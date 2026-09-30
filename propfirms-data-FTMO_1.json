@@ -1,0 +1,126 @@
+{
+  "_notes": {
+    "last_verified": "2026-09-30",
+    "source": "Screenshots of each firm's live pricing page",
+    "pricing": "promo = current discounted price, standard = crossed-out list price. Promos change often; re-verify before publishing.",
+    "rule_units": "Forex rules are % of account size. Futures rules are fixed USD amounts.",
+    "null_means": "Field not shown on the pricing page. Check the firm's 'View Rules' page before publishing."
+  },
+  "firm": {
+    "id": "ftmo",
+    "name": "FTMO",
+    "currency": "EUR",
+    "platforms": [
+      "MT4",
+      "MT5",
+      "cTrader"
+    ],
+    "markets": [
+      {
+        "market": "forex",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "Standard",
+                "tagline": null,
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 10,
+                  "drawdown_type": "EOD trailing",
+                  "profit_split_max": 90,
+                  "min_trading_days": null,
+                  "consistency": "Best Day Rule 50%",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 79
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 199
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 319
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 399,
+                    "standard": 499
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 999
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "Standard",
+                "tagline": null,
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 90,
+                  "min_trading_days": 4,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 89
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 250
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 345
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 439,
+                    "standard": 540
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 1080
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

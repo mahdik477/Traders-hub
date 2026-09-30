@@ -1,0 +1,578 @@
+{
+  "_notes": {
+    "last_verified": "2026-09-30",
+    "source": "Screenshots of each firm's live pricing page",
+    "pricing": "promo = current discounted price, standard = crossed-out list price. Promos change often; re-verify before publishing.",
+    "rule_units": "Forex rules are % of account size. Futures rules are fixed USD amounts.",
+    "null_means": "Field not shown on the pricing page. Check the firm's 'View Rules' page before publishing."
+  },
+  "firm": {
+    "id": "alpha",
+    "name": "Alpha",
+    "currency": "USD",
+    "platforms": null,
+    "markets": [
+      {
+        "market": "forex",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "Lite",
+                "tagline": "10% Max Drawdown",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 10,
+                  "profit_split_max": 100,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": null,
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": 72,
+                    "standard": 120
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 210,
+                    "standard": 350
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 420,
+                    "standard": 700
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 450,
+                    "standard": 900
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 900,
+                    "standard": 1800
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 1080,
+                    "standard": 2700
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1440,
+                    "standard": 3600
+                  }
+                ]
+              },
+              {
+                "tier": "PRO",
+                "tagline": "6% Max Drawdown",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "profit_split_max": 100,
+                  "min_trading_days": 5,
+                  "consistency": null,
+                  "trading_period": null,
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": 57,
+                    "standard": 95
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 165,
+                    "standard": 275
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 330,
+                    "standard": 550
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 400,
+                    "standard": 800
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 800,
+                    "standard": 1600
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 960,
+                    "standard": 2400
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1280,
+                    "standard": 3200
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "Classic",
+                "tagline": "No Minimum Trading Days",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "profit_split_max": 100,
+                  "min_trading_days": 0,
+                  "consistency": "none",
+                  "trading_period": null,
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": 47.4,
+                    "standard": 79
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 149.4,
+                    "standard": 249
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 209.4,
+                    "standard": 349
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 350,
+                    "standard": 700
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 600,
+                    "standard": 1200
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 760,
+                    "standard": 1900
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 960,
+                    "standard": 2400
+                  }
+                ]
+              },
+              {
+                "tier": "Standard",
+                "tagline": "100% Profit Split",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "profit_split_max": 100,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": null,
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": 60,
+                    "standard": 100
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 180,
+                    "standard": 300
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 300,
+                    "standard": 500
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 400,
+                    "standard": 800
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 800,
+                    "standard": 1600
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 960,
+                    "standard": 2400
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1280,
+                    "standard": 3200
+                  }
+                ]
+              },
+              {
+                "tier": "PRO",
+                "tagline": "Weekly Payouts",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": 4,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 5,
+                  "profit_split_max": 80,
+                  "min_trading_days": 2,
+                  "consistency": "none",
+                  "trading_period": null,
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": 72,
+                    "standard": 120
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 210,
+                    "standard": 350
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 360,
+                    "standard": 600
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 450,
+                    "standard": 900
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 900,
+                    "standard": 1800
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 1080,
+                    "standard": 2700
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1440,
+                    "standard": 3600
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Standard",
+                "tagline": "Highest Profit Split",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": null,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 5,
+                  "profit_split_max": 90,
+                  "min_trading_days": 5,
+                  "consistency": null,
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": 89.4,
+                    "standard": 149
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 179.4,
+                    "standard": 299
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 269.4,
+                    "standard": 449
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 450,
+                    "standard": 900
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 900,
+                    "standard": 1800
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 1080,
+                    "standard": 2700
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1440,
+                    "standard": 3600
+                  }
+                ]
+              },
+              {
+                "tier": "PRO",
+                "tagline": "No Consistency",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": null,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 5,
+                  "profit_split_max": 80,
+                  "min_trading_days": 10,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "promo": 178.8,
+                    "standard": 298
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 358.8,
+                    "standard": 598
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 538.8,
+                    "standard": 898
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 749,
+                    "standard": 1498
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 1350,
+                    "standard": 2700
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 1680,
+                    "standard": 4200
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 2160,
+                    "standard": 5400
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "market": "futures",
+        "partner": "Tradesea",
+        "promo_code": "FALL",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Flex",
+                "tagline": "Balanced evaluation rules",
+                "rules": {
+                  "unit": "usd",
+                  "consistency_pct": 50,
+                  "min_trading_days": 0,
+                  "profit_split_max": 90
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1500,
+                    "max_loss": 2500,
+                    "max_contracts": 5,
+                    "payout_cap": 2500,
+                    "promo": 119.6,
+                    "standard": 299
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 3000,
+                    "max_loss": 5000,
+                    "max_contracts": 10,
+                    "payout_cap": 5000,
+                    "promo": 199.6,
+                    "standard": 499
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 4500,
+                    "max_loss": 7500,
+                    "max_contracts": 15,
+                    "payout_cap": 7500,
+                    "promo": 279.6,
+                    "standard": 699
+                  },
+                  {
+                    "size": 300000,
+                    "profit_target": 18000,
+                    "daily_loss": 9000,
+                    "max_loss": 15000,
+                    "max_contracts": 30,
+                    "payout_cap": 15000,
+                    "promo": 559.6,
+                    "standard": 1399
+                  },
+                  {
+                    "size": 450000,
+                    "profit_target": 27000,
+                    "daily_loss": 13500,
+                    "max_loss": 22500,
+                    "max_contracts": 45,
+                    "payout_cap": 22500,
+                    "promo": 839.6,
+                    "standard": 2099
+                  }
+                ]
+              },
+              {
+                "tier": "PRO",
+                "tagline": "Harder rules, lower entry",
+                "rules": {
+                  "unit": "usd",
+                  "consistency_pct": 40,
+                  "min_trading_days": 0,
+                  "profit_split_max": 90
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 4000,
+                    "daily_loss": 750,
+                    "max_loss": 1500,
+                    "max_contracts": 5,
+                    "payout_cap": 2500,
+                    "promo": 100,
+                    "standard": 250
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 8000,
+                    "daily_loss": 1500,
+                    "max_loss": 3000,
+                    "max_contracts": 10,
+                    "payout_cap": 5000,
+                    "promo": 150,
+                    "standard": 375
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 12000,
+                    "daily_loss": 2250,
+                    "max_loss": 4500,
+                    "max_contracts": 15,
+                    "payout_cap": 7500,
+                    "promo": 200,
+                    "standard": 500
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Instant Funding",
+                "tagline": "Trade funded from day one",
+                "rules": {
+                  "unit": "usd",
+                  "consistency_pct": 20,
+                  "min_trading_days": null,
+                  "profit_split_max": 90
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": 1500,
+                    "max_contracts": 5,
+                    "payout_cap": 1250,
+                    "promo": 239.6,
+                    "standard": 599
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": 3000,
+                    "max_contracts": 10,
+                    "payout_cap": 2500,
+                    "promo": 319.6,
+                    "standard": 799
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": 4500,
+                    "max_contracts": 15,
+                    "payout_cap": 3750,
+                    "promo": 399.6,
+                    "standard": 999
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
