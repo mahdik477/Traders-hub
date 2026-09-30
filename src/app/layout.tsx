@@ -30,9 +30,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <SiteHeader />
-        {children}
+        {/* Every page sits in the same centred container as the header. */}
+        <main className="container-page flex-1 py-10 sm:py-14">{children}</main>
         <SiteFooter />
       </body>
     </html>

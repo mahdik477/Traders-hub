@@ -7,9 +7,14 @@
     "null_means": "Field not shown on the pricing page. Check the firm's 'View Rules' page before publishing."
   },
   "firm": {
-    "id": "alpha",
-    "name": "Alpha",
+    "id": "alpha-funded",
+    "name": "Alpha Funded",
+    "name_note": "Alpha Funded (alphafunded.com) is not the same company as Alpha Futures or Alpha Capital Group.",
+    "about": "Alpha Funded offers simulated funded accounts on forex and futures (futures through Tradesea), with 1-Step, 2-Step and Instant Funding programs and account sizes up to $400K.",
+    "about_note": "Company background not yet verified.",
     "currency": "USD",
+    "website": "https://alphafunded.com/",
+    "affiliate_link": "",
     "platforms": null,
     "markets": [
       {
