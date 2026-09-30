@@ -4,39 +4,84 @@
    Design tokens — the only place colours, type sizes and the page container
    are defined. Pages use these names (bg-surface, text-accent, page-title…)
    rather than raw colours, so the whole site stays consistent.
-   The site is dark-only.
+
+   Brand colour is fixed (same in light and dark). Everything else switches
+   with the `data-theme` attribute on <html> — dark is the default; light is
+   opt-in via the toggle (see ThemeToggle). Surface/border/text values come
+   from the project's colour spec; the "-2" / "-strong" / "subtle" tiers
+   aren't in that spec, so they're derived to fit the same hierarchy.
    ========================================================================== */
 
+:root {
+  --color-brand: #4f46e5;
+  --color-brand-hover: #4338ca;
+
+  /* Status — used across the site, and specifically for the LOW/MEDIUM/HIGH
+     red_flag_level badges on listings once those exist. */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+}
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark; /* dark dropdowns, scrollbars and form controls */
+
+  --color-background: #0b0e14;
+  --color-surface: #151923;
+  --color-surface-2: #1c2230; /* derived: one step up from surface, for hover/secondary panels */
+  --color-border: #262b36;
+  --color-border-strong: #3a4150; /* derived: heavier border for emphasis */
+
+  --color-foreground: #e6e8eb;
+  --color-muted: #8b92a3;
+  --color-subtle: #5b6373; /* derived: dimmest tier, below muted */
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-2: #f3f4f6; /* derived */
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db; /* derived */
+
+  --color-foreground: #14161b;
+  --color-muted: #6b7280;
+  --color-subtle: #9ca3af; /* derived */
+}
+
 @theme inline {
-  /* Surfaces: near-black page, two slightly lighter shades for cards/panels */
-  --color-background: #09090b;
-  --color-surface: #111114;
-  --color-surface-2: #1a1a1f;
-  --color-border: #26262c;
-  --color-border-strong: #3a3a42;
+  /* Surfaces */
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
 
-  /* Text: everything is neutral grey unless it has a job */
-  --color-foreground: #f4f4f5;
-  --color-muted: #a1a1aa; /* secondary text */
-  --color-subtle: #71717a; /* dimmest: captions, dashes */
+  /* Text */
+  --color-foreground: var(--color-foreground);
+  --color-muted: var(--color-muted);
+  --color-subtle: var(--color-subtle);
 
-  /* Accent (emerald): key positive numbers and main buttons ONLY */
-  --color-accent: #34d399;
-  --color-accent-strong: #10b981; /* button fill */
-  --color-accent-fg: #052e22; /* text on the accent fill */
+  /* Brand — key actions and links. Same value in both themes. */
+  --color-accent: var(--color-brand);
+  --color-accent-strong: var(--color-brand-hover);
+  --color-accent-fg: #ffffff; /* text on the brand fill — indigo is dark enough for white */
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
 
   /* Status */
-  --color-promo: #fbbf24; /* amber: promos and discounts */
-  --color-danger: #f87171; /* soft red: "No" and warnings */
+  --color-promo: var(--color-warning); /* promos/discounts share the warning amber */
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
 
-  --shadow-glow: 0 0 0 1px rgb(52 211 153 / 0.45), 0 12px 32px -12px rgb(16 185 129 / 0.45);
+  --shadow-glow: 0 0 0 1px rgb(79 70 229 / 0.45), 0 12px 32px -12px rgb(67 56 202 / 0.45);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-:root {
-  color-scheme: dark; /* dark dropdowns, scrollbars and form controls */
 }
 
 body {
@@ -183,22 +228,31 @@ body {
   white-space: nowrap;
 }
 
+/* success/danger double as the LOW/HIGH red_flag_level colours once those
+   badges exist — same tokens, same rgb() overlays, just add badge-warning
+   for MEDIUM when that lands. */
 @utility badge-success {
-  background: rgb(52 211 153 / 0.12);
-  color: var(--color-accent);
-  box-shadow: inset 0 0 0 1px rgb(52 211 153 / 0.3);
+  background: rgb(34 197 94 / 0.12);
+  color: var(--color-success);
+  box-shadow: inset 0 0 0 1px rgb(34 197 94 / 0.3);
+}
+
+@utility badge-warning {
+  background: rgb(245 158 11 / 0.12);
+  color: var(--color-warning);
+  box-shadow: inset 0 0 0 1px rgb(245 158 11 / 0.3);
 }
 
 @utility badge-danger {
-  background: rgb(248 113 113 / 0.12);
+  background: rgb(239 68 68 / 0.12);
   color: var(--color-danger);
-  box-shadow: inset 0 0 0 1px rgb(248 113 113 / 0.3);
+  box-shadow: inset 0 0 0 1px rgb(239 68 68 / 0.3);
 }
 
 @utility badge-promo {
-  background: rgb(251 191 36 / 0.12);
+  background: rgb(245 158 11 / 0.12);
   color: var(--color-promo);
-  box-shadow: inset 0 0 0 1px rgb(251 191 36 / 0.3);
+  box-shadow: inset 0 0 0 1px rgb(245 158 11 / 0.3);
 }
 
 /* ---- Form controls ------------------------------------------------------- */

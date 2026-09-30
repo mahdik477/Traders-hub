@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ThemeToggle from "@/components/ThemeToggle";
 import { SITE_NAME } from "@/lib/sections";
 import "./globals.css";
 
@@ -24,17 +25,34 @@ export const metadata: Metadata = {
     "Discover and compare prop firms, brokers, courses, tools and signal groups. For information only — we do not verify trading performance.",
 };
 
+// Sets data-theme before hydration so the page never flashes the wrong
+// theme. Defaults to dark (the product default) unless the visitor
+// previously chose light mode.
+const themeInitScript = `
+  try {
+    var theme = localStorage.getItem('theme');
+    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-theme="dark"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <SiteHeader />
         {/* Every page sits in the same centred container as the header. */}
         <main className="container-page flex-1 py-10 sm:py-14">{children}</main>
         <SiteFooter />
+        <ThemeToggle />
       </body>
     </html>
   );
