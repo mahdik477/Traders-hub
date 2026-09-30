@@ -3,12 +3,12 @@ import { SITE_NAME, sections } from "@/lib/sections";
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-6xl flex-1 px-4">
-      <section className="py-16 sm:py-24">
-        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">
+    <>
+      <section className="pb-12 pt-4 sm:pb-16 sm:pt-8">
+        <h1 className="page-title max-w-3xl sm:text-5xl">
           Discover and compare trading products in one place
         </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted">
+        <p className="mt-5 max-w-2xl text-lg text-muted">
           {SITE_NAME} helps traders find and compare prop firms, brokers,
           courses, tools and signal groups side by side, so you can see the
           facts and decide for yourself.
@@ -17,12 +17,12 @@ export default function Home() {
 
       <section
         aria-labelledby="what-we-are"
-        className="rounded-lg border border-border bg-card p-6"
+        className="rounded-xl border border-border bg-surface p-6"
       >
-        <h2 id="what-we-are" className="text-lg font-semibold">
+        <h2 id="what-we-are" className="section-title">
           Discovery, not verification
         </h2>
-        <ul className="mt-3 list-disc space-y-1 pl-5 text-muted">
+        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-muted marker:text-subtle">
           <li>We are a directory and comparison site.</li>
           <li>
             We are not a broker, not a signal provider and not a financial
@@ -39,31 +39,37 @@ export default function Home() {
         </ul>
       </section>
 
-      <section aria-labelledby="sections-heading" className="py-16">
-        <h2 id="sections-heading" className="text-2xl font-semibold">
+      <section aria-labelledby="sections-heading" className="pt-14">
+        <h2 id="sections-heading" className="section-title">
           What you&apos;ll find here
         </h2>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {sections.map((section) => (
             <li key={section.slug}>
               <Link
                 href={`/${section.slug}`}
-                className="flex h-full flex-col rounded-lg border border-border p-5 transition-colors hover:border-accent"
+                className="flex h-full flex-col rounded-xl border border-border bg-surface p-5 transition hover:border-border-strong hover:bg-surface-2"
               >
-                <span className="text-xs font-medium uppercase tracking-wide text-accent">
-                  {section.status === "next-up" ? "Next up" : "Coming soon"}
+                <span
+                  className={
+                    section.status === "live" ? "badge badge-success self-start" : "pill self-start"
+                  }
+                >
+                  {section.status === "live"
+                    ? "Browse now"
+                    : section.status === "next-up"
+                      ? "Next up"
+                      : "Coming soon"}
                 </span>
-                <span className="mt-2 text-lg font-semibold">
+                <span className="mt-3 text-lg font-semibold">
                   {section.title}
                 </span>
-                <span className="mt-2 text-sm text-muted">
-                  {section.summary}
-                </span>
+                <span className="meta mt-1.5">{section.summary}</span>
               </Link>
             </li>
           ))}
         </ul>
       </section>
-    </main>
+    </>
   );
 }

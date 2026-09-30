@@ -6,11 +6,11 @@ export const metadata: Metadata = { title: "Disclaimer" };
 // Draft wording — have this reviewed by a lawyer before launch.
 export default function DisclaimerPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">Disclaimer</h1>
-      <div className="mt-8 space-y-6 text-muted">
+    <div className="max-w-3xl">
+      <h1 className="page-title">Disclaimer</h1>
+      <div className="mt-8 space-y-8 text-muted">
         <section>
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 className="section-title text-foreground">
             Discovery and information only
           </h2>
           <p className="mt-2">
@@ -21,7 +21,7 @@ export default function DisclaimerPage() {
           </p>
         </section>
         <section>
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 className="section-title text-foreground">
             We do not verify performance
           </h2>
           <p className="mt-2">
@@ -32,7 +32,7 @@ export default function DisclaimerPage() {
           </p>
         </section>
         <section>
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 className="section-title text-foreground">
             Trading involves risk
           </h2>
           <p className="mt-2">
@@ -44,7 +44,7 @@ export default function DisclaimerPage() {
           </p>
         </section>
         <section>
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 className="section-title text-foreground">
             How we make money
           </h2>
           <p className="mt-2">
@@ -54,6 +54,6 @@ export default function DisclaimerPage() {
           </p>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

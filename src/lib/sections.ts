@@ -1,7 +1,7 @@
 // The site's main sections. The header menu, homepage cards and "coming soon"
 // pages all read from this list, so a section only needs to be added here once.
 
-export type SectionStatus = "next-up" | "coming-soon";
+export type SectionStatus = "live" | "next-up" | "coming-soon";
 
 export type Section = {
   slug: string;
@@ -18,7 +18,7 @@ export const sections: Section[] = [
     title: "Funded Accounts",
     summary:
       "Compare prop firms side by side: fees, account sizes, drawdown rules, profit splits, platforms and evaluation steps.",
-    status: "next-up",
+    status: "live",
   },
   {
     slug: "courses",
