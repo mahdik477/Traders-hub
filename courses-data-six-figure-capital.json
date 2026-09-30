@@ -1,0 +1,102 @@
+{
+  "course": {
+    "id": "six-figure-capital",
+    "name": "Six Figure Capital",
+    "logo": "/courses/six-figure-capital-logo.webp",
+    "tagline": "Video-based forex, commodities and crypto trading education built around harmonic pattern analysis.",
+    "about": "Six Figure Capital is a trading education platform run by Lewis Glasgow, teaching forex, commodities and cryptocurrency trading through harmonic pattern analysis. It's built as two video courses plus community access and downloadable resources, aimed at beginner-to-advanced traders.",
+    "instructor": {
+      "name": "Lewis Glasgow",
+      "link": "https://www.tradingview.com/u/LewisGlasgow/"
+    },
+    "curriculum": [
+      {
+        "title": "14-Day Foundation Course",
+        "module_count": 19,
+        "topics": [
+          "Core trading fundamentals and forex basics",
+          "Currency pairs, trading sessions and market terminology",
+          "Japanese candlestick analysis",
+          "Chart analysis and the TradingView platform",
+          "Market structure and trend identification",
+          "Technical analysis: trendlines, support/resistance, patterns",
+          "Harmonic patterns: Bat, Gartley, Butterfly, Crab",
+          "Confluence and multi-timeframe analysis",
+          "Risk management and position sizing",
+          "Trading psychology and emotional discipline",
+          "Broker selection and trading platforms"
+        ]
+      },
+      {
+        "title": "Harmonic Mastery Course",
+        "module_count": 13,
+        "topics": [
+          "Fibonacci methodology and geometric principles",
+          "Pattern recognition: Shark, Cypher, 5-0 patterns",
+          "Harmonic pattern software training",
+          "BAMM (Bat Action Magnet Move) theory",
+          "Trade management systems (marked \"coming soon\" on the provider's site)",
+          "Pattern violations and timeframe analysis (marked \"coming soon\" on the provider's site)"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Video lessons",
+        "description": "32 instructional videos across the two courses (19 in the Foundation course, 13 in Harmonic Mastery)."
+      },
+      {
+        "label": "Downloadable resources",
+        "description": "Breakthrough guide, currency cheat sheet, trading journal templates, harmonic trading guides and a compound interest calculator."
+      },
+      {
+        "label": "Community access",
+        "description": "Access to the Six Figure Capital community, included with membership."
+      },
+      {
+        "label": "Ongoing support & updates",
+        "description": "Lifetime access to course updates and provider support."
+      }
+    ],
+    "platforms": ["MetaTrader 4", "eSignal", "NinjaTrader", "TradingView"],
+    "pricing": [
+      {
+        "name": "12-Month Contract",
+        "price": "£97/month",
+        "billing_note": "12 monthly payments (£1,164 total); financing via Klarna, Clearpay or PayPal Credit",
+        "highlight": null
+      },
+      {
+        "name": "Lifetime Membership",
+        "price": "£800",
+        "billing_note": "One-time payment; financing via Klarna, Clearpay or PayPal Credit",
+        "highlight": "Saves £364 vs. the 12-month plan"
+      }
+    ],
+    "refund_policy": "No money-back guarantee or refund policy is stated on the provider's website (last checked when this listing was built).",
+    "trustpilot": {
+      "rating": 4,
+      "review_count": 3,
+      "url": "https://uk.trustpilot.com/review/sixfigurecapital.com"
+    },
+    "testimonials": [
+      {
+        "quote": "By far the best educational course I have undertaken! ... Lewis has a wealth of knowledge and his ability to simplify to the 'average Joe' like myself, I was amazed.",
+        "author": "Paul Hayden",
+        "source": "Quoted on Six Figure Capital's website, originally posted on Forex Peace Army"
+      },
+      {
+        "quote": "Six Figure Capital is by all means the #1 Forex Trading Course ... absolutely nothing compares to the value being provided.",
+        "author": "Christopher David",
+        "source": "Quoted on Six Figure Capital's website (Indiana, US)"
+      },
+      {
+        "quote": "This changed the game for me ... allowed me to leave my job as a Customer Advisor and go on to become a full time trader.",
+        "author": "Kyle McQuade",
+        "source": "Quoted on Six Figure Capital's website (Scotland, UK)"
+      }
+    ],
+    "website": "https://www.sixfigurecapital.com/",
+    "affiliate_link": null
+  }
+}

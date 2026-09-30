@@ -25,7 +25,7 @@ export const sections: Section[] = [
     title: "Courses",
     summary:
       "Browse trading education courses by topic, format and price.",
-    status: "coming-soon",
+    status: "live",
   },
   {
     slug: "signal-groups",
