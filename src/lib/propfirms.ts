@@ -23,8 +23,11 @@ type RawForexRules = {
   unit: "percent";
   phase1_target: number | null;
   phase2_target: number | null;
+  /** Only for 3-step evaluations. */
+  phase3_target?: number | null;
   funded_target: number | null;
-  daily_loss: number | null;
+  /** "none" = the firm has no daily loss limit (shown as "None"). */
+  daily_loss: number | "none" | null;
   max_loss: number | null;
   drawdown_type?: string | null;
   profit_split_max: number | null;
@@ -36,6 +39,7 @@ type RawForexRules = {
 
 type RawFuturesRules = {
   unit: "usd";
+  drawdown_type?: string | null;
   consistency_pct: number | null;
   min_trading_days: number | null;
   profit_split_max: number | null;
@@ -48,7 +52,7 @@ type RawAccount = {
   standard: number | null;
   // Futures only: rules are fixed USD amounts per account size.
   profit_target?: number | null;
-  daily_loss?: number | null;
+  daily_loss?: number | "none" | null;
   max_loss?: number | null;
   max_contracts?: number | null;
   payout_cap?: number | null;
@@ -57,6 +61,8 @@ type RawAccount = {
 type RawTier = {
   tier: string;
   tagline: string | null;
+  /** "monthly" for subscription pricing (shown as "/month"). Default: one-time. */
+  billing?: "one-time" | "monthly" | null;
   rules: RawForexRules | RawFuturesRules;
   accounts: RawAccount[];
 };
@@ -87,6 +93,7 @@ const DATA_FILE_PATTERN = /^propfirms-data-.+\.json$/i;
 const PROGRAM_LABELS: Record<string, string> = {
   "1-step": "1-Step",
   "2-step": "2-Step",
+  "3-step": "3-Step",
   instant: "Instant",
 };
 
@@ -196,6 +203,8 @@ function buildTier(
   const n = accounts.length;
   const same = (v: Cell): Cell[] => Array(n).fill(v);
   const isInstant = program === "instant";
+  const monthly = t.billing === "monthly";
+  const period = monthly ? "/month" : "";
   const rows: TierView["rows"] = [];
 
   if (t.rules.unit === "percent") {
@@ -207,6 +216,9 @@ function buildTier(
     if (r.phase2_target != null) {
       rows.push({ label: "Profit target (Phase 1)", values: same(pct(r.phase1_target)) });
       rows.push({ label: "Profit target (Phase 2)", values: same(pct(r.phase2_target)) });
+      if (r.phase3_target != null) {
+        rows.push({ label: "Profit target (Phase 3)", values: same(pct(r.phase3_target)) });
+      }
     } else {
       rows.push({
         label: "Profit target",
@@ -216,7 +228,10 @@ function buildTier(
     if (r.funded_target != null) {
       rows.push({ label: "Profit target (Funded)", values: same(pct(r.funded_target)) });
     }
-    rows.push({ label: "Daily loss", values: same(pct(r.daily_loss)) });
+    rows.push({
+      label: "Daily loss",
+      values: same(r.daily_loss === "none" ? NO_LIMIT : pct(r.daily_loss)),
+    });
     rows.push({ label: "Max loss", values: same(pct(r.max_loss)) });
     if (r.drawdown_type) rows.push({ label: "Drawdown type", values: same(capitalise(r.drawdown_type)) });
     rows.push({ label: "Profit split", values: same(split(r.profit_split_max)) });
@@ -230,7 +245,9 @@ function buildTier(
     // Futures: rules are fixed USD amounts that change with account size.
     const r = t.rules;
     const col = (key: keyof RawAccount) =>
-      accounts.map((a) => (a[key] == null ? null : usd(a[key] as number)));
+      accounts.map((a) =>
+        a[key] == null ? null : a[key] === "none" ? NO_LIMIT : usd(a[key] as number),
+      );
 
     rows.push({
       label: "Profit target",
@@ -240,6 +257,7 @@ function buildTier(
     });
     rows.push({ label: "Daily loss", values: col("daily_loss") });
     rows.push({ label: "Max loss", values: col("max_loss") });
+    if (r.drawdown_type) rows.push({ label: "Drawdown type", values: same(capitalise(r.drawdown_type)) });
     rows.push({ label: "Profit split", values: same(split(r.profit_split_max)) });
     rows.push({ label: "Min trading days", values: same(days(r.min_trading_days)) });
     rows.push({
@@ -267,12 +285,12 @@ function buildTier(
       const full = a.standard ?? a.promo;
       const hasDiscount = a.promo != null && a.standard != null;
       return {
-        full: full == null ? null : money(full, currency),
-        discounted: hasDiscount ? money(a.promo!, currency) : null,
+        full: full == null ? null : money(full, currency) + period,
+        discounted: hasDiscount ? money(a.promo!, currency) + period : null,
         discountLabel: hasDiscount ? discountLabel : null,
       };
     }),
-    accounts: accounts.map((a) => ({ size: a.size, lowestPrice: a.promo ?? a.standard })),
+    accounts: accounts.map((a) => ({ size: a.size, lowestPrice: a.promo ?? a.standard, monthly })),
     profitSplit: t.rules.profit_split_max,
     feeRefund: t.rules.fee_refund ?? null,
   };
@@ -291,6 +309,9 @@ function safeLink(url: string | null | undefined): string | null {
 }
 
 // ---- Formatting -------------------------------------------------------------
+
+// Shown where a data file says a limit is "none" (as opposed to null = not stated).
+const NO_LIMIT = "None";
 
 function money(n: number, currency: string) {
   return new Intl.NumberFormat("en-US", {

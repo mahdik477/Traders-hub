@@ -42,6 +42,22 @@ Firm: **$ARGUMENTS**
   No marketing claims, no copying their text. If background is unverified, set
   `about_note: "Company background not yet verified."`
 - `affiliate_link`: leave `""` until we have a real tracked link.
+- `countries`: which countries the firm accepts (we're a global site, so
+  list firms whatever their restrictions — just record them). From the firm's
+  own restricted-countries / terms / FAQ page:
+  ```json
+  "countries": {
+    "restricted": ["IR", "KP"],
+    "allowed_only": null,
+    "notes": "Plain-English caveats, e.g. US residents can only buy futures.",
+    "source": "https://firm.com/restricted-countries",
+    "last_checked": "YYYY-MM-DD"
+  }
+  ```
+  Use ISO 3166-1 alpha-2 codes (US, GB, AE…). `restricted` = countries
+  whose residents can't buy; `allowed_only` = use instead when the firm only
+  serves a listed set of countries. Not found → both null, and say so in
+  `notes`.
 - `_notes.last_verified`: today's date (YYYY-MM-DD) and `source`.
 
 ## 3. Validate and show

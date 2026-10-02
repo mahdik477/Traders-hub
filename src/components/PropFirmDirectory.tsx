@@ -196,7 +196,12 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
       ) : (
         <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {matchingFirms.map(({ firm, matches }) => {
-            const prices = matches.map((a) => a.lowestPrice).filter((p): p is number => p != null);
+            const cheapest = matches
+              .filter((a) => a.lowestPrice != null)
+              .reduce<(typeof matches)[number] | null>(
+                (best, a) => (best == null || a.lowestPrice! < best.lowestPrice! ? a : best),
+                null,
+              );
             const splits = matches.map((a) => a.profitSplit).filter((s): s is number => s != null);
             return (
               <li
@@ -221,7 +226,9 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                   <div>
                     <div className="eyebrow">From</div>
                     <div className="figure-lg mt-1 text-accent">
-                      {prices.length ? money(Math.min(...prices), firm.currency) : "—"}
+                      {cheapest
+                        ? money(cheapest.lowestPrice!, firm.currency) + (cheapest.monthly ? "/month" : "")
+                        : "—"}
                     </div>
                   </div>
                   {splits.length > 0 && (

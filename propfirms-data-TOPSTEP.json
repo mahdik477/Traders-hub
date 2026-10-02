@@ -1,0 +1,174 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-02",
+    "source": "Official Topstep pages only: https://www.topstep.com/topstep-prop (plan cards and price data in page source), https://help.topstep.com/en/articles/14289835-topstep-pricing-and-payment-questions, https://help.topstep.com/en/articles/8284197-trading-combine-parameters, https://help.topstep.com/en/articles/8284208-consistency-at-topstep, https://help.topstep.com/en/articles/8284121-trading-combine-subscriptions, https://help.topstep.com/en/articles/8284215-express-funded-account-parameters, https://help.topstep.com/en/articles/8284233-topstep-payout-policy, https://help.topstep.com/en/articles/14434175-topstepx, https://help.topstep.com/en/articles/8284179-quantower-connection-instructions, https://www.topstep.com/about-us",
+    "pricing": "Prices are MONTHLY subscriptions (USD). standard = the stated monthly price. No time-limited promo was running, so promo is null.",
+    "billing": "Trading Combine rebills every 30 days from sign-up until the trader passes (earns an Express Funded Account) or cancels. Standard path: $49 / $99 / $199 per month (50K / 100K / 150K) plus a one-time $149 Express Funded Account activation fee charged only after passing. No Activation Fee path: $95 / $149 / $229 per month, $0 activation fee. Adding the optional Daily Loss Limit ('Responsible Trading Advantage') at purchase on No Activation Fee products takes $10 / $20 / $30 off each month ($85 / $129 / $199). Reset fee equals the monthly price of the path chosen. Level 2 data is an extra $38/month. Per-trade commissions and fees and sales tax are extra. Back2Funded reactivation: $599 / $699 / $829.",
+    "daily_loss": "Daily Loss Limit is OPTIONAL (Responsible Trading Advantage): $1,000 / $2,000 / $3,000 for 50K / 100K / 150K. Hitting it pauses trading until the next session and is not a rule break, so daily_loss is left null.",
+    "payout_caps": "Express Funded payout caps per request, by payout path. Standard path (5 winning days of $150+): $2,000 / $3,000 / $5,000, doubled to $4,000 / $6,000 / $10,000 with the optional Daily Loss Limit. Consistency path (3+ trading days, best day within 40% of total profit): $3,000 / $4,000 / $6,000, doubled to $6,000 / $8,000 / $12,000 with the Daily Loss Limit. Help centre describes the doubled caps as a limited-time offering starting June 2nd. Live Funded Account payouts are not capped. Left null in the table because there is no single cap per size.",
+    "profit_split": "90/10 for new sign-ups from 2026-01-12 (help centre says earlier accounts kept 100% of the first $10,000 lifetime profits).",
+    "consistency": "55% consistency target in the Trading Combine (best day at or below 55% of the profit target). Express Funded Consistency payout path uses 40%.",
+    "drawdown": "Maximum Loss Limit trails the end-of-day balance high and is monitored in real time.",
+    "fee_refund": "No official page states that any fee is refunded after passing, so fee_refund is null.",
+    "platforms": "TopstepX is Topstep's own platform; Quantower connects via TopstepX credentials (Trading Combine and Express Funded only). Third-party sites mention NinjaTrader/Tradovate but the official help centre no longer documents them, so they are not listed.",
+    "other_products": "Topstep Labs runs separate limited 'drops' (e.g. a $49 two-round challenge with a fixed $3,000 payout, Aug 2026). Not listed here. No forex program is currently sold; futures only.",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official Topstep page (or not expressible as one number - see the notes above). Check the live plan page before publishing."
+  },
+  "firm": {
+    "id": "topstep",
+    "name": "Topstep",
+    "name_note": null,
+    "about": "Topstep is a Chicago-based futures prop firm (its own timeline starts in 2010 as Patak Trading Partners) that sells monthly-subscription evaluations called the Trading Combine in 50K, 100K and 150K sizes, traded on its own TopstepX platform.",
+    "about_note": null,
+    "currency": "USD",
+    "website": "https://www.topstep.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "TopstepX",
+      "Quantower"
+    ],
+    "countries": {
+      "restricted": [
+        "AF",
+        "AO",
+        "BF",
+        "BI",
+        "BY",
+        "CD",
+        "CI",
+        "CU",
+        "DZ",
+        "HT",
+        "IQ",
+        "IR",
+        "KE",
+        "KP",
+        "LB",
+        "LY",
+        "MA",
+        "ML",
+        "MM",
+        "NG",
+        "NI",
+        "PK",
+        "RU",
+        "SD",
+        "SO",
+        "SS",
+        "SY",
+        "TR",
+        "UA",
+        "VE",
+        "XK",
+        "YE"
+      ],
+      "allowed_only": null,
+      "notes": "Eligibility is based on both citizenship and permanent residency: citizens or residents of a listed country cannot trade or receive payouts. The list also bans 'Chinese Military Companies' and the Crimea, Donetsk, Luhansk, Kherson and Zaporizhzhia regions (all of Ukraine is listed anyway). Kosovo is recorded as XK (a widely used code, not an official ISO one). Partial restriction: traders from 25 more countries can use the Trading Combine, Express Funded and Pro accounts but cannot get a Live Funded Account, and Topstep caps their total payouts at $200,000. Those countries are Albania, Bolivia, Bosnia and Herzegovina, British Virgin Islands, Cameroon, Central African Republic, Ethiopia, Germany, Ghana, Hong Kong, Iceland, Kuwait, Laos, Liberia, Monaco, Mongolia, Montenegro, Namibia, Nepal, North Macedonia, Papua New Guinea, Serbia, Trinidad and Tobago, Vietnam and Zimbabwe. Topstep says the list can change with brokerage updates and US (OFAC) sanctions.",
+      "source": "https://help.topstep.com/en/articles/8284116-am-i-eligible-to-trade-with-topstep",
+      "last_checked": "2026-10-02"
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Standard",
+                "tagline": "Monthly subscription · $149 activation fee after passing · Optional daily loss limit",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "consistency_pct": 55,
+                  "min_trading_days": 2,
+                  "profit_split_max": 90,
+                  "fee_refund": null,
+                  "drawdown_type": "EOD trailing"
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": null,
+                    "max_loss": 2000,
+                    "max_contracts": 5,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 49
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": null,
+                    "max_loss": 3000,
+                    "max_contracts": 10,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 99
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": null,
+                    "max_loss": 4500,
+                    "max_contracts": 15,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 199
+                  }
+                ]
+              },
+              {
+                "tier": "No Activation Fee",
+                "tagline": "Monthly subscription · no activation fee · $10-$30/month less with optional Daily Loss Limit",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "consistency_pct": 55,
+                  "min_trading_days": 2,
+                  "profit_split_max": 90,
+                  "fee_refund": null,
+                  "drawdown_type": "EOD trailing"
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": null,
+                    "max_loss": 2000,
+                    "max_contracts": 5,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 95
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": null,
+                    "max_loss": 3000,
+                    "max_contracts": 10,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 149
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": null,
+                    "max_loss": 4500,
+                    "max_contracts": 15,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 229
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

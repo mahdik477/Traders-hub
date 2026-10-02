@@ -1,0 +1,345 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-02",
+    "source": "Official pages only: fundingpips.com/2-step-standard, /2-step-pro, /2-step-flex, /zero (prices from each page's pricing table data); help.fundingpips.com articles '2 Step Standard', '2 Step Pro Model', '2 Step Flex', '1 Step Flex', 'FundingPips Zero', 'Get Started' (rules, platforms, restricted countries, fee refund); fundingpips.com footer 'Related Entities' (company details); fundingpips.com/blog/funding-pips-new-chapter (start of operations, November 2022).",
+    "pricing": "standard = list price shown on each product page (no crossed-out price was shown on 2026-10-02, so promo is null). A site-wide banner offered code FP: 10% off for new users, 5% off for existing users; the Get Started help article also mentions code HELLO (20% off first purchase, excludes $100K). Codes not applied here. Optional Swap-Free add-on costs +10%.",
+    "billing": "One-time challenge fee per account. No monthly subscription or activation fee is mentioned on the official pages. On 2 Step Standard only, the fee is refunded with the 4th reward on the Master Account; this refund does not apply to 1 Step Flex, 2 Step Pro, 2 Step Flex or Zero.",
+    "two_step_standard_3pct": "The 3% daily-loss option is priced from the page's data as the 5% price minus a stated dollar difference (-8, -14, -39, -61, -108 for 5K-100K). Only the 5% price for $50K was visible as text; confirm the 3% prices with a screenshot before publishing.",
+    "two_step_pro_min_days": "Conflict on official pages: the product page shows 0 minimum trading days per phase, while the help centre says accounts bought on or after 26 August 2026 need 2 minimum trading days. Left null until confirmed.",
+    "one_step_flex": "Prices could not be read (page blocked automated access). Daily loss is 2% or 3% depending on the configuration bought, so daily_loss is left null.",
+    "zero": "No evaluation. 5% max loss trails the highest equity and locks at the starting balance once the account is 5% up. Also: 1% max open risk, at least 7 profitable days (0.25%+ each) per rolling 30 days, 15% consistency score for rewards.",
+    "reward_cycles": "2 Step Standard: Weekly 60%, Bi-Weekly 80%, On Demand 90%, Monthly 100%. 2 Step Pro: Weekly 80%, Monthly 100%. 2 Step Flex: Bi-Weekly 80% or 95% (95% needs 3 profitable days), Monthly 100%. 1 Step Flex: Bi-Weekly 80%, Monthly 100%. Monthly 100% applies to evaluations bought on or after 15 August 2026 and needs a 35% consistency score and 7 profitable days.",
+    "restrictions": "FundingPips does not accept residents of the UAE, Iran or Vietnam (help centre 'Get Started' and site footer).",
+    "rule_units": "Forex rules are % of account size.",
+    "null_means": "Not stated (or stated inconsistently) on the official pages checked. See the notes above before publishing.",
+    "unverified_prices": "Standard (3% daily) prices left null: earlier figures ($36/$66/$177/$288/$544) were calculated from a discount in the page data, not shown on the page. Confirm with a screenshot."
+  },
+  "firm": {
+    "id": "fundingpips",
+    "name": "FundingPips",
+    "name_note": null,
+    "about": "FundingPips sells simulated funded accounts for forex and other CFDs, with one-step, two-step and no-evaluation (Zero) programs from $5K up to $200K. It began operating in November 2022 and lists a registered office in Dubai, with its trading entity incorporated in the Comoros.",
+    "about_note": null,
+    "currency": "USD",
+    "website": "https://fundingpips.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "MT5",
+      "cTrader",
+      "Match-Trader"
+    ],
+    "countries": {
+      "restricted": [
+        "AE",
+        "IR",
+        "VN"
+      ],
+      "allowed_only": null,
+      "notes": "The help centre names only three restricted countries: Iran, Vietnam and the UAE. The site footer adds that services are also not offered in 'countries on the FATF and EU/UN sanctions lists', but FundingPips doesn't list those countries anywhere, so they aren't included above. US residents can't use MT5 or cTrader - only Match-Trader - so the Prime Account and the 1K Instant giveaway (both MT5-only) aren't open to them. The help centre names only the US as excluded from MT5 and cTrader, and says Canadian residents can use Match-Trader (platform details: help article 43468639481105, Account Workspace).",
+      "source": "https://help.fundingpips.com/hc/en-us/articles/44390730743825-Get-Started",
+      "last_checked": "2026-10-02"
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "1 Step Flex",
+                "tagline": "Daily loss 2% or 3% (chosen at purchase)",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 12,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": null,
+                  "max_loss": 12,
+                  "drawdown_type": "static",
+                  "profit_split_max": 100,
+                  "min_trading_days": 0,
+                  "consistency": "35% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "Standard (5% daily)",
+                "tagline": "One-time fee · refunded with 4th payout",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 100,
+                  "min_trading_days": 3,
+                  "consistency": "35% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 44
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 80
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 216
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 349
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 652
+                  }
+                ]
+              },
+              {
+                "tier": "Standard (3% daily)",
+                "tagline": "No minimum trading days · refunded with 4th payout",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 100,
+                  "min_trading_days": 0,
+                  "consistency": "35% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": null
+                  }
+                ]
+              },
+              {
+                "tier": "Pro",
+                "tagline": "6% max loss · weekly or monthly payouts",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 6,
+                  "phase2_target": 6,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "static",
+                  "profit_split_max": 100,
+                  "min_trading_days": null,
+                  "consistency": "35% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 33
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 62
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 149
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 249
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 466
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 919
+                  }
+                ]
+              },
+              {
+                "tier": "Flex",
+                "tagline": "12% max loss · choose 80% or 95% bi-weekly split",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 8,
+                  "funded_target": null,
+                  "daily_loss": 4,
+                  "max_loss": 12,
+                  "drawdown_type": "static",
+                  "profit_split_max": 100,
+                  "min_trading_days": 1,
+                  "consistency": "35% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 39
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 70
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 188
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 299
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 555
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Zero",
+                "tagline": "No evaluation · trailing 5% max loss · needs 7 days of 0.25%+ gain every 30 days",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": null,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 5,
+                  "drawdown_type": "trailing (locks at starting balance)",
+                  "profit_split_max": 95,
+                  "min_trading_days": null,
+                  "consistency": "15% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 60
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 88
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 188
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 244
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 444
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 888
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
