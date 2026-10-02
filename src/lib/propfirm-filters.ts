@@ -36,6 +36,8 @@ export type Account = {
   tier: string;
   size: number;
   lowestPrice: number | null;
+  /** The price is a monthly subscription. */
+  monthly: boolean;
   profitSplit: number | null;
   feeRefund: boolean | null;
 };
@@ -51,6 +53,7 @@ export function allAccounts(firm: FirmView): Account[] {
           tier: t.name,
           size: a.size,
           lowestPrice: a.lowestPrice,
+          monthly: a.monthly,
           profitSplit: t.profitSplit,
           feeRefund: t.feeRefund,
         })),

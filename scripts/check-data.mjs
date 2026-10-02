@@ -102,6 +102,27 @@ function scanWording(file, value, trail = []) {
   }
 }
 
+// Which countries a firm accepts. Codes are ISO 3166-1 alpha-2 (US, GB, AE...),
+// so a future "where are you from?" filter can use them directly.
+function checkCountries(file, c) {
+  if (!c) return warn(file, `no "firm.countries" - add which countries the firm does and doesn't accept`);
+  for (const key of ["restricted", "allowed_only"]) {
+    const list = c[key];
+    if (list == null) continue;
+    if (!Array.isArray(list)) {
+      err(file, `firm.countries.${key} must be a list of country codes or null`);
+      continue;
+    }
+    for (const code of list) {
+      if (!/^[A-Z]{2}$/.test(code)) err(file, `firm.countries.${key}: "${code}" is not a 2-letter country code (e.g. "US", "AE")`);
+    }
+  }
+  if (c.restricted == null && c.allowed_only == null)
+    warn(file, `firm.countries has no restricted or allowed_only list - country rules not found yet`);
+  checkLink(file, "firm.countries.source", c.source);
+  if (!c.last_checked) warn(file, `firm.countries has no "last_checked" date`);
+}
+
 function checkPropFirm(file, data) {
   const f = data?.firm;
   if (!f) return err(file, `missing top-level "firm"`);
@@ -113,6 +134,7 @@ function checkPropFirm(file, data) {
   checkLink(file, "firm.affiliate_link", f.affiliate_link);
   if (!f.affiliate_link) warn(file, `no affiliate_link yet - the "Visit site" button stays hidden`);
   if (f.platforms !== null && !Array.isArray(f.platforms)) err(file, `firm.platforms must be a list or null`);
+  checkCountries(file, f.countries);
   if (!Array.isArray(f.markets) || f.markets.length === 0) return err(file, `firm.markets must be a non-empty list`);
 
   f.markets.forEach((m, mi) => {
@@ -124,15 +146,18 @@ function checkPropFirm(file, data) {
       if (!p.program) err(file, `${pat} has no "program" name`);
       (p.tiers ?? []).forEach((t, ti) => {
         const tat = `${pat}.tiers[${ti}] (${t.tier})`;
+        if (t.billing != null && t.billing !== "one-time" && t.billing !== "monthly")
+          err(file, `${tat}: billing must be "one-time" or "monthly" (got "${t.billing}")`);
         const unit = t.rules?.unit;
         if (m.market === "forex" && unit !== "percent") err(file, `${tat}: forex rules must use "unit": "percent"`);
         if (m.market === "futures" && unit !== "usd") err(file, `${tat}: futures rules must use "unit": "usd"`);
         const split = t.rules?.profit_split_max;
         if (!isNumOrNull(split) || (isNum(split) && (split <= 0 || split > 100))) err(file, `${tat}: profit_split_max must be a number between 1 and 100`);
         if (unit === "percent") {
-          for (const k of ["phase1_target", "phase2_target", "daily_loss", "max_loss"]) {
+          for (const k of ["phase1_target", "phase2_target", "phase3_target", "daily_loss", "max_loss"]) {
             const v = t.rules[k];
-            if (!isNumOrNull(v)) err(file, `${tat}: ${k} must be a number or null`);
+            if (k === "daily_loss" && v === "none") continue; // firm has no daily limit
+            if (!isNumOrNull(v)) err(file, `${tat}: ${k} must be a number or null${k === "daily_loss" ? ' (or "none" for no limit)' : ""}`);
             else if (isNum(v) && (v <= 0 || v > 50)) err(file, `${tat}: ${k} = ${v}% looks wrong (forex rules are % of account size)`);
           }
         }
@@ -148,6 +173,8 @@ function checkPropFirm(file, data) {
           if (isNum(a.promo) && isNum(a.standard) && a.promo >= a.standard)
             err(file, `${aat}: promo price (${a.promo}) should be lower than the standard price (${a.standard})`);
           if (unit === "usd") {
+            if (!isNumOrNull(a.daily_loss) && a.daily_loss !== "none")
+              err(file, `${aat}: daily_loss must be a number, null, or "none" for no limit`);
             for (const k of ["profit_target", "daily_loss", "max_loss", "payout_cap"]) {
               if (isNum(a[k]) && a[k] >= a.size) err(file, `${aat}: ${k} (${a[k]}) is bigger than the account - futures rules are USD amounts`);
             }

@@ -27,8 +27,9 @@ export type TierView = {
   /** Rule rows down the side; each has one value per account size. */
   rows: { label: string; values: Cell[] }[];
   prices: PriceCell[];
-  /** Raw numbers used by the filter bar, one per account size. */
-  accounts: { size: number; lowestPrice: number | null }[];
+  /** Raw numbers used by the filter bar, one per account size.
+   *  `monthly` = the price is a monthly subscription. */
+  accounts: { size: number; lowestPrice: number | null; monthly: boolean }[];
   profitSplit: number | null;
   /** null = not stated on the firm's pricing page. */
   feeRefund: boolean | null;

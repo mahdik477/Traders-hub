@@ -41,13 +41,16 @@ export default function PropFirmNotes({
         {filterNote && (
           <li>
             The max price filter and the &ldquo;From&rdquo; price on each firm
-            card use the discounted price where there is one.
+            card use the discounted price where there is one. Monthly
+            subscriptions are compared using one month&apos;s fee.
           </li>
         )}
         <li>
           Prices, promotions and rules change often. Always check the firm&apos;s
-          own website before buying. A dash (—) means the firm&apos;s pricing page
-          doesn&apos;t state that detail. We do not verify trading performance.
+          own website before buying. A dash (—) means we haven&apos;t confirmed
+          that detail from the firm&apos;s own pages yet. &ldquo;None&rdquo; means
+          the firm says there is no such limit. We do not verify trading
+          performance.
         </li>
       </ul>
     </details>
