@@ -18,6 +18,8 @@
   "firm": {
     "id": "topstep",
     "name": "Topstep",
+    "logo": "/funded-accounts/topstep-logo.png",
+    "logo_bg": "dark",
     "name_note": null,
     "about": "Topstep is a Chicago-based futures prop firm (its own timeline starts in 2010 as Patak Trading Partners) that sells monthly-subscription evaluations called the Trading Combine in 50K, 100K and 150K sizes, traded on its own TopstepX platform.",
     "about_note": null,

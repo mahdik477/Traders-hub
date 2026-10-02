@@ -9,6 +9,7 @@
   "firm": {
     "id": "ftmo",
     "name": "FTMO",
+    "logo": "/funded-accounts/ftmo-logo.png",
     "name_note": null,
     "about": "FTMO is a Prague-based prop trading firm founded in 2015, and one of the largest firms in the industry. It offers 1-Step and 2-Step forex challenges on MT4, MT5 and cTrader.",
     "about_note": null,

@@ -132,6 +132,14 @@ function checkPropFirm(file, data) {
   if (!/^[a-z0-9-]+$/.test(f.id ?? "")) err(file, `firm.id must be lowercase letters, numbers and dashes (got "${f.id}")`);
   if (!f.name) err(file, `firm.name is missing`);
   if (!f.about) warn(file, `firm.about is empty - add a short description in our own words`);
+  if (f.logo) {
+    if (!f.logo.startsWith("/")) err(file, `firm.logo should be a path under /public, e.g. "/funded-accounts/name-logo.png"`);
+    else if (!existsSync(path.join(ROOT, "public", f.logo))) err(file, `firm.logo file not found: public${f.logo}`);
+  } else {
+    warn(file, `firm.logo is missing - the card/page falls back to a lettermark`);
+  }
+  if (f.logo_bg != null && f.logo_bg !== "white" && f.logo_bg !== "dark")
+    err(file, `firm.logo_bg must be "white", "dark" or left out (got "${f.logo_bg}")`);
   checkCurrency(file, f.currency);
   checkLink(file, "firm.website", f.website);
   checkLink(file, "firm.affiliate_link", f.affiliate_link);

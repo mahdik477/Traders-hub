@@ -10,6 +10,8 @@
   "firm": {
     "id": "alpha-funded",
     "name": "Alpha Funded",
+    "logo": "/funded-accounts/alpha-funded-logo.jpg",
+    "logo_bg": "dark",
     "name_note": "Alpha Funded (alphafunded.com) also uses the name Alpha Trader Firm on its help center. It is not the same company as Alpha Futures or Alpha Capital Group.",
     "about": "Alpha Funded offers simulated funded accounts on forex and futures (futures through Tradesea), with 1-Step, 2-Step and Instant Funding programs and account sizes up to $400K.",
     "about_note": "Company background not yet verified.",

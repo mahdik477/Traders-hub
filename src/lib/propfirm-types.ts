@@ -54,6 +54,13 @@ export type FirmView = {
   /** Also the page address: /funded-accounts/<id>. */
   id: string;
   name: string;
+  /** Path under /public, e.g. "/funded-accounts/ftmo-logo.png". Null falls
+   *  back to a lettermark. */
+  logo: string | null;
+  /** The box behind the logo — "dark" for a logo that's a white/light mark
+   *  with no transparent background (so it doesn't disappear or look broken
+   *  on our usual white box). Defaults to "white". */
+  logoBg: "white" | "dark";
   /** e.g. "not the same company as..." — shown under the firm name. */
   nameNote: string | null;
   about: string | null;
