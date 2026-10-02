@@ -8,14 +8,22 @@ argument-hint: "[firm name or website]"
 
 Firm: **$ARGUMENTS**
 
-## 1. Gather the facts (never guess)
-- Best source: **screenshots** of the firm's live pricing page and "View
-  rules"/FAQ pages that the person pastes in. Pricing pages are usually
-  interactive, so a fetched page often misses prices. Ask for screenshots if you
-  don't have them — one per market / challenge type / tier, same currency
-  setting throughout.
-- You may use WebFetch/WebSearch for background (founded, HQ, platforms), but
-  only record what a page actually states. Anything not stated → `null`.
+## 1. Gather the facts (research first, never guess)
+- **Do the research yourself first** with WebFetch/WebSearch, using only the
+  firm's own pages: official site, pricing page, rules / "View rules" pages,
+  FAQ and help centre (often a separate site such as `help.<domain>` — find it
+  with a WebSearch for the firm's domain plus "help" or "rules"). Go through
+  every market, challenge type and tier.
+- Only record what a page actually states. Anything not stated → `null`.
+  Third-party blogs and review sites are not a source for prices or rules;
+  they often mix up firms or are out of date.
+- Pricing pages are often interactive, so a fetched page may miss prices or
+  show them incompletely. Treat anything you couldn't read clearly as not
+  read reliably.
+- **Only then ask the person for screenshots**, and only of the specific
+  things you couldn't read reliably — say exactly which page, market,
+  challenge type and tier, and to keep the same currency setting throughout.
+  Tell them what you already found so they don't repeat it.
 - Confirm you have the **right company** (e.g. Alpha Funded ≠ Alpha Futures ≠
   Alpha Capital Group). If the name is ambiguous, add a `name_note`.
 
@@ -41,7 +49,7 @@ Firm: **$ARGUMENTS**
    person in plain English.
 2. Start (or reuse) `npm run dev` and tell them to open
    `http://localhost:3000/funded-accounts/<id>` and compare each table against
-   their screenshots — prices, sizes, rules.
+   the firm's live pricing page — prices, sizes, rules.
 3. List every field left `null` so they know what to look up next.
 
 ## 4. Wrap up
