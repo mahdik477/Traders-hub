@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Checks every listing data file (propfirms-data-*.json, courses-data-*.json)
-// for mistakes before they reach the live site.
+// Checks every listing data file (propfirms-data-*.json, courses-data-*.json,
+// providers-data-*.json) for mistakes before they reach the live site.
 //
 //   npm run check:data            -> check all files, print a report
 //   node scripts/check-data.mjs --hook
@@ -21,6 +21,9 @@ const ROOT =
 
 const PROP_PATTERN = /^propfirms-data-.+\.json$/i;
 const COURSE_PATTERN = /^courses-data-.+\.json$/i;
+// A "provider" sells several distinct courses under one brand (e.g. Sharper
+// Trades) rather than one course on its own — see provider-types.ts.
+const PROVIDER_PATTERN = /^providers-data-.+\.json$/i;
 const STALE_AFTER_DAYS = 30;
 
 // Wording we never publish (see CLAUDE.md "Non-negotiable constraints").
@@ -207,8 +210,50 @@ function checkCourse(file, data) {
   if (!Array.isArray(c.pricing) || c.pricing.length === 0) warn(file, `no pricing listed`);
 }
 
+// One course inside a multi-course provider — same spirit as checkCourse's
+// per-course checks, minus the fields a provider supplies once for all its
+// courses (logo, trustpilot, top-level website).
+function checkProviderCourse(file, c) {
+  const where = `course "${c.slug}"`;
+  if (!/^[a-z0-9-]+$/.test(c.slug ?? "")) err(file, `${where}: slug must be lowercase letters, numbers and dashes (got "${c.slug}")`);
+  if (!c.name) err(file, `${where}: name is missing`);
+  if (!c.about) warn(file, `${where}: about is empty`);
+  checkLink(file, `${where}.website`, c.website);
+  (c.instructors ?? []).forEach((instr, i) => checkLink(file, `${where}.instructors[${i}].link`, instr.link));
+  (c.testimonials ?? []).forEach((t, i) => {
+    if (!t.source) err(file, `${where}.testimonials[${i}] has no "source" - every quote must say where it came from`);
+  });
+  if (!Array.isArray(c.pricing) || c.pricing.length === 0) warn(file, `${where}: no pricing listed`);
+}
+
+function checkProvider(file, data) {
+  const p = data?.provider;
+  if (!p) return err(file, `missing top-level "provider"`);
+  if (!/^[a-z0-9-]+$/.test(p.id ?? "")) err(file, `provider.id must be lowercase letters, numbers and dashes (got "${p.id}")`);
+  if (!p.name) err(file, `provider.name is missing`);
+  if (!p.about) warn(file, `provider.about is empty`);
+  if (p.logo) {
+    if (!p.logo.startsWith("/")) err(file, `provider.logo should be a path under /public, e.g. "/courses/name-logo.webp"`);
+    else if (!existsSync(path.join(ROOT, "public", p.logo))) err(file, `provider.logo file not found: public${p.logo}`);
+  }
+  checkLink(file, "provider.website", p.website);
+  checkLink(file, "provider.affiliate_link", p.affiliate_link);
+  checkLink(file, "provider.trustpilot.url", p.trustpilot?.url);
+  if (p.trustpilot && (!isNum(p.trustpilot.rating) || p.trustpilot.rating < 0 || p.trustpilot.rating > 5))
+    err(file, `provider.trustpilot.rating must be between 0 and 5`);
+  if (!Array.isArray(p.courses) || p.courses.length === 0) return err(file, `provider.courses must be a non-empty list`);
+  const slugs = new Set();
+  for (const c of p.courses) {
+    if (slugs.has(c.slug)) err(file, `two courses share the slug "${c.slug}"`);
+    slugs.add(c.slug);
+    checkProviderCourse(file, c);
+  }
+}
+
 function checkAll() {
-  const files = readdirSync(ROOT).filter((f) => PROP_PATTERN.test(f) || COURSE_PATTERN.test(f)).sort();
+  const files = readdirSync(ROOT)
+    .filter((f) => PROP_PATTERN.test(f) || COURSE_PATTERN.test(f) || PROVIDER_PATTERN.test(f))
+    .sort();
   const ids = new Map();
   for (const file of files) {
     let data;
@@ -219,11 +264,15 @@ function checkAll() {
       continue;
     }
     const isProp = PROP_PATTERN.test(file);
+    const isProvider = PROVIDER_PATTERN.test(file);
+    const kind = isProp ? "firm" : isProvider ? "provider" : "course";
+    const entity = isProp ? data.firm : isProvider ? data.provider : data.course;
     if (isProp) checkPropFirm(file, data);
+    else if (isProvider) checkProvider(file, data);
     else checkCourse(file, data);
     checkVerified(file, data._notes);
-    scanWording(file, isProp ? data.firm : data.course);
-    const id = `${isProp ? "firm" : "course"}:${(isProp ? data.firm : data.course)?.id}`;
+    scanWording(file, entity);
+    const id = `${kind}:${entity?.id}`;
     if (ids.has(id)) err(file, `uses the same id as ${ids.get(id)}`);
     ids.set(id, file);
   }
@@ -249,7 +298,7 @@ async function main() {
       process.exit(0);
     }
     const name = path.basename(filePath);
-    if (!PROP_PATTERN.test(name) && !COURSE_PATTERN.test(name)) process.exit(0);
+    if (!PROP_PATTERN.test(name) && !COURSE_PATTERN.test(name) && !PROVIDER_PATTERN.test(name)) process.exit(0);
     const count = checkAll();
     // Only interrupt Claude for real errors; warnings show up in npm run check.
     if (errors.length) {

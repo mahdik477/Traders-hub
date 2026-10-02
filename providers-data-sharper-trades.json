@@ -1,0 +1,267 @@
+{
+  "provider": {
+    "id": "sharper-trades",
+    "name": "Sharper Trades",
+    "logo": "/courses/sharper-trades-logo.png",
+    "tagline": "An ecosystem of trading alerts, investment research and structured video courses, spanning options, swing trading, long-term stock picking and institutional order-flow analysis.",
+    "about": "Sharper Trades is run by Luca Moschini (founder, has trained over 180,000 students) and Kal Zurn (who leads the options services division). Rather than one single course, it's a suite of separate products covering different trading styles — real-time alerts, video courses and a monthly stock-picking service — which can be bought individually or bundled together.",
+    "website": "https://sharpertrades.com/",
+    "affiliate_link": null,
+    "trustpilot": null,
+    "courses": [
+      {
+        "slug": "essential-option-income-system",
+        "name": "Essential Option Income System",
+        "website": "https://sharpertrades.com/p/option-alert-trading-signal",
+        "tagline": "Real-time alerts for busy people who just want plug-and-play options trades.",
+        "about": "An alert-only service (no video course) aimed at traders who want clear, research-backed options trades without doing their own market analysis — built for beginners and people with limited time.",
+        "bundle_of": [],
+        "performance_claim": null,
+        "instructors": [{ "name": "Kal Zurn", "role": "Leads Sharper Trades' options services", "link": null }],
+        "formats": [
+          {
+            "label": "Real-time trade alerts",
+            "description": "2–3 alerts per week with entry/exit specifics, trade reasoning and a closing alert when the trade is done."
+          },
+          {
+            "label": "Risk management guidance",
+            "description": "Built into every alert, rather than a separate module."
+          }
+        ],
+        "platforms": [],
+        "pricing": [
+          { "name": "Monthly", "price": "$49/month", "billing_note": "Cancel anytime.", "highlight": null },
+          {
+            "name": "Annual",
+            "price": "$497/year",
+            "billing_note": "Equivalent to 10 months — 2 months free versus paying monthly.",
+            "highlight": "Saves $91/year vs. monthly"
+          }
+        ],
+        "testimonials": [
+          {
+            "quote": "I was honestly scared to place my first options trade. The alerts took that fear away.",
+            "author": "Ellen A.",
+            "source": "Quoted on Sharper Trades' website"
+          },
+          {
+            "quote": "What surprised me most is how calm trading feels now. I'm not panicking.",
+            "author": "Luther L.",
+            "source": "Quoted on Sharper Trades' website"
+          },
+          {
+            "quote": "This feels thoughtful and professional, compared to other services.",
+            "author": "Hank G.",
+            "source": "Quoted on Sharper Trades' website"
+          }
+        ]
+      },
+      {
+        "slug": "block-orders",
+        "name": "Block Orders",
+        "website": "https://sharpertrades.com/p/block-orders",
+        "tagline": "Trade around institutional levels, not guesswork.",
+        "about": "A real-time alert service that flags unusual institutional trading activity, aiming to show both the trade direction and the reasoning behind it rather than just a signal to follow.",
+        "bundle_of": [],
+        "performance_claim": null,
+        "instructors": [{ "name": "Luca Moschini", "role": "Founder, Sharper Trades", "link": null }],
+        "formats": [
+          {
+            "label": "Real-time trade alerts",
+            "description": "Long and short setups built around institutional-level activity, with defined support/resistance levels and targets."
+          },
+          {
+            "label": "Ongoing market insights",
+            "description": "Ongoing context and commentary alongside the alerts."
+          }
+        ],
+        "platforms": [],
+        "pricing": [
+          { "name": "Monthly", "price": "$49/month", "billing_note": null, "highlight": null },
+          {
+            "name": "Annual",
+            "price": "$497/year",
+            "billing_note": "Includes 2 months free. 7-day refund window on the annual plan.",
+            "highlight": null
+          }
+        ],
+        "testimonials": []
+      },
+      {
+        "slug": "stock-investor",
+        "name": "Stock Investor",
+        "website": "https://sharpertrades.com/p/stock-investor",
+        "tagline": "Build a portfolio of high-conviction ideas.",
+        "about": "A monthly stock-picking service for long-term investors, aiming to flag growth companies early. Each pick comes with an investment thesis, a 3–5 year price target, and supporting research.",
+        "bundle_of": [],
+        "performance_claim": null,
+        "instructors": [{ "name": "Luca Moschini", "role": "Founder, Sharper Trades", "link": null }],
+        "formats": [
+          {
+            "label": "Monthly stock picks",
+            "description": "A curated portfolio of growth stocks with investment theses and price targets."
+          },
+          {
+            "label": "Research reports",
+            "description": "Business breakdowns, risk analysis and supporting charts for each pick."
+          },
+          {
+            "label": "Portfolio tracking",
+            "description": "Access to all current and past picks, with performance tracked over time."
+          }
+        ],
+        "platforms": [],
+        "pricing": [
+          { "name": "Annual", "price": "$249/year", "billing_note": "Cancel anytime.", "highlight": null }
+        ],
+        "testimonials": []
+      },
+      {
+        "slug": "pro-option-alert-trading-signal",
+        "name": "Pro Option Trader Academy",
+        "website": "https://sharpertrades.com/p/pro-option-alert-trading-signal",
+        "tagline": "Complete options mastery, plus real-time alerts.",
+        "about": "Combines the same alert service as the Essential Option Income System with a full video curriculum, aimed at traders who want to learn options trading properly rather than just follow alerts.",
+        "bundle_of": [],
+        "performance_claim": null,
+        "instructors": [{ "name": "Kal Zurn", "role": "Leads Sharper Trades' options services", "link": null }],
+        "formats": [
+          {
+            "label": "Real-time trade alerts",
+            "description": "2–3 alerts per week with closing alerts, same as the Essential Option Income System."
+          },
+          {
+            "label": "Video course library",
+            "description": "A 12-course library from beginner to advanced, plus a 6-hour crash course, structured across 4 levels."
+          },
+          {
+            "label": "Live webinars",
+            "description": "Ongoing live sessions for continuing education."
+          },
+          {
+            "label": "Downloadable guides",
+            "description": "Strategy blueprints and PDF guides."
+          }
+        ],
+        "platforms": [],
+        "pricing": [
+          { "name": "Monthly", "price": "$99/month", "billing_note": null, "highlight": null },
+          {
+            "name": "Annual",
+            "price": "$997/year",
+            "billing_note": "Equivalent to 2 months free. 14-day refund window.",
+            "highlight": null
+          }
+        ],
+        "testimonials": [
+          {
+            "quote": "The alerts are great, but the education is what really made everything click.",
+            "author": "Sanjay G.",
+            "source": "Quoted on Sharper Trades' website"
+          },
+          {
+            "quote": "After going through the courses, that fear is mostly gone.",
+            "author": "Joy H.",
+            "source": "Quoted on Sharper Trades' website"
+          },
+          {
+            "quote": "I always know what to learn next, and everything builds on itself.",
+            "author": "Chandra S.",
+            "source": "Quoted on Sharper Trades' website"
+          }
+        ]
+      },
+      {
+        "slug": "market-edge",
+        "name": "Market Edge",
+        "website": "https://sharpertrades.com/p/market-edge",
+        "tagline": "Trade short-term. Invest long-term. Build real market skill.",
+        "about": "A bundle combining three of Sharper Trades' other products into one system, for traders who want both active trading alerts and a long-term investing approach rather than buying each piece separately.",
+        "bundle_of": ["Block Orders", "Stock Investor", "Swing Trading Masterclass"],
+        "performance_claim": null,
+        "instructors": [{ "name": "Luca Moschini", "role": "Founder, Sharper Trades", "link": null }],
+        "formats": [
+          {
+            "label": "Block Orders alerts",
+            "description": "Real-time trade setups built around institutional-level activity."
+          },
+          {
+            "label": "Stock Investor picks",
+            "description": "Long-term portfolio opportunities with research and price targets."
+          },
+          {
+            "label": "Swing Trading Masterclass",
+            "description": "The full 6-week video curriculum and execution training."
+          }
+        ],
+        "platforms": [],
+        "pricing": [
+          { "name": "Monthly", "price": "$99/month", "billing_note": null, "highlight": null },
+          {
+            "name": "Annual",
+            "price": "$997/year",
+            "billing_note": "Equivalent to 2 months free. Each component is also sold separately.",
+            "highlight": null
+          }
+        ],
+        "testimonials": []
+      },
+      {
+        "slug": "swing-trading-masterclass-how-to-become-a-successful-stock-trader-in-just-6-weeks",
+        "name": "Swing Trading Masterclass",
+        "website": "https://sharpertrades.com/p/swing-trading-masterclass-how-to-become-a-successful-stock-trader-in-just-6-weeks",
+        "tagline": "A complete 6-week system to learn the market, identify high-quality setups, and execute with confidence.",
+        "about": "A structured 6-week video course on swing trading, built for traders who already know the basics but want a repeatable system rather than guesswork. The provider is explicit that it isn't aimed at get-rich-quick seekers or day scalpers.",
+        "bundle_of": [],
+        "performance_claim": null,
+        "instructors": [
+          { "name": "Luca Moschini", "role": "Founder, Sharper Trades — has trained over 180,000 students", "link": null }
+        ],
+        "curriculum": [
+          {
+            "title": "6-Week Curriculum",
+            "module_count": null,
+            "topics": [
+              "Support and resistance fundamentals",
+              "Candlestick and technical pattern analysis",
+              "Technical indicators: moving averages, volume, balance of power, money stream",
+              "TC2000 platform training and simulator practice",
+              "Trading psychology and 10 rules for successful traders",
+              "Risk and money management",
+              "Trading plan construction: position sizing and stop-loss strategy",
+              "Fibonacci retracement and projection techniques",
+              "Live trading examples across different market conditions",
+              "Stock scanner setup, unusual options and dark pool analysis"
+            ]
+          }
+        ],
+        "formats": [
+          {
+            "label": "Video lessons",
+            "description": "6-week structured curriculum, released module by module."
+          }
+        ],
+        "platforms": ["TC2000"],
+        "pricing": [
+          {
+            "name": "One-time",
+            "price": "$1,497",
+            "billing_note": "7-day refund window.",
+            "highlight": "Saves $238 vs. the payment plan"
+          },
+          {
+            "name": "Payment plan",
+            "price": "5 × $347/month",
+            "billing_note": "Totals $1,735 — more than the one-time price, spread over 5 months.",
+            "highlight": null
+          }
+        ],
+        "testimonials": []
+      }
+    ]
+  },
+  "_notes": {
+    "last_verified": "2026-10-02",
+    "source": "sharpertrades.com product pages and /p/about; no Trustpilot profile exists for this domain"
+  }
+}

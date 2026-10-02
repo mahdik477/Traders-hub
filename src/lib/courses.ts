@@ -25,6 +25,10 @@ type RawFile = {
     refund_policy?: string | null;
     trustpilot?: { rating: number; review_count?: number | null; url?: string | null } | null;
     testimonials?: { quote: string; author: string; source?: string | null }[];
+    /** Overrides the default "sourced from the provider's own marketing" note
+     *  — set this when testimonials are from somewhere else, e.g. independent
+     *  Trustpilot reviews. */
+    testimonials_note?: string | null;
     website?: string | null;
     affiliate_link?: string | null;
   };
@@ -32,7 +36,7 @@ type RawFile = {
 
 const DATA_FILE_PATTERN = /^courses-data-.+\.json$/i;
 
-const TESTIMONIALS_NOTE =
+const DEFAULT_TESTIMONIALS_NOTE =
   "These testimonials are quoted from the course provider's own website and marketing. We haven't independently verified them, and we don't verify trading performance or results.";
 
 function loadCourses(): CourseView[] {
@@ -101,7 +105,7 @@ function buildCourse(c: RawFile["course"]): CourseView {
       author: t.author,
       source: t.source ?? null,
     })),
-    testimonialsNote: TESTIMONIALS_NOTE,
+    testimonialsNote: c.testimonials_note || DEFAULT_TESTIMONIALS_NOTE,
     website: safeLink(c.website),
     affiliateLink: safeLink(c.affiliate_link),
   };
