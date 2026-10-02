@@ -1,7 +1,7 @@
 // Small inline icon set for the courses section — no icon library dependency,
 // just the handful of glyphs the course page actually uses.
 
-import type { JSX } from "react";
+import type { CSSProperties, JSX } from "react";
 
 type IconProps = { className?: string };
 
@@ -103,6 +103,37 @@ export function CheckIcon({ className = base }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M5 12.5 9.5 17 19 7" />
+    </svg>
+  );
+}
+
+export function ChevronLeftIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="m14.5 6-6 6 6 6" />
+    </svg>
+  );
+}
+
+export function ChevronDownIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="m6 9.5 6 6 6-6" />
+    </svg>
+  );
+}
+
+export function StarIcon({
+  className = base,
+  style,
+}: IconProps & { style?: CSSProperties }) {
+  return (
+    // viewBox is cropped tight to the star's actual points (2,2 to 22,22,
+    // not the full 0-24 box) — the path itself doesn't reach the edges, and
+    // a proportional-fill rating bar clips this box by percentage, so any
+    // dead margin here would throw that math off.
+    <svg viewBox="2 2 20 20" fill="currentColor" className={className} style={style}>
+      <path d="m12 2.5 2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7-5.4-4.7 7.1-.6L12 2.5Z" />
     </svg>
   );
 }

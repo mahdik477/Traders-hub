@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CourseDirectory from "@/components/CourseDirectory";
 import { courses } from "@/lib/courses";
+import { providers } from "@/lib/providers";
 import { getSection } from "@/lib/sections";
 
 const section = getSection("courses");
@@ -23,7 +24,7 @@ export default function CoursesPage() {
         where its testimonials and ratings come from.
       </p>
 
-      <CourseDirectory courses={courses} />
+      <CourseDirectory courses={courses} providers={providers} />
     </>
   );
 }

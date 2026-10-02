@@ -1,0 +1,79 @@
+{
+  "course": {
+    "id": "humbled-trader",
+    "name": "Humbled Trader",
+    "logo": "/courses/humbled-trader-logo.png",
+    "tagline": "Day trading education focused on small-cap and large-cap momentum strategies, combining a self-paced video course with live community mentorship.",
+    "about": "Humbled Trader is a day trading education platform run by Shay Huang, centered on small-cap and large-cap momentum trading. The core product is the Humbled Trader Academy, a self-paced video course, usually bundled with a paid community membership that adds live mentorship, webinars and a private Discord.",
+    "instructor": {
+      "name": "Shay Huang",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Humbled Trader Academy",
+        "module_count": 17,
+        "topics": [
+          "What to expect from the Academy",
+          "Who is Humbled Trader?",
+          "HT roadmap for beginner traders",
+          "Stock market lingo for beginners",
+          "Brokers & trading platform set-up",
+          "Introduction to candlestick charts",
+          "Technical analysis",
+          "Risk management",
+          "Trade journal & tracking",
+          "Trade planning: small caps",
+          "Trade planning: large cap stocks",
+          "Long set-ups (3 modules)",
+          "Short set-ups (2 modules)",
+          "Trader psychology & longevity in the market"
+        ]
+      },
+      {
+        "title": "Included with community membership",
+        "module_count": null,
+        "topics": [
+          "Humbled Trader Options Course",
+          "Advanced strategy courses and trading masterminds"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Video lessons",
+        "description": "Self-paced Academy course — third-party reviews report around 150+ video lessons across 17 units."
+      },
+      {
+        "label": "Live mentorship & webinars",
+        "description": "Midday livestream mentorship sessions, weekly webinars and live trade reviews with Shay and other coaches."
+      },
+      {
+        "label": "Community access",
+        "description": "Private Discord community, including a dedicated channel for new traders."
+      },
+      {
+        "label": "Downloadable resources",
+        "description": "Trade planning templates and scanner set-ups for platforms like thinkorswim and Interactive Brokers."
+      }
+    ],
+    "platforms": ["thinkorswim", "Interactive Brokers"],
+    "pricing": [
+      {
+        "name": "Academy + Community",
+        "price": "≈ $1,580/year",
+        "billing_note": "Academy course access plus community membership, billed annually.",
+        "highlight": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 2.9,
+      "review_count": 2,
+      "url": "https://www.trustpilot.com/review/humbledtrader.com"
+    },
+    "testimonials": [],
+    "website": "https://www.humbledtrader.com/",
+    "affiliate_link": null
+  }
+}
