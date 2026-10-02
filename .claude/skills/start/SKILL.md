@@ -2,7 +2,6 @@
 name: start
 description: Start a new piece of work - switch to main, pull the latest changes, install dependencies if needed and create a correctly named branch. Use when someone says they want to start something new, begin a feature, or "switch back to main and pull".
 argument-hint: "[what you're working on, e.g. signal groups page]"
-disable-model-invocation: true
 ---
 
 # Start new work

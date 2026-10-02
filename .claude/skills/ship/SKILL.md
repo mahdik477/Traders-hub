@@ -1,7 +1,6 @@
 ---
 name: ship
 description: Get the current branch ready for a pull request - runs the data check, lint and production build, runs the compliance and code reviewers, fixes what they find (with permission), commits, pushes the branch and writes a plain-English PR description. Use when someone says they're done, wants to ship, push, open a PR or "send it for review".
-disable-model-invocation: true
 ---
 
 # Ship this branch

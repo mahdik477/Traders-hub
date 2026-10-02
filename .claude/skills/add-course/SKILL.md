@@ -8,10 +8,18 @@ argument-hint: "[course name or website]"
 
 Course: **$ARGUMENTS**
 
-## 1. Gather the facts
-- Read the course's own site (WebFetch) and any screenshots/links the person
-  shares. Record only what's actually stated; anything unknown → `null` or an
-  empty list.
+## 1. Gather the facts (research first, never guess)
+- **Do the research yourself first** with WebFetch/WebSearch, using the
+  course's own pages: official site, pricing / checkout page, curriculum,
+  FAQ, terms (for the refund policy) and help centre. Use any links the person
+  has already shared.
+- Record only what's actually stated; anything unknown → `null` or an empty
+  list. Third-party blogs are not a source for prices or course details.
+- Pages are often interactive, so a fetched page may miss prices or content.
+  Treat anything you couldn't read clearly as not read reliably.
+- **Only then ask the person for screenshots**, and only of the specific
+  things you couldn't read reliably — say exactly which page and section.
+  Tell them what you already found so they don't repeat it.
 - Check Trustpilot for the rating and review count if a page exists (link it).
 - Refund policy: quote what their site says in plain words. If nothing is
   stated, say exactly that: "No refund policy is stated on the provider's
