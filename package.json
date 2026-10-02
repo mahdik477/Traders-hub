@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:data": "node scripts/check-data.mjs",
+    "check": "node scripts/check-data.mjs && eslint && next build"
   },
   "dependencies": {
     "next": "16.3.7",

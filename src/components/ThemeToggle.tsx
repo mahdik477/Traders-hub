@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 function SunIcon() {
   return (
@@ -22,17 +22,23 @@ function MoonIcon() {
 // Dark is the site default (see globals.css). This is the floating toggle
 // that lets a visitor switch to light mode; it remembers their choice and
 // matches whatever the blocking script in layout.tsx already applied, so
-// there's no mismatch on load.
-export default function ThemeToggle() {
-  const [isLight, setIsLight] = useState(false);
+// there's no mismatch on load. The button reads the theme straight from the
+// <html data-theme> attribute, so it always shows the right icon.
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+}
 
-  useEffect(() => {
-    setIsLight(document.documentElement.getAttribute("data-theme") === "light");
-  }, []);
+const readIsLight = () => document.documentElement.getAttribute("data-theme") === "light";
+
+export default function ThemeToggle() {
+  // On the server we can't know the visitor's choice, so render the default
+  // (dark) and let the browser correct it straight after loading.
+  const isLight = useSyncExternalStore(subscribe, readIsLight, () => false);
 
   function toggle() {
     const next = isLight ? "dark" : "light";
-    setIsLight(!isLight);
     document.documentElement.setAttribute("data-theme", next);
     try {
       localStorage.setItem("theme", next);
