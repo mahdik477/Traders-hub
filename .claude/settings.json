@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run lint)",
+      "Bash(npm run build)",
+      "Bash(npm run check)",
+      "Bash(npm run check:data)",
+      "Bash(npm install)",
+      "Bash(npm ci)",
+      "Bash(node scripts/check-data.mjs)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git diff)",
+      "Bash(git log *)",
+      "Bash(git branch *)",
+      "Bash(git branch)",
+      "Bash(git fetch *)",
+      "Bash(git pull)",
+      "Bash(git pull *)",
+      "Bash(git switch *)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "WebFetch",
+      "WebSearch"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(npm install *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(git push origin main)",
+      "Bash(git push origin main *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/scripts/check-data.mjs\" --hook",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
