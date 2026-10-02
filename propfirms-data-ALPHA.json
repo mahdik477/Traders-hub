@@ -4,12 +4,13 @@
     "source": "Screenshots of each firm's live pricing page",
     "pricing": "promo = current discounted price, standard = crossed-out list price. Promos change often; re-verify before publishing.",
     "rule_units": "Forex rules are % of account size. Futures rules are fixed USD amounts.",
-    "null_means": "Field not shown on the pricing page. Check the firm's 'View Rules' page before publishing."
+    "null_means": "Field not shown on the pricing page. Check the firm's 'View Rules' page before publishing.",
+    "rules_source": "Rules checked against Alpha Funded help-center rule pages on 2026-10-02 (1-Step Lite/PRO, 2-Step Classic/Standard/PRO, Instant Standard/PRO, Futures Instant Funding). Instant PRO: 7 profitable days applies to purchases from 2026-10-01."
   },
   "firm": {
     "id": "alpha-funded",
     "name": "Alpha Funded",
-    "name_note": "Alpha Funded (alphafunded.com) is not the same company as Alpha Futures or Alpha Capital Group.",
+    "name_note": "Alpha Funded (alphafunded.com) also uses the name Alpha Trader Firm on its help center. It is not the same company as Alpha Futures or Alpha Capital Group.",
     "about": "Alpha Funded offers simulated funded accounts on forex and futures (futures through Tradesea), with 1-Step, 2-Step and Instant Funding programs and account sizes up to $400K.",
     "about_note": "Company background not yet verified.",
     "currency": "USD",
@@ -36,7 +37,7 @@
                   "profit_split_max": 100,
                   "min_trading_days": 3,
                   "consistency": "none",
-                  "trading_period": null,
+                  "trading_period": "unlimited",
                   "fee_refund": true
                 },
                 "accounts": [
@@ -89,8 +90,8 @@
                   "max_loss": 6,
                   "profit_split_max": 100,
                   "min_trading_days": 5,
-                  "consistency": null,
-                  "trading_period": null,
+                  "consistency": "35% (payouts)",
+                  "trading_period": "unlimited",
                   "fee_refund": true
                 },
                 "accounts": [
@@ -148,8 +149,8 @@
                   "max_loss": 10,
                   "profit_split_max": 100,
                   "min_trading_days": 0,
-                  "consistency": "none",
-                  "trading_period": null,
+                  "consistency": "30% (payouts)",
+                  "trading_period": "unlimited",
                   "fee_refund": true
                 },
                 "accounts": [
@@ -257,7 +258,7 @@
                   "profit_split_max": 80,
                   "min_trading_days": 2,
                   "consistency": "none",
-                  "trading_period": null,
+                  "trading_period": "unlimited",
                   "fee_refund": true
                 },
                 "accounts": [
@@ -315,7 +316,7 @@
                   "max_loss": 5,
                   "profit_split_max": 90,
                   "min_trading_days": 5,
-                  "consistency": null,
+                  "consistency": "20% (payouts)",
                   "trading_period": "unlimited",
                   "fee_refund": false
                 },
@@ -368,7 +369,7 @@
                   "daily_loss": 3,
                   "max_loss": 5,
                   "profit_split_max": 80,
-                  "min_trading_days": 10,
+                  "min_trading_days": 7,
                   "consistency": "none",
                   "trading_period": "unlimited",
                   "fee_refund": false
