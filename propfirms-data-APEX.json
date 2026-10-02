@@ -15,6 +15,7 @@
   "firm": {
     "id": "apex-trader-funding",
     "name": "Apex Trader Funding",
+    "logo": "/funded-accounts/apex-trader-funding-logo.jpg",
     "name_note": "Apex Trader Funding (apextraderfunding.com), based in Austin, Texas. Not related to similarly named sites such as apexfundtraders.com.",
     "about": "Apex Trader Funding is a futures-only firm that sells simulated evaluation accounts from $25K to $150K, with a choice of end-of-day or intraday trailing drawdown. Traders who pass pay an activation fee to move to a simulated funded Performance Account.",
     "about_note": null,
@@ -122,6 +123,41 @@
       "notes": "Apex's pages disagree: its Terms of Use say services are intended for U.S. users only, while its help-centre 'Restricted Countries' page says traders from over 100 countries can take part and lists only these 87 places as unable to buy new or additional accounts. The list includes territories (Réunion, New Caledonia, Saint Pierre and Miquelon, Jersey, Western Sahara, Palestine). Kosovo is recorded as XK (a widely used code, not an official ISO one). Exception: someone originally from a restricted country may qualify if they hold a valid government ID from a non-restricted country and their home, mailing address and bank account are all in a non-restricted country; while physically in a restricted country they cannot buy accounts or request payouts. Canadians are accepted. The live site blocks automated checks, so this was read from Internet Archive copies of the official page (latest dated June 2026).",
       "source": "https://web.archive.org/web/20260630155746/https://apextraderfunding.com/help-center/getting-started/restricted-countries/",
       "last_checked": "2026-10-02"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.2,
+        "review_count": 21187,
+        "url": "https://www.trustpilot.com/review/apextraderfunding.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "No Google Business profile found for this firm.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Clear rules, easy and fast payout, great way to get the discipline in trading right.",
+          "author": "David A.",
+          "stars": 5,
+          "date": "2026-10-02",
+          "url": "https://www.trustpilot.com/reviews/6abfa0265a59a73c05e48eb2"
+        },
+        {
+          "quote": "Overall, I have a positive experience with this prop firm. They have fair policies and demonstrate strong integrity, particularly in how they handle issues. …",
+          "author": "John C.",
+          "stars": 4,
+          "date": "2026-10-01",
+          "url": "https://www.trustpilot.com/reviews/6abe9669b90bd9c23290d9b6"
+        },
+        {
+          "quote": "Payout is taking so long to go into my account, also data on funded a update every 24 hours, not good",
+          "author": "Gael C.",
+          "stars": 2,
+          "date": "2026-08-08",
+          "url": "https://www.trustpilot.com/reviews/6a774a72eb50d844053e0985"
+        }
+      ]
     },
     "markets": [
       {

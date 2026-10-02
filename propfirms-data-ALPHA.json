@@ -10,6 +10,7 @@
   "firm": {
     "id": "alpha-funded",
     "name": "Alpha Funded",
+    "logo": "/funded-accounts/alpha-funded-logo.jpg",
     "name_note": "Alpha Funded (alphafunded.com) also uses the name Alpha Trader Firm on its help center. It is not the same company as Alpha Futures or Alpha Capital Group.",
     "about": "Alpha Funded offers simulated funded accounts on forex and futures (futures through Tradesea), with 1-Step, 2-Step and Instant Funding programs and account sizes up to $400K.",
     "about_note": "Company background not yet verified.",
@@ -52,6 +53,29 @@
       "notes": "Residents of these countries can't trade with Alpha Funded. Crimea (a region of Ukraine) is also listed; the rest of Ukraine is not. Help-center article last updated 24 Aug 2026; the firm says the list exists for legal and regulatory reasons and may change, so contact support if unsure.",
       "source": "https://faq.alphafunded.com/en/articles/9568285-restricted-countries",
       "last_checked": "2026-10-02"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (checked 3 Oct 2026).",
+      "google": null,
+      "google_note": "No Google Business profile found for this firm.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Good price, excellent rules, and fast payout!",
+          "author": "haiyun H.",
+          "stars": 5,
+          "date": "2026-08-04",
+          "url": "https://www.trustpilot.com/reviews/6a714a4f9a5df4c009468516"
+        },
+        {
+          "quote": "They mention in their rule that your profit is distributed over days but theg dont mention how loss affect your score and they are dont professional they dont even know their own rule. …",
+          "author": "Parth",
+          "stars": 1,
+          "date": "2026-09-25",
+          "url": "https://www.trustpilot.com/reviews/6ab66fa2f319f829a7eb90eb"
+        }
+      ]
     },
     "markets": [
       {

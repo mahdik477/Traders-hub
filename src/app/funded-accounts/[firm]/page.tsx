@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { BackToFirmsLink, FirmPricingFromFilters } from "@/components/FirmPageFromFilters";
 import FirmBadge from "@/components/FirmBadge";
 import PropFirmNotes from "@/components/PropFirmNotes";
+import PropFirmReviews from "@/components/PropFirmReviews";
 import { getPropFirm, propFirms } from "@/lib/propfirms";
 import { getSection } from "@/lib/sections";
 
@@ -34,7 +35,7 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
       <BackToFirmsLink />
 
       <div className="mt-5 flex items-center gap-4">
-        <FirmBadge name={firm.name} size="lg" />
+        <FirmBadge name={firm.name} logo={firm.logo} size="lg" />
         <h1 className="page-title">{firm.name}</h1>
       </div>
       {firm.nameNote && <p className="meta mt-3 max-w-3xl">{firm.nameNote}</p>}
@@ -51,6 +52,8 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
           {firm.aboutNote && <p className="mt-3 text-xs italic text-subtle">{firm.aboutNote}</p>}
         </section>
       )}
+
+      {firm.reviews && <PropFirmReviews reviews={firm.reviews} />}
 
       <section aria-labelledby="pricing-heading" className="mt-12">
         <h2 id="pricing-heading" className="section-title">

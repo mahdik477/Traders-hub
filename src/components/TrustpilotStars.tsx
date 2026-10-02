@@ -15,7 +15,7 @@ function trustpilotLabel(rating: number): string {
 // explicit pixel offset (no flexbox) so there's no shrink/gap ambiguity for
 // the browser to resolve — the gold row is a plain overflow-hidden box
 // clipped to an exact pixel width, sitting over an identical grey row.
-function StarRow({ rating, iconPx = 16 }: { rating: number; iconPx?: number }) {
+export function StarRow({ rating, iconPx = 16 }: { rating: number; iconPx?: number }) {
   const gapPx = 2;
   const step = iconPx + gapPx;
   const totalPx = 5 * iconPx + 4 * gapPx;
@@ -65,7 +65,7 @@ export default function TrustpilotRatingDisplay({
       <span className="meta">
         {trustpilotLabel(rating.rating)}
         {rating.reviewCount != null &&
-          ` · ${rating.reviewCount} review${rating.reviewCount === 1 ? "" : "s"} on Trustpilot`}
+          ` · ${rating.reviewCount.toLocaleString("en-US")} review${rating.reviewCount === 1 ? "" : "s"} on Trustpilot`}
       </span>
     </>
   );
@@ -78,7 +78,7 @@ export default function TrustpilotRatingDisplay({
     <a
       href={rating.url}
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       className="flex flex-wrap items-center gap-2 hover:underline"
     >
       {content}

@@ -20,6 +20,10 @@ export default function SiteFooter() {
           </Link>
         </p>
         <p className="text-xs text-subtle">
+          Firm names and logos belong to their owners; showing them doesn&apos;t
+          mean they endorse us.
+        </p>
+        <p className="text-xs text-subtle">
           © {new Date().getFullYear()} {SITE_NAME}
         </p>
       </div>
