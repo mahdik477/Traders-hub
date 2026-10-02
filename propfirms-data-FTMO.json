@@ -9,6 +9,7 @@
   "firm": {
     "id": "ftmo",
     "name": "FTMO",
+    "logo": "/funded-accounts/ftmo-logo.png",
     "name_note": null,
     "about": "FTMO is a Prague-based prop trading firm founded in 2015, and one of the largest firms in the industry. It offers 1-Step and 2-Step forex challenges on MT4, MT5 and cTrader.",
     "about_note": null,
@@ -101,6 +102,23 @@
       "notes": "List is for FTMO CFD (forex) challenges. Iran, Syria, Myanmar and North Korea are banned by nationality as well as residence, but nationals of Iran, Syria or Myanmar living in the EEA with a traditional EEA bank account may be accepted (no exception for North Korea). Ukraine is only restricted in Crimea, Sevastopol, Donetsk, Kherson, Luhansk and Zaporizhzhia. Kosovo is coded XK (widely used, not an official ISO code). US residents are not served on ftmo.com but can join through FTMO US (ftmo.oanda.com); Australians use ftmo.com/au. FTMO Futures has its own, longer list (it also excludes China, for example, and five US states: AR, DE, LA, MT, SC). People on sanctions lists or with financial-crime records are also refused. FTMO may change this list.",
       "source": "https://ftmo.com/en/faq/who-can-join-ftmo/",
       "last_checked": "2026-10-02"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.8,
+        "review_count": 53670,
+        "url": "https://www.trustpilot.com/review/ftmo.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": {
+        "rating": 4.6,
+        "review_count": 383,
+        "url": "https://www.google.com/maps/place/?q=place_id:ChIJc4h2I7aVC0cRCuV4kKz5l1w",
+        "checked": "2026-10-03"
+      },
+      "google_note": null
     },
     "markets": [
       {

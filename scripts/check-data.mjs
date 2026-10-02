@@ -126,6 +126,42 @@ function checkCountries(file, c) {
   if (!c.last_checked) warn(file, `firm.countries has no "last_checked" date`);
 }
 
+// Trustpilot / Google ratings shown in a firm's "Reviews" box. A missing
+// rating needs a note saying why, because the note is shown instead.
+function checkReviews(file, r) {
+  if (!r) return warn(file, `no "firm.reviews" - add the Trustpilot and Google ratings`);
+  for (const site of ["trustpilot", "google"]) {
+    const v = r[site];
+    const where = `firm.reviews.${site}`;
+    if (v == null) {
+      if (!r[`${site}_note`]) warn(file, `${where} is empty and has no ${site}_note saying why`);
+      continue;
+    }
+    if (!isNum(v.rating) || v.rating < 0 || v.rating > 5) err(file, `${where}.rating must be a number from 0 to 5`);
+    if (v.review_count != null && (!Number.isInteger(v.review_count) || v.review_count < 0))
+      err(file, `${where}.review_count must be a whole number (no commas)`);
+    checkLink(file, `${where}.url`, v.url);
+    if (!v.checked) warn(file, `${where} has no "checked" date`);
+    else if (Number.isNaN(new Date(v.checked).getTime())) err(file, `${where}.checked is not a date (use YYYY-MM-DD)`);
+  }
+  const quotes = r.trustpilot_quotes ?? [];
+  if (!Array.isArray(quotes)) return err(file, `firm.reviews.trustpilot_quotes must be a list`);
+  if (quotes.length > 3) warn(file, `firm.reviews.trustpilot_quotes has ${quotes.length} quotes - keep it to 3`);
+  quotes.forEach((q, i) => {
+    const where = `firm.reviews.trustpilot_quotes[${i}]`;
+    if (!q.quote) err(file, `${where} has no quote text`);
+    else if (q.quote.length > 300) warn(file, `${where} is ${q.quote.length} characters - use a shorter excerpt`);
+    if (!q.author) err(file, `${where} has no author`);
+    if (q.stars != null && (!Number.isInteger(q.stars) || q.stars < 1 || q.stars > 5)) err(file, `${where}.stars must be 1 to 5`);
+    if (q.date && Number.isNaN(new Date(q.date).getTime())) err(file, `${where}.date is not a date (use YYYY-MM-DD)`);
+    checkLink(file, `${where}.url`, q.url);
+  });
+  // A page showing only praise (or only complaints) reads as cherry-picked.
+  const stars = quotes.map((q) => q.stars).filter((s) => s != null);
+  if (stars.length >= 2 && (stars.every((s) => s >= 4) || stars.every((s) => s <= 2)))
+    warn(file, `firm.reviews.trustpilot_quotes are all ${stars[0] >= 4 ? "positive" : "negative"} - aim for a range of opinions`);
+}
+
 function checkPropFirm(file, data) {
   const f = data?.firm;
   if (!f) return err(file, `missing top-level "firm"`);
@@ -138,6 +174,11 @@ function checkPropFirm(file, data) {
   if (!f.affiliate_link) warn(file, `no affiliate_link yet - the "Visit site" button stays hidden`);
   if (f.platforms !== null && !Array.isArray(f.platforms)) err(file, `firm.platforms must be a list or null`);
   checkCountries(file, f.countries);
+  checkReviews(file, f.reviews);
+  if (f.logo) {
+    if (!f.logo.startsWith("/")) err(file, `firm.logo should be a path under /public, e.g. "/funded-accounts/${f.id}-logo.png"`);
+    else if (!existsSync(path.join(ROOT, "public", f.logo))) err(file, `firm.logo file not found: public${f.logo}`);
+  } else warn(file, `no firm.logo - the page shows the firm's initials instead`);
   if (!Array.isArray(f.markets) || f.markets.length === 0) return err(file, `firm.markets must be a non-empty list`);
 
   f.markets.forEach((m, mi) => {

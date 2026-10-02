@@ -1,0 +1,368 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "Official MyFundedFutures pages only: https://myfundedfutures.com/ (plan cards and promo banner), https://myfundedfutures.com/plans/builder, https://myfundedfutures.com/plans/rapid, https://myfundedfutures.com/plans/rapid-eod, https://myfundedfutures.com/plans/pro (rule tables and per-size list prices in the pages' structured offer data), https://myfundedfutures.com/terms, https://myfundedfutures.com/disclaimer, help centre: https://help.myfundedfutures.com/en/articles/11802636-traders-evaluation-simplified, .../17036130-builder-plan-25k-a-comprehensive-look, .../14290805-builder-plan-50k-a-comprehensive-guide, .../17005296-builder-plan-100k-comprehensive-guide, .../17035331-builder-plan-150k-comprehensive-guide, .../14116402-rapid-plan-25k-a-comprehensive-look, .../13134709-rapid-plan-50k-a-comprehensive-look, .../13286542-rapid-plan-100k-a-comprehensive-look, .../13286582-rapid-plan-150k-a-comprehensive-look, .../16727601-rapid-eod-25k-a-comprehensive-look, .../16158363-rapid-eod-50k-a-comprehensive-look, .../11802674-pro-plan-sim-funded-and-live-account-highlights, .../11994562-consistency-rule-at-my-fundedfutures, .../12398151-does-myfundedfutures-charge-activation-fees, .../11542523-refund-cancellation-policy-transparent-and-trader-first, .../16596524-inactivity-rule-one-time-payment-model, .../8528335-overview-of-supported-platforms-at-mffu, .../8229993-restricted-countries-policy.",
+    "pricing": "standard = the plan's listed one-time price (shown crossed out on the plan pages and listed as 'Price' in the help centre, e.g. Builder 50K $153). promo = the 40%-off price the site actually displays with code CLUB ('Save 40% On Any Plan With Code CLUB'). The site only displays the promo price for the 50K size of each plan and the 25K Rapid EOD, so promo is null for other sizes (not calculated). The Builder 50K help article says the 40% price is limited to 2 uses and lists a 30%-off price ($107) otherwise; the banner also offers new customers 50% off their first evaluation. Promos change often - re-verify before publishing.",
+    "billing": "All new evaluations bought on or after 25 August 2026 are a one-time payment with no renewal ('One-time purchase, nothing to cancel'). Older monthly subscriptions continue as 'legacy' subscriptions. No activation fee on any plan. Resets are sold separately (reset prices not read). New one-time accounts close after 7 calendar days without a trade (evaluation and sim funded).",
+    "builder_50k_add_on": "Builder 50K is also sold with a smaller $1,500 max loss (floor $48,500) for $125 (40% off: $75). Everything else is the same. The table shows the default $2,000 version.",
+    "daily_loss": "Builder: soft-pause daily loss limit ($600 / $1,000 / $1,750 / $2,500) - hitting it stops trading for the rest of the session but does not fail the account. Rapid, Rapid EOD and Pro: the firm states there is no daily loss limit (recorded as 'none').",
+    "drawdown": "Builder, Rapid EOD and Pro use an end-of-day trailing max loss throughout. Rapid uses an end-of-day max loss in the evaluation and an intraday trailing max loss on the sim funded account. Max loss locks once it trails to $100 above the starting balance.",
+    "consistency": "Builder: no consistency rule in the evaluation; 50% rule on payouts (best day max 50% of profit in each payout cycle). Rapid and Pro: 50% in the evaluation only. Rapid EOD: 30% in the evaluation only. Exceeding it does not fail the account - you trade more days. Pro One-Day add-on (limited time, 50K, $4,000 target) has no consistency rule; not listed separately.",
+    "max_contracts": "Mini contracts allowed in the evaluation (micros = 10x). Pro sim funded accounts allow more (5 / 10 / 15 minis); Builder and Rapid live accounts allow fewer.",
+    "payout_caps": "Builder: maximum per payout cycle ($1,000 / $2,000 / $3,000 / $4,500), up to 5 sim payouts, then eligible for a live account. Rapid EOD: help centre says no cap per payout cycle. Rapid: no cap stated. Pro: lifetime maximum of $100,000 payouts per user on sim funded, not a per-request cap, so left null. Payout timing: Builder 48 hours after first funded trade; Rapid and Rapid EOD daily; Pro 14 calendar days from first funded trade. Buffers must be cleared first (e.g. $2,100 on 50K).",
+    "profit_split": "Rapid and Rapid EOD 90/10; Builder and Pro 80/20.",
+    "fee_refund": "Site footer: 'Evaluation fees are non-refundable.' A full refund is only possible within 14 days if no trades were placed (not for crypto purchases). No refund after passing, so fee_refund = false.",
+    "platforms": "Official help centre lists NinjaTrader, Tradovate, TradingView, Quantower, Volumetrica, DeepChart and ATAS. The homepage plan cards also mention Hyperprop (not listed here until its role is confirmed).",
+    "company": "Legal entity is MyFunded Futures, LLC; terms are governed by Texas law (Collin County courts). Official pages state copyright '2023-2026' but do not state a founding date or HQ address, so founded/hq are omitted. Third-party sources say CEO Matthew Leech, Dallas TX, launched 2023 - not used.",
+    "other_products": "MyFunded Perpetuals is a separate company (Funding Perpetuals Holdings, Inc.) and is not listed. Legacy Flex and older Builder plans are no longer sold.",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official MyFundedFutures page (or not expressible as one number - see the notes above). Check the live plan pages before publishing."
+  },
+  "firm": {
+    "id": "myfundedfutures",
+    "name": "MyFundedFutures",
+    "logo": "/funded-accounts/myfundedfutures-logo.png",
+    "name_note": "MyFundedFutures (myfundedfutures.com, 'MFFU'), operated by MyFunded Futures, LLC. Not the same as My Forex Funds or MyFundedFX.",
+    "about": "MyFundedFutures is a futures-only firm selling one-time-fee simulated evaluations from $25K to $150K across four plans (Builder, Rapid, Rapid EOD and Pro), with no activation fee after passing. Plans differ mainly in drawdown style, payout timing and profit split.",
+    "about_note": "Company background not yet verified.",
+    "currency": "USD",
+    "website": "https://myfundedfutures.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "NinjaTrader",
+      "Tradovate",
+      "TradingView",
+      "Quantower",
+      "Volumetrica",
+      "DeepChart",
+      "ATAS"
+    ],
+    "countries": {
+      "restricted": [
+        "AE",
+        "AF",
+        "AL",
+        "AO",
+        "BA",
+        "BB",
+        "BF",
+        "BG",
+        "BI",
+        "BS",
+        "BW",
+        "BY",
+        "CD",
+        "CF",
+        "CG",
+        "CI",
+        "CM",
+        "CN",
+        "CU",
+        "DZ",
+        "EC",
+        "ET",
+        "GH",
+        "GI",
+        "GY",
+        "HK",
+        "HR",
+        "HT",
+        "ID",
+        "IQ",
+        "IR",
+        "IS",
+        "JM",
+        "JO",
+        "KE",
+        "KG",
+        "KH",
+        "KP",
+        "KZ",
+        "LA",
+        "LB",
+        "LK",
+        "LR",
+        "LY",
+        "MA",
+        "ME",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MT",
+        "MU",
+        "MY",
+        "MZ",
+        "NA",
+        "NG",
+        "NI",
+        "NR",
+        "PA",
+        "PG",
+        "PH",
+        "PK",
+        "QA",
+        "RO",
+        "RS",
+        "RU",
+        "RW",
+        "SD",
+        "SI",
+        "SN",
+        "SO",
+        "SS",
+        "SY",
+        "TM",
+        "TN",
+        "TR",
+        "TT",
+        "TW",
+        "TZ",
+        "UA",
+        "UG",
+        "UZ",
+        "VE",
+        "VN",
+        "XK",
+        "YE",
+        "ZA",
+        "ZW"
+      ],
+      "allowed_only": null,
+      "notes": "The United Arab Emirates is on MyFundedFutures' restricted list, as are several other Gulf and EU countries (Qatar, Jordan, Bulgaria, Croatia, Malta, Romania, Slovenia). The list also covers Crimea and, for France, only Corsica and the non-mainland islands (mainland France is not restricted, so FR is not listed). Kosovo is recorded as XK (a widely used code, not an official ISO one). Traders visiting a restricted country can keep trading existing accounts but cannot buy or reset accounts while there. The terms also exclude anyone in a US-sanctioned (OFAC) jurisdiction and say restricted participants may only use simulated accounts with limited payouts.",
+      "source": "https://help.myfundedfutures.com/en/articles/8229993-restricted-countries-policy",
+      "last_checked": "2026-10-03"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.9,
+        "review_count": 22156,
+        "url": "https://www.trustpilot.com/review/myfundedfutures.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": "Trustpilot shows a notice that this company may be associated with high-risk investments.",
+      "google": null,
+      "google_note": "No Google Business profile found for this firm.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Got back with me very quick and fixed my problem great support",
+          "author": "Jeffery B.",
+          "stars": 5,
+          "date": "2026-10-02",
+          "url": "https://www.trustpilot.com/reviews/6abfa67055b4a5ab6ace116b"
+        },
+        {
+          "quote": "They change the rules without notifying you through effective communication channels like email. They prefer using Discord, but not everyone uses it, and I don't consider it as good a communication channel as email…",
+          "author": "kevin S.",
+          "stars": 2,
+          "date": "2026-09-08",
+          "url": "https://www.trustpilot.com/reviews/6a9ff90c2b956f57e5b164f9"
+        }
+      ]
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "promo_code": "CLUB",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Builder",
+                "tagline": "One-time fee · no activation fee · soft-pause daily loss limit · 50% consistency rule on payouts only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 50,
+                  "min_trading_days": 1,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": 600,
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": 1000,
+                    "promo": null,
+                    "standard": 105
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1000,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": 2000,
+                    "promo": 92,
+                    "standard": 153
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 1750,
+                    "max_loss": 3000,
+                    "max_contracts": 6,
+                    "payout_cap": 3000,
+                    "promo": null,
+                    "standard": 282
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 2500,
+                    "max_loss": 4500,
+                    "max_contracts": 9,
+                    "payout_cap": 4500,
+                    "promo": null,
+                    "standard": 398
+                  }
+                ]
+              },
+              {
+                "tier": "Rapid",
+                "tagline": "One-time fee · no activation fee · daily payouts · intraday trailing drawdown once funded · 50% consistency in evaluation only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing (evaluation), intraday trailing (funded)",
+                  "consistency_pct": 50,
+                  "min_trading_days": 2,
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 145
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": 2000,
+                    "max_contracts": 5,
+                    "payout_cap": null,
+                    "promo": 125,
+                    "standard": 209
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": "none",
+                    "max_loss": 3000,
+                    "max_contracts": 8,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 356
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": "none",
+                    "max_loss": 4500,
+                    "max_contracts": 10,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 463
+                  }
+                ]
+              },
+              {
+                "tier": "Rapid EOD",
+                "tagline": "One-time fee · no activation fee · daily payouts · no daily loss limit · 30% consistency in evaluation only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 30,
+                  "min_trading_days": 4,
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": null,
+                    "promo": 87,
+                    "standard": 145
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": 2000,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": 135,
+                    "standard": 225
+                  }
+                ]
+              },
+              {
+                "tier": "Pro",
+                "tagline": "One-time fee · no activation fee · bi-weekly payouts · no daily loss limit · 50% consistency in evaluation only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 50,
+                  "min_trading_days": 2,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": 2000,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": 159,
+                    "standard": 265
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": "none",
+                    "max_loss": 3000,
+                    "max_contracts": 6,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 401
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": "none",
+                    "max_loss": 4500,
+                    "max_contracts": 9,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 557
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

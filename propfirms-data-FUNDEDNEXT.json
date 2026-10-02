@@ -13,6 +13,7 @@
   "firm": {
     "id": "fundednext",
     "name": "FundedNext",
+    "logo": "/funded-accounts/fundednext-logo.png",
     "name_note": null,
     "about": "FundedNext sells simulated funded accounts for CFD and futures traders, with 1-step, 2-step and instant CFD accounts and several futures evaluation types. The brand launched in 2022 and is owned by GrowthNext F.Z.E., a company registered in Ajman, UAE.",
     "about_note": null,
@@ -55,6 +56,41 @@
       "notes": "FundedNext has separate lists for its two products. The 20 countries above are blocked for both CFD (forex) and futures challenges; the help centre says this covers residents and citizens. Futures challenges are also blocked in 31 more countries, where CFD challenges can still be bought: Afghanistan, Albania, Antarctica, Burkina Faso, Congo, Congo (DRC), Côte d'Ivoire, Cuba, Djibouti, Guinea-Bissau, Iran, Iraq, Jordan, Laos, Lebanon, Lesotho, Libya, Malawi, Mali, Palestinian Territory, Russia, Rwanda, Sierra Leone, Somalia, South Sudan, Sudan, Tajikistan, Timor-Leste, Ukraine, Venezuela and Yemen. The CFD list does not name Iran, Cuba or Russia, but the terms also let FundedNext refuse anyone in a sanctioned country. US residents are not on either list, but MetaQuotes platforms (MT4/MT5) can't be used from a US IP address, so US traders must pick another platform (help article 8020080). Source: terms of service sections 5.3 (CFD) and 5.4 (futures); the CFD list matches help article 8020080 (updated 27 Aug 2026).",
       "source": "https://fundednext.com/terms-of-service",
       "last_checked": "2026-10-02"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.5,
+        "review_count": 80692,
+        "url": "https://www.trustpilot.com/review/fundednext.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "No Google Business profile found for this firm.",
+      "trustpilot_quotes": [
+        {
+          "quote": "The static drawdown is what i love most about FN",
+          "author": "Lefika",
+          "stars": 5,
+          "date": "2026-10-02",
+          "url": "https://www.trustpilot.com/reviews/6ac013a73eaa17f5858ad6f1"
+        },
+        {
+          "quote": "The funded next team responded really quickly about my questions.",
+          "author": "Joshua I.",
+          "stars": 5,
+          "date": "2026-10-02",
+          "url": "https://www.trustpilot.com/reviews/6abfd0317818f283eaba2c27"
+        },
+        {
+          "quote": "No body has any idea on how to help - the email AI is worse and the online chat is terrible. No clue on how to assist a US customer who is asking for Match trader login",
+          "author": "jetly232",
+          "stars": 1,
+          "date": "2026-10-01",
+          "url": "https://www.trustpilot.com/reviews/6abe7c6d876b6fc7160fdf39"
+        }
+      ]
     },
     "markets": [
       {

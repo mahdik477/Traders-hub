@@ -17,6 +17,7 @@
   "firm": {
     "id": "fundingpips",
     "name": "FundingPips",
+    "logo": "/funded-accounts/fundingpips-logo.png",
     "name_note": null,
     "about": "FundingPips sells simulated funded accounts for forex and other CFDs, with one-step, two-step and no-evaluation (Zero) programs from $5K up to $200K. It began operating in November 2022 and lists a registered office in Dubai, with its trading entity incorporated in the Comoros.",
     "about_note": null,
@@ -38,6 +39,23 @@
       "notes": "The help centre names only three restricted countries: Iran, Vietnam and the UAE. The site footer adds that services are also not offered in 'countries on the FATF and EU/UN sanctions lists', but FundingPips doesn't list those countries anywhere, so they aren't included above. US residents can't use MT5 or cTrader - only Match-Trader - so the Prime Account and the 1K Instant giveaway (both MT5-only) aren't open to them. The help centre names only the US as excluded from MT5 and cTrader, and says Canadian residents can use Match-Trader (platform details: help article 43468639481105, Account Workspace).",
       "source": "https://help.fundingpips.com/hc/en-us/articles/44390730743825-Get-Started",
       "last_checked": "2026-10-02"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.5,
+        "review_count": 69729,
+        "url": "https://www.trustpilot.com/review/fundingpips.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": {
+        "rating": 4.8,
+        "review_count": 1208,
+        "url": "https://www.google.com/maps/place/?q=place_id:ChIJWR4ptQbwZmQR4Snrkv5jzLY",
+        "checked": "2026-10-03"
+      },
+      "google_note": null
     },
     "markets": [
       {

@@ -1,0 +1,429 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "Official E8 pages only: https://e8markets.com/ (homepage configurator and footer company details), https://e8markets.com/e8-one, https://e8markets.com/e8-pro, https://e8markets.com/e8-signature, https://e8futures.com/ (futures configurator), product data embedded in those pages (prices per size, drawdown per size, payout options, platforms); help.e8markets.com articles 11775980 (E8 One), 15274219 (E8 Pro), 13106558 (product overview), 5514278 (accepted countries), 8811411 (refund policy), 9799834 (platforms), 14124293 (about); helpfutures.e8markets.com articles 11755943 (E8 Signature), 15935817 (E8 Zero Starter and Max), 10155917 (max contract sizes), 11940573 (Signature payout caps). e8markets.com and the help centres were read with a plain HTTP client (WebFetch was blocked with 403).",
+    "pricing": "standard = price shown without any code. promo = first-order price with the site-wide code E8 as shown on the pages: 25% off on forex (Classic Markets) products, 5% off on futures. The code is first order only; later orders get 10% off (forex) or 25-35% off (futures) per the page data, not applied here. The pages also show a crossed-out 'regular' price and 'Save $X with code E8' - the standard price here is the no-code price a customer pays, not an inflated anchor. E8 Zero promo prices were not shown as text on the page, so promo is null there. E8 One and E8 Pro prices are for the default configuration shown on the configurator (E8 One: 6% drawdown, 80% payout; E8 Pro: 8% drawdown, 80% payout). Choosing a 90%/100% payout or a different drawdown changes the price; those prices are not shown without interacting with the configurator. Swap-free adds 10%; cTrader costs an extra $10 on accounts under $100.",
+    "billing": "All E8 challenges are a one-time fee. The configurator shows 'No Activation Fee'. No monthly subscription. Fee refund only if the account is unused, under 30 days old and not paid in crypto (refund policy); E8 says it does not refund the fee with the first payout, so fee_refund = false.",
+    "rule_units": "Forex rules are % of account size. Futures rules are fixed USD amounts.",
+    "null_means": "Not stated (or varies by account size or configuration) on the official pages checked. See the notes before publishing.",
+    "forex_rules": "All E8 products are single-phase. E8 One: drawdown customisable 4-14% (profit target = 1.5x drawdown, daily drawdown ~0.66x drawdown); values here are the website's default 6% configuration ($100K: $9,000 target, $6,000 dynamic drawdown, $4,000 daily drawdown). Note: the E8 One help article describes a different preset (6% target, 3% daily, 4% dynamic drawdown) - the website configurator was used because its prices match. 'Dynamic' drawdown trails closed profits only and locks at the starting balance. 40% best-day rule on the performance account only; news trading banned around high-impact news on the performance account. E8 Pro: 8% target, 8% static drawdown (moves only after first payout), 2.5% daily drawdown, 2% daily profit cap counts toward target and payouts, no consistency, daily payouts with 1% minimum profit; payout split 80% or 100% (paid add-on). E8 Signature (Classic Markets): 6% target, end-of-day dynamic drawdown of 4% on $25K and $50K and 3% on $100K and $150K ($1,000 / $2,000 / $3,000 / $4,500), so max_loss is left null; no daily limit in the challenge, a 2% soft 'daily pause' on the performance account only; 35% best-day rule on payouts; payout caps per payout ($1,000-$5,250) and a buffer equal to the drawdown. All forex products: unlimited time, but at least one trade every 60 days.",
+    "futures_rules": "Futures market (e8futures.com, Tradovate/NinjaTrader). E8 Signature Futures: 6% target, end-of-day dynamic drawdown ($4,000 on $150K applies to accounts bought after 1 Oct 2026), 2% daily pause on the performance account only ($500 / $1,000 / $2,000 / $3,000) so daily_loss is null, 35% best-day rule on payouts, max 4 payouts per account then a free new challenge; payout_cap = cap on the 1st and 2nd payout (3rd and 4th: $1,250 / $2,000 / $3,000 / $3,500). E8 Zero Starter and Max: identical rules, differ only in price and payout caps; 3% end-of-day dynamic drawdown (USD amounts not stated, so max_loss is null), no daily loss limit, 40% best-day rule in the challenge only, no consistency/minimum days on the performance account, daily payouts ($100 minimum), max 4 payouts per account; payout split 80% or 100%. max_contracts = challenge allowance in full-size contracts (micros = 10x); E8 Zero performance accounts start lower (2/3/4) and scale up with profit. Signature needs at least one trade every 60 days, Zero every 7 days. Positions are closed daily (Zero: 15:10 CT).",
+    "not_listed": "Perpetual Futures market (E8 One and E8 Pro on E8 Terminal / Hyperliquid, crypto and other perpetuals) is not listed separately; it uses the same E8 One / E8 Pro prices with a bigger first-order discount (50%). The free trial (E8 Trial One) is also not listed.",
+    "company": "Footer: E8 Funding LLC, 4101 McEwen Rd #205, Dallas, TX (operates TradeLocker, cTrader, Match-Trader); E8 Markets Ltd, Saint Lucia, reg. 2025-00347 (operates MT5); website subject to the policies of Digital Renaissance LLC (Puerto Rico). Founded 2021 as E8 Funding (help centre)."
+  },
+  "firm": {
+    "id": "e8-markets",
+    "name": "E8 Markets",
+    "logo": "/funded-accounts/e8-markets-logo.png",
+    "name_note": "Formerly E8 Funding.",
+    "about": "E8 Markets sells single-phase simulated trading challenges for forex/CFD and futures traders, with several rule sets to choose from and accounts from $5K to $500K. It started in 2021 as E8 Funding and is based in Dallas, Texas.",
+    "about_note": null,
+    "currency": "USD",
+    "website": "https://e8markets.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "MT5",
+      "cTrader",
+      "Match-Trader",
+      "TradeLocker",
+      "E8 Terminal",
+      "Tradovate",
+      "NinjaTrader"
+    ],
+    "countries": {
+      "restricted": [
+        "AE",
+        "AF",
+        "AL",
+        "BI",
+        "BY",
+        "CD",
+        "CF",
+        "CG",
+        "CU",
+        "DZ",
+        "ET",
+        "IQ",
+        "IR",
+        "KP",
+        "LB",
+        "LY",
+        "ML",
+        "MM",
+        "NI",
+        "PK",
+        "PS",
+        "RU",
+        "SD",
+        "SO",
+        "SS",
+        "SY",
+        "UA",
+        "VE",
+        "XK",
+        "YE",
+        "ZM"
+      ],
+      "allowed_only": null,
+      "notes": "E8 publishes separate lists for its two products. The 31 above are blocked for both forex (Classic Markets) and futures - this includes the UAE. Forex is also blocked for Midway Islands, Samoa, Vatican City and Western Sahara. Futures is also blocked in 56 more countries plus Crimea: Angola, Antarctica, Bahamas, Barbados, Bosnia, Botswana, Bulgaria, Burkina Faso, Cambodia, Cameroon, Chad, China, Côte d'Ivoire, Croatia, Djibouti, Ghana, Gibraltar, Guinea-Bissau, Haiti, Iceland, Indonesia, Jamaica, Jordan, Kenya, Laos, Lesotho, Liberia, North Macedonia, Malawi, Mauritius, Mongolia, Montenegro, Mozambique, Namibia, Nigeria, Panama, Papua New Guinea, Philippines, Qatar, Romania, Rwanda, Senegal, Serbia, Sierra Leone, Slovenia, South Africa, Sri Lanka, Tajikistan, Tanzania, Timor-Leste, Trinidad and Tobago, Tunisia, Turkey, Uganda, Vietnam and Zimbabwe. E8 One is not sold to Bangladesh, Bulgaria, Cambodia, Croatia, Laos, Romania or Taiwan, and is capped at $200K for India, Indonesia, Kenya and Vietnam. US residents can't use MT5 or cTrader (TradeLocker and Match-Trader only). Country is taken from the ID document used for verification. 'XK' (Kosovo) and 'PS' (listed as West Bank / Palestine) are the codes commonly used for those places.",
+      "source": "https://help.e8markets.com/en/articles/5514278-accepted-countries",
+      "last_checked": "2026-10-03"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (checked 3 Oct 2026).",
+      "google": null,
+      "google_note": "Google rating not available yet.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Really good platform and fair prices (a bit high but fair) however the spreads are wonky and they allow copy trading but with the spreads and lag time with trade locker or their system is not the best",
+          "author": "Andrew V.",
+          "stars": 3,
+          "date": "2026-09-24",
+          "url": "https://www.trustpilot.com/reviews/6ab550b9e8e92c5de8e1f1fc"
+        },
+        {
+          "quote": "But today, I'm being asked to go through the verification process again before I can place trades on TradeLocker. This is extremely frustrating and feels like a very poor system and service…",
+          "author": "Bhupendra J.",
+          "stars": 1,
+          "date": "2026-09-15",
+          "url": "https://www.trustpilot.com/reviews/6aa8f1dd6304effbc169757d"
+        },
+        {
+          "quote": "They have good discounts and their trading conditions are also good",
+          "author": "Clyde M.",
+          "stars": 5,
+          "date": "2026-08-23",
+          "url": "https://www.trustpilot.com/reviews/6a8aad4a4394982ffb5c95ec"
+        }
+      ]
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "promo_code": "E8",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "E8 One",
+                "tagline": "One-time fee · Customisable drawdown and payout share · Prices shown for 6% drawdown and 80% payout",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 9,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 4,
+                  "max_loss": 6,
+                  "drawdown_type": "dynamic",
+                  "profit_split_max": 100,
+                  "min_trading_days": 0,
+                  "consistency": "40% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 36,
+                    "standard": 48
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 66,
+                    "standard": 88
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 141,
+                    "standard": 188
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 216,
+                    "standard": 288
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 366,
+                    "standard": 488
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 599,
+                    "standard": 798
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1199,
+                    "standard": 1598
+                  },
+                  {
+                    "size": 500000,
+                    "promo": 1499,
+                    "standard": 1998
+                  }
+                ]
+              },
+              {
+                "tier": "E8 Pro",
+                "tagline": "One-time fee · Static drawdown · No consistency rule · Payouts can be requested daily",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 2.5,
+                  "max_loss": 8,
+                  "drawdown_type": "static",
+                  "profit_split_max": 100,
+                  "min_trading_days": 0,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 24,
+                    "standard": 32
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 51,
+                    "standard": 68
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 111,
+                    "standard": 148
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 171,
+                    "standard": 228
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 366,
+                    "standard": 488
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 749,
+                    "standard": 998
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1574,
+                    "standard": 2098
+                  },
+                  {
+                    "size": 500000,
+                    "promo": 1949,
+                    "standard": 2598
+                  }
+                ]
+              },
+              {
+                "tier": "E8 Signature",
+                "tagline": "One-time fee · End-of-day drawdown of 3-4% depending on size · Payout caps apply",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 6,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": null,
+                  "max_loss": null,
+                  "drawdown_type": "EOD",
+                  "profit_split_max": 80,
+                  "min_trading_days": null,
+                  "consistency": "35% (payouts)",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "promo": 90,
+                    "standard": 120
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 120,
+                    "standard": 160
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 210,
+                    "standard": 280
+                  },
+                  {
+                    "size": 150000,
+                    "promo": 338,
+                    "standard": 450
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "market": "futures",
+        "promo_code": "E8",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "E8 Signature Futures",
+                "tagline": "One-time fee · Single phase · End-of-day drawdown · Up to 4 payouts per account",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD",
+                  "consistency_pct": 35,
+                  "min_trading_days": null,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": null,
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": 1000,
+                    "promo": 114,
+                    "standard": 120
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": null,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": 1250,
+                    "promo": 162,
+                    "standard": 170
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": null,
+                    "max_loss": 3000,
+                    "max_contracts": 8,
+                    "payout_cap": 2000,
+                    "promo": 266,
+                    "standard": 280
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": null,
+                    "max_loss": 4000,
+                    "max_contracts": 12,
+                    "payout_cap": 3000,
+                    "promo": 428,
+                    "standard": 450
+                  }
+                ]
+              },
+              {
+                "tier": "E8 Zero Starter",
+                "tagline": "One-time fee · No daily loss limit · Consistency rule in challenge only · Smaller payout caps",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD",
+                  "consistency_pct": 40,
+                  "min_trading_days": 0,
+                  "profit_split_max": 100,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": null,
+                    "max_contracts": 4,
+                    "payout_cap": 1000,
+                    "promo": null,
+                    "standard": 178
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6500,
+                    "daily_loss": "none",
+                    "max_loss": null,
+                    "max_contracts": 8,
+                    "payout_cap": 1600,
+                    "promo": null,
+                    "standard": 278
+                  },
+                  {
+                    "size": 200000,
+                    "profit_target": 13500,
+                    "daily_loss": "none",
+                    "max_loss": null,
+                    "max_contracts": 10,
+                    "payout_cap": 2100,
+                    "promo": null,
+                    "standard": 558
+                  }
+                ]
+              },
+              {
+                "tier": "E8 Zero Max",
+                "tagline": "One-time fee · No daily loss limit · Consistency rule in challenge only · Larger payout caps",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD",
+                  "consistency_pct": 40,
+                  "min_trading_days": 0,
+                  "profit_split_max": 100,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": null,
+                    "max_contracts": 4,
+                    "payout_cap": 3000,
+                    "promo": null,
+                    "standard": 328
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6500,
+                    "daily_loss": "none",
+                    "max_loss": null,
+                    "max_contracts": 8,
+                    "payout_cap": 5000,
+                    "promo": null,
+                    "standard": 588
+                  },
+                  {
+                    "size": 200000,
+                    "profit_target": 13500,
+                    "daily_loss": "none",
+                    "max_loss": null,
+                    "max_contracts": 10,
+                    "payout_cap": 7000,
+                    "promo": null,
+                    "standard": 1088
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

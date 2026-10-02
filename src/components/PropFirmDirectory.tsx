@@ -209,7 +209,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                 className="relative flex flex-col rounded-xl border border-border bg-surface p-5 transition duration-200 hover:border-accent/50 hover:shadow-glow motion-safe:hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-3">
-                  <FirmBadge name={firm.name} />
+                  <FirmBadge name={firm.name} logo={firm.logo} />
                   <div className="min-w-0">
                     <h2 className="truncate text-lg font-semibold">{firm.name}</h2>
                     <div className="mt-1 flex flex-wrap gap-1.5">

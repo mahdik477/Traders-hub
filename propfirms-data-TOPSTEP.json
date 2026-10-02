@@ -18,6 +18,7 @@
   "firm": {
     "id": "topstep",
     "name": "Topstep",
+    "logo": "/funded-accounts/topstep-logo.png",
     "name_note": null,
     "about": "Topstep is a Chicago-based futures prop firm (its own timeline starts in 2010 as Patak Trading Partners) that sells monthly-subscription evaluations called the Trading Combine in 50K, 100K and 150K sizes, traded on its own TopstepX platform.",
     "about_note": null,
@@ -67,6 +68,41 @@
       "notes": "Eligibility is based on both citizenship and permanent residency: citizens or residents of a listed country cannot trade or receive payouts. The list also bans 'Chinese Military Companies' and the Crimea, Donetsk, Luhansk, Kherson and Zaporizhzhia regions (all of Ukraine is listed anyway). Kosovo is recorded as XK (a widely used code, not an official ISO one). Partial restriction: traders from 25 more countries can use the Trading Combine, Express Funded and Pro accounts but cannot get a Live Funded Account, and Topstep caps their total payouts at $200,000. Those countries are Albania, Bolivia, Bosnia and Herzegovina, British Virgin Islands, Cameroon, Central African Republic, Ethiopia, Germany, Ghana, Hong Kong, Iceland, Kuwait, Laos, Liberia, Monaco, Mongolia, Montenegro, Namibia, Nepal, North Macedonia, Papua New Guinea, Serbia, Trinidad and Tobago, Vietnam and Zimbabwe. Topstep says the list can change with brokerage updates and US (OFAC) sanctions.",
       "source": "https://help.topstep.com/en/articles/8284116-am-i-eligible-to-trade-with-topstep",
       "last_checked": "2026-10-02"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 3.6,
+        "review_count": 14892,
+        "url": "https://www.trustpilot.com/review/topstep.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": "Trustpilot shows a notice that this company may be associated with high-risk investments.",
+      "google": null,
+      "google_note": "Google rating not available yet.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Always a quick response and resolution to any issue (which are few tbh). Great Job Topstep!",
+          "author": "Thomas H.",
+          "stars": 5,
+          "date": "2026-09-30",
+          "url": "https://www.trustpilot.com/reviews/6abd297fd63011385fd02af5"
+        },
+        {
+          "quote": "Very transparent. Easy platform to work with.",
+          "author": "Raymond A.",
+          "stars": 5,
+          "date": "2026-10-01",
+          "url": "https://www.trustpilot.com/reviews/6abeeee00f06e6936a5c05b6"
+        },
+        {
+          "quote": "There was an error on their own platform, yet the support team is slow, taking nearly a full day to respond to my first message just to say \"we're working on it\", then continuously says the same thing for the next 4 days with 0 meaningful update…",
+          "author": "J.",
+          "stars": 2,
+          "date": "2026-04-07",
+          "url": "https://www.trustpilot.com/reviews/69d51617b3f39ccf2a54318c"
+        }
+      ]
     },
     "markets": [
       {

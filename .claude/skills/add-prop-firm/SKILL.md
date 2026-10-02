@@ -42,6 +42,12 @@ Firm: **$ARGUMENTS**
   No marketing claims, no copying their text. If background is unverified, set
   `about_note: "Company background not yet verified."`
 - `affiliate_link`: leave `""` until we have a real tracked link.
+- `logo`: the firm's own square icon (apple-touch-icon / largest favicon from
+  its homepage `<link rel="icon">` tags; if the site blocks you, Google's copy
+  at `https://www.google.com/s2/favicons?domain=<domain>&sz=256`). Save it as
+  `public/funded-accounts/<id>-logo.<png|jpg|svg>`, look at it to check it's
+  the right company and at least ~120px (or an SVG), and set
+  `"logo": "/funded-accounts/<id>-logo.png"` right after `name`.
 - `countries`: which countries the firm accepts (we're a global site, so
   list firms whatever their restrictions — just record them). From the firm's
   own restricted-countries / terms / FAQ page:
@@ -58,6 +64,26 @@ Firm: **$ARGUMENTS**
   whose residents can't buy; `allowed_only` = use instead when the firm only
   serves a listed set of countries. Not found → both null, and say so in
   `notes`.
+- `reviews` (after `countries`): the firm's Trustpilot score from
+  `trustpilot.com/review/<domain>` and its Google rating from Google's own
+  business listing — never a third-party site's copy of either:
+  ```json
+  "reviews": {
+    "trustpilot": { "rating": 4.6, "review_count": 23456, "url": "https://www.trustpilot.com/review/firm.com", "checked": "YYYY-MM-DD" },
+    "trustpilot_note": null,
+    "google": null,
+    "google_note": "No Google Business profile found for this firm."
+  }
+  ```
+  No score shown → `null` plus a short, neutral `*_note` saying why (it's
+  shown on the page instead). Keep any Trustpilot warning banner in the note.
+- If there's **no Google rating**, add `reviews.trustpilot_quotes`: up to 3
+  exact excerpts (≤ 250 chars, one continuous piece, may end in "…") from
+  recent, preferably "Verified" Trustpilot reviews, with `author` (first name
+  + last initial), `stars`, `date`, `url`. Balance them — at least one 4–5★
+  and one 1–2★ if both exist. Skip reviews with profit/payout amounts,
+  fraud/scam accusations, personal data, profanity or non-English text. Only
+  use wording you've read identically twice.
 - `_notes.last_verified`: today's date (YYYY-MM-DD) and `source`.
 
 ## 3. Validate and show

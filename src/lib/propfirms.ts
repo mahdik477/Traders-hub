@@ -14,6 +14,7 @@ import type {
   ChallengeView,
   FirmView,
   MarketView,
+  ReviewRating,
   TierView,
 } from "./propfirm-types";
 
@@ -69,16 +70,38 @@ type RawTier = {
 
 type RawProgram = { program: string; tiers: RawTier[] };
 
+type RawRating = {
+  rating: number;
+  review_count?: number | null;
+  url?: string | null;
+  checked?: string | null;
+};
+
 type RawFile = {
   firm: {
     id: string;
     name: string;
+    logo?: string | null;
     name_note?: string | null;
     about?: string | null;
     about_note?: string | null;
     currency: string;
     affiliate_link?: string | null;
     platforms: string[] | null;
+    reviews?: {
+      checked?: string | null;
+      trustpilot?: RawRating | null;
+      trustpilot_note?: string | null;
+      google?: RawRating | null;
+      google_note?: string | null;
+      trustpilot_quotes?: {
+        quote: string;
+        author: string;
+        stars?: number | null;
+        date?: string | null;
+        url?: string | null;
+      }[];
+    } | null;
     markets: {
       market: string;
       partner?: string;
@@ -147,13 +170,41 @@ function buildFirm(firm: RawFile["firm"]): FirmView {
   return {
     id: firm.id,
     name: firm.name,
+    // Only local files under /public — never a remote image URL.
+    logo: firm.logo?.startsWith("/") ? firm.logo : null,
     nameNote: firm.name_note || null,
     about: firm.about || null,
     aboutNote: firm.about_note || null,
     currency: firm.currency,
     affiliateLink: safeLink(firm.affiliate_link),
     platforms: firm.platforms,
+    reviews: firm.reviews
+      ? {
+          checked: firm.reviews.checked ?? null,
+          trustpilot: rating(firm.reviews.trustpilot),
+          trustpilotNote: firm.reviews.trustpilot_note || null,
+          google: rating(firm.reviews.google),
+          googleNote: firm.reviews.google_note || null,
+          trustpilotQuotes: (firm.reviews.trustpilot_quotes ?? []).map((q) => ({
+            quote: q.quote,
+            author: q.author,
+            stars: q.stars ?? null,
+            date: q.date ?? null,
+            url: safeLink(q.url),
+          })),
+        }
+      : null,
     markets,
+  };
+}
+
+function rating(r: RawRating | null | undefined): ReviewRating | null {
+  if (!r) return null;
+  return {
+    rating: r.rating,
+    reviewCount: r.review_count ?? null,
+    url: safeLink(r.url),
+    checked: r.checked ?? null,
   };
 }
 

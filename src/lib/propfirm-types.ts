@@ -50,10 +50,51 @@ export type MarketView = {
   challenges: ChallengeView[];
 };
 
+/** A rating as published on a review site (Trustpilot, Google). We don't
+ *  verify it — the page names the source and the date it was checked. */
+export type ReviewRating = {
+  /** Out of 5. */
+  rating: number;
+  reviewCount: number | null;
+  url: string | null;
+  /** YYYY-MM-DD the rating was read from the site. */
+  checked: string | null;
+};
+
+export type FirmReviews = {
+  /** YYYY-MM-DD the review sites were last checked (even if they showed no
+   *  rating). */
+  checked: string | null;
+  trustpilot: ReviewRating | null;
+  /** Shown under the rating, or instead of it when there's none (e.g. why
+   *  Trustpilot isn't showing a score). */
+  trustpilotNote: string | null;
+  google: ReviewRating | null;
+  googleNote: string | null;
+  /** Short excerpts from recent Trustpilot reviews, picked to show a range of
+   *  opinions. Collected for firms with no Google rating. */
+  trustpilotQuotes: ReviewQuote[];
+};
+
+export type ReviewQuote = {
+  /** The reviewer's exact words (one continuous excerpt, may end in "…"). */
+  quote: string;
+  /** First name + last initial, e.g. "Sam K.". */
+  author: string;
+  /** The reviewer's own star rating, 1–5. */
+  stars: number | null;
+  /** YYYY-MM-DD. */
+  date: string | null;
+  url: string | null;
+};
+
 export type FirmView = {
   /** Also the page address: /funded-accounts/<id>. */
   id: string;
   name: string;
+  /** Path under /public, e.g. "/funded-accounts/ftmo-logo.png". Null = show
+   *  the firm's initials instead. */
+  logo: string | null;
   /** e.g. "not the same company as..." — shown under the firm name. */
   nameNote: string | null;
   about: string | null;
@@ -64,5 +105,7 @@ export type FirmView = {
    *  normal web address. */
   affiliateLink: string | null;
   platforms: string[] | null;
+  /** null = no reviews block in the data file yet. */
+  reviews: FirmReviews | null;
   markets: MarketView[];
 };

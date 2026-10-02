@@ -15,6 +15,7 @@
   "firm": {
     "id": "the5ers",
     "name": "The5ers",
+    "logo": "/funded-accounts/the5ers-logo.png",
     "name_note": "Also written as The 5%ers. The operating company is Five Percent Online Ltd (UK).",
     "about": "The5ers is a prop trading firm founded in 2016 with its registered office in London, UK. It offers 1-Step, 2-Step and 3-Step evaluations on forex, metals, indices and other CFDs, traded on MT5.",
     "about_note": null,
@@ -61,6 +62,23 @@
       "notes": "Residents of the countries above can't join. The5ers also blocks the Crimea, Donetsk, Luhansk, Kherson and Zaporizhzhia regions of Ukraine (the rest of Ukraine is not restricted), and anyone covered by OFAC, UN, EU, UK or Israeli sanctions. The terms say the list is 'not limited to' these countries. US residents are not on the list, but the terms ban US residents from MetaQuotes platforms (MT5) - The5ers' forex programs run on MT5, so check with the firm before recommending them to US traders. The terms (updated 23 Sep 2026) name the same countries as the FAQ but leave out the four Ukrainian regions other than Crimea.",
       "source": "https://the5ers.com/faqs/who-can-join-the5ers/",
       "last_checked": "2026-10-02"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.7,
+        "review_count": 38974,
+        "url": "https://www.trustpilot.com/review/the5ers.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": {
+        "rating": 4.7,
+        "review_count": 178,
+        "url": "https://www.google.com/maps/place/?q=place_id:ChIJVaG2Kns5HRURJkdRxwB0tPg",
+        "checked": "2026-10-03"
+      },
+      "google_note": null
     },
     "markets": [
       {
