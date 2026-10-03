@@ -75,6 +75,7 @@ function Stat({
 export default function CourseDetail({
   name,
   logo,
+  logoBg = "white",
   tagline,
   about,
   extraNote,
@@ -95,6 +96,8 @@ export default function CourseDetail({
 }: {
   name: string;
   logo: string | null;
+  /** "dark" for a logo that's a light mark with no transparent background. */
+  logoBg?: "white" | "dark";
   tagline: string | null;
   about: string | null;
   /** Shown right under About — for things like "this is a bundle of X, Y, Z"
@@ -138,7 +141,11 @@ export default function CourseDetail({
         />
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center">
           {logo && (
-            <div className="flex size-20 shrink-0 items-center justify-center rounded-xl bg-white p-3 shadow-sm sm:size-24">
+            <div
+              className={`flex size-20 shrink-0 items-center justify-center rounded-xl p-3 shadow-sm sm:size-24 ${
+                logoBg === "dark" ? "bg-black" : "bg-white"
+              }`}
+            >
               <Image
                 src={logo}
                 alt={`${name} logo`}
@@ -338,7 +345,13 @@ export default function CourseDetail({
         </div>
       )}
 
-      <StickyVisitBar courseName={name} logo={logo} price={pricing[0]?.price ?? null} visitHref={visitHref} />
+      <StickyVisitBar
+        courseName={name}
+        logo={logo}
+        logoBg={logoBg}
+        price={pricing[0]?.price ?? null}
+        visitHref={visitHref}
+      />
     </>
   );
 }

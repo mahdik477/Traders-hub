@@ -8,6 +8,7 @@ type Entry = {
   id: string;
   name: string;
   logo: string | null;
+  logoBg: "white" | "dark";
   tagline: string | null;
   trustpilot: CourseView["trustpilot"];
   whop: CourseView["whop"];
@@ -32,6 +33,7 @@ export default function CourseDirectory({
       id: c.id,
       name: c.name,
       logo: c.logo,
+      logoBg: c.logoBg,
       tagline: c.tagline,
       trustpilot: c.trustpilot,
       whop: c.whop,
@@ -45,6 +47,7 @@ export default function CourseDirectory({
         id: p.id,
         name: p.name,
         logo: p.logo,
+        logoBg: p.logoBg,
         tagline: p.tagline,
         trustpilot: p.trustpilot,
         whop: p.whop,
@@ -66,7 +69,11 @@ export default function CourseDirectory({
           <div className="flex flex-1 flex-col p-5">
             <div className="flex items-center gap-3">
               {entry.logo ? (
-                <div className="flex size-14 shrink-0 items-center justify-center rounded-lg bg-white p-2">
+                <div
+                  className={`flex size-14 shrink-0 items-center justify-center rounded-lg p-2 ${
+                    entry.logoBg === "dark" ? "bg-black" : "bg-white"
+                  }`}
+                >
                   <Image
                     src={entry.logo}
                     alt={`${entry.name} logo`}

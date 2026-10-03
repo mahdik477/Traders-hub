@@ -249,6 +249,8 @@ function checkCourse(file, data) {
     if (!c.logo.startsWith("/")) err(file, `course.logo should be a path under /public, e.g. "/courses/name-logo.webp"`);
     else if (!existsSync(path.join(ROOT, "public", c.logo))) err(file, `course.logo file not found: public${c.logo}`);
   }
+  if (c.logo_bg != null && c.logo_bg !== "white" && c.logo_bg !== "dark")
+    err(file, `course.logo_bg must be "white", "dark" or left out (got "${c.logo_bg}")`);
   checkLink(file, "course.website", c.website);
   checkLink(file, "course.affiliate_link", c.affiliate_link);
   checkLink(file, "course.instructor.link", c.instructor?.link);

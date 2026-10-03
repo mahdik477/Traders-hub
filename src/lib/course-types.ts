@@ -78,6 +78,9 @@ export type CourseView = {
   /** Path under /public, e.g. "/courses/six-figure-capital-logo.webp". Null if
    *  we don't have one — the page falls back to a lettermark. */
   logo: string | null;
+  /** "dark" for a logo that's a light mark with no transparent background —
+   *  see FirmView.logoBg for the same idea on prop firms. */
+  logoBg: "white" | "dark";
   /** One-line "what it sells". */
   tagline: string | null;
   /** General info paragraph. */

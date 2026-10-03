@@ -49,6 +49,7 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
       <CourseDetail
         name={course.name}
         logo={course.logo}
+        logoBg={course.logoBg}
         tagline={course.tagline}
         about={course.about}
         instructors={course.instructor ? [course.instructor] : []}

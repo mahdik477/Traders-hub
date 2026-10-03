@@ -22,6 +22,7 @@ type RawFile = {
     id: string;
     name: string;
     logo?: string | null;
+    logo_bg?: "white" | "dark" | null;
     tagline?: string | null;
     about?: string | null;
     instructor?: { name: string; link?: string | null } | null;
@@ -90,6 +91,7 @@ function buildCourse(c: RawFile["course"]): CourseView {
     id: c.id,
     name: c.name,
     logo: c.logo || null,
+    logoBg: c.logo_bg === "dark" ? "dark" : "white",
     tagline: c.tagline || null,
     about: c.about || null,
     instructor: c.instructor
