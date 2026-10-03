@@ -95,6 +95,9 @@ export type FirmView = {
   /** Path under /public, e.g. "/funded-accounts/ftmo-logo.png". Null = show
    *  the firm's initials instead. */
   logo: string | null;
+  /** "dark" for a logo that's a white/light mark with no transparent
+   *  background, so it doesn't look broken in the usual white tile. */
+  logoBg: "white" | "dark";
   /** e.g. "not the same company as..." — shown under the firm name. */
   nameNote: string | null;
   about: string | null;

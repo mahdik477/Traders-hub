@@ -35,7 +35,7 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
       <BackToFirmsLink />
 
       <div className="mt-5 flex items-center gap-4">
-        <FirmBadge name={firm.name} logo={firm.logo} size="lg" />
+        <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} size="lg" />
         <h1 className="page-title">{firm.name}</h1>
       </div>
       {firm.nameNote && <p className="meta mt-3 max-w-3xl">{firm.nameNote}</p>}
