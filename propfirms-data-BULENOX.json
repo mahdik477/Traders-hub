@@ -1,0 +1,151 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "Official Bulenox pages only, fetched 2026-10-03: https://bulenox.com/accounts-pricing (plan data in the site's own page script: sizes, prices, contracts, targets, drawdowns, daily loss limits), and Bulenox's official help centre and FAQ (https://bulenox.com/help-center and https://bulenox.com/faq, read from the site's own content feed at bulenox.com/cms): articles qualification/rules, qualification/option-1, qualification/option-2, qualification/reset, master/activation-fee, master/withdrawal-rules, momentum/mo-parameters, mo-payout-caps, mo-consistency, mo-activation, fast-track/ft-parameters, ft-profit-split, ft-payout-limits, ft-consistency, subscription/return-policy, FAQ 'Is my country supported?', 'What platforms do you support?'. Help-centre prices for Momentum and Fast Track match the pricing page exactly. Terms of Use PDF (https://bulenox.com/legal/Terms_of_Use.pdf) and affiliate signup page (https://bulenox.com/member/aff/signup).",
+    "pricing": "All prices USD, one-time fees. standard = the price on the pricing page. The site shows an 'always-on coupon' BULENOX ('this code never expires') but not how much it takes off, so promo = null. Same price for both risk models (Option 1 trailing / Option 2 end-of-day).",
+    "billing": "Qualification: one-time fee for 30 days of access, no auto-renewal ('access simply expires at the end of the subscription cycle and nothing is charged again'); reset $78 (does not extend the 30 days). After passing, a one-time Master Account activation fee is due within 7 days of the link: $143 / $148 / $248 / $498 (25K / 50K / 100K / 150K); no monthly fees on Master accounts. Momentum: one-time fee, Master stage activated free. Fast Track: one-time fee, no activation fee, no monthly fee. Third-party API or trade-copier connection to Rithmic costs $100/month.",
+    "risk_models": "Every plan offers two risk models at checkout. Option 1 (recorded in the tables): intraday trailing drawdown including open profit, no daily loss limit, full contract size. Option 2: end-of-day drawdown plus a daily loss limit and fewer or scaling contracts. Option 2 figures - Qualification: daily loss $500 / $1,100 / $2,200 / $3,300, contracts scale up to 3 / 7 / 12 / 15 as profit grows. Momentum: daily loss $600 / $1,200 / $2,500 / $3,300, contracts 2 / 4 / 8 / 12. Fast Track: daily loss none (25K) / $1,200 / $2,500 / $3,300, contracts 2 / 4 / 8 / 12. Drawdown on Master / funded-stage accounts locks at starting balance + $100.",
+    "rules_detail": "No minimum trading days on any evaluation; no time limit apart from Qualification's 30-day access. All positions closed by 3:59 PM CT; holding overnight is prohibited. Qualification -> Master: payouts need 10 trading days per cycle, $1,000 minimum, a safety reserve ($1,600 / $2,600 / $3,100 / $4,600) and a 40% consistency rule; paid weekly on Wednesdays. Momentum Master: 5 qualifying profitable days ($100 / $150 / $200 / $250 each) and 35% consistency per payout cycle; same-day payouts. Fast Track: first payout needs profit of $1,500 / $3,000 / $6,000 / $9,000; consistency 20% for payout 1, 25% for payout 2, 30% after; same-day payouts. Up to 5 Master-level accounts (Master, Fast Track, Momentum combined); Qualification accounts unlimited.",
+    "payout_caps": "Varies by payout number, so payout_cap = null. Master (from Qualification): first 3 payouts max $1,000 / $1,500 / $1,750 / $2,000, then no maximum. Momentum Master: payout 1 $1,000 / $1,500 / $2,000 / $2,500, rising to $1,000 / $3,000 / $4,000 / $5,000 from payout 4. Fast Track: payouts 1-3 $1,000 / $2,000 / $2,500 / $3,000, payout 4+ $1,250 / $2,500 / $3,000 / $3,500.",
+    "profit_split": "First $10,000 of payouts is 100% to the trader (counted once per trader across all accounts), then 90/10. profit_split_max = 90.",
+    "fee_refund": "Return policy: no refunds once an account has been created and the service accessed. fee_refund = false.",
+    "platforms": "Rithmic data. FAQ: more than 20 platforms including NinjaTrader, R|Trader Pro, Quantower, Sierra Chart, MultiCharts and ATAS; NinjaTrader 8 licence free on Master accounts.",
+    "company": "Bulenox LLC. The affiliate agreement gives a Delaware LLC at 1201 N Orange St, Suite 7149, Wilmington, Delaware 19801 (a common registered-agent address). No official page states a founding date, so founded = null. Not related to any firm already listed.",
+    "affiliate_program": "Has a program (signup: https://bulenox.com/member/aff/signup). 'Earn Up To 15% Commissions' of revenue from each referred account. Commission is earned on a 'Completed Transaction' = delivered, return period expired, and 30 days since full payment. Payout by PayPal or direct deposit (the form asks for a US-style routing number). Affiliate must own the website or social account; may not bid on Bulenox trademarks/keywords or register domains using the brand. Cookie length: not stated. Comparison sites: not mentioned (websites are allowed). UAE-based affiliates: not mentioned (the UAE is not on the trader restricted list).",
+    "marketing_stats_excluded": "None reproduced.",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official Bulenox page, or varies by payout number (see notes)."
+  },
+  "firm": {
+    "id": "bulenox",
+    "name": "Bulenox",
+    "logo": "/funded-accounts/bulenox-logo.png",
+    "name_note": null,
+    "about": "Bulenox is a US futures prop firm with three ways in: a low-cost Qualification evaluation followed by a paid Master activation, a Momentum evaluation that includes the Master stage, and a Fast Track account with no evaluation. Accounts run from $25K to $150K and every plan lets you choose a trailing or end-of-day drawdown.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "Wilmington, Delaware, USA (registered address)",
+    "currency": "USD",
+    "website": "https://bulenox.com/",
+    "affiliate_link": "",
+    "platforms": ["NinjaTrader", "R|Trader Pro", "Quantower", "Sierra Chart", "MultiCharts", "ATAS"],
+    "countries": {
+      "restricted": [
+        "AF", "AL", "AO", "AM", "AZ", "BS", "BH", "BD", "BB", "BY", "BJ", "BM", "BO", "BA", "BW",
+        "BN", "BF", "BI", "MM", "CM", "CF", "TD", "CN", "CD", "CI", "HR", "CU", "CW", "ET", "GA",
+        "GH", "GI", "GD", "GN", "HT", "HK", "IR", "IQ", "JM", "JE", "JO", "KZ", "KE", "XK", "KW",
+        "KG", "LB", "LS", "LR", "LY", "MO", "MK", "MV", "ML", "MR", "MU", "YT", "MC", "MN", "ME",
+        "MZ", "NA", "NP", "NC", "NI", "NE", "NG", "KP", "PS", "OM", "PK", "PG", "CG", "RU", "RW",
+        "MF", "SN", "RS", "SO", "SS", "LK", "SD", "SY", "TW", "TJ", "TZ", "TG", "TT", "UG", "UZ",
+        "VU", "VE", "VG", "EH", "YE", "ZM", "ZW"
+      ],
+      "allowed_only": null,
+      "notes": "Bulenox's FAQ says it cannot do business with residents of these countries and that the list can change at any time. The FAQ lists 'Congo' and 'Republic of the Congo' separately; recorded as DR Congo (CD) and Republic of the Congo (CG). Kosovo is recorded as XK (a widely used code, not an official ISO one). The United Arab Emirates and the United States are not on the list, but several Gulf countries (Bahrain, Kuwait, Oman, Jordan) are.",
+      "source": "https://bulenox.com/faq",
+      "last_checked": "2026-10-03"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.7,
+        "review_count": 1800,
+        "url": "https://www.trustpilot.com/review/bulenox.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "Google rating not available yet.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Bulenox never disappoints- stick to the rules and get paid with no questions, so professional.",
+          "author": "Brighton M.",
+          "stars": 5,
+          "date": "2026-09-26",
+          "url": "https://www.trustpilot.com/reviews/6ab71d014991e0a50e179a29"
+        },
+        {
+          "quote": "Been trading with this company for almost 4 years, long story short, I took a trade with TP and SL in place logged off, went to work…",
+          "author": "Yevgeniy",
+          "stars": 1,
+          "date": "2026-09-17",
+          "url": "https://www.trustpilot.com/reviews/6aac4fe98e729efd989a8bc0"
+        }
+      ]
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "promo_code": "BULENOX",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Qualification",
+                "tagline": "One-time fee for 30 days of access · One-time Master activation fee ($143-$498) after passing · Trailing drawdown shown; end-of-day option adds a daily loss limit",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "Trailing (intraday) or EOD",
+                  "consistency_pct": 40,
+                  "min_trading_days": 0,
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 25000, "profit_target": 1500, "daily_loss": "none", "max_loss": 1500, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 145 },
+                  { "size": 50000, "profit_target": 3000, "daily_loss": "none", "max_loss": 2500, "max_contracts": 7, "payout_cap": null, "promo": null, "standard": 175 },
+                  { "size": 100000, "profit_target": 6000, "daily_loss": "none", "max_loss": 3000, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 215 },
+                  { "size": 150000, "profit_target": 9000, "daily_loss": "none", "max_loss": 4500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 325 }
+                ]
+              },
+              {
+                "tier": "Momentum",
+                "tagline": "One-time fee · Master stage included free · 35% consistency rule on payouts · Trailing drawdown shown; end-of-day option adds a daily loss limit",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "Trailing (intraday) or EOD",
+                  "consistency_pct": 35,
+                  "min_trading_days": 0,
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 25000, "profit_target": 1500, "daily_loss": "none", "max_loss": 1000, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 94 },
+                  { "size": 50000, "profit_target": 3000, "daily_loss": "none", "max_loss": 2250, "max_contracts": 7, "payout_cap": null, "promo": null, "standard": 143 },
+                  { "size": 100000, "profit_target": 6000, "daily_loss": "none", "max_loss": 4000, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 248 },
+                  { "size": 150000, "profit_target": 9000, "daily_loss": "none", "max_loss": 5500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 358 }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Fast Track",
+                "tagline": "One-time fee · No evaluation · No activation fee · Same-day payouts · Consistency rule rises from 20% to 30%",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "Trailing (intraday) or EOD",
+                  "consistency_pct": 20,
+                  "min_trading_days": 0,
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 25000, "profit_target": null, "daily_loss": "none", "max_loss": 1000, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 338 },
+                  { "size": 50000, "profit_target": null, "daily_loss": "none", "max_loss": 2250, "max_contracts": 7, "payout_cap": null, "promo": null, "standard": 488 },
+                  { "size": 100000, "profit_target": null, "daily_loss": "none", "max_loss": 4000, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 648 },
+                  { "size": 150000, "profit_target": null, "daily_loss": "none", "max_loss": 5500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 788 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
