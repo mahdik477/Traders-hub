@@ -82,6 +82,7 @@ type RawFile = {
     id: string;
     name: string;
     logo?: string | null;
+    logo_bg?: "white" | "dark" | null;
     name_note?: string | null;
     about?: string | null;
     about_note?: string | null;
@@ -172,6 +173,7 @@ function buildFirm(firm: RawFile["firm"]): FirmView {
     name: firm.name,
     // Only local files under /public — never a remote image URL.
     logo: firm.logo?.startsWith("/") ? firm.logo : null,
+    logoBg: firm.logo_bg === "dark" ? "dark" : "white",
     nameNote: firm.name_note || null,
     about: firm.about || null,
     aboutNote: firm.about_note || null,

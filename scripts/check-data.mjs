@@ -179,6 +179,8 @@ function checkPropFirm(file, data) {
     if (!f.logo.startsWith("/")) err(file, `firm.logo should be a path under /public, e.g. "/funded-accounts/${f.id}-logo.png"`);
     else if (!existsSync(path.join(ROOT, "public", f.logo))) err(file, `firm.logo file not found: public${f.logo}`);
   } else warn(file, `no firm.logo - the page shows the firm's initials instead`);
+  if (f.logo_bg != null && f.logo_bg !== "white" && f.logo_bg !== "dark")
+    err(file, `firm.logo_bg must be "white", "dark" or left out (got "${f.logo_bg}")`);
   if (!Array.isArray(f.markets) || f.markets.length === 0) return err(file, `firm.markets must be a non-empty list`);
 
   f.markets.forEach((m, mi) => {

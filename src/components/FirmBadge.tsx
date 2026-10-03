@@ -10,19 +10,23 @@ export function firmInitials(name: string) {
 export default function FirmBadge({
   name,
   logo = null,
+  logoBg = "white",
   size = "md",
 }: {
   name: string;
   logo?: string | null;
+  /** "dark" for a logo that's a white/light mark with no transparent
+   *  background — it would look broken in the usual white tile. */
+  logoBg?: "white" | "dark";
   size?: "md" | "lg";
 }) {
   if (logo) {
     const px = size === "lg" ? 56 : 44;
     return (
       <span
-        className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-white ${
-          size === "lg" ? "size-14 p-1.5" : "size-11 p-1"
-        }`}
+        className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border ${
+          logoBg === "dark" ? "bg-black" : "bg-white"
+        } ${size === "lg" ? "size-14 p-1.5" : "size-11 p-1"}`}
       >
         {/* Decorative: the firm's name is always shown right next to it. */}
         <Image src={logo} alt="" width={px} height={px} className="size-full rounded object-contain" />
