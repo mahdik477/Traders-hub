@@ -1,0 +1,330 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "Official FXIFY pages only, fetched 2026-10-03: https://fxify.com/ and https://fxify.com/programs/two-phase/ (the site's pricing table data, 'pricingTableData', is embedded in the page source of every program page; each program, account type, size, price and rule row was read from it), https://fxify.com/blog/introducing-fxify-2-phase-pro/ (29 Apr 2026, confirms 2-Phase Pro targets, static drawdown, no consistency rule, 80/20 split, $4,000 daily profit cap and prices $129 / $225), https://fxify.com/newsroom/ ('Since our launch in 2023'), https://fxify.com/become-a-partner/, site footer (company details and restricted jurisdictions).",
+    "pricing": "All prices USD, one-time fees. standard = the price shown on the live pricing table. No crossed-out prices are shown. Site-wide codes on 2026-10-03: REWARD25 (25% off all programs except Instant Funding Lite, expires 31 Oct 2026) and ONESTEP35 (35% off One Phase for new traders, expires 31 Dec 2026). The table does not display discounted prices, so promo = null everywhere (we don't calculate them). Paid add-ons at checkout: 90% split (from 80%), bi-weekly payouts, higher leverage - add-on prices not read.",
+    "billing": "One-time assessment fee per account. The FAQ text on the program pages says 'We do not have any hidden fees' and that the fee is reimbursed with the first payout on request for 1, 2 and 3 Phase plans.",
+    "rules_detail": "One Phase: 10% target, 3% daily loss (from previous day's 5pm EST balance), 6% trailing max drawdown, min 5 trading days, unlimited time. Two Phase Standard: 10% then 5%, 4% daily, 10% trailing, min 5 days per phase, drawdown locks on payout. Two Phase Classic: 5% then 10% (shown in that order on the official table), 4% daily, 10% static, 25% consistency rule on the funded account only. Two Phase Pro: 4% then 8%, 4% daily, 8% static, no consistency rule, $4,000 maximum gain per day (account goes read-only for the day), min 3 trading days that each need +0.5% profit, withdrawals every 10 days. Three Phase: 5% / 5% / 5%, 5% daily, 5% static, min 5 days per phase. Lightning Challenge: 5% target, 3% daily, 4% trailing, min 3 and MAXIMUM 5 trading days, 30% consistency rule, stop loss required on every trade, MT5 only. Instant Funding Standard: no target, 8% daily and 8% trailing drawdown (as shown on the table), no EAs, no weekend holding, no news trading. Instant Funding Lite: 3% daily, 4% trailing, 20% consistency rule.",
+    "min_days_unclear": "Two Phase Classic: the pricing data lists both '4 days' and '5 days' for minimum trading days, so min_trading_days = null. Instant Funding: the data has three feature blocks for two account types ('N/A', 'N/A' and '5 trading days'), so it's unclear which applies to Lite; both left null.",
+    "profit_split": "One, Two (Standard, Classic) and Three Phase: 80% standard, 90% with a paid checkout add-on (stated on the pricing table). Two Phase Pro: 80/20 (blog post). Lightning and Instant Funding: the table only says 'Up to 90%' and does not say whether an add-on is needed, so profit_split_max = null. Following our planned rule, profit_split_max = the standard split without paid add-ons.",
+    "fee_refund": "Refunded with the first payout: One Phase, Two Phase Standard, Three Phase ('Refundable Fee 100%') and Lightning ('Refund: Yes'). Two Phase Pro: 'Refundable Fee Upon First Payout: No'. Instant Funding: 'Refund: No'. Two Phase Classic: not stated (null).",
+    "platforms": "MT4, MT5, DXtrade and TradingView, depending on program (Lightning is MT5 only). Partner brokers: FXPIG and Alchemy Markets.",
+    "company": "Footer: Prime Intermarket Group Eurasia Ltd, 6 St Denis Street, 1/F River Court, Port Louis, Mauritius (licensed in Mauritius as an Investment Dealer, licence GB24204066). FXIFY Solutions Limited, UK company 14451720, 142 Central Street, Clerkenwell, London EC1V 8AR, acts as payment agent. 'FXIFY Solutions Ltd is part of the FXPIG group of companies.' Not related to any firm already listed.",
+    "not_listed": "FXIFY Crypto (new, separate program page, not in the main pricing table) is not listed.",
+    "affiliate_program": "Has a program (https://fxify.com/become-a-partner/). Commission: 10% per referral, 15% after 100 sign-ups, 20% after 500 sign-ups, plus free challenge accounts at 50 / 250 / 500 referrals. Payout: PayPal or wire transfer, no withdrawal fee, minimum $50, only on transactions over 30 days old. Apply: create a trader dashboard account and submit the form in its affiliate section; FXIFY reviews each application. Open to 'Website owners', 'Bloggers' and 'Online Marketers' among others, so a comparison site looks eligible but this isn't stated explicitly. Cookie length: not stated. UAE-based affiliates: not stated (the UAE is not on the trader restricted list).",
+    "marketing_stats_excluded": "Payout totals and trader counts on the site are not reproduced (directory policy).",
+    "rule_units": "Forex rules are % of account size.",
+    "null_means": "Not stated on an official FXIFY page, or the official data is contradictory (see notes above)."
+  },
+  "firm": {
+    "id": "fxify",
+    "name": "FXIFY",
+    "logo": "/funded-accounts/fxify-logo.jpg",
+    "name_note": null,
+    "about": "FXIFY is a broker-backed forex and CFD prop firm, part of the FXPIG group, that sells one-, two- and three-phase evaluations plus instant funded accounts from $1K to $400K. It launched in 2023 and is run from Mauritius, with a UK payment company.",
+    "about_note": null,
+    "founded": 2023,
+    "hq": "Port Louis, Mauritius",
+    "currency": "USD",
+    "website": "https://fxify.com/",
+    "affiliate_link": "",
+    "platforms": ["MT4", "MT5", "DXtrade", "TradingView"],
+    "countries": {
+      "restricted": [
+        "US", "ZW", "IR", "IQ", "KP", "SO", "VN", "BI", "CF", "CI", "LR", "LY", "SD", "CU", "SY",
+        "AF", "YE", "PS", "MM", "NI", "CG", "CD", "ER", "GN", "GW", "PG", "SS", "VU", "VE", "DZ",
+        "RU", "BY", "KE", "GH"
+      ],
+      "allowed_only": null,
+      "notes": "FXIFY does not open accounts for residents of the United States. Crimea is also restricted (no separate country code). The list ends with 'and / or any particular country or jurisdiction where such distribution or use would be contrary to local law', so it may not be complete. The United Arab Emirates is not on the list.",
+      "source": "https://fxify.com/",
+      "last_checked": "2026-10-03"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.3,
+        "review_count": 6372,
+        "url": "https://www.trustpilot.com/review/fxify.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "Google rating not available yet.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Affordable entry cost and simplified trading rules",
+          "author": "Steve I.",
+          "stars": 5,
+          "date": "2026-10-03",
+          "url": "https://www.trustpilot.com/reviews/6ac08192f7dd9b527ec5b4c0"
+        },
+        {
+          "quote": "Happy with everything so far I will update if anything changes",
+          "author": "Kenris G.",
+          "stars": 5,
+          "date": "2026-09-30",
+          "url": "https://www.trustpilot.com/reviews/6ac0fd26794c3ec286735729"
+        },
+        {
+          "quote": "Low spread is the pros. No weekends trading is cons",
+          "author": "Omoniyi A.",
+          "stars": 2,
+          "date": "2026-09-26",
+          "url": "https://www.trustpilot.com/reviews/6ab79258cd4487dea91a0edb"
+        }
+      ]
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "promo_code": "REWARD25",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "One Phase",
+                "tagline": "One-time fee · Fee refunded with first payout · 90% split with paid add-on",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": 80,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  { "size": 5000, "promo": null, "standard": 59 },
+                  { "size": 10000, "promo": null, "standard": 89 },
+                  { "size": 15000, "promo": null, "standard": 119 },
+                  { "size": 25000, "promo": null, "standard": 199 },
+                  { "size": 50000, "promo": null, "standard": 379 },
+                  { "size": 100000, "promo": null, "standard": 549 },
+                  { "size": 200000, "promo": null, "standard": 1049 },
+                  { "size": 400000, "promo": null, "standard": 2950 }
+                ]
+              },
+              {
+                "tier": "Lightning Challenge",
+                "tagline": "One-time fee · Must pass within 5 trading days · Stop loss required on every trade · MT5 only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 5,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 4,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": null,
+                  "min_trading_days": 3,
+                  "consistency": "30%",
+                  "trading_period": "5 trading days maximum",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  { "size": 10000, "promo": null, "standard": 59 },
+                  { "size": 25000, "promo": null, "standard": 149 },
+                  { "size": 50000, "promo": null, "standard": 249 },
+                  { "size": 100000, "promo": null, "standard": 399 }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "Two Phase Standard",
+                "tagline": "One-time fee · Fee refunded with first payout · 90% split with paid add-on",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 4,
+                  "max_loss": 10,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": 80,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  { "size": 5000, "promo": null, "standard": 59 },
+                  { "size": 10000, "promo": null, "standard": 89 },
+                  { "size": 15000, "promo": null, "standard": 119 },
+                  { "size": 25000, "promo": null, "standard": 199 },
+                  { "size": 50000, "promo": null, "standard": 379 },
+                  { "size": 100000, "promo": null, "standard": 549 },
+                  { "size": 200000, "promo": null, "standard": 1049 },
+                  { "size": 400000, "promo": null, "standard": 2950 }
+                ]
+              },
+              {
+                "tier": "Two Phase Classic",
+                "tagline": "One-time fee · Static drawdown · 25% consistency rule on the funded account only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 5,
+                  "phase2_target": 10,
+                  "funded_target": null,
+                  "daily_loss": 4,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": null,
+                  "consistency": "25% (funded account only)",
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  { "size": 5000, "promo": null, "standard": 59 },
+                  { "size": 10000, "promo": null, "standard": 89 },
+                  { "size": 15000, "promo": null, "standard": 119 },
+                  { "size": 25000, "promo": null, "standard": 199 },
+                  { "size": 50000, "promo": null, "standard": 379 },
+                  { "size": 100000, "promo": null, "standard": 549 }
+                ]
+              },
+              {
+                "tier": "Two Phase Pro",
+                "tagline": "One-time fee · Static drawdown · $4,000 daily profit cap · Withdrawals every 10 days",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 4,
+                  "phase2_target": 8,
+                  "funded_target": null,
+                  "daily_loss": 4,
+                  "max_loss": 8,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 10000, "promo": null, "standard": 129 },
+                  { "size": 25000, "promo": null, "standard": 225 },
+                  { "size": 50000, "promo": null, "standard": 375 },
+                  { "size": 100000, "promo": null, "standard": 599 },
+                  { "size": 150000, "promo": null, "standard": 849 },
+                  { "size": 200000, "promo": null, "standard": 1099 },
+                  { "size": 250000, "promo": null, "standard": 1350 }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "3-step",
+            "tiers": [
+              {
+                "tier": "Three Phase",
+                "tagline": "One-time fee · Static drawdown · Fee refunded with first payout",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 5,
+                  "phase2_target": 5,
+                  "phase3_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 5,
+                  "max_loss": 5,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  { "size": 5000, "promo": null, "standard": 39 },
+                  { "size": 10000, "promo": null, "standard": 59 },
+                  { "size": 15000, "promo": null, "standard": 79 },
+                  { "size": 25000, "promo": null, "standard": 149 },
+                  { "size": 50000, "promo": null, "standard": 249 },
+                  { "size": 100000, "promo": null, "standard": 399 },
+                  { "size": 200000, "promo": null, "standard": 799 },
+                  { "size": 400000, "promo": null, "standard": 1599 }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Instant Funding",
+                "tagline": "One-time fee · No evaluation · No EAs, weekend holding or news trading",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": null,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 8,
+                  "max_loss": 8,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": null,
+                  "min_trading_days": null,
+                  "consistency": "none",
+                  "trading_period": null,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 1000, "promo": null, "standard": 69 },
+                  { "size": 2500, "promo": null, "standard": 119 },
+                  { "size": 5000, "promo": null, "standard": 229 },
+                  { "size": 10000, "promo": null, "standard": 449 },
+                  { "size": 25000, "promo": null, "standard": 899 },
+                  { "size": 50000, "promo": null, "standard": 1749 },
+                  { "size": 75000, "promo": null, "standard": 2499 },
+                  { "size": 100000, "promo": null, "standard": 4249 }
+                ]
+              },
+              {
+                "tier": "Instant Funding Lite",
+                "tagline": "One-time fee · No evaluation · Lower price, tighter limits · Not included in the monthly discount code",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": null,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 4,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": null,
+                  "min_trading_days": null,
+                  "consistency": "20%",
+                  "trading_period": null,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 2500, "promo": null, "standard": 19 },
+                  { "size": 5000, "promo": null, "standard": 44 },
+                  { "size": 10000, "promo": null, "standard": 89 },
+                  { "size": 25000, "promo": null, "standard": 169 },
+                  { "size": 50000, "promo": null, "standard": 289 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
