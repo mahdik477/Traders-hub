@@ -1,0 +1,160 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "Official TradeDay pages only, fetched 2026-10-03: https://www.tradeday.com/ (pricing section: every product, drawdown type, platform and size card, with list and discounted prices, evaluation and funded rules), https://www.tradeday.com/about, https://www.tradeday.com/affiliate-program, https://www.tradeday.com/terms-and-conditions, and the official help centre tradeday.freshdesk.com articles 103000123294 (prohibited countries, modified 1 Oct 2026), 103000008902 (monthly billing, modified 18 Sep 2026), 103000008813 (platforms, modified 2 Sep 2026), 103000008855 (maximum drawdown), 103000050956 (affiliate program).",
+    "pricing": "All prices USD per MONTH (billing = monthly). standard = the crossed-out list price on the pricing card; promo = the price shown with code TDNEW ('Now 55% OFF! Accounts from just $45!'). The page doesn't say whether the discount applies only to the first month or to every renewal - check before publishing. Prices are the same for Tradovate and Rithmic.",
+    "billing": "Monthly subscription: the first payment is taken at sign-up and recurs every 30 days until you pass or cancel; no time limit to pass. No activation fee on any plan. Resets are extra (help centre, Quick Pay Intraday / Quick Pay EOD / Fast Pass): 25K $45 / $54 / $59, 50K $60 / $85 / $85, 100K $110 / $135 / $140, 150K $165 / $195 / $225. The pricing cards show slightly lower reset prices for some sizes (e.g. 50K Quick Pay Intraday $59, 100K $108), probably the discounted figure.",
+    "rules_detail": "Quick Pay: profit target, trailing max drawdown calculated intraday (or end-of-day during the evaluation on the EOD version - the funded account is always intraday), 30% consistency and min 5 trading days in the evaluation. Funded Sim: no consistency rule, no payout buffer, payouts from day 1, minimum request $250. Fast Pass: end-of-day trailing drawdown in evaluation and funded, 45% consistency in evaluation and funded, min 3 trading days to pass (the FAQ also describes it as 'no minimum trading day requirement'; the card says 3); funded payouts need 5 profitable days of $100 / $150 / $200 / $250, minimum request $250, maximum per cycle $750 / $1,500 / $1,875 / $2,250; funded position limit starts at 1 / 2 / 3 / 4 contracts and scales +1 per $2K profit. No daily loss limit is listed on any card (daily_loss = null, not stated). Trailing drawdown stops at the starting balance.",
+    "profit_split": "Quick Pay Funded Sim: 50/50 on net profit below $4K, 80/20 above $4K; 90/10 in Funded Live. Fast Pass: 80/20 in Funded Sim, 90/10 in Funded Live. profit_split_max = 80 (the Funded Sim split, before moving live).",
+    "fee_refund": "Footer: 'All subscription fees are non-refundable except where required by law.' fee_refund = false.",
+    "platforms": "Help centre: CQG (Tradovate) - Tradovate, NinjaTrader (free NT8), TradingView and Jigsaw (own licence needed). Rithmic - R|Trader Pro, Quantower, ATAS, MotiveWave, Bookmap, Jigsaw, Sierra Chart, EdgeProX, Finamark, Volfix, WealthCharts, MultiCharts, Overcharts. NinjaTrader Desktop is not supported with Rithmic accounts.",
+    "company": "TradeDay LLC, Chicago, Illinois 60607 (site footer). 'Established 2020' / 'Since 2020' on the homepage and about page; founders' backgrounds include running Chicago futures trading firms. Terms governed by Illinois law. Not related to any firm already listed.",
+    "affiliate_program": "Has a program (https://www.tradeday.com/affiliate-program, sign-up form https://tradeday.postaffiliatepro.com/affiliates/signup.php#SignupForm, runs on Post Affiliate Pro). Commission tiered by monthly sales: $0-$5,000 = 15%, $5,001-$10,000 = 20%, $10,001+ = 22.5% 'on all purchases'. Higher tiers also get graphics, newsletter features, giveaways and a free $50K evaluation. 'New Partners Apply' - applications are reviewed. Payout method, minimum payout and cookie length: not stated on the public page. Comparison sites / UAE-based affiliates: not mentioned (the UAE is not on the trader prohibited list).",
+    "marketing_stats_excluded": "The site publishes a 36% pass rate (Jan-Jun 2026) and payout totals; not reproduced here (directory policy).",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official TradeDay page."
+  },
+  "firm": {
+    "id": "tradeday",
+    "name": "TradeDay",
+    "logo": "/funded-accounts/tradeday-logo.png",
+    "name_note": null,
+    "about": "TradeDay is a Chicago-based futures prop firm, running since 2020, that sells monthly evaluations in two styles: Quick Pay, with payouts from the first funded day, and Fast Pass, built to pass in as little as three days. Account sizes run from $25K to $150K.",
+    "about_note": null,
+    "founded": 2020,
+    "hq": "Chicago, Illinois, USA",
+    "currency": "USD",
+    "website": "https://www.tradeday.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "Tradovate",
+      "NinjaTrader",
+      "TradingView",
+      "Jigsaw",
+      "R|Trader Pro",
+      "Quantower",
+      "ATAS",
+      "MotiveWave",
+      "Bookmap",
+      "Sierra Chart",
+      "EdgeProX",
+      "Finamark",
+      "Volfix",
+      "WealthCharts",
+      "MultiCharts",
+      "Overcharts"
+    ],
+    "countries": {
+      "restricted": [
+        "AF", "AL", "DZ", "AO", "BB", "BY", "VG", "BA", "BW", "BG", "BF", "BI", "CM", "KY", "CF",
+        "CI", "HR", "CU", "KP", "CD", "EC", "ET", "GH", "GI", "GU", "GY", "HT", "IS", "ID", "IR",
+        "IQ", "JM", "JO", "XK", "LA", "LB", "LR", "LY", "MK", "ML", "MT", "MU", "MC", "MN", "ME",
+        "MA", "MZ", "MM", "NA", "NP", "NI", "NG", "PK", "PA", "PG", "PS", "PH", "PR", "RO", "RU",
+        "SN", "RS", "SI", "SO", "ZA", "SS", "LK", "SD", "SY", "TZ", "TT", "TN", "UG", "UA", "VI",
+        "VE", "VN", "YE", "ZW"
+      ],
+      "allowed_only": null,
+      "notes": "Set by TradeDay's US clearing firm and broker. Applies to citizens OR residents of these countries, and to people trading mainly from them while visiting. Also listed: the Crimea region of Ukraine, 'Balkans' and people on the 'Magnitsky' sanctions list (no single country code). Kosovo is recorded as XK (a widely used code, not an official ISO one). German citizens and Canadians outside Ontario can trade Funded Sim only, not Funded Live. Funded traders must pass KYC/AML checks with ID and proof of address. The UAE and the US are not on the list.",
+      "source": "https://tradeday.freshdesk.com/en/support/solutions/articles/103000123294-prohibited-countries",
+      "last_checked": "2026-10-03"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.6,
+        "review_count": 1442,
+        "url": "https://www.trustpilot.com/review/tradeday.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "Google rating not available yet.",
+      "trustpilot_quotes": [
+        {
+          "quote": "Great firm with straight forward rules and reliable payouts. They have a clear path to funded and are there to help you throughout your trading journey.",
+          "author": "Michael G.",
+          "stars": 5,
+          "date": "2026-09-23",
+          "url": "https://www.trustpilot.com/reviews/6ab41c1e2cddfd284ad0c13e"
+        },
+        {
+          "quote": "Seem okay. Support is quick and friendly so that is good. The trade fees (commission + etc) are literally double all other leading prop firms so that is bad.",
+          "author": "Max",
+          "stars": 3,
+          "date": "2026-09-29",
+          "url": "https://www.trustpilot.com/reviews/6abb8e6d19df4059249d80c7"
+        }
+      ]
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "promo_code": "TDNEW",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Quick Pay (Intraday)",
+                "tagline": "Monthly subscription until you pass · No activation fee · Payouts from day one when funded · 50% split until $4K profit, then 80%",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "Intraday trailing",
+                  "consistency_pct": 30,
+                  "min_trading_days": 5,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 25000, "profit_target": 1500, "daily_loss": null, "max_loss": 1000, "max_contracts": 2, "payout_cap": null, "promo": 45, "standard": 100 },
+                  { "size": 50000, "profit_target": 3000, "daily_loss": null, "max_loss": 2000, "max_contracts": 5, "payout_cap": null, "promo": 59, "standard": 131 },
+                  { "size": 100000, "profit_target": 6000, "daily_loss": null, "max_loss": 3000, "max_contracts": 10, "payout_cap": null, "promo": 108, "standard": 240 },
+                  { "size": 150000, "profit_target": 9000, "daily_loss": null, "max_loss": 4500, "max_contracts": 15, "payout_cap": null, "promo": 162, "standard": 360 }
+                ]
+              },
+              {
+                "tier": "Quick Pay (EOD)",
+                "tagline": "Monthly subscription until you pass · End-of-day drawdown in the evaluation, intraday once funded · Payouts from day one when funded",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing (evaluation), intraday (funded)",
+                  "consistency_pct": 30,
+                  "min_trading_days": 5,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 25000, "profit_target": 1500, "daily_loss": null, "max_loss": 1000, "max_contracts": 2, "payout_cap": null, "promo": 54, "standard": 120 },
+                  { "size": 50000, "profit_target": 3000, "daily_loss": null, "max_loss": 2000, "max_contracts": 5, "payout_cap": null, "promo": 79, "standard": 175 },
+                  { "size": 100000, "profit_target": 6000, "daily_loss": null, "max_loss": 3000, "max_contracts": 10, "payout_cap": null, "promo": 129, "standard": 285 },
+                  { "size": 150000, "profit_target": 9000, "daily_loss": null, "max_loss": 4500, "max_contracts": 15, "payout_cap": null, "promo": 180, "standard": 400 }
+                ]
+              },
+              {
+                "tier": "Fast Pass",
+                "tagline": "Monthly subscription until you pass · Pass in as little as 3 days · 45% consistency rule in evaluation and funded · Capped payouts per cycle",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 45,
+                  "min_trading_days": 3,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 25000, "profit_target": 1500, "daily_loss": null, "max_loss": 1000, "max_contracts": 2, "payout_cap": 750, "promo": 59, "standard": 130 },
+                  { "size": 50000, "profit_target": 3000, "daily_loss": null, "max_loss": 2000, "max_contracts": 5, "payout_cap": 1500, "promo": 85, "standard": 189 },
+                  { "size": 100000, "profit_target": 6000, "daily_loss": null, "max_loss": 3000, "max_contracts": 10, "payout_cap": 1875, "promo": 149, "standard": 330 },
+                  { "size": 150000, "profit_target": 9000, "daily_loss": null, "max_loss": 4500, "max_contracts": 15, "payout_cap": 2250, "promo": 225, "standard": 500 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
