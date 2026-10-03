@@ -1,0 +1,118 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "Official Earn2Trade pages only, fetched 2026-10-03: https://www.earn2trade.com/trader-career-path and https://www.earn2trade.com/gauntlet-mini (visible text for the default size, and the site's own plan data in its page scripts for every size: goal, drawdown, daily loss limit, contract ladder, monthly subscription and reset price; the visible $25K TCP and $50K Gauntlet figures match the script data exactly), FAQ answers embedded in the same pages (activation fee, platforms, resets), https://www.earn2trade.com/affiliates, https://www.earn2trade.com/about-us, https://www.earn2trade.com/terms-and-conditions, https://help.earn2trade.com/en/articles/2547638-i-m-not-an-american-us-citizen-can-i-still-get-funded (updated 7 Mar 2025).",
+    "pricing": "All prices USD, MONTHLY subscriptions for the evaluation (billing = monthly). standard = the monthly price on the live pricing page. No crossed-out prices are shown, so promo = null. Current offer (ends 10 Oct 2026): '10-Year Anniversary Bundle: 3 x TCP25 + 3 resets - $27.50 per attempt' (bundle purchases are final and non-refundable) - not a per-account discount, so not recorded as a promo. Region switch (US / Non-US) does not change prices; all shown in USD.",
+    "billing": "Evaluation is a monthly subscription; Trader Career Path includes a free reset when rebilled. Paid resets: TCP100 fixed $100, TCP25 / TCP50 'dynamic pricing'; Gauntlet Mini $75 / $100 / $130 / $155 (plan data). Once funded there is no monthly fee. A one-time activation fee of $139 is deducted from the first successful withdrawal (not paid up front).",
+    "rules_detail": "Both evaluations: single phase, EOD drawdown, daily loss limit, 30% consistency rule, no minimum trading days, trading until 15:50 CT, news trading allowed, up to 5 evaluation accounts at once. Contracts follow a progression ladder up to the listed maximum. Funded LiveSim account: EOD drawdown, no consistency rule, weekly payouts, no buffer. Funded Live account: trailing drawdown. Trader Career Path: after passing, traders work through a growth plan (e.g. $25K -> $50K -> $100K -> $200K -> $400K live) by reaching the profit target at each step. Reaching the profit goal is not stated as a fixed percent - figures are USD per account size.",
+    "profit_split": "Tiered on funded accounts: 50% on payouts under a threshold, 80% over it. Thresholds: TCP25 $1,500, TCP50 $2,250, TCP100 $3,000, GAU50 $2,250, GAU100 $3,000, GAU150 $4,000, GAU200 $5,000. profit_split_max = 80.",
+    "fee_refund": "Terms: 'we do not provide refunds after purchase', so fee_refund = false.",
+    "platforms": "FAQ: 'NinjaTrader, Finamark, Tradovate, TradingView and R Trader Pro are available for free'; other platforms are listed on a separate page that was not read. Commissions depend on the data provider (Tradovate or Rithmic).",
+    "company": "Footer: Earn2Trade LLC, registered office 30 N Gould St STE 4000, Sheridan, WY 82801 (a common registered-agent address). Founded is null because official pages disagree: the affiliate page says 'in business since 2017' while the 2026 banner celebrates a '10-Year Anniversary' (which would mean 2016). Team page lists staff across several countries. Not related to any firm already listed.",
+    "affiliate_program": "Has a program (https://www.earn2trade.com/affiliates, sign-up form https://partners.earn2trade.com/affiliates/signup.php#SignupForm, run on Post Affiliate Pro). Commission: '20% commission on all sales of all products' (page text; an older string in the site code says 'up to 40%', not shown). Lifetime commissions while the customer stays. Affiliates get a personal 20% discount link and coupon for referrals. Payouts monthly once the $300 minimum is reached; payout method not stated. Applications are approved by Earn2Trade. Cookie length: not stated. Whether comparison sites or UAE-based affiliates are accepted: not stated (the UAE is not on the trader restricted list). Rules include using only approved materials and never claiming guaranteed profits.",
+    "marketing_stats_excluded": "The site publishes pass rates and withdrawal statistics in its exam disclaimer; none are reproduced here (directory policy).",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official Earn2Trade page."
+  },
+  "firm": {
+    "id": "earn2trade",
+    "name": "Earn2Trade",
+    "logo": "/funded-accounts/earn2trade-logo.png",
+    "name_note": null,
+    "about": "Earn2Trade is a US-registered futures prop firm whose evaluations (Trader Career Path and Gauntlet Mini) are paid monthly until you pass. Funded traders can move up through larger account sizes and onto live accounts, and a $139 activation fee is taken from the first withdrawal.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "Sheridan, Wyoming, USA (registered office)",
+    "currency": "USD",
+    "website": "https://www.earn2trade.com/",
+    "affiliate_link": "",
+    "platforms": ["NinjaTrader", "Finamark", "Tradovate", "TradingView", "R|Trader Pro"],
+    "countries": {
+      "restricted": [
+        "AF", "AL", "AZ", "MM", "CF", "CU", "GI", "IR", "IQ", "KE", "LY", "ML", "NR", "NG", "KP",
+        "PK", "RU", "SO", "SS", "SD", "SY", "TM", "UA", "VE", "YE"
+      ],
+      "allowed_only": null,
+      "notes": "The help centre says citizens of these countries are 'unable to get funded owing to sanctions or other reasons'; the terms add that purchases from newly sanctioned countries are not refunded. US and non-US traders are both accepted (non-US traders fill in a W-8BEN form when funded). Traders from Palestine are asked to choose Israel at signup because the data provider has no Palestine option. The UAE is not on the list. The list was last updated 7 March 2025, so it may be out of date.",
+      "source": "https://help.earn2trade.com/en/articles/2547638-i-m-not-an-american-us-citizen-can-i-still-get-funded",
+      "last_checked": "2026-10-03"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.6,
+        "review_count": 5013,
+        "url": "https://www.trustpilot.com/review/earn2trade.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "Google rating not available yet.",
+      "trustpilot_quotes": [
+        {
+          "quote": "They are very friendly to solve if any issues occurred. Great customer service 👏",
+          "author": "Debi D.",
+          "stars": 5,
+          "date": "2026-09-12",
+          "url": "https://www.trustpilot.com/reviews/6aa5b14d9925b7714c1af4a0"
+        },
+        {
+          "quote": "Avoid this prop firm at all costs. The platform is continuously plagued by technical issues, and their support is a absolute nightmare. I opened a ticket over 72 hours ago and have received zero response…",
+          "author": "Blixep",
+          "stars": 1,
+          "date": "2026-09-23",
+          "url": "https://www.trustpilot.com/reviews/6ab387a7ef1d90cb19d13f32"
+        }
+      ]
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Trader Career Path",
+                "tagline": "Monthly subscription until you pass · Free reset when rebilled · $139 activation fee taken from first withdrawal · 50% split until a payout threshold, then 80%",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD",
+                  "consistency_pct": 30,
+                  "min_trading_days": 0,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 25000, "profit_target": 1750, "daily_loss": 550, "max_loss": 1500, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 150 },
+                  { "size": 50000, "profit_target": 3000, "daily_loss": 1100, "max_loss": 2000, "max_contracts": 6, "payout_cap": null, "promo": null, "standard": 190 },
+                  { "size": 100000, "profit_target": 6000, "daily_loss": 2200, "max_loss": 3500, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 350 }
+                ]
+              },
+              {
+                "tier": "Gauntlet Mini",
+                "tagline": "Monthly subscription until you pass · $139 activation fee taken from first withdrawal · 50% split until a payout threshold, then 80%",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD",
+                  "consistency_pct": 30,
+                  "min_trading_days": 0,
+                  "profit_split_max": 80,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 50000, "profit_target": 3000, "daily_loss": 1100, "max_loss": 2000, "max_contracts": 6, "payout_cap": null, "promo": null, "standard": 170 },
+                  { "size": 100000, "profit_target": 6000, "daily_loss": 2200, "max_loss": 3500, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 315 },
+                  { "size": 150000, "profit_target": 9000, "daily_loss": 3300, "max_loss": 4500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 375 },
+                  { "size": 200000, "profit_target": 11000, "daily_loss": 4400, "max_loss": 6000, "max_contracts": 16, "payout_cap": null, "promo": null, "standard": 550 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
