@@ -10,6 +10,13 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { CourseView } from "./course-types";
 
+type RawRating = {
+  rating: number;
+  review_count?: number | null;
+  url?: string | null;
+  label?: string | null;
+};
+
 type RawFile = {
   course: {
     id: string;
@@ -31,7 +38,8 @@ type RawFile = {
       link?: string | null;
     }[];
     refund_policy?: string | null;
-    trustpilot?: { rating: number; review_count?: number | null; url?: string | null } | null;
+    trustpilot?: RawRating | null;
+    whop?: RawRating | null;
     testimonials?: { quote: string; author: string; source?: string | null }[];
     /** Overrides the default "sourced from the provider's own marketing" note
      *  — set this when testimonials are from somewhere else, e.g. independent
@@ -110,13 +118,8 @@ function buildCourse(c: RawFile["course"]): CourseView {
       link: safeLink(p.link),
     })),
     refundPolicy: c.refund_policy || null,
-    trustpilot: c.trustpilot
-      ? {
-          rating: c.trustpilot.rating,
-          reviewCount: c.trustpilot.review_count ?? null,
-          url: safeLink(c.trustpilot.url),
-        }
-      : null,
+    trustpilot: buildRating(c.trustpilot),
+    whop: buildRating(c.whop),
     testimonials: (c.testimonials ?? []).map((t) => ({
       quote: t.quote,
       author: t.author,
@@ -125,6 +128,17 @@ function buildCourse(c: RawFile["course"]): CourseView {
     testimonialsNote: c.testimonials_note || DEFAULT_TESTIMONIALS_NOTE,
     website: safeLink(c.website),
     affiliateLink: safeLink(c.affiliate_link),
+  };
+}
+
+// Shared shape for both `trustpilot` and `whop` — same fields either way.
+function buildRating(r: RawRating | null | undefined) {
+  if (!r) return null;
+  return {
+    rating: r.rating,
+    reviewCount: r.review_count ?? null,
+    url: safeLink(r.url),
+    label: r.label || null,
   };
 }
 

@@ -80,6 +80,7 @@ export default function CourseDetail({
   extraNote,
   instructors,
   trustpilot,
+  whop = null,
   pricing,
   formats,
   platforms,
@@ -101,6 +102,10 @@ export default function CourseDetail({
   extraNote?: ReactNode;
   instructors: InstructorInfo[];
   trustpilot: TrustpilotRating | null;
+  /** Rating from Whop, when the course is sold there — shown alongside
+   *  Trustpilot rather than instead of it, since they're independent and
+   *  can disagree a lot. */
+  whop?: TrustpilotRating | null;
   pricing: PricingTier[];
   formats: LearningFormat[];
   platforms: string[];
@@ -147,8 +152,11 @@ export default function CourseDetail({
           <div className="min-w-0 flex-1">
             <h1 className="page-title">{name}</h1>
             {tagline && <p className="mt-2 max-w-2xl text-base text-muted">{tagline}</p>}
-            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <div className="mt-3 flex flex-col flex-wrap gap-x-4 gap-y-1.5">
               {trustpilot && <TrustpilotStars rating={trustpilot} />}
+              {whop && <TrustpilotStars rating={whop} platform="Whop" />}
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
               {instructors.length > 0 && (
                 <span className="meta">
                   {instructors.length === 1 ? "Instructor" : "Instructors"}:{" "}
@@ -184,6 +192,7 @@ export default function CourseDetail({
           {trustpilot && (
             <Stat label="Trustpilot" value={`${trustpilot.rating.toFixed(1)}/5`} color="text-warning" />
           )}
+          {whop && <Stat label="Whop" value={`${whop.rating.toFixed(1)}/5`} color="text-warning" />}
           {platforms.length > 0 && <Stat label="Platforms" value={String(platforms.length)} />}
           {stats.map((s) => (
             <Stat key={s.label} label={s.label} value={s.value} />

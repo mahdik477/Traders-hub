@@ -63,6 +63,14 @@ function checkLink(file, field, url) {
   }
 }
 
+// A rating from any review platform (Trustpilot, Whop, ...) — same shape,
+// same checks either way.
+function checkRating(file, field, r) {
+  if (!r) return;
+  checkLink(file, `${field}.url`, r.url);
+  if (!isNum(r.rating) || r.rating < 0 || r.rating > 5) err(file, `${field}.rating must be between 0 and 5`);
+}
+
 function checkCurrency(file, code) {
   try {
     new Intl.NumberFormat("en-US", { style: "currency", currency: code });
@@ -244,12 +252,11 @@ function checkCourse(file, data) {
   checkLink(file, "course.website", c.website);
   checkLink(file, "course.affiliate_link", c.affiliate_link);
   checkLink(file, "course.instructor.link", c.instructor?.link);
-  checkLink(file, "course.trustpilot.url", c.trustpilot?.url);
+  checkRating(file, "course.trustpilot", c.trustpilot);
+  checkRating(file, "course.whop", c.whop);
   checkLink(file, "course.broker_partnership.url", c.broker_partnership?.url);
   if (c.broker_partnership && !c.broker_partnership.broker_name)
     err(file, `course.broker_partnership has no "broker_name"`);
-  if (c.trustpilot && (!isNum(c.trustpilot.rating) || c.trustpilot.rating < 0 || c.trustpilot.rating > 5))
-    err(file, `course.trustpilot.rating must be between 0 and 5`);
   (c.testimonials ?? []).forEach((t, i) => {
     if (!t.source) err(file, `testimonials[${i}] has no "source" - every quote must say where it came from`);
   });
@@ -285,9 +292,13 @@ function checkProvider(file, data) {
   }
   checkLink(file, "provider.website", p.website);
   checkLink(file, "provider.affiliate_link", p.affiliate_link);
-  checkLink(file, "provider.trustpilot.url", p.trustpilot?.url);
-  if (p.trustpilot && (!isNum(p.trustpilot.rating) || p.trustpilot.rating < 0 || p.trustpilot.rating > 5))
-    err(file, `provider.trustpilot.rating must be between 0 and 5`);
+  checkRating(file, "provider.trustpilot", p.trustpilot);
+  checkRating(file, "provider.whop", p.whop);
+  if (p.logo_bg != null && p.logo_bg !== "white" && p.logo_bg !== "dark")
+    err(file, `provider.logo_bg must be "white", "dark" or left out (got "${p.logo_bg}")`);
+  (p.partner_firms ?? []).forEach((f, i) => {
+    if (!f.name) err(file, `provider.partner_firms[${i}] has no "name"`);
+  });
   if (!Array.isArray(p.courses) || p.courses.length === 0) return err(file, `provider.courses must be a non-empty list`);
   const slugs = new Set();
   for (const c of p.courses) {

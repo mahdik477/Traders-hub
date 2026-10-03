@@ -1,8 +1,11 @@
 import type { TrustpilotRating } from "@/lib/course-types";
 import { StarIcon } from "@/components/icons";
 
-// Trustpilot's own published scale for the word under the score.
-function trustpilotLabel(rating: number): string {
+// Fallback only, for an older data file that hasn't got a stored label yet —
+// Trustpilot's real banding doesn't line up neatly with the number (e.g.
+// we've seen 2.9 shown as "Average" and 2.7 shown as "Poor"), so this is
+// an approximation, not a source of truth.
+function approximateTrustpilotLabel(rating: number): string {
   if (rating >= 4.5) return "Excellent";
   if (rating >= 3.5) return "Great";
   if (rating >= 2.5) return "Average";
@@ -46,16 +49,23 @@ export function StarRow({ rating, iconPx = 16 }: { rating: number; iconPx?: numb
   );
 }
 
-// "4.0 ★★★★☆ Great · 3 reviews on Trustpilot" — links out to Trustpilot when
+// "4.0 ★★★★☆ Great · 3 reviews on Trustpilot" — links out to the source when
 // we have a URL. Rating is whatever the data file states — we don't verify
-// it ourselves, we just display it with its source named.
+// it ourselves, we just display it with its source named. Also used for
+// Whop ratings (same shape, different platform) — pass `platform="Whop"`.
 export default function TrustpilotRatingDisplay({
   rating,
   size = "md",
+  platform = "Trustpilot",
 }: {
   rating: TrustpilotRating;
   size?: "sm" | "md";
+  /** Which review platform this rating is from — only Trustpilot gets the
+   *  approximate Excellent/Great/Average/Poor/Bad label as a fallback, since
+   *  that's Trustpilot's own banding, not a universal scale. */
+  platform?: string;
 }) {
+  const label = rating.label ?? (platform === "Trustpilot" ? approximateTrustpilotLabel(rating.rating) : null);
   const content = (
     <>
       <span className={`font-bold text-warning ${size === "md" ? "text-lg" : "text-sm"}`}>
@@ -63,9 +73,9 @@ export default function TrustpilotRatingDisplay({
       </span>
       <StarRow rating={rating.rating} iconPx={size === "md" ? 16 : 14} />
       <span className="meta">
-        {trustpilotLabel(rating.rating)}
+        {label}
         {rating.reviewCount != null &&
-          ` · ${rating.reviewCount.toLocaleString("en-US")} review${rating.reviewCount === 1 ? "" : "s"} on Trustpilot`}
+          `${label ? " · " : ""}${rating.reviewCount.toLocaleString("en-US")} review${rating.reviewCount === 1 ? "" : "s"} on ${platform}`}
       </span>
     </>
   );

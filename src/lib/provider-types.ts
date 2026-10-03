@@ -37,15 +37,39 @@ export type ProviderCourse = {
   testimonialsNote: string;
 };
 
+/** A prop firm this provider is partnered with/promotes. Only gets an
+ *  internal link when we've manually confirmed it's genuinely the same firm
+ *  we list (not just a similar name — e.g. "Alpha Futures" is NOT our
+ *  "Alpha Funded", see CLAUDE.md). */
+export type PartnerFirm = {
+  /** Name as the provider itself writes it. */
+  name: string;
+  /** Our /funded-accounts/<id>, only when confirmed as the same company. */
+  internalId: string | null;
+};
+
 export type ProviderView = {
   /** Also the page address: /courses/<id>. */
   id: string;
   name: string;
   logo: string | null;
+  /** "dark" for a logo that's a light mark with no transparent background —
+   *  see FirmView.logoBg for the same idea on prop firms. */
+  logoBg: "white" | "dark";
   tagline: string | null;
   about: string | null;
   trustpilot: TrustpilotRating | null;
+  /** Same idea as CourseView.whop — independent Whop buyer reviews. */
+  whop: TrustpilotRating | null;
   website: string | null;
   affiliateLink: string | null;
+  /** Prop firms this provider promotes/partners with — distinct from a
+   *  course's `platforms` (software), since this is specifically about
+   *  funded-account firms, some of which we may already list ourselves. */
+  partnerFirms: PartnerFirm[];
+  /** Shown under the partner firms list — for flagging a naming mix-up,
+   *  e.g. a partner firm that sounds like but isn't one we list. Null most
+   *  of the time. */
+  partnerFirmsNote: string | null;
   courses: ProviderCourse[];
 };

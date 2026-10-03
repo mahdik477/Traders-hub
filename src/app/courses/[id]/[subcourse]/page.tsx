@@ -63,6 +63,7 @@ export default async function ProviderCoursePage({
       extraNote={notes.length > 0 ? <div className="space-y-2">{notes}</div> : undefined}
       instructors={course.instructors}
       trustpilot={provider.trustpilot}
+      whop={provider.whop}
       pricing={course.pricing}
       formats={course.formats}
       platforms={course.platforms}

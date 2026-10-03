@@ -7,7 +7,8 @@ import { providers, getProvider } from "@/lib/providers";
 import { getSection } from "@/lib/sections";
 import CourseDetail from "@/components/CourseDetail";
 import TrustpilotStars from "@/components/TrustpilotStars";
-import { ChevronLeftIcon } from "@/components/icons";
+import PartnerFirmPill from "@/components/PartnerFirmPill";
+import { ChevronLeftIcon, LinkIcon } from "@/components/icons";
 
 // This one route serves two kinds of page, both addressed as /courses/<id>:
 // a standalone course (from courses-data-*.json) renders the full course
@@ -52,6 +53,7 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
         about={course.about}
         instructors={course.instructor ? [course.instructor] : []}
         trustpilot={course.trustpilot}
+        whop={course.whop}
         pricing={course.pricing}
         formats={course.formats}
         platforms={course.platforms}
@@ -85,7 +87,11 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
         />
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center">
           {provider.logo && (
-            <div className="flex size-20 shrink-0 items-center justify-center rounded-xl bg-white p-3 shadow-sm sm:size-24">
+            <div
+              className={`flex size-20 shrink-0 items-center justify-center rounded-xl p-3 shadow-sm sm:size-24 ${
+                provider.logoBg === "dark" ? "bg-black" : "bg-white"
+              }`}
+            >
               <Image
                 src={provider.logo}
                 alt={`${provider.name} logo`}
@@ -99,9 +105,10 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
           <div className="min-w-0 flex-1">
             <h1 className="page-title">{provider.name}</h1>
             {provider.tagline && <p className="mt-2 max-w-2xl text-base text-muted">{provider.tagline}</p>}
-            {provider.trustpilot && (
-              <div className="mt-3">
-                <TrustpilotStars rating={provider.trustpilot} />
+            {(provider.trustpilot || provider.whop) && (
+              <div className="mt-3 flex flex-col gap-1.5">
+                {provider.trustpilot && <TrustpilotStars rating={provider.trustpilot} />}
+                {provider.whop && <TrustpilotStars rating={provider.whop} platform="Whop" />}
               </div>
             )}
           </div>
@@ -109,6 +116,31 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
       </div>
 
       {provider.about && <p className="mt-6 max-w-3xl text-muted">{provider.about}</p>}
+
+      {provider.partnerFirms.length > 0 && (
+        <section aria-labelledby="partner-firms-heading" className="mt-10">
+          <h2 id="partner-firms-heading" className="section-title flex items-center gap-2.5">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
+              <LinkIcon className="size-4" />
+            </span>
+            Partner prop firms
+          </h2>
+          <p className="meta mt-2 max-w-2xl">
+            Prop firms {provider.name} promotes or has a discount/affiliate arrangement with. Hover
+            (or tap) one for a link to our own listing, where we have it.
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {provider.partnerFirms.map((f) => (
+              <li key={f.name}>
+                <PartnerFirmPill name={f.name} internalId={f.internalId} />
+              </li>
+            ))}
+          </ul>
+          {provider.partnerFirmsNote && (
+            <p className="meta mt-3 italic">{provider.partnerFirmsNote}</p>
+          )}
+        </section>
+      )}
 
       <section aria-labelledby="provider-courses-heading" className="mt-10">
         <h2 id="provider-courses-heading" className="section-title">

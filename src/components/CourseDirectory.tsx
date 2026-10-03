@@ -10,6 +10,7 @@ type Entry = {
   logo: string | null;
   tagline: string | null;
   trustpilot: CourseView["trustpilot"];
+  whop: CourseView["whop"];
   fromPrice: string | null;
   href: string;
   /** Set only for a multi-course provider, e.g. "6 courses". */
@@ -33,6 +34,7 @@ export default function CourseDirectory({
       logo: c.logo,
       tagline: c.tagline,
       trustpilot: c.trustpilot,
+      whop: c.whop,
       fromPrice: c.pricing[0]?.price ?? null,
       href: `/courses/${c.id}`,
       courseCountLabel: null,
@@ -45,6 +47,7 @@ export default function CourseDirectory({
         logo: p.logo,
         tagline: p.tagline,
         trustpilot: p.trustpilot,
+        whop: p.whop,
         fromPrice: prices[0] ?? null,
         href: `/courses/${p.id}`,
         courseCountLabel: `${p.courses.length} courses`,
@@ -79,9 +82,10 @@ export default function CourseDirectory({
               )}
               <div className="min-w-0">
                 <h2 className="truncate text-lg font-semibold">{entry.name}</h2>
-                {entry.trustpilot && (
-                  <div className="mt-1 text-xs">
-                    <TrustpilotStars rating={entry.trustpilot} size="sm" />
+                {(entry.trustpilot || entry.whop) && (
+                  <div className="mt-1 flex flex-col gap-0.5 text-xs">
+                    {entry.trustpilot && <TrustpilotStars rating={entry.trustpilot} size="sm" />}
+                    {entry.whop && <TrustpilotStars rating={entry.whop} size="sm" platform="Whop" />}
                   </div>
                 )}
               </div>
