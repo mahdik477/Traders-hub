@@ -1,0 +1,97 @@
+{
+  "course": {
+    "id": "crystal-academy",
+    "name": "Crystal Academy",
+    "logo": "/courses/crystal-academy-logo.jpg",
+    "logo_bg": "dark",
+    "tagline": "Live options and futures trading sessions, structured education and psychology coaching from Sierra Smith.",
+    "about": "Crystal Academy is a trading education community founded by Sierra Smith in 2023, focused on options and futures trading. It combines daily live trading sessions, structured lessons and trading psychology coaching, with a free Basic tier and a paid Diamond membership for full access.",
+    "instructor": {
+      "name": "Sierra Smith",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Core curriculum",
+        "module_count": null,
+        "topics": [
+          "Trading fundamentals and strategies",
+          "Options and futures trading",
+          "Trading psychology and discipline",
+          "Market analysis and pre/post-market insights",
+          "Risk management through disciplined approaches"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live trading sessions",
+        "description": "Live sessions Monday through Friday."
+      },
+      {
+        "label": "Daily study groups",
+        "description": "Ongoing study groups alongside the live sessions."
+      },
+      {
+        "label": "Psychology coaching",
+        "description": "Weekly trading psychology coaching sessions."
+      },
+      {
+        "label": "Weekly educational classes",
+        "description": "Structured weekly lessons covering the core curriculum."
+      },
+      {
+        "label": "Community & library",
+        "description": "24/7 library access and a private Discord-based community."
+      }
+    ],
+    "platforms": [],
+    "stats": [{ "label": "Community size", "value": "≈158,000 members" }],
+    "pricing": [
+      {
+        "name": "Basic",
+        "price": "Free",
+        "billing_note": "Free education and community chat access, including free Friday sessions.",
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Diamond",
+        "price": "$65/month",
+        "billing_note": "Cancel anytime.",
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": {
+      "rating": 4.8,
+      "review_count": 3300,
+      "url": "https://whop.com/crystal-academy/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "The live trading sessions have completely transformed my approach. Real-time guidance makes all the difference.",
+        "author": "Michael R.",
+        "source": "Quoted on Crystal Academy's website (described as a day trader)"
+      },
+      {
+        "quote": "The psychology coaching alone is worth the membership. I've finally developed the discipline I needed.",
+        "author": "Sarah K.",
+        "source": "Quoted on Crystal Academy's website (described as an options trader)"
+      },
+      {
+        "quote": "As a beginner, the study groups and library access helped me learn faster than I ever thought possible.",
+        "author": "Emily L.",
+        "source": "Quoted on Crystal Academy's website (described as a new trader)"
+      }
+    ],
+    "website": "https://crystalacademytrades.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "crystalacademytrades.com homepage (its other pages — /about, /faq, /mentorship, /results — are rendered client-side and returned no content to a direct fetch); no Trustpilot profile exists for this domain (confirmed, 404); Whop rating/review count averaged across several search snapshots (4.8-4.82, ~3,100-3,500 reviews) since Whop's own pages are JS-rendered and didn't expose exact current numbers to a fetch. Founder's name given as Sierra Smith (as provided); some third-party sources instead call her Sierra Aaliyah (her Whop handle is sierraaaliyah) — not independently resolved."
+  }
+}

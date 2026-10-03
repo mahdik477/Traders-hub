@@ -1,0 +1,128 @@
+{
+  "provider": {
+    "id": "dodgys-dungeon",
+    "name": "Dodgy's Dungeon",
+    "logo": "/courses/dodgys-dungeon-logo.png",
+    "logo_bg": "dark",
+    "tagline": "ICT-style trading education and live streams from Ryan (\"Dodgy\"), built around his iFVG methodology.",
+    "about": "Dodgy's Dungeon is a trading education community run by Ryan (\"Dodgy\"), teaching ICT-style concepts — market structure, order blocks, fair value gaps, liquidity — with a focus on his own iFVG (Implied Fair Value Gap) methodology. A free Discord community includes a free ICT bootcamp course and daily live streams; the paid products below add more on top of that.",
+    "website": "https://dodgysdungeon.com/",
+    "affiliate_link": null,
+    "trustpilot": {
+      "rating": 2.7,
+      "review_count": 9,
+      "url": "https://www.trustpilot.com/review/www.dodgysdungeon.com",
+      "label": "Poor"
+    },
+    "whop": {
+      "rating": 4.8,
+      "review_count": 680,
+      "url": "https://whop.com/dodgys-dungeon/reviews/"
+    },
+    "partner_firms": [
+      { "name": "Apex Funding", "internal_id": "apex-trader-funding" },
+      { "name": "Lucid Trading", "internal_id": null },
+      { "name": "Tradeify", "internal_id": "tradeify" },
+      { "name": "Fundnext", "internal_id": "fundednext" },
+      { "name": "Alpha Futures", "internal_id": null },
+      { "name": "TakeProfitTrader", "internal_id": "take-profit-trader" },
+      { "name": "Funded Futures Family (FFF)", "internal_id": null },
+      { "name": "Tradecopia", "internal_id": null },
+      { "name": "FTMO", "internal_id": "ftmo" },
+      { "name": "Blue Guardian", "internal_id": null }
+    ],
+    "partner_firms_note": "\"Alpha Futures\" is a different company from \"Alpha Funded\", which is the firm we list separately — we haven't linked it here to avoid mixing the two up.",
+    "courses": [
+      {
+        "slug": "ifvg-indicator",
+        "name": "iFVG Ultimate+ Indicator",
+        "website": "https://whop.com/dodgys-dungeon/ifvg-ultimate-dodgysdd/",
+        "tagline": "A real-time indicator for spotting Implied Fair Value Gap setups.",
+        "about": "A standalone trading indicator (not a full course) that detects Implied Fair Value Gap setups in real time, with a built-in setup-grading system. Works across all currency pairs and timeframes.",
+        "bundle_of": [],
+        "performance_claim": null,
+        "instructors": [{ "name": "Ryan (\"Dodgy\")", "role": "Founder, Dodgy's Dungeon", "link": null }],
+        "formats": [
+          {
+            "label": "Real-time indicator",
+            "description": "Detects iFVG setups live on your charts, with 10 customizable settings."
+          },
+          {
+            "label": "Setup grading",
+            "description": "Grades detected setups so you can judge quality at a glance."
+          }
+        ],
+        "platforms": [],
+        "pricing": [
+          {
+            "name": "Monthly",
+            "price": "$40/month",
+            "billing_note": "No refunds; monthly access only.",
+            "highlight": null
+          }
+        ],
+        "testimonials": []
+      },
+      {
+        "slug": "premium",
+        "name": "Dodgy's Dungeon Premium",
+        "website": "https://whop.com/dodgys-dungeon",
+        "tagline": "Live trading streams, premium Discord access and the Ultimate Trading Course.",
+        "about": "The paid membership tier on top of the free community: live trading streams every market morning, a premium Discord channel with deeper iFVG methodology breakdowns, and access to the Ultimate Trading Course.",
+        "bundle_of": [],
+        "performance_claim": null,
+        "instructors": [{ "name": "Ryan (\"Dodgy\")", "role": "Founder, Dodgy's Dungeon", "link": null }],
+        "formats": [
+          {
+            "label": "Live trading streams",
+            "description": "Ryan trades live every market morning, with real-time commentary."
+          },
+          {
+            "label": "Premium Discord",
+            "description": "Deeper iFVG methodology breakdowns and setup walkthroughs."
+          },
+          {
+            "label": "Ultimate Trading Course",
+            "description": "A structured course included with membership."
+          }
+        ],
+        "platforms": [],
+        "pricing": [
+          {
+            "name": "Monthly",
+            "price": "$100/month",
+            "billing_note": "No refunds; monthly access only.",
+            "highlight": null
+          },
+          {
+            "name": "3 Months",
+            "price": "$300",
+            "billing_note": "Prepaid 3-month bundle (3 × $100/month).",
+            "highlight": null
+          }
+        ],
+        "testimonials": [
+          {
+            "quote": "Dodgy is a bright young man with an amazing trading strategy. Most people hate on him because he is honest and doesn't tell you what you want to hear.",
+            "author": "Steve Vigil",
+            "source": "Quoted on Dodgy's Dungeon's website"
+          },
+          {
+            "quote": "Ryan has helped me be a better trader. I now know when to leave the charts, when to take partials and trail stop loss.",
+            "author": "Qazi Omair Ahmed",
+            "source": "Quoted on Dodgy's Dungeon's website"
+          },
+          {
+            "quote": "The streams are very educational, even if the PA sucks and held very professional. The indicator is very helpful.",
+            "author": "Oliver Eilhardt",
+            "source": "Quoted on Dodgy's Dungeon's website"
+          }
+        ]
+      }
+    ]
+  },
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "dodgysdungeon.com (home/testimonials); Trustpilot; Whop pages for iFVG indicator and Premium (some pricing confirmed via third-party review sites topwhops.com and thestockdork.com, since Whop's own checkout pages are JS-rendered and didn't expose full pricing to a fetch). Whop rating/review count is an average across several search snapshots (4.75-4.8, 609-765 reviews) for the same reason — not a single confirmed read of the live page, which climbs often anyway as new reviews come in."
+  }
+}

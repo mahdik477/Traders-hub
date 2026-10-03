@@ -5,7 +5,15 @@
 
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import type { ProviderCourse, ProviderView } from "./provider-types";
+import type { PartnerFirm, ProviderCourse, ProviderView } from "./provider-types";
+import { getPropFirm } from "./propfirms";
+
+type RawRating = {
+  rating: number;
+  review_count?: number | null;
+  url?: string | null;
+  label?: string | null;
+};
 
 type RawInstructor = { name: string; role?: string | null; link?: string | null };
 
@@ -37,11 +45,15 @@ type RawFile = {
     id: string;
     name: string;
     logo?: string | null;
+    logo_bg?: "white" | "dark" | null;
     tagline?: string | null;
     about?: string | null;
-    trustpilot?: { rating: number; review_count?: number | null; url?: string | null } | null;
+    trustpilot?: RawRating | null;
+    whop?: RawRating | null;
     website?: string | null;
     affiliate_link?: string | null;
+    partner_firms?: { name: string; internal_id?: string | null }[];
+    partner_firms_note?: string | null;
     courses: RawCourse[];
   };
 };
@@ -92,19 +104,26 @@ function buildProvider(p: RawFile["provider"]): ProviderView {
     id: p.id,
     name: p.name,
     logo: p.logo || null,
+    logoBg: p.logo_bg === "dark" ? "dark" : "white",
     tagline: p.tagline || null,
     about: p.about || null,
-    trustpilot: p.trustpilot
-      ? {
-          rating: p.trustpilot.rating,
-          reviewCount: p.trustpilot.review_count ?? null,
-          url: safeLink(p.trustpilot.url),
-        }
-      : null,
+    trustpilot: buildRating(p.trustpilot),
+    whop: buildRating(p.whop),
     website: safeLink(p.website),
     affiliateLink: safeLink(p.affiliate_link),
+    partnerFirms: (p.partner_firms ?? []).map(buildPartnerFirm),
+    partnerFirmsNote: p.partner_firms_note || null,
     courses: p.courses.map(buildCourse),
   };
+}
+
+// Only keep the internal link when that firm genuinely exists in our own
+// data — never trust the data file's word for it alone, so a typo or a
+// mistaken match (e.g. confusing "Alpha Futures" with "Alpha Funded") can't
+// silently produce a wrong link.
+function buildPartnerFirm(f: { name: string; internal_id?: string | null }): PartnerFirm {
+  const confirmed = f.internal_id ? getPropFirm(f.internal_id) : undefined;
+  return { name: f.name, internalId: confirmed ? confirmed.id : null };
 }
 
 function buildCourse(c: RawCourse): ProviderCourse {
@@ -141,6 +160,17 @@ function buildCourse(c: RawCourse): ProviderCourse {
       source: t.source ?? null,
     })),
     testimonialsNote: c.testimonials_note || DEFAULT_TESTIMONIALS_NOTE,
+  };
+}
+
+// Shared shape for both `trustpilot` and `whop` — same fields either way.
+function buildRating(r: RawRating | null | undefined) {
+  if (!r) return null;
+  return {
+    rating: r.rating,
+    reviewCount: r.review_count ?? null,
+    url: safeLink(r.url),
+    label: r.label || null,
   };
 }
 

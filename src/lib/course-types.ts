@@ -43,6 +43,13 @@ export type TrustpilotRating = {
   rating: number;
   reviewCount: number | null;
   url: string | null;
+  /** The verbal label (Excellent/Great/Average/Poor/Bad) exactly as shown on
+   *  Trustpilot at the time we checked — Trustpilot's own banding doesn't
+   *  match a simple formula on the number, so we record what it actually
+   *  said rather than guess. Optional/null falls back to an approximation —
+   *  also keeps this type compatible with propfirm-types.ts's ReviewRating,
+   *  which doesn't have one yet. */
+  label?: string | null;
 };
 
 /** A standalone credibility figure, e.g. "10,000+ students taught". Optional
@@ -71,6 +78,9 @@ export type CourseView = {
   /** Path under /public, e.g. "/courses/six-figure-capital-logo.webp". Null if
    *  we don't have one — the page falls back to a lettermark. */
   logo: string | null;
+  /** "dark" for a logo that's a light mark with no transparent background —
+   *  see FirmView.logoBg for the same idea on prop firms. */
+  logoBg: "white" | "dark";
   /** One-line "what it sells". */
   tagline: string | null;
   /** General info paragraph. */
@@ -92,6 +102,10 @@ export type CourseView = {
    *  means we checked and found nothing stated. */
   refundPolicy: string | null;
   trustpilot: TrustpilotRating | null;
+  /** Same shape, for a course sold through Whop — Whop collects its own
+   *  independent buyer reviews, separate from Trustpilot, and the two can
+   *  disagree a lot, so we show both rather than picking one. */
+  whop: TrustpilotRating | null;
   testimonials: Testimonial[];
   /** Shown once above the testimonials — these are sourced from the
    *  provider's own site/marketing, not independently verified. */

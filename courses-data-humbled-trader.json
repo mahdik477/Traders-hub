@@ -70,7 +70,8 @@
     "trustpilot": {
       "rating": 2.9,
       "review_count": 2,
-      "url": "https://www.trustpilot.com/review/humbledtrader.com"
+      "url": "https://www.trustpilot.com/review/humbledtrader.com",
+      "label": "Average"
     },
     "testimonials": [],
     "website": "https://www.humbledtrader.com/",

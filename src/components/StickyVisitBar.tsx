@@ -9,11 +9,13 @@ import VisitSiteLink from "@/components/VisitSiteLink";
 export default function StickyVisitBar({
   courseName,
   logo,
+  logoBg = "white",
   price,
   visitHref,
 }: {
   courseName: string;
   logo: string | null;
+  logoBg?: "white" | "dark";
   price: string | null;
   visitHref: string | null;
 }) {
@@ -40,7 +42,11 @@ export default function StickyVisitBar({
       <div className="container-page pb-4">
         <div className="flex items-center gap-3 rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4">
           {logo && (
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white p-1.5">
+            <div
+              className={`flex size-10 shrink-0 items-center justify-center rounded-lg p-1.5 ${
+                logoBg === "dark" ? "bg-black" : "bg-white"
+              }`}
+            >
               <Image src={logo} alt="" width={40} height={40} className="h-auto max-h-7 w-full object-contain" />
             </div>
           )}

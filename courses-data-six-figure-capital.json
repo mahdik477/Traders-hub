@@ -77,7 +77,8 @@
     "trustpilot": {
       "rating": 4,
       "review_count": 3,
-      "url": "https://uk.trustpilot.com/review/sixfigurecapital.com"
+      "url": "https://uk.trustpilot.com/review/sixfigurecapital.com",
+      "label": "Great"
     },
     "testimonials": [
       {

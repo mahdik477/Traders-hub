@@ -58,11 +58,13 @@ export default async function ProviderCoursePage({
     <CourseDetail
       name={course.name}
       logo={provider.logo}
+      logoBg={provider.logoBg}
       tagline={course.tagline}
       about={course.about}
       extraNote={notes.length > 0 ? <div className="space-y-2">{notes}</div> : undefined}
       instructors={course.instructors}
       trustpilot={provider.trustpilot}
+      whop={provider.whop}
       pricing={course.pricing}
       formats={course.formats}
       platforms={course.platforms}
