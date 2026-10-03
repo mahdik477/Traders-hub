@@ -245,12 +245,16 @@ function checkCourse(file, data) {
   checkLink(file, "course.affiliate_link", c.affiliate_link);
   checkLink(file, "course.instructor.link", c.instructor?.link);
   checkLink(file, "course.trustpilot.url", c.trustpilot?.url);
+  checkLink(file, "course.broker_partnership.url", c.broker_partnership?.url);
+  if (c.broker_partnership && !c.broker_partnership.broker_name)
+    err(file, `course.broker_partnership has no "broker_name"`);
   if (c.trustpilot && (!isNum(c.trustpilot.rating) || c.trustpilot.rating < 0 || c.trustpilot.rating > 5))
     err(file, `course.trustpilot.rating must be between 0 and 5`);
   (c.testimonials ?? []).forEach((t, i) => {
     if (!t.source) err(file, `testimonials[${i}] has no "source" - every quote must say where it came from`);
   });
   if (!Array.isArray(c.pricing) || c.pricing.length === 0) warn(file, `no pricing listed`);
+  (c.pricing ?? []).forEach((p, i) => checkLink(file, `pricing[${i}].link`, p.link));
 }
 
 // One course inside a multi-course provider — same spirit as checkCourse's

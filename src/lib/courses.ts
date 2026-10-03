@@ -21,7 +21,15 @@ type RawFile = {
     curriculum?: { title: string; module_count?: number | null; topics: string[] }[];
     formats?: { label: string; description: string }[];
     platforms?: string[];
-    pricing?: { name: string; price: string; billing_note?: string | null; highlight?: string | null }[];
+    stats?: { label: string; value: string }[];
+    broker_partnership?: { broker_name: string; description: string; url?: string | null } | null;
+    pricing?: {
+      name: string;
+      price: string;
+      billing_note?: string | null;
+      highlight?: string | null;
+      link?: string | null;
+    }[];
     refund_policy?: string | null;
     trustpilot?: { rating: number; review_count?: number | null; url?: string | null } | null;
     testimonials?: { quote: string; author: string; source?: string | null }[];
@@ -86,11 +94,20 @@ function buildCourse(c: RawFile["course"]): CourseView {
     })),
     formats: c.formats ?? [],
     platforms: c.platforms ?? [],
+    stats: c.stats ?? [],
+    brokerPartnership: c.broker_partnership
+      ? {
+          brokerName: c.broker_partnership.broker_name,
+          description: c.broker_partnership.description,
+          url: safeLink(c.broker_partnership.url),
+        }
+      : null,
     pricing: (c.pricing ?? []).map((p) => ({
       name: p.name,
       price: p.price,
       billingNote: p.billing_note ?? null,
       highlight: p.highlight ?? null,
+      link: safeLink(p.link),
     })),
     refundPolicy: c.refund_policy || null,
     trustpilot: c.trustpilot

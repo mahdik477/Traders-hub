@@ -55,6 +55,8 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
         pricing={course.pricing}
         formats={course.formats}
         platforms={course.platforms}
+        stats={course.stats}
+        brokerPartnership={course.brokerPartnership}
         curriculum={course.curriculum}
         testimonials={course.testimonials}
         testimonialsNote={course.testimonialsNote}

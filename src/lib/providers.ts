@@ -21,7 +21,13 @@ type RawCourse = {
   curriculum?: { title: string; module_count?: number | null; topics: string[] }[];
   formats?: { label: string; description: string }[];
   platforms?: string[];
-  pricing?: { name: string; price: string; billing_note?: string | null; highlight?: string | null }[];
+  pricing?: {
+    name: string;
+    price: string;
+    billing_note?: string | null;
+    highlight?: string | null;
+    link?: string | null;
+  }[];
   testimonials?: { quote: string; author: string; source?: string | null }[];
   testimonials_note?: string | null;
 };
@@ -127,6 +133,7 @@ function buildCourse(c: RawCourse): ProviderCourse {
       price: pr.price,
       billingNote: pr.billing_note ?? null,
       highlight: pr.highlight ?? null,
+      link: safeLink(pr.link),
     })),
     testimonials: (c.testimonials ?? []).map((t) => ({
       quote: t.quote,
