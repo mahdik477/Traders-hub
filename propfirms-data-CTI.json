@@ -1,0 +1,195 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "Official City Traders Imperium pages only, fetched 2026-10-03: https://citytradersimperium.com/2-step-challenge/, /1-step-challenge/, /instant-funding/, /direct-funding/ (rules and every account card with price), /fee-refund-policy/, /about-us/, /terms-conditions-of-service/, /affiliate-program/, /affiliates-terms-and-conditions/.",
+    "pricing": "All prices USD, one-time fees ('One-time challenge fee, no monthly subscription'). standard = the price on each account card. No crossed-out prices or discount code were shown on the program pages, so promo = null and no promo_code. Failed accounts can be reset at a 15% discount (challenges) or 10% discount (Instant / Direct).",
+    "billing": "One-time fee per account, no subscription, no activation fee mentioned.",
+    "rules_detail": "All drawdowns are balance-based (not equity). 2-Step: 10% then 5% target, 5% daily (from each day's starting balance), 10% static max drawdown, min 3 profitable days per phase, no consistency rule, no time limit, personal EAs only. 1-Step: 8% target, NO daily drawdown, 5% trailing max drawdown, min 3 profitable days, no time limit, third-party EAs and martingale allowed. Instant Funding: no challenge; you start on 50% of the account size (e.g. $1,250 on the $2,500 plan) and the balance doubles each time you make 10%, up to the full size and then on to $2M per account; 6% static drawdown from the starting balance, no daily drawdown. Direct Funding: full account size from day one, 6% static drawdown, no daily drawdown, no consistency rule, payouts on demand from day 5.",
+    "profit_split": "Starting split (recorded as profit_split_max, following our planned rule of the split you get without extras): 2-Step and 1-Step 80%; Instant Funding 50% while on the half-size starting balance, then 70% once fully funded; Direct 70%. All programs can rise to 90% (Bronze) and 100% (Silver) through CTI's VIP ladder, which is earned by performance, not paid for.",
+    "fee_refund": "Refund only if the account is unused (no trades) and requested within 7 days of purchase; no refund with a payout. Recorded as false.",
+    "platforms": "MetaTrader 5 and Match-Trader on every program.",
+    "company": "Founded in 2018 in London by Daniel Martin and Martin Najat (About page). Terms: the trading programs are provided by City Traders Imperium Limited, incorporated in the Comoros Union (Autonomous Island of Anjouan, company 15969, licence L15969/CTI), operating address Edificio Faro, San José, Costa Rica. The education academy is CTI FZCO, Dubai Silicon Oasis, UAE (DSO-FZCO-21340). Not related to any firm already listed.",
+    "affiliate_program": "Has a program (https://citytradersimperium.com/affiliate-program/, sign up free to the affiliate dashboard). Commission: 20% of every purchase through your link, available as soon as the referral pays; minimum payout $100, request any time. Payment method: bank transfer unless agreed otherwise (affiliate terms). Applications are approved or rejected at CTI's discretion; a rejected applicant may not reapply. Aimed at people who create trading content, current or past CTI traders, paid communities, and people who can refer 5+ traders in the first month. Not allowed: paid search ads or bidding on CTI's brand, coupon-led promotion, cookie stuffing; all content about CTI must be approved in writing. Disputes go to arbitration in the UAE. Cookie length: not stated. Comparison sites: not mentioned either way. UAE-based affiliates: not restricted (the UAE is not on the restricted list and arbitration is in the UAE).",
+    "marketing_stats_excluded": "Payout totals and 'countries funded' figures are not reproduced (directory policy).",
+    "rule_units": "Forex rules are % of account size.",
+    "null_means": "Not stated on an official CTI page."
+  },
+  "firm": {
+    "id": "city-traders-imperium",
+    "name": "City Traders Imperium",
+    "logo": "/funded-accounts/city-traders-imperium-logo.png",
+    "name_note": "Also known as CTI.",
+    "about": "City Traders Imperium (CTI) is a forex and CFD prop firm founded in London in 2018. It sells 1-step and 2-step challenges plus instant and direct funded accounts from $2.5K to $100K, uses balance-based drawdown on every program, and raises the profit split through a loyalty ladder.",
+    "about_note": null,
+    "founded": 2018,
+    "hq": "San José, Costa Rica (operating address); founded in London, UK",
+    "currency": "USD",
+    "website": "https://citytradersimperium.com/",
+    "affiliate_link": "",
+    "platforms": ["MT5", "Match-Trader"],
+    "countries": {
+      "restricted": ["KP", "IR", "SY", "CU", "RU"],
+      "allowed_only": null,
+      "notes": "Applies to nationals and residents of these countries, and to anyone under international sanctions. The terms also say the website isn't aimed at any country where using it would break local law. The UAE and the US are not on the list.",
+      "source": "https://citytradersimperium.com/terms-conditions-of-service/",
+      "last_checked": "2026-10-03"
+    },
+    "reviews": {
+      "checked": "2026-10-03",
+      "trustpilot": {
+        "rating": 4.2,
+        "review_count": 1627,
+        "url": "https://www.trustpilot.com/review/citytradersimperium.com",
+        "checked": "2026-10-03"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "Google rating not available yet.",
+      "trustpilot_quotes": [
+        {
+          "quote": "I'm working with CTI more then 3 years and I'm growing as a Trader. CTI have a very easy rules and very helping Support Team…",
+          "author": "Muhammad M.",
+          "stars": 5,
+          "date": "2026-09-15",
+          "url": "https://www.trustpilot.com/reviews/6aad3615cfb35667e01b32cf"
+        },
+        {
+          "quote": "I purchased a CTI Instant Funding account and have been using my own proprietary EA. After reviewing CTI's EA rules and speaking with support/management…",
+          "author": "Jacob",
+          "stars": 1,
+          "date": "2026-09-10",
+          "url": "https://www.trustpilot.com/reviews/6aa2435f0aa251cbd57f09c3"
+        }
+      ]
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "1-Step Challenge",
+                "tagline": "One-time fee · No daily drawdown · Balance-based trailing drawdown · Split rises to 100% through the VIP ladder",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": "none",
+                  "max_loss": 5,
+                  "drawdown_type": "trailing (balance-based)",
+                  "profit_split_max": 80,
+                  "min_trading_days": 3,
+                  "consistency": null,
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 2500, "promo": null, "standard": 29 },
+                  { "size": 5000, "promo": null, "standard": 49 },
+                  { "size": 10000, "promo": null, "standard": 79 },
+                  { "size": 25000, "promo": null, "standard": 159 },
+                  { "size": 50000, "promo": null, "standard": 299 },
+                  { "size": 100000, "promo": null, "standard": 449 }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "2-Step Challenge",
+                "tagline": "One-time fee · Balance-based static drawdown · No consistency rule · Split rises to 100% through the VIP ladder",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": null,
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static (balance-based)",
+                  "profit_split_max": 80,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 2500, "promo": null, "standard": 39 },
+                  { "size": 5000, "promo": null, "standard": 59 },
+                  { "size": 10000, "promo": null, "standard": 99 },
+                  { "size": 25000, "promo": null, "standard": 199 },
+                  { "size": 50000, "promo": null, "standard": 329 },
+                  { "size": 100000, "promo": null, "standard": 549 }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Instant Funding",
+                "tagline": "One-time fee · Starts on half the account size at a 50% split · Make 10% to unlock the full size and a 70% split",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": null,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": "none",
+                  "max_loss": 6,
+                  "drawdown_type": "static (balance-based)",
+                  "profit_split_max": 50,
+                  "min_trading_days": null,
+                  "consistency": null,
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 2500, "promo": null, "standard": 79 },
+                  { "size": 5000, "promo": null, "standard": 139 },
+                  { "size": 10000, "promo": null, "standard": 259 },
+                  { "size": 20000, "promo": null, "standard": 449 },
+                  { "size": 40000, "promo": null, "standard": 849 },
+                  { "size": 80000, "promo": null, "standard": 1599 }
+                ]
+              },
+              {
+                "tier": "Direct Funding",
+                "tagline": "One-time fee · Full account size from day one · 70% split from the first trade · No consistency rule",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": null,
+                  "phase2_target": null,
+                  "funded_target": null,
+                  "daily_loss": "none",
+                  "max_loss": 6,
+                  "drawdown_type": "static (balance-based)",
+                  "profit_split_max": 70,
+                  "min_trading_days": null,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  { "size": 5000, "promo": null, "standard": 229 },
+                  { "size": 10000, "promo": null, "standard": 399 },
+                  { "size": 20000, "promo": null, "standard": 999 },
+                  { "size": 40000, "promo": null, "standard": 1999 },
+                  { "size": 80000, "promo": null, "standard": 3999 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
