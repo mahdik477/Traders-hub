@@ -2,6 +2,8 @@ import type { JSX, ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type {
+  BrokerPartnership,
+  CourseStat,
   CurriculumModule,
   LearningFormat,
   PricingTier,
@@ -19,6 +21,7 @@ import {
   ChevronLeftIcon,
   InfoIcon,
   LayersIcon,
+  LinkIcon,
   MonitorIcon,
   QuoteIcon,
   TagIcon,
@@ -80,6 +83,8 @@ export default function CourseDetail({
   pricing,
   formats,
   platforms,
+  stats = [],
+  brokerPartnership = null,
   curriculum,
   testimonials,
   testimonialsNote,
@@ -99,6 +104,11 @@ export default function CourseDetail({
   pricing: PricingTier[];
   formats: LearningFormat[];
   platforms: string[];
+  /** Extra credibility figures for the hero — course-specific, most courses
+   *  won't have any. */
+  stats?: CourseStat[];
+  /** A disclosed broker partnership, when the course has one. */
+  brokerPartnership?: BrokerPartnership | null;
   curriculum: CurriculumModule[];
   testimonials: Testimonial[];
   testimonialsNote: string;
@@ -175,6 +185,9 @@ export default function CourseDetail({
             <Stat label="Trustpilot" value={`${trustpilot.rating.toFixed(1)}/5`} color="text-warning" />
           )}
           {platforms.length > 0 && <Stat label="Platforms" value={String(platforms.length)} />}
+          {stats.map((s) => (
+            <Stat key={s.label} label={s.label} value={s.value} />
+          ))}
         </div>
       </div>
 
@@ -246,6 +259,28 @@ export default function CourseDetail({
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {brokerPartnership && (
+        <section aria-labelledby="broker-partnership-heading" className="mt-10 max-w-3xl">
+          <SectionHeading id="broker-partnership-heading" icon={LinkIcon}>
+            Broker partnership
+          </SectionHeading>
+          <div className="mt-4 rounded-xl border border-border bg-surface p-5">
+            <h3 className="font-semibold text-foreground">{brokerPartnership.brokerName}</h3>
+            <p className="mt-2 text-sm text-muted">{brokerPartnership.description}</p>
+            {brokerPartnership.url && (
+              <a
+                href={brokerPartnership.url}
+                target="_blank"
+                rel="noopener"
+                className="mt-3 inline-block text-sm text-accent hover:underline"
+              >
+                View the partnership offer
+              </a>
+            )}
+          </div>
         </section>
       )}
 

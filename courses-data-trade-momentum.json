@@ -1,0 +1,111 @@
+{
+  "course": {
+    "id": "trade-momentum",
+    "name": "Trade Momentum",
+    "logo": "/courses/trade-momentum-logo.png",
+    "tagline": "Live momentum day-trading streams and mentorship for US equities, built around the first hour of the market open.",
+    "about": "Trade Momentum is a day-trading education and live-streaming community founded by Kev in 2019, focused on rule-based momentum trading in US equities. The core membership includes live trading streams, real-time alerts and nightly watchlists; a separate 60-Day Trading Bootcamp offers a more structured, mentorship-led path for traders who want a full curriculum rather than ongoing alerts.",
+    "instructor": {
+      "name": "Kev",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Core curriculum",
+        "module_count": null,
+        "topics": [
+          "Rule-based entry and exit strategies",
+          "Risk management protocols",
+          "Supply-and-demand momentum approach",
+          "Technical analysis and chart reading",
+          "Stock selection methodology"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live trading streams",
+        "description": "Weekday streams, 9–11am EST, with full screen-share transparency during trades."
+      },
+      {
+        "label": "Real-time alerts",
+        "description": "Buy/sell signals with entries, exits and stops."
+      },
+      {
+        "label": "Nightly watchlists",
+        "description": "3–5 hand-picked tickers shared premarket or the night before."
+      },
+      {
+        "label": "Community & support",
+        "description": "Private chatroom with 24/7 support and Q&A."
+      },
+      {
+        "label": "Trade logs & recordings",
+        "description": "Daily trade logs, performance reports and stream recordings to review."
+      }
+    ],
+    "platforms": [],
+    "stats": [
+      { "label": "Students taught", "value": "10,000+" },
+      { "label": "Coaching experience", "value": "6+ years" },
+      { "label": "Founded", "value": "2019" }
+    ],
+    "broker_partnership": {
+      "broker_name": "TradeZero",
+      "description": "Trade Momentum is a paid marketing partner of TradeZero — TradeZero's own site states Trade Momentum \"may receive compensation for introducing customers to TradeZero.\" Members get a 2% deposit bonus, 90 days of free ZeroPro platform access, and a 5% discount on locates for 90 days, using the promo code TRADEMOMENTUM at sign-up.",
+      "url": "https://tradezero.com/en-us/trade-momentum-promo"
+    },
+    "pricing": [
+      {
+        "name": "Monthly (Full Access)",
+        "price": "$197/month",
+        "billing_note": "7-day free trial, cancel anytime.",
+        "highlight": null,
+        "link": "https://whop.com/joinmomentum/joinmomentum?a=user50f81875135"
+      },
+      {
+        "name": "Annual (Full Access)",
+        "price": "$1,300/year",
+        "billing_note": "Billed once a year.",
+        "highlight": "Saves $1,064/year vs. paying monthly",
+        "link": "https://whop.com/joinmomentum/full-access-annual?a=user50f81875135"
+      },
+      {
+        "name": "60-Day Trading Bootcamp",
+        "price": "Apply for pricing",
+        "billing_note": "One-time payment; payment plans available. Includes full mentorship and lifetime access to the bootcamp's class library.",
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": "No refund or money-back guarantee is stated on the provider's website (last checked 2026-10-03).",
+    "trustpilot": {
+      "rating": 4.7,
+      "review_count": 100,
+      "url": "https://www.trustpilot.com/review/trademomentum.org"
+    },
+    "testimonials": [
+      {
+        "quote": "This is the real deal! Kev is incredibly knowledgeable and tells it to you straight.",
+        "author": "Damen Chalifour",
+        "source": "Quoted on Trade Momentum's website"
+      },
+      {
+        "quote": "I have learned more in the last few months than I have in the last 4 years.",
+        "author": "Amy",
+        "source": "Quoted on Trade Momentum's website"
+      },
+      {
+        "quote": "I can now say why I loose. It's the way forward.",
+        "author": "Ian Smith GB",
+        "source": "Quoted on Trade Momentum's website"
+      }
+    ],
+    "website": "https://www.trademomentum.org/",
+    "affiliate_link": "https://whop.com/joinmomentum/joinmomentum?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-03",
+    "source": "trademomentum.org (home, /pricing, /about, /testimonials); Trustpilot; Whop checkout pages (monthly price read directly; annual price confirmed by the site owner, since Whop's checkout page is JS-rendered and didn't expose it to a fetch); tradezero.com/en-us/trade-momentum-promo (broker partnership terms and compensation disclosure)"
+  }
+}

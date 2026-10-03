@@ -8,6 +8,10 @@ export type PricingTier = {
   /** e.g. "Best value" — shown as a small ribbon on the card. Null for a
    *  plain tier. */
   highlight: string | null;
+  /** This tier's own tracked/checkout link, when it has one of its own
+   *  (e.g. separate monthly vs. annual affiliate links). Falls back to the
+   *  course's general visit link when null. */
+  link: string | null;
 };
 
 /** A group of topics under one course/module name, e.g. "14-Day Foundation Course". */
@@ -41,6 +45,25 @@ export type TrustpilotRating = {
   url: string | null;
 };
 
+/** A standalone credibility figure, e.g. "10,000+ students taught". Optional
+ *  and course-specific — most courses won't have any of these, some (the
+ *  ones with more public info available) will have several. */
+export type CourseStat = {
+  label: string;
+  value: string;
+};
+
+/** A disclosed broker/platform partnership — distinct from `platforms`,
+ *  which just lists software the course uses. This is for a named,
+ *  compensated partnership the provider has with a specific broker. */
+export type BrokerPartnership = {
+  brokerName: string;
+  /** In our own words, including the fact that it's a paid/compensated
+   *  partnership when the source discloses that. */
+  description: string;
+  url: string | null;
+};
+
 export type CourseView = {
   /** Also the page address: /courses/<id>. */
   id: string;
@@ -57,6 +80,13 @@ export type CourseView = {
   formats: LearningFormat[];
   /** Platforms/software the course trades or teaches on, e.g. "MetaTrader 4". */
   platforms: string[];
+  /** Optional credibility figures shown in the hero, e.g. students taught,
+   *  years coaching. Empty for most courses — only shown when we actually
+   *  have sourced numbers, never estimated. */
+  stats: CourseStat[];
+  /** A disclosed, named broker partnership, when the provider has one. Null
+   *  for most courses. */
+  brokerPartnership: BrokerPartnership | null;
   pricing: PricingTier[];
   /** What the provider's own site states about refunds. Shown as-is; null
    *  means we checked and found nothing stated. */

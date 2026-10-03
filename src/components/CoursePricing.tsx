@@ -18,6 +18,10 @@ export default function CoursePricing({
 }) {
   const highlightedIndex = tiers.findIndex((t) => t.highlight);
   const [selected, setSelected] = useState(highlightedIndex >= 0 ? highlightedIndex : 0);
+  const selectedTier = tiers[selected];
+  // A tier with its own tracked link (e.g. separate monthly/annual affiliate
+  // links) wins over the course's general visit link.
+  const selectedHref = selectedTier?.link ?? visitHref;
 
   return (
     <div>
@@ -58,13 +62,13 @@ export default function CoursePricing({
         })}
       </ul>
 
-      {visitHref && tiers[selected] && (
+      {selectedHref && selectedTier && (
         <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface-2 p-4">
           <p className="meta flex-1">
-            Selected: <span className="font-medium text-foreground">{tiers[selected].name}</span> —{" "}
-            {tiers[selected].price}
+            Selected: <span className="font-medium text-foreground">{selectedTier.name}</span> —{" "}
+            {selectedTier.price}
           </p>
-          <VisitSiteLink href={visitHref} firmName={courseName} variant="outline" />
+          <VisitSiteLink href={selectedHref} firmName={courseName} variant="outline" />
         </div>
       )}
     </div>
