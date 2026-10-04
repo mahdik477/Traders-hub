@@ -58,6 +58,7 @@
       }
     ],
     "platforms": ["thinkorswim", "Interactive Brokers"],
+    "markets": ["stocks"],
     "pricing": [
       {
         "name": "Academy + Community",

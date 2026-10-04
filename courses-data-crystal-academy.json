@@ -46,6 +46,7 @@
       }
     ],
     "platforms": [],
+    "markets": ["options", "futures"],
     "stats": [{ "label": "Community size", "value": "≈158,000 members" }],
     "pricing": [
       {

@@ -45,6 +45,7 @@
       }
     ],
     "platforms": [],
+    "markets": ["stocks"],
     "stats": [
       { "label": "Students taught", "value": "10,000+" },
       { "label": "Coaching experience", "value": "6+ years" },

@@ -4,6 +4,7 @@
 // its own page at /courses/<id>/<course slug>.
 
 import type {
+  CourseMarket,
   CurriculumModule,
   LearningFormat,
   PricingTier,
@@ -32,6 +33,8 @@ export type ProviderCourse = {
   curriculum: CurriculumModule[];
   formats: LearningFormat[];
   platforms: string[];
+  /** What it actually trades — forex, options, stocks, etc. */
+  markets: CourseMarket[];
   pricing: PricingTier[];
   testimonials: Testimonial[];
   testimonialsNote: string;

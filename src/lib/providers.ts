@@ -6,6 +6,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { PartnerFirm, ProviderCourse, ProviderView } from "./provider-types";
+import type { CourseMarket } from "./course-types";
 import { getPropFirm } from "./propfirms";
 
 type RawRating = {
@@ -29,6 +30,7 @@ type RawCourse = {
   curriculum?: { title: string; module_count?: number | null; topics: string[] }[];
   formats?: { label: string; description: string }[];
   platforms?: string[];
+  markets?: CourseMarket[];
   pricing?: {
     name: string;
     price: string;
@@ -147,6 +149,7 @@ function buildCourse(c: RawCourse): ProviderCourse {
     })),
     formats: c.formats ?? [],
     platforms: c.platforms ?? [],
+    markets: c.markets ?? [],
     pricing: (c.pricing ?? []).map((pr) => ({
       name: pr.name,
       price: pr.price,
