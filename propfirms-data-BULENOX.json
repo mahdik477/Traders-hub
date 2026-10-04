@@ -28,19 +28,116 @@
     "currency": "USD",
     "website": "https://bulenox.com/",
     "affiliate_link": "",
-    "platforms": ["NinjaTrader", "R|Trader Pro", "Quantower", "Sierra Chart", "MultiCharts", "ATAS"],
+    "platforms": [
+      "NinjaTrader",
+      "R|Trader Pro",
+      "Quantower",
+      "Sierra Chart",
+      "MultiCharts",
+      "ATAS"
+    ],
     "countries": {
       "restricted": [
-        "AF", "AL", "AO", "AM", "AZ", "BS", "BH", "BD", "BB", "BY", "BJ", "BM", "BO", "BA", "BW",
-        "BN", "BF", "BI", "MM", "CM", "CF", "TD", "CN", "CD", "CI", "HR", "CU", "CW", "ET", "GA",
-        "GH", "GI", "GD", "GN", "HT", "HK", "IR", "IQ", "JM", "JE", "JO", "KZ", "KE", "XK", "KW",
-        "KG", "LB", "LS", "LR", "LY", "MO", "MK", "MV", "ML", "MR", "MU", "YT", "MC", "MN", "ME",
-        "MZ", "NA", "NP", "NC", "NI", "NE", "NG", "KP", "PS", "OM", "PK", "PG", "CG", "RU", "RW",
-        "MF", "SN", "RS", "SO", "SS", "LK", "SD", "SY", "TW", "TJ", "TZ", "TG", "TT", "UG", "UZ",
-        "VU", "VE", "VG", "EH", "YE", "ZM", "ZW"
+        "AF",
+        "AL",
+        "AO",
+        "AM",
+        "AZ",
+        "BS",
+        "BH",
+        "BD",
+        "BB",
+        "BY",
+        "BJ",
+        "BM",
+        "BO",
+        "BA",
+        "BW",
+        "BN",
+        "BF",
+        "BI",
+        "MM",
+        "CM",
+        "CF",
+        "TD",
+        "CN",
+        "CD",
+        "CI",
+        "HR",
+        "CU",
+        "CW",
+        "ET",
+        "GA",
+        "GH",
+        "GI",
+        "GD",
+        "GN",
+        "HT",
+        "HK",
+        "IR",
+        "IQ",
+        "JM",
+        "JE",
+        "JO",
+        "KZ",
+        "KE",
+        "XK",
+        "KW",
+        "KG",
+        "LB",
+        "LS",
+        "LR",
+        "LY",
+        "MO",
+        "MK",
+        "MV",
+        "ML",
+        "MR",
+        "MU",
+        "YT",
+        "MC",
+        "MN",
+        "ME",
+        "MZ",
+        "NA",
+        "NP",
+        "NC",
+        "NI",
+        "NE",
+        "NG",
+        "KP",
+        "PS",
+        "OM",
+        "PK",
+        "PG",
+        "CG",
+        "RU",
+        "RW",
+        "MF",
+        "SN",
+        "RS",
+        "SO",
+        "SS",
+        "LK",
+        "SD",
+        "SY",
+        "TW",
+        "TJ",
+        "TZ",
+        "TG",
+        "TT",
+        "UG",
+        "UZ",
+        "VU",
+        "VE",
+        "VG",
+        "EH",
+        "YE",
+        "ZM",
+        "ZW"
       ],
       "allowed_only": null,
-      "notes": "Bulenox's FAQ says it cannot do business with residents of these countries and that the list can change at any time. The FAQ lists 'Congo' and 'Republic of the Congo' separately; recorded as DR Congo (CD) and Republic of the Congo (CG). Kosovo is recorded as XK (a widely used code, not an official ISO one). The United Arab Emirates and the United States are not on the list, but several Gulf countries (Bahrain, Kuwait, Oman, Jordan) are.",
+      "notes": "Bulenox's FAQ says it cannot do business with residents of these countries and that the list can change at any time. The FAQ lists 'Congo' and 'Republic of the Congo' separately; recorded as DR Congo (CD) and Republic of the Congo (CG). Kosovo is recorded as XK (a widely used code, not an official ISO one). The United Arab Emirates and the United States are not on the list, but several Middle East countries (Bahrain, Kuwait, Oman, Jordan) are.",
       "source": "https://bulenox.com/faq",
       "last_checked": "2026-10-03"
     },
@@ -57,11 +154,11 @@
       "google_note": "Google rating not available yet.",
       "trustpilot_quotes": [
         {
-          "quote": "Bulenox never disappoints- stick to the rules and get paid with no questions, so professional.",
-          "author": "Brighton M.",
+          "quote": "Shoutout to bulenox help desk. they're so helpful , answer all my questions in a timely manner…",
+          "author": "Jeremy F.",
           "stars": 5,
-          "date": "2026-09-26",
-          "url": "https://www.trustpilot.com/reviews/6ab71d014991e0a50e179a29"
+          "date": "2026-09-25",
+          "url": "https://www.trustpilot.com/reviews/6ab6ca4bc812d0f5f0c8aeaf"
         },
         {
           "quote": "Been trading with this company for almost 4 years, long story short, I took a trade with TP and SL in place logged off, went to work…",
@@ -82,7 +179,7 @@
             "tiers": [
               {
                 "tier": "Qualification",
-                "tagline": "One-time fee for 30 days of access · One-time Master activation fee ($143-$498) after passing · Trailing drawdown shown; end-of-day option adds a daily loss limit",
+                "tagline": "One-time fee for 30 days of access · One-time Master activation fee ($143-$498) after passing · 40% consistency rule on Master payouts only · Trailing drawdown shown; end-of-day option adds a daily loss limit",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -93,15 +190,51 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": 1500, "daily_loss": "none", "max_loss": 1500, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 145 },
-                  { "size": 50000, "profit_target": 3000, "daily_loss": "none", "max_loss": 2500, "max_contracts": 7, "payout_cap": null, "promo": null, "standard": 175 },
-                  { "size": 100000, "profit_target": 6000, "daily_loss": "none", "max_loss": 3000, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 215 },
-                  { "size": 150000, "profit_target": 9000, "daily_loss": "none", "max_loss": 4500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 325 }
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1500,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 145
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": 2500,
+                    "max_contracts": 7,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 175
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": "none",
+                    "max_loss": 3000,
+                    "max_contracts": 12,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 215
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": "none",
+                    "max_loss": 4500,
+                    "max_contracts": 15,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 325
+                  }
                 ]
               },
               {
                 "tier": "Momentum",
-                "tagline": "One-time fee · Master stage included free · 35% consistency rule on payouts · Trailing drawdown shown; end-of-day option adds a daily loss limit",
+                "tagline": "One-time fee · Master stage included free · 35% consistency rule on payouts only · Trailing drawdown shown; end-of-day option adds a daily loss limit",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -112,10 +245,46 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": 1500, "daily_loss": "none", "max_loss": 1000, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 94 },
-                  { "size": 50000, "profit_target": 3000, "daily_loss": "none", "max_loss": 2250, "max_contracts": 7, "payout_cap": null, "promo": null, "standard": 143 },
-                  { "size": 100000, "profit_target": 6000, "daily_loss": "none", "max_loss": 4000, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 248 },
-                  { "size": 150000, "profit_target": 9000, "daily_loss": "none", "max_loss": 5500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 358 }
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 94
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": 2250,
+                    "max_contracts": 7,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 143
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": "none",
+                    "max_loss": 4000,
+                    "max_contracts": 12,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 248
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": "none",
+                    "max_loss": 5500,
+                    "max_contracts": 15,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 358
+                  }
                 ]
               }
             ]
@@ -125,7 +294,7 @@
             "tiers": [
               {
                 "tier": "Fast Track",
-                "tagline": "One-time fee · No evaluation · No activation fee · Same-day payouts · Consistency rule rises from 20% to 30%",
+                "tagline": "One-time fee · No evaluation · No activation fee · Same-day payouts · Consistency rule on payouts rises from 20% to 30%",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -136,10 +305,46 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": null, "daily_loss": "none", "max_loss": 1000, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 338 },
-                  { "size": 50000, "profit_target": null, "daily_loss": "none", "max_loss": 2250, "max_contracts": 7, "payout_cap": null, "promo": null, "standard": 488 },
-                  { "size": 100000, "profit_target": null, "daily_loss": "none", "max_loss": 4000, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 648 },
-                  { "size": 150000, "profit_target": null, "daily_loss": "none", "max_loss": 5500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 788 }
+                  {
+                    "size": 25000,
+                    "profit_target": null,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 338
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": null,
+                    "daily_loss": "none",
+                    "max_loss": 2250,
+                    "max_contracts": 7,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 488
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": null,
+                    "daily_loss": "none",
+                    "max_loss": 4000,
+                    "max_contracts": 12,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 648
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": null,
+                    "daily_loss": "none",
+                    "max_loss": 5500,
+                    "max_contracts": 15,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 788
+                  }
                 ]
               }
             ]

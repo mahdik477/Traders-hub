@@ -26,9 +26,18 @@
     "currency": "USD",
     "website": "https://citytradersimperium.com/",
     "affiliate_link": "",
-    "platforms": ["MT5", "Match-Trader"],
+    "platforms": [
+      "MT5",
+      "Match-Trader"
+    ],
     "countries": {
-      "restricted": ["KP", "IR", "SY", "CU", "RU"],
+      "restricted": [
+        "KP",
+        "IR",
+        "SY",
+        "CU",
+        "RU"
+      ],
       "allowed_only": null,
       "notes": "Applies to nationals and residents of these countries, and to anyone under international sanctions. The terms also say the website isn't aimed at any country where using it would break local law. The UAE and the US are not on the list.",
       "source": "https://citytradersimperium.com/terms-conditions-of-service/",
@@ -88,12 +97,36 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 2500, "promo": null, "standard": 29 },
-                  { "size": 5000, "promo": null, "standard": 49 },
-                  { "size": 10000, "promo": null, "standard": 79 },
-                  { "size": 25000, "promo": null, "standard": 159 },
-                  { "size": 50000, "promo": null, "standard": 299 },
-                  { "size": 100000, "promo": null, "standard": 449 }
+                  {
+                    "size": 2500,
+                    "promo": null,
+                    "standard": 29
+                  },
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 49
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 79
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 159
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 299
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 449
+                  }
                 ]
               }
             ]
@@ -120,12 +153,36 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 2500, "promo": null, "standard": 39 },
-                  { "size": 5000, "promo": null, "standard": 59 },
-                  { "size": 10000, "promo": null, "standard": 99 },
-                  { "size": 25000, "promo": null, "standard": 199 },
-                  { "size": 50000, "promo": null, "standard": 329 },
-                  { "size": 100000, "promo": null, "standard": 549 }
+                  {
+                    "size": 2500,
+                    "promo": null,
+                    "standard": 39
+                  },
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 59
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 99
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 199
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 329
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 549
+                  }
                 ]
               }
             ]
@@ -135,7 +192,7 @@
             "tiers": [
               {
                 "tier": "Instant Funding",
-                "tagline": "One-time fee · Starts on half the account size at a 50% split · Make 10% to unlock the full size and a 70% split",
+                "tagline": "One-time fee · Starts on half the account size at a 50% split · Reach a 10% profit target to unlock the full size and a 70% split",
                 "billing": "one-time",
                 "rules": {
                   "unit": "percent",
@@ -152,12 +209,36 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 2500, "promo": null, "standard": 79 },
-                  { "size": 5000, "promo": null, "standard": 139 },
-                  { "size": 10000, "promo": null, "standard": 259 },
-                  { "size": 20000, "promo": null, "standard": 449 },
-                  { "size": 40000, "promo": null, "standard": 849 },
-                  { "size": 80000, "promo": null, "standard": 1599 }
+                  {
+                    "size": 2500,
+                    "promo": null,
+                    "standard": 79
+                  },
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 139
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 259
+                  },
+                  {
+                    "size": 20000,
+                    "promo": null,
+                    "standard": 449
+                  },
+                  {
+                    "size": 40000,
+                    "promo": null,
+                    "standard": 849
+                  },
+                  {
+                    "size": 80000,
+                    "promo": null,
+                    "standard": 1599
+                  }
                 ]
               },
               {
@@ -179,11 +260,31 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 5000, "promo": null, "standard": 229 },
-                  { "size": 10000, "promo": null, "standard": 399 },
-                  { "size": 20000, "promo": null, "standard": 999 },
-                  { "size": 40000, "promo": null, "standard": 1999 },
-                  { "size": 80000, "promo": null, "standard": 3999 }
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 229
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 399
+                  },
+                  {
+                    "size": 20000,
+                    "promo": null,
+                    "standard": 999
+                  },
+                  {
+                    "size": 40000,
+                    "promo": null,
+                    "standard": 1999
+                  },
+                  {
+                    "size": 80000,
+                    "promo": null,
+                    "standard": 3999
+                  }
                 ]
               }
             ]

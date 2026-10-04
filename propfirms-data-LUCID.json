@@ -44,11 +44,81 @@
     ],
     "countries": {
       "restricted": [
-        "AF", "AL", "DZ", "AO", "BS", "BB", "BY", "BZ", "BA", "BG", "BF", "MM", "BW", "BI", "KH",
-        "CF", "CI", "CU", "CG", "CD", "EC", "ET", "GH", "GN", "HT", "IS", "ID", "IR", "IQ", "JM",
-        "KZ", "KE", "XK", "KG", "LA", "LB", "LR", "LY", "LT", "ML", "MU", "MN", "ME", "MA", "MZ",
-        "NA", "NI", "NG", "KP", "MK", "PK", "PA", "PG", "PH", "RU", "SN", "RS", "SC", "SI", "SO",
-        "ZA", "SS", "LK", "SD", "SY", "TZ", "TR", "TT", "TN", "UG", "UA", "UZ", "VN", "VE", "YE",
+        "AF",
+        "AL",
+        "DZ",
+        "AO",
+        "BS",
+        "BB",
+        "BY",
+        "BZ",
+        "BA",
+        "BG",
+        "BF",
+        "MM",
+        "BW",
+        "BI",
+        "KH",
+        "CF",
+        "CI",
+        "CU",
+        "CG",
+        "CD",
+        "EC",
+        "ET",
+        "GH",
+        "GN",
+        "HT",
+        "IS",
+        "ID",
+        "IR",
+        "IQ",
+        "JM",
+        "KZ",
+        "KE",
+        "XK",
+        "KG",
+        "LA",
+        "LB",
+        "LR",
+        "LY",
+        "LT",
+        "ML",
+        "MU",
+        "MN",
+        "ME",
+        "MA",
+        "MZ",
+        "NA",
+        "NI",
+        "NG",
+        "KP",
+        "MK",
+        "PK",
+        "PA",
+        "PG",
+        "PH",
+        "RU",
+        "SN",
+        "RS",
+        "SC",
+        "SI",
+        "SO",
+        "ZA",
+        "SS",
+        "LK",
+        "SD",
+        "SY",
+        "TZ",
+        "TR",
+        "TT",
+        "TN",
+        "UG",
+        "UA",
+        "UZ",
+        "VN",
+        "VE",
+        "YE",
         "ZW"
       ],
       "allowed_only": null,
@@ -111,15 +181,51 @@
                   "fee_refund": null
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": 1250, "daily_loss": null, "max_loss": 1000, "max_contracts": 2, "payout_cap": 1000, "promo": null, "standard": null },
-                  { "size": 50000, "profit_target": 3000, "daily_loss": null, "max_loss": 2000, "max_contracts": 4, "payout_cap": 2000, "promo": null, "standard": null },
-                  { "size": 100000, "profit_target": 6000, "daily_loss": null, "max_loss": 3000, "max_contracts": 6, "payout_cap": 2500, "promo": null, "standard": null },
-                  { "size": 150000, "profit_target": 9000, "daily_loss": null, "max_loss": 4500, "max_contracts": 10, "payout_cap": 3000, "promo": null, "standard": null }
+                  {
+                    "size": 25000,
+                    "profit_target": 1250,
+                    "daily_loss": null,
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": 1000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": null,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": 2000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": null,
+                    "max_loss": 3000,
+                    "max_contracts": 6,
+                    "payout_cap": 2500,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": null,
+                    "max_loss": 4500,
+                    "max_contracts": 10,
+                    "payout_cap": 3000,
+                    "promo": null,
+                    "standard": null
+                  }
                 ]
               },
               {
                 "tier": "LucidPro",
-                "tagline": "One-time fee · No activation fee · Can pass in one day · Daily loss limit can be turned off at checkout for a higher price · 40% consistency rule on payouts",
+                "tagline": "One-time fee · No activation fee · Minimum 1 trading day · Daily loss limit can be turned off at checkout for a higher price · 40% consistency rule on payouts only",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -130,15 +236,51 @@
                   "fee_refund": null
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": 1250, "daily_loss": "none", "max_loss": 1000, "max_contracts": 2, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 50000, "profit_target": 3000, "daily_loss": 1200, "max_loss": 2000, "max_contracts": 4, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 100000, "profit_target": 6000, "daily_loss": 1800, "max_loss": 3000, "max_contracts": 6, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 150000, "profit_target": 9000, "daily_loss": 2700, "max_loss": 4500, "max_contracts": 10, "payout_cap": null, "promo": null, "standard": null }
+                  {
+                    "size": 25000,
+                    "profit_target": 1250,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1200,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 1800,
+                    "max_loss": 3000,
+                    "max_contracts": 6,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 2700,
+                    "max_loss": 4500,
+                    "max_contracts": 10,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  }
                 ]
               },
               {
                 "tier": "LucidDaily",
-                "tagline": "One-time fee · Daily payouts · Daily loss limit and evaluation drawdown type chosen at checkout · Funded account uses intraday drawdown",
+                "tagline": "One-time fee · Daily payouts · 50% consistency rule in the evaluation only · Daily loss limit and evaluation drawdown type chosen at checkout · Funded account uses intraday drawdown",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -149,10 +291,46 @@
                   "fee_refund": null
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": 1250, "daily_loss": 600, "max_loss": 1000, "max_contracts": 2, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 50000, "profit_target": 3000, "daily_loss": 1200, "max_loss": 2000, "max_contracts": 4, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 100000, "profit_target": 6000, "daily_loss": 1800, "max_loss": 3000, "max_contracts": 6, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 150000, "profit_target": 9000, "daily_loss": 2700, "max_loss": 4500, "max_contracts": 10, "payout_cap": null, "promo": null, "standard": null }
+                  {
+                    "size": 25000,
+                    "profit_target": 1250,
+                    "daily_loss": 600,
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1200,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 1800,
+                    "max_loss": 3000,
+                    "max_contracts": 6,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 2700,
+                    "max_loss": 4500,
+                    "max_contracts": 10,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  }
                 ]
               }
             ]
@@ -173,10 +351,46 @@
                   "fee_refund": null
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": null, "daily_loss": "none", "max_loss": 1000, "max_contracts": 2, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 50000, "profit_target": null, "daily_loss": 1200, "max_loss": 2000, "max_contracts": 4, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 100000, "profit_target": null, "daily_loss": 2100, "max_loss": 3500, "max_contracts": 6, "payout_cap": null, "promo": null, "standard": null },
-                  { "size": 150000, "profit_target": null, "daily_loss": 3000, "max_loss": 5000, "max_contracts": 10, "payout_cap": null, "promo": null, "standard": null }
+                  {
+                    "size": 25000,
+                    "profit_target": null,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": null,
+                    "daily_loss": 1200,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": null,
+                    "daily_loss": 2100,
+                    "max_loss": 3500,
+                    "max_contracts": 6,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": null,
+                    "daily_loss": 3000,
+                    "max_loss": 5000,
+                    "max_contracts": 10,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": null
+                  }
                 ]
               }
             ]

@@ -28,12 +28,48 @@
     "currency": "USD",
     "website": "https://fxify.com/",
     "affiliate_link": "",
-    "platforms": ["MT4", "MT5", "DXtrade", "TradingView"],
+    "platforms": [
+      "MT4",
+      "MT5",
+      "DXtrade",
+      "TradingView"
+    ],
     "countries": {
       "restricted": [
-        "US", "ZW", "IR", "IQ", "KP", "SO", "VN", "BI", "CF", "CI", "LR", "LY", "SD", "CU", "SY",
-        "AF", "YE", "PS", "MM", "NI", "CG", "CD", "ER", "GN", "GW", "PG", "SS", "VU", "VE", "DZ",
-        "RU", "BY", "KE", "GH"
+        "US",
+        "ZW",
+        "IR",
+        "IQ",
+        "KP",
+        "SO",
+        "VN",
+        "BI",
+        "CF",
+        "CI",
+        "LR",
+        "LY",
+        "SD",
+        "CU",
+        "SY",
+        "AF",
+        "YE",
+        "PS",
+        "MM",
+        "NI",
+        "CG",
+        "CD",
+        "ER",
+        "GN",
+        "GW",
+        "PG",
+        "SS",
+        "VU",
+        "VE",
+        "DZ",
+        "RU",
+        "BY",
+        "KE",
+        "GH"
       ],
       "allowed_only": null,
       "notes": "FXIFY does not open accounts for residents of the United States. Crimea is also restricted (no separate country code). The list ends with 'and / or any particular country or jurisdiction where such distribution or use would be contrary to local law', so it may not be complete. The United Arab Emirates is not on the list.",
@@ -102,14 +138,46 @@
                   "fee_refund": true
                 },
                 "accounts": [
-                  { "size": 5000, "promo": null, "standard": 59 },
-                  { "size": 10000, "promo": null, "standard": 89 },
-                  { "size": 15000, "promo": null, "standard": 119 },
-                  { "size": 25000, "promo": null, "standard": 199 },
-                  { "size": 50000, "promo": null, "standard": 379 },
-                  { "size": 100000, "promo": null, "standard": 549 },
-                  { "size": 200000, "promo": null, "standard": 1049 },
-                  { "size": 400000, "promo": null, "standard": 2950 }
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 59
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 89
+                  },
+                  {
+                    "size": 15000,
+                    "promo": null,
+                    "standard": 119
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 199
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 379
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 549
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 1049
+                  },
+                  {
+                    "size": 400000,
+                    "promo": null,
+                    "standard": 2950
+                  }
                 ]
               },
               {
@@ -131,10 +199,26 @@
                   "fee_refund": true
                 },
                 "accounts": [
-                  { "size": 10000, "promo": null, "standard": 59 },
-                  { "size": 25000, "promo": null, "standard": 149 },
-                  { "size": 50000, "promo": null, "standard": 249 },
-                  { "size": 100000, "promo": null, "standard": 399 }
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 59
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 149
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 249
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 399
+                  }
                 ]
               }
             ]
@@ -161,14 +245,46 @@
                   "fee_refund": true
                 },
                 "accounts": [
-                  { "size": 5000, "promo": null, "standard": 59 },
-                  { "size": 10000, "promo": null, "standard": 89 },
-                  { "size": 15000, "promo": null, "standard": 119 },
-                  { "size": 25000, "promo": null, "standard": 199 },
-                  { "size": 50000, "promo": null, "standard": 379 },
-                  { "size": 100000, "promo": null, "standard": 549 },
-                  { "size": 200000, "promo": null, "standard": 1049 },
-                  { "size": 400000, "promo": null, "standard": 2950 }
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 59
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 89
+                  },
+                  {
+                    "size": 15000,
+                    "promo": null,
+                    "standard": 119
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 199
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 379
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 549
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 1049
+                  },
+                  {
+                    "size": 400000,
+                    "promo": null,
+                    "standard": 2950
+                  }
                 ]
               },
               {
@@ -190,12 +306,36 @@
                   "fee_refund": null
                 },
                 "accounts": [
-                  { "size": 5000, "promo": null, "standard": 59 },
-                  { "size": 10000, "promo": null, "standard": 89 },
-                  { "size": 15000, "promo": null, "standard": 119 },
-                  { "size": 25000, "promo": null, "standard": 199 },
-                  { "size": 50000, "promo": null, "standard": 379 },
-                  { "size": 100000, "promo": null, "standard": 549 }
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 59
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 89
+                  },
+                  {
+                    "size": 15000,
+                    "promo": null,
+                    "standard": 119
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 199
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 379
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 549
+                  }
                 ]
               },
               {
@@ -217,13 +357,41 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 10000, "promo": null, "standard": 129 },
-                  { "size": 25000, "promo": null, "standard": 225 },
-                  { "size": 50000, "promo": null, "standard": 375 },
-                  { "size": 100000, "promo": null, "standard": 599 },
-                  { "size": 150000, "promo": null, "standard": 849 },
-                  { "size": 200000, "promo": null, "standard": 1099 },
-                  { "size": 250000, "promo": null, "standard": 1350 }
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 129
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 225
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 375
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 599
+                  },
+                  {
+                    "size": 150000,
+                    "promo": null,
+                    "standard": 849
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 1099
+                  },
+                  {
+                    "size": 250000,
+                    "promo": null,
+                    "standard": 1350
+                  }
                 ]
               }
             ]
@@ -251,14 +419,46 @@
                   "fee_refund": true
                 },
                 "accounts": [
-                  { "size": 5000, "promo": null, "standard": 39 },
-                  { "size": 10000, "promo": null, "standard": 59 },
-                  { "size": 15000, "promo": null, "standard": 79 },
-                  { "size": 25000, "promo": null, "standard": 149 },
-                  { "size": 50000, "promo": null, "standard": 249 },
-                  { "size": 100000, "promo": null, "standard": 399 },
-                  { "size": 200000, "promo": null, "standard": 799 },
-                  { "size": 400000, "promo": null, "standard": 1599 }
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 39
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 59
+                  },
+                  {
+                    "size": 15000,
+                    "promo": null,
+                    "standard": 79
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 149
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 249
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 399
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 799
+                  },
+                  {
+                    "size": 400000,
+                    "promo": null,
+                    "standard": 1599
+                  }
                 ]
               }
             ]
@@ -285,19 +485,51 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 1000, "promo": null, "standard": 69 },
-                  { "size": 2500, "promo": null, "standard": 119 },
-                  { "size": 5000, "promo": null, "standard": 229 },
-                  { "size": 10000, "promo": null, "standard": 449 },
-                  { "size": 25000, "promo": null, "standard": 899 },
-                  { "size": 50000, "promo": null, "standard": 1749 },
-                  { "size": 75000, "promo": null, "standard": 2499 },
-                  { "size": 100000, "promo": null, "standard": 4249 }
+                  {
+                    "size": 1000,
+                    "promo": null,
+                    "standard": 69
+                  },
+                  {
+                    "size": 2500,
+                    "promo": null,
+                    "standard": 119
+                  },
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 229
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 449
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 899
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 1749
+                  },
+                  {
+                    "size": 75000,
+                    "promo": null,
+                    "standard": 2499
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 4249
+                  }
                 ]
               },
               {
                 "tier": "Instant Funding Lite",
-                "tagline": "One-time fee · No evaluation · Lower price, tighter limits · Not included in the monthly discount code",
+                "tagline": "One-time fee · No evaluation · Lower price, tighter limits · Not included in the REWARD25 code",
                 "billing": "one-time",
                 "rules": {
                   "unit": "percent",
@@ -314,17 +546,38 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 2500, "promo": null, "standard": 19 },
-                  { "size": 5000, "promo": null, "standard": 44 },
-                  { "size": 10000, "promo": null, "standard": 89 },
-                  { "size": 25000, "promo": null, "standard": 169 },
-                  { "size": 50000, "promo": null, "standard": 289 }
+                  {
+                    "size": 2500,
+                    "promo": null,
+                    "standard": 19
+                  },
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 44
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 89
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 169
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 289
+                  }
                 ]
               }
             ]
           }
         ]
       }
-    ]
+    ],
+    "logo_bg": "dark"
   }
 }

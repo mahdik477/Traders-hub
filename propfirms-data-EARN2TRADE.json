@@ -26,11 +26,40 @@
     "currency": "USD",
     "website": "https://www.earn2trade.com/",
     "affiliate_link": "",
-    "platforms": ["NinjaTrader", "Finamark", "Tradovate", "TradingView", "R|Trader Pro"],
+    "platforms": [
+      "NinjaTrader",
+      "Finamark",
+      "Tradovate",
+      "TradingView",
+      "R|Trader Pro"
+    ],
     "countries": {
       "restricted": [
-        "AF", "AL", "AZ", "MM", "CF", "CU", "GI", "IR", "IQ", "KE", "LY", "ML", "NR", "NG", "KP",
-        "PK", "RU", "SO", "SS", "SD", "SY", "TM", "UA", "VE", "YE"
+        "AF",
+        "AL",
+        "AZ",
+        "MM",
+        "CF",
+        "CU",
+        "GI",
+        "IR",
+        "IQ",
+        "KE",
+        "LY",
+        "ML",
+        "NR",
+        "NG",
+        "KP",
+        "PK",
+        "RU",
+        "SO",
+        "SS",
+        "SD",
+        "SY",
+        "TM",
+        "UA",
+        "VE",
+        "YE"
       ],
       "allowed_only": null,
       "notes": "The help centre says citizens of these countries are 'unable to get funded owing to sanctions or other reasons'; the terms add that purchases from newly sanctioned countries are not refunded. US and non-US traders are both accepted (non-US traders fill in a W-8BEN form when funded). Traders from Palestine are asked to choose Israel at signup because the data provider has no Palestine option. The UAE is not on the list. The list was last updated 7 March 2025, so it may be out of date.",
@@ -74,7 +103,7 @@
             "tiers": [
               {
                 "tier": "Trader Career Path",
-                "tagline": "Monthly subscription until you pass · Free reset when rebilled · $139 activation fee taken from first withdrawal · 50% split until a payout threshold, then 80%",
+                "tagline": "Monthly subscription until you pass · Free reset when rebilled · 30% consistency rule in the evaluation only · $139 activation fee taken from first withdrawal · 50% split until a payout threshold, then 80%",
                 "billing": "monthly",
                 "rules": {
                   "unit": "usd",
@@ -85,14 +114,41 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 25000, "profit_target": 1750, "daily_loss": 550, "max_loss": 1500, "max_contracts": 3, "payout_cap": null, "promo": null, "standard": 150 },
-                  { "size": 50000, "profit_target": 3000, "daily_loss": 1100, "max_loss": 2000, "max_contracts": 6, "payout_cap": null, "promo": null, "standard": 190 },
-                  { "size": 100000, "profit_target": 6000, "daily_loss": 2200, "max_loss": 3500, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 350 }
+                  {
+                    "size": 25000,
+                    "profit_target": 1750,
+                    "daily_loss": 550,
+                    "max_loss": 1500,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 150
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1100,
+                    "max_loss": 2000,
+                    "max_contracts": 6,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 190
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 2200,
+                    "max_loss": 3500,
+                    "max_contracts": 12,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 350
+                  }
                 ]
               },
               {
                 "tier": "Gauntlet Mini",
-                "tagline": "Monthly subscription until you pass · $139 activation fee taken from first withdrawal · 50% split until a payout threshold, then 80%",
+                "tagline": "Monthly subscription until you pass · 30% consistency rule in the evaluation only · $139 activation fee taken from first withdrawal · 50% split until a payout threshold, then 80%",
                 "billing": "monthly",
                 "rules": {
                   "unit": "usd",
@@ -103,10 +159,46 @@
                   "fee_refund": false
                 },
                 "accounts": [
-                  { "size": 50000, "profit_target": 3000, "daily_loss": 1100, "max_loss": 2000, "max_contracts": 6, "payout_cap": null, "promo": null, "standard": 170 },
-                  { "size": 100000, "profit_target": 6000, "daily_loss": 2200, "max_loss": 3500, "max_contracts": 12, "payout_cap": null, "promo": null, "standard": 315 },
-                  { "size": 150000, "profit_target": 9000, "daily_loss": 3300, "max_loss": 4500, "max_contracts": 15, "payout_cap": null, "promo": null, "standard": 375 },
-                  { "size": 200000, "profit_target": 11000, "daily_loss": 4400, "max_loss": 6000, "max_contracts": 16, "payout_cap": null, "promo": null, "standard": 550 }
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1100,
+                    "max_loss": 2000,
+                    "max_contracts": 6,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 170
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 2200,
+                    "max_loss": 3500,
+                    "max_contracts": 12,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 315
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 3300,
+                    "max_loss": 4500,
+                    "max_contracts": 15,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 375
+                  },
+                  {
+                    "size": 200000,
+                    "profit_target": 11000,
+                    "daily_loss": 4400,
+                    "max_loss": 6000,
+                    "max_contracts": 16,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 550
+                  }
                 ]
               }
             ]
