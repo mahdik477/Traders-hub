@@ -8,7 +8,7 @@
 
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import type { CourseView } from "./course-types";
+import type { CourseMarket, CourseView } from "./course-types";
 
 type RawRating = {
   rating: number;
@@ -29,6 +29,7 @@ type RawFile = {
     curriculum?: { title: string; module_count?: number | null; topics: string[] }[];
     formats?: { label: string; description: string }[];
     platforms?: string[];
+    markets?: CourseMarket[];
     stats?: { label: string; value: string }[];
     broker_partnership?: { broker_name: string; description: string; url?: string | null } | null;
     pricing?: {
@@ -104,6 +105,7 @@ function buildCourse(c: RawFile["course"]): CourseView {
     })),
     formats: c.formats ?? [],
     platforms: c.platforms ?? [],
+    markets: c.markets ?? [],
     stats: c.stats ?? [],
     brokerPartnership: c.broker_partnership
       ? {

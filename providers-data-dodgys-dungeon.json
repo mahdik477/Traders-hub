@@ -53,6 +53,7 @@
           }
         ],
         "platforms": [],
+        "markets": ["forex"],
         "pricing": [
           {
             "name": "Monthly",
@@ -87,6 +88,7 @@
           }
         ],
         "platforms": [],
+        "markets": ["forex"],
         "pricing": [
           {
             "name": "Monthly",

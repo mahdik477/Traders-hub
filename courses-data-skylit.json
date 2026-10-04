@@ -1,0 +1,110 @@
+{
+  "course": {
+    "id": "skylit",
+    "name": "Skylit",
+    "logo": "/courses/skylit-logo.png",
+    "logo_bg": "dark",
+    "tagline": "AI-powered dealer-positioning and options-flow platform for stocks, options and futures, built around the Heatseeker gamma/vanna module.",
+    "about": "Skylit is a trading data and education platform combining real-time market data, options-flow tracking and dealer-positioning analysis (via its Heatseeker module) with live trading rooms and structured courses through Skylit Academy. It integrates seven tools — Heatseeker, Flowseeker, Atlas, Nexus, Tempest, Talon and an API/MCP — led by the platform's founder, known as \"Glitch\".",
+    "instructor": {
+      "name": "Glitch",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Skylit Academy",
+        "module_count": 26,
+        "topics": [
+          "Heatseeker: dealer positioning, gamma and vanna exposure",
+          "Reading \"The King node\" and other key price levels",
+          "Flowseeker: options flow tracking",
+          "Atlas, Nexus and Tempest: the platform's other data modules",
+          "Using Talon, the platform's AI market analyst"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Real-time market data",
+        "description": "Millisecond-latency data licensed from NASDAQ, CBOE and OPRA, plus 1+ years of 1-minute session replay."
+      },
+      {
+        "label": "Daily Live Stages",
+        "description": "Interactive trading rooms with screen sharing and live transcripts."
+      },
+      {
+        "label": "Skylit Academy courses",
+        "description": "16 Heatseeker courses and 10 Flowseeker courses covering the platform's modules."
+      },
+      {
+        "label": "Discord community",
+        "description": "Community access with analyst insights."
+      },
+      {
+        "label": "1:1 Trader Success sessions",
+        "description": "Dedicated support sessions, included on the Pro tier."
+      }
+    ],
+    "platforms": [],
+    "markets": ["stocks", "options", "futures"],
+    "stats": [],
+    "pricing": [
+      {
+        "name": "Community",
+        "price": "$149/month",
+        "billing_note": "Discord, Heatseeker Bot (indices only), Flowseeker, Nexus, Live Stages, pay-as-you-go API.",
+        "highlight": null,
+        "link": "https://whop.com/heatseeker/community-access-ae?a=user50f81875135"
+      },
+      {
+        "name": "Initiate",
+        "price": "$349/month",
+        "billing_note": "Everything in Community, plus Heatseeker for 63 index/ETF symbols and Atlas for indices and futures.",
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Pro",
+        "price": "$699/month",
+        "billing_note": "Everything in Initiate, plus Heatseeker for 5,000+ tickers, Atlas for all symbols, Talon, Tempest, 100k monthly API credits and 1:1 Trader Success sessions.",
+        "highlight": null,
+        "link": "https://whop.com/heatseeker/heatseeker?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.9,
+      "review_count": 311,
+      "url": "https://www.trustpilot.com/review/skylit.ai",
+      "label": "Excellent"
+    },
+    "whop": {
+      "rating": 4.9,
+      "review_count": 554,
+      "url": "https://whop.com/heatseeker/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "Been using Skylit's GEX heatmap feed daily for about a month and it's become a core part of how I read the market.",
+        "author": "Das anjaneyulu Darla",
+        "source": "Quoted on Skylit's website"
+      },
+      {
+        "quote": "The tools are genuinely elite and keep getting better, and the mentors actually put in the time to teach you.",
+        "author": "Leon795",
+        "source": "Quoted on Skylit's website"
+      },
+      {
+        "quote": "I can't imagine trying to trade without Skylit. To not be able to see where dealers are hedged terrifies me.",
+        "author": "James Storck",
+        "source": "Quoted on Skylit's website"
+      }
+    ],
+    "website": "https://www.skylit.ai/",
+    "affiliate_link": "https://whop.com/heatseeker/community-access-ae?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-04",
+    "source": "skylit.ai homepage (pricing, modules, testimonials, Whop rating as stated by Skylit itself); Trustpilot (confirmed directly: 4.9/5, 311 reviews, Excellent, claimed profile). Whop reviews URL constructed from the standard pattern (whop.com/<store>/reviews/) using the storefront slug from the provided affiliate links — not individually confirmed. Only Community and Pro tiers have tracked affiliate links (as provided); Initiate falls back to the general Community link."
+  }
+}

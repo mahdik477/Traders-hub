@@ -1,6 +1,19 @@
 // Types shared by the course data loader (server) and the directory/detail
 // pages (may render on the client). Keep this file free of Node-only imports.
 
+// What a course actually trades/teaches trading on — used for the directory
+// filter. A course can cover more than one.
+export type CourseMarket = "forex" | "futures" | "options" | "stocks" | "crypto" | "commodities";
+
+export const MARKET_LABELS: Record<CourseMarket, string> = {
+  forex: "Forex",
+  futures: "Futures",
+  options: "Options",
+  stocks: "Stocks",
+  crypto: "Crypto",
+  commodities: "Commodities",
+};
+
 export type PricingTier = {
   name: string;
   price: string;
@@ -90,6 +103,9 @@ export type CourseView = {
   formats: LearningFormat[];
   /** Platforms/software the course trades or teaches on, e.g. "MetaTrader 4". */
   platforms: string[];
+  /** What it actually trades — forex, options, stocks, etc. Used for the
+   *  directory filter. */
+  markets: CourseMarket[];
   /** Optional credibility figures shown in the hero, e.g. students taught,
    *  years coaching. Empty for most courses — only shown when we actually
    *  have sourced numbers, never estimated. */

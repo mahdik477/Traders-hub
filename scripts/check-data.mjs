@@ -26,6 +26,18 @@ const COURSE_PATTERN = /^courses-data-.+\.json$/i;
 const PROVIDER_PATTERN = /^providers-data-.+\.json$/i;
 const STALE_AFTER_DAYS = 30;
 
+// Keep in sync with CourseMarket in src/lib/course-types.ts.
+const KNOWN_MARKETS = new Set(["forex", "futures", "options", "stocks", "crypto", "commodities"]);
+
+function checkMarkets(file, where, markets) {
+  if (markets == null) return;
+  if (!Array.isArray(markets)) return err(file, `${where}.markets must be a list`);
+  for (const m of markets) {
+    if (!KNOWN_MARKETS.has(m))
+      err(file, `${where}.markets has "${m}" - must be one of ${[...KNOWN_MARKETS].join(", ")}`);
+  }
+}
+
 // Wording we never publish (see CLAUDE.md "Non-negotiable constraints").
 const BANNED = [
   [/guaranteed?\s+(profits?|returns?|income|payouts?|results?|funding)/i, "promises a guaranteed outcome"],
@@ -264,6 +276,8 @@ function checkCourse(file, data) {
   });
   if (!Array.isArray(c.pricing) || c.pricing.length === 0) warn(file, `no pricing listed`);
   (c.pricing ?? []).forEach((p, i) => checkLink(file, `pricing[${i}].link`, p.link));
+  checkMarkets(file, "course", c.markets);
+  if (!c.markets || c.markets.length === 0) warn(file, `course.markets is empty - the course won't show up under any market filter`);
 }
 
 // One course inside a multi-course provider — same spirit as checkCourse's
@@ -280,6 +294,8 @@ function checkProviderCourse(file, c) {
     if (!t.source) err(file, `${where}.testimonials[${i}] has no "source" - every quote must say where it came from`);
   });
   if (!Array.isArray(c.pricing) || c.pricing.length === 0) warn(file, `${where}: no pricing listed`);
+  checkMarkets(file, where, c.markets);
+  if (!c.markets || c.markets.length === 0) warn(file, `${where}.markets is empty - it won't show up under any market filter`);
 }
 
 function checkProvider(file, data) {

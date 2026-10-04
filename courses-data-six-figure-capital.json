@@ -59,6 +59,7 @@
       }
     ],
     "platforms": ["MetaTrader 4", "eSignal", "NinjaTrader", "TradingView"],
+    "markets": ["forex", "commodities", "crypto"],
     "pricing": [
       {
         "name": "12-Month Contract",
