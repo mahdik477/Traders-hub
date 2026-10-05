@@ -1,0 +1,88 @@
+{
+  "course": {
+    "id": "owls-options-traders",
+    "name": "Owls Options Traders",
+    "logo": "/courses/owls-options-traders-logo.png",
+    "logo_bg": "white",
+    "tagline": "Options alerts and education community covering options, stocks and crypto, with three analysts posting live trade ideas and daily watchlists.",
+    "about": "Owls Options Traders is a Discord-based alerts and education community covering options, common stock and crypto trading. Members get live trade alerts and technical analysis from three in-house analysts, daily watchlists with key support/resistance levels, options-flow and dark-pool scanning tools, and training materials aimed at beginners through to more experienced traders.",
+    "instructor": null,
+    "curriculum": [
+      {
+        "title": "Training materials",
+        "module_count": null,
+        "topics": [
+          "Options basics: calls, puts, spreads",
+          "Day trading, scalping and swing strategies",
+          "Reading options flow and dark-pool activity",
+          "Technical analysis and key support/resistance levels"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live trade alerts",
+        "description": "Real-time options alerts and the positions three in-house analysts personally take."
+      },
+      {
+        "label": "Daily watchlists",
+        "description": "Key support/resistance levels and a daily watchlist."
+      },
+      {
+        "label": "Options flow & AI scanning tools",
+        "description": "Unusual options activity and dark-pool order detection."
+      },
+      {
+        "label": "Discord community",
+        "description": "Live chat with analysts and other members, plus pre/post-market analysis."
+      },
+      {
+        "label": "Training materials",
+        "description": "Courses aimed at beginner through more experienced traders."
+      }
+    ],
+    "platforms": [],
+    "markets": ["options", "stocks", "crypto"],
+    "stats": [
+      { "label": "Active members", "value": "3,140+" }
+    ],
+    "pricing": [
+      {
+        "name": "Free (3-day trial)",
+        "price": "Free",
+        "billing_note": "Full Discord access, daily technical alerts, options and day trades/scalps/swings, common stock purchases, unusual options flow software, and the key-levels watchlist — for 3 days.",
+        "highlight": null,
+        "link": "https://whop.com/owls-options-traders/owls-options-traders-free?a=user50f81875135"
+      },
+      {
+        "name": "Pro (Monthly)",
+        "price": "$59.99/28 days",
+        "billing_note": "Full Discord access, premium chat group, key levels and daily watchlist, live chat and pre/post-market analysis, training courses and materials, options flow and AI bots, credit/debit spreads.",
+        "highlight": "Most popular",
+        "link": "https://whop.com/owls-options-traders/owls-options-traders?a=user50f81875135"
+      },
+      {
+        "name": "Lifetime",
+        "price": "$1,999.99 one-time",
+        "billing_note": "One-time payment for lifetime access to the Pro tier.",
+        "highlight": null,
+        "link": "https://whop.com/owls-options-traders/owls-lifetime?a=user50f81875135"
+      }
+    ],
+    "refund_policy": "No refunds. Cancellation/downgrade is handled inside Discord (the provider's FAQ points members to the disclaimer channel, or typing \"Downgrade\" in the upgrade channel).",
+    "trustpilot": null,
+    "whop": {
+      "rating": 5.0,
+      "review_count": 2075,
+      "url": "https://whop.com/owls-options-traders/reviews/"
+    },
+    "testimonials": [],
+    "testimonials_note": "Every testimonial we found on the provider's own site states a specific profit or account-growth figure. We don't republish testimonials that promise or imply trading results, so none are shown here.",
+    "website": "https://owlsoptionstraders.com/",
+    "affiliate_link": "https://whop.com/owls-options-traders/owls-options-traders?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-05",
+    "source": "owlsoptionstraders.com (about, formats, FAQ/refund policy, testimonials — all excluded for income claims) and its Shopify CDN for the full-resolution logo. Pricing for the three tiers we actually link to (Free/Pro-Monthly/Lifetime) confirmed via whoptrends.com, not the main site's checkout (JS-rendered, inaccessible to fetch). Note: the main site's own /pages/pricing shows a different set of tiers ($79/4wks, $159/3mo, $379/6mo, $699/yr) that don't match the Whop-confirmed $59.99/28-day price — these look like a separate, possibly outdated, direct-pay option; we only show the tiers matching our actual (Whop) affiliate links. No Trustpilot profile exists (confirmed 404). Whop rating (5.0/5, 2,075 reviews) and 15% affiliate commission (consistent across all three listings) confirmed via whoptrends.com."
+  }
+}
