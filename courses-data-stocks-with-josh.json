@@ -1,0 +1,107 @@
+{
+  "course": {
+    "id": "stocks-with-josh",
+    "name": "Stocks with Josh",
+    "logo": "/courses/stocks-with-josh-logo.png",
+    "logo_bg": "dark",
+    "tagline": "Live day-trading mentorship and proprietary TradingView tools from Josh (\"The Chart GOAT\") and a team of Crown Trader mentors.",
+    "about": "Stocks with Josh is a Discord-based trading community led by Josh, a trader with 17+ years of experience and over 190,000 YouTube subscribers. Members get live trading and teaching sessions from a team of mentors known as the Crown Traders, plus a set of proprietary TradingView-integrated tools. There's no separate structured video course yet — the provider's own site lists one as \"coming soon\".",
+    "instructor": {
+      "name": "Josh",
+      "link": null
+    },
+    "curriculum": [],
+    "formats": [
+      {
+        "label": "Live trading & teaching sessions",
+        "description": "15 weekly trading sessions plus 7 teaching sessions from Josh and the Crown Trader mentors, on the TRADER tier."
+      },
+      {
+        "label": "Proprietary indicators & tools",
+        "description": "GOAT Scalps ALPHA, Profit Windows, A+ Scalp Dashboard, GOAT Scalp Levels, GOAT RSI Multi-TF, plus an onboarding guide."
+      },
+      {
+        "label": "Discord community",
+        "description": "Community chat access, with the amount of access varying by tier."
+      },
+      {
+        "label": "Mentorship",
+        "description": "A team of named mentors (the \"Crown Traders\") covering different styles: momentum scalping, options income, swing trading and small-cap/biotech stocks."
+      }
+    ],
+    "platforms": ["TradingView"],
+    "markets": ["stocks", "options"],
+    "stats": [
+      { "label": "YouTube subscribers", "value": "190,000+" },
+      { "label": "Josh's trading experience", "value": "17+ years" }
+    ],
+    "pricing": [
+      {
+        "name": "Starter (Friendly Trader Tools)",
+        "price": "$79.99/month",
+        "billing_note": "All tools, community chat access, and one livestream per week (Tuesdays).",
+        "highlight": null,
+        "link": "https://whop.com/stocks-with-josh/friendly-trader-tools?a=user50f81875135"
+      },
+      {
+        "name": "TRADER — Weekly",
+        "price": "$49/week",
+        "billing_note": "Full Discord and live-session access.",
+        "highlight": null,
+        "link": "https://whop.com/stocks-with-josh/josh-exclusive-vip-a-copy?a=user50f81875135"
+      },
+      {
+        "name": "TRADER — Monthly",
+        "price": "$160/month",
+        "billing_note": "Discounted from $196/month (18% off). Full Discord access, 15 weekly trading sessions plus 7 teaching sessions, and every tool.",
+        "highlight": "Most popular",
+        "link": "https://whop.com/stocks-with-josh/josh-exclusive-vip-a-copy?a=user50f81875135"
+      },
+      {
+        "name": "TRADER — 3 Months",
+        "price": "$465",
+        "billing_note": "≈$155/month.",
+        "highlight": null,
+        "link": "https://whop.com/stocks-with-josh/josh-exclusive-vip-a-copy?a=user50f81875135"
+      },
+      {
+        "name": "TRADER — Yearly",
+        "price": "$1,495/year",
+        "billing_note": "≈$125/month — the cheapest way into the TRADER tier.",
+        "highlight": "Best value",
+        "link": "https://whop.com/stocks-with-josh/josh-exclusive-vip-a-copy?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": {
+      "rating": 4.5,
+      "review_count": 850,
+      "url": "https://whop.com/stocks-with-josh/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "When attending my first few live sessions with Josh & Mike, I was overwhelmed with how advanced the sessions seemed, but after taking the time to navigate the discord, follow a few of the crown traders, I was able to understand the market a little more day by day.",
+        "author": "CrazyCarl2711",
+        "source": "Whop review, republished on an independent (unofficial) Stocks with Josh affiliate site"
+      },
+      {
+        "quote": "I originally signed up mainly to learn the SWJ indicators and dashboard...Daniel is exceptional at technical analysis — he breaks down complex concepts in a way that's easy to follow.",
+        "author": "Ishaque Ketekar",
+        "source": "Whop review, republished on an independent (unofficial) Stocks with Josh affiliate site"
+      },
+      {
+        "quote": "Ms Mary is such a great teacher, her TA skills are next level. Very patient and genuinely wants everyone to succeed.",
+        "author": "Ruth Hobbs",
+        "source": "Whop review, republished on an independent (unofficial) Stocks with Josh affiliate site"
+      }
+    ],
+    "testimonials_note": "These are customer reviews for Stocks with Josh on Whop, republished by an independent, unofficial affiliate site (not Josh's own site) since Whop's own review pages don't expose full text to a direct fetch. We haven't independently re-verified them, and we don't verify trading performance or results.",
+    "website": "https://stockswithjosh.com/",
+    "affiliate_link": "https://whop.com/stocks-with-josh/josh-exclusive-vip-a-copy?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-05",
+    "source": "IMPORTANT: the URL given (stockswithjosh.net) is an independent, unofficial affiliate review site — it says so explicitly on its own page (\"not affiliated with Stocks with Josh or Josh\", using a different affiliate ID). The real official site is stockswithjosh.com, used for about/pricing/mentors/formats. Monthly price for both tiers cross-checked and matching between the official site and whoptrends.com. Weekly/3-month/yearly TRADER pricing came only from the unofficial site (not independently confirmed, but the monthly figure from that same source matched the official site exactly). Trustpilot: confirmed no profile exists (404). Whop rating/commission confirmed via whoptrends.com (4.4-4.5/5, ~850 reviews across the two listings; 30% affiliate commission on both)."
+  }
+}
