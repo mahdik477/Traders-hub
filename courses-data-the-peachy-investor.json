@@ -2,7 +2,7 @@
   "course": {
     "id": "the-peachy-investor",
     "name": "The Peachy Investor",
-    "logo": null,
+    "logo": "/courses/the-peachy-investor-logo.png",
     "logo_bg": "white",
     "tagline": "A futures and stocks trading community for beginners, led by Brittney Marie, built around three structured courses and the Peach Street Trading Discord.",
     "about": "The Peachy Investor is a trading education community founded by Brittney Marie in 2018, now focused mainly on futures trading. The Peachy Gold membership includes three progressive courses — an introductory overview, a New Trader course covering fundamentals, and a Futures Trader course covering more advanced strategies — plus access to the Peach Street Trading Discord server with daily pre-market plans and trading recaps.",
@@ -48,7 +48,8 @@
     "platforms": [],
     "markets": ["futures", "stocks"],
     "stats": [
-      { "label": "YouTube subscribers", "value": "100,000+" }
+      { "label": "YouTube subscribers", "value": "100,000+" },
+      { "label": "Whop members", "value": "11,500+" }
     ],
     "pricing": [
       {
@@ -73,6 +74,6 @@
   },
   "_notes": {
     "last_verified": "2026-10-05",
-    "source": "Unusually limited access this time: the likely official domains (thepeachyinvestor.com, peachyinvestor.co, herpeachyinvestor.com, stocks.brittneymarie.com) all failed to load — 404s, DNS failures or connection failures, tried both via fetch and direct curl — so none were usable as a primary source, and 'website' is left null rather than linking something unverified. Built from Whop's own blog review of the product (whop.com/blog/peachy-investor-review), WebSearch results confirming Brittney Marie as founder (est. 2018, ex-personal trainer, 100k+ YouTube subscribers, now focused mainly on futures), and whoptrends.com for pricing/rating/commission, confirmed directly: $167/month, 4.9/5 rating, 273 reviews, 15% affiliate commission. No Trustpilot profile found. No logo found either (Google's favicon service 404s for the one domain it could check, suggesting it's broadly unreachable, not just from here) — a lettermark shows instead. Worth asking for a screenshot of the actual Whop page and/or a working official site link if more detail is wanted."
+    "source": "Unusually limited access this time: the likely official domains (thepeachyinvestor.com, peachyinvestor.co, herpeachyinvestor.com, stocks.brittneymarie.com) all failed to load — 404s, DNS failures or connection failures, tried both via fetch and direct curl — so none were usable as a primary source, and 'website' is left null rather than linking something unverified. Built from Whop's own blog review of the product (whop.com/blog/peachy-investor-review), WebSearch results confirming Brittney Marie as founder (est. 2018, ex-personal trainer, 100k+ YouTube subscribers, now focused mainly on futures), and whoptrends.com for pricing/rating/commission, confirmed directly: $167/month, 4.9/5 rating, 273 reviews, 15% affiliate commission. No Trustpilot profile found. Logo and member count (11.5K) pulled directly from the real Whop profile page (whop.com/@thepeachyinvestor/) once the person gave us that link — rating (4.9) cross-checked and matches whoptrends.com. Still no confirmed about/bio text, testimonials or refund policy from that page (content was truncated on every fetch); worth asking for a screenshot of the profile's About and Reviews tabs if more detail is wanted."
   }
 }
