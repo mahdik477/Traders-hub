@@ -39,7 +39,7 @@ export const sections: Section[] = [
     title: "Brokers",
     summary:
       "Retail brokers for trading your own capital, filterable by regulatory status, minimum deposit and supported platforms.",
-    status: "coming-soon",
+    status: "live",
   },
   {
     slug: "tools",

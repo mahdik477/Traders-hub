@@ -24,7 +24,11 @@ const COURSE_PATTERN = /^courses-data-.+\.json$/i;
 // A "provider" sells several distinct courses under one brand (e.g. Sharper
 // Trades) rather than one course on its own — see provider-types.ts.
 const PROVIDER_PATTERN = /^providers-data-.+\.json$/i;
+const BROKER_PATTERN = /^brokers-data-.+\.json$/i;
 const STALE_AFTER_DAYS = 30;
+
+// Keep in sync with BrokerMarket in src/lib/broker-types.ts.
+const KNOWN_BROKER_MARKETS = new Set(["stocks", "options", "futures", "forex", "bonds", "funds", "crypto", "cfds"]);
 
 // Keep in sync with CourseMarket in src/lib/course-types.ts.
 const KNOWN_MARKETS = new Set(["forex", "futures", "options", "stocks", "crypto", "commodities"]);
@@ -326,9 +330,53 @@ function checkProvider(file, data) {
   }
 }
 
+function checkBroker(file, data) {
+  const b = data?.broker;
+  if (!b) return err(file, `missing top-level "broker"`);
+  if (!/^[a-z0-9-]+$/.test(b.id ?? "")) err(file, `broker.id must be lowercase letters, numbers and dashes (got "${b.id}")`);
+  if (!b.name) err(file, `broker.name is missing`);
+  if (!b.about) warn(file, `broker.about is empty - add a short description in our own words`);
+  if (b.logo) {
+    if (!b.logo.startsWith("/")) err(file, `broker.logo should be a path under /public, e.g. "/brokers/name-logo.png"`);
+    else if (!existsSync(path.join(ROOT, "public", b.logo))) err(file, `broker.logo file not found: public${b.logo}`);
+  } else warn(file, `no broker.logo - the page shows the broker's initials instead`);
+  if (b.logo_bg != null && b.logo_bg !== "white" && b.logo_bg !== "dark")
+    err(file, `broker.logo_bg must be "white", "dark" or left out (got "${b.logo_bg}")`);
+  checkCurrency(file, b.currency ?? "USD");
+  if (!isNumOrNull(b.min_deposit) || (isNum(b.min_deposit) && b.min_deposit < 0))
+    err(file, `broker.min_deposit must be a plain number (no currency symbol) or null`);
+  checkLink(file, "broker.website", b.website);
+  checkLink(file, "broker.affiliate_link", b.affiliate_link);
+  checkRating(file, "broker.trustpilot", b.trustpilot);
+  if (!Array.isArray(b.markets) || b.markets.length === 0) warn(file, `broker.markets is empty - it won't show up under any market filter`);
+  for (const m of b.markets ?? []) {
+    if (!KNOWN_BROKER_MARKETS.has(m))
+      err(file, `broker.markets has "${m}" - must be one of ${[...KNOWN_BROKER_MARKETS].join(", ")}`);
+  }
+  if (!Array.isArray(b.regulators) || b.regulators.length === 0) warn(file, `no broker.regulators - add who licenses the broker`);
+  (b.regulators ?? []).forEach((r, i) => {
+    if (!r.regulator) err(file, `broker.regulators[${i}] has no "regulator"`);
+    if (!/^[A-Z]{2}$/.test(r.country ?? "")) err(file, `broker.regulators[${i}].country must be a 2-letter country code (e.g. "GB")`);
+  });
+  (b.costs ?? []).forEach((g, i) => {
+    if (!g.title) err(file, `broker.costs[${i}] has no "title"`);
+    if (!Array.isArray(g.rows) || g.rows.length === 0) err(file, `broker.costs[${i}] has no rows`);
+  });
+  // Leverage is always shown with a risk warning; make sure one exists.
+  if ((b.leverage ?? []).length > 0 && !b.leverage_note)
+    warn(file, `broker.leverage has no leverage_note - the default risk warning will be shown`);
+  const mr = b.margin_rates;
+  if (mr) {
+    (mr.rows ?? []).forEach((r, i) => {
+      if (!Array.isArray(r.values) || r.values.length !== (mr.columns ?? []).length)
+        err(file, `broker.margin_rates.rows[${i}] needs one value per column (${(mr.columns ?? []).length})`);
+    });
+  }
+}
+
 function checkAll() {
   const files = readdirSync(ROOT)
-    .filter((f) => PROP_PATTERN.test(f) || COURSE_PATTERN.test(f) || PROVIDER_PATTERN.test(f))
+    .filter((f) => PROP_PATTERN.test(f) || COURSE_PATTERN.test(f) || PROVIDER_PATTERN.test(f) || BROKER_PATTERN.test(f))
     .sort();
   const ids = new Map();
   for (const file of files) {
@@ -341,10 +389,12 @@ function checkAll() {
     }
     const isProp = PROP_PATTERN.test(file);
     const isProvider = PROVIDER_PATTERN.test(file);
-    const kind = isProp ? "firm" : isProvider ? "provider" : "course";
-    const entity = isProp ? data.firm : isProvider ? data.provider : data.course;
+    const isBroker = BROKER_PATTERN.test(file);
+    const kind = isProp ? "firm" : isProvider ? "provider" : isBroker ? "broker" : "course";
+    const entity = isProp ? data.firm : isProvider ? data.provider : isBroker ? data.broker : data.course;
     if (isProp) checkPropFirm(file, data);
     else if (isProvider) checkProvider(file, data);
+    else if (isBroker) checkBroker(file, data);
     else checkCourse(file, data);
     checkVerified(file, data._notes);
     scanWording(file, entity);
@@ -374,7 +424,8 @@ async function main() {
       process.exit(0);
     }
     const name = path.basename(filePath);
-    if (!PROP_PATTERN.test(name) && !COURSE_PATTERN.test(name) && !PROVIDER_PATTERN.test(name)) process.exit(0);
+    if (!PROP_PATTERN.test(name) && !COURSE_PATTERN.test(name) && !PROVIDER_PATTERN.test(name) && !BROKER_PATTERN.test(name))
+      process.exit(0);
     const count = checkAll();
     // Only interrupt Claude for real errors; warnings show up in npm run check.
     if (errors.length) {
