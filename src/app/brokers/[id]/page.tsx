@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import BrokerBackLink from "@/components/BrokerBackLink";
 import BrokerLogo from "@/components/BrokerLogo";
 import BrokerReveal from "@/components/BrokerReveal";
 import CoursePricing from "@/components/CoursePricing";
@@ -9,10 +9,10 @@ import PlatformPill from "@/components/PlatformPill";
 import StickyVisitBar from "@/components/StickyVisitBar";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import VisitSiteLink from "@/components/VisitSiteLink";
-import { ChevronLeftIcon, InfoIcon, LayersIcon, MonitorIcon, ShieldIcon, TagIcon } from "@/components/icons";
+import { InfoIcon, LayersIcon, MonitorIcon, ShieldIcon, TagIcon } from "@/components/icons";
 import { BROKER_MARKET_LABELS, brokerOutboundUrl, formatDeposit, type CostRow } from "@/lib/broker-types";
 import { brokers, getBroker } from "@/lib/brokers";
-import { leverageLabel, listingHrefFromBack } from "@/lib/broker-filters";
+import { leverageLabel } from "@/lib/broker-filters";
 
 export const dynamicParams = false;
 
@@ -50,7 +50,7 @@ function SectionHeading({
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="min-w-0">
+    <div className="min-w-0 bg-surface px-4 py-3 sm:px-5">
       <div className="eyebrow">{label}</div>
       <div className="mt-1 text-lg font-semibold tracking-tight text-foreground sm:text-xl">{value}</div>
     </div>
@@ -73,11 +73,9 @@ function CostTable({ rows }: { rows: CostRow[] }) {
   );
 }
 
-export default async function BrokerPage({ params, searchParams }: PageProps<"/brokers/[id]">) {
+export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">) {
   const broker = getBroker((await params).id);
   if (!broker) notFound();
-  const back = (await searchParams).back;
-  const backHref = listingHrefFromBack(typeof back === "string" ? back : null);
 
   const visitHref = brokerOutboundUrl(broker);
   const deposit = formatDeposit(broker.minDeposit, broker.currency);
@@ -98,16 +96,10 @@ export default async function BrokerPage({ params, searchParams }: PageProps<"/b
 
   return (
     <>
-      <Link
-        href={backHref}
-        className="inline-flex min-h-9 items-center gap-1 text-sm text-muted transition-colors duration-150 hover:text-foreground"
-      >
-        <ChevronLeftIcon className="size-4" />
-        Back to brokers
-      </Link>
+      <BrokerBackLink />
 
-      <header className="mt-5 border-b border-border pb-6">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+      <header className="mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
+        <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:p-6">
           <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} size="lg" priority />
           <div className="min-w-0 flex-1">
             <h1 className="page-title">{broker.name}</h1>
@@ -127,7 +119,7 @@ export default async function BrokerPage({ params, searchParams }: PageProps<"/b
           )}
         </div>
 
-        <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-px border-t border-border bg-border sm:grid-cols-4">
           <Stat label="Min. deposit" value={deposit ?? "Varies"} />
           <Stat label="Leverage" value={leverageLabel(broker)} />
           <Stat label="Regulators" value={broker.regulators.length ? String(broker.regulators.length) : "None listed"} />
@@ -136,17 +128,21 @@ export default async function BrokerPage({ params, searchParams }: PageProps<"/b
             value={broker.trustpilot ? `${broker.trustpilot.rating.toFixed(1)} / 5` : "Not listed"}
           />
         </dl>
-
-        {jumps.length > 0 && (
-          <nav aria-label="On this page" className="mt-6 flex gap-2 overflow-x-auto pb-1">
-            {jumps.map(([id, label]) => (
-              <a key={id} href={`#${id}`} className="pill shrink-0 transition-colors duration-150 hover:border-accent/40 hover:text-foreground">
-                {label}
-              </a>
-            ))}
-          </nav>
-        )}
       </header>
+
+      {jumps.length > 0 && (
+        <nav aria-label="On this page" className="mt-4 flex gap-2 overflow-x-auto pb-1">
+          {jumps.map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className="pill min-h-10 shrink-0 px-3 transition-colors duration-150 hover:border-accent/40 hover:text-foreground"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+      )}
 
       {broker.promotions && (
         <BrokerReveal>
