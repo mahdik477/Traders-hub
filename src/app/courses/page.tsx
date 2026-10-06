@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function CoursesPage() {
   return (
     <>
-      <h1 className="page-title">{section.title}</h1>
+      <h1 className="title-rule page-title">{section.title}</h1>
       <p className="mt-3 text-lg text-muted">
         Compare trading courses side by side: what they cover, how they&apos;re delivered, pricing
         and independent Trustpilot ratings.

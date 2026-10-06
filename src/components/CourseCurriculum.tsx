@@ -46,7 +46,7 @@ export default function CourseCurriculum({ modules }: { modules: CurriculumModul
                 className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl px-5 py-4 text-left transition-colors hover:bg-surface-2"
               >
                 <span className="flex items-center gap-3">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-fg">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-fill text-xs font-bold text-gold-ink">
                     {i + 1}
                   </span>
                   <span className="font-semibold text-foreground">{module.title}</span>

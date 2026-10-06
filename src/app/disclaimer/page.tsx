@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Disclaimer" };
 export default function DisclaimerPage() {
   return (
     <div className="max-w-3xl">
-      <h1 className="page-title">Disclaimer</h1>
+      <h1 className="title-rule page-title">Disclaimer</h1>
       <div className="mt-8 space-y-8 text-muted">
         <section>
           <h2 className="section-title text-foreground">

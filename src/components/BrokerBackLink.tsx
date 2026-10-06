@@ -6,8 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { ChevronLeftIcon } from "@/components/icons";
 import { listingHrefFromBack } from "@/lib/broker-filters";
 
-const linkClass =
-  "inline-flex min-h-9 items-center gap-1 text-sm text-muted transition-colors duration-150 hover:text-foreground";
+const linkClass = "back-link";
 
 function BackLink({ href }: { href: string }) {
   return (

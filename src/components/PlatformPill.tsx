@@ -18,10 +18,10 @@ export default function PlatformPill({ name }: { name: string }) {
       </button>
       <span
         role="tooltip"
-        className="invisible absolute bottom-full left-1/2 z-20 mb-2 w-64 -translate-x-1/2 rounded-lg border border-accent-hover bg-accent p-3 text-xs text-accent-fg opacity-0 shadow-glow transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+        className="invisible absolute bottom-full left-1/2 z-20 mb-2 w-64 -translate-x-1/2 rounded-lg border border-gold-deep/40 bg-gold-fill p-3 text-xs text-gold-ink opacity-0 shadow-glow transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
       >
         <span className="block font-semibold">{name}</span>
-        <span className="mt-1 block text-accent-fg/85">{info.description}</span>
+        <span className="mt-1 block text-gold-ink/80">{info.description}</span>
         <a
           href={info.url}
           target="_blank"

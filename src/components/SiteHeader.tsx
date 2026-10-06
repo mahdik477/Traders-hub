@@ -1,25 +1,48 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SITE_NAME, sections } from "@/lib/sections";
 
 export default function SiteHeader() {
+  const pathname = usePathname();
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
-      <div className="container-page flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between sm:py-4">
-        <Link href="/" className="text-lg font-bold tracking-tight">
-          {SITE_NAME}
+    <header className="site-header sticky top-0 z-40">
+      <div className="container-page flex flex-col gap-1 py-2 sm:flex-row sm:items-center sm:gap-5 sm:py-2.5">
+        <Link href="/" className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-lg">
+          <Image
+            src="/brand/tradox-td.png"
+            alt=""
+            width={44}
+            height={44}
+            priority
+            className="size-10 rounded-xl sm:size-11"
+          />
+          <span className="text-sm font-semibold tracking-[0.16em] uppercase">{SITE_NAME}</span>
         </Link>
-        <nav aria-label="Main" className="-mx-1 overflow-x-auto sm:mx-0">
-          <ul className="flex gap-x-1 whitespace-nowrap text-sm text-muted">
-            {sections.map((section) => (
-              <li key={section.slug}>
-                <Link
-                  href={`/${section.slug}`}
-                  className="block rounded-md px-2 py-1 transition-colors hover:bg-surface-2 hover:text-foreground"
-                >
-                  {section.title}
-                </Link>
-              </li>
-            ))}
+        <nav aria-label="Main" className="min-w-0 sm:flex-1">
+          <ul className="nav-scroll -mx-1 flex gap-1 overflow-x-auto px-1 py-0.5">
+            {sections.map((section) => {
+              const href = `/${section.slug}`;
+              const active = pathname === href || pathname.startsWith(`${href}/`);
+              return (
+                <li key={section.slug} className="shrink-0">
+                  <Link
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex min-h-11 items-center rounded-lg px-3 text-sm font-medium whitespace-nowrap transition-colors duration-150 ${
+                      active
+                        ? "bg-gold-fill/15 text-accent"
+                        : "text-muted hover:bg-surface-2 hover:text-foreground"
+                    }`}
+                  >
+                    {section.title}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>

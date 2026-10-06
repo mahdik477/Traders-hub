@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Do you rank brokers by results?",
-    a: "No. Traders Hub is a directory. We do not score win rate, accuracy or returns. Trustpilot numbers are that site's review scores, shown with a link back to the source.",
+    a: "No. Tradox is a directory. We do not score win rate, accuracy or returns. Trustpilot numbers are that site's review scores, shown with a link back to the source.",
   },
   {
     q: "Where does Visit broker go?",
@@ -30,7 +30,7 @@ export default function BrokersPage() {
 
   return (
     <>
-      <h1 className="page-title">{section.title}</h1>
+      <h1 className="title-rule page-title">{section.title}</h1>
       <p className="mt-3 max-w-2xl text-lg text-muted">
         Compare retail brokers on deposit, leverage, platforms and who regulates them.
       </p>

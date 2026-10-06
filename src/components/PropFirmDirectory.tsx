@@ -105,7 +105,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
       {/* Filter bar */}
       <form
         aria-label="Filter prop firm accounts"
-        className="grid grid-cols-2 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-3 lg:grid-cols-6"
+        className="grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
         onSubmit={(e) => e.preventDefault()}
       >
         <Select
@@ -206,7 +206,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
             return (
               <li
                 key={firm.id}
-                className="relative flex flex-col rounded-xl border border-border bg-surface p-5 transition duration-200 hover:border-accent/50 hover:shadow-glow motion-safe:hover:-translate-y-0.5"
+                className="lift-card relative flex flex-col rounded-xl border border-border bg-surface p-5"
               >
                 <div className="flex items-center gap-3">
                   <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />

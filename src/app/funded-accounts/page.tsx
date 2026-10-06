@@ -16,7 +16,7 @@ export default function FundedAccountsPage() {
 
   return (
     <>
-      <h1 className="page-title">{section.title}</h1>
+      <h1 className="title-rule page-title">{section.title}</h1>
       <p className="mt-3 text-lg text-muted">
         Compare prop firm challenges side by side: price, rules and profit split.
       </p>

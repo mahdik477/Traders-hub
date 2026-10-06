@@ -99,7 +99,7 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
     <>
       <BrokerBackLink />
 
-      <header className="mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
+      <header className="detail-hero mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
         <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:p-6">
           <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} size="lg" priority />
           <div className="min-w-0 flex-1">
@@ -108,7 +108,7 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
               {broker.ourChoice && <OurChoiceBadge />}
             </div>
             {broker.ourChoice && (
-              <p className="meta mt-2">Featured listing on Traders Hub. It is not a score of trading results.</p>
+              <p className="meta mt-2">Featured listing on Tradox. It is not a score of trading results.</p>
             )}
             {broker.tagline && <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{broker.tagline}</p>}
             <p className="meta mt-2">

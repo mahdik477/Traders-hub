@@ -75,13 +75,13 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
 
   return (
     <>
-      <Link href="/courses" className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground">
+      <Link href="/courses" className="back-link">
         <ChevronLeftIcon className="size-4" />
         Back to courses
       </Link>
 
       {/* Hero */}
-      <div className="relative mt-5 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-glow sm:p-8">
+      <div className="detail-hero relative mt-5 overflow-hidden rounded-2xl border border-border bg-surface p-6 sm:p-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-24 -top-24 size-64 rounded-full bg-accent/20 blur-3xl"
@@ -157,7 +157,7 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
             return (
               <li
                 key={course.slug}
-                className="group relative flex flex-col rounded-xl border border-border bg-surface p-5 transition duration-200 hover:border-accent/50 hover:shadow-glow motion-safe:hover:-translate-y-0.5"
+                className="lift-card group relative flex flex-col rounded-xl border border-border bg-surface p-5"
               >
                 <h3 className="text-lg font-semibold">{course.name}</h3>
                 {course.bundleOf.length > 0 && (

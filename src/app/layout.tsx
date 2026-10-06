@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} — Compare trading products`,
+    default: `${SITE_NAME} | Compare trading products`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
