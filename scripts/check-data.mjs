@@ -365,6 +365,10 @@ function checkBroker(file, data) {
   // Leverage is always shown with a risk warning; make sure one exists.
   if ((b.leverage ?? []).length > 0 && !b.leverage_note)
     warn(file, `broker.leverage has no leverage_note - the default risk warning will be shown`);
+  if (b.leverage_summary != null && typeof b.leverage_summary !== "string")
+    err(file, `broker.leverage_summary must be text or left out`);
+  if (b.promotions != null && typeof b.promotions !== "string")
+    err(file, `broker.promotions must be text or left out`);
   const mr = b.margin_rates;
   if (mr) {
     (mr.rows ?? []).forEach((r, i) => {

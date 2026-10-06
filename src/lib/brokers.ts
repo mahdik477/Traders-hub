@@ -38,7 +38,9 @@ type RawFile = {
     costs?: { title: string; rows: RawRow[] }[];
     costs_note?: string | null;
     leverage?: { market: string; value: string; note?: string | null }[];
+    leverage_summary?: string | null;
     leverage_note?: string | null;
+    promotions?: string | null;
     margin_rates?: {
       columns: string[];
       rows: { tier: string; values: string[] }[];
@@ -125,6 +127,7 @@ function buildBroker(b: RawFile["broker"]): BrokerView {
     costs: (b.costs ?? []).map((g) => ({ title: g.title, rows: g.rows.map(buildRow) })),
     costsNote: b.costs_note || null,
     leverage: (b.leverage ?? []).map((l) => ({ market: l.market, value: l.value, note: l.note || null })),
+    leverageSummary: b.leverage_summary || null,
     leverageNote: b.leverage_note || DEFAULT_LEVERAGE_NOTE,
     marginRates: b.margin_rates
       ? {
@@ -142,10 +145,13 @@ function buildBroker(b: RawFile["broker"]): BrokerView {
           label: b.trustpilot.label || null,
         }
       : null,
+    promotions: b.promotions || null,
     website: safeLink(b.website),
     affiliateLink: safeLink(b.affiliate_link),
   };
 }
+
+export { brokerOutboundUrl } from "./broker-types";
 
 // Only allow normal web links, so a typo in a data file can't produce a
 // harmful link (e.g. "javascript:...") — same guard as courses.ts.

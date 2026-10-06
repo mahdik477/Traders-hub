@@ -12,12 +12,14 @@ export default function StickyVisitBar({
   logoBg = "white",
   price,
   visitHref,
+  visitLabel = "Visit site",
 }: {
   courseName: string;
   logo: string | null;
   logoBg?: "white" | "dark";
   price: string | null;
   visitHref: string | null;
+  visitLabel?: string;
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -54,7 +56,7 @@ export default function StickyVisitBar({
             <p className="truncate text-sm font-semibold text-foreground">{courseName}</p>
             {price && <p className="meta">{price}</p>}
           </div>
-          <VisitSiteLink href={visitHref} firmName={courseName} className="shrink-0" />
+          <VisitSiteLink href={visitHref} firmName={courseName} label={visitLabel} className="shrink-0" />
         </div>
       </div>
     </div>
