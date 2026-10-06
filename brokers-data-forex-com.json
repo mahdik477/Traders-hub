@@ -21,7 +21,7 @@
       { "regulator": "MAS", "country": "SG", "entity": null },
       { "regulator": "FSA (Japan)", "country": "JP", "entity": null }
     ],
-    "regulators_note": "FOREX.com's international regulation page lists these authorities, including the US, Canada and the UK. Company names are filled in only where a customer agreement or the broker's own page names them. CIMA, MAS and the Japan FSA are listed by the broker without a company name on the pages checked. A Capital Markets Authority is also named on that page without a country or company, so it is left off this list.",
+    "regulators_note": "FOREX.com's international regulation page lists these authorities, including the US, Canada and the UK. Company names are filled in only where a customer agreement or the broker's own page names them. CIMA, MAS and the Japan FSA are listed by the broker without a company name. A Capital Markets Authority is also named on that page without a country or company, so it is left off this list.",
     "platforms": ["FOREX.com web", "FOREX.com mobile", "TradingView", "MetaTrader 5"],
     "plans": [
       {
@@ -54,12 +54,12 @@
           {
             "label": "Spread only",
             "value": "No separate commission",
-            "note": "A single typical spread was not taken from the pages checked, because the live quote moves and was not published as one standard figure."
+            "note": "FOREX.com does not publish one standard spread for this account. The live quote moves."
           }
         ]
       }
     ],
-    "costs_note": "No single minimum is shown, because it depends on the company you join. The US and international pages checked both said you can deposit from $100, and recommended at least $2,500. That $100 figure may not apply everywhere.",
+    "costs_note": "No single minimum is shown, because it depends on the company you join. US and international account pages say you can deposit from $100, and they recommend at least $2,500. That $100 figure may not apply everywhere.",
     "leverage": [
       {
         "market": "All products",
@@ -70,7 +70,7 @@
     "leverage_summary": "Depends on entity",
     "leverage_note": "Leverage increases losses as well as gains, and you can lose more than you deposit. The limit is set by the FOREX.com company you join and by the product.",
     "other_fees": [
-      { "label": "Minimum deposit", "value": "Depends on jurisdiction", "note": "Not stored as one number. See the costs note for the $100 figure on the US and international pages checked." }
+      { "label": "Minimum deposit", "value": "Depends on jurisdiction", "note": "US and international account pages say you can deposit from $100. That figure may not apply everywhere." }
     ],
     "promotions": "A welcome bonus of up to $5,000, a switch offer of up to $10,000, referral rewards and Active Trader rebates have been advertised. Eligibility and amounts depend on the entity and the campaign.",
     "trustpilot": {

@@ -59,6 +59,35 @@ export function sortFromQuery(value: string | null): SortKey {
   return "name";
 }
 
+const LISTING_QUERY_KEYS = ["market", "regulator", "deposit", "rating", "sort", "compare"] as const;
+
+/** Turn the directory's current filters into a query string, without the "?". */
+export function currentListingQuery(filters: Filters, sort: SortKey, compare: string[]): string {
+  const query = new URLSearchParams(filtersToQuery(filters).replace(/^\?/, ""));
+  if (sort !== "name") query.set("sort", sort);
+  if (compare.length) query.set("compare", compare.join(","));
+  return query.toString();
+}
+
+/**
+ * Back link from a broker page. Only known directory filters are kept, so a
+ * crafted address cannot send someone off the site.
+ */
+export function listingHrefFromBack(back: string | null | undefined): string {
+  if (!back) return "/brokers";
+  const incoming = new URLSearchParams(back);
+  const out = new URLSearchParams();
+  for (const key of LISTING_QUERY_KEYS) {
+    const value = incoming.get(key);
+    if (!value || value.length > 120) continue;
+    if (key === "sort" && value !== "deposit" && value !== "rating") continue;
+    if (key === "compare" && !/^[a-z0-9,-]+$/.test(value)) continue;
+    out.set(key, value);
+  }
+  const qs = out.toString();
+  return qs ? `/brokers?${qs}` : "/brokers";
+}
+
 /** Up to three broker ids from ?compare=a,b,c */
 export function compareFromQuery(value: string | null): string[] {
   if (!value) return [];

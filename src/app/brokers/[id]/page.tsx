@@ -12,7 +12,7 @@ import VisitSiteLink from "@/components/VisitSiteLink";
 import { ChevronLeftIcon, InfoIcon, LayersIcon, MonitorIcon, ShieldIcon, TagIcon } from "@/components/icons";
 import { BROKER_MARKET_LABELS, brokerOutboundUrl, formatDeposit, type CostRow } from "@/lib/broker-types";
 import { brokers, getBroker } from "@/lib/brokers";
-import { leverageLabel } from "@/lib/broker-filters";
+import { leverageLabel, listingHrefFromBack } from "@/lib/broker-filters";
 
 export const dynamicParams = false;
 
@@ -73,9 +73,11 @@ function CostTable({ rows }: { rows: CostRow[] }) {
   );
 }
 
-export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">) {
+export default async function BrokerPage({ params, searchParams }: PageProps<"/brokers/[id]">) {
   const broker = getBroker((await params).id);
   if (!broker) notFound();
+  const back = (await searchParams).back;
+  const backHref = listingHrefFromBack(typeof back === "string" ? back : null);
 
   const visitHref = brokerOutboundUrl(broker);
   const deposit = formatDeposit(broker.minDeposit, broker.currency);
@@ -97,7 +99,7 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
   return (
     <>
       <Link
-        href="/brokers"
+        href={backHref}
         className="inline-flex min-h-9 items-center gap-1 text-sm text-muted transition-colors duration-150 hover:text-foreground"
       >
         <ChevronLeftIcon className="size-4" />
@@ -360,6 +362,7 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
         price={deposit ? `Min. deposit ${deposit}` : "Min. deposit varies"}
         visitHref={visitHref}
         visitLabel="Visit broker"
+        wideLogo
       />
     </>
   );

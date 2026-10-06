@@ -13,7 +13,7 @@
     "markets": ["forex", "stocks", "crypto", "cfds"],
     "regulators": [],
     "company_registration": "Saint Lucia 2024-00205",
-    "regulators_note": "Defcofx publishes registration number 2024-00205 and the address Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia. That number is a company registration. It is not a financial-services licence from a conduct regulator, and it does not give the same protections as an FCA, ASIC or CySEC firm. The company name on the registration was not printed next to the number on the pages checked.",
+    "regulators_note": "Defcofx publishes registration number 2024-00205 and the address Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia. That number is a company registration. It is not a financial-services licence from a conduct regulator, and it does not give the same protections as an FCA, ASIC or CySEC firm. The company name was not printed next to the number.",
     "platforms": ["MetaTrader 5"],
     "plans": [
       {
@@ -58,7 +58,7 @@
         "note": "Stated by Defcofx. This listing has not timed a withdrawal."
       }
     ],
-    "promotions": "No public deposit bonus was verified when this listing was checked.",
+    "promotions": null,
     "trustpilot": {
       "rating": 4.5,
       "review_count": 71,

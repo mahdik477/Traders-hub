@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 const SIZES = {
-  sm: { box: "size-10", text: "text-sm", img: 40, maxH: "max-h-7" },
-  md: { box: "size-12", text: "text-base", img: 48, maxH: "max-h-8" },
-  lg: { box: "size-16 sm:size-20", text: "text-xl", img: 80, maxH: "max-h-12 sm:max-h-14" },
+  sm: { box: "h-10 w-24", text: "text-sm", img: 96 },
+  md: { box: "h-12 w-36", text: "text-base", img: 144 },
+  lg: { box: "h-16 w-52 sm:h-20 sm:w-60", text: "text-xl", img: 240 },
 } as const;
 
 export default function BrokerLogo({
@@ -45,7 +45,7 @@ export default function BrokerLogo({
         width={s.img}
         height={s.img}
         priority={priority}
-        className={`h-auto ${s.maxH} w-full object-contain`}
+        className="h-auto max-h-full w-auto max-w-full object-contain"
       />
     </div>
   );

@@ -13,6 +13,7 @@ import {
 import {
   EMPTY_FILTERS,
   compareFromQuery,
+  currentListingQuery,
   filtersFromQuery,
   filtersToQuery,
   leverageLabel,
@@ -106,7 +107,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
   }
 
   const chips = activeFilterChips(filters);
-  const listKey = `${sort}:${matching.map((b) => b.id).join("|")}`;
+  const listingQuery = currentListingQuery(filters, sort, compare);
 
   return (
     <div>
@@ -212,13 +213,14 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
           No brokers match these filters.
         </p>
       ) : (
-        <ul key={listKey} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {matching.map((broker, index) => (
             <BrokerCard
               key={broker.id}
               broker={broker}
               index={index}
               selected={compare.includes(broker.id)}
+              listingQuery={listingQuery}
               onToggleCompare={() => toggleCompare(broker.id)}
               onPickRegulator={(regulator) => updateFilters({ regulator })}
             />
@@ -233,12 +235,14 @@ function BrokerCard({
   broker,
   index,
   selected,
+  listingQuery,
   onToggleCompare,
   onPickRegulator,
 }: {
   broker: BrokerView;
   index: number;
   selected: boolean;
+  listingQuery: string;
   onToggleCompare: () => void;
   onPickRegulator: (regulator: string) => void;
 }) {
@@ -287,7 +291,7 @@ function BrokerCard({
               key={`${r.regulator}-${r.country}`}
               type="button"
               onClick={() => onPickRegulator(r.regulator)}
-              className="pill relative z-10 transition-colors duration-150 hover:border-accent/40 hover:text-foreground"
+              className="pill relative z-10 min-h-10 px-2.5 transition-colors duration-150 hover:border-accent/40 hover:text-foreground"
             >
               {r.regulator}
             </button>
@@ -301,7 +305,7 @@ function BrokerCard({
           type="button"
           aria-pressed={selected}
           onClick={onToggleCompare}
-          className={`relative z-10 inline-flex min-h-9 items-center rounded-lg border px-2.5 text-xs font-semibold transition-colors duration-150 ${
+          className={`relative z-10 inline-flex min-h-11 items-center rounded-lg border px-3 text-xs font-semibold transition-colors duration-150 ${
             selected
               ? "border-accent bg-accent/12 text-foreground"
               : "border-border-strong text-muted hover:border-subtle hover:text-foreground"
@@ -310,7 +314,11 @@ function BrokerCard({
           {selected ? "In compare" : "Compare"}
         </button>
         <Link
-          href={`/brokers/${broker.id}`}
+          href={
+            listingQuery
+              ? `/brokers/${broker.id}?back=${encodeURIComponent(listingQuery)}`
+              : `/brokers/${broker.id}`
+          }
           className="inline-flex min-h-9 items-center text-sm font-semibold text-foreground after:absolute after:inset-0"
         >
           View

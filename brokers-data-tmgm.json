@@ -17,7 +17,7 @@
       { "regulator": "FSA (Seychelles)", "country": "SC", "entity": "Trademax Global Markets (SE) Limited" },
       { "regulator": "FSC (Mauritius)", "country": "MU", "entity": "Trademax Global Markets (International) Pty Ltd" }
     ],
-    "regulators_note": "Licence details from TMGM's Australia regulations page: ASIC AFSL 436416, VFSC 40356, Seychelles FSA SD224, Mauritius FSC GB22201012. The Trustpilot company description also mentions the FMA. That New Zealand authority is not on the regulations page checked, so it is not listed here.",
+    "regulators_note": "Licence details from TMGM's Australia regulations page: ASIC AFSL 436416, VFSC 40356, Seychelles FSA SD224, Mauritius FSC GB22201012. The Trustpilot company description also mentions the FMA. That New Zealand authority is not on the regulations page, so it is not listed here.",
     "platforms": ["MetaTrader 4", "MetaTrader 5"],
     "plans": [
       {

@@ -48,7 +48,7 @@
         ]
       }
     ],
-    "costs_note": "The lower minimum on the account pages checked is $50. ASIC retail clients do not get the 1:2000 leverage advertised for international accounts.",
+    "costs_note": "Raw and Standard account pages list a $50 minimum. ASIC retail clients do not get the 1:2000 leverage advertised for international accounts.",
     "leverage": [
       {
         "market": "International accounts",
@@ -67,7 +67,7 @@
       { "label": "Raw Spread minimum", "value": "$50" },
       { "label": "Stop out", "value": "50%", "note": "Stated on the margin and account pages, with a 100% margin call level." }
     ],
-    "promotions": "No standard public deposit bonus was verified when this listing was checked.",
+    "promotions": null,
     "trustpilot": {
       "rating": 4.4,
       "review_count": 209,

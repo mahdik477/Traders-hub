@@ -79,7 +79,7 @@
       { "label": "Minimum deposit", "value": "None on listed accounts", "note": "CFI says there is no minimum to open a real account. You still need funds in the account to trade." },
       { "label": "Swap-free", "value": "Advertised", "note": "Offered with conditions. Confirm the instruments and any admin fee on your entity." }
     ],
-    "promotions": "No public deposit bonus was verified when this listing was checked.",
+    "promotions": null,
     "trustpilot": {
       "rating": 4.8,
       "review_count": 1919,

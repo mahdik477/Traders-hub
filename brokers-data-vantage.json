@@ -4,7 +4,7 @@
     "name": "Vantage",
     "logo": null,
     "tagline": "A multi-entity CFD and forex group, founded in 2009. Leverage and client protections depend on which Vantage company holds the account.",
-    "about": "Vantage, formerly Vantage FX, was founded in 2009 and runs several companies. Vantage describes major operations in Mauritius, the UK and Australia, and Seychelles is also named among its bases. International pages advertise a Standard STP account with spreads from 1.0 pip and no commission, and a RAW ECN account with spreads from 0.0 pips plus commission. Some international entities are described as offering leverage up to 1:2000. The account pages that loaded for this check did not repeat that figure. Retail clients at the Australian and UK companies are under much lower regulatory caps. Platforms named for this listing are MetaTrader 4, MetaTrader 5, TradingView and copy trading.",
+    "about": "Vantage, formerly Vantage FX, was founded in 2009 and runs several companies. The group describes major operations in Mauritius, the UK and Australia, and also names Seychelles among its bases. International pages advertise a Standard STP account with spreads from 1.0 pip and no commission, and a RAW ECN account with spreads from 0.0 pips plus commission. Some international entities are described as offering leverage up to 1:2000. Not every Vantage account page states that figure. Retail clients at the Australian and UK companies are under much lower regulatory caps. The platforms listed here are MetaTrader 4, MetaTrader 5, TradingView and copy trading.",
     "founded": 2009,
     "headquarters": "Global group. Major operations in Mauritius, Seychelles, the UK and Australia",
     "min_deposit": 50,
@@ -18,7 +18,7 @@
       { "regulator": "FSCA", "country": "ZA", "entity": "Vantage Markets (Pty) Ltd" },
       { "regulator": "FSC (Mauritius)", "country": "MU", "entity": "VIG Holdings Limited" }
     ],
-    "regulators_note": "The company on your account is the one that matters. ASIC and FCA retail rules are stricter than the Vanuatu and Cayman companies. A Seychelles licence was not on the Vantage pages checked for this listing, so Seychelles is not shown as a regulator.",
+    "regulators_note": "The company on your account is the one that matters. ASIC and FCA retail rules are stricter than the Vanuatu and Cayman companies. Seychelles is not shown as a regulator, because the Vantage pages used here do not name a Seychelles licence.",
     "platforms": ["MetaTrader 4", "MetaTrader 5", "TradingView", "Copy Trading"],
     "plans": [
       {
@@ -56,7 +56,7 @@
       {
         "market": "Some international entities",
         "value": "Up to 1:2000",
-        "note": "Described for some international entities. The account pages that loaded for this check did not repeat 1:2000. It is not the cap for Australian or UK retail clients."
+        "note": "Described for some international entities. Not every Vantage account page states 1:2000. It is not the cap for Australian or UK retail clients."
       },
       {
         "market": "ASIC and FCA retail",
