@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 import { SITE_NAME, sections } from "@/lib/sections";
 
 export default function SiteHeader() {
@@ -10,8 +11,8 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header sticky top-0 z-40">
-      <div className="container-page flex flex-col gap-1 py-2 sm:flex-row sm:items-center sm:gap-5 sm:py-2.5">
-        <Link href="/" className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-lg">
+      <div className="container-page flex flex-wrap items-center gap-x-3 gap-y-1 py-2 sm:flex-nowrap sm:py-2.5">
+        <Link href="/" className="mr-auto flex min-h-11 shrink-0 items-center gap-2.5 rounded-lg sm:order-1 sm:mr-0">
           <Image
             src="/brand/tradox-td.png"
             alt=""
@@ -22,8 +23,11 @@ export default function SiteHeader() {
           />
           <span className="text-sm font-semibold tracking-[0.16em] uppercase">{SITE_NAME}</span>
         </Link>
-        <nav aria-label="Main" className="min-w-0 sm:flex-1">
-          <ul className="nav-scroll -mx-1 flex gap-1 overflow-x-auto px-1 py-0.5">
+        <div className="sm:order-3">
+          <ThemeToggle />
+        </div>
+        <nav aria-label="Main" className="relative order-last w-full min-w-0 sm:order-2 sm:w-auto sm:flex-1">
+          <ul className="nav-scroll -mx-1 flex gap-1 overflow-x-auto px-1 py-0.5 pr-8">
             {sections.map((section) => {
               const href = `/${section.slug}`;
               const active = pathname === href || pathname.startsWith(`${href}/`);
@@ -44,6 +48,7 @@ export default function SiteHeader() {
               );
             })}
           </ul>
+          <span className="nav-fade" aria-hidden="true" />
         </nav>
       </div>
     </header>

@@ -52,7 +52,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
-      className="fixed bottom-5 right-5 z-50 flex size-11 items-center justify-center rounded-full border border-border bg-surface text-foreground shadow-lg transition-colors hover:border-accent hover:text-accent"
+      className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-foreground transition-colors hover:border-accent hover:text-accent"
     >
       {isLight ? <MoonIcon /> : <SunIcon />}
     </button>

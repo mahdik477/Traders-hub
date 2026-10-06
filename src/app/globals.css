@@ -21,11 +21,6 @@
   --color-gold-fill: #e0b44a;
   --color-gold-fill-hover: #f5d76e;
 
-  /* Status — used across the site, and specifically for the LOW/MEDIUM/HIGH
-     red_flag_level badges on listings once those exist. */
-  --color-success: #3dce86;
-  --color-warning: #e8a317;
-  --color-danger: #ef5b56;
 }
 
 :root,
@@ -39,11 +34,15 @@
   --color-border-strong: #433c30;
 
   --color-foreground: #f6f3ec;
-  --color-muted: #a89f90;
-  --color-subtle: #746c60;
+  --color-muted: #cfc6b8;
+  --color-subtle: #b3a898;
 
   --color-brand: var(--color-gold);
   --color-brand-hover: var(--color-gold-bright);
+
+  --color-success: #3dce86;
+  --color-warning: #e8a317;
+  --color-danger: #ef5b56;
 }
 
 :root[data-theme="light"] {
@@ -56,12 +55,15 @@
   --color-border-strong: #d4c4a2;
 
   --color-foreground: #16130e;
-  --color-muted: #5c564c;
-  --color-subtle: #8a8172;
+  --color-muted: #3d3832;
+  --color-subtle: #5a534a;
 
-  /* Darker gold so links and labels stay readable on the light surfaces. */
+  /* Darker gold and status colours so text stays readable on the light surfaces. */
   --color-brand: #8a6410;
   --color-brand-hover: #6e4e0c;
+  --color-success: #0f7a45;
+  --color-warning: #8a5a00;
+  --color-danger: #b42318;
 }
 
 @theme inline {
@@ -102,6 +104,12 @@
 
 html {
   scroll-padding-top: 7.25rem;
+}
+
+/* Keep wide tables inside their own scroller so the page itself does not slide sideways. */
+main {
+  min-width: 0;
+  overflow-x: clip;
 }
 
 body {
@@ -427,6 +435,16 @@ body {
 
 .nav-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.nav-fade {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2rem;
+  background: linear-gradient(90deg, transparent, var(--color-background));
 }
 
 .site-footer {

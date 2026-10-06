@@ -168,7 +168,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
             key={key}
             type="button"
             onClick={() => updateFilters({ [key]: "" })}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border-strong bg-surface-2 py-0.5 pl-3 pr-2 text-xs font-medium text-foreground transition-colors hover:border-subtle"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border-strong bg-surface-2 py-1 pl-3 pr-2 text-xs font-medium text-foreground transition-colors hover:border-subtle"
           >
             {label}
             <span aria-hidden="true" className="text-muted">
@@ -181,7 +181,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
           <button
             type="button"
             onClick={() => updateFilters(EMPTY_FILTERS)}
-            className="text-xs text-muted underline hover:text-foreground"
+            className="inline-flex min-h-11 items-center text-xs text-muted underline hover:text-foreground"
           >
             Clear all
           </button>

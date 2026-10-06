@@ -77,7 +77,7 @@ export default function PropFirmPricing({
         </p>
         <p className="meta mt-3 sm:hidden">Scroll sideways to see every account size →</p>
 
-        <div className="mt-3 overflow-x-auto rounded-xl border border-border">
+        <div className="mt-3 max-w-full overflow-x-auto rounded-xl border border-border">
           <table
             className="w-full border-collapse text-sm"
             onMouseLeave={() => setHoveredCol(null)}
