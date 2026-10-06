@@ -1,0 +1,164 @@
+{
+  "broker": {
+    "id": "interactive-brokers",
+    "name": "Interactive Brokers (IBKR)",
+    "logo": null,
+    "tagline": "A large, low-cost global broker giving access to stocks, options, futures, forex and bonds on exchanges worldwide from one account.",
+    "about": "Interactive Brokers is a US-based brokerage founded in 1978 and listed on the Nasdaq under the ticker IBKR. It's known for low commissions, very wide market access and professional-grade tools, which makes it popular with active traders. Beginners can open an account with no minimum deposit, but the main desktop platform (Trader Workstation) has a steep learning curve, so many newer users start with the simpler mobile or web apps. Which IBKR company you sign up with, and so which regulator protects you, depends on the country you live in.",
+    "founded": 1978,
+    "headquarters": "Greenwich, Connecticut, US",
+    "min_deposit": 0,
+    "currency": "USD",
+    "markets": ["stocks", "options", "futures", "forex", "bonds", "funds", "crypto", "cfds"],
+    "regulators": [
+      { "regulator": "SEC & FINRA", "country": "US", "entity": "Interactive Brokers LLC" },
+      { "regulator": "FCA", "country": "GB", "entity": "Interactive Brokers (U.K.) Limited" },
+      { "regulator": "Central Bank of Ireland", "country": "IE", "entity": "Interactive Brokers Ireland Limited" },
+      { "regulator": "CIRO", "country": "CA", "entity": "Interactive Brokers Canada Inc." },
+      { "regulator": "ASIC", "country": "AU", "entity": "Interactive Brokers Australia Pty Ltd" },
+      { "regulator": "SFC", "country": "HK", "entity": "Interactive Brokers Hong Kong Limited" },
+      { "regulator": "MAS", "country": "SG", "entity": "Interactive Brokers Singapore Pte. Ltd." }
+    ],
+    "regulators_note": "You're placed with an IBKR company based on where you live. Check which one your account is opened with, as investor protection rules differ between them.",
+    "platforms": [
+      "Trader Workstation (TWS)",
+      "IBKR Desktop",
+      "IBKR Mobile",
+      "Client Portal",
+      "IBKR GlobalTrader",
+      "TradingView",
+      "IBKR API"
+    ],
+    "plans": [
+      {
+        "name": "IBKR Pro",
+        "price": "From $0.0005/share",
+        "billing_note": "Pay-per-trade commissions on everything, with the lowest margin rates and IBKR's best order routing. Choose Fixed or Tiered pricing.",
+        "highlight": "For active traders"
+      },
+      {
+        "name": "IBKR Lite",
+        "price": "$0 US stocks & ETFs",
+        "billing_note": "Commission-free US stocks and ETFs, but higher margin rates. US stock pricing shown is for US residents.",
+        "highlight": null
+      }
+    ],
+    "costs": [
+      {
+        "title": "US stocks & ETFs",
+        "rows": [
+          {
+            "label": "IBKR Pro — Fixed",
+            "value": "$0.005 per share",
+            "note": "Minimum $1.00 and maximum 1% of trade value per order, plus regulatory fees."
+          },
+          {
+            "label": "IBKR Pro — Tiered",
+            "value": "$0.0005–$0.0035 per share",
+            "note": "Cheaper the more shares you trade each month. Minimum $0.35 per order, maximum 1% of trade value, plus exchange, clearing and regulatory fees."
+          },
+          {
+            "label": "IBKR Lite",
+            "value": "$0",
+            "note": "US residents only, plus regulatory fees."
+          }
+        ]
+      },
+      {
+        "title": "US options",
+        "rows": [
+          {
+            "label": "IBKR Pro",
+            "value": "$0.15–$0.65 per contract",
+            "note": "Depends on monthly volume and the option's premium. Minimum $1.00 per order, plus exchange, clearing and regulatory fees."
+          },
+          {
+            "label": "IBKR Lite",
+            "value": "$0.65 per contract",
+            "note": "Minimum $1.00 per order. US residents only."
+          }
+        ]
+      },
+      {
+        "title": "US futures",
+        "rows": [
+          {
+            "label": "IBKR Pro",
+            "value": "$0.25–$0.85 per contract",
+            "note": "$0.85 for your first 1,000 contracts each month, falling with volume. Exchange and regulatory fees are charged on top."
+          }
+        ]
+      },
+      {
+        "title": "Forex (spot currencies)",
+        "rows": [
+          {
+            "label": "Commission",
+            "value": "0.08–0.20 basis points × trade value",
+            "note": "0.20 bp (0.002%) for most people, lower only at very high monthly volume. Minimum $2.00 per order. Exchange and regulatory fees included."
+          },
+          {
+            "label": "Spreads",
+            "value": "Raw interbank, from 0.1 pip",
+            "note": "IBKR passes on the prices it gets from big banks without marking them up, and charges the separate commission above instead. Real spreads widen in fast or quiet markets."
+          }
+        ]
+      }
+    ],
+    "costs_note": "US pricing shown. Commissions on other countries' markets are different — see IBKR's pricing pages.",
+    "leverage": [
+      {
+        "market": "Stocks (margin account)",
+        "value": "Up to 2:1",
+        "note": "Standard US margin rules (Reg T) let you borrow up to half the cost of a stock. Some account types can get more intraday."
+      },
+      {
+        "market": "Forex — major pairs",
+        "value": "Up to 50:1 (US) · 30:1 (UK/EU retail)",
+        "note": "Set by the regulator for your IBKR company. Minor pairs and exotic currencies get less."
+      },
+      {
+        "market": "Futures",
+        "value": "Set by the exchange",
+        "note": "Each contract has a margin requirement set by its exchange, which IBKR can raise."
+      }
+    ],
+    "leverage_note": "Leverage makes losses bigger as well as gains, and on a margin account you can lose more than you deposited. IBKR can raise its margin requirements at any time.",
+    "margin_rates": {
+      "columns": ["IBKR Pro", "IBKR Lite"],
+      "rows": [
+        { "tier": "Up to $100,000", "values": ["5.38%", "6.38%"] },
+        { "tier": "$100,000 – $1M", "values": ["4.88%", "6.38%"] },
+        { "tier": "$1M – $50M", "values": ["4.63%", "6.38%"] },
+        { "tier": "Over $50M", "values": ["4.38%", "6.38%"] }
+      ],
+      "note": "Yearly interest on money borrowed in USD. Rates follow a benchmark interest rate (Pro: benchmark + 0.5% to 1.5%, Lite: benchmark + 2.5%), so they change over time."
+    },
+    "other_fees": [
+      { "label": "Minimum deposit", "value": "$0" },
+      { "label": "Account / inactivity fee", "value": "None listed" },
+      {
+        "label": "Withdrawals",
+        "value": "2 free per month",
+        "note": "After that, a USD bank wire costs $10.00 and an ACH transfer $1.00."
+      },
+      {
+        "label": "Market data",
+        "value": "Varies",
+        "note": "Delayed prices are free. Live data for many exchanges is a paid monthly subscription."
+      }
+    ],
+    "trustpilot": {
+      "rating": 3.1,
+      "review_count": 5511,
+      "url": "https://www.trustpilot.com/review/interactivebrokers.com",
+      "label": "Average"
+    },
+    "website": "https://www.interactivebrokers.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-05",
+    "source": "interactivebrokers.com pricing pages (commissions-stocks, commissions-options, commissions-futures, commissions-spot-currencies, margin-rates, other-fees); Trustpilot. Leverage limits are regulatory caps, not checked against IBKR's own margin tables (the forex margin page was unavailable)."
+  }
+}
