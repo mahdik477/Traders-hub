@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import BrokerBackLink from "@/components/BrokerBackLink";
 import BrokerLogo from "@/components/BrokerLogo";
 import BrokerReveal from "@/components/BrokerReveal";
+import OurChoiceBadge from "@/components/OurChoiceBadge";
 import CoursePricing from "@/components/CoursePricing";
 import PlatformPill from "@/components/PlatformPill";
 import StickyVisitBar from "@/components/StickyVisitBar";
@@ -102,7 +103,13 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
         <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:p-6">
           <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} size="lg" priority />
           <div className="min-w-0 flex-1">
-            <h1 className="page-title">{broker.name}</h1>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <h1 className="page-title">{broker.name}</h1>
+              {broker.ourChoice && <OurChoiceBadge />}
+            </div>
+            {broker.ourChoice && (
+              <p className="meta mt-2">Featured listing on Traders Hub. It is not a score of trading results.</p>
+            )}
             {broker.tagline && <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{broker.tagline}</p>}
             <p className="meta mt-2">
               {[broker.founded ? `Since ${broker.founded}` : null, broker.headquarters].filter(Boolean).join(" · ")}

@@ -373,6 +373,8 @@ function checkBroker(file, data) {
     err(file, `broker.leverage_summary must be text or left out`);
   if (b.promotions != null && typeof b.promotions !== "string")
     err(file, `broker.promotions must be text or left out`);
+  if (b.our_choice != null && typeof b.our_choice !== "boolean")
+    err(file, `broker.our_choice must be true, false, or left out`);
   const mr = b.margin_rates;
   if (mr) {
     (mr.rows ?? []).forEach((r, i) => {

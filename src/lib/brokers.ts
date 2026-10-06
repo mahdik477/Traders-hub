@@ -56,6 +56,8 @@ type RawFile = {
     } | null;
     website?: string | null;
     affiliate_link?: string | null;
+    /** Featured listing. Only brokers set to true are pinned and badged. */
+    our_choice?: boolean | null;
   };
 };
 
@@ -150,6 +152,7 @@ function buildBroker(b: RawFile["broker"]): BrokerView {
     promotions: b.promotions || null,
     website: safeLink(b.website),
     affiliateLink: safeLink(b.affiliate_link),
+    ourChoice: b.our_choice === true,
   };
 }
 

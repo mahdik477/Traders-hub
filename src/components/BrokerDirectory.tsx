@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import BrokerLogo from "@/components/BrokerLogo";
+import OurChoiceBadge from "@/components/OurChoiceBadge";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import {
   BROKER_MARKET_LABELS,
@@ -253,7 +254,10 @@ function BrokerCard({
       <div className="flex items-start gap-3">
         <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} />
         <div className="min-w-0 flex-1">
-          <h2 className="text-base font-semibold tracking-tight text-foreground">{broker.name}</h2>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <h2 className="text-base font-semibold tracking-tight text-foreground">{broker.name}</h2>
+            {broker.ourChoice && <OurChoiceBadge />}
+          </div>
           {broker.founded && <p className="meta mt-0.5">Since {broker.founded}</p>}
           {broker.trustpilot && (
             <div className="relative z-10 mt-1.5">
