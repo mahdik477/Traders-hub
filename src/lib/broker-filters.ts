@@ -98,23 +98,30 @@ export function compareFromQuery(value: string | null): string[] {
   return [...new Set(ids)].slice(0, 3);
 }
 
+function compareBySort(a: BrokerView, b: BrokerView, sort: SortKey): number {
+  if (sort === "deposit") {
+    if (a.minDeposit == null && b.minDeposit == null) return a.name.localeCompare(b.name);
+    if (a.minDeposit == null) return 1;
+    if (b.minDeposit == null) return -1;
+    return a.minDeposit - b.minDeposit || a.name.localeCompare(b.name);
+  }
+  if (sort === "rating") {
+    return (b.trustpilot?.rating ?? -1) - (a.trustpilot?.rating ?? -1) || a.name.localeCompare(b.name);
+  }
+  return a.name.localeCompare(b.name);
+}
+
+/**
+ * Our-choice brokers stay first for every sort. If more than one is marked,
+ * that group is ordered by name. Everyone else keeps the selected sort.
+ */
 export function sortBrokers(list: BrokerView[], sort: SortKey): BrokerView[] {
   const copy = [...list];
-  if (sort === "deposit") {
-    copy.sort((a, b) => {
-      if (a.minDeposit == null && b.minDeposit == null) return a.name.localeCompare(b.name);
-      if (a.minDeposit == null) return 1;
-      if (b.minDeposit == null) return -1;
-      return a.minDeposit - b.minDeposit || a.name.localeCompare(b.name);
-    });
-  } else if (sort === "rating") {
-    copy.sort(
-      (a, b) =>
-        (b.trustpilot?.rating ?? -1) - (a.trustpilot?.rating ?? -1) || a.name.localeCompare(b.name),
-    );
-  } else {
-    copy.sort((a, b) => a.name.localeCompare(b.name));
-  }
+  copy.sort((a, b) => {
+    if (a.ourChoice !== b.ourChoice) return a.ourChoice ? -1 : 1;
+    if (a.ourChoice && b.ourChoice) return a.name.localeCompare(b.name);
+    return compareBySort(a, b, sort);
+  });
   return copy;
 }
 

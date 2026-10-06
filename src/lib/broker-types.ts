@@ -106,6 +106,11 @@ export type BrokerView = {
   promotions: string | null;
   website: string | null;
   /**
+   * Featured listing. Pinned to the top of the brokers directory, with an
+   * "Our choice" badge. Not a score of trading results.
+   */
+  ourChoice: boolean;
+  /**
    * The only place an affiliate URL goes. Null until the owner supplies one.
    * Visit buttons use affiliateLink, then website. Swap this field later
    * and every outbound button for the broker updates.
