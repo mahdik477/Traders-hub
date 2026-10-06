@@ -36,7 +36,7 @@ export default function CoursePricing({
                 type="button"
                 onClick={() => setSelected(i)}
                 aria-pressed={isSelected}
-                className={`relative w-full rounded-xl border p-5 text-left transition hover:-translate-y-0.5 ${
+                className={`lift-card relative w-full rounded-xl border p-5 text-left ${
                   isSelected
                     ? "border-accent bg-accent/6 shadow-glow"
                     : "border-border bg-surface hover:border-border-strong"
@@ -50,7 +50,7 @@ export default function CoursePricing({
                 <span
                   aria-hidden="true"
                   className={`absolute right-4 top-4 flex size-5 items-center justify-center rounded-full border transition-colors ${
-                    isSelected ? "border-accent bg-accent text-accent-fg" : "border-border-strong text-transparent"
+                    isSelected ? "border-gold-fill bg-gold-fill text-gold-ink" : "border-border-strong text-transparent"
                   }`}
                 >
                   <CheckIcon className="size-3" />

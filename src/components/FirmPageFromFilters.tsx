@@ -56,7 +56,7 @@ function BackLinkFromAddress() {
 
 function BackLink({ query }: { query: string }) {
   return (
-    <Link href={`/funded-accounts${query}`} className="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-foreground">
+    <Link href={`/funded-accounts${query}`} className="back-link">
       ← Back to all firms
     </Link>
   );

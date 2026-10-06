@@ -128,13 +128,13 @@ export default function CourseDetail({
 
   return (
     <>
-      <Link href={backHref} className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground">
+      <Link href={backHref} className="back-link">
         <ChevronLeftIcon className="size-4" />
         {backLabel}
       </Link>
 
       {/* Hero */}
-      <div className="relative mt-5 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-glow sm:p-8">
+      <div className="detail-hero relative mt-5 overflow-hidden rounded-2xl border border-border bg-surface p-6 sm:p-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-24 -top-24 size-64 rounded-full bg-accent/20 blur-3xl"
@@ -321,7 +321,7 @@ export default function CourseDetail({
             {testimonials.map((t, i) => (
               <li
                 key={i}
-                className="flex flex-col rounded-xl border border-border bg-surface p-5 transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-glow"
+                className="lift-card flex flex-col rounded-xl border border-border bg-surface p-5"
               >
                 <QuoteIcon className="size-6 text-accent/50" />
                 <p className="mt-2 flex-1 text-sm text-foreground">&ldquo;{t.quote}&rdquo;</p>

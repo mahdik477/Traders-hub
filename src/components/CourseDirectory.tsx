@@ -128,7 +128,7 @@ function Directory({
       {/* Filter bar */}
       <form
         aria-label="Filter courses"
-        className="grid grid-cols-2 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-3 lg:grid-cols-5"
+        className="grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-5"
         onSubmit={(e) => e.preventDefault()}
       >
         <Select
@@ -183,7 +183,7 @@ function Directory({
             key={key}
             type="button"
             onClick={() => updateFilters({ [key]: "" })}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border-strong bg-surface-2 py-0.5 pl-3 pr-2 text-xs font-medium text-foreground transition-colors hover:border-subtle"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border-strong bg-surface-2 py-1 pl-3 pr-2 text-xs font-medium text-foreground transition-colors hover:border-subtle"
           >
             {label}
             <span aria-hidden="true" className="text-muted">
@@ -196,7 +196,7 @@ function Directory({
           <button
             type="button"
             onClick={() => updateFilters(EMPTY_FILTERS)}
-            className="text-xs text-muted underline hover:text-foreground"
+            className="inline-flex min-h-11 items-center text-xs text-muted underline hover:text-foreground"
           >
             Clear all
           </button>
@@ -212,9 +212,9 @@ function Directory({
           {matching.map((entry) => (
             <li
               key={entry.id}
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition duration-200 hover:border-accent/50 hover:shadow-glow motion-safe:hover:-translate-y-0.5"
+              className="lift-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface"
             >
-              <div className="h-1 w-full bg-gradient-to-r from-accent to-accent-strong" />
+              <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
               <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-center gap-3">
                   {entry.logo ? (

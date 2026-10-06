@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import ThemeToggle from "@/components/ThemeToggle";
 import { SITE_NAME } from "@/lib/sections";
 import "./globals.css";
 
@@ -18,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} — Compare trading products`,
+    default: `${SITE_NAME} | Compare trading products`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
@@ -52,7 +51,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Every page sits in the same centred container as the header. */}
         <main className="container-page flex-1 py-10 sm:py-14">{children}</main>
         <SiteFooter />
-        <ThemeToggle />
       </body>
     </html>
   );

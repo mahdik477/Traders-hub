@@ -10,7 +10,7 @@ export type Section = {
   status: SectionStatus;
 };
 
-export const SITE_NAME = "Traders Hub";
+export const SITE_NAME = "Tradox";
 
 export const sections: Section[] = [
   {

@@ -77,7 +77,7 @@ export default function PropFirmPricing({
         </p>
         <p className="meta mt-3 sm:hidden">Scroll sideways to see every account size →</p>
 
-        <div className="mt-3 overflow-x-auto rounded-xl border border-border">
+        <div className="mt-3 max-w-full overflow-x-auto rounded-xl border border-border">
           <table
             className="w-full border-collapse text-sm"
             onMouseLeave={() => setHoveredCol(null)}
@@ -213,9 +213,9 @@ function ToggleRow({
               type="button"
               aria-pressed={isSelected}
               onClick={() => onSelect(o.key)}
-              className={`flex min-w-24 flex-col items-center rounded-lg border px-4 py-2 text-sm font-semibold transition-colors ${
+              className={`flex min-h-11 min-w-24 flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm font-semibold transition-colors ${
                 isSelected
-                  ? "border-accent-strong bg-accent-strong text-accent-fg"
+                  ? "border-gold-fill bg-gold-fill text-gold-ink"
                   : "border-border-strong text-foreground hover:border-accent/70 hover:bg-surface-2"
               }`}
             >
@@ -223,7 +223,7 @@ function ToggleRow({
               {o.sub && (
                 <span
                   className={`mt-0.5 text-xs font-normal ${
-                    isSelected ? "text-accent-fg/75" : "text-subtle"
+                    isSelected ? "text-gold-ink/75" : "text-subtle"
                   }`}
                 >
                   {o.sub}

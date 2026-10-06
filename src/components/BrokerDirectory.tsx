@@ -114,7 +114,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
     <div>
       <form
         aria-label="Filter brokers"
-        className="grid grid-cols-2 gap-3 border-b border-border pb-5 lg:grid-cols-5"
+        className="grid grid-cols-1 gap-3 border-b border-border pb-5 sm:grid-cols-2 lg:grid-cols-5"
         onSubmit={(e) => e.preventDefault()}
       >
         <Select
@@ -170,7 +170,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
             key={key}
             type="button"
             onClick={() => updateFilters({ [key]: "" })}
-            className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-border-strong bg-surface py-1 pl-3 pr-2 text-xs font-medium text-foreground transition-colors duration-150 hover:border-subtle"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border-strong bg-surface py-1 pl-3 pr-2 text-xs font-medium text-foreground transition-colors duration-150 hover:border-subtle"
           >
             {label}
             <span aria-hidden="true" className="text-muted">
@@ -183,7 +183,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
           <button
             type="button"
             onClick={() => updateFilters(EMPTY_FILTERS)}
-            className="text-xs text-muted underline underline-offset-2 hover:text-foreground"
+            className="inline-flex min-h-11 items-center text-xs text-muted underline underline-offset-2 hover:text-foreground"
           >
             Clear filters
           </button>
@@ -248,7 +248,7 @@ function BrokerCard({
 
   return (
     <li
-      className="broker-card group relative flex flex-col rounded-xl border border-border bg-surface p-4 transition duration-200 ease-out hover:border-border-strong hover:bg-surface-2 motion-safe:hover:-translate-y-px sm:p-5"
+      className="broker-card lift-card group relative flex flex-col rounded-xl border border-border bg-surface p-4 sm:p-5"
       style={{ animationDelay: `${Math.min(index, 8) * 45}ms` }}
     >
       <div className="flex items-start gap-3">
