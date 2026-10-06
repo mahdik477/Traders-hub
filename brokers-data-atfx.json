@@ -42,7 +42,7 @@
         "name": "ECN (South Africa)",
         "price": "From R500",
         "billing_note": "South Africa account page: spreads from 0.1, commission $7 per lot, leverage up to 1:500, MetaTrader 5.",
-        "highlight": "Tighter spread"
+        "highlight": "Spread from 0.1 pips"
       }
     ],
     "costs": [

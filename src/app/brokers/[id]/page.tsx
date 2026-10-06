@@ -86,7 +86,11 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
     broker.costs.length ? ["costs-heading", "Costs"] : null,
     broker.leverage.length || broker.marginRates ? ["leverage-heading", "Leverage"] : null,
     broker.otherFees.length ? ["fees-heading", "Fees"] : null,
-    broker.regulators.length ? ["regulation-heading", "Regulation"] : null,
+    broker.regulators.length
+      ? ["regulation-heading", "Regulation"]
+      : broker.companyRegistration
+        ? ["regulation-heading", "Registration"]
+        : null,
     broker.platforms.length ? ["platforms-heading", "Platforms"] : null,
   ].filter((item): item is [string, string] => Boolean(item));
 
@@ -112,6 +116,7 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
             {broker.trustpilot && (
               <div className="mt-3">
                 <TrustpilotStars rating={broker.trustpilot} />
+                <p className="meta mt-1.5">Trustpilot&apos;s review score. It is not a measure of trading results.</p>
               </div>
             )}
           </div>
@@ -283,13 +288,19 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
         </BrokerReveal>
       )}
 
-      {broker.regulators.length > 0 && (
+      {(broker.regulators.length > 0 || broker.companyRegistration) && (
         <BrokerReveal className="mt-10">
           <section aria-labelledby="regulation-heading">
             <SectionHeading id="regulation-heading" icon={ShieldIcon}>
-              Regulation
+              {broker.regulators.length > 0 ? "Regulation" : "Company registration"}
             </SectionHeading>
+            {broker.companyRegistration && (
+              <p className="mt-3 text-sm font-semibold text-foreground">
+                Company registration: {broker.companyRegistration}
+              </p>
+            )}
             {broker.regulatorsNote && <p className="meta mt-2 max-w-2xl">{broker.regulatorsNote}</p>}
+            {broker.regulators.length > 0 && (
             <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {broker.regulators.map((r) => (
                 <li
@@ -304,6 +315,7 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
                 </li>
               ))}
             </ul>
+            )}
           </section>
         </BrokerReveal>
       )}

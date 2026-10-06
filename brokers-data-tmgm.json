@@ -24,7 +24,7 @@
         "name": "EDGE",
         "price": "$100 minimum",
         "billing_note": "Spreads from 0.0 pips. FX commission $7 round turn. Precious metals $5 round turn on the international account page.",
-        "highlight": "Tighter spread"
+        "highlight": "Spread from 0.0 pips"
       },
       {
         "name": "CLASSIC",
@@ -35,7 +35,7 @@
       {
         "name": "Cent",
         "price": "$15 minimum",
-        "billing_note": "Lower minimum from the owner brief. The international homepage has also advertised gold and forex CFDs from $15.",
+        "billing_note": "The international homepage has advertised gold and forex CFDs from $15. Standard and EDGE accounts are $100.",
         "highlight": null
       }
     ],
@@ -56,7 +56,7 @@
         ]
       }
     ],
-    "costs_note": "The card shows $15 because that is the lowest minimum in the owner brief (Cent). Standard and EDGE are $100. An ASIC account table also shows a $50 label on some cards next to a $100 row, so the published minimum is not identical on every TMGM page.",
+    "costs_note": "The lowest minimum found is $15 on the Cent account. Standard and EDGE are $100. An ASIC account table also shows a $50 label on some cards next to a $100 row, so the published minimum is not identical on every TMGM page.",
     "leverage": [
       {
         "market": "Some entities",

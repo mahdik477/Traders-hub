@@ -40,7 +40,7 @@
         "name": "Dynamic Trader",
         "price": "No minimum deposit",
         "billing_note": "Spreads advertised from 0.0 pips, with a volume-based commission. CFI does not publish one commission figure on the account page.",
-        "highlight": "Tighter spread"
+        "highlight": "Spread from 0.0 pips"
       }
     ],
     "costs": [

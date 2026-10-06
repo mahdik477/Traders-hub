@@ -353,7 +353,11 @@ function checkBroker(file, data) {
     if (!KNOWN_BROKER_MARKETS.has(m))
       err(file, `broker.markets has "${m}" - must be one of ${[...KNOWN_BROKER_MARKETS].join(", ")}`);
   }
-  if (!Array.isArray(b.regulators) || b.regulators.length === 0) warn(file, `no broker.regulators - add who licenses the broker`);
+  if (b.company_registration != null && typeof b.company_registration !== "string")
+    err(file, `broker.company_registration must be text or left out`);
+  if (!Array.isArray(b.regulators) || b.regulators.length === 0) {
+    if (!b.company_registration) warn(file, `no broker.regulators - add who licenses the broker`);
+  }
   (b.regulators ?? []).forEach((r, i) => {
     if (!r.regulator) err(file, `broker.regulators[${i}] has no "regulator"`);
     if (!/^[A-Z]{2}$/.test(r.country ?? "")) err(file, `broker.regulators[${i}].country must be a 2-letter country code (e.g. "GB")`);

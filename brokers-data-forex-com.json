@@ -28,7 +28,7 @@
         "name": "RAW pricing",
         "price": "Deposit varies",
         "billing_note": "Spreads from 0.0 pips on FX majors, plus a commission. US pages state $7 per $100,000 traded. The international RAW Spread page states $5 per $100,000 traded.",
-        "highlight": "Tightest advertised spread"
+        "highlight": "Spread from 0.0 pips"
       },
       {
         "name": "Spread only",
@@ -59,7 +59,7 @@
         ]
       }
     ],
-    "costs_note": "The owner brief says the minimum deposit depends on jurisdiction, so no single minimum is shown. US and international account pages checked on this pass both said you can deposit from $100 and recommended at least $2,500. That $100 figure may not apply at every entity.",
+    "costs_note": "No single minimum is shown, because it depends on the company you join. The US and international pages checked both said you can deposit from $100, and recommended at least $2,500. That $100 figure may not apply everywhere.",
     "leverage": [
       {
         "market": "All products",

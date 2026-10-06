@@ -27,6 +27,7 @@ type RawFile = {
     markets?: BrokerMarket[];
     regulators?: { regulator: string; country: string; entity?: string | null }[];
     regulators_note?: string | null;
+    company_registration?: string | null;
     platforms?: string[];
     plans?: {
       name: string;
@@ -116,6 +117,7 @@ function buildBroker(b: RawFile["broker"]): BrokerView {
       entity: r.entity || null,
     })),
     regulatorsNote: b.regulators_note || null,
+    companyRegistration: b.company_registration || null,
     platforms: b.platforms ?? [],
     plans: (b.plans ?? []).map((p) => ({
       name: p.name,

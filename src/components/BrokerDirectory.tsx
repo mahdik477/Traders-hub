@@ -189,6 +189,8 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
       </div>
       <p className="meta mt-2 max-w-2xl">
         Trustpilot figures are that site&apos;s review scores. They are not a measure of trading results.
+        Leverage on a card is the highest figure the broker advertises. It increases losses, and the cap
+        you get depends on where you live.
       </p>
 
       {compared.length > 0 && (
@@ -410,10 +412,20 @@ function ComparePanel({
                 )}
               />
               <CompareRow label="Published offer" values={brokers.map((b) => b.promotions ?? "None recorded")} />
+              {brokers.some((b) => b.companyRegistration) && (
+                <CompareRow
+                  label="Company registration"
+                  values={brokers.map((b) => b.companyRegistration ?? "None listed")}
+                />
+              )}
             </tbody>
           </table>
         </div>
       )}
+      <p className="meta border-t border-border px-4 py-3 sm:px-5">
+        Offers change often and depend on where you live. Check the broker&apos;s site before you rely on one.
+        Trustpilot figures are review scores, not trading results.
+      </p>
     </section>
   );
 }

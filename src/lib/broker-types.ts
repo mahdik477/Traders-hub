@@ -83,6 +83,8 @@ export type BrokerView = {
   markets: BrokerMarket[];
   regulators: BrokerRegulator[];
   regulatorsNote: string | null;
+  /** A company registration, when the broker does not publish a conduct licence. */
+  companyRegistration: string | null;
   platforms: string[];
   /** Account plans/types, shown as clickable cards like course pricing. */
   plans: PricingTier[];
