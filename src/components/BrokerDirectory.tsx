@@ -222,7 +222,6 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
               selected={compare.includes(broker.id)}
               listingQuery={listingQuery}
               onToggleCompare={() => toggleCompare(broker.id)}
-              onPickRegulator={(regulator) => updateFilters({ regulator })}
             />
           ))}
         </ul>
@@ -237,19 +236,14 @@ function BrokerCard({
   selected,
   listingQuery,
   onToggleCompare,
-  onPickRegulator,
 }: {
   broker: BrokerView;
   index: number;
   selected: boolean;
   listingQuery: string;
   onToggleCompare: () => void;
-  onPickRegulator: (regulator: string) => void;
 }) {
   const deposit = formatDeposit(broker.minDeposit, broker.currency);
-  const regs = broker.regulators;
-  const shownRegs = regs.slice(0, 3);
-  const extraRegs = regs.length - shownRegs.length;
 
   return (
     <li
@@ -284,23 +278,7 @@ function BrokerCard({
         </div>
       </dl>
 
-      {shownRegs.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {shownRegs.map((r) => (
-            <button
-              key={`${r.regulator}-${r.country}`}
-              type="button"
-              onClick={() => onPickRegulator(r.regulator)}
-              className="pill relative z-10 min-h-10 px-2.5 transition-colors duration-150 hover:border-accent/40 hover:text-foreground"
-            >
-              {r.regulator}
-            </button>
-          ))}
-          {extraRegs > 0 && <span className="pill">+{extraRegs}</span>}
-        </div>
-      )}
-
-      <div className="mt-4 flex items-center justify-between gap-3">
+      <div className="mt-auto flex items-center justify-between gap-3 pt-4">
         <button
           type="button"
           aria-pressed={selected}
