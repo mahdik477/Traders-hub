@@ -1,0 +1,106 @@
+{
+  "course": {
+    "id": "kaizen",
+    "name": "Kaizen",
+    "logo": "/courses/kaizen-logo.png",
+    "logo_bg": "dark",
+    "tagline": "A crypto trading and education community founded by YouTuber Brian Jung, combining 20+ analysts with structured educational guides.",
+    "about": "Kaizen is a crypto trading community founded by Brian Jung, a YouTube creator and entrepreneur. It combines 20+ expert analysts and researchers with educational resources — including a crypto terms glossary and a crypto trading basics section covering exchanges, regulation, leverage and spot vs. futures trading — alongside daily alerts and weekly livestreams.",
+    "instructor": {
+      "name": "Brian Jung",
+      "link": "https://www.youtube.com/@thebrianjung"
+    },
+    "curriculum": [
+      {
+        "title": "Crypto Trading Basics",
+        "module_count": null,
+        "topics": [
+          "Crypto key terms glossary",
+          "Exchanges and regulation",
+          "Leverage",
+          "Spot vs. futures trading"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Daily alerts & livestreams",
+        "description": "Daily crypto alerts and weekly livestreams with 20+ analysts."
+      },
+      {
+        "label": "Educational guides",
+        "description": "\"Crypto Trading Basics\" and a \"Crypto Key Terms\" glossary."
+      },
+      {
+        "label": "Discord community",
+        "description": "A 20,000+ member Discord with portfolio-review opportunities and a beginner FAQ channel."
+      },
+      {
+        "label": "Kaizen Jobs",
+        "description": "A section listing work opportunities in the crypto sector."
+      }
+    ],
+    "platforms": [],
+    "markets": ["crypto"],
+    "stats": [
+      { "label": "Members", "value": "20,000+" }
+    ],
+    "pricing": [
+      {
+        "name": "Lite",
+        "price": "$7/week",
+        "billing_note": "Community Discord and Whop access; excludes premium alerts, calls and livestreams.",
+        "highlight": null,
+        "link": "https://whop.com/kaizen?a=user50f81875135"
+      },
+      {
+        "name": "Platinum (Monthly)",
+        "price": "$199/month",
+        "billing_note": "All community features included.",
+        "highlight": "Most popular",
+        "link": "https://whop.com/kaizen?a=user50f81875135"
+      },
+      {
+        "name": "Platinum (3 Months)",
+        "price": "$550",
+        "billing_note": null,
+        "highlight": null,
+        "link": "https://whop.com/kaizen?a=user50f81875135"
+      },
+      {
+        "name": "Platinum (6 Months)",
+        "price": "$1,075",
+        "billing_note": null,
+        "highlight": null,
+        "link": "https://whop.com/kaizen?a=user50f81875135"
+      },
+      {
+        "name": "Platinum (Annual)",
+        "price": "$2,000",
+        "billing_note": null,
+        "highlight": "Best value",
+        "link": "https://whop.com/kaizen?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.6,
+      "review_count": 72,
+      "url": "https://www.trustpilot.com/review/thekaizen.co",
+      "label": "Excellent"
+    },
+    "whop": {
+      "rating": 4.95,
+      "review_count": 1088,
+      "url": "https://whop.com/kaizen/reviews/"
+    },
+    "testimonials": [],
+    "testimonials_note": "We couldn't find any individually-quoted member testimonials for this community in the sources we could access, so none are shown here. Worth knowing: a couple of third-party review round-ups mention members being encouraged to leave 5-star reviews in exchange for extra content, which may affect how representative the Whop rating is — we haven't independently confirmed this.",
+    "website": "https://thekaizen.co/",
+    "affiliate_link": "https://whop.com/kaizen?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "Founder (Brian Jung) and most structural detail confirmed via Whop's own blog review (whop.com/blog/kaizen-review) and WebSearch results. Pricing (Lite $7/wk, Platinum $199/mo, $550/3mo, $1,075/6mo, $2,000/yr) from the same sources, not independently re-verified against the live Whop checkout. Trustpilot (4.6/5, 72 reviews, Excellent) confirmed directly for thekaizen.co. Logo is the community's own square icon from its Whop profile. Review-incentive concern noted above comes from a single third-party review round-up, not corroborated elsewhere — flagged for transparency, not presented as confirmed fact."
+  }
+}

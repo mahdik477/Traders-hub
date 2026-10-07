@@ -1,0 +1,74 @@
+{
+  "course": {
+    "id": "247-research",
+    "name": "247 Research",
+    "logo": "/courses/247-research-logo.png",
+    "logo_bg": "dark",
+    "tagline": "Live crypto, stock and markets research and trading calls from Ran Neuner (founder of Crypto Banter) and his team.",
+    "about": "247 Research is a markets research and trading-calls community founded by Ran Neuner, founder of Crypto Banter. Members get live research meetings, real-time trading calls across crypto, stocks and commodities, the \"247 Terminal\" news-execution platform, and daily market reports. It's built around live calls and analysis rather than a structured course.",
+    "instructor": {
+      "name": "Ran Neuner",
+      "link": null
+    },
+    "curriculum": [],
+    "formats": [
+      {
+        "label": "Live research meetings & trading sessions",
+        "description": "Multiple live research meetings and trading sessions every week."
+      },
+      {
+        "label": "Real-time trading calls",
+        "description": "Calls across crypto, stocks and commodities."
+      },
+      {
+        "label": "247 Terminal",
+        "description": "A news-execution platform bundled with membership."
+      },
+      {
+        "label": "Daily market reports",
+        "description": "Daily market reports and macro analysis."
+      }
+    ],
+    "platforms": [],
+    "markets": ["crypto", "stocks", "commodities"],
+    "stats": [
+      { "label": "Members", "value": "1,500+" }
+    ],
+    "broker_partnership": {
+      "broker_name": "Blofin",
+      "description": "A crypto exchange partnership offering VIP status and bonuses for 247 Research members.",
+      "url": null
+    },
+    "pricing": [
+      {
+        "name": "Monthly",
+        "price": "$199/month",
+        "billing_note": null,
+        "highlight": null,
+        "link": "https://whop.com/247research?a=user50f81875135"
+      },
+      {
+        "name": "Annual",
+        "price": "$1,999/year",
+        "billing_note": null,
+        "highlight": "Best value",
+        "link": "https://whop.com/247research?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": {
+      "rating": 4.9,
+      "review_count": 258,
+      "url": "https://whop.com/247research/reviews/"
+    },
+    "testimonials": [],
+    "testimonials_note": "We couldn't find any individually-quoted member testimonials for this community in the sources we could access, so none are shown here.",
+    "website": "https://247research.trade/",
+    "affiliate_link": "https://whop.com/247research?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "Founder (Ran Neuner, founder of Crypto Banter) confirmed directly on 247research.trade. This is a live research/calls community, not a structured course - described honestly as such rather than overstating the educational component. No Trustpilot profile found. Commission % not published/found anywhere we could access, so not shown. Logo is the provider's own favicon."
+  }
+}

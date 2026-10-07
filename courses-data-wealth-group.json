@@ -1,0 +1,99 @@
+{
+  "course": {
+    "id": "wealth-group",
+    "name": "Wealth Group",
+    "logo": null,
+    "logo_bg": "white",
+    "tagline": "A multi-asset community covering crypto, stocks, prediction markets and sports betting, with five expert-led sections.",
+    "about": "Wealth Group is a trading and investing community founded by Johnny (\"cryptogodjohn\"). Members get live calls, market insights and educational content across five Discord sections, each led by a different analyst (JD, Pocky, DB, Tareeq and Impulse). Worth knowing up front: alongside crypto, stocks and prediction markets, the community also covers sports betting — it isn't exclusively a trading education product.",
+    "instructor": {
+      "name": "Johnny",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Five expert-led sections",
+        "module_count": 5,
+        "topics": [
+          "Led by JD, Pocky, DB, Tareeq and Impulse",
+          "Crypto, stocks, prediction markets and sports betting coverage"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live calls",
+        "description": "Live calls across crypto, stocks, prediction markets and sports betting."
+      },
+      {
+        "label": "Market insights",
+        "description": "Curated market insights and analysis."
+      },
+      {
+        "label": "Five expert-led sections",
+        "description": "Discord sections each led by a different analyst."
+      }
+    ],
+    "platforms": [],
+    "markets": ["crypto", "stocks"],
+    "stats": [
+      { "label": "Members", "value": "10,500+" }
+    ],
+    "pricing": [
+      {
+        "name": "Monthly (card)",
+        "price": "$250/month",
+        "billing_note": null,
+        "highlight": null,
+        "link": "https://whop.com/wealthgroup/wealthgroup?a=user50f81875135"
+      },
+      {
+        "name": "6 Months (card)",
+        "price": "$1,400 / 6 months",
+        "billing_note": "≈$233/month (7% off the monthly rate).",
+        "highlight": null,
+        "link": "https://whop.com/wealthgroup/wealthgroup?a=user50f81875135"
+      },
+      {
+        "name": "Annual (card)",
+        "price": "$2,550/year",
+        "billing_note": "≈$212.50/month (15% off the monthly rate).",
+        "highlight": "Best value",
+        "link": "https://whop.com/wealthgroup/wealthgroup?a=user50f81875135"
+      },
+      {
+        "name": "Monthly (pay with crypto)",
+        "price": "$250/month",
+        "billing_note": "Same plan as Monthly (card), paid via crypto instead.",
+        "highlight": null,
+        "link": "https://whop.com/wealthgroup/wealth-group-crypto-payment-access?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": {
+      "rating": 4.9,
+      "review_count": 1989,
+      "url": "https://whop.com/wealthgroup/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "Down to earth group who don't muck around! Definitely has to be the number 1 group",
+        "author": "Taylor Di Michiel",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Best Crypto community ever known…",
+        "author": "Emanuele Galli",
+        "source": "Whop review"
+      }
+    ],
+    "testimonials_note": "A couple of other reviews we found made specific accuracy or earnings claims, which we don't republish — these two don't.",
+    "website": "https://whop.com/wealthgroup/",
+    "affiliate_link": "https://whop.com/wealthgroup/wealthgroup?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "Founder (Johnny, \"cryptogodjohn\") and pricing confirmed via Whop's own product page and whoptrends.com (which also confirmed a 30% affiliate commission). No separate official website found outside Whop. No Trustpilot profile found (wealthgroup.io 404s). Two affiliate links given — card payment and crypto payment — for what appears to be the same underlying plans; crypto payment link only confirmed for the monthly tier. Scope note: this community explicitly includes sports betting alongside crypto/stocks/prediction markets, stated plainly in our own 'about' copy rather than glossed over."
+  }
+}
