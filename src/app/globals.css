@@ -5,8 +5,9 @@
    are defined. Pages use these names (bg-surface, text-accent, page-title…)
    rather than raw colours, so the whole site stays consistent.
 
-   Champagne gold is the accent. Text gold is a touch darker in light mode
-   so it stays readable; button fills stay the same gold in both themes.
+   Champagne gold is the dark-mode accent. Light mode uses a stone page,
+   white cards and bronze. Light button fills are the darker bronze so
+   white label text meets WCAG AA (#A87A1F with white text is 3.84:1).
    Everything else switches with the `data-theme` attribute on <html>.
    Dark is the default; light is opt-in via the toggle (see ThemeToggle).
    ========================================================================== */
@@ -17,10 +18,10 @@
   --color-gold: #e8c56a;
   --color-gold-deep: #b8860b;
   --color-gold-ink: #161208;
-  /* Fills stay champagne in both themes so buttons and badges stay readable. */
+  /* Dark-mode fills. Light mode overrides these so white button text stays readable. */
   --color-gold-fill: #e0b44a;
   --color-gold-fill-hover: #f5d76e;
-
+  --shadow-glow-color: 0 0 0 1px rgb(232 197 106 / 0.35), 0 16px 40px -22px rgb(184 134 11 / 0.55);
 }
 
 :root,
@@ -48,22 +49,32 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --color-background: #f7f4ee;
-  --color-surface: #fffdf8;
-  --color-surface-2: #f3eee4;
-  --color-border: #e6dcc8;
-  --color-border-strong: #d4c4a2;
+  --color-background: #edebe6;
+  --color-surface: #ffffff;
+  --color-surface-2: #e4e1da; /* section bands, table headers, hover panels */
+  --color-border: #ddd9d0;
+  --color-border-strong: #cfc9be;
 
-  --color-foreground: #16130e;
-  --color-muted: #3d3832;
-  --color-subtle: #5a534a;
+  --color-foreground: #141414;
+  --color-muted: #5c5a55;
+  /* #8A877F is about 3:1 on this stone, so captions sit a step darker. */
+  --color-subtle: #67645c;
 
-  /* Darker gold and status colours so text stays readable on the light surfaces. */
-  --color-brand: #8a6410;
-  --color-brand-hover: #6e4e0c;
+  --color-brand: #a87a1f;
+  --color-brand-hover: #8f6716;
+  /* Decorative bronze for stripes. Button fills are separate, below. */
+  --color-gold: #a87a1f;
+  --color-gold-deep: #8f6716;
+  --color-gold-bright: #c4a15a;
+  /* #8F6716 with white text is 5.10:1. Hover is darker, still bronze. */
+  --color-gold-fill: #8f6716;
+  --color-gold-fill-hover: #734f10;
+  --color-gold-ink: #ffffff;
   --color-success: #0f7a45;
   --color-warning: #8a5a00;
   --color-danger: #b42318;
+
+  --shadow-glow-color: 0 1px 2px rgb(20 20 20 / 0.05), 0 14px 32px -16px rgb(20 20 20 / 0.18);
 }
 
 @theme inline {
@@ -96,7 +107,7 @@
   --color-warning: var(--color-warning);
   --color-danger: var(--color-danger);
 
-  --shadow-glow: 0 0 0 1px rgb(232 197 106 / 0.35), 0 16px 40px -22px rgb(184 134 11 / 0.55);
+  --shadow-glow: var(--shadow-glow-color);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -547,5 +558,131 @@ body {
   .hero-intro,
   .lift-card {
     animation: none;
+  }
+}
+
+/* ---- Light theme only ----------------------------------------------------
+   Dark rules above stay as they are. These overrides replace cream glows
+   and champagne hairlines once the page is stone and the cards are white.
+   -------------------------------------------------------------------------- */
+
+:root[data-theme="light"] ::selection {
+  background: rgb(168 122 31 / 0.22);
+  color: #141414;
+}
+
+:root[data-theme="light"] .site-wordmark {
+  color: #a87a1f;
+}
+
+:root[data-theme="light"] .site-header {
+  background: color-mix(in srgb, #ffffff 92%, transparent);
+  box-shadow: 0 1px 0 #ddd9d0, 0 10px 24px -20px rgb(20 20 20 / 0.28);
+}
+
+:root[data-theme="light"] .nav-fade {
+  background: linear-gradient(90deg, rgb(255 255 255 / 0), #ffffff);
+}
+
+:root[data-theme="light"] .site-footer {
+  box-shadow: 0 -1px 0 #ddd9d0;
+}
+
+:root[data-theme="light"] .title-rule::after {
+  background: linear-gradient(90deg, #a87a1f, transparent);
+}
+
+:root[data-theme="light"] .panel-accent {
+  box-shadow: inset 3px 0 0 #a87a1f;
+}
+
+:root[data-theme="light"] .hero-intro::before {
+  background: radial-gradient(ellipse at 30% 40%, rgb(168 122 31 / 0.18), transparent 68%);
+}
+
+:root[data-theme="light"] .detail-hero.rounded-2xl.border.bg-surface {
+  box-shadow:
+    0 1px 2px rgb(20 20 20 / 0.05),
+    0 16px 36px -18px rgb(20 20 20 / 0.18);
+}
+
+:root[data-theme="light"] .field {
+  background: #ffffff;
+  border-color: #ddd9d0;
+  box-shadow: inset 0 1px 2px rgb(20 20 20 / 0.04);
+}
+
+:root[data-theme="light"] .field:hover {
+  border-color: #c9c4b8;
+}
+
+:root[data-theme="light"] .field::placeholder {
+  color: #5c5a55;
+  opacity: 1;
+}
+
+:root[data-theme="light"] :is(.rounded-xl, .rounded-2xl).border.bg-surface,
+:root[data-theme="light"] .rounded-full.border.bg-surface {
+  box-shadow: 0 1px 2px rgb(20 20 20 / 0.04), 0 10px 24px -14px rgb(20 20 20 / 0.16);
+}
+
+:root[data-theme="light"] .badge-success {
+  background: rgb(15 122 69 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(15 122 69 / 0.28);
+}
+
+:root[data-theme="light"] .badge-warning,
+:root[data-theme="light"] .badge-promo {
+  background: rgb(168 122 31 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(168 122 31 / 0.28);
+}
+
+:root[data-theme="light"] .badge-danger {
+  background: rgb(180 35 24 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(180 35 24 / 0.24);
+}
+
+:root[data-theme="light"] .our-choice-badge {
+  border-color: color-mix(in srgb, #a87a1f 50%, #ddd9d0);
+  background: #ffffff;
+  color: #8f6716;
+  box-shadow: 0 1px 2px rgb(20 20 20 / 0.05);
+}
+
+:root[data-theme="light"] .our-choice-mark {
+  color: #a87a1f;
+}
+
+:root[data-theme="light"] .our-choice-badge::after {
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    rgb(255 255 255 / 0.9) 50%,
+    transparent 68%
+  );
+}
+
+/* Secondary line on a bronze fill. 75% white is 3.6:1; 92% clears AA. */
+:root[data-theme="light"] :is(.text-gold-ink\/75, .text-gold-ink\/80) {
+  color: rgb(255 255 255 / 0.92);
+}
+
+:root[data-theme="light"] .bg-accent\/20 {
+  background-color: rgb(168 122 31 / 0.12);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :root[data-theme="light"] .lift-card.rounded-xl.border.bg-surface:hover,
+  :root[data-theme="light"] .lift-card.rounded-2xl.border.bg-surface:hover {
+    border-color: color-mix(in srgb, #a87a1f 55%, #ddd9d0);
+    box-shadow:
+      0 1px 2px rgb(20 20 20 / 0.05),
+      0 16px 32px -16px rgb(20 20 20 / 0.2);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: reduce) {
+  :root[data-theme="light"] .lift-card:hover {
+    border-color: color-mix(in srgb, #a87a1f 55%, #ddd9d0);
   }
 }

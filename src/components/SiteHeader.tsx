@@ -21,7 +21,7 @@ export default function SiteHeader() {
             priority
             className="size-10 rounded-xl sm:size-11"
           />
-          <span className="text-sm font-semibold tracking-[0.16em] uppercase">{SITE_NAME}</span>
+          <span className="site-wordmark text-sm font-semibold tracking-[0.16em] uppercase">{SITE_NAME}</span>
         </Link>
         <div className="sm:order-3">
           <ThemeToggle />
