@@ -1,0 +1,96 @@
+{
+  "course": {
+    "id": "eliteclouds-trading-education",
+    "name": "EliteClouds Trading Education",
+    "logo": null,
+    "logo_bg": "white",
+    "tagline": "A live futures day-trading room and a 6-week mentorship course led by Dr. Gunbharpur Gill, with guidance available in Punjabi.",
+    "about": "EliteClouds Trading Education is a live futures trading room and mentorship program founded by Dr. Gunbharpur Gill, who has 8+ years of trading experience and provides guidance in Punjabi. The live room runs daily screen-share sessions covering NQ and ES futures, and a separate 6-week mentorship course (nine live Zoom sessions, six students per batch) covers everything from account setup through trading psychology.",
+    "instructor": {
+      "name": "Dr. Gunbharpur Gill",
+      "link": "https://www.youtube.com/@EliteCloudsTrading"
+    },
+    "curriculum": [
+      {
+        "title": "6-Week Mentorship Course",
+        "module_count": 9,
+        "topics": [
+          "Foundations & account setup",
+          "Futures strategies",
+          "Charting setup and practice",
+          "Options swing trading",
+          "Stock trading",
+          "Long-term investing",
+          "Trading psychology and bias correction"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Daily live trading room",
+        "description": "Daily screen-share sessions at 9:15 AM ET on Discord, covering NQ and ES futures with entry/stop/target guidance."
+      },
+      {
+        "label": "6-week mentorship course",
+        "description": "Nine live Zoom sessions (two hours each), six students per batch."
+      },
+      {
+        "label": "Guidance in Punjabi",
+        "description": "Live sessions and mentorship offered in Punjabi."
+      },
+      {
+        "label": "Free YouTube content",
+        "description": "Weekly Thursday broadcasts, free to watch."
+      }
+    ],
+    "platforms": [],
+    "markets": ["futures", "options", "stocks"],
+    "stats": [],
+    "pricing": [
+      {
+        "name": "Live Room — 3 Months",
+        "price": "$299",
+        "billing_note": "Renews every 3 months.",
+        "highlight": null,
+        "link": "https://whop.com/eliteclouds-trading-education/eliteclouds-trading-education?a=user50f81875135"
+      },
+      {
+        "name": "Live Room — 6 Months",
+        "price": "$499",
+        "billing_note": "Renews every 6 months (≈ 17% savings vs. two 3-month terms).",
+        "highlight": "Best value",
+        "link": "https://whop.com/eliteclouds-trading-education/eliteclouds-trading-education?a=user50f81875135"
+      }
+    ],
+    "refund_policy": "No refunds — the provider's Terms of Service state a \"No Refund Policy\"; specific terms beyond that aren't published.",
+    "trustpilot": null,
+    "whop": {
+      "rating": 5.0,
+      "review_count": 210,
+      "url": "https://whop.com/eliteclouds-trading-education/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "Watching you trade live has changed how I see the market.",
+        "author": "Ruby Brar",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Daily live trading helps you learn in real time.",
+        "author": "ravinderdutt",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Very helpful, Dr. Gill is the best mentor.",
+        "author": "Harjeet Singh",
+        "source": "Whop review"
+      }
+    ],
+    "website": "https://elitecloudstrading.ca/",
+    "affiliate_link": "https://whop.com/eliteclouds-trading-education/eliteclouds-trading-education?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "Founder, pricing, curriculum, refund policy and testimonials confirmed directly on the official site (elitecloudstrading.ca), which also has its own Terms of Service and Risk Disclosure pages — a more established setup than most Whop-only providers we've added. The separate 6-Week Mentorship Course has no published price (shared directly with applicants), so it isn't listed as its own pricing tier here, only described. 10% affiliate commission confirmed via whoptrends.com. No Trustpilot profile found. No clean square logo found (the only images were a presenter photo and its matching favicon), so a lettermark shows instead."
+  }
+}

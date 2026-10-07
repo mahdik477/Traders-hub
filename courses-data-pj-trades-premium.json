@@ -1,0 +1,86 @@
+{
+  "course": {
+    "id": "pj-trades-premium",
+    "name": "PJ Trades Premium",
+    "logo": "/courses/pj-trades-logo.png",
+    "logo_bg": "dark",
+    "tagline": "A futures trading community led by Paul Jon Siljee Jr. (PJ), a 9-year professional trader, with real-time guidance and a starter course.",
+    "about": "PJ Trades Premium is a futures trading community founded by Paul Jon Siljee Jr., known as PJ, a trader with 9 years of professional experience. Members get real-time trading guidance and an included starter course, alongside a live Discord community and discount-code partnerships with several prop firms.",
+    "instructor": {
+      "name": "PJ (Paul Jon Siljee Jr.)",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "PJ's Starter Crash Course",
+        "module_count": null,
+        "topics": [
+          "Futures trading fundamentals",
+          "Getting started with the community's tools and strategies"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Real-time trading guidance",
+        "description": "Live guidance and strategies from PJ."
+      },
+      {
+        "label": "Starter Crash Course",
+        "description": "An included course for new members."
+      },
+      {
+        "label": "Discord community",
+        "description": "An active, highly-reviewed futures trading Discord."
+      },
+      {
+        "label": "Prop firm discounts",
+        "description": "Discount codes for several prop firm partners, including Alpha Futures — a different company from Alpha Funded, which we list separately."
+      }
+    ],
+    "platforms": [],
+    "markets": ["futures"],
+    "stats": [
+      { "label": "Members", "value": "2,300+" }
+    ],
+    "pricing": [
+      {
+        "name": "Membership",
+        "price": "$100/month",
+        "billing_note": null,
+        "highlight": null,
+        "link": "https://whop.com/pjtradespremium/pjtradespremium?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": {
+      "rating": 5.0,
+      "review_count": 2500,
+      "url": "https://whop.com/pjtradespremium/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "Best community i've ever been on",
+        "author": "alessandrobattaglin0f",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Your guidance has been absolutely amazing love the work your team puts in",
+        "author": "GabeColon",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Best trading discord out there!",
+        "author": "Nick Miller",
+        "source": "Whop review"
+      }
+    ],
+    "website": "https://whop.com/pjtradespremium/",
+    "affiliate_link": "https://whop.com/pjtradespremium/pjtradespremium?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "Founder's full name (Paul Jon Siljee Jr.) confirmed via WebSearch (X/Instagram/TikTok handles, a TradeZella blog post); no separate official website found, only social profiles, so 'website' points to the Whop page. 10% affiliate commission confirmed via whoptrends.com during our earlier shortlist research. Review count shown (2,500) is from the live Whop page directly, more recent than whoptrends.com's cached 1,651 figure from the same research pass. The community's own promo banner lists prop-firm discount partners including one labelled 'Alpha' — a YouTube video title confirms this is Alpha Futures, NOT Alpha Funded (which we list separately), so we named it explicitly to avoid the mix-up CLAUDE.md warns about. No Trustpilot profile found. Logo cropped from the community's own Whop banner wordmark."
+  }
+}
