@@ -1,0 +1,79 @@
+{
+  "course": {
+    "id": "no-nonsense-forex",
+    "name": "No Nonsense Forex",
+    "logo": null,
+    "logo_bg": "white",
+    "tagline": "A free forex education platform run by \"VP\", with an advanced paid course and a dedicated trading psychology course.",
+    "about": "No Nonsense Forex is a forex trading education platform built mostly around free content from its founder, known publicly as \"VP\". It covers money management, trading psychology, technical analysis and trade entries through blog posts, a YouTube channel, and a podcast, with a Discord community for trader support. A licensed advanced course (Stonehill Forex 201) and a separate trading psychology course are sold as paid add-ons.",
+    "instructor": {
+      "name": "VP",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Core education (free)",
+        "module_count": null,
+        "topics": [
+          "Money management",
+          "Trading psychology",
+          "Technical analysis and trade entries",
+          "Core concepts: big banks, EUR/USD, reversal trading"
+        ]
+      },
+      {
+        "title": "Stonehill Forex 201 (paid, officially licensed)",
+        "module_count": null,
+        "topics": ["Nearly 80 hours of original content condensed from the free material"]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Free blog, YouTube & podcast",
+        "description": "The core educational content, structured as a foundational-to-advanced learning path."
+      },
+      {
+        "label": "Discord community",
+        "description": "A forum for trader support."
+      },
+      {
+        "label": "Stonehill Forex 201 (advanced course)",
+        "description": "The only officially licensed and endorsed advanced course, condensing the free material into roughly 80 hours."
+      },
+      {
+        "label": "Trading Psychology Course",
+        "description": "A dedicated paid course on trading psychology."
+      }
+    ],
+    "platforms": [],
+    "markets": ["forex"],
+    "stats": [],
+    "pricing": [
+      {
+        "name": "Core education",
+        "price": "Free",
+        "billing_note": null,
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Stonehill Forex 201",
+        "price": "$349",
+        "billing_note": "Sold on a separate, officially-licensed site.",
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": null,
+    "testimonials": [],
+    "testimonials_note": "We didn't find individually-quoted testimonials we could independently verify, so none are shown here.",
+    "website": "https://nononsenseforex.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the most well-known free forex education brands (large YouTube/podcast following), added for directory credibility rather than affiliate revenue — no affiliate relationship exists. The founder goes publicly only by \"VP\" and doesn't disclose a full name on the official site, so we've used that rather than guess a surname from secondhand sources. Paid course details and price ($349 for Stonehill Forex 201) confirmed via WebSearch of the officially-licensed course site (stonehillforex.com); the Trading Psychology Course's price wasn't found published anywhere, so it's described but not priced. No Trustpilot profile found. No usable logo found (favicon resolved to a generic placeholder, not a real brand mark), so a lettermark shows instead."
+  }
+}

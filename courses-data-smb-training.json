@@ -1,0 +1,91 @@
+{
+  "course": {
+    "id": "smb-training",
+    "name": "SMB Training",
+    "logo": "/courses/smb-training-logo.png",
+    "logo_bg": "white",
+    "tagline": "The training arm of SMB Capital, a New York prop trading firm, co-founded by Mike Bellafiore, author of \"One Good Trade\".",
+    "about": "SMB Training is the education arm of SMB Capital, a proprietary trading firm in New York City, co-founded by Mike Bellafiore, author of the trading books \"One Good Trade\" and \"The PlayBook\". It offers structured training programs and tool packages covering day trading, options and tape reading, built from the firm's own prop trading desk experience.",
+    "instructor": {
+      "name": "Mike Bellafiore",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Training programs",
+        "module_count": null,
+        "topics": [
+          "DNA of Successful Trading",
+          "The Winning Trader",
+          "Options Foundation",
+          "Reading the Tape",
+          "20 professional trading strategies"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Tool packages",
+        "description": "Proprietary radar screen, stock scanner and written game plan templates."
+      },
+      {
+        "label": "Real-time mentoring",
+        "description": "SMB Inside Access meetings and mentoring from professional traders."
+      },
+      {
+        "label": "Structured programs",
+        "description": "Multi-module intensive courses, e.g. a 6-module tape reading program."
+      }
+    ],
+    "platforms": [],
+    "markets": ["stocks", "options"],
+    "stats": [],
+    "pricing": [
+      {
+        "name": "Trader 90",
+        "price": "$1,397/quarter",
+        "billing_note": null,
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Trader 365",
+        "price": "$5,000/year",
+        "billing_note": "~10% savings ($588) vs. quarterly billing.",
+        "highlight": "Best value",
+        "link": null
+      }
+    ],
+    "refund_policy": "No refunds. The provider states that once payment is received, you have access to proprietary materials, so no refunds are offered.",
+    "trustpilot": {
+      "rating": 2.6,
+      "review_count": 8,
+      "url": "https://www.trustpilot.com/review/smbtraining.com",
+      "label": "Poor"
+    },
+    "whop": null,
+    "testimonials": [
+      {
+        "quote": "Your course is far more comprehensive than I anticipated.",
+        "author": "L. Kulla, Lawyer, New York",
+        "source": "Quoted on SMB Training's website"
+      },
+      {
+        "quote": "The tape reading skills that I have learned are amazing.",
+        "author": "A. Thisher, Engineer, Washington",
+        "source": "Quoted on SMB Training's website"
+      },
+      {
+        "quote": "Tape Reading in your detailed way was new to me. Mentoring was excellent.",
+        "author": "M. Eickhoff, Doctor, Germany",
+        "source": "Quoted on SMB Training's website"
+      }
+    ],
+    "website": "https://www.smbtraining.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "SMB Capital is one of the most publicly recognized proprietary trading firms (regular CNBC/Bloomberg/WSJ coverage, subject of the Wall Street Warriors documentary), added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Co-founder (Mike Bellafiore) and curriculum confirmed via smbtraining.com and WebSearch. Refund policy confirmed directly from the provider's own refund policy page (plain 'no refunds' statement, quoted in our own words). Trustpilot (2.6/5, 8 reviews, Poor) confirmed directly — shown as-is despite the low score and small sample size, consistent with how we handle every rating on this site; worth noting only 8 reviews exist, so this may not be fully representative."
+  }
+}

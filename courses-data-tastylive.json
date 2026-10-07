@@ -1,0 +1,72 @@
+{
+  "course": {
+    "id": "tastylive",
+    "name": "tastylive",
+    "logo": "/courses/tastylive-logo.png",
+    "logo_bg": "white",
+    "tagline": "A free options and futures education network founded in 2011 by Tom Sosnoff, Tony Battista and Scott Sheridan, the team behind thinkorswim.",
+    "about": "tastylive is a financial education and entertainment network founded in 2011 by Tom Sosnoff and Tony Battista, who previously built the thinkorswim trading platform (sold to TD Ameritrade), together with Scott Sheridan. It's free to watch, and covers options, futures and risk management through daily live shows, on-demand video and articles. A related but separate company, tastytrade, is a brokerage (acquired by IG Group in 2021).",
+    "instructor": {
+      "name": "Tom Sosnoff & Tony Battista",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Concepts & strategies",
+        "module_count": null,
+        "topics": [
+          "Options strategies: covered calls, iron condors, diagonal and calendar spreads",
+          "Implied volatility",
+          "0DTE (zero days-to-expiration) options",
+          "Options expiration mechanics",
+          "Futures trading",
+          "Risk management and market probabilities"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Daily live shows",
+        "description": "Market analysis programs such as Market Measures, Risk & Reward, and Overtime."
+      },
+      {
+        "label": "On-demand video library",
+        "description": "A large archive of past shows and segments."
+      },
+      {
+        "label": "Articles, podcasts & newsletters",
+        "description": "Written and audio content covering options and futures concepts."
+      }
+    ],
+    "platforms": [],
+    "markets": ["options", "futures"],
+    "stats": [
+      { "label": "Founded", "value": "2011" }
+    ],
+    "pricing": [
+      {
+        "name": "Free",
+        "price": "Free",
+        "billing_note": "All shows, articles and on-demand video are free to watch.",
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.8,
+      "review_count": 57,
+      "url": "https://www.trustpilot.com/review/tastylive.com",
+      "label": "Excellent"
+    },
+    "whop": null,
+    "testimonials": [],
+    "testimonials_note": "We didn't find individually-quoted viewer testimonials on the provider's site, so none are shown here.",
+    "website": "https://www.tastylive.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the most widely recognized names in options/futures education, added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Founders and history confirmed via WebSearch (Tom Sosnoff and Tony Battista built thinkorswim, sold to TD Ameritrade for $750M; tastylive launched 2011; tastytrade brokerage launched 2017 and was acquired by IG Group in 2021 for roughly $1B — we've kept tastylive the free education network distinct from tastytrade the brokerage in our own copy). Trustpilot (4.8/5, 57 reviews, Excellent) is for tastylive.com specifically. Logo is the provider's own favicon."
+  }
+}
