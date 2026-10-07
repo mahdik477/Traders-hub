@@ -60,12 +60,13 @@
   /* #8A877F is about 3:1 on this stone, so captions sit a step darker. */
   --color-subtle: #67645c;
 
-  --color-brand: #a87a1f;
-  --color-brand-hover: #8f6716;
-  /* Decorative bronze for stripes. Button fills are separate, below. */
+  /* #A87A1F is 2.9:1 on the stone band, so words use a darker bronze.
+     Lines, glows and the title rule stay #A87A1F. */
+  --color-brand: #734f10;
+  --color-brand-hover: #5c3e0c;
   --color-gold: #a87a1f;
   --color-gold-deep: #8f6716;
-  --color-gold-bright: #c4a15a;
+  --color-gold-bright: #a87a1f;
   /* #8F6716 with white text is 5.10:1. Hover is darker, still bronze. */
   --color-gold-fill: #8f6716;
   --color-gold-fill-hover: #734f10;
@@ -572,7 +573,7 @@ body {
 }
 
 :root[data-theme="light"] .site-wordmark {
-  color: #a87a1f;
+  color: #8f6716;
 }
 
 :root[data-theme="light"] .site-header {
@@ -657,7 +658,7 @@ body {
   background: linear-gradient(
     105deg,
     transparent 32%,
-    rgb(255 255 255 / 0.9) 50%,
+    rgb(168 122 31 / 0.35) 50%,
     transparent 68%
   );
 }
@@ -672,9 +673,8 @@ body {
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  :root[data-theme="light"] .lift-card.rounded-xl.border.bg-surface:hover,
-  :root[data-theme="light"] .lift-card.rounded-2xl.border.bg-surface:hover {
-    border-color: color-mix(in srgb, #a87a1f 55%, #ddd9d0);
+  :root[data-theme="light"] .lift-card:hover {
+    border-color: color-mix(in srgb, #a87a1f 45%, var(--color-border));
     box-shadow:
       0 1px 2px rgb(20 20 20 / 0.05),
       0 16px 32px -16px rgb(20 20 20 / 0.2);
