@@ -1,0 +1,86 @@
+{
+  "course": {
+    "id": "urban-forex",
+    "name": "Urban Forex",
+    "logo": "/courses/urban-forex-logo.png",
+    "logo_bg": "white",
+    "tagline": "A price-action forex education platform founded by Navin Prithyani, followed by 190,000+ students worldwide.",
+    "about": "Urban Forex is a price-action trading education platform founded by Navin Prithyani, who has taught over 190,000 students through webinars worldwide. It teaches reading charts without indicators or signals, applicable across forex, stocks and crypto, through a free foundation course, a paid advanced program, and a members-only community.",
+    "instructor": {
+      "name": "Navin Prithyani",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Foundation Course (free)",
+        "module_count": null,
+        "topics": ["Price action basics"]
+      },
+      {
+        "title": "Mastering Price Action 2.0",
+        "module_count": null,
+        "topics": ["Advanced price-action concepts, delivered week-by-week"]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Free Foundation Course",
+        "description": "Price action basics, free to start."
+      },
+      {
+        "label": "Mastering Price Action 2.0",
+        "description": "A week-by-week advanced program."
+      },
+      {
+        "label": "Mentor support",
+        "description": "Questions under lessons answered within 24-48 hours."
+      },
+      {
+        "label": "Elite Community",
+        "description": "A members-only community, plus a podcast and blog."
+      }
+    ],
+    "platforms": [],
+    "markets": ["forex", "stocks", "crypto"],
+    "stats": [
+      { "label": "Students taught", "value": "190,000+" }
+    ],
+    "pricing": [
+      {
+        "name": "Foundation Course",
+        "price": "Free",
+        "billing_note": null,
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Mastering Price Action 2.0",
+        "price": "Not published",
+        "billing_note": "Price isn't shown publicly — check the provider's own site for current cost.",
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.9,
+      "review_count": 201,
+      "url": "https://www.trustpilot.com/review/urbanforex.com",
+      "label": "Excellent"
+    },
+    "whop": null,
+    "testimonials": [
+      {
+        "quote": "Feels like they open your third eye, allowing you to see the market in a new way.",
+        "author": "Albert",
+        "source": "Quoted on Urban Forex's website"
+      }
+    ],
+    "website": "https://urbanforex.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the longest-running and most recognized price-action forex education brands, added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Founder, format and curriculum confirmed directly on urbanforex.com. Mastering Price Action 2.0's price isn't published on the site, so we've said so plainly rather than guessing. Trustpilot (4.9/5, 201 reviews, Excellent) confirmed directly. Skipped two of the provider's own testimonials that referenced a prop-firm challenge pass and 'stable income' per our no-performance-claims rule. Logo is the provider's own favicon."
+  }
+}

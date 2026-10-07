@@ -1,0 +1,101 @@
+{
+  "course": {
+    "id": "bulls-on-wall-street",
+    "name": "Bulls on Wall Street",
+    "logo": "/courses/bulls-on-wall-street-logo.png",
+    "logo_bg": "dark",
+    "tagline": "A day and swing trading education platform founded by Kunal Desai in 2008, with a free intro course and a 60-day live bootcamp.",
+    "about": "Bulls on Wall Street is a trading education company founded by Kunal Desai in 2008, who has traded full-time since 2007. It offers a free 25-hour introductory course, a day/swing/options platform called BullsVision, and a 60-day live trading bootcamp combining structured classes, simulator trading, and daily screen-share sessions with Kunal during market hours.",
+    "instructor": {
+      "name": "Kunal Desai",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "60-Day Live Trading Bootcamp",
+        "module_count": null,
+        "topics": [
+          "Bone Zone strategy (9 EMA/20 EMA pullbacks)",
+          "First Pullback strategy",
+          "The 1% Risk Rule",
+          "The 3-Loss Rule (revenge-trading protocol)",
+          "VWAP trading principles",
+          "Day trading, swing trading, options and futures"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Free intro course",
+        "description": "A free 25-hour introductory course plus community access."
+      },
+      {
+        "label": "60-Day Live Bootcamp",
+        "description": "Live classes 4 nights/week for weeks 1-5 (no live trading allowed yet), then graded simulator trading for weeks 6-9, plus 1 year of chatroom access and lifetime access to recordings."
+      },
+      {
+        "label": "Daily live screen-share",
+        "description": "Daily screen-share with Kunal during market hours."
+      },
+      {
+        "label": "BullsVision",
+        "description": "A unified day trading, swing trading and options platform."
+      }
+    ],
+    "platforms": [],
+    "markets": ["stocks", "options", "futures"],
+    "stats": [
+      { "label": "Founded", "value": "2008" },
+      { "label": "Traders trained", "value": "7,000+" }
+    ],
+    "pricing": [
+      {
+        "name": "Free intro course",
+        "price": "Free",
+        "billing_note": "25-hour introductory course plus community access.",
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "BullsVision",
+        "price": "$7 (first week)",
+        "billing_note": "Ongoing subscription after the first week.",
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "60-Day Live Bootcamp",
+        "price": "$3,499",
+        "billing_note": "Or 3 payments of $1,200. Price and promotions change often.",
+        "highlight": "Most popular",
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.7,
+      "review_count": 447,
+      "url": "https://www.trustpilot.com/review/bullsonwallstreet.com",
+      "label": "Excellent"
+    },
+    "whop": null,
+    "testimonials": [
+      {
+        "quote": "Absolutely hands down the best options trading chat room on the net! I've searched high and low and wasted hundreds of dollars on overhyped chat rooms.",
+        "author": "Angelo",
+        "source": "Quoted on Bulls on Wall Street's website"
+      },
+      {
+        "quote": "I've really enjoyed the boot camp program! Kunal is a genuine expert in the field.",
+        "author": "Shawn Coe",
+        "source": "Quoted on Bulls on Wall Street's website"
+      }
+    ],
+    "website": "https://www.bullsonwallstreet.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the most established day trading education brands (founded 2008, 7,000+ traders trained, 80+ bootcamp cohorts per the provider), added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Founder, format and curriculum came directly from bullsonwallstreet.com; the Trustpilot figure (4.7/5, 447 reviews, Excellent) was independently confirmed directly on Trustpilot, not just taken from the provider's own self-reported number. Bootcamp price cross-checked via WebSearch, which shows it has varied over time ($2,850-$3,499 across different snapshots) — noted as subject to change in our own billing_note rather than presenting a single figure as fixed. Logo is the provider's own favicon."
+  }
+}

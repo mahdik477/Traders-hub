@@ -1,0 +1,76 @@
+{
+  "course": {
+    "id": "investors-underground",
+    "name": "Investors Underground",
+    "logo": "/courses/investors-underground-logo.png",
+    "logo_bg": "white",
+    "tagline": "A live day trading chat room and education platform founded by Nathan Michaud, trading full-time since 2007.",
+    "about": "Investors Underground is a day trading community founded by Nathan Michaud, a trader since 2003 and full-time since 2007. Members get a live chat room for real-time trading ideas, proprietary scanners and tools, a 1,000+ video course library, and pre-market research and watchlists.",
+    "instructor": {
+      "name": "Nathan Michaud",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Trading courses",
+        "module_count": null,
+        "topics": [
+          "Legends Playbook",
+          "Momentum Playbook",
+          "Swing Trading",
+          "Textbook Trading",
+          "Tandem Trader",
+          "Chart patterns and price action"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live chat room",
+        "description": "Real-time trading idea generation and discussion."
+      },
+      {
+        "label": "Market prep resources",
+        "description": "Pre-market broadcasts, watchlists and research tools."
+      },
+      {
+        "label": "Trading tools",
+        "description": "Proprietary scanners, AI news alerts and ticker lists."
+      },
+      {
+        "label": "Video course library",
+        "description": "1,000+ videos across multiple structured programs, plus live study sessions and webinars."
+      }
+    ],
+    "platforms": [],
+    "markets": ["stocks"],
+    "stats": [],
+    "pricing": [],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.5,
+      "review_count": 178,
+      "url": "https://www.trustpilot.com/review/investorsunderground.com",
+      "label": "Excellent"
+    },
+    "whop": null,
+    "testimonials": [
+      {
+        "quote": "The monthly investment is pennies compared to the knowledge and process you gain.",
+        "author": "Ronald",
+        "source": "Quoted on Investors Underground's website"
+      },
+      {
+        "quote": "The value you get for what you pay is nothing short of brilliant.",
+        "author": "Gary Felice",
+        "source": "Quoted on Investors Underground's website"
+      }
+    ],
+    "website": "https://www.investorsunderground.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the longest-running live day trading chat rooms, added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Founder (Nathan Michaud) and format confirmed directly on investorsunderground.com and cross-checked via WebSearch. Pricing is kept behind a dedicated /pricing/ page that didn't return readable content to us, so pricing is left empty rather than guessed. Trustpilot (4.5/5, 178 reviews, Excellent) confirmed directly. Skipped several of the provider's own testimonials that stated specific dollar results (e.g. a named consecutive-profit streak) per our no-performance-claims rule. Logo is the provider's own favicon."
+  }
+}

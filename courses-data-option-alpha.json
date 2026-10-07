@@ -1,0 +1,93 @@
+{
+  "course": {
+    "id": "option-alpha",
+    "name": "Option Alpha",
+    "logo": "/courses/option-alpha-logo.png",
+    "logo_bg": "white",
+    "tagline": "An options trading education and automation platform founded by Kirk Du Plessis in 2010.",
+    "about": "Option Alpha is an options trading education and automation platform founded by Kirk Du Plessis in 2010, a former investment banker and stock analyst. It combines a three-tiered course system (beginner through advanced) with tools for strategy backtesting and automated trade management, usable with several supported brokers.",
+    "instructor": {
+      "name": "Kirk Du Plessis",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Options courses",
+        "module_count": 3,
+        "topics": [
+          "Options fundamentals and mechanics (Beginner)",
+          "Strategy identification and evaluation (Intermediate)",
+          "Backtesting and automated trading implementation (Advanced)"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Backtesting engine",
+        "description": "Test options strategies against historical data."
+      },
+      {
+        "label": "Automated trading bots",
+        "description": "Rule-based position entry, management and exits."
+      },
+      {
+        "label": "Community",
+        "description": "10,000+ active traders."
+      }
+    ],
+    "platforms": [],
+    "markets": ["options"],
+    "stats": [
+      { "label": "Founded", "value": "2010" }
+    ],
+    "pricing": [
+      {
+        "name": "Free (broker-linked)",
+        "price": "Free",
+        "billing_note": "Free with a qualifying Tradier or TradeStation account (minimum balance requirements apply).",
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Pro (Annual)",
+        "price": "$99/month",
+        "billing_note": "Billed annually. Trade with any broker, 50 bots, $100k limit per bot, unlimited backtesting.",
+        "highlight": "Most popular",
+        "link": null
+      },
+      {
+        "name": "Pro (Monthly)",
+        "price": "$149/month",
+        "billing_note": null,
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 3.5,
+      "review_count": 11,
+      "url": "https://www.trustpilot.com/review/optionalpha.com",
+      "label": "Average"
+    },
+    "whop": null,
+    "testimonials": [
+      {
+        "quote": "I haven't been able to trade this consistently before and it's 100% because of these bots.",
+        "author": "Oliver Acevedo",
+        "source": "Quoted on Option Alpha's website"
+      },
+      {
+        "quote": "Once you have a good set of rules and trading plan, it almost completely removes the emotion out of trading.",
+        "author": "Bret Williams",
+        "source": "Quoted on Option Alpha's website"
+      }
+    ],
+    "website": "https://optionalpha.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the best-known names in retail options education/automation, added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Founder (Kirk Du Plessis) confirmed via optionalpha.com/team and WebSearch. Pricing confirmed via WebSearch of the provider's own /pricing page. Trustpilot (3.5/5, 11 reviews, Average) confirmed directly — shown as-is despite being a lower score, consistent with how we handle every rating on this site."
+  }
+}

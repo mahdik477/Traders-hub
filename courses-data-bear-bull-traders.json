@@ -1,0 +1,112 @@
+{
+  "course": {
+    "id": "bear-bull-traders",
+    "name": "Bear Bull Traders",
+    "logo": "/courses/bear-bull-traders-logo.png",
+    "logo_bg": "dark",
+    "tagline": "A day trading community founded by Andrew Aziz in 2015, combining 12+ courses with 26+ mentors and a live chatroom.",
+    "about": "Bear Bull Traders is an online day trading community founded by Andrew Aziz in 2015. Members get 12+ structured courses covering stock and options trading, a live chatroom with 26+ mentors during market hours, weekly webinars, and a trading simulator.",
+    "instructor": {
+      "name": "Andrew Aziz",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Day trading courses",
+        "module_count": 12,
+        "topics": [
+          "Day trading basics to advanced strategies",
+          "Opening Range Breakout strategy",
+          "VWAP-based strategies",
+          "Intraday momentum trading",
+          "Options trading",
+          "Risk management and trading psychology"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live chatroom",
+        "description": "26+ expert mentors and active traders during market hours."
+      },
+      {
+        "label": "Weekly webinars",
+        "description": "9 weekly webinars, live and recorded."
+      },
+      {
+        "label": "Trading simulator",
+        "description": "Practice trading without real capital."
+      },
+      {
+        "label": "Community events",
+        "description": "Live trading summits and retreats."
+      }
+    ],
+    "platforms": [],
+    "markets": ["stocks", "options"],
+    "stats": [
+      { "label": "Founded", "value": "2015" }
+    ],
+    "pricing": [
+      {
+        "name": "Intro",
+        "price": "$39",
+        "billing_note": "7-day access to the chatroom, courses, and the live Monday onboarding class.",
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Basic (Monthly)",
+        "price": "$99/month",
+        "billing_note": null,
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Elite (Monthly)",
+        "price": "$199/month",
+        "billing_note": "Adds weekly mentorship and 1:1 psychology coaching.",
+        "highlight": "Most popular",
+        "link": null
+      },
+      {
+        "name": "Elite (Annual)",
+        "price": "$2,388/year",
+        "billing_note": null,
+        "highlight": "Best value",
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.4,
+      "review_count": 54,
+      "url": "https://www.trustpilot.com/review/bearbulltraders.com",
+      "label": "Excellent"
+    },
+    "whop": null,
+    "testimonials": [
+      {
+        "quote": "Bear Bull Traders stands out for its focus on risk management.",
+        "author": "Josh P",
+        "source": "Quoted on Bear Bull Traders' website"
+      },
+      {
+        "quote": "Joining Bear Bull Traders transformed my trading through watchlists and insights.",
+        "author": "Magdalena F",
+        "source": "Quoted on Bear Bull Traders' website"
+      },
+      {
+        "quote": "Being part of Bear Bull Traders has deepened my understanding via mentorship.",
+        "author": "Artak N",
+        "source": "Quoted on Bear Bull Traders' website"
+      }
+    ],
+    "website": "https://bearbulltraders.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the most well-known day trading communities, added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Founder, format, curriculum and testimonials confirmed directly on bearbulltraders.com. Pricing confirmed via the members portal and cross-checked across several independent review sites. Trustpilot (4.4/5, 54 reviews, Excellent) confirmed directly. Logo is the provider's own favicon."
+  }
+}

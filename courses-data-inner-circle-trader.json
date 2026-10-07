@@ -1,0 +1,63 @@
+{
+  "course": {
+    "id": "inner-circle-trader",
+    "name": "Inner Circle Trader (ICT)",
+    "logo": null,
+    "logo_bg": "white",
+    "tagline": "A free forex and futures price-action education library built by Michael J. Huddleston, one of the most-referenced names in retail price-action trading.",
+    "about": "Inner Circle Trader (ICT) is the trading education work of Michael J. Huddleston, focused on a price-action methodology he calls \"Trading the Markets\". The core 137-article curriculum and years of mentorship cohorts have been released free on YouTube; a separate paid mentorship has historically existed for traders wanting guided, live application with trade reviews.",
+    "instructor": {
+      "name": "Michael J. Huddleston",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Trading the Markets",
+        "module_count": 137,
+        "topics": [
+          "Price action concepts",
+          "Forex trading fundamentals",
+          "Guided live application and trade reviews (paid mentorship cohorts)"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Free YouTube library",
+        "description": "The full core curriculum, released at no cost."
+      },
+      {
+        "label": "Mentorship cohorts",
+        "description": "Historically offered as a paid, guided program with live sessions and trade reviews; past cohorts have later been released free."
+      }
+    ],
+    "platforms": [],
+    "markets": ["forex", "futures"],
+    "stats": [],
+    "pricing": [
+      {
+        "name": "Core curriculum",
+        "price": "Free",
+        "billing_note": "The full 137-article/video curriculum, free on YouTube.",
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 3.1,
+      "review_count": 47,
+      "url": "https://www.trustpilot.com/review/theinnercircletrader.com",
+      "label": "Average"
+    },
+    "whop": null,
+    "testimonials": [],
+    "testimonials_note": "We didn't find individually-quoted testimonials we could independently verify, so none are shown here.",
+    "website": "https://www.theinnercircletrader.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the most-referenced names in retail forex/futures price-action trading (an enormous YouTube following and widely-copied terminology), added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Founder confirmed on theinnercircletrader.com. A historical paid mentorship (reported around $100/month on a 12-month basis in 2022) appears to have existed, but we couldn't confirm a currently-active paid price for 2026, so pricing only shows the free tier rather than guessing a possibly-outdated figure. Trustpilot (3.1/5, 47 reviews, Average) confirmed directly. No usable logo found (the official site's favicon didn't resolve), so a lettermark shows instead."
+  }
+}

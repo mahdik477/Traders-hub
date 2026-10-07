@@ -1,0 +1,90 @@
+{
+  "course": {
+    "id": "warrior-trading",
+    "name": "Warrior Trading",
+    "logo": "/courses/warrior-trading-logo.png",
+    "logo_bg": "white",
+    "tagline": "A day trading education platform founded by Ross Cameron in 2012, focused on small-cap momentum trading.",
+    "about": "Warrior Trading is a day trading education company founded by Ross Cameron in 2012. It teaches small-cap momentum strategies — including low-float stocks with a catalyst, gap-and-go entries, and micro pullbacks — through live-streamed trading sessions where students watch Ross and other traders make real-time decisions.",
+    "instructor": {
+      "name": "Ross Cameron",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Warrior Starter",
+        "module_count": null,
+        "topics": ["Foundational day trading concepts", "18 hours of core material"]
+      },
+      {
+        "title": "Warrior Pro",
+        "module_count": null,
+        "topics": [
+          "Advanced small-cap momentum strategies",
+          "Gap-and-go entries",
+          "Low-float stocks with a catalyst",
+          "Micro pullbacks inside a strong move",
+          "200+ hours of material"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live trading streams",
+        "description": "Watch Ross Cameron and other traders make real-time decisions during market hours."
+      },
+      {
+        "label": "Day Trade Dash",
+        "description": "A real-time trading simulator platform, sold as a separate add-on."
+      },
+      {
+        "label": "Chat room",
+        "description": "Live streams and chat access with the trading community."
+      }
+    ],
+    "platforms": [],
+    "markets": ["stocks"],
+    "stats": [
+      { "label": "Founded", "value": "2012" }
+    ],
+    "pricing": [
+      {
+        "name": "Warrior Starter",
+        "price": "$797",
+        "billing_note": "18 hours of material, 3 years of access.",
+        "highlight": null,
+        "link": null
+      },
+      {
+        "name": "Warrior Pro",
+        "price": "$2,997",
+        "billing_note": "200+ hours of material, advanced strategies and tools.",
+        "highlight": "Most popular",
+        "link": null
+      },
+      {
+        "name": "Live streams & chat",
+        "price": "$147/month",
+        "billing_note": "Ongoing subscription for live streams and chat access.",
+        "highlight": null,
+        "link": null
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": {
+      "rating": 4.8,
+      "review_count": 2773,
+      "url": "https://www.trustpilot.com/review/warriortrading.com",
+      "label": "Excellent"
+    },
+    "whop": null,
+    "testimonials": [],
+    "testimonials_note": "We couldn't reliably access testimonials directly from the provider's site (it blocks automated access), so none are shown here.",
+    "website": "https://www.warriortrading.com/",
+    "affiliate_link": null
+  },
+  "_notes": {
+    "last_verified": "2026-10-07",
+    "source": "One of the most widely recognized day trading education brands, added for directory credibility rather than affiliate revenue — no affiliate relationship exists. Warriortrading.com returned 403 Forbidden to direct fetch, so about/curriculum/formats came from WebSearch results (multiple independent review sites agreeing on the same figures) rather than the primary site directly; pricing cross-confirmed across several sources. Trustpilot (4.8/5, 2,773 reviews, Excellent) confirmed directly. Logo is the provider's own favicon."
+  }
+}
