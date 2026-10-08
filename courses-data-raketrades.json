@@ -1,0 +1,95 @@
+{
+  "course": {
+    "id": "raketrades",
+    "name": "RakeTrades",
+    "logo": "/courses/raketrades-logo.png",
+    "logo_bg": "white",
+    "tagline": "A futures and options trading mastermind founded by Jake Ricci, with 500+ trade reviews and a personalized psychology tool.",
+    "about": "RakeTrades is a futures and options trading education community founded by Jake Ricci. The Mastermind course includes 500+ trade reviews and bonus lessons, daily watchlists and weekly newsletters, an automated key-levels TradingView indicator, and a personalized trading psychology tool.",
+    "instructor": {
+      "name": "Jake Ricci",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Mastermind course",
+        "module_count": null,
+        "topics": [
+          "500+ trade reviews and bonus lessons",
+          "Daily watchlists",
+          "Automated key-levels TradingView indicator",
+          "Trading psychology"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Mastermind course",
+        "description": "500+ trade reviews and bonus lessons."
+      },
+      {
+        "label": "Daily watchlists & newsletters",
+        "description": "Delivered daily and weekly."
+      },
+      {
+        "label": "TradingView indicator",
+        "description": "An automated key-levels indicator included with membership."
+      },
+      {
+        "label": "Trading channels & support",
+        "description": "Chat rooms and round-the-clock customer support."
+      }
+    ],
+    "platforms": ["TradingView"],
+    "markets": ["futures", "options"],
+    "stats": [
+      { "label": "Members", "value": "393" }
+    ],
+    "pricing": [
+      {
+        "name": "Monthly",
+        "price": "$199/month",
+        "billing_note": null,
+        "highlight": null,
+        "link": "https://whop.com/raketrades/raketrades?a=user50f81875135"
+      },
+      {
+        "name": "Lifetime",
+        "price": "$3,000",
+        "billing_note": null,
+        "highlight": "Best value",
+        "link": "https://whop.com/raketrades/raketrades?a=user50f81875135"
+      }
+    ],
+    "refund_policy": "No refunds, except under specific legal requirements or on a case-by-case basis at the company's discretion. No money-back guarantee is offered.",
+    "trustpilot": null,
+    "whop": {
+      "rating": 5.0,
+      "review_count": 366,
+      "url": "https://whop.com/raketrades/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "The content and the team at Rake Trades are awesome. So much value provided in a very straightforward and easy to follow way.",
+        "author": "Zach Wessolleck",
+        "source": "Whop review"
+      },
+      {
+        "quote": "For the price this course is offered at I honestly don't think you can get much better.",
+        "author": "Jamie",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Worth every penny. The real deal. I've done a few mentorships but this one is a real game changer.",
+        "author": "Scott",
+        "source": "Whop review"
+      }
+    ],
+    "website": "https://whop.com/raketrades/",
+    "affiliate_link": "https://whop.com/raketrades/raketrades?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-08",
+    "source": "Founder (Jake Ricci) and lifetime price ($3,000) confirmed via WebSearch of multiple independent review sites; monthly price ($199) confirmed directly on the live Whop product page (one review source showed $175, which may be outdated - we went with the figure read directly from the current page). Refund policy confirmed via WebSearch summary of the provider's own store policies, quoted in our own words. No independently-confirmed official domain, so 'website' points to the Whop store. No Trustpilot profile found (raketrades.com 404s). 15% affiliate commission confirmed via whoptrends.com during our earlier shortlist research. Logo is the community's own wordmark from its Whop listing."
+  }
+}

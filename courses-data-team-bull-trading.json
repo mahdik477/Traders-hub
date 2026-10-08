@@ -1,0 +1,91 @@
+{
+  "course": {
+    "id": "team-bull-trading",
+    "name": "Team Bull Trading",
+    "logo": "/courses/team-bull-trading-logo.png",
+    "logo_bg": "dark",
+    "tagline": "A day and swing trading education community founded by Jdun, with a 10+ trader coaching team and a weekly curriculum.",
+    "about": "Team Bull Trading is a day and swing trading education community founded by Jdun, who has 9 years of trading experience, alongside a team of 10+ traders. Members join an active trading floor with live screen-share sessions, session replays, guest speakers and a weekly curriculum, trading everything from penny stocks to large-cap options.",
+    "instructor": {
+      "name": "Jdun",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Weekly curriculum",
+        "module_count": null,
+        "topics": [
+          "Trading terminology and account types",
+          "Broker comparison",
+          "Financial instruments",
+          "Intro to options",
+          "Day trading and swing trading across timeframes"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live trading floor",
+        "description": "Morning stream, live screen-sharing and session replays."
+      },
+      {
+        "label": "Coaching bench",
+        "description": "Guest speakers and direct coaching access."
+      },
+      {
+        "label": "Weekly curriculum",
+        "description": "Structured weekly lessons covering trading fundamentals through options."
+      },
+      {
+        "label": "Discord community",
+        "description": "A private network of 5,000+ traders."
+      }
+    ],
+    "platforms": [],
+    "markets": ["stocks", "options"],
+    "stats": [
+      { "label": "Members", "value": "5,000+" }
+    ],
+    "pricing": [
+      {
+        "name": "Monthly",
+        "price": "$99/month",
+        "billing_note": null,
+        "highlight": null,
+        "link": "https://whop.com/team-bull-trading/team-bull-trading?a=user50f81875135"
+      },
+      {
+        "name": "Annual",
+        "price": "Not published",
+        "billing_note": "Price isn't shown publicly — select annual billing at checkout for the current rate.",
+        "highlight": null,
+        "link": "https://whop.com/team-bull-trading/team-bull-trading?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": {
+      "rating": 4.7,
+      "review_count": 499,
+      "url": "https://whop.com/team-bull-trading/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "Goated patience and teaching from JDun and his crew.",
+        "author": "FancyMu",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Jdun doesn't trade a lot but when he does its a banger! He keeps his losses small and winners big.",
+        "author": "Daniel",
+        "source": "Whop review"
+      }
+    ],
+    "website": "https://whop.com/team-bull-trading/",
+    "affiliate_link": "https://whop.com/team-bull-trading/team-bull-trading?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-08",
+    "source": "Founder (Jdun, 9 years' experience) and curriculum confirmed via WebSearch of multiple independent review sites. 'website' points to the Whop store rather than teambulltrading.com - that domain's own Trustpilot profile states the company's website has closed, so we're not linking something that may be dead; it still shows 155 historical reviews but no current aggregate score, hence trustpilot is null here rather than guessed. 30% affiliate commission confirmed via whoptrends.com during our earlier shortlist research. The person gave two identical links for 'monthly' and 'annual' billing, so both pricing tiers point to the same URL (same checkout page, different billing option selected there); the annual price itself isn't shown publicly so we didn't guess it. Logo cropped from the community's own Whop banner (the bull-head mark)."
+  }
+}

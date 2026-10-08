@@ -1,0 +1,85 @@
+{
+  "course": {
+    "id": "chroma-trading",
+    "name": "Chroma Trading",
+    "logo": null,
+    "logo_bg": "white",
+    "tagline": "A trading education community founded by Follis, covering forex, crypto and stocks through structured modules and 1-on-1 mentorship.",
+    "about": "Chroma Trading is a trading education community founded by Follis. It combines structured learning modules (beginner through advanced) with 1-on-1 coaching and a team of analysts covering different styles — price action, altcoin trading, scalping and DeFi — across forex, crypto and stocks.",
+    "instructor": {
+      "name": "Follis",
+      "link": null
+    },
+    "curriculum": [
+      {
+        "title": "Structured modules",
+        "module_count": null,
+        "topics": [
+          "Beginner, intermediate and advanced trading modules",
+          "Market analysis",
+          "Emotional discipline and trading psychology"
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "label": "Live daily analysis",
+        "description": "Daily market analysis alongside the structured curriculum."
+      },
+      {
+        "label": "1-on-1 mentorship",
+        "description": "Personalized coaching included with membership."
+      },
+      {
+        "label": "Workshops",
+        "description": "Workshop access alongside the core curriculum."
+      },
+      {
+        "label": "Community",
+        "description": "A team of analysts covering price action, altcoin trading, scalping and DeFi."
+      }
+    ],
+    "platforms": [],
+    "markets": ["forex", "crypto", "stocks"],
+    "stats": [],
+    "pricing": [
+      {
+        "name": "Membership",
+        "price": "$150/month",
+        "billing_note": "Other billing options are shown at checkout but weren't published to us.",
+        "highlight": null,
+        "link": "https://whop.com/chroma-trading/chroma-trading?a=user50f81875135"
+      }
+    ],
+    "refund_policy": null,
+    "trustpilot": null,
+    "whop": {
+      "rating": 5.0,
+      "review_count": 245,
+      "url": "https://whop.com/chroma-trading/reviews/"
+    },
+    "testimonials": [
+      {
+        "quote": "If crypto could give you a hug, it would be from Chroma.",
+        "author": "lemon",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Top-notch. The real deal.",
+        "author": "Jansen McLendon",
+        "source": "Whop review"
+      },
+      {
+        "quote": "Being part of Chroma is worth every penny. The wealth knowledge is unmatched.",
+        "author": "De Luminist",
+        "source": "Whop review"
+      }
+    ],
+    "website": "https://whop.com/chroma-trading/",
+    "affiliate_link": "https://whop.com/chroma-trading/chroma-trading?a=user50f81875135"
+  },
+  "_notes": {
+    "last_verified": "2026-10-08",
+    "source": "Founder (Follis) and markets confirmed via WebSearch. No independently-confirmed official domain (chromatrading.com and chromatrading.net both returned nothing usable), so 'website' points to the Whop store instead. No Trustpilot profile found either. 15% affiliate commission confirmed via whoptrends.com during our earlier shortlist research. No usable brand-mark logo found (the only image on the Whop page was a generic gradient placeholder), so a lettermark shows instead."
+  }
+}
