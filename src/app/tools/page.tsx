@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Where does Visit tool go?",
-    a: "For now it opens the tool's official homepage. If an affiliate link is added later, it lives in one field on that listing and the button uses it automatically. The footer explains when a link may earn us a commission.",
+    a: "It opens the tool's official site. If that listing has an affiliate link, the button uses it, and we may earn a commission if you sign up or buy. The footer says the same. Listings without an affiliate link still open the official homepage.",
   },
 ];
 
