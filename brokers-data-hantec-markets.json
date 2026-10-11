@@ -2,7 +2,8 @@
   "broker": {
     "id": "hantec-markets",
     "name": "Hantec Markets",
-    "logo": null,
+    "logo": "/brokers/hantec-markets.png",
+    "logo_bg": "dark",
     "tagline": "Its site names 5 regulators, including FSC (Mauritius), FCA, and ASIC. Rules depend on where you live. Advertised leverage: Up to 1:500.",
     "about": "The Hantec Markets pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Hantec Global, Hantec Pro, and Hantec Cent. Platforms named there include Hantec Mobile, Hantec WebTrader, Hantec Social, MetaTrader 4, MetaTrader 5, and PAMM. The site names these regulators: FSC (Mauritius), FCA, ASIC, VFSC, and HGX. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:500. Leverage increases losses as well as gains.",
     "founded": null,

@@ -2,7 +2,8 @@
   "broker": {
     "id": "octa",
     "name": "Octa",
-    "logo": null,
+    "logo": "/brokers/octa.png",
+    "logo_bg": "dark",
     "tagline": "A conduct licence was not confirmed on the pages that loaded. Rules depend on where you live. Advertised leverage: Up to 1:1000.",
     "about": "The Octa pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include OctaTrader, MetaTrader 5, and MetaTrader 4. Platforms named there include OctaTrader, MetaTrader 5, MetaTrader 4, and Octa Global app. Those pages do not confirm a conduct licence we could list with a country and a regulator name. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:1000. Leverage increases losses as well as gains.",
     "founded": null,

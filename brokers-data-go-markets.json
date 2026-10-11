@@ -2,7 +2,8 @@
   "broker": {
     "id": "go-markets",
     "name": "GO Markets",
-    "logo": null,
+    "logo": "/brokers/go-markets.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 2006. Its site names ASIC, CySEC, and FSC (Mauritius). Rules depend on where you live. Advertised leverage: Up to 1:500.",
     "about": "GO Markets says it has operated since 2006. An address it publishes is Melbourne, Australia. Account names on its site include Standard (Australia page), GO Plus+ (Australia page), Micro (Australia page), Standard (international / Mauritius page), GO Plus+ (international / Mauritius page), Micro (international / Mauritius page), GO Professional, and Swap-free Islamic account. Platforms named there include MT4, MT5, cTrader, TradingView, and GO TradeX. The site names these regulators: ASIC, CySEC, and FSC (Mauritius). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:500. Leverage increases losses as well as gains.",
     "founded": 2006,

@@ -2,7 +2,8 @@
   "broker": {
     "id": "admirals",
     "name": "Admirals",
-    "logo": null,
+    "logo": "/brokers/admirals.png",
+    "logo_bg": "dark",
     "tagline": "Its site names CySEC. Rules depend on where you live. Advertised leverage: Up to 1:30.",
     "about": "The Admirals pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Trade.MT4, Zero.MT4, Zero.MT4 and Zero.MT5, and Invest.MT5. Platforms named there include MetaTrader 4, MetaTrader 5, Admirals mobile app, Web trading, and MetaTrader Supreme Edition. The site names these regulators: CySEC. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:30. Leverage increases losses as well as gains.",
     "founded": null,

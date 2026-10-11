@@ -2,7 +2,8 @@
   "broker": {
     "id": "oanda",
     "name": "OANDA",
-    "logo": null,
+    "logo": "/brokers/oanda.png",
+    "logo_bg": "white",
     "tagline": "Its site names CFTC and NFA. Rules depend on where you live. Advertised leverage: Up to 1:50.",
     "about": "OANDA publishes this address: 17 State Street, Suite 300, New York, NY 10004-1501, United States. The pages checked do not state a founding year. Account names on its site include Standard and Elite Trader. Platforms named there include OANDA web platform, OANDA mobile app, OANDA tablet app, TradingView, and MetaTrader 4. The site names these regulators: CFTC and NFA. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:50. Leverage increases losses as well as gains.",
     "founded": null,

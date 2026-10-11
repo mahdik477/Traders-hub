@@ -2,7 +2,8 @@
   "broker": {
     "id": "ic-markets",
     "name": "IC Markets",
-    "logo": null,
+    "logo": "/brokers/ic-markets.png",
+    "logo_bg": "dark",
     "tagline": "On its own site since 2007. Its site names FSA (Seychelles). Rules depend on where you live. Advertised leverage: Up to 1:5000.",
     "about": "IC Markets says it has operated since 2007. The pages checked do not name one headquarters. Account names on its site include Standard and Raw Spread. Platforms named there include MetaTrader 4, MetaTrader 5, cTrader, IC Social, cTrader Copy, ZuluTrade, MyfxBook, and AutoTrade. The site names these regulators: FSA (Seychelles). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:5000. Leverage increases losses as well as gains.",
     "founded": 2007,

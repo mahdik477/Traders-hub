@@ -2,7 +2,8 @@
   "broker": {
     "id": "naga",
     "name": "NAGA",
-    "logo": null,
+    "logo": "/brokers/naga.png",
+    "logo_bg": "white",
     "tagline": "Its site names CySEC and ASF. Rules depend on where you live. Advertised leverage: Up to 1:30.",
     "about": "NAGA publishes this address: Agias Zonis 11, 3027, Limassol, Cyprus. The pages checked do not state a founding year. Account names on its site include CFD and forex and Real stocks and ETFs. Platforms named there include NAGA social trading app and TradingView charts. The site names these regulators: CySEC and ASF. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:30. Leverage increases losses as well as gains.",
     "founded": null,

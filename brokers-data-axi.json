@@ -2,7 +2,8 @@
   "broker": {
     "id": "axi",
     "name": "Axi",
-    "logo": null,
+    "logo": "/brokers/axi.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 2007. Its site names 6 regulators, including ASIC, FMA, and FCA. Rules depend on where you live. Advertised leverage: Up to 1:1000.",
     "about": "Axi says it has operated since 2007. The pages checked do not name one headquarters. Account names on its site include Standard and Pro. Platforms named there include Axi trading app, MetaTrader 4, MetaTrader 5, and Axi Copy Trading. The site names these regulators: ASIC, FMA, FCA, CySEC, DFSA, and FSA (St Vincent). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:1000. Leverage increases losses as well as gains.",
     "founded": 2007,

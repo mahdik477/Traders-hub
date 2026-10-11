@@ -2,7 +2,8 @@
   "broker": {
     "id": "moneta-markets",
     "name": "Moneta Markets",
-    "logo": null,
+    "logo": "/brokers/moneta-markets.png",
+    "logo_bg": "dark",
     "tagline": "Its site names 5 regulators, including FSCA, FCA, and CMA. Rules depend on where you live. Advertised leverage: Up to 1:1000.",
     "about": "The Moneta Markets pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Direct STP, Prime ECN, and Ultra ECN. Platforms named there include PRO Trader, MetaTrader 4, MetaTrader 5, AppTrader, and TradingView. The site names these regulators: FSCA, FCA, CMA, FSC (Mauritius), and SLIBC. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:1000. Leverage increases losses as well as gains.",
     "founded": null,

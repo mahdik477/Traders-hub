@@ -2,7 +2,8 @@
   "broker": {
     "id": "cmc-markets",
     "name": "CMC Markets",
-    "logo": null,
+    "logo": "/brokers/cmc-markets.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 1989. Its site names FCA and BMA. Rules depend on where you live. Advertised leverage: Up to 1:200.",
     "about": "CMC Markets says it has operated since 1989. An address it publishes is 133 Houndsditch, London, United Kingdom, EC3A 7BX. Account names on its site include Standard CFD, FX Active, Equities, and Spread betting. Platforms named there include CMC web platform, CMC mobile app, MetaTrader 4, MetaTrader 5, and TradingView. The site names these regulators: FCA and BMA. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:200. Leverage increases losses as well as gains.",
     "founded": 1989,

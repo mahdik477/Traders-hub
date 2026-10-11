@@ -2,7 +2,8 @@
   "broker": {
     "id": "eightcap",
     "name": "Eightcap",
-    "logo": null,
+    "logo": "/brokers/eightcap.png",
+    "logo_bg": "dark",
     "tagline": "Its site names 6 regulators, including ASIC, FCA, and CySEC. Rules depend on where you live. Advertised leverage: Up to 1:500.",
     "about": "The Eightcap pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Standard and Raw. Platforms named there include MetaTrader 4, MetaTrader 5, TradingView, and TradeLocker. The site names these regulators: ASIC, FCA, CySEC, SCB, FSA (Seychelles), and FSC (Mauritius). The company on an account depends on where the client lives. A minimum deposit figure on the site is 100 USD. The highest leverage figure taken from those pages is Up to 1:500. Leverage increases losses as well as gains.",
     "founded": null,

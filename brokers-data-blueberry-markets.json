@@ -2,7 +2,8 @@
   "broker": {
     "id": "blueberry-markets",
     "name": "Blueberry Markets",
-    "logo": null,
+    "logo": "/brokers/blueberry-markets.png",
+    "logo_bg": "white",
     "tagline": "Its site names VFSC, FSC (Mauritius), and ASIC. Rules depend on where you live. Advertised leverage: Up to 1:500.",
     "about": "The Blueberry Markets pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Standard and Direct (also labelled Raw). Platforms named there include MetaTrader 4, MetaTrader 5, WebTrader, TradingView, and Blueberry X. The site names these regulators: VFSC, FSC (Mauritius), and ASIC. The company on an account depends on where the client lives. A minimum deposit figure on the site is 100 USD. The highest leverage figure taken from those pages is Up to 1:500. Leverage increases losses as well as gains.",
     "founded": null,

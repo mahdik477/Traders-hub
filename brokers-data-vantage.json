@@ -2,7 +2,8 @@
   "broker": {
     "id": "vantage",
     "name": "Vantage",
-    "logo": null,
+    "logo": "/brokers/vantage.png",
+    "logo_bg": "white",
     "tagline": "A multi-entity CFD and forex group, founded in 2009. Leverage and client protections depend on which Vantage company holds the account.",
     "about": "Vantage, formerly Vantage FX, was founded in 2009 and runs several companies. The group describes major operations in Mauritius, the UK and Australia, and also names Seychelles among its bases. International pages advertise a Standard STP account with spreads from 1.0 pip and no commission, and a RAW ECN account with spreads from 0.0 pips plus commission. Some international entities are described as offering leverage up to 1:2000. Not every Vantage account page states that figure. Retail clients at the Australian and UK companies are under much lower regulatory caps. The platforms listed here are MetaTrader 4, MetaTrader 5, TradingView and copy trading.",
     "founded": 2009,

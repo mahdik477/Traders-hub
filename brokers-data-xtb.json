@@ -2,7 +2,8 @@
   "broker": {
     "id": "xtb",
     "name": "XTB",
-    "logo": null,
+    "logo": "/brokers/xtb.png",
+    "logo_bg": "white",
     "tagline": "Its site names FCA, CySEC, and FSC (Belize). Rules depend on where you live. Advertised leverage: Up to 1:30.",
     "about": "XTB publishes this address: Level 9, One Canada Square, Canary Wharf, London, E14 5AA, United Kingdom. The pages checked do not state a founding year. Account names on its site include Stocks and ETFs and CFDs. Platforms named there include Mobile, Desktop, and Tablet. The site names these regulators: FCA, CySEC, and FSC (Belize). The company on an account depends on where the client lives. A minimum deposit figure on the site is 0 GBP. The highest leverage figure taken from those pages is Up to 1:30. Leverage increases losses as well as gains.",
     "founded": null,

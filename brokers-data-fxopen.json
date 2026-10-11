@@ -2,7 +2,8 @@
   "broker": {
     "id": "fxopen",
     "name": "FXOpen",
-    "logo": null,
+    "logo": "/brokers/fxopen.png",
+    "logo_bg": "dark",
     "tagline": "Its site names FCA. Rules depend on where you live. Advertised leverage: Up to 1:500.",
     "about": "FXOpen publishes this address: 3rd Floor Waverley House, 7-12 Noel Street, London, United Kingdom, W1F 8GQ. The pages checked do not state a founding year. Account names on its site include Basic ECN, Classic ECN, Advanced ECN, and Elite ECN. Platforms named there include TickTrader, MetaTrader 4, and MetaTrader 5. The site names these regulators: FCA. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:500. Leverage increases losses as well as gains.",
     "founded": null,

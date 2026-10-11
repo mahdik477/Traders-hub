@@ -2,7 +2,8 @@
   "broker": {
     "id": "m4markets",
     "name": "M4Markets",
-    "logo": null,
+    "logo": "/brokers/m4markets.png",
+    "logo_bg": "dark",
     "tagline": "On its own site since 2019. Its site names FSA (Seychelles), CySEC, and DFSA. Rules depend on where you live. Advertised leverage: Up to 1:5000.",
     "about": "M4Markets says it has operated since 2019. An address it publishes is Providence, Mahe, Seychelles (registered address, not labelled as a headquarters on the about page). Account names on its site include Standard, Raw Spread, Premium, Dynamic Leverage, Cent Account / USD and USDC, and Islamic Account. Platforms named there include MT4 and MT5. The site names these regulators: FSA (Seychelles), CySEC, and DFSA. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:5000. Leverage increases losses as well as gains.",
     "founded": 2019,

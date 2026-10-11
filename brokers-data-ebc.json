@@ -2,7 +2,8 @@
   "broker": {
     "id": "ebc",
     "name": "EBC Financial Group",
-    "logo": null,
+    "logo": "/brokers/ebc.png",
+    "logo_bg": "white",
     "tagline": "Its site names 6 regulators, including FCA, CIMA, and ASIC. Rules depend on where you live. Advertised leverage: Up to 1:1000.",
     "about": "The EBC Financial Group pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Standard and Professional. Platforms named there include MetaTrader 4 and MetaTrader 5. The site names these regulators: FCA, CIMA, ASIC, FSCA, FSC (Mauritius), and AOFA (Anjouan). The company on an account depends on where the client lives. A minimum deposit figure on the site is 50 USD. The highest leverage figure taken from those pages is Up to 1:1000. Leverage increases losses as well as gains.",
     "founded": null,

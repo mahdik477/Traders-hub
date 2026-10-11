@@ -2,7 +2,8 @@
   "broker": {
     "id": "exclusive-markets",
     "name": "Exclusive Markets",
-    "logo": null,
+    "logo": "/brokers/exclusive-markets.png",
+    "logo_bg": "white",
     "tagline": "Its site names FSA (Seychelles). Rules depend on where you live. Advertised leverage: Up to 1:4000.",
     "about": "The Exclusive Markets pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Exclusive, Standard Plus, Standard, Cent, and Shares. Platforms named there include MetaTrader 4 and MetaTrader 5. The site names these regulators: FSA (Seychelles). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:4000. Leverage increases losses as well as gains.",
     "founded": null,
