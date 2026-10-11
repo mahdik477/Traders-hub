@@ -10,7 +10,9 @@ import type {
   StrategyPricingTier,
   StrategyRules,
   StrategySource,
+  StrategyStep,
   StrategyTimeframe,
+  StrategyVideo,
   StrategyView,
 } from "./strategy-types";
 
@@ -42,6 +44,8 @@ type RawStrategy = {
   sources?: string[];
   controversy_flag?: boolean;
   image?: { kind: "synthetic" | "diagram"; src: string; caption: string } | null;
+  step_by_step?: { title: string; detail: string }[];
+  videos?: { title: string; url: string; note?: string | null }[];
 };
 
 function buildRules(r: RawStrategy["rules"]): StrategyRules {
@@ -56,6 +60,14 @@ function buildSources(sources?: string[]): StrategySource[] {
 function buildImage(image: RawStrategy["image"]): StrategyImage | null {
   if (!image) return null;
   return { kind: image.kind, src: image.src, caption: image.caption };
+}
+
+function buildSteps(steps?: RawStrategy["step_by_step"]): StrategyStep[] {
+  return (steps ?? []).map((s) => ({ title: s.title, detail: s.detail }));
+}
+
+function buildVideos(videos?: RawStrategy["videos"]): StrategyVideo[] {
+  return (videos ?? []).map((v) => ({ title: v.title, url: v.url, note: v.note ?? null }));
 }
 
 function buildStrategy(r: RawStrategy): StrategyView {
@@ -89,6 +101,8 @@ function buildStrategy(r: RawStrategy): StrategyView {
     sources: buildSources(r.sources),
     controversyFlag: r.controversy_flag ?? false,
     image: buildImage(r.image ?? null),
+    stepByStep: buildSteps(r.step_by_step),
+    videos: buildVideos(r.videos),
   };
 }
 

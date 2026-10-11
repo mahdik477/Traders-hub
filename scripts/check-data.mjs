@@ -523,6 +523,16 @@ function checkStrategyEntry(file, s, i) {
     else if (!existsSync(path.join(ROOT, "public", s.image.src))) err(file, `${where}.image file not found: public${s.image.src}`);
     if (!s.image.caption) warn(file, `${where}.image.caption is empty`);
   }
+  (s.step_by_step ?? []).forEach((step, j) => {
+    if (!step.title) err(file, `${where}.step_by_step[${j}] has no title`);
+    if (!step.detail) err(file, `${where}.step_by_step[${j}] has no detail`);
+  });
+  (s.videos ?? []).forEach((v, j) => {
+    if (!v.title) err(file, `${where}.videos[${j}] has no title`);
+    checkLink(file, `${where}.videos[${j}].url`, v.url);
+    if (v.url && !/^https:\/\/(www\.)?youtube\.com\/|^https:\/\/youtu\.be\//.test(v.url))
+      warn(file, `${where}.videos[${j}].url doesn't look like a YouTube link - double check it's the right URL`);
+  });
 }
 
 function checkStrategies(file, data) {

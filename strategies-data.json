@@ -73,7 +73,44 @@
         "kind": "synthetic",
         "src": "/strategies/moving-average-crossover.png",
         "caption": "A fast and slow moving average on fabricated price data, with crossover points marked."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Pick your two moving averages",
+          "detail": "Choose a faster (shorter-period) and slower (longer-period) moving average. Classic combinations: 50/200-day for long-term \"golden cross\"/\"death cross\" signals, 20/50 for swing trading, or 9/21 EMA for faster intraday signals. EMAs react quicker to recent price than SMAs, which is why most short-term traders prefer them."
+        },
+        {
+          "title": "Add both to your chart",
+          "detail": "On TradingView (or any charting platform), open Indicators, search \"Moving Average\" (or \"EMA\" for exponential), add it twice with your two chosen periods, and give them different colours so you can tell them apart at a glance."
+        },
+        {
+          "title": "Wait for the actual crossover, not just a close line",
+          "detail": "A valid signal is the faster line crossing fully above (bullish) or below (bearish) the slower line, ideally confirmed by a candle close — not just a brief intrabar touch that reverses a moment later."
+        },
+        {
+          "title": "Check if other evidence agrees before entering",
+          "detail": "Don't trade the crossover blind. Look at whether price is also above a longer-term trend filter (like a 200-day MA), whether volume is picking up, and whether an oscillator like RSI isn't already extremely stretched in the opposite direction."
+        },
+        {
+          "title": "Enter on the next candle's open after confirmation",
+          "detail": "Many traders wait for the crossover candle to fully close, then enter at the next candle's open — this avoids reacting to a crossover that reverses intrabar before the candle finishes."
+        },
+        {
+          "title": "Place your stop before you place your trade",
+          "detail": "Put your stop-loss below the most recent swing low (for a long) or above the most recent swing high (for a short) — decide this before you're in the position, not after."
+        },
+        {
+          "title": "Decide your exit rule in advance",
+          "detail": "Common choices: exit on the opposite crossover, exit when price closes back through the slower MA, or use a trailing stop that follows price up. Pick one before you enter, not while you're already holding and emotional."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Moving Average Crossover Strategy: A Step-by-Step Trading Guide",
+          "url": "https://www.youtube.com/watch?v=0mSlyXVnei0",
+          "note": "Walks through several real crossover combinations on a live chart, including a clear look at why the signal lags price."
+        }
+      ]
     },
     {
       "ref_id": "T1-02",
@@ -148,7 +185,48 @@
         "kind": "synthetic",
         "src": "/strategies/support-and-resistance.png",
         "caption": "Synthetic price action bouncing between a marked support and resistance zone."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Strip your chart back to candles only",
+          "detail": "Remove every indicator first. Support and resistance come from where price itself has repeatedly reacted — overlaying indicators at this stage just adds noise."
+        },
+        {
+          "title": "Pick the right lookback for your timeframe",
+          "detail": "For swing or position trading, use the daily chart with 12–18 months of history. For day trading, use a 15-minute chart with roughly 3–6 months."
+        },
+        {
+          "title": "Mark swing highs and lows",
+          "detail": "Find the peaks and troughs where price clearly changed direction — not every minor wiggle in between."
+        },
+        {
+          "title": "Only keep levels price has reacted at 2–3+ times",
+          "detail": "A level only matters if price has stalled, reversed, or paused there more than once. One touch isn't a level, it's a coincidence."
+        },
+        {
+          "title": "Draw a zone, not a single line",
+          "detail": "Real markets rarely reverse at one exact price. Draw a band a few points or pips wide around the cluster of reactions instead of a single precise line."
+        },
+        {
+          "title": "Wait for price to return, then wait again for a reaction candle",
+          "detail": "Don't buy the moment price touches support. Wait for a rejection candle (a hammer, pin bar, or bullish engulfing at support) that confirms buyers actually showed up there."
+        },
+        {
+          "title": "Set your stop just beyond the zone, target the next level",
+          "detail": "Stop-loss goes just past the zone, not right at its exact edge (which gets hunted often). Target the next clear support/resistance level in the direction of your trade."
+        },
+        {
+          "title": "Remember broken levels can flip roles",
+          "detail": "Once resistance is convincingly broken — a strong close through it, ideally with volume — it often becomes support on the next pullback, and the same works in reverse."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Support and Resistance For Beginners (The Ultimate Guide)",
+          "url": "https://www.youtube.com/watch?v=nuVv0ZWUfs4",
+          "note": "Covers drawing levels in both ranging and trending markets, and why a broken level often swaps roles."
+        }
+      ]
     },
     {
       "ref_id": "T1-03",
@@ -221,7 +299,44 @@
         "kind": "synthetic",
         "src": "/strategies/trendline-trading.png",
         "caption": "A trendline drawn through a series of fabricated swing lows."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Confirm you're actually in a trend first",
+          "detail": "Trendlines only work when there's a real trend — a clear sequence of higher highs and higher lows (up) or lower highs and lower lows (down). Forcing a trendline onto a sideways market gives you nonsense."
+        },
+        {
+          "title": "Find at least two swing points to anchor the line",
+          "detail": "For an uptrend, find two (ideally three) rising swing LOWS. For a downtrend, find two to three falling swing HIGHS. A very common beginner mistake is connecting the highs in an uptrend instead of the lows — don't do that."
+        },
+        {
+          "title": "Draw the line through those points, not through the candles",
+          "detail": "The line should touch the wicks (or bodies — see the next step) at the swing points without slicing through price action elsewhere on the chart."
+        },
+        {
+          "title": "Be consistent with wicks vs. bodies",
+          "detail": "Pick one method — always use wicks, or always use candle bodies — and stick with it for that line. Don't mix them partway through."
+        },
+        {
+          "title": "Wait for a third touch before trusting the line",
+          "detail": "Two points define a line mathematically, but the market hasn't \"confirmed\" it's respecting that line until price touches it a third time and reacts."
+        },
+        {
+          "title": "Trade the bounce, or trade the break",
+          "detail": "Bounce: enter in the trend direction when price touches the line and shows a rejection candle, with your stop just beyond the line. Break: a decisive close through the line can signal the trend is changing — many traders wait for a retest of the broken line before entering."
+        },
+        {
+          "title": "Re-draw as new swings form",
+          "detail": "A trendline isn't permanent. As the trend progresses and makes new swing points, you'll often need to redraw a steeper or shallower line to match the new structure."
+        }
+      ],
+      "videos": [
+        {
+          "title": "How To Draw Trendlines Like A Pro (My Secret Technique)",
+          "url": "https://www.youtube.com/watch?v=BONTuuxhujk",
+          "note": "From Rayner Teo, a well-known independent trading educator; good specifically on the highs-vs-lows mistake."
+        }
+      ]
     },
     {
       "ref_id": "T1-04",
@@ -294,7 +409,44 @@
         "kind": "synthetic",
         "src": "/strategies/rsi-overbought-oversold.png",
         "caption": "Synthetic price with a 14-period RSI panel showing the 70/30 overbought/oversold zones."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Add RSI to your chart",
+          "detail": "On TradingView: Indicators > Relative Strength Index. The default period is 14 — leave it there unless you have a specific, tested reason to change it."
+        },
+        {
+          "title": "Draw your reference lines at 70 and 30",
+          "detail": "These are usually already there by default: 70 = overbought, 30 = oversold. Some traders use 80/20 instead, which reduces false signals but also reduces how often you get a signal at all."
+        },
+        {
+          "title": "Identify the broader trend first",
+          "detail": "Check whether price is above or below a longer moving average (like the 200-period). This matters because the standard overbought/oversold levels behave very differently depending on that backdrop."
+        },
+        {
+          "title": "In a genuine range: trade both directions",
+          "detail": "If price is truly range-bound (not trending), look for longs when RSI dips below 30 and turns back up, and shorts when it pokes above 70 and turns back down."
+        },
+        {
+          "title": "In a trend: only take signals in the trend's direction",
+          "detail": "If price is in a clear uptrend, treat RSI dips to 30–40 as potential buy zones and largely ignore overbought readings — in a strong uptrend, RSI can sit above 70 for a long stretch without the trend reversing. Mirror this logic for downtrends."
+        },
+        {
+          "title": "Wait for RSI to actually turn, not just touch the level",
+          "detail": "Don't enter the instant RSI touches 30 or 70. Wait for it to cross back through that level, confirming momentum is genuinely shifting rather than just brushing the level and continuing on."
+        },
+        {
+          "title": "Plan your stop and exit together",
+          "detail": "Set a stop beyond the recent price swing. A common exit rule is closing the trade when RSI reaches the 50 midline, or when it reaches the opposite extreme."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Master the RSI Indicator (ULTIMATE In-Depth Guide)",
+          "url": "https://www.youtube.com/watch?v=BoD0I5J_eLU",
+          "note": "Covers using RSI differently in trends versus ranges, which a lot of shorter beginner videos skip entirely."
+        }
+      ]
     },
     {
       "ref_id": "T1-05",
@@ -366,7 +518,44 @@
         "kind": "synthetic",
         "src": "/strategies/macd-signal-line-crossover.png",
         "caption": "Synthetic price with an oscillator panel illustrating a momentum signal crossing its trigger line."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Add MACD with the standard settings",
+          "detail": "12, 26, 9 is the default almost everyone uses — don't change these unless you have a specific, tested reason to."
+        },
+        {
+          "title": "Learn to read all three parts",
+          "detail": "The MACD line (faster EMA minus slower EMA), the signal line (an EMA of the MACD line), and the histogram (the gap between them). Most beginners only watch the two lines and ignore the histogram, which actually gives the earliest hint of a shift."
+        },
+        {
+          "title": "Check which side of the zero line you're on",
+          "detail": "MACD above zero means the faster average is above the slower one — a long-bias backdrop. Below zero means a short-bias backdrop. Crossovers happening near or just after crossing zero tend to catch the start of new momentum; crossovers deep into overbought or oversold territory are often late."
+        },
+        {
+          "title": "Wait for the actual crossover",
+          "detail": "A buy signal is the MACD line crossing above the signal line; a sell signal is it crossing below."
+        },
+        {
+          "title": "Don't jump in on the crossover candle itself",
+          "detail": "Wait for that candle to close, then enter on the next candle's open. This small delay filters out a lot of signals that would have reversed intrabar."
+        },
+        {
+          "title": "Check for confluence before pulling the trigger",
+          "detail": "Is price also above or below a key moving average? Is RSI not already extremely stretched the other way? Is volume reasonable? MACD alone throws off a lot of false signals in a quiet, range-bound market."
+        },
+        {
+          "title": "Plan your stop and exit before entering",
+          "detail": "Stop below the recent swing low (long) or above the recent swing high (short). A common exit rule is simply the opposite crossover, though some traders exit earlier when the histogram starts shrinking — momentum fading — rather than waiting for the full reverse cross."
+        }
+      ],
+      "videos": [
+        {
+          "title": "MACD Indicator Trading Explained (For Beginners)",
+          "url": "https://www.youtube.com/watch?v=xQYrUSRrLYo",
+          "note": "Clear specifically on reading the histogram, not just the two lines, which most short explainers gloss over."
+        }
+      ]
     },
     {
       "ref_id": "T1-06",
@@ -440,7 +629,44 @@
         "kind": "synthetic",
         "src": "/strategies/bollinger-band-basics.png",
         "caption": "Fabricated price action with Bollinger Bands expanding and contracting around a moving average."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Add Bollinger Bands with the default settings",
+          "detail": "A 20-period moving average with 2 standard deviations is John Bollinger's own recommended default, and what nearly every tutorial assumes you're using."
+        },
+        {
+          "title": "Figure out which of the two opposite strategies fits right now",
+          "detail": "Bollinger Bands are used in two contradictory ways depending on conditions: fading touches of the bands in a RANGE, or riding a \"band walk\" breakout when volatility expands. Using the wrong one for current conditions is the single biggest beginner mistake with this tool."
+        },
+        {
+          "title": "For range/reversion trading: wait for a touch plus a reaction",
+          "detail": "In a sideways market with a flat middle band, a touch of the lower band plus a bullish reversal candle is a buy signal, targeting the middle band first and then the opposite band. Mirror this at the upper band for shorts."
+        },
+        {
+          "title": "For breakout trading: watch for \"the squeeze\"",
+          "detail": "When the bands pinch tightly together (low volatility), that's often the calm before a bigger move. Wait for a candle to close clearly outside the bands, ideally with volume well above average, and trade in that breakout direction."
+        },
+        {
+          "title": "Never fade a band walk",
+          "detail": "If price is \"walking the band\" — repeatedly touching or hugging the upper or lower band during a strong trend — don't fight it by fading every touch. That's the classic way this strategy loses money."
+        },
+        {
+          "title": "Set your stop based on which variant you're trading",
+          "detail": "Reversion trades: stop just beyond the band you faded. Breakout trades: stop back inside the squeeze range."
+        },
+        {
+          "title": "Use band width as a standalone volatility gauge too",
+          "detail": "Even without taking a trade, watching the bands narrow and widen tells you whether the market is calm or active right now — useful context for every other strategy you run alongside this one."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Best Bollinger Bands Trading Strategy for Beginners",
+          "url": "https://www.youtube.com/watch?v=BPJx2rscu4I",
+          "note": "Covers both the squeeze/breakout approach and the reversion approach, which most single videos only cover one of."
+        }
+      ]
     },
     {
       "ref_id": "T1-07",
@@ -514,7 +740,44 @@
         "kind": "synthetic",
         "src": "/strategies/range-breakout.png",
         "caption": "Synthetic price consolidating in a range before breaking out to the upside."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Define your range",
+          "detail": "Most commonly the first 5–30 minutes of a session (an \"opening range\"), but the same logic works on any clearly-bounded consolidation — mark the highest high and lowest low of that period."
+        },
+        {
+          "title": "Draw the range boundaries on your chart",
+          "detail": "A horizontal line at the range high and another at the range low. This is now your reference for the rest of the session or move."
+        },
+        {
+          "title": "Don't jump the gun on a wick",
+          "detail": "Wait for an actual candle CLOSE beyond the range boundary, not just a brief poke through it, before treating it as a real breakout."
+        },
+        {
+          "title": "Check volume on the breakout candle",
+          "detail": "A breakout on volume clearly above the recent average is far more trustworthy than one on thin volume — low-volume breakouts fail (\"fake out\") much more often."
+        },
+        {
+          "title": "Enter at the break, or wait for a retest",
+          "detail": "Aggressive approach: enter as soon as the breakout candle closes. More conservative approach: wait for price to pull back and retest the broken level as support/resistance before entering — a tighter stop, at the cost of sometimes missing the move entirely."
+        },
+        {
+          "title": "Set your stop back inside the range",
+          "detail": "For a long breakout, stop just below the range high (which should now act as support), or below the range low for a wider stop. Mirror this above the range low for a short."
+        },
+        {
+          "title": "Use a fixed reward-to-risk target, like 2:1",
+          "detail": "A common, simple rule: whatever you're risking to your stop, target twice that in profit — though many traders instead trail their stop once the move is working, to let bigger trends run further."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Master The Opening Range Breakout (ORB) Trading Strategy In Just 10 Minutes!",
+          "url": "https://www.youtube.com/watch?v=sv-ixHXUTSQ",
+          "note": "A concise, specific walkthrough of the opening-range version of this strategy, the most common way it's actually traded."
+        }
+      ]
     },
     {
       "ref_id": "T1-08",
@@ -587,7 +850,48 @@
         "kind": "synthetic",
         "src": "/strategies/candlestick-reversal-basics.png",
         "caption": "A fabricated bullish engulfing candle forming after a downswing."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Only look for patterns at meaningful locations",
+          "detail": "A hammer or engulfing candle in the middle of a random range means almost nothing. The same pattern at a well-tested support or resistance level, after an extended move, is what actually matters."
+        },
+        {
+          "title": "Learn the hammer/pin bar shape precisely",
+          "detail": "A small body near the top of the range, a long lower wick at least twice the body size, and little to no upper wick. It shows sellers pushed price down hard, then buyers fiercely rejected that and pushed it back up."
+        },
+        {
+          "title": "Learn the engulfing shape precisely",
+          "detail": "A two-candle pattern: a smaller candle followed by a larger opposite-coloured candle whose BODY fully covers the first candle's body (wicks don't count). A bullish engulfing after a decline, opening below and closing above the first candle's range, shows buyers have taken firm control."
+        },
+        {
+          "title": "Wait for the pattern to fully close before acting",
+          "detail": "Never pre-empt a hammer or engulfing candle while it's still forming intrabar — it can completely change shape by the close."
+        },
+        {
+          "title": "Check for a volume increase on the pattern candle",
+          "detail": "A reversal candle on above-average volume is more trustworthy than the identical shape on thin volume."
+        },
+        {
+          "title": "Enter on the open of the next candle, not the pattern candle",
+          "detail": "Let the pattern candle close first, then take your entry on the following candle's open."
+        },
+        {
+          "title": "Set your stop at the extreme of the pattern",
+          "detail": "For a bullish hammer or engulfing, stop just below the lowest wick of the pattern. For a bearish version, just above the highest wick."
+        },
+        {
+          "title": "Don't trade every pattern you see — rank them",
+          "detail": "A pattern at a major, well-tested level after a strong decline, with volume, confirmed by a second candle closing in your direction, is a much stronger signal than a lone pattern with none of that context around it."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Candlestick Charts for Beginners: The Complete Guide",
+          "url": "https://www.youtube.com/watch?v=tkVJNd5uoTg",
+          "note": "Starts from what each individual candle represents before getting to named patterns, which most pattern-focused videos skip over."
+        }
+      ]
     },
     {
       "ref_id": "T1-09",
@@ -660,7 +964,48 @@
         "kind": "synthetic",
         "src": "/strategies/fibonacci-retracement-basics.png",
         "caption": "Fibonacci retracement levels drawn across a fabricated swing."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Confirm there's a clear, clean swing to measure",
+          "detail": "You need an obvious, unambiguous move from a swing low to a swing high (uptrend) or high to low (downtrend). If you can't agree with yourself on where the swing starts and ends, the whole exercise is already on shaky ground."
+        },
+        {
+          "title": "Select the Fibonacci retracement tool",
+          "detail": "On TradingView, it's in the left-hand drawing toolbar, or search \"Fib Retracement\" — most charting platforms have an equivalent."
+        },
+        {
+          "title": "Anchor it correctly for the trend direction",
+          "detail": "Uptrend: click at the swing LOW, drag to the swing HIGH. Downtrend: click at the swing HIGH, drag to the swing LOW. Getting this backwards flips every level to the wrong side of price."
+        },
+        {
+          "title": "Note the key levels it draws",
+          "detail": "23.6%, 38.2%, 50% (not a true Fibonacci ratio, but universally included anyway), 61.8% — the \"golden ratio\", usually treated as the most significant — and 78.6%."
+        },
+        {
+          "title": "Look for confluence, not the Fibonacci level alone",
+          "detail": "A 61.8% retracement that also lines up with a prior support/resistance level, a moving average, or a trendline is a much stronger area of interest than a bare Fibonacci number with nothing else backing it up."
+        },
+        {
+          "title": "Wait for a confirming candle at the level",
+          "detail": "Same as any other support/resistance trade: don't buy the instant price touches 61.8%. Wait for a rejection candle or other sign that buyers or sellers are genuinely stepping in there."
+        },
+        {
+          "title": "Set your stop beyond the next level down",
+          "detail": "Commonly just past 78.6%, or beyond the full swing origin if you want more room to be wrong."
+        },
+        {
+          "title": "Use extensions for targets beyond the prior high or low",
+          "detail": "If price breaks past where the swing started, the 127.2% and 161.8% extension levels give you a next reference point for taking profit, since there's no prior price history to lean on out there."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Fibonacci retracements explained: A step-by-step guide for traders",
+          "url": "https://www.youtube.com/watch?v=L7CzNwCErSw",
+          "note": "Clean, practical, and focuses on the anchoring step beginners most often get backwards."
+        }
+      ]
     },
     {
       "ref_id": "T1-10",
@@ -734,7 +1079,48 @@
         "kind": "synthetic",
         "src": "/strategies/basic-chart-patterns.png",
         "caption": "A fabricated double-top pattern with its neckline marked."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Learn the double top/bottom shape precisely",
+          "detail": "Double top: two peaks at roughly the same price, separated by a pullback, forming an \"M\" shape, usually after an uptrend. Double bottom: the mirror image, a \"W\" shape, usually after a downtrend."
+        },
+        {
+          "title": "Check the two peaks or troughs are genuinely close in price",
+          "detail": "If the second peak is meaningfully higher or lower than the first, it's probably not a real double top/bottom — it might just be ongoing trend continuation."
+        },
+        {
+          "title": "Watch volume on the second peak or trough",
+          "detail": "Classically, volume is expected to be lower on the second peak of a double top than the first — read as a sign of weakening buying pressure."
+        },
+        {
+          "title": "Find the neckline",
+          "detail": "For a double top, it's the low point of the pullback between the two peaks. For a double bottom, it's the high point of the bounce between the two troughs."
+        },
+        {
+          "title": "Wait for a confirmed close through the neckline",
+          "detail": "The pattern isn't valid, and shouldn't be traded, until price actually closes through the neckline — not just approaches it."
+        },
+        {
+          "title": "Measure the pattern height for your target",
+          "detail": "Take the distance from the peak (or trough) to the neckline, then project that same distance beyond the breakout point. That's your measured-move target."
+        },
+        {
+          "title": "Set your stop beyond the pattern's extreme",
+          "detail": "For a double top, just above the highest peak. For a double bottom, just below the lowest trough."
+        },
+        {
+          "title": "Apply the same logic to triangles",
+          "detail": "Ascending, descending and symmetrical triangles compress volatility the same way a Bollinger squeeze does. Draw the two converging boundary lines, wait for a confirmed close outside one of them (ideally with volume), and project the widest part of the triangle from the breakout point for your target."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Best Beginner Trading Strategy: Double Tops Explained Simply",
+          "url": "https://www.youtube.com/watch?v=m3brwfdr_Mw",
+          "note": "Walks through the neckline and measured-move logic clearly, step by step, for a genuine beginner."
+        }
+      ]
     },
     {
       "ref_id": "T2-01",
