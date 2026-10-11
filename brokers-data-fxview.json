@@ -2,7 +2,8 @@
   "broker": {
     "id": "fxview",
     "name": "Fxview",
-    "logo": null,
+    "logo": "/brokers/fxview.png",
+    "logo_bg": "white",
     "tagline": "Its site names 4 regulators, including FSCA, FSC (Mauritius), and CySEC. Rules depend on where you live. Advertised leverage: Up to 1:1000.",
     "about": "The Fxview pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include RAW ECN, Premium ECN, Islamic, and Zero Commission. Platforms named there include MetaTrader 4, MetaTrader 5, ActTrader, ZuluTrade, and Fxview app. The site names these regulators: FSCA, FSC (Mauritius), CySEC, and SEBI. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:1000. Leverage increases losses as well as gains.",
     "founded": null,

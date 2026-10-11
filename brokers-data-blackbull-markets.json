@@ -2,7 +2,8 @@
   "broker": {
     "id": "blackbull-markets",
     "name": "BlackBull Markets",
-    "logo": null,
+    "logo": "/brokers/blackbull-markets.png",
+    "logo_bg": "white",
     "tagline": "Its site names FSA (Seychelles). Rules depend on where you live. Advertised leverage: Up to 1:500.",
     "about": "BlackBull Markets publishes this address: Level 20, 188 Quay Street, Auckland 1010, New Zealand. The pages checked do not state a founding year. Account names on its site include ECN Standard, ECN Prime, Prime+, Standard, Raw, and Pro. Platforms named there include MetaTrader 4, MetaTrader 5, cTrader, TradingView, and BlackBull CopyTrader. The site names these regulators: FSA (Seychelles). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:500. Leverage increases losses as well as gains.",
     "founded": null,

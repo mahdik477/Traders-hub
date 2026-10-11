@@ -2,7 +2,8 @@
   "broker": {
     "id": "headway",
     "name": "Headway",
-    "logo": null,
+    "logo": "/brokers/headway.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 2023. Its site names FSCA. Rules depend on where you live. Advertised leverage: Unlimited.",
     "about": "Headway says it has operated since 2023. An address it publishes is 3 Flamingo Crescent, Beacon Bay, East London, 5241, South Africa. Account names on its site include Cent, Standard, and Pro. Platforms named there include MT4 and MT5. The site names these regulators: FSCA. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Unlimited. Leverage increases losses as well as gains.",
     "founded": 2023,

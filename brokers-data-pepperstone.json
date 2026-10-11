@@ -2,7 +2,8 @@
   "broker": {
     "id": "pepperstone",
     "name": "Pepperstone",
-    "logo": null,
+    "logo": "/brokers/pepperstone.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 2010. Its site names 8 regulators, including ASIC, FCA, and CySEC. Rules depend on where you live. Advertised leverage: Up to 1:1000.",
     "about": "Pepperstone says it has operated since 2010. The pages checked do not name one headquarters. Account names on its site include Standard and Razor. Platforms named there include Pepperstone platform and mobile app, MetaTrader 4, MetaTrader 5, cTrader, and TradingView. The site names these regulators: ASIC, FCA, CySEC, BaFin, DFSA, CMA, SCB, and CMA (Kenya). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:1000. Leverage increases losses as well as gains.",
     "founded": 2010,

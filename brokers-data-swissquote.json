@@ -2,7 +2,8 @@
   "broker": {
     "id": "swissquote",
     "name": "Swissquote",
-    "logo": null,
+    "logo": "/brokers/swissquote.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 1996. Its site names 6 regulators, including FINMA, FCA, and DFSA. Rules depend on where you live. Advertised leverage: Up to 1:100.",
     "about": "Swissquote says it has operated since 1996. An address it publishes is Gland, Switzerland. Account names on its site include Standard, Premium, Prime, and Professional. Platforms named there include CFXD, TradingView, MetaTrader 4, and MetaTrader 5. The site names these regulators: FINMA, FCA, DFSA, SFC, MAS, and CSSF. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:100. Leverage increases losses as well as gains.",
     "founded": 1996,

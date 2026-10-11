@@ -2,7 +2,8 @@
   "broker": {
     "id": "justmarkets",
     "name": "JustMarkets",
-    "logo": null,
+    "logo": "/brokers/justmarkets.png",
+    "logo_bg": "dark",
     "tagline": "Its site names 5 regulators, including FSA (Seychelles), CySEC, and FSCA. Rules depend on where you live. Advertised leverage: Up to 1:3000.",
     "about": "The JustMarkets pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Standard, Standard Cent, Pro, and Raw Spread. Platforms named there include MetaTrader 4, MetaTrader 5, WebTrader, iOS, and Android. The site names these regulators: FSA (Seychelles), CySEC, FSCA, FSC (Mauritius), and FSC (BVI). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:3000. Leverage increases losses as well as gains.",
     "founded": null,

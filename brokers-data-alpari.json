@@ -2,7 +2,8 @@
   "broker": {
     "id": "alpari",
     "name": "Alpari",
-    "logo": null,
+    "logo": "/brokers/alpari.png",
+    "logo_bg": "dark",
     "tagline": "Its site names MISA (Mwali). Rules depend on where you live. Advertised leverage: Up to 1:3000.",
     "about": "Alpari publishes this address: Bonovo Road, Fomboni, Island of Moheli, Comoros Union. The pages checked do not state a founding year. Account names on its site include Micro, Standard, ECN, and Pro ECN. Platforms named there include MetaTrader 4 and MetaTrader 5. The site names these regulators: MISA (Mwali). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:3000. Leverage increases losses as well as gains.",
     "founded": null,

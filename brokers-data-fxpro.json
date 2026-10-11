@@ -2,7 +2,8 @@
   "broker": {
     "id": "fxpro",
     "name": "FxPro",
-    "logo": null,
+    "logo": "/brokers/fxpro.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 1999. Its site names FCA, SCB, and FSA (Seychelles). Rules depend on where you live. Advertised leverage: Up to 1:500.",
     "about": "FxPro says it has operated since 1999. An address it publishes is 80 Coleman Street, EC2R 5BJ London, UK. Account names on its site include Standard (MT4/MT5), Raw+, Elite, cTrader, and Spread betting. Platforms named there include FxPro mobile app, FxPro WebTrader, MetaTrader 4, MetaTrader 5, cTrader, TradingView, and FxPro platform. The site names these regulators: FCA, SCB, and FSA (Seychelles). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:500. Leverage increases losses as well as gains.",
     "founded": 1999,

@@ -2,7 +2,8 @@
   "broker": {
     "id": "instaforex",
     "name": "InstaForex",
-    "logo": null,
+    "logo": "/brokers/instaforex.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 2007. Its site names FSC (BVI) and FSA (St Vincent). Rules depend on where you live. Advertised leverage: Up to 1:5000.",
     "about": "InstaForex says it has operated since 2007. An address it publishes is 4th Floor, Water's Edge Building, Meridian Plaza, Road Town, Tortola, British Virgin Islands. Account names on its site include Insta.Standard, Insta.Pro, Insta.Zero, Insta.Raw, and Insta.Cent. Platforms named there include MetaTrader 4, MetaTrader 5, IFXGear, and Mobile app. The site names these regulators: FSC (BVI) and FSA (St Vincent). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:5000. Leverage increases losses as well as gains.",
     "founded": 2007,

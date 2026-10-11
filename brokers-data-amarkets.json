@@ -2,7 +2,8 @@
   "broker": {
     "id": "amarkets",
     "name": "AMarkets",
-    "logo": null,
+    "logo": "/brokers/amarkets.png",
+    "logo_bg": "white",
     "tagline": "On its own site since 2007. Its site names MISA (Mwali). Rules depend on where you live. Advertised leverage: Up to 1:3000.",
     "about": "AMarkets says it has operated since 2007. The pages checked do not name one headquarters. Account names on its site include Standard, ECN, and Zero. Platforms named there include MetaTrader 4 and MetaTrader 5. The site names these regulators: MISA (Mwali). The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:3000. Leverage increases losses as well as gains.",
     "founded": 2007,
