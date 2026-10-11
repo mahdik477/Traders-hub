@@ -58,6 +58,8 @@ type RawFile = {
     affiliate_link?: string | null;
     /** Featured listing. Only brokers set to true are pinned and badged. */
     our_choice?: boolean | null;
+    /** Default name-sort slot after Our choice. Not a badge. */
+    directory_pin?: number | null;
   };
 };
 
@@ -153,6 +155,7 @@ function buildBroker(b: RawFile["broker"]): BrokerView {
     website: safeLink(b.website),
     affiliateLink: safeLink(b.affiliate_link),
     ourChoice: b.our_choice === true,
+    directoryPin: Number.isInteger(b.directory_pin) && (b.directory_pin as number) > 0 ? (b.directory_pin as number) : null,
   };
 }
 

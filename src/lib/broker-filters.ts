@@ -120,6 +120,13 @@ export function sortBrokers(list: BrokerView[], sort: SortKey): BrokerView[] {
   copy.sort((a, b) => {
     if (a.ourChoice !== b.ourChoice) return a.ourChoice ? -1 : 1;
     if (a.ourChoice && b.ourChoice) return a.name.localeCompare(b.name);
+    // Default name order only. Deposit and Trustpilot sorts ignore this slot.
+    // PU Prime uses directory_pin 2 so it sits directly after Our choice.
+    if (sort === "name" && (a.directoryPin != null || b.directoryPin != null)) {
+      if (a.directoryPin == null) return 1;
+      if (b.directoryPin == null) return -1;
+      if (a.directoryPin !== b.directoryPin) return a.directoryPin - b.directoryPin;
+    }
     return compareBySort(a, b, sort);
   });
   return copy;

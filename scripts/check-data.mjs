@@ -375,6 +375,10 @@ function checkBroker(file, data) {
     err(file, `broker.promotions must be text or left out`);
   if (b.our_choice != null && typeof b.our_choice !== "boolean")
     err(file, `broker.our_choice must be true, false, or left out`);
+  if (b.directory_pin != null && (!Number.isInteger(b.directory_pin) || b.directory_pin < 1))
+    err(file, `broker.directory_pin must be a positive whole number or left out`);
+  if (b.directory_pin != null && b.our_choice === true)
+    err(file, `broker.directory_pin is for a slot after Our choice, so do not set both`);
   const mr = b.margin_rates;
   if (mr) {
     (mr.rows ?? []).forEach((r, i) => {
