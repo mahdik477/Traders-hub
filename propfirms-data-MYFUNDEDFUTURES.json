@@ -16,7 +16,8 @@
     "company": "Legal entity is MyFunded Futures, LLC; terms are governed by Texas law (Collin County courts). Official pages state copyright '2023-2026' but do not state a founding date or HQ address, so founded/hq are omitted. Third-party sources say CEO Matthew Leech, Dallas TX, launched 2023 - not used.",
     "other_products": "MyFunded Perpetuals is a separate company (Funding Perpetuals Holdings, Inc.) and is not listed. Legacy Flex and older Builder plans are no longer sold.",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
-    "null_means": "Not stated on an official MyFundedFutures page (or not expressible as one number - see the notes above). Check the live plan pages before publishing."
+    "null_means": "Not stated on an official MyFundedFutures page (or not expressible as one number - see the notes above). Check the live plan pages before publishing.",
+    "company_check": "Re-checked 2026-10-11: myfundedfutures.com homepage states no founding date or address (no /about page). founded/hq still null."
   },
   "firm": {
     "id": "myfundedfutures",
@@ -25,6 +26,8 @@
     "name_note": "MyFundedFutures (myfundedfutures.com, 'MFFU'), operated by MyFunded Futures, LLC. Not the same as My Forex Funds or MyFundedFX.",
     "about": "MyFundedFutures is a futures-only firm selling one-time-fee simulated evaluations from $25K to $150K across four plans (Builder, Rapid, Rapid EOD and Pro), with no activation fee after passing. Plans differ mainly in drawdown style, payout timing and profit split.",
     "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": null,
     "currency": "USD",
     "website": "https://myfundedfutures.com/",
     "affiliate_link": "",
@@ -298,7 +301,7 @@
                     "daily_loss": "none",
                     "max_loss": 1000,
                     "max_contracts": 2,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": 87,
                     "standard": 145
                   },
@@ -308,7 +311,7 @@
                     "daily_loss": "none",
                     "max_loss": 2000,
                     "max_contracts": 3,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": 135,
                     "standard": 225
                   }

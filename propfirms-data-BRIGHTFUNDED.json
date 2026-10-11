@@ -1,0 +1,227 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official pages only, fetched 2026-10-11: https://brightfunded.com/ (pricing table, plan tabs, discount codes, company footer, 'Established 2023'); help centre articles https://help.brightfunded.com/en/articles/14284743-brightfunded-1-step, https://help.brightfunded.com/en/articles/14284817-brightfunded-2-step-bright, https://help.brightfunded.com/en/articles/14284844-brightfunded-2-step-classic, https://help.brightfunded.com/en/articles/9241611-what-are-the-current-rules-for-the-evaluation-process, https://help.brightfunded.com/en/articles/9241600-how-long-does-the-evaluation-process-take, https://help.brightfunded.com/en/articles/12577176-does-brightfunded-have-a-consistency-rule, https://help.brightfunded.com/en/articles/9268736-how-does-my-reward-split-work-on-my-funded-account, https://help.brightfunded.com/en/articles/9460023-can-i-get-a-refund-for-my-brightfunded-challenge, https://help.brightfunded.com/en/articles/9286630-what-countries-are-restricted-at-brightfunded, https://help.brightfunded.com/en/articles/8205805-who-can-join-brightfunded, https://help.brightfunded.com/en/articles/10855521-what-trading-platform-does-brightfunded-offer, https://help.brightfunded.com/en/articles/14285762-brightfunded-original-accounts; Trustpilot https://www.trustpilot.com/review/brightfunded.com.",
+    "pricing": "Prices are shown in EUR on brightfunded.com (account sizes are in USD). standard = crossed-out price, promo = discounted price shown. Only the 2-Step Bright tab's prices are in the page's HTML: EUR 47 / 87 / 187 / 277 / 477 / 947 for $5K-$200K, shown as EUR 35.25 / 65.25 / 140.25 / 207.75 / 357.75 / 710.25 with 25% off (code RALLY25). The 1-Step (code RALLY30, 30% off) and 2-Step Classic (code RALLY15, 15% off) prices only load in a browser, so they are null until we have screenshots. The site may show a different currency by visitor location - not confirmed.",
+    "promo_codes": "Each plan has its own code, so promo_code on the market is left null and the codes are recorded here: 1-Step RALLY30 (30% off), 2-Step Bright RALLY25 (25% off), 2-Step Classic RALLY15 (15% off). The 2-Step Bright promo prices above match 25% off exactly.",
+    "account_sizes": "The site's size selector ($5K, $10K, $25K, $50K, $100K, $200K) is shared by all three plans; only 2-Step Bright's sizes were confirmed with prices. Confirm 1-Step and 2-Step Classic sizes with the screenshots.",
+    "profit_split": "80% by default; 90% with a paid add-on at checkout; up to 100% through the scaling plan (help centre, 'How does my Reward Split work'). The pricing table shows 'Up to 90%', which is what profit_split_max records. See the open to-do on standardising profit_split_max.",
+    "evaluation_reward": "All three plans pay a 15% share of the evaluation profits, added to the next funded account after 10% growth and a payout (help centre).",
+    "drawdown": "Daily loss is measured from the higher of balance or equity at the end of each day (resets 11:30-11:59 PM CET) and is a % of the original balance. 2-Step Bright and Classic: static max loss from the starting balance. 1-Step: max loss trails the highest equity in real time (intraday) and locks at the starting balance once equity is 6% up.",
+    "fee_refund": "No official page says the challenge fee is refunded with a payout as standard. The pricing table lists '100% Challenge Fee Refund' as a paid add-on, and the help centre says an unused challenge (no trades, within 30 days) can be refunded. Recorded as false.",
+    "payout_wording": "brightfunded.com advertises a '24-Hour Payout Guarantee' (a promise about how fast an approved payout is processed). We do not repeat this wording on our site. The same footer states that no guarantee is offered on profitability or trading success.",
+    "payouts": "First payout 30 days after the first funded trade, then every 14 days; weekly payouts as a paid add-on. Paid by bank transfer (EUR) or USDC.",
+    "not_listed": "BrightFunded also sells futures evaluations through BrightFunded LLC (Wyoming). Only the forex/CFD plans are listed here. The Free $1K Challenge and accounts bought before 13 April 2026 ('Original' rules) are not listed.",
+    "company": "Footer: Bright Global FZCO (trading as BrightFunded), Building A1, Dubai Digital Park, Dubai Silicon Oasis, UAE. CFD service contracted by BrightFunded Ltd (Saint Lucia, reg. 2025-00358). Futures by BrightFunded LLC (Wyoming; business address Austin, TX). Payments affiliate Bright Transact Ltd (Cyprus, HE 478945). Homepage says 'Established 2023'.",
+    "vetting": "Checked 2026-10-11 against our listing criteria. Trustpilot hides the score for a guideline breach and says fake reviews were removed. Of the 20 newest reviews, none described a refused trader payout; complaints were mainly about account breaches, platform problems and support. Passed.",
+    "rule_units": "Forex rules are % of account size.",
+    "null_means": "Not stated on an official BrightFunded page we could read."
+  },
+  "firm": {
+    "id": "brightfunded",
+    "name": "BrightFunded",
+    "logo": "/funded-accounts/brightfunded-logo.png",
+    "name_note": null,
+    "about": "BrightFunded sells simulated funded accounts for forex and other CFDs through one 1-step and two 2-step challenges, from $5K to $200K, on MT5, cTrader and DXtrade. It started in 2023; its parent company is in Dubai Silicon Oasis, and the CFD service is run by a company registered in Saint Lucia.",
+    "about_note": null,
+    "founded": 2023,
+    "hq": "Dubai Silicon Oasis, Dubai, UAE",
+    "currency": "EUR",
+    "website": "https://brightfunded.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "MT5",
+      "cTrader",
+      "DXtrade"
+    ],
+    "countries": {
+      "restricted": [
+        "CU",
+        "IR",
+        "KP",
+        "SY",
+        "VN",
+        "PK"
+      ],
+      "allowed_only": null,
+      "notes": "Residents and nationals of these countries can't buy a challenge. Traders from Pakistan who already have an active account may keep trading. MT5 isn't available to US or UAE residents, and cTrader isn't available to US residents, so they trade on the other platforms. People on sanctions lists, with financial-crime records or under 18 are also refused.",
+      "source": "https://help.brightfunded.com/en/articles/9286630-what-countries-are-restricted-at-brightfunded",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (570 reviews, checked 11 Oct 2026).",
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "promo_code": null,
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "1-Step",
+                "tagline": "Max loss trails your highest equity until you're 6% up",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "trailing (locks at starting balance)",
+                  "profit_split_max": 90,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "2-Step Bright",
+                "tagline": "Discount code RALLY25",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": 5,
+                  "funded_target": "n/a",
+                  "daily_loss": 4,
+                  "max_loss": 8,
+                  "drawdown_type": "static",
+                  "profit_split_max": 90,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 35.25,
+                    "standard": 47
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 65.25,
+                    "standard": 87
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 140.25,
+                    "standard": 187
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 207.75,
+                    "standard": 277
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 357.75,
+                    "standard": 477
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 710.25,
+                    "standard": 947
+                  }
+                ]
+              },
+              {
+                "tier": "2-Step Classic",
+                "tagline": "Wider limits: 5% daily, 10% max loss",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": "n/a",
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 90,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

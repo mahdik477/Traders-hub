@@ -13,7 +13,8 @@
     "platforms": "TopstepX is Topstep's own platform; Quantower connects via TopstepX credentials (Trading Combine and Express Funded only). Third-party sites mention NinjaTrader/Tradovate but the official help centre no longer documents them, so they are not listed.",
     "other_products": "Topstep Labs runs separate limited 'drops' (e.g. a $49 two-round challenge with a fixed $3,000 payout, Aug 2026). Not listed here. No forex program is currently sold; futures only.",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
-    "null_means": "Not stated on an official Topstep page (or not expressible as one number - see the notes above). Check the live plan page before publishing."
+    "null_means": "Not stated on an official Topstep page (or not expressible as one number - see the notes above). Check the live plan page before publishing.",
+    "company_check": "https://www.topstep.com/about-us/ (checked 2026-10-11): timeline shows 2010 founding of Patak Trading Partners (the beginning of what became Topstep), 2012 launch of Topstep Trader (recorded as founded), 2013 first office in the Chicago West Loop."
   },
   "firm": {
     "id": "topstep",
@@ -23,6 +24,8 @@
     "name_note": null,
     "about": "Topstep is a Chicago-based futures prop firm (its own timeline starts in 2010 as Patak Trading Partners) that sells monthly-subscription evaluations called the Trading Combine in 50K, 100K and 150K sizes, traded on its own TopstepX platform.",
     "about_note": null,
+    "founded": 2012,
+    "hq": "Chicago, Illinois, USA",
     "currency": "USD",
     "website": "https://www.topstep.com/",
     "affiliate_link": "",

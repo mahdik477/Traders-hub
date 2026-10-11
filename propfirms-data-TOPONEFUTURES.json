@@ -1,0 +1,367 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official Top One Futures pages only, fetched 2026-10-11: https://www.toponefutures.com/ (pricing cards for Elite Daily, Elite Access, Instant Sim Funded and Ignite; footer company details); help centre https://help.toponefutures.com/en/articles/15056075-elite-daily-v2-overview, https://help.toponefutures.com/en/articles/14595016-elite-access-accounts-overview, https://help.toponefutures.com/en/articles/11020805-overview-of-the-instant-sim-funded-program, https://help.toponefutures.com/en/articles/12671168-ignite-accounts-overview, https://help.toponefutures.com/en/articles/14617600-differences-between-elite-elite-access-and-elite-daily-accounts, https://help.toponefutures.com/en/articles/13449146-top-one-futures-account-comparison-elite-vs-instant-vs-s2f-sim-pro-vs-ignite-accounts, https://help.toponefutures.com/en/articles/10907367-maximum-payout-until-live-explained, https://help.toponefutures.com/en/articles/10907430-understanding-the-profit-split-on-sim-funded-accounts, https://help.toponefutures.com/en/articles/11021644-countries-with-limitations-and-restrictions, https://help.toponefutures.com/en/articles/11403918-refund-policy, and the help-centre collections for Tradovate/NinjaTrader, BlackArrow and WealthCharts (platforms); Trustpilot https://www.trustpilot.com/review/toponefutures.com.",
+    "pricing": "standard = crossed-out price, promo = discounted price shown on the homepage cards (one-time fees). Each product had its own code: Elite Daily and Ignite 60% off with WC; Instant Sim Funded 45% off with OCT (the $50K card said WC); Elite Access 'Buy 1, Get 1 FREE' with BOGO. Because codes differ by product, the market promo_code is null and each code is in the tier tagline.",
+    "elite_access_price": "Elite Access is a flat $39 evaluation fee for every size (help centre). The homepage shows $139 / $189 / $259 / $359 crossed out next to $39, but those amounts match the activation fee due after passing (help centre: '$139 to $359, depending on account size'), not a full price, so standard = 39 and promo = null.",
+    "rules_detail": "Elite Daily (V2): one-phase evaluation, 6% target, EOD trailing drawdown, daily loss limit in evaluation and funded, 40% consistency in the evaluation only, no activation fee, daily payouts, 50% daily progression rule; funded drawdown $1,000 / $2,000 / $2,500 / $3,500 (evaluation $1,000 / $2,000 / $3,000 / $4,500 recorded); minimum 1 trading day on the funded account, none stated for the evaluation. Elite Access: $39 evaluation, 30 days to pass, no daily loss limit in the evaluation (funded DLL $500 / $1,000 / $1,250 / $1,750), evaluation drawdown $1,000 / $2,000 / $3,000 / $4,000 (funded $3,500 on 150K), minimum 1 trading day, 40% consistency on the funded account only, 5 profitable days per payout. Instant Sim Funded 2.0 (bought from 27 Jul 2026): no evaluation, no minimum trading days, EOD trailing drawdown, 20% consistency for payouts, profit target per payout 6% / 5% / 4%. Ignite: no evaluation, no minimum trading days, EOD trailing drawdown, 15% consistency, 5% profit target per payout, no overnight holding.",
+    "payout_caps": "Max per payout in the sim-funded stage (help centre 'Maximum Payout Until Live'). Removed once moved to a live account.",
+    "profit_split": "90/10 on every sim-funded account (help centre).",
+    "fee_refund": "Strict no-refund policy on all purchases (help centre), so false.",
+    "not_listed": "Elite (classic 1-step evaluation), Elite Access Intraday, S2F Sim Pro, the Launchpad X-Ultra limited offer and the separate CFD product (Top One Trader) are not listed.",
+    "company": "Top One Futures, LLC, 1621 Central Ave, Suite 8433, Cheyenne WY 82001 (homepage footer; a common registered-agent address). No official page states a founding year.",
+    "vetting": "Checked 2026-10-11. Trustpilot 4.8 from 5,105 reviews (Trustpilot marks a paid subscription). None of the 19 newest reviews described a refused payout; almost all thanked named support staff. Passed.",
+    "marketing_stats_excluded": "Payout totals, named trader payout amounts and the homepage 'earning potential' calculator are not reproduced.",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official Top One Futures page we could read."
+  },
+  "firm": {
+    "id": "top-one-futures",
+    "name": "Top One Futures",
+    "logo": "/funded-accounts/top-one-futures-logo.png",
+    "name_note": null,
+    "about": "Top One Futures is a US futures prop firm offering one-phase evaluations (Elite Daily and Elite Access) and instant-funded accounts with no evaluation (Instant Sim Funded and Ignite), from $25K to $150K. All accounts are one-time purchases, and every funded account uses a 90% profit split.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "Cheyenne, Wyoming, USA (business address)",
+    "currency": "USD",
+    "website": "https://www.toponefutures.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "Tradovate",
+      "NinjaTrader",
+      "BlackArrow",
+      "WealthCharts"
+    ],
+    "countries": {
+      "restricted": [
+        "AF",
+        "AL",
+        "DZ",
+        "AO",
+        "AQ",
+        "AM",
+        "AZ",
+        "BS",
+        "BB",
+        "BY",
+        "BA",
+        "BW",
+        "BF",
+        "MM",
+        "BI",
+        "KH",
+        "CF",
+        "TD",
+        "CI",
+        "CD",
+        "CU",
+        "DJ",
+        "TL",
+        "EC",
+        "ET",
+        "GH",
+        "GW",
+        "IS",
+        "ID",
+        "IR",
+        "IQ",
+        "JM",
+        "JO",
+        "KZ",
+        "XK",
+        "KW",
+        "LA",
+        "LB",
+        "LS",
+        "LR",
+        "LY",
+        "MK",
+        "MW",
+        "MU",
+        "MN",
+        "ME",
+        "MA",
+        "NI",
+        "KP",
+        "PK",
+        "PS",
+        "PA",
+        "PG",
+        "PH",
+        "RU",
+        "RW",
+        "SL",
+        "SO",
+        "SS",
+        "LK",
+        "SD",
+        "SY",
+        "TJ",
+        "TT",
+        "TN",
+        "TR",
+        "UG",
+        "UA",
+        "VE",
+        "VN",
+        "YE",
+        "ZW"
+      ],
+      "allowed_only": null,
+      "notes": "Citizens or residents of these countries can't use Top One Futures. Crimea is also listed separately, and you can't trade while travelling in a restricted country. Kosovo is coded XK (widely used, not an official ISO code).",
+      "source": "https://help.toponefutures.com/en/articles/11021644-countries-with-limitations-and-restrictions",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": {
+        "rating": 4.8,
+        "review_count": 5105,
+        "url": "https://www.trustpilot.com/review/toponefutures.com",
+        "checked": "2026-10-11"
+      },
+      "trustpilot_note": "Trustpilot shows this firm as a paying Trustpilot customer.",
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "promo_code": null,
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Elite Daily",
+                "tagline": "One-time fee · No activation fee · Daily payouts · 40% consistency in the evaluation only · 60% off with code WC",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 40,
+                  "min_trading_days": null,
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": 500,
+                    "max_loss": 1000,
+                    "max_contracts": 1,
+                    "payout_cap": 750,
+                    "promo": 71,
+                    "standard": 178
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1000,
+                    "max_loss": 2000,
+                    "max_contracts": 3,
+                    "payout_cap": 1000,
+                    "promo": 87,
+                    "standard": 218
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 1250,
+                    "max_loss": 3000,
+                    "max_contracts": 5,
+                    "payout_cap": 1500,
+                    "promo": 159,
+                    "standard": 398
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 1850,
+                    "max_loss": 4500,
+                    "max_contracts": 7,
+                    "payout_cap": 2250,
+                    "promo": 220,
+                    "standard": 549
+                  }
+                ]
+              },
+              {
+                "tier": "Elite Access",
+                "tagline": "$39 evaluation for every size · Activation fee $139-$359 after passing · No daily loss limit in the evaluation · 30 days to pass · Buy 1, get 1 free with code BOGO",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": "none",
+                  "min_trading_days": 1,
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 1,
+                    "payout_cap": 1000,
+                    "promo": null,
+                    "standard": 39
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": 2000,
+                    "max_contracts": 3,
+                    "payout_cap": 1500,
+                    "promo": null,
+                    "standard": 39
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": "none",
+                    "max_loss": 3000,
+                    "max_contracts": 5,
+                    "payout_cap": 2000,
+                    "promo": null,
+                    "standard": 39
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": "none",
+                    "max_loss": 4000,
+                    "max_contracts": 7,
+                    "payout_cap": 2500,
+                    "promo": null,
+                    "standard": 39
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Instant Sim Funded",
+                "tagline": "No evaluation · 20% consistency for payouts · 45% off with code OCT",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 20,
+                  "min_trading_days": "none",
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": "n/a",
+                    "daily_loss": 625,
+                    "max_loss": 1000,
+                    "max_contracts": 1,
+                    "payout_cap": 1000,
+                    "promo": 230,
+                    "standard": 419
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": "n/a",
+                    "daily_loss": 1250,
+                    "max_loss": 2000,
+                    "max_contracts": 3,
+                    "payout_cap": 2000,
+                    "promo": 373,
+                    "standard": 679
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": "n/a",
+                    "daily_loss": 2500,
+                    "max_loss": 4000,
+                    "max_contracts": 5,
+                    "payout_cap": 2500,
+                    "promo": 452,
+                    "standard": 821
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": "n/a",
+                    "daily_loss": 3000,
+                    "max_loss": 5250,
+                    "max_contracts": 7,
+                    "payout_cap": 3000,
+                    "promo": 516,
+                    "standard": 939
+                  }
+                ]
+              },
+              {
+                "tier": "Ignite",
+                "tagline": "No evaluation · 15% consistency · 5% profit target per payout · 60% off with code WC",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 15,
+                  "min_trading_days": "none",
+                  "profit_split_max": 90,
+                  "fee_refund": false
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": "n/a",
+                    "daily_loss": 500,
+                    "max_loss": 1000,
+                    "max_contracts": 1,
+                    "payout_cap": 500,
+                    "promo": 87,
+                    "standard": 218
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": "n/a",
+                    "daily_loss": 1000,
+                    "max_loss": 2000,
+                    "max_contracts": 3,
+                    "payout_cap": 1000,
+                    "promo": 159,
+                    "standard": 398
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": "n/a",
+                    "daily_loss": 2000,
+                    "max_loss": 4000,
+                    "max_contracts": 5,
+                    "payout_cap": 1500,
+                    "promo": 225,
+                    "standard": 563
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": "n/a",
+                    "daily_loss": 3000,
+                    "max_loss": 6000,
+                    "max_contracts": 7,
+                    "payout_cap": 2000,
+                    "promo": 320,
+                    "standard": 799
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

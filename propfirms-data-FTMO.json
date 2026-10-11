@@ -4,7 +4,8 @@
     "source": "Screenshots of each firm's live pricing page",
     "pricing": "promo = current discounted price, standard = crossed-out list price. Promos change often; re-verify before publishing.",
     "rule_units": "Forex rules are % of account size. Futures rules are fixed USD amounts.",
-    "null_means": "Field not shown on the pricing page. Check the firm's 'View Rules' page before publishing."
+    "null_means": "Field not shown on the pricing page. Check the firm's 'View Rules' page before publishing.",
+    "company_check": "https://ftmo.com/en/about-us/ (checked 2026-10-11): 'Since 2015' and 'operating from our headquarters in the heart of Prague'; footer 'FTMO s.r.o.'."
   },
   "firm": {
     "id": "ftmo",
@@ -13,6 +14,8 @@
     "name_note": null,
     "about": "FTMO is a Prague-based prop trading firm founded in 2015, and one of the largest firms in the industry. It offers 1-Step and 2-Step forex challenges on MT4, MT5 and cTrader.",
     "about_note": null,
+    "founded": 2015,
+    "hq": "Prague, Czech Republic",
     "currency": "EUR",
     "website": "https://ftmo.com/en/",
     "affiliate_link": "",
@@ -133,8 +136,8 @@
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 10,
-                  "phase2_target": null,
-                  "funded_target": null,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
                   "daily_loss": 3,
                   "max_loss": 10,
                   "drawdown_type": "EOD trailing",
@@ -184,7 +187,7 @@
                   "unit": "percent",
                   "phase1_target": 10,
                   "phase2_target": 5,
-                  "funded_target": null,
+                  "funded_target": "n/a",
                   "daily_loss": 5,
                   "max_loss": 10,
                   "drawdown_type": "static",

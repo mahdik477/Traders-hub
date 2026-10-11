@@ -12,7 +12,8 @@
     "affiliate_program": "Has a program (https://www.earn2trade.com/affiliates, sign-up form https://partners.earn2trade.com/affiliates/signup.php#SignupForm, run on Post Affiliate Pro). Commission: '20% commission on all sales of all products' (page text; an older string in the site code says 'up to 40%', not shown). Lifetime commissions while the customer stays. Affiliates get a personal 20% discount link and coupon for referrals. Payouts monthly once the $300 minimum is reached; payout method not stated. Applications are approved by Earn2Trade. Cookie length: not stated. Whether comparison sites or UAE-based affiliates are accepted: not stated (the UAE is not on the trader restricted list). Rules include using only approved materials and never claiming guaranteed profits.",
     "marketing_stats_excluded": "The site publishes pass rates and withdrawal statistics in its exam disclaimer; none are reproduced here (directory policy).",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
-    "null_means": "Not stated on an official Earn2Trade page."
+    "null_means": "Not stated on an official Earn2Trade page.",
+    "company_check": "Re-checked 2026-10-11: https://www.earn2trade.com/about-us states no founding year; the earlier conflict (2017 vs '10-Year Anniversary') stands, so founded is still null."
   },
   "firm": {
     "id": "earn2trade",

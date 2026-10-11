@@ -174,8 +174,20 @@ export default function PropFirmPricing({
 function CellValue({ value, rowLabel }: { value: Cell; rowLabel: string }) {
   if (value == null) {
     return (
-      <span className="text-subtle" title="Not shown on the firm's pricing page">
+      <span className="text-subtle" title="Not confirmed from the firm's own pages yet">
         —
+      </span>
+    );
+  }
+  // Set by the loader for rules that don't exist for this account type.
+  if (value === "N/A") {
+    return (
+      <span
+        className="text-xs text-subtle"
+        title="Doesn't apply to this account type"
+        aria-label="Not applicable"
+      >
+        N/A
       </span>
     );
   }

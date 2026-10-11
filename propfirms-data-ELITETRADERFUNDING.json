@@ -1,0 +1,227 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "elitetraderfunding.com blocks automated access (HTTP 403) and has no recent Internet Archive copy, so only its official help centre was read, fetched 2026-10-11: https://help.elitetraderfunding.com/help/how-the-1-step-plan-works, https://help.elitetraderfunding.com/help/how-the-end-of-day-plan-works, https://help.elitetraderfunding.com/help/how-the-static-account-plan-works, https://help.elitetraderfunding.com/help/contract-limits (account sizes and contract limits), https://help.elitetraderfunding.com/help/how-do-payouts-work (reward cycle caps), https://help.elitetraderfunding.com/help/countries-restricted-and-supported, https://help.elitetraderfunding.com/help/supported-platforms-data-feed; Trustpilot https://www.trustpilot.com/review/elitetraderfunding.com.",
+    "pricing": "PRICES NOT RECORDED. Prices, profit targets and drawdown amounts are on the main site's pricing page, which we couldn't open. All are null until we have screenshots. Evaluations are a subscription renewed every 30 days until you pass (help centre).",
+    "rules_detail": "1-Step: trailing drawdown on open (unrealised) profit, 5 minimum trading days (skippable with a paid add-on), no time limit. End of Day: drawdown trails the end-of-day balance, plus a daily loss limit from the prior day's ending balance, 5 minimum trading days. Funded drawdown stops trailing once realised profit reaches the max drawdown + $100. Static: sizes and contracts confirmed; rules page not read. Payouts need Active Trade Days (8 for the first cycle, 10 after) and are capped until a $25,000 lifetime reward cap, after which traders move to a live account.",
+    "payout_caps": "First reward-cycle maximum recorded; caps rise in later cycles (e.g. 1-Step 50K: $1,000 / $1,250 / $1,500 / $1,750; Static and EOD 50K: $1,250 / $1,500 / $1,750 / $2,000).",
+    "payout_wording": "The help centre has a '48-Hour Reward Guarantee' article (a promise about payout processing time). We don't repeat that wording.",
+    "not_listed": "Fast Track, Diamond Hands, Direct to Funded (DTF) and the legacy plans are not listed until we can read their prices. The 250K 1-Step is no longer sold.",
+    "countries": "Restricted list = countries restricted by Rise, ETF's reward provider (auto-updated list, last verified by ETF 30 Jul 2026). You also need a country supported by Stripe for payments, and OFAC-sanctioned countries can't move to the live account. Guam, Puerto Rico and the US Virgin Islands are unsupported.",
+    "company": "Not confirmed: the main site (About and footer) couldn't be opened.",
+    "vetting": "Checked 2026-10-11. Trustpilot 3.8 from 1,158 reviews. 6 of the 20 newest reviews described a refused or forfeited payout; the firm replied to most. Borderline, similar to firms already listed. Passed with a warning.",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official ETF page we could read. Prices especially need screenshots."
+  },
+  "firm": {
+    "id": "elite-trader-funding",
+    "name": "Elite Trader Funding",
+    "logo": "/funded-accounts/elite-trader-funding-logo.png",
+    "logo_bg": "dark",
+    "name_note": null,
+    "about": "Elite Trader Funding (ETF) is a futures prop firm selling subscription evaluations, including a 1-Step plan with a trailing drawdown, an End of Day plan and a Static plan. Funded traders who reach a lifetime reward cap move on to trading a live account.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": null,
+    "currency": "USD",
+    "website": "https://elitetraderfunding.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "Tradovate",
+      "NinjaTrader",
+      "TradingView",
+      "Rithmic",
+      "R | Trader",
+      "ATAS"
+    ],
+    "countries": {
+      "restricted": [
+        "AF",
+        "CF",
+        "CG",
+        "CU",
+        "CD",
+        "GN",
+        "HT",
+        "IR",
+        "IQ",
+        "LY",
+        "ML",
+        "MM",
+        "KP",
+        "RU",
+        "SO",
+        "SS",
+        "SD",
+        "SY",
+        "UA",
+        "VE",
+        "YE"
+      ],
+      "allowed_only": null,
+      "notes": "These are the countries ETF's payout provider (Rise) can't serve. Your country must also be supported by Stripe, ETF's payment provider, and residents of OFAC-sanctioned countries can't move to a live account. Guam, Puerto Rico and the US Virgin Islands aren't supported.",
+      "source": "https://help.elitetraderfunding.com/help/countries-restricted-and-supported",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": {
+        "rating": 3.8,
+        "review_count": 1158,
+        "url": "https://www.trustpilot.com/review/elitetraderfunding.com",
+        "checked": "2026-10-11"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "promo_code": null,
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "1-Step",
+                "tagline": "Monthly subscription until you pass · Drawdown trails open profit · 5 minimum trading days",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "Intraday trailing",
+                  "consistency_pct": null,
+                  "min_trading_days": 5,
+                  "profit_split_max": null,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 8,
+                    "payout_cap": 1000,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 14,
+                    "payout_cap": 1250,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 18,
+                    "payout_cap": 1500,
+                    "promo": null,
+                    "standard": null
+                  }
+                ]
+              },
+              {
+                "tier": "End of Day",
+                "tagline": "Monthly subscription until you pass · End-of-day trailing drawdown plus a daily loss limit · 5 minimum trading days",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": null,
+                  "min_trading_days": 5,
+                  "profit_split_max": null,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 8,
+                    "payout_cap": 1250,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 14,
+                    "payout_cap": 1750,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 18,
+                    "payout_cap": 2250,
+                    "promo": null,
+                    "standard": null
+                  }
+                ]
+              },
+              {
+                "tier": "Static",
+                "tagline": "Monthly subscription until you pass · Static drawdown",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "static",
+                  "consistency_pct": null,
+                  "min_trading_days": null,
+                  "profit_split_max": null,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 10000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 1,
+                    "payout_cap": 500,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 25000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 2,
+                    "payout_cap": 750,
+                    "promo": null,
+                    "standard": null
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": null,
+                    "daily_loss": null,
+                    "max_loss": null,
+                    "max_contracts": 4,
+                    "payout_cap": 1250,
+                    "promo": null,
+                    "standard": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

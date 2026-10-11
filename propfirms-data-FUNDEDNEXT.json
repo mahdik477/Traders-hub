@@ -7,8 +7,9 @@
     "rule_units": "Forex rules are % of account size. Futures rules are fixed USD amounts.",
     "null_means": "Field not stated on the firm's official pricing page or help centre. Check the firm's rules pages before publishing.",
     "forex_rules": "Stellar models use static drawdown. Stellar 2-Step and Lite base reward share is 80% on the standard 21-day cycle; 90% on the On-Demand option and 95% with the paid 'Lifetime Reward 95%' add-on. A 40% consistency rule applies only to the On-Demand reward option. Stellar 2-Step also pays a one-time 15% Performance Reward from challenge-phase profit. Stellar 1-Step reward share is shown as 'Up to 95%' on the pricing page (help centre: 80% base, 90% with Scale-Up, 95% with add-ons). Fee refund: 2-Step with 1st reward, 1-Step and Lite at 3rd reward, Instant none. Stellar Instant has no daily loss limit and a 6% trailing max loss. Max risk 3% per position at any time on all Stellar models.",
-    "futures_rules": "No daily loss limit on Flex, Legacy and Rapid Pro (daily_loss null = none). Max loss is end-of-day (EOD). max_contracts = mini contracts allowed during the challenge (micros = 10x); Legacy funded accounts allow more (3/5/7 minis). payout_cap = 'Maximum Withdrawal' per reward on the funded account. Consistency: Flex and Legacy 40% during the challenge only; Rapid Pro 40% on the funded account only; Rapid Daily none. Minimum trading days are not stated as a number (help centre says there are no benchmark-day requirements during the challenge; 5 benchmark days are needed for Flex and Legacy rewards).",
-    "not_listed": "FundedNext Labs 'FNL:001 NO DLL 1-Step' ($50K CFD experimental account) and the Free Trial are not included. Bolt and the original Rapid challenge were discontinued in 2026."
+    "futures_rules": "No daily loss limit on Flex, Legacy and Rapid Pro (daily_loss = 'none'). Max loss is end-of-day (EOD). max_contracts = mini contracts allowed during the challenge (micros = 10x); Legacy funded accounts allow more (3/5/7 minis). payout_cap = 'Maximum Withdrawal' per reward on the funded account. Consistency: Flex and Legacy 40% during the challenge only; Rapid Pro 40% on the funded account only; Rapid Daily none. Minimum trading days are not stated as a number (help centre says there are no benchmark-day requirements during the challenge; 5 benchmark days are needed for Flex and Legacy rewards).",
+    "not_listed": "FundedNext Labs 'FNL:001 NO DLL 1-Step' ($50K CFD experimental account) and the Free Trial are not included. Bolt and the original Rapid challenge were discontinued in 2026.",
+    "company_check": "https://fundednext.com/company (checked 2026-10-11): timeline says FundedNext was launched on 18 March 2022 (its parent, NEXT Ventures, started in 2016). Lists operational hubs in the UAE, Malaysia, Bangladesh, Sri Lanka and Cyprus; trading run by FundedNext Ltd (Comoros, HY01023052); brand owned by GrowthNext F.Z.E. (Ajman, UAE); website operated by FundedNext Limited (Hong Kong)."
   },
   "firm": {
     "id": "fundednext",
@@ -17,6 +18,8 @@
     "name_note": null,
     "about": "FundedNext sells simulated funded accounts for CFD and futures traders, with 1-step, 2-step and instant CFD accounts and several futures evaluation types. The brand launched in 2022 and is owned by GrowthNext F.Z.E., a company registered in Ajman, UAE.",
     "about_note": null,
+    "founded": 2022,
+    "hq": "UAE (operational hub); trading entity registered in the Comoros",
     "currency": "USD",
     "website": "https://fundednext.com/",
     "affiliate_link": "",
@@ -106,8 +109,8 @@
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 10,
-                  "phase2_target": null,
-                  "funded_target": null,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
                   "daily_loss": 3,
                   "max_loss": 6,
                   "drawdown_type": "static",
@@ -162,7 +165,7 @@
                   "unit": "percent",
                   "phase1_target": 8,
                   "phase2_target": 5,
-                  "funded_target": null,
+                  "funded_target": "n/a",
                   "daily_loss": 5,
                   "max_loss": 10,
                   "drawdown_type": "static",
@@ -212,7 +215,7 @@
                   "unit": "percent",
                   "phase1_target": 8,
                   "phase2_target": 4,
-                  "funded_target": null,
+                  "funded_target": "n/a",
                   "daily_loss": 4,
                   "max_loss": 8,
                   "drawdown_type": "static",
@@ -265,8 +268,8 @@
                 "tagline": "One-time fee · No daily loss limit · Trailing max loss",
                 "rules": {
                   "unit": "percent",
-                  "phase1_target": null,
-                  "phase2_target": null,
+                  "phase1_target": "n/a",
+                  "phase2_target": "n/a",
                   "funded_target": null,
                   "daily_loss": "none",
                   "max_loss": 6,
@@ -274,7 +277,7 @@
                   "profit_split_max": 80,
                   "min_trading_days": 0,
                   "consistency": "none",
-                  "trading_period": null,
+                  "trading_period": "n/a",
                   "fee_refund": false
                 },
                 "accounts": [
@@ -448,7 +451,7 @@
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",
-                  "consistency_pct": null,
+                  "consistency_pct": "none",
                   "min_trading_days": null,
                   "profit_split_max": 90,
                   "fee_refund": null

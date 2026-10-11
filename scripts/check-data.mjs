@@ -100,6 +100,12 @@ const warn = (file, msg) => warnings.push(`${file}: ${msg}`);
 
 const isNum = (v) => typeof v === "number" && Number.isFinite(v);
 const isNumOrNull = (v) => v === null || v === undefined || isNum(v);
+// Prop firm rules have three kinds of "empty": "n/a" (doesn't apply to this
+// account type), "none" (the firm says there's no such rule) and null (not
+// confirmed yet).
+const EMPTY = new Set(["n/a", "none"]);
+const isRuleValue = (v) => isNumOrNull(v) || EMPTY.has(v);
+const RULE_HINT = `a number, "n/a" (doesn't apply), "none" (firm says there is none) or null (not confirmed)`;
 
 function checkLink(file, field, url) {
   if (url === null || url === undefined || url === "") return;
@@ -254,14 +260,27 @@ function checkPropFirm(file, data) {
         if (m.market === "forex" && unit !== "percent") err(file, `${tat}: forex rules must use "unit": "percent"`);
         if (m.market === "futures" && unit !== "usd") err(file, `${tat}: futures rules must use "unit": "usd"`);
         const split = t.rules?.profit_split_max;
-        if (!isNumOrNull(split) || (isNum(split) && (split <= 0 || split > 100))) err(file, `${tat}: profit_split_max must be a number between 1 and 100`);
+        if (!isRuleValue(split) || (isNum(split) && (split <= 0 || split > 100))) err(file, `${tat}: profit_split_max must be ${RULE_HINT}, between 1 and 100`);
+        for (const k of ["min_trading_days", "consistency_pct"]) {
+          if (!isRuleValue(t.rules?.[k])) err(file, `${tat}: ${k} must be ${RULE_HINT}`);
+        }
+        const refund = t.rules?.fee_refund;
+        // "No refund" is false (shown as a red "No"), so "none" isn't allowed here.
+        if (!(refund == null || typeof refund === "boolean" || refund === "n/a"))
+          err(file, `${tat}: fee_refund must be true, false, "n/a" or null (use false for "no refund")`);
+        for (const k of ["consistency", "trading_period"]) {
+          const v = t.rules?.[k];
+          if (typeof v === "string" && v.trim() === "") err(file, `${tat}: ${k} is an empty string - use null if not confirmed`);
+        }
         if (unit === "percent") {
-          for (const k of ["phase1_target", "phase2_target", "phase3_target", "daily_loss", "max_loss"]) {
+          for (const k of ["phase1_target", "phase2_target", "phase3_target", "funded_target", "daily_loss", "max_loss"]) {
             const v = t.rules[k];
-            if (k === "daily_loss" && v === "none") continue; // firm has no daily limit
-            if (!isNumOrNull(v)) err(file, `${tat}: ${k} must be a number or null${k === "daily_loss" ? ' (or "none" for no limit)' : ""}`);
+            if (!isRuleValue(v)) err(file, `${tat}: ${k} must be ${RULE_HINT}`);
             else if (isNum(v) && (v <= 0 || v > 50)) err(file, `${tat}: ${k} = ${v}% looks wrong (forex rules are % of account size)`);
           }
+          // One-phase and instant programs have no Phase 2 target.
+          if ((p.program === "1-step" || p.program === "instant") && t.rules.phase2_target === null)
+            warn(file, `${tat}: phase2_target is null - use "n/a" (a ${p.program} program has no Phase 2)`);
         }
         if (!Array.isArray(t.accounts) || t.accounts.length === 0) return err(file, `${tat} has no accounts`);
         const seen = new Set();
@@ -275,8 +294,9 @@ function checkPropFirm(file, data) {
           if (isNum(a.promo) && isNum(a.standard) && a.promo >= a.standard)
             err(file, `${aat}: promo price (${a.promo}) should be lower than the standard price (${a.standard})`);
           if (unit === "usd") {
-            if (!isNumOrNull(a.daily_loss) && a.daily_loss !== "none")
-              err(file, `${aat}: daily_loss must be a number, null, or "none" for no limit`);
+            for (const k of ["profit_target", "daily_loss", "max_loss", "max_contracts", "payout_cap"]) {
+              if (!isRuleValue(a[k])) err(file, `${aat}: ${k} must be ${RULE_HINT}`);
+            }
             for (const k of ["profit_target", "daily_loss", "max_loss", "payout_cap"]) {
               if (isNum(a[k]) && a[k] >= a.size) err(file, `${aat}: ${k} (${a[k]}) is bigger than the account - futures rules are USD amounts`);
             }

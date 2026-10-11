@@ -9,12 +9,13 @@
     "consistency": "50% consistency rule in the Test only (best day must be below 50% of total net profit; the target rises automatically if not met). No consistency rule in PRO or PRO+.",
     "min_trading_days": "3 trading days for tests bought from 17 August 2026 (older tests keep 5).",
     "profit_split": "PRO (simulated) 80/20, withdrawable once the account is above a buffer equal to the max drawdown (e.g. $52,000 on a 50K). PRO+ (live account) 90/10 with no buffer, but PRO+ is by invitation at TPT's discretion. profit_split_max = 90.",
-    "payout_caps": "Official pages say there is no maximum withdrawal amount and no scaling plan; payout_cap left null because there is no cap number to show. Wallet withdrawals of $250 or less carry a $50 fee. Payouts via Plaid (US banks), PayPal or Wise.",
+    "payout_caps": "Official pages say there is no maximum withdrawal amount and no scaling plan; so payout_cap is 'none' (shown as None). Wallet withdrawals of $250 or less carry a $50 fee. Payouts via Plaid (US banks), PayPal or Wise.",
     "fee_refund": "No official page states that the Test fee is refunded, so fee_refund is null.",
     "platforms": "15+ platforms on two data feeds. CQG: TradingView, NinjaTrader, Tradovate. Rithmic: R|Trader, Quantower, Bookmap, MultiCharts, MotiveWave, Trade Navigator, VolFix, ATAS, Investor R/T, Finamark, Jigsaw Trader. Only the main ones are listed in the platforms array.",
     "other_rules": "No automated/bot trading in PRO. No counter positions across accounts (all account types). PRO and PRO+ must be flat around FOMC, NFP and CPI releases (Test may trade news). PRO max 50 executions per day. Up to 5 PRO/PRO+ accounts at once; unlimited tests. PRO and PRO+ must trade at least one day per week.",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
-    "null_means": "Not stated on an official Take Profit Trader page (or not expressible as one number - see the notes above). Check the live plan page before publishing."
+    "null_means": "Not stated on an official Take Profit Trader page (or not expressible as one number - see the notes above). Check the live plan page before publishing.",
+    "company_check": "https://takeprofittrader.com/about-us and site footer (checked 2026-10-11): TakeProfitTrader LLC, 9100 Conroy Windermere Rd Suite 200, Windermere, FL 34786. No founding date stated, so founded is null."
   },
   "firm": {
     "id": "take-profit-trader",
@@ -23,6 +24,8 @@
     "name_note": "Take Profit Trader (takeprofittrader.com), operated by TakeProfitTrader LLC. Often shortened to TPT.",
     "about": "Take Profit Trader is a futures-only firm that sells a one-step, monthly-subscription Test in five sizes from $25K to $150K. Traders who pass move to a simulated PRO account where withdrawals are available from the first day, and may later be invited to a live PRO+ account.",
     "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "Windermere, Florida, USA",
     "currency": "USD",
     "website": "https://takeprofittrader.com/",
     "affiliate_link": "",
@@ -216,7 +219,7 @@
                     "daily_loss": "none",
                     "max_loss": 1500,
                     "max_contracts": 3,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": 150
                   },
@@ -226,7 +229,7 @@
                     "daily_loss": "none",
                     "max_loss": 2000,
                     "max_contracts": 6,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": 170
                   },
@@ -236,7 +239,7 @@
                     "daily_loss": "none",
                     "max_loss": 2500,
                     "max_contracts": 9,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": 245
                   },
@@ -246,7 +249,7 @@
                     "daily_loss": "none",
                     "max_loss": 3000,
                     "max_contracts": 12,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": 330
                   },
@@ -256,7 +259,7 @@
                     "daily_loss": "none",
                     "max_loss": 4500,
                     "max_contracts": 15,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": 360
                   }

@@ -1,0 +1,211 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official pages only, fetched 2026-10-11: https://audacity.capital/ (pricing widget and its page data for all three programs, 2-step rules table, footer company details, restricted countries), https://audacity.capital/two-step-prop-firm-ability-challenge/, https://audacity.capital/one-step-prop-firm-ability-one/, https://audacity.capital/instant-funding-prop-firm/, https://audacity.capital/funded-trader-program/, https://audacity.capital/about/, https://audacity.capital/trading-platforms/, https://audacity.capital/terms-and-conditions/; Trustpilot https://www.trustpilot.com/review/audacity.capital.",
+    "pricing": "Prices in USD (the site also offers GBP and EUR). standard = full price from the pricing widget's data. A '14 Years, 14% OFF - For All Programs' banner with code 14th was running. Only the Ability Challenge (2-step) discounted prices are displayed as text ($42 / $68 / $168 / $283 / $472 / $902), so promo is filled for that program only. The 1-step and instant discounted prices are not shown as text, so promo is null there even though the code is said to apply to all programs.",
+    "ftp_price_conflict": "The pricing data gives FTP (instant) $5K at $119, but a comparison table on /funded-trader-program/ says FTP entry fee 'From $199'. Recorded $119 from the pricing data; confirm with a screenshot of the FTP tab.",
+    "ability_one_sizes": "Pricing data lists Ability One at $5K-$100K only, while the 1-step page says 'Purchase up to $200K'. Recorded the five sizes with prices.",
+    "ability_challenge_limits": "Limits differ by stage: Challenge (phase 1) 7.5% daily / 15% max loss; Verification and funded account 5% daily / 10% max loss. The table shows the phase 1 figures; the tagline explains the change. Both limits are static.",
+    "ftp_drawdown": "The instant page says the 5% daily limit trails the balance as it grows, while the 10% max loss is fixed from the starting balance. Other parts of the same page describe FTP drawdown both as 'trailing' and as 'static', so drawdown_type records the max-loss rule and the tagline mentions the trailing daily limit. Minimum 5 trading days before a payout.",
+    "fee_refund": "Ability Challenge: 'up to 100%' of the fee refunded with the first payout (homepage, 2-step page). Ability One: '100% Refundable' (funded-trader-program comparison table). FTP: no refund stated, so null.",
+    "profit_split": "Ability Challenge and Ability One 'up to 90%'; FTP 'up to 80%' (one comparison table says 90% for instant; the instant page itself says 80% repeatedly, which is what is recorded).",
+    "company": "Footer: trading activities run by AudaCity Global LTD (reg. 15850), licensed in the Union of Comoros (Anjouan). AudaCity International FZCO (Dubai Silicon Oasis) acts only as a payment facilitator; Propmetry Limited (Cyprus) is another payment partner. UK office: 25 Cabot Square, Level 11, London E14 4QZ. About page: started in March 2012; CEO Karim Yousfi.",
+    "vetting": "Checked 2026-10-11 against our listing criteria. Trustpilot hides the score for a guideline breach and says fake reviews were removed (288 reviews). Of about 12 recent reviews read closely, 4 described a refused or voided payout after passing; the firm replied to some. Similar level to firms we already list, so it passed, but this is worth re-checking.",
+    "marketing_stats_excluded": "Site claims such as '$250M paid out' and '500K+ traders' are not reproduced.",
+    "rule_units": "Forex rules are % of account size.",
+    "null_means": "Not stated on an official Audacity Capital page we could read."
+  },
+  "firm": {
+    "id": "audacity-capital",
+    "name": "Audacity Capital",
+    "logo": "/funded-accounts/audacity-capital-logo.png",
+    "name_note": "The firm writes its name as both 'Audacity Capital' and 'AudaCity Capital'.",
+    "about": "Audacity Capital says it began in 2012. It offers a 2-step challenge, a 1-step challenge and an instant-funded account on MT5 and DXtrade; it lists a London office, while trading accounts are run by a company licensed in the Comoros.",
+    "about_note": null,
+    "founded": 2012,
+    "hq": "London, UK (office); trading entity registered in the Comoros",
+    "currency": "USD",
+    "website": "https://audacity.capital/",
+    "affiliate_link": "",
+    "platforms": [
+      "MT5",
+      "DXtrade"
+    ],
+    "countries": {
+      "restricted": [
+        "SY",
+        "IR",
+        "KP"
+      ],
+      "allowed_only": null,
+      "notes": "The site names Syria, Iran and North Korea but says the list is 'not limited to' them; no full list is published. US residents can only take part through the DXtrade platform, where permitted.",
+      "source": "https://audacity.capital/terms-and-conditions/",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (288 reviews, checked 11 Oct 2026).",
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "promo_code": "14th",
+        "programs": [
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "Ability Challenge",
+                "tagline": "Phase 1: 7.5% daily / 15% max loss, then 5% / 10%",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": "n/a",
+                  "daily_loss": 7.5,
+                  "max_loss": 15,
+                  "drawdown_type": "static",
+                  "profit_split_max": 90,
+                  "min_trading_days": 4,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 42,
+                    "standard": 49
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 68,
+                    "standard": 79
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 168,
+                    "standard": 195
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 283,
+                    "standard": 329
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 472,
+                    "standard": 549
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 902,
+                    "standard": 1049
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "Ability One",
+                "tagline": "Static 3% daily / 6% max loss",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "static",
+                  "profit_split_max": 90,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 69
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 99
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 249
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 399
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 699
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "FTP (Instant Funding)",
+                "tagline": "No evaluation; 5% daily limit trails your balance",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": "n/a",
+                  "phase2_target": "n/a",
+                  "funded_target": "none",
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "n/a",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 119
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 279
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 449
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 1299
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -20,31 +20,38 @@ import type {
 
 // ---- Shape of the JSON files ------------------------------------------------
 
+// Every rule value can be one of three kinds of "empty":
+//   "n/a"  = doesn't apply to this account type (e.g. Phase 2 target on a
+//            1-step challenge) — shown as "N/A".
+//   "none" = the firm's own page says there is no such rule/limit — shown
+//            as "None".
+//   null   = not confirmed from the firm's own pages yet — shown as "—".
+type Empty = "n/a" | "none" | null;
+
 type RawForexRules = {
   unit: "percent";
-  phase1_target: number | null;
-  phase2_target: number | null;
+  phase1_target: number | Empty;
+  phase2_target: number | Empty;
   /** Only for 3-step evaluations. */
-  phase3_target?: number | null;
-  funded_target: number | null;
-  /** "none" = the firm has no daily loss limit (shown as "None"). */
-  daily_loss: number | "none" | null;
-  max_loss: number | null;
+  phase3_target?: number | Empty;
+  funded_target: number | Empty;
+  daily_loss: number | Empty;
+  max_loss: number | Empty;
   drawdown_type?: string | null;
-  profit_split_max: number | null;
-  min_trading_days: number | null;
+  profit_split_max: number | Empty;
+  min_trading_days: number | Empty;
   consistency: string | null;
   trading_period: string | null;
-  fee_refund: boolean | null;
+  fee_refund: boolean | Empty;
 };
 
 type RawFuturesRules = {
   unit: "usd";
   drawdown_type?: string | null;
-  consistency_pct: number | null;
-  min_trading_days: number | null;
-  profit_split_max: number | null;
-  fee_refund?: boolean | null;
+  consistency_pct: number | Empty;
+  min_trading_days: number | Empty;
+  profit_split_max: number | Empty;
+  fee_refund?: boolean | Empty;
 };
 
 type RawAccount = {
@@ -52,11 +59,11 @@ type RawAccount = {
   promo: number | null;
   standard: number | null;
   // Futures only: rules are fixed USD amounts per account size.
-  profit_target?: number | null;
-  daily_loss?: number | "none" | null;
-  max_loss?: number | null;
-  max_contracts?: number | null;
-  payout_cap?: number | null;
+  profit_target?: number | Empty;
+  daily_loss?: number | Empty;
+  max_loss?: number | Empty;
+  max_contracts?: number | Empty;
+  payout_cap?: number | Empty;
 };
 
 type RawTier = {
@@ -217,7 +224,7 @@ function forexChallenge(p: RawProgram, currency: string, discountLabel: string):
     key: p.program,
     label: PROGRAM_LABELS[p.program] ?? p.program,
     tagline: null,
-    tiers: p.tiers.map((t) => buildTier(t, p.program, currency, discountLabel)),
+    tiers: p.tiers.map((t) => buildTier(t, currency, discountLabel)),
   };
 }
 
@@ -234,7 +241,7 @@ function futuresChallenges(
         key: "instant",
         label: "Instant",
         tagline: p.tiers.length === 1 ? p.tiers[0].tagline : null,
-        tiers: p.tiers.map((t) => buildTier(t, p.program, currency, discountLabel)),
+        tiers: p.tiers.map((t) => buildTier(t, currency, discountLabel)),
       },
     ];
   }
@@ -242,20 +249,18 @@ function futuresChallenges(
     key: `${p.program}-${t.tier}`,
     label: t.tier,
     tagline: t.tagline,
-    tiers: [buildTier(t, p.program, currency, discountLabel)],
+    tiers: [buildTier(t, currency, discountLabel)],
   }));
 }
 
 function buildTier(
   t: RawTier,
-  program: string,
   currency: string,
   discountLabel: string,
 ): TierView {
   const accounts = [...t.accounts].sort((a, b) => a.size - b.size);
   const n = accounts.length;
   const same = (v: Cell): Cell[] => Array(n).fill(v);
-  const isInstant = program === "instant";
   const monthly = t.billing === "monthly";
   const period = monthly ? "/month" : "";
   const rows: TierView["rows"] = [];
@@ -263,51 +268,30 @@ function buildTier(
   if (t.rules.unit === "percent") {
     // Forex: rules are a % of account size, the same for every size.
     const r = t.rules;
-    const pct = (v: number | null) => (v == null ? null : `${v}%`);
-    const noTarget = isInstant && r.phase1_target == null && r.phase2_target == null;
+    const pct = (v: number | Empty) => show(v, (n) => `${n}%`);
 
-    if (r.phase2_target != null) {
-      rows.push({ label: "Profit target (Phase 1)", values: same(pct(r.phase1_target)) });
-      rows.push({ label: "Profit target (Phase 2)", values: same(pct(r.phase2_target)) });
-      if (r.phase3_target != null) {
-        rows.push({ label: "Profit target (Phase 3)", values: same(pct(r.phase3_target)) });
-      }
-    } else {
-      rows.push({
-        label: "Profit target",
-        values: same(noTarget ? "None" : pct(r.phase1_target)),
-      });
+    rows.push({ label: "Profit target (Phase 1)", values: same(pct(r.phase1_target)) });
+    rows.push({ label: "Profit target (Phase 2)", values: same(pct(r.phase2_target)) });
+    // Only 3-step programs have a third phase; other files leave it out.
+    if (r.phase3_target !== undefined) {
+      rows.push({ label: "Profit target (Phase 3)", values: same(pct(r.phase3_target)) });
     }
-    if (r.funded_target != null) {
-      rows.push({ label: "Profit target (Funded)", values: same(pct(r.funded_target)) });
-    }
-    rows.push({
-      label: "Daily loss",
-      values: same(r.daily_loss === "none" ? NO_LIMIT : pct(r.daily_loss)),
-    });
+    rows.push({ label: "Profit target (Funded)", values: same(pct(r.funded_target)) });
+    rows.push({ label: "Daily loss", values: same(pct(r.daily_loss)) });
     rows.push({ label: "Max loss", values: same(pct(r.max_loss)) });
     if (r.drawdown_type) rows.push({ label: "Drawdown type", values: same(capitalise(r.drawdown_type)) });
     rows.push({ label: "Profit split", values: same(split(r.profit_split_max)) });
     rows.push({ label: "Min trading days", values: same(days(r.min_trading_days)) });
-    rows.push({ label: "Consistency", values: same(consistency(r.consistency)) });
-    if (r.trading_period) {
-      rows.push({ label: "Trading period", values: same(capitalise(r.trading_period)) });
-    }
+    rows.push({ label: "Consistency", values: same(text(r.consistency)) });
+    rows.push({ label: "Trading period", values: same(text(r.trading_period)) });
     rows.push({ label: "Fee refund", values: same(yesNo(r.fee_refund)) });
   } else {
     // Futures: rules are fixed USD amounts that change with account size.
     const r = t.rules;
-    const col = (key: keyof RawAccount) =>
-      accounts.map((a) =>
-        a[key] == null ? null : a[key] === "none" ? NO_LIMIT : usd(a[key] as number),
-      );
+    const col = (key: "profit_target" | "daily_loss" | "max_loss" | "payout_cap") =>
+      accounts.map((a) => show(a[key], usd));
 
-    rows.push({
-      label: "Profit target",
-      values: isInstant && accounts.every((a) => a.profit_target == null)
-        ? same("None")
-        : col("profit_target"),
-    });
+    rows.push({ label: "Profit target", values: col("profit_target") });
     rows.push({ label: "Daily loss", values: col("daily_loss") });
     rows.push({ label: "Max loss", values: col("max_loss") });
     if (r.drawdown_type) rows.push({ label: "Drawdown type", values: same(capitalise(r.drawdown_type)) });
@@ -315,12 +299,12 @@ function buildTier(
     rows.push({ label: "Min trading days", values: same(days(r.min_trading_days)) });
     rows.push({
       label: "Consistency",
-      values: same(r.consistency_pct == null ? null : `${r.consistency_pct}%`),
+      values: same(show(r.consistency_pct, (n) => `${n}%`)),
     });
     if (accounts.some((a) => a.max_contracts != null)) {
       rows.push({
         label: "Max contracts",
-        values: accounts.map((a) => (a.max_contracts == null ? null : String(a.max_contracts))),
+        values: accounts.map((a) => show(a.max_contracts, String)),
       });
     }
     if (accounts.some((a) => a.payout_cap != null)) {
@@ -344,8 +328,9 @@ function buildTier(
       };
     }),
     accounts: accounts.map((a) => ({ size: a.size, lowestPrice: a.promo ?? a.standard, monthly })),
-    profitSplit: t.rules.profit_split_max,
-    feeRefund: t.rules.fee_refund ?? null,
+    // The filters only compare real values; "n/a" / "none" count as unknown.
+    profitSplit: typeof t.rules.profit_split_max === "number" ? t.rules.profit_split_max : null,
+    feeRefund: typeof t.rules.fee_refund === "boolean" ? t.rules.fee_refund : null,
   };
 }
 
@@ -363,8 +348,19 @@ function safeLink(url: string | null | undefined): string | null {
 
 // ---- Formatting -------------------------------------------------------------
 
-// Shown where a data file says a limit is "none" (as opposed to null = not stated).
+// What the tables show for the two kinds of "empty" that aren't unknown
+// (unknown = null, shown as a dash by the table).
+// (PropFirmPricing styles these two by their text.)
+const NOT_APPLICABLE = "N/A";
 const NO_LIMIT = "None";
+
+/** Format a rule value, turning "n/a" / "none" into their labels. */
+function show<T>(v: T | Empty | undefined, format: (v: T) => string): Cell {
+  if (v == null) return null;
+  if (v === "n/a") return NOT_APPLICABLE;
+  if (v === "none") return NO_LIMIT;
+  return format(v as T);
+}
 
 function money(n: number, currency: string) {
   return new Intl.NumberFormat("en-US", {
@@ -391,22 +387,22 @@ function usd(n: number) {
   }).format(n);
 }
 
-function split(v: number | null): Cell {
-  return v == null ? null : `Up to ${v}%`;
+function split(v: number | Empty): Cell {
+  return show(v, (n: number) => `Up to ${n}%`);
 }
 
-function days(v: number | null): Cell {
-  if (v == null) return null;
-  return v === 0 ? "No minimum" : String(v);
+function days(v: number | Empty): Cell {
+  return show(v, (n: number) => (n === 0 ? "No minimum" : String(n)));
 }
 
-function consistency(v: string | null): Cell {
-  if (v == null) return null;
-  return v.toLowerCase() === "none" ? "None" : v;
+/** Free-text rules (consistency, trading period). */
+function text(v: string | null): Cell {
+  const lower = v?.toLowerCase();
+  return show(lower === "none" || lower === "n/a" ? (lower as Empty) : v, capitalise);
 }
 
-function yesNo(v: boolean | null): Cell {
-  return v == null ? null : v ? "Yes" : "No";
+function yesNo(v: boolean | Empty): Cell {
+  return show(v, (b: boolean) => (b ? "Yes" : "No"));
 }
 
 function capitalise(s: string) {
