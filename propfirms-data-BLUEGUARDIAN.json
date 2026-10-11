@@ -1,0 +1,578 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official Blue Guardian pages only, fetched 2026-10-11: https://blueguardian.com/ (product and rule data embedded in the page: every plan, size, platform, full price and discounted price, challenge and funded rules; footer company details), help centre https://help.blueguardian.com/en/articles/15618204-general-information-rules (restricted countries), https://help.blueguardian.com/en/articles/14061082-instant-standard-account-rules, https://help.blueguardian.com/en/articles/14062186-1-step-standard-rules, https://help.blueguardian.com/en/articles/16444654-1-step-nano-rules, https://help.blueguardian.com/en/articles/14062291-2-step-standard-rules, https://help.blueguardian.com/en/articles/16445450-2-step-nano-rules (profit split, minimum days, consistency); Trustpilot https://www.trustpilot.com/review/blueguardian.com.",
+    "pricing": "standard = original price, promo = discounted price from the site's product data (25% off with code BG25, shown site-wide). Prices are the same on every platform.",
+    "profit_split": "profit_split_max = the standard split without paid add-ons (help centre): Instant 80% (90% add-on), 1-Step Standard 85% (90% add-on), 1-Step Nano 85% (100% add-on), 2-Step Standard 85% (90% add-on), 2-Step Nano 80%. Futures 90%.",
+    "rules_detail": "Forex daily loss resets at 5pm EST from the higher of balance or equity. Minimum days are profitable days: Instant 5 (before payout), 1-Step and 2-Step Standard 3, 1-Step Nano none in the evaluation and 5 on the funded account, 2-Step Nano none. Consistency: Instant 20%; 1-Step Nano 50%; 2-Step Nano 50% on the funded account only. Futures: Standard has no consistency rule in the evaluation and 40% on the funded account; Reserve and Express have 40% in the evaluation only; Direct (no evaluation) uses 20% / 25% / 30% for payouts 1 / 2 / 3+, and a profit goal of $1,500 / $3,000 / $6,000 / $9,000 for the first payout.",
+    "payout_caps": "Futures Standard: first payout cap recorded ($1,500-$4,000), then $2,000-$4,500. Express: maximum daily payout ($600-$2,500). Reserve: flat cap per payout. Direct: no cap shown.",
+    "not_listed": "Fast Track, Buy Now Pay Later, Instant Starter and legacy plans (1-Step Pro, 2-Step Pro, 3-Step) are not listed.",
+    "payout_wording": "The site advertises a '24hr payout guarantee' (processing speed). We don't repeat this wording.",
+    "company": "Footer: products and payment processing provided by Iconic Exchange FZCO, IFZA Business Park, DDP Dubai, UAE. No founding date stated on an official page.",
+    "vetting": "Checked 2026-10-11. Of the 20 newest Trustpilot reviews, about 11 described a rejected payout (reasons given include 'multiple accounts'/CID violations, a failed video or KYC check and the 'Guardian Shield' rule); the firm replied to 1. Trustpilot hides its score for a guideline breach and says it removed fake reviews. Listed with a review alert at the team's request (2026-10-11): the site aims to list every firm and show this context.",
+    "logo": "No square logo found (the site uses an inline wordmark); the card shows initials.",
+    "rule_units": "Forex rules are % of account size. Futures rules are fixed USD amounts.",
+    "null_means": "Not stated on an official Blue Guardian page we could read."
+  },
+  "firm": {
+    "id": "blue-guardian",
+    "name": "Blue Guardian",
+    "name_note": null,
+    "about": "Blue Guardian is a prop firm, with its payment company registered in Dubai, selling simulated forex accounts (instant, 1-step and 2-step, including cheaper 'Nano' versions) from $5K to $400K, plus futures evaluations from $25K to $150K. Forex trades on MT5, Match-Trader or TradeLocker; futures on Tradovate or DeepCharts.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "Dubai, UAE (payment company)",
+    "currency": "USD",
+    "website": "https://blueguardian.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "MT5",
+      "Match-Trader",
+      "TradeLocker",
+      "Tradovate",
+      "DeepCharts"
+    ],
+    "countries": {
+      "restricted": [
+        "AF",
+        "AL",
+        "DZ",
+        "CU",
+        "IR",
+        "JO",
+        "LY",
+        "MM",
+        "KP",
+        "PH",
+        "SN",
+        "SY",
+        "VN"
+      ],
+      "allowed_only": null,
+      "notes": "You must be 18 or older.",
+      "source": "https://help.blueguardian.com/en/articles/15618204-general-information-rules",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (2,111 reviews, checked 11 Oct 2026).",
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "review_alert": {
+      "summary": "Of the 20 most recent Trustpilot reviews, about 11 describe a payout being rejected (reasons given include rule or identity-check issues), and the firm had replied to only one of them. Trustpilot is also not showing a score for this firm; its page says this is because of a breach of its guidelines.",
+      "checked": "2026-10-11",
+      "url": "https://www.trustpilot.com/review/blueguardian.com?sort=recency"
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "promo_code": "BG25",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "1-Step Standard",
+                "tagline": "Trailing max loss · 90% split as a paid add-on",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 9,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
+                  "daily_loss": 4,
+                  "max_loss": 6,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": 85,
+                  "min_trading_days": 3,
+                  "consistency": null,
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 30,
+                    "standard": 40
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 49,
+                    "standard": 66
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 100,
+                    "standard": 134
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 150,
+                    "standard": 200
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 298,
+                    "standard": 398
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 552,
+                    "standard": 736
+                  }
+                ]
+              },
+              {
+                "tier": "1-Step Nano",
+                "tagline": "Cheapest 1-step · 50% consistency rule · 100% split as a paid add-on",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
+                  "daily_loss": 4,
+                  "max_loss": 6,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": 85,
+                  "min_trading_days": 0,
+                  "consistency": "50%",
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 20,
+                    "standard": 26.66
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 29,
+                    "standard": 38.66
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 59,
+                    "standard": 78.66
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 120,
+                    "standard": 160
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 240,
+                    "standard": 320
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 438,
+                    "standard": 585
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "2-Step Standard",
+                "tagline": "Static max loss · 90% split as a paid add-on",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": 4,
+                  "funded_target": "n/a",
+                  "daily_loss": 4,
+                  "max_loss": 8,
+                  "drawdown_type": "static",
+                  "profit_split_max": 85,
+                  "min_trading_days": 3,
+                  "consistency": null,
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 24,
+                    "standard": 32
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 56,
+                    "standard": 75
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 115,
+                    "standard": 154
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 174,
+                    "standard": 232
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 347,
+                    "standard": 463
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 697,
+                    "standard": 930
+                  }
+                ]
+              },
+              {
+                "tier": "2-Step Nano",
+                "tagline": "Cheapest 2-step · 50% consistency rule on the funded account",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": 5,
+                  "funded_target": "n/a",
+                  "daily_loss": 3,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 0,
+                  "consistency": "50% (funded only)",
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "promo": 50,
+                    "standard": 66.66
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 95,
+                    "standard": 127
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 179,
+                    "standard": 239
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 345,
+                    "standard": 460
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Instant",
+                "tagline": "No evaluation · 20% consistency · 90% split as a paid add-on",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": "n/a",
+                  "phase2_target": "n/a",
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": 80,
+                  "min_trading_days": 5,
+                  "consistency": "20%",
+                  "trading_period": "n/a",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 54,
+                    "standard": 72
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 75,
+                    "standard": 100
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 156,
+                    "standard": 208
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 243,
+                    "standard": 324
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 467,
+                    "standard": 623
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 716,
+                    "standard": 954
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 1284,
+                    "standard": 1712
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1650,
+                    "standard": 2200
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "market": "futures",
+        "promo_code": "BG25",
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Standard",
+                "tagline": "One-time fee · No consistency rule in the evaluation, 40% when funded · No daily loss limit on 25K",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 40,
+                  "min_trading_days": null,
+                  "profit_split_max": 90,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 1,
+                    "payout_cap": 1500,
+                    "promo": 116,
+                    "standard": 154
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1000,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": 2500,
+                    "promo": 157,
+                    "standard": 209
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 2000,
+                    "max_loss": 3500,
+                    "max_contracts": 8,
+                    "payout_cap": 3000,
+                    "promo": 248,
+                    "standard": 330
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 3000,
+                    "max_loss": 5000,
+                    "max_contracts": 12,
+                    "payout_cap": 4000,
+                    "promo": 318,
+                    "standard": 424
+                  }
+                ]
+              },
+              {
+                "tier": "Reserve",
+                "tagline": "One-time fee · No daily loss limit · 40% consistency in the evaluation only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 40,
+                  "min_trading_days": null,
+                  "profit_split_max": 90,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 2,
+                    "payout_cap": 1000,
+                    "promo": 48,
+                    "standard": 64
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": "none",
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": 2000,
+                    "promo": 84,
+                    "standard": 112
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": "none",
+                    "max_loss": 3000,
+                    "max_contracts": 8,
+                    "payout_cap": 2500,
+                    "promo": 111,
+                    "standard": 148
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": "none",
+                    "max_loss": 4500,
+                    "max_contracts": 12,
+                    "payout_cap": 3000,
+                    "promo": 222,
+                    "standard": 296
+                  }
+                ]
+              },
+              {
+                "tier": "Express",
+                "tagline": "One-time fee · Daily payouts · 40% consistency in the evaluation only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 40,
+                  "min_trading_days": null,
+                  "profit_split_max": 90,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 1,
+                    "payout_cap": 600,
+                    "promo": 65,
+                    "standard": 86
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": 1000,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": 1100,
+                    "promo": 98,
+                    "standard": 130
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": 1500,
+                    "max_loss": 3000,
+                    "max_contracts": 8,
+                    "payout_cap": 1500,
+                    "promo": 154,
+                    "standard": 205
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": 2250,
+                    "max_loss": 4500,
+                    "max_contracts": 12,
+                    "payout_cap": 2500,
+                    "promo": 240,
+                    "standard": 320
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Direct",
+                "tagline": "No evaluation · Consistency 20% for the first payout, rising to 30%",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD",
+                  "consistency_pct": 20,
+                  "min_trading_days": null,
+                  "profit_split_max": 90,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": "n/a",
+                    "daily_loss": 1000,
+                    "max_loss": 1500,
+                    "max_contracts": 1,
+                    "payout_cap": null,
+                    "promo": 262.5,
+                    "standard": 350
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": "n/a",
+                    "daily_loss": 1250,
+                    "max_loss": 2000,
+                    "max_contracts": 4,
+                    "payout_cap": null,
+                    "promo": 339,
+                    "standard": 452
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": "n/a",
+                    "daily_loss": 2500,
+                    "max_loss": 3500,
+                    "max_contracts": 8,
+                    "payout_cap": null,
+                    "promo": 449,
+                    "standard": 598.67
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": "n/a",
+                    "daily_loss": 3000,
+                    "max_loss": 4500,
+                    "max_contracts": 12,
+                    "payout_cap": null,
+                    "promo": 539,
+                    "standard": 718.67
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

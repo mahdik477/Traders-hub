@@ -1,0 +1,272 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official Phidias pages only, fetched 2026-10-11: https://phidiaspropfirm.com/ (account configurator data in the site's script shared-scripts-3.js: every account type, size, price, activation fee and rule; FAQ; footer company details), https://phidiaspropfirm.com/tou (Annex 1: countries where services are unavailable); Trustpilot https://www.trustpilot.com/review/phidiaspropfirm.com.",
+    "pricing": "Each account can be bought two ways: a one-time payment with no fees after passing (recorded here: standard = crossed-out price, promo = discounted price), or a cheaper evaluation fee plus an activation fee on passing (Express to Live: $29 / $49 / $69 / $89 one-time + $83-$169 activation; Fundamental: $49 / $79 / $99 per month + $149-$169; Premium: $59 / $89 / $119 per month + $149-$169). Express to Live 25K one-time payment is $55 instead of $277 with code PHIDIAS80; the other Express to Live sizes showed no discount. The Fundamental and Premium discounts (about 60% off) were shown on the site with no code needed.",
+    "rules_detail": "Express to Live: static drawdown, no daily loss limit, no consistency rule, no minimum days; hitting the target on the funded (Cash) account gives a bonus payout (80/20) and moves you to a live account. Fundamental: EOD trailing drawdown, no daily loss limit, no consistency rule in the evaluation, 30% max-day rule on the funded account, 3 minimum days, 10 funded days per payout. Premium: same targets and drawdowns, 1 minimum day, can hold overnight and over weekends, profit split rises 75% / 80% / 85% / 90% / 100% over payouts 1-5 (recorded as 100).",
+    "not_listed": "The 10K Drawdown Challenge (entry-fee contest) is not listed.",
+    "company": "Footer: Phidias Propfirm LTD, registered in Gibraltar. The site says '3 years operating' but states no founding date.",
+    "marketing_wording": "The site says it has never denied a payout; recent reviews (see vetting) say otherwise. The review alert shows both.",
+    "vetting": "Checked 2026-10-11. Of the 20 newest Trustpilot reviews, about 8 described a refused payout or a ban around a payout request; the firm replied to none. Trustpilot hides its score for a guideline breach (339 reviews). Listed with a review alert at the team's request (2026-10-11).",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official Phidias page we could read.",
+    "premium_daily_loss": "Premium's feature list doesn't say 'No Daily Loss Limit' (Fundamental's and Express to Live's do), so Premium daily_loss is null until confirmed."
+  },
+  "firm": {
+    "id": "phidias",
+    "name": "Phidias",
+    "logo": "/funded-accounts/phidias-logo.webp",
+    "logo_bg": "dark",
+    "name_note": "Also called Phidias Propfirm.",
+    "about": "Phidias is a Gibraltar-registered futures prop firm with three account types: Express to Live (static drawdown, aimed at a fast move to a live account), Fundamental (intraday) and Premium (can hold overnight). Accounts run from $25K to $150K on Tradovate, Rithmic, NinjaTrader, TradingView or DeepCharts.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "Gibraltar (registered company)",
+    "currency": "USD",
+    "website": "https://phidiaspropfirm.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "Tradovate",
+      "Rithmic",
+      "NinjaTrader",
+      "TradingView",
+      "DeepCharts"
+    ],
+    "countries": {
+      "restricted": [
+        "AF",
+        "DZ",
+        "AO",
+        "AL",
+        "BA",
+        "BG",
+        "BY",
+        "BW",
+        "BF",
+        "BI",
+        "HR",
+        "CF",
+        "CU",
+        "CD",
+        "KP",
+        "EC",
+        "ET",
+        "GY",
+        "HT",
+        "IR",
+        "ID",
+        "IQ",
+        "JM",
+        "KE",
+        "XK",
+        "LA",
+        "LB",
+        "LY",
+        "MU",
+        "MK",
+        "ME",
+        "ML",
+        "MT",
+        "MZ",
+        "NA",
+        "NI",
+        "NG",
+        "MM",
+        "PK",
+        "PG",
+        "PH",
+        "RO",
+        "RU",
+        "SN",
+        "RS",
+        "SO",
+        "ZA",
+        "SD",
+        "SS",
+        "SY",
+        "LK",
+        "SI",
+        "TZ",
+        "TT",
+        "TN",
+        "VE",
+        "YE",
+        "ZW"
+      ],
+      "allowed_only": null,
+      "notes": "Crimea is also listed. 'Slovenia and Yugoslavia' is recorded as Slovenia and Serbia; Kosovo is coded XK (widely used, not an official ISO code).",
+      "source": "https://phidiaspropfirm.com/tou",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (339 reviews, checked 11 Oct 2026).",
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "review_alert": {
+      "summary": "Of the 20 most recent Trustpilot reviews, about 8 describe a payout being refused or the reviewer being banned around a payout request, and none of these had a reply from the firm. The firm says on its own website that it has never denied a payout. Trustpilot is also not showing a score for this firm; its page says this is because of a breach of its guidelines.",
+      "checked": "2026-10-11",
+      "url": "https://www.trustpilot.com/review/phidiaspropfirm.com?sort=recency"
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "promo_code": null,
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Express to Live",
+                "tagline": "One-time payment shown (or a cheaper eval fee + activation fee) · Static drawdown · No daily loss limit · 25K: code PHIDIAS80",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "static",
+                  "consistency_pct": "none",
+                  "min_trading_days": 0,
+                  "profit_split_max": 80,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": "none",
+                    "max_loss": 500,
+                    "max_contracts": 2,
+                    "payout_cap": null,
+                    "promo": 55,
+                    "standard": 277
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 2500,
+                    "daily_loss": "none",
+                    "max_loss": 650,
+                    "max_contracts": 5,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 723
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 3500,
+                    "daily_loss": "none",
+                    "max_loss": 800,
+                    "max_contracts": 7,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 900
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 4500,
+                    "daily_loss": "none",
+                    "max_loss": 1000,
+                    "max_contracts": 9,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 1125
+                  }
+                ]
+              },
+              {
+                "tier": "Fundamental",
+                "tagline": "One-time payment shown (or monthly + activation fee) · No daily loss limit · 30% max-day rule on the funded account only",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 30,
+                  "min_trading_days": 3,
+                  "profit_split_max": 80,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 4000,
+                    "daily_loss": "none",
+                    "max_loss": 2500,
+                    "max_contracts": 10,
+                    "payout_cap": 2000,
+                    "promo": 90,
+                    "standard": 225
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": "none",
+                    "max_loss": 3000,
+                    "max_contracts": 14,
+                    "payout_cap": 2500,
+                    "promo": 145,
+                    "standard": 361
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": "none",
+                    "max_loss": 4500,
+                    "max_contracts": 17,
+                    "payout_cap": 2750,
+                    "promo": 175,
+                    "standard": 437
+                  }
+                ]
+              },
+              {
+                "tier": "Premium",
+                "tagline": "One-time payment shown (or monthly + activation fee) · Hold overnight and weekends · Split rises from 75% to 100%",
+                "billing": "one-time",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "EOD trailing",
+                  "consistency_pct": 30,
+                  "min_trading_days": 1,
+                  "profit_split_max": 100,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 50000,
+                    "profit_target": 4000,
+                    "daily_loss": null,
+                    "max_loss": 2500,
+                    "max_contracts": 10,
+                    "payout_cap": 2000,
+                    "promo": 110,
+                    "standard": 275
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": null,
+                    "max_loss": 3000,
+                    "max_contracts": 14,
+                    "payout_cap": 2500,
+                    "promo": 180,
+                    "standard": 450
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": null,
+                    "max_loss": 4500,
+                    "max_contracts": 17,
+                    "payout_cap": 2750,
+                    "promo": 220,
+                    "standard": 550
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

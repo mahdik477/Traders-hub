@@ -219,6 +219,9 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                         </span>
                       ))}
                     </div>
+                    {firm.reviewAlert && (
+                      <span className="badge badge-warning mt-2 whitespace-normal">Payout complaints in recent reviews</span>
+                    )}
                   </div>
                 </div>
 

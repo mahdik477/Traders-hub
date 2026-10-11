@@ -110,6 +110,7 @@ type RawFile = {
         url?: string | null;
       }[];
     } | null;
+    review_alert?: { summary: string; checked: string; url?: string | null } | null;
     markets: {
       market: string;
       partner?: string;
@@ -201,6 +202,13 @@ function buildFirm(firm: RawFile["firm"]): FirmView {
             date: q.date ?? null,
             url: safeLink(q.url),
           })),
+        }
+      : null,
+    reviewAlert: firm.review_alert?.summary
+      ? {
+          summary: firm.review_alert.summary,
+          checked: firm.review_alert.checked,
+          url: safeLink(firm.review_alert.url),
         }
       : null,
     markets,

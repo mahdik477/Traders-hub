@@ -120,7 +120,7 @@ function GoogleRating({ rating }: { rating: ReviewRating }) {
   );
 }
 
-function formatDate(isoDate: string) {
+export function formatDate(isoDate: string) {
   return new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
     month: "short",
