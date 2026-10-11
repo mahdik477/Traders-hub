@@ -168,7 +168,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <p aria-live="polite" className="meta mr-1">
-          <span className="font-semibold text-foreground">{matching.length}</span> of {brokers.length} shown
+          <span className="font-semibold text-foreground">{shown.length}</span> of {matching.length} shown
         </p>
         {chips.map(({ key, label }) => (
           <button
@@ -233,10 +233,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
         </ul>
       )}
       {shown.length < matching.length && (
-        <div className="mt-6 flex flex-col items-center gap-2">
-          <p className="meta">
-            Showing {shown.length} of {matching.length}.
-          </p>
+        <div className="mt-6 flex justify-center">
           <button
             type="button"
             onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
