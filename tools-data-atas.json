@@ -1,0 +1,50 @@
+{
+  "tool": {
+    "slug": "atas",
+    "name": "ATAS",
+    "category": "market-data",
+    "priority": 100,
+    "description": "ATAS is order-flow software for futures, stocks and crypto, with footprint charts, heatmaps and volume tools. The current apps run on Windows, macOS and the web.",
+    "features": [
+      "Footprint charts, volume profile and a heatmap",
+      "Connections to crypto, futures and stock data, with real-time access depending on the plan",
+      "Market replay",
+      "A free Start plan, plus a 14-day trial of paid plans"
+    ],
+    "plans": [
+      {
+        "name": "Start",
+        "price": "Free",
+        "detail": "Basic tools, with no time limit, according to the pricing FAQ."
+      },
+      {
+        "name": "Plus",
+        "price": "\u20ac24.95/mo",
+        "detail": "Monthly price. Longer terms were shown at a lower monthly equivalent."
+      },
+      {
+        "name": "Pro",
+        "price": "\u20ac69.95/mo",
+        "detail": "Monthly price. Real-time futures and stock connections are on this tier and above."
+      },
+      {
+        "name": "Ultra",
+        "price": "\u20ac89.95/mo",
+        "detail": "Monthly price. Includes the wider tool set described on the pricing page."
+      }
+    ],
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Web"
+    ],
+    "website": "https://atas.net/",
+    "pricing_note": "Monthly euro prices from the official pricing page on 11 Oct 2026. Longer subscriptions cost less per month. Lifetime amounts were on the page but were not clearly tied to a plan name, so they are not listed.",
+    "affiliate_link": "",
+    "logo": "/tools/atas.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://atas.net/pricing/"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "tool": {
+    "slug": "zeiierman",
+    "name": "Zeiierman",
+    "category": "indicators",
+    "priority": 100,
+    "description": "Zeiierman sells invite-only indicators and toolkits that run inside TradingView, including trend, liquidity and oscillator tools. The site says they work on TradingView's free plan.",
+    "features": [
+      "Premium TradingView indicators. The site says the library is 80 or more",
+      "Toolkits covering trend, liquidity, oscillators and buy and sell signals",
+      "Access is tied to your TradingView username",
+      "Monthly, quarterly, yearly and lifetime options are described on the site"
+    ],
+    "plans": [],
+    "platforms": [
+      "TradingView"
+    ],
+    "website": "https://www.zeiierman.com/",
+    "pricing_note": "The official site describes monthly, quarterly, yearly and lifetime plans, but no dollar amount was on the pages we could read on 11 Oct 2026.",
+    "affiliate_link": "",
+    "logo": "/tools/zeiierman.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://www.zeiierman.com/"
+  }
+}

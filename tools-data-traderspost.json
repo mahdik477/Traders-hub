@@ -1,0 +1,53 @@
+{
+  "tool": {
+    "slug": "traderspost",
+    "name": "TradersPost",
+    "category": "automation",
+    "priority": 100,
+    "description": "TradersPost takes alerts from TradingView, TrendSpider and webhooks and sends them to a broker. You can approve each order, or let a paid plan submit it automatically.",
+    "features": [
+      "Webhook automation into broker, crypto and prop-firm accounts",
+      "Paper accounts for testing, with a 7-day trial",
+      "Live auto-submit on paid plans",
+      "Stocks, options, futures and crypto, with an asset-class cap by plan"
+    ],
+    "plans": [
+      {
+        "name": "Trial",
+        "price": "Free for 7 days",
+        "detail": "Manual submit on live accounts and automated submit on paper accounts."
+      },
+      {
+        "name": "Starter",
+        "price": "$41.65/mo",
+        "detail": "Billed yearly. 1 live account, 4 paper accounts, 1 asset class."
+      },
+      {
+        "name": "Basic",
+        "price": "$84.15/mo",
+        "detail": "Billed yearly. 2 live accounts, 6 paper accounts, 2 asset classes."
+      },
+      {
+        "name": "Pro",
+        "price": "$169.15/mo",
+        "detail": "Billed yearly. 3 live accounts, 8 paper accounts, 3 asset classes."
+      },
+      {
+        "name": "Premium",
+        "price": "$254.15/mo",
+        "detail": "Billed yearly. 6 live accounts, 10 paper accounts, all listed asset classes."
+      }
+    ],
+    "platforms": [
+      "Web"
+    ],
+    "website": "https://traderspost.io/",
+    "pricing_note": "Yearly billing prices from the official pricing page on 11 Oct 2026. The page says yearly billing saves 15 percent versus monthly. Monthly dollar amounts were not shown while yearly billing was selected.",
+    "affiliate_link": "",
+    "logo": "/tools/traderspost.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://traderspost.io/pricing"
+  }
+}

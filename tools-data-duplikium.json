@@ -1,0 +1,45 @@
+{
+  "tool": {
+    "slug": "duplikium",
+    "name": "Duplikium",
+    "category": "copiers",
+    "priority": 100,
+    "description": "Duplikium is a cloud trade copier for MT4, MT5, cTrader and several other platforms. You connect a master account and one or more follower accounts. No VPS install is required.",
+    "features": [
+      "Cloud copier with no local software install",
+      "Size settings, symbol filters and pending-order copying",
+      "Server locations include Frankfurt, London, New York and Singapore",
+      "Prepay by the day, or a monthly subscription, both charged per connected account"
+    ],
+    "plans": [
+      {
+        "name": "Subscription",
+        "price": "\u20ac9.00/account/mo",
+        "detail": "For 1 to 10 accounts. The rate steps down to \u20ac6.00 per account per month above 1,000 accounts."
+      },
+      {
+        "name": "Prepay",
+        "price": "\u20ac0.50/account/day",
+        "detail": "For 1 to 10 accounts. The rate steps down to \u20ac0.20 per account per day above 1,000 accounts."
+      }
+    ],
+    "platforms": [
+      "MT4",
+      "MT5",
+      "cTrader",
+      "DXtrade",
+      "Tradovate",
+      "NinjaTrader",
+      "TradingView",
+      "Web"
+    ],
+    "website": "https://www.trade-copier.com/",
+    "pricing_note": "Per-account prices from the official site on 11 Oct 2026. New signups are offered \u20ac30 of credit. Static IP addresses are an optional extra.",
+    "affiliate_link": "",
+    "logo": "/tools/duplikium.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://www.trade-copier.com/"
+  }
+}

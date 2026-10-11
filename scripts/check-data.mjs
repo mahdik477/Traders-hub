@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Checks every listing data file (propfirms-data-*.json, courses-data-*.json,
-// providers-data-*.json) for mistakes before they reach the live site.
+// providers-data-*.json, brokers-data-*.json, tools-data-*.json) for mistakes
+// before they reach the live site.
 //
 //   npm run check:data            -> check all files, print a report
 //   node scripts/check-data.mjs --hook
@@ -25,10 +26,23 @@ const COURSE_PATTERN = /^courses-data-.+\.json$/i;
 // Trades) rather than one course on its own — see provider-types.ts.
 const PROVIDER_PATTERN = /^providers-data-.+\.json$/i;
 const BROKER_PATTERN = /^brokers-data-.+\.json$/i;
+const TOOL_PATTERN = /^tools-data-.+\.json$/i;
 const STALE_AFTER_DAYS = 30;
 
 // Keep in sync with BrokerMarket in src/lib/broker-types.ts.
 const KNOWN_BROKER_MARKETS = new Set(["stocks", "options", "futures", "forex", "bonds", "funds", "crypto", "cfds"]);
+
+// Keep in sync with ToolCategory in src/lib/tool-types.ts.
+const KNOWN_TOOL_CATEGORIES = new Set([
+  "charting",
+  "indicators",
+  "backtesting",
+  "journals",
+  "automation",
+  "vps",
+  "market-data",
+  "copiers",
+]);
 
 // Keep in sync with CourseMarket in src/lib/course-types.ts.
 const KNOWN_MARKETS = new Set(["forex", "futures", "options", "stocks", "crypto", "commodities"]);
@@ -384,9 +398,54 @@ function checkBroker(file, data) {
   }
 }
 
+function checkTool(file, data) {
+  const t = data?.tool;
+  if (!t) return err(file, `missing top-level "tool"`);
+  if (!/^[a-z0-9-]+$/.test(t.slug ?? ""))
+    err(file, `tool.slug must be lowercase letters, numbers and dashes (got "${t.slug}")`);
+  const expected = file.replace(/^tools-data-/i, "").replace(/\.json$/i, "");
+  if (t.slug && t.slug !== expected) err(file, `tool.slug "${t.slug}" should match the file name (${expected})`);
+  if (!t.name) err(file, `tool.name is missing`);
+  if (!t.description) err(file, `tool.description is empty - add a short description in our own words`);
+  if (!KNOWN_TOOL_CATEGORIES.has(t.category))
+    err(file, `tool.category "${t.category}" must be one of ${[...KNOWN_TOOL_CATEGORIES].join(", ")}`);
+  if (!Array.isArray(t.features) || t.features.length === 0)
+    warn(file, `tool.features is empty - add a few features from the official site`);
+  if (!Array.isArray(t.plans)) err(file, `tool.plans must be a list (use [] when the price is unknown)`);
+  else if (t.plans.length === 0) warn(file, `no confirmed price - tool.plans is empty`);
+  (t.plans ?? []).forEach((p, i) => {
+    if (!p.name) err(file, `tool.plans[${i}] has no name`);
+    if (!p.price) err(file, `tool.plans[${i}] has no price`);
+  });
+  if (!Array.isArray(t.platforms)) err(file, `tool.platforms must be a list`);
+  else if (t.platforms.length === 0) warn(file, `tool.platforms is empty`);
+  checkLink(file, "tool.website", t.website);
+  if (!t.website) err(file, `tool.website is missing - add the official homepage`);
+  checkLink(file, "tool.affiliate_link", t.affiliate_link);
+  // An empty affiliate link is expected. Visit buttons fall back to the homepage.
+  if (t.affiliate_link) warn(file, `affiliate_link is set - confirm it is the owner's link, not a commission rate`);
+  if (t.priority != null && (!Number.isInteger(t.priority) || t.priority < 1))
+    err(file, `tool.priority must be a whole number from 1 up`);
+  if (t.logo) {
+    if (typeof t.logo !== "string" || !t.logo.startsWith("/tools/"))
+      err(file, `tool.logo must be a path under /tools/`);
+    else if (!existsSync(path.join(ROOT, "public", t.logo)))
+      warn(file, `tool.logo "${t.logo}" is not in public/`);
+  }
+  if (t.pricing_note != null && typeof t.pricing_note !== "string")
+    err(file, `tool.pricing_note must be text or left out`);
+}
+
 function checkAll() {
   const files = readdirSync(ROOT)
-    .filter((f) => PROP_PATTERN.test(f) || COURSE_PATTERN.test(f) || PROVIDER_PATTERN.test(f) || BROKER_PATTERN.test(f))
+    .filter(
+      (f) =>
+        PROP_PATTERN.test(f) ||
+        COURSE_PATTERN.test(f) ||
+        PROVIDER_PATTERN.test(f) ||
+        BROKER_PATTERN.test(f) ||
+        TOOL_PATTERN.test(f),
+    )
     .sort();
   const ids = new Map();
   for (const file of files) {
@@ -400,15 +459,25 @@ function checkAll() {
     const isProp = PROP_PATTERN.test(file);
     const isProvider = PROVIDER_PATTERN.test(file);
     const isBroker = BROKER_PATTERN.test(file);
-    const kind = isProp ? "firm" : isProvider ? "provider" : isBroker ? "broker" : "course";
-    const entity = isProp ? data.firm : isProvider ? data.provider : isBroker ? data.broker : data.course;
+    const isTool = TOOL_PATTERN.test(file);
+    const kind = isProp ? "firm" : isProvider ? "provider" : isBroker ? "broker" : isTool ? "tool" : "course";
+    const entity = isProp
+      ? data.firm
+      : isProvider
+        ? data.provider
+        : isBroker
+          ? data.broker
+          : isTool
+            ? data.tool
+            : data.course;
     if (isProp) checkPropFirm(file, data);
     else if (isProvider) checkProvider(file, data);
     else if (isBroker) checkBroker(file, data);
+    else if (isTool) checkTool(file, data);
     else checkCourse(file, data);
     checkVerified(file, data._notes);
     scanWording(file, entity);
-    const id = `${kind}:${entity?.id}`;
+    const id = `${kind}:${isTool ? entity?.slug : entity?.id}`;
     if (ids.has(id)) err(file, `uses the same id as ${ids.get(id)}`);
     ids.set(id, file);
   }
@@ -434,7 +503,13 @@ async function main() {
       process.exit(0);
     }
     const name = path.basename(filePath);
-    if (!PROP_PATTERN.test(name) && !COURSE_PATTERN.test(name) && !PROVIDER_PATTERN.test(name) && !BROKER_PATTERN.test(name))
+    if (
+      !PROP_PATTERN.test(name) &&
+      !COURSE_PATTERN.test(name) &&
+      !PROVIDER_PATTERN.test(name) &&
+      !BROKER_PATTERN.test(name) &&
+      !TOOL_PATTERN.test(name)
+    )
       process.exit(0);
     const count = checkAll();
     // Only interrupt Claude for real errors; warnings show up in npm run check.

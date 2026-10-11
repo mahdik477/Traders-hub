@@ -1,0 +1,53 @@
+import Image from "next/image";
+
+const SIZES = {
+  sm: { box: "size-12", text: "text-sm", img: 48 },
+  md: { box: "size-14", text: "text-base", img: 56 },
+  lg: { box: "size-16 sm:size-20", text: "text-xl", img: 80 },
+} as const;
+
+export function toolInitials(name: string): string {
+  const words = name.replace(/[^A-Za-z0-9 ]/g, " ").trim().split(/\s+/).filter(Boolean);
+  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+  return (words[0] ?? "TL").slice(0, 2).toUpperCase();
+}
+
+export default function ToolLogo({
+  name,
+  logo,
+  size = "md",
+  priority = false,
+}: {
+  name: string;
+  logo: string | null;
+  size?: keyof typeof SIZES;
+  priority?: boolean;
+}) {
+  const s = SIZES[size];
+
+  if (!logo) {
+    return (
+      <div
+        className={`flex ${s.box} shrink-0 items-center justify-center rounded-xl border border-border bg-accent/12 font-semibold tracking-tight text-foreground ${s.text}`}
+        aria-hidden="true"
+      >
+        {toolInitials(name)}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`flex ${s.box} shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white p-1.5`}
+    >
+      <Image
+        src={logo}
+        alt=""
+        width={s.img}
+        height={s.img}
+        priority={priority}
+        className="h-auto max-h-full w-auto max-w-full object-contain"
+      />
+    </div>
+  );
+}

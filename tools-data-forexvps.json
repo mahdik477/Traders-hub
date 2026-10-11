@@ -1,0 +1,49 @@
+{
+  "tool": {
+    "slug": "forexvps",
+    "name": "ForexVPS",
+    "category": "vps",
+    "priority": 7,
+    "description": "ForexVPS rents Windows servers so MetaTrader and other platforms can stay online when your own computer is off. Plans differ by CPU, memory and how many platforms they suggest you run.",
+    "features": [
+      "Windows Server with a dedicated IP and 22 locations",
+      "One-click MetaTrader install and remote desktop access",
+      "A trade copier is included with the VPS plans",
+      "24/7 support and a 14-day money-back window"
+    ],
+    "plans": [
+      {
+        "name": "Core",
+        "price": "$40/mo",
+        "detail": "Or $28.80/mo billed at $345.60 per year. 2 CPU, 4 GB RAM, 100 GB. Suggested for 1 to 2 platforms."
+      },
+      {
+        "name": "Edge",
+        "price": "$60/mo",
+        "detail": "Or $43.20/mo billed at $518.40 per year. 4 CPU, 6 GB RAM, 150 GB."
+      },
+      {
+        "name": "Prime",
+        "price": "$80/mo",
+        "detail": "Or $57.60/mo billed at $691.20 per year. 6 CPU, 8 GB RAM, 200 GB."
+      },
+      {
+        "name": "Dedicated server",
+        "price": "From $270/mo",
+        "detail": "Custom dedicated hardware. GPU servers were listed from $640/mo."
+      }
+    ],
+    "platforms": [
+      "Windows Server",
+      "Remote desktop"
+    ],
+    "website": "https://www.forexvps.net/",
+    "pricing_note": "VPS prices from the official homepage on 11 Oct 2026. The lower monthly figures are the yearly billing rate shown beside each plan.",
+    "affiliate_link": "",
+    "logo": "/tools/forexvps.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://www.forexvps.net/"
+  }
+}

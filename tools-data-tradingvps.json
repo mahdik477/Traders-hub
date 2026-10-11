@@ -1,0 +1,60 @@
+{
+  "tool": {
+    "slug": "tradingvps",
+    "name": "TradingVPS",
+    "category": "vps",
+    "priority": 100,
+    "description": "TradingVPS offers Ryzen-based servers for trading platforms, with Windows Server or Ubuntu. Data centers listed include Chicago, New York, London, Frankfurt, Amsterdam and Dublin.",
+    "features": [
+      "AMD Ryzen 9 CPU, DDR5 memory and NVMe storage",
+      "Windows Server 2022 or Ubuntu 22.04",
+      "A dedicated IPv4 address on each listed plan",
+      "Remote desktop from a computer or phone"
+    ],
+    "plans": [
+      {
+        "name": "Starter",
+        "price": "$19/mo",
+        "detail": "1 core, 4 GB RAM, 100 GB. Suggested for 1 chart."
+      },
+      {
+        "name": "Basic",
+        "price": "$35/mo",
+        "detail": "2 cores, 8 GB RAM, 200 GB. Suggested for 1 to 2 charts."
+      },
+      {
+        "name": "Standard",
+        "price": "$59/mo",
+        "detail": "4 cores, 16 GB RAM, 300 GB. Suggested for 2 to 4 charts."
+      },
+      {
+        "name": "Professional",
+        "price": "$79/mo",
+        "detail": "6 cores, 24 GB RAM, 400 GB. Suggested for 3 to 6 charts."
+      },
+      {
+        "name": "Expert",
+        "price": "$109/mo",
+        "detail": "8 cores, 32 GB RAM, 500 GB. Suggested for 5 to 8 charts."
+      },
+      {
+        "name": "Ultimate",
+        "price": "$179/mo",
+        "detail": "16 cores, 64 GB RAM, 600 GB. Suggested for 8 or more charts."
+      }
+    ],
+    "platforms": [
+      "Windows Server 2022",
+      "Ubuntu 22.04",
+      "Remote desktop"
+    ],
+    "website": "https://tradingvps.io/",
+    "pricing_note": "The first monthly prices on the official homepage on 11 Oct 2026. The same page also showed lower monthly amounts that were not clearly tied to a billing period.",
+    "affiliate_link": "",
+    "logo": "/tools/tradingvps.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://tradingvps.io/"
+  }
+}

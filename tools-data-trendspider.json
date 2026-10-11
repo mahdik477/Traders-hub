@@ -1,0 +1,29 @@
+{
+  "tool": {
+    "slug": "trendspider",
+    "name": "TrendSpider",
+    "category": "charting",
+    "priority": 100,
+    "description": "TrendSpider is a web charting and scanning platform for US stocks, ETFs, forex, crypto and optional futures data. The named plans share the same tools and differ by limits on workspaces, alerts, bots and how fast you can scan.",
+    "features": [
+      "Charts, automated trendlines, pattern recognition and a large indicator library",
+      "Scanners, alerts and trading bots",
+      "Backtesting, including multi-symbol tests",
+      "Web app, plus iOS and Android apps"
+    ],
+    "plans": [],
+    "platforms": [
+      "Web",
+      "iOS",
+      "Android"
+    ],
+    "website": "https://trendspider.com/",
+    "pricing_note": "On 11 Oct 2026 the pricing page was running a weekend promotion. It named Standard, Premium, Enhanced and Advanced, but the monthly ranges could not be matched to those names with confidence, so no price is listed.",
+    "affiliate_link": "",
+    "logo": "/tools/trendspider.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://trendspider.com/pricing/"
+  }
+}
