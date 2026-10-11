@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import StrategyBackLink from "@/components/StrategyBackLink";
-import { ShieldIcon, InfoIcon, BookIcon, LayersIcon, TagIcon, LinkIcon, MonitorIcon, QuoteIcon } from "@/components/icons";
+import StrategyWalkthrough from "@/components/StrategyWalkthrough";
+import { ShieldIcon, InfoIcon, BookIcon, LayersIcon, TagIcon, LinkIcon, MonitorIcon, QuoteIcon, PlayIcon } from "@/components/icons";
 import {
   STRATEGY_CATEGORY_LABELS,
   STRATEGY_DIFFICULTY_LABELS,
@@ -55,13 +56,6 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
-const EVIDENCE_BADGE_CLASS: Record<string, string> = {
-  strong: "badge-success",
-  mixed: "badge-warning",
-  weak: "badge-danger",
-  little: "badge-danger",
-};
-
 export default async function StrategyPage({ params }: PageProps<"/strategies/[slug]">) {
   const s = getStrategy((await params).slug);
   if (!s) notFound();
@@ -83,9 +77,11 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
                 Premium library
               </span>
             )}
-            <span className={`badge ${EVIDENCE_BADGE_CLASS[s.evidence.rating]}`}>
-              {STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence
-            </span>
+            {s.evidence.rating === "strong" && (
+              <span className="badge badge-success">
+                {STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence
+              </span>
+            )}
             {s.controversyFlag && (
               <span className="badge badge-warning inline-flex items-center gap-1">
                 <ShieldIcon className="size-3" />
@@ -180,6 +176,20 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         )}
       </section>
 
+      {s.stepByStep.length > 0 && (
+        <section aria-labelledby="walkthrough-heading" className="mt-10">
+          <SectionHeading id="walkthrough-heading" icon={PlayIcon}>
+            Step by step: how to actually trade this
+          </SectionHeading>
+          <p className="meta mt-2 max-w-2xl">
+            A more detailed walkthrough than the short rules above — click a step to open it.
+          </p>
+          <div className="mt-4">
+            <StrategyWalkthrough steps={s.stepByStep} />
+          </div>
+        </section>
+      )}
+
       {Object.keys(s.assetClassNotes).length > 0 && (
         <section aria-labelledby="markets-heading" className="mt-10">
           <SectionHeading id="markets-heading" icon={LayersIcon}>
@@ -232,11 +242,11 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         <SectionHeading id="evidence-heading" icon={ShieldIcon}>
           Independent evidence
         </SectionHeading>
-        <p className="mt-3">
-          <span className={`badge ${EVIDENCE_BADGE_CLASS[s.evidence.rating]}`}>
-            {STRATEGY_EVIDENCE_LABELS[s.evidence.rating]}
-          </span>
-        </p>
+        {s.evidence.rating === "strong" && (
+          <p className="mt-3">
+            <span className="badge badge-success">{STRATEGY_EVIDENCE_LABELS[s.evidence.rating]}</span>
+          </p>
+        )}
         <p className="mt-3 leading-relaxed text-muted">{s.evidence.summary}</p>
         <div className="mt-4 rounded-xl border border-border-strong bg-surface-2 p-4">
           <h3 className="text-sm font-semibold text-foreground">On winning and losing trades</h3>
@@ -259,6 +269,37 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
           </div>
         </dl>
       </section>
+
+      {s.videos.length > 0 && (
+        <section aria-labelledby="videos-heading" className="mt-10 max-w-3xl">
+          <SectionHeading id="videos-heading" icon={PlayIcon}>
+            Watch and learn
+          </SectionHeading>
+          <p className="meta mt-2">
+            Videos we found genuinely useful for this strategy — from outside creators we don&apos;t
+            control, so we haven&apos;t fact-checked every claim made in them. Judge the content on
+            its own merits.
+          </p>
+          <ul className="mt-4 space-y-3">
+            {s.videos.map((v) => (
+              <li key={v.url} className="rounded-xl border border-border bg-surface p-4">
+                <a
+                  href={v.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-start gap-3 font-semibold text-foreground hover:text-accent"
+                >
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent/12 text-accent">
+                    <PlayIcon className="size-4" />
+                  </span>
+                  <span>{v.title}</span>
+                </a>
+                {v.note && <p className="mt-2 pl-11 text-sm leading-relaxed text-muted">{v.note}</p>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {s.sources.length > 0 && (
         <section aria-labelledby="sources-heading" className="mt-10 max-w-3xl">

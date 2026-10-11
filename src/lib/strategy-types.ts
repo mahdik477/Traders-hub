@@ -107,6 +107,24 @@ export type StrategySource = {
   label: string;
 };
 
+/** One step in a detailed, numbered "how to actually trade this" walkthrough
+ *  — more granular than `rules` (which is the short traditional entry/exit/
+ *  stop), written to teach a beginner the whole process in order. Optional:
+ *  only the 10 Free-tier strategies have this depth so far. */
+export type StrategyStep = {
+  title: string;
+  detail: string;
+};
+
+/** A YouTube video we're pointing to as further reading, not hosting or
+ *  verifying — the `note` says why it's useful or what to watch for, since
+ *  we haven't fact-checked everything said in someone else's video. */
+export type StrategyVideo = {
+  title: string;
+  url: string;
+  note: string | null;
+};
+
 export type StrategyView = {
   /** The research doc's own ID, e.g. "T1-01". Shown for reference only. */
   refId: string;
@@ -138,4 +156,10 @@ export type StrategyView = {
   sources: StrategySource[];
   controversyFlag: boolean;
   image: StrategyImage | null;
+  /** Numbered "how to actually trade this" walkthrough. Empty for strategies
+   *  that haven't had the deeper research pass yet. */
+  stepByStep: StrategyStep[];
+  /** Curated external videos. Empty for strategies that haven't had the
+   *  deeper research pass yet. */
+  videos: StrategyVideo[];
 };
