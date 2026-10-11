@@ -55,13 +55,6 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
-const EVIDENCE_BADGE_CLASS: Record<string, string> = {
-  strong: "badge-success",
-  mixed: "badge-warning",
-  weak: "badge-danger",
-  little: "badge-danger",
-};
-
 export default async function StrategyPage({ params }: PageProps<"/strategies/[slug]">) {
   const s = getStrategy((await params).slug);
   if (!s) notFound();
@@ -83,9 +76,11 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
                 Premium library
               </span>
             )}
-            <span className={`badge ${EVIDENCE_BADGE_CLASS[s.evidence.rating]}`}>
-              {STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence
-            </span>
+            {s.evidence.rating === "strong" && (
+              <span className="badge badge-success">
+                {STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence
+              </span>
+            )}
             {s.controversyFlag && (
               <span className="badge badge-warning inline-flex items-center gap-1">
                 <ShieldIcon className="size-3" />
@@ -232,11 +227,11 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         <SectionHeading id="evidence-heading" icon={ShieldIcon}>
           Independent evidence
         </SectionHeading>
-        <p className="mt-3">
-          <span className={`badge ${EVIDENCE_BADGE_CLASS[s.evidence.rating]}`}>
-            {STRATEGY_EVIDENCE_LABELS[s.evidence.rating]}
-          </span>
-        </p>
+        {s.evidence.rating === "strong" && (
+          <p className="mt-3">
+            <span className="badge badge-success">{STRATEGY_EVIDENCE_LABELS[s.evidence.rating]}</span>
+          </p>
+        )}
         <p className="mt-3 leading-relaxed text-muted">{s.evidence.summary}</p>
         <div className="mt-4 rounded-xl border border-border-strong bg-surface-2 p-4">
           <h3 className="text-sm font-semibold text-foreground">On winning and losing trades</h3>

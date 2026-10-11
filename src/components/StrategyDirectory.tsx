@@ -156,12 +156,6 @@ function Directory({
 
 function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; listingQuery: string }) {
   const href = listingQuery ? `/strategies/${s.slug}${listingQuery}` : `/strategies/${s.slug}`;
-  const evidenceBadgeClass =
-    s.evidence.rating === "strong"
-      ? "badge-success"
-      : s.evidence.rating === "mixed"
-        ? "badge-warning"
-        : "badge-danger";
 
   return (
     <li className="lift-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface">
@@ -169,7 +163,9 @@ function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; l
       <div className="flex flex-1 flex-col p-5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="pill">{STRATEGY_TIER_LABELS[s.tier]}</span>
-          <span className={`badge ${evidenceBadgeClass}`}>{STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence</span>
+          {s.evidence.rating === "strong" && (
+            <span className="badge badge-success">{STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence</span>
+          )}
           {s.controversyFlag && (
             <span className="badge badge-warning inline-flex items-center gap-1">
               <ShieldIcon className="size-3" />
