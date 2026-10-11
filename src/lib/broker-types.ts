@@ -111,6 +111,11 @@ export type BrokerView = {
    */
   ourChoice: boolean;
   /**
+   * Slot in the default name sort, after every Our choice broker.
+   * 2 means second when one broker is already Our choice. Not a badge.
+   */
+  directoryPin: number | null;
+  /**
    * The only place an affiliate URL goes. Null until the owner supplies one.
    * Visit buttons use affiliateLink, then website. Swap this field later
    * and every outbound button for the broker updates.

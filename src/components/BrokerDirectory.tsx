@@ -27,6 +27,7 @@ import {
 
 const RATING_OPTIONS = ["3", "3.5", "4", "4.5"];
 const MAX_COMPARE = 3;
+const PAGE_SIZE = 18;
 
 export default function BrokerDirectory({ brokers }: { brokers: BrokerView[] }) {
   return (
@@ -50,6 +51,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
     compareFromQuery(params.get("compare")).filter((id) => knownIds.has(id)),
   );
   const [compareNote, setCompareNote] = useState("");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const marketOptions = [...new Set(brokers.flatMap((b) => b.markets))].sort((a, b) =>
     BROKER_MARKET_LABELS[a].localeCompare(BROKER_MARKET_LABELS[b]),
@@ -75,11 +77,13 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
   function updateFilters(changes: Partial<Filters>) {
     const next = { ...filters, ...changes };
     setFilters(next);
+    setVisibleCount(PAGE_SIZE);
     writeAddress(next, sort, compare);
   }
 
   function updateSort(nextSort: SortKey) {
     setSort(nextSort);
+    setVisibleCount(PAGE_SIZE);
     writeAddress(filters, nextSort, compare);
   }
 
@@ -109,6 +113,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
 
   const chips = activeFilterChips(filters);
   const listingQuery = currentListingQuery(filters, sort, compare);
+  const shown = matching.slice(0, visibleCount);
 
   return (
     <div>
@@ -163,7 +168,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <p aria-live="polite" className="meta mr-1">
-          <span className="font-semibold text-foreground">{matching.length}</span> of {brokers.length} shown
+          <span className="font-semibold text-foreground">{shown.length}</span> of {matching.length} shown
         </p>
         {chips.map(({ key, label }) => (
           <button
@@ -215,7 +220,7 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
         </p>
       ) : (
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {matching.map((broker, index) => (
+          {shown.map((broker, index) => (
             <BrokerCard
               key={broker.id}
               broker={broker}
@@ -226,6 +231,17 @@ function Directory({ brokers, initialQuery }: { brokers: BrokerView[]; initialQu
             />
           ))}
         </ul>
+      )}
+      {shown.length < matching.length && (
+        <div className="mt-6 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+            className="inline-flex min-h-11 items-center rounded-lg border border-border-strong bg-surface px-4 text-sm font-semibold text-foreground transition-colors duration-150 hover:border-subtle"
+          >
+            Show more
+          </button>
+        </div>
       )}
     </div>
   );

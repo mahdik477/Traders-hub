@@ -1,0 +1,164 @@
+{
+  "broker": {
+    "id": "pu-prime",
+    "name": "PU Prime",
+    "logo": null,
+    "tagline": "Its site names 5 regulators, including FSA (Seychelles), FSC (Mauritius), and FSCA. Rules depend on where you live. Advertised leverage: Up to 1:1000.",
+    "about": "The PU Prime pages checked on 11 October 2026 do not state a founding year or one headquarters. Account names on its site include Standard, Prime, ECN, Cent, and Islamic. Platforms named there include PU Prime app, MetaTrader 4, MetaTrader 5, PU Web Trader, and Copy Trading. The site names these regulators: FSA (Seychelles), FSC (Mauritius), FSCA, CMA, and ASIC. The company on an account depends on where the client lives. Minimum deposit is not a single number on the pages that loaded. The highest leverage figure taken from those pages is Up to 1:1000. Leverage increases losses as well as gains.",
+    "founded": null,
+    "headquarters": null,
+    "min_deposit": null,
+    "currency": "USD",
+    "markets": [
+      "forex",
+      "stocks",
+      "bonds",
+      "cfds"
+    ],
+    "regulators": [
+      {
+        "regulator": "FSA (Seychelles)",
+        "country": "SC",
+        "entity": null
+      },
+      {
+        "regulator": "FSC (Mauritius)",
+        "country": "MU",
+        "entity": null
+      },
+      {
+        "regulator": "FSCA",
+        "country": "ZA",
+        "entity": null
+      },
+      {
+        "regulator": "CMA",
+        "country": "AE",
+        "entity": null
+      },
+      {
+        "regulator": "ASIC",
+        "country": "AU",
+        "entity": null
+      }
+    ],
+    "regulators_note": "The company behind an account depends on where you live. FSA (Seychelles): SD050. FSC (Mauritius): GB23202672. FSCA: 52218. CMA: 20200000388. ASIC: 410681.",
+    "platforms": [
+      "PU Prime app",
+      "MetaTrader 4",
+      "MetaTrader 5",
+      "PU Web Trader",
+      "Copy Trading"
+    ],
+    "plans": [
+      {
+        "name": "Standard",
+        "price": "Not stated",
+        "billing_note": "trading cost is in the spread and there is no additional commission. Spreads are described as slightly wider.",
+        "highlight": null
+      },
+      {
+        "name": "Prime",
+        "price": "Not stated",
+        "billing_note": "spreads often from 0.0 pips. Commission $3.50 per side per lot ($7 round turn).",
+        "highlight": null
+      },
+      {
+        "name": "ECN",
+        "price": "Not stated",
+        "billing_note": "commission $1 per side per lot ($2 round turn).",
+        "highlight": null
+      },
+      {
+        "name": "Cent",
+        "price": "Not stated",
+        "billing_note": "FAQ describes it for micro-lot trading. The compare table includes a USC base currency and a note that a 0.01 lot commission of $0.035 per side can round to $0.04 per side on MetaTrader. That note was not clearly tied to a column in the fetch.",
+        "highlight": null
+      },
+      {
+        "name": "Islamic",
+        "price": "Not stated",
+        "billing_note": "swap-free trading for clients who require it under Sharia law. Listed as an option on the compare table.",
+        "highlight": null
+      }
+    ],
+    "costs": [
+      {
+        "title": "Accounts",
+        "rows": [
+          {
+            "label": "Standard",
+            "value": "No additional commission",
+            "note": "trading cost is in the spread and there is no additional commission. Spreads are described as slightly wider."
+          },
+          {
+            "label": "Prime",
+            "value": "From 0.0 pips",
+            "note": "spreads often from 0.0 pips. Commission $3.50 per side per lot ($7 round turn)."
+          },
+          {
+            "label": "ECN",
+            "value": "Commission $1 per side per lot ($2 round turn)",
+            "note": "commission $1 per side per lot ($2 round turn)."
+          },
+          {
+            "label": "Cent",
+            "value": "Commission of $0",
+            "note": "FAQ describes it for micro-lot trading. The compare table includes a USC base currency and a note that a 0.01 lot commission of $0.035 per side can round to $0.04 per side on MetaTrader. That note was not clearly tied to a column in the fetch."
+          },
+          {
+            "label": "Islamic",
+            "value": "swap-free trading for clients who require it under Sharia law",
+            "note": "swap-free trading for clients who require it under Sharia law. Listed as an option on the compare table."
+          }
+        ]
+      }
+    ],
+    "costs_note": "Spreads and commissions move with the market, and they are not the same at every company in the group.",
+    "leverage": [
+      {
+        "market": "account types on the compare table",
+        "value": "up to 1:1000",
+        "note": "The figure is repeated for the account rows. The page does not split it by forex, indices or shares."
+      }
+    ],
+    "leverage_summary": "Up to 1:1000",
+    "leverage_note": "Leverage increases losses as well as gains, and you can lose more than you deposit. The highest figure on this card is the highest number this broker advertises. It is not the cap on every account. The cap depends on the company, the product and where you live.",
+    "other_fees": [
+      {
+        "label": "Minimum deposit",
+        "value": "Not one figure",
+        "note": "The account-types page lists minimum deposits of $50, $1,000, $10,000 and $20, but the fetch did not keep the column headings, so those amounts are not assigned to named accounts. Because more than one figure is shown, there is no single minimum."
+      },
+      {
+        "label": "Prime commission",
+        "value": "$3.50 per side per lot",
+        "note": "FAQ says $7 round turn."
+      },
+      {
+        "label": "ECN commission",
+        "value": "$1 per side per lot",
+        "note": "FAQ says $2 round turn."
+      }
+    ],
+    "promotions": null,
+    "trustpilot": null,
+    "website": "https://www.puprime.com",
+    "affiliate_link": null,
+    "directory_pin": 2
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "https://www.puprime.com https://www.puprime.com/regulation/ https://www.puprime.com/account-types/ https://www.puprime.com/about-us/",
+    "unverified": [
+      "founded",
+      "headquarters",
+      "company_registration",
+      "regulator entity names",
+      "which account has which minimum deposit",
+      "deposit and withdrawal fees"
+    ],
+    "fetch_notes": "Homepage, regulation, account-types and about pages fetched. Direct HTML requests returned 403, and WebFetch dropped footer legal text. Regulation page FAQ lists FSA Seychelles SD050, FSCA 52218, FSC Mauritius GB23202672, ASIC 410681 and CMA 20200000388. The four cards at the top of that page name FSA, FSC, FSCA and CMA, not ASIC. Entity names and registered addresses appeared in search excerpts of the same URLs but were not in the WebFetch body, so entity is null. The site says it has been a regulated broker since 2015 and operating since 2015, and the about page has a 2015-2019 foundation period. It does not say founded in a specific year, so founded is null. Homepage mentions Lloyd's insurance coverage up to $1,000,000. No current bonus code was fetched.",
+    "company_details_not_listed": null
+  }
+}
