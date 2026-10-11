@@ -125,6 +125,15 @@ export type StrategyVideo = {
   note: string | null;
 };
 
+/** YouTube's own public thumbnail CDN — no API key needed, this is the same
+ *  image YouTube itself serves for embeds and link previews. Returns null
+ *  for a URL we can't parse a video ID out of, so the card can fall back to
+ *  a plain link instead of a broken image. */
+export function youtubeThumbnail(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
+  return m ? `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg` : null;
+}
+
 export type StrategyView = {
   /** The research doc's own ID, e.g. "T1-01". Shown for reference only. */
   refId: string;
