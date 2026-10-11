@@ -188,6 +188,18 @@ function checkCountries(file, c) {
   if (!c.last_checked) warn(file, `firm.countries has no "last_checked" date`);
 }
 
+// Warning shown on firms whose recent Trustpilot reviews show many refused or
+// withheld payouts. It must be dated and link to the reviews so visitors can check.
+function checkReviewAlert(file, a) {
+  if (a == null) return;
+  if (!a.summary || typeof a.summary !== "string") err(file, `firm.review_alert.summary is missing`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(a.checked ?? "")) err(file, `firm.review_alert.checked must be a YYYY-MM-DD date`);
+  if (!a.url) err(file, `firm.review_alert.url is missing - link to the reviews, newest first`);
+  else if (!/^https:\/\/(www\.)?trustpilot\.com\/review\//.test(a.url))
+    err(file, `firm.review_alert.url must be the firm's Trustpilot page (the box says "recent reviews on Trustpilot")`);
+  checkLink(file, "firm.review_alert.url", a.url);
+}
+
 // Trustpilot / Google ratings shown in a firm's "Reviews" box. A missing
 // rating needs a note saying why, because the note is shown instead.
 function checkReviews(file, r) {
@@ -237,6 +249,7 @@ function checkPropFirm(file, data) {
   if (f.platforms !== null && !Array.isArray(f.platforms)) err(file, `firm.platforms must be a list or null`);
   checkCountries(file, f.countries);
   checkReviews(file, f.reviews);
+  checkReviewAlert(file, f.review_alert);
   if (f.logo) {
     if (!f.logo.startsWith("/")) err(file, `firm.logo should be a path under /public, e.g. "/funded-accounts/${f.id}-logo.png"`);
     else if (!existsSync(path.join(ROOT, "public", f.logo))) err(file, `firm.logo file not found: public${f.logo}`);

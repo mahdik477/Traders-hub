@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { BackToFirmsLink, FirmPricingFromFilters } from "@/components/FirmPageFromFilters";
 import FirmBadge from "@/components/FirmBadge";
 import PropFirmNotes from "@/components/PropFirmNotes";
+import PropFirmReviewAlert from "@/components/PropFirmReviewAlert";
 import PropFirmReviews from "@/components/PropFirmReviews";
 import { getPropFirm, propFirms } from "@/lib/propfirms";
 import { getSection } from "@/lib/sections";
@@ -39,6 +40,7 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
         <h1 className="page-title">{firm.name}</h1>
       </div>
       {firm.nameNote && <p className="meta mt-3 max-w-3xl">{firm.nameNote}</p>}
+      {firm.reviewAlert && <PropFirmReviewAlert alert={firm.reviewAlert} />}
 
       {(firm.about || firm.aboutNote) && (
         <section

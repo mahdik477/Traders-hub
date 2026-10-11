@@ -110,5 +110,20 @@ export type FirmView = {
   platforms: string[] | null;
   /** null = no reviews block in the data file yet. */
   reviews: FirmReviews | null;
+  /** Set when many recent Trustpilot reviews describe refused or withheld
+   *  payouts. The card badge always reads "Payout complaints in recent
+   *  reviews", so only use it for that. Shown as a warning box on the firm
+   *  page and a badge on its card. null = no alert. */
+  reviewAlert: ReviewAlert | null;
   markets: MarketView[];
+};
+
+export type ReviewAlert = {
+  /** Factual summary in our own words, e.g. "About half of the 20 most recent
+   *  Trustpilot reviews describe a refused payout." */
+  summary: string;
+  /** YYYY-MM-DD the reviews were read. */
+  checked: string;
+  /** Link to the reviews (sorted newest first). */
+  url: string | null;
 };

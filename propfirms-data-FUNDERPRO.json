@@ -1,0 +1,285 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official FunderPro pages only, fetched 2026-10-11: https://funderpro.com/ (pricing table data in the site's own script: every challenge type, size, price and rule row; footer company details and platforms), https://support.funderpro.com/en/articles/409950-how-can-i-join-funderpro; Trustpilot https://www.trustpilot.com/review/funderpro.com.",
+    "pricing": "standard = price shown on the pricing table. No discount was shown, so promo is null. The table labels the price 'will be processed with 1st reward' without saying whether it is refunded, so fee_refund is null.",
+    "rules_detail": "One Phase: 10% target, 3% daily / 6% max loss (the site says 'No Trailing Drawdown'), consistency rule in the evaluation only (percentage not shown), 80% split. Classic: 10% then 5%, 5% daily / 10% max, 4 minimum trading days per phase, no consistency rule, 80% split. Pro: 10% then 8%, 5% daily / 10% max, consistency rule in both evaluation phases (percentage not shown), up to 90% split, on-demand or weekly rewards. Instant: 3% daily / 6% max, 15% consistency, 80% split (90% as an add-on). Weekend holding needs a paid add-on on all challenges.",
+    "not_listed": "FunderPro Futures (funderprofutures.com) is a separate site and not listed here.",
+    "countries": "The support article says the list of restricted countries is in the FAQ or terms; not found on a page we could read.",
+    "company": "Footer: FunderPro Ltd., Malta, registration C 104558, Cali House, Level 3, Vjal ir-Rihan, San Gwann, Malta. Copyright '2023 - 2026' (not a founding statement).",
+    "marketing_stats_excluded": "Payout totals and the published pass rate are not reproduced.",
+    "vetting": "Checked 2026-10-11. Of the 19 newest Trustpilot reviews, about 11 described a denied or withheld payout (reasons given include IP sharing, over-leveraging and 'third-party involvement'); the firm replied to most. Trustpilot hides its score for a guideline breach and says it removed fake reviews. Listed with a review alert at the team's request (2026-10-11).",
+    "rule_units": "Forex rules are % of account size.",
+    "null_means": "Not stated on an official FunderPro page we could read."
+  },
+  "firm": {
+    "id": "funderpro",
+    "name": "FunderPro",
+    "logo": "/funded-accounts/funderpro-logo.webp",
+    "name_note": null,
+    "about": "FunderPro is a Malta-registered prop firm selling simulated forex and CFD challenges (one-phase and two-phase) and instant accounts, from $5K to $200K. It trades on MT5, cTrader and TradeLocker.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "San Gwann, Malta (registered address)",
+    "currency": "USD",
+    "website": "https://funderpro.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "MT5",
+      "cTrader",
+      "TradeLocker"
+    ],
+    "countries": {
+      "restricted": null,
+      "allowed_only": null,
+      "notes": "FunderPro says availability depends on your country of residence and points to its FAQ and terms for the list, which we couldn't find. MT5 isn't offered to US citizens or residents.",
+      "source": "https://support.funderpro.com/en/articles/409950-how-can-i-join-funderpro",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (1,561 reviews, checked 11 Oct 2026).",
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "review_alert": {
+      "summary": "Of the 19 most recent Trustpilot reviews, about 11 describe a payout being denied or withheld (reviewers say the reasons given included IP sharing and over-leveraging). The firm had replied to most of them. Trustpilot is also not showing a score for this firm; its page says this is because of a breach of its guidelines.",
+      "checked": "2026-10-11",
+      "url": "https://www.trustpilot.com/review/funderpro.com?sort=recency"
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "promo_code": null,
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "One Phase",
+                "tagline": "Static max loss · Consistency rule in the evaluation only",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": null,
+                  "consistency": "evaluation only",
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 69
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 109
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 219
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 319
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 539
+                  },
+                  {
+                    "size": 150000,
+                    "promo": null,
+                    "standard": 799
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 989
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "Classic",
+                "tagline": "No consistency rule · Lower Phase 2 target",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": "n/a",
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 4,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 69
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 109
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 219
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 319
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 539
+                  },
+                  {
+                    "size": 150000,
+                    "promo": null,
+                    "standard": 799
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 989
+                  }
+                ]
+              },
+              {
+                "tier": "Pro",
+                "tagline": "Consistency rule in the evaluation · On-demand or weekly rewards",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 8,
+                  "funded_target": "n/a",
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 90,
+                  "min_trading_days": null,
+                  "consistency": "evaluation only",
+                  "trading_period": "unlimited",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 75
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 129
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 239
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 419
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 659
+                  },
+                  {
+                    "size": 150000,
+                    "promo": null,
+                    "standard": 979
+                  },
+                  {
+                    "size": 200000,
+                    "promo": null,
+                    "standard": 1319
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Instant",
+                "tagline": "No evaluation · 15% consistency · 90% split as a paid add-on",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": "n/a",
+                  "phase2_target": "n/a",
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": null,
+                  "profit_split_max": 80,
+                  "min_trading_days": null,
+                  "consistency": "15%",
+                  "trading_period": "n/a",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": null,
+                    "standard": 79
+                  },
+                  {
+                    "size": 10000,
+                    "promo": null,
+                    "standard": 169
+                  },
+                  {
+                    "size": 25000,
+                    "promo": null,
+                    "standard": 339
+                  },
+                  {
+                    "size": 50000,
+                    "promo": null,
+                    "standard": 499
+                  },
+                  {
+                    "size": 100000,
+                    "promo": null,
+                    "standard": 799
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

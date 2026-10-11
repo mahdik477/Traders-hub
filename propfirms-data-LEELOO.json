@@ -1,0 +1,144 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official LeeLoo pages only, fetched 2026-10-11: https://leelootrading.com/ (Foundation account cards: size, contracts, profit target, trailing drawdown, monthly price, reset fee; supported platforms; footer), support knowledge base https://support.leelootrading.com/kb/a48/minimum-10-trading-days-no-maximum.aspx, https://support.leelootrading.com/kb/a44/rising-trailing-max-drawdown-explained.aspx, https://support.leelootrading.com/kb/a190/understanding-the-30-rule-for-performance-accounts.aspx (titles); Trustpilot https://www.trustpilot.com/review/leelootrading.com.",
+    "pricing": "Monthly recurring subscription for Foundation (LL) accounts; reset $85. No discount shown. Bundle (LB) accounts are a one-month non-recurring bundle where only one account can qualify ($520-$950); not listed separately.",
+    "rules_detail": "Foundation accounts: profit target and rising trailing max drawdown per size, minimum 10 trading days and no maximum (knowledge base title). A 30% rule applies to Performance Accounts (knowledge base title), recorded as consistency_pct 30. Payouts are made through 'Performance Accounts', which may be simulated or copied accounts at LeeLoo's discretion, so no profit split or payout cap is recorded.",
+    "countries": "No restricted-countries list found on an official page.",
+    "company": "Footer: 'Leeloo Trading, Montana USA', copyright 2019-2026 (not a founding statement).",
+    "vetting": "Checked 2026-10-11. Trustpilot 3.1 from 608 reviews. About 10 of the 20 newest reviews described a denied payout, and the newest review was from 7 Jun 2026. The site is live with current prices. Listed with a review alert at the team's request (2026-10-11).",
+    "rule_units": "Futures rules are fixed USD amounts per account size.",
+    "null_means": "Not stated on an official LeeLoo page we could read."
+  },
+  "firm": {
+    "id": "leeloo-trading",
+    "name": "LeeLoo Trading",
+    "logo": "/funded-accounts/leeloo-trading-logo.png",
+    "name_note": "The firm writes its name 'Leeloo'.",
+    "about": "LeeLoo Trading is a Montana-based futures firm that sells monthly practice accounts from $25K to $300K. Traders who meet its targets can move to a 'Performance Account', which LeeLoo may run as a simulated account or copy to a live account at its discretion.",
+    "about_note": "Company background not yet verified.",
+    "founded": null,
+    "hq": "Montana, USA",
+    "currency": "USD",
+    "website": "https://leelootrading.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "NinjaTrader",
+      "R|Trader Pro",
+      "EdgeProX",
+      "TradingView"
+    ],
+    "countries": {
+      "restricted": null,
+      "allowed_only": null,
+      "notes": "No restricted-countries list found on LeeLoo's own pages.",
+      "source": "https://leelootrading.com/",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": {
+        "rating": 3.1,
+        "review_count": 608,
+        "url": "https://www.trustpilot.com/review/leelootrading.com",
+        "checked": "2026-10-11"
+      },
+      "trustpilot_note": null,
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "review_alert": {
+      "summary": "Of the 20 most recent Trustpilot reviews, about 10 describe a payout being denied. The newest review was posted in June 2026.",
+      "checked": "2026-10-11",
+      "url": "https://www.trustpilot.com/review/leelootrading.com?sort=recency"
+    },
+    "markets": [
+      {
+        "market": "futures",
+        "promo_code": null,
+        "programs": [
+          {
+            "program": "evaluation",
+            "tiers": [
+              {
+                "tier": "Foundation",
+                "tagline": "Monthly subscription · $85 reset · Minimum 10 trading days · Payouts via a Performance Account (simulated or live, LeeLoo's choice)",
+                "billing": "monthly",
+                "rules": {
+                  "unit": "usd",
+                  "drawdown_type": "trailing",
+                  "consistency_pct": 30,
+                  "min_trading_days": 10,
+                  "profit_split_max": null,
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 25000,
+                    "profit_target": 1500,
+                    "daily_loss": null,
+                    "max_loss": 1500,
+                    "max_contracts": 3,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 250
+                  },
+                  {
+                    "size": 50000,
+                    "profit_target": 3000,
+                    "daily_loss": null,
+                    "max_loss": 2500,
+                    "max_contracts": 8,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 280
+                  },
+                  {
+                    "size": 100000,
+                    "profit_target": 6000,
+                    "daily_loss": null,
+                    "max_loss": 3000,
+                    "max_contracts": 12,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 320
+                  },
+                  {
+                    "size": 150000,
+                    "profit_target": 9000,
+                    "daily_loss": null,
+                    "max_loss": 5000,
+                    "max_contracts": 15,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 405
+                  },
+                  {
+                    "size": 250000,
+                    "profit_target": 15000,
+                    "daily_loss": null,
+                    "max_loss": 6500,
+                    "max_contracts": 25,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 725
+                  },
+                  {
+                    "size": 300000,
+                    "profit_target": 20000,
+                    "daily_loss": null,
+                    "max_loss": 7500,
+                    "max_contracts": 30,
+                    "payout_cap": null,
+                    "promo": null,
+                    "standard": 850
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

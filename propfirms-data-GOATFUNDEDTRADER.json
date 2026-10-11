@@ -1,0 +1,441 @@
+{
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "source": "Official Goat Funded Trader pages only, fetched 2026-10-11: https://www.goatfundedtrader.com/ (pricing script on the page: list prices, available sizes, model rules, discount rules), help centre https://help.goatfundedtrader.com/1-step.html, /2-step-goat.html, /2-step-standard.html, /instant-goat.html, /instant-hero.html, /instant-premium.html, /goat-blitz.html, /get-started.html (restricted countries), /why-gft.html (launch date, HQ); Trustpilot https://www.trustpilot.com/review/goatfundedtrader.com.",
+    "pricing": "standard = list price from the page's pricing script; promo = the price the same script displays: list price minus the site-wide 45% (code GFT45), rounded, except 2-Step GOAT 5K, 2-Step Standard 5K and Instant HERO 5K, which the script fixes at $17. The page's static placeholder text didn't match the script for one size, so confirm prices with a screenshot. A separate 50% code (FIRSTGFT) is for first-time customers.",
+    "rules_detail": "1-Step: 10% target, 3% daily (accounts bought from 1 Aug 2026), 6% static max loss, 3 profitable days, $3,000 daily profit cap on the funded account. 2-Step GOAT: 8% then 6%, 4% daily, 10% static, 3 profitable days per phase. 2-Step Standard: 10% then 5%, 5% daily, 10% static. Instant GOAT: 3% daily and 6% max (both trailing), 15% consistency, 5 profitable days per payout, 2% floating-loss limit. Instant HERO: 3% / 5% trailing, 15% consistency, 6 profitable days, 1% floating-loss limit, 90% split (100% add-on). Instant Premium: 3% daily, 6% intraday trailing, no consistency rule, 5 profitable days, 80% split. Funded accounts on evaluation models need 4 profitable days per payout for accounts bought from late July 2026.",
+    "fee_refund": "Homepage pricing card: 'One-time 100% refundable fee' for challenges; the conditions are not stated. Instant: not stated (null).",
+    "not_listed": "GOAT Blitz (sold only on some weekends), 2-Step PRO, 3-Step (retired), Goat Stride and $1 GOAT promotions are not listed.",
+    "company": "Help centre ('Why GFT', updated 27 Jul 2026): launched May 2023 and headquartered in Hong Kong. Hong Kong is also on its own restricted-countries list.",
+    "marketing_stats_excluded": "Payout totals, trader counts, named trader payouts and the site's own star ratings are not reproduced. The site advertises 'Rewards in 2 Days or Extra $1000'; we don't repeat it.",
+    "vetting": "Checked 2026-10-11. Of the 20 newest Trustpilot reviews, about 13 described a denied or withheld payout or an account closed after an interview; the firm replied to most. Trustpilot hides its score for a guideline breach (4,350 reviews). Listed with a review alert at the team's request (2026-10-11).",
+    "rule_units": "Forex rules are % of account size.",
+    "null_means": "Not stated on an official Goat Funded Trader page we could read."
+  },
+  "firm": {
+    "id": "goat-funded-trader",
+    "name": "Goat Funded Trader",
+    "logo": "/funded-accounts/goat-funded-trader-logo.png",
+    "logo_bg": "dark",
+    "name_note": null,
+    "about": "Goat Funded Trader (GFT) is a prop firm that launched in May 2023 and says it is headquartered in Hong Kong. It sells simulated forex and CFD accounts through 1-step and 2-step challenges and three instant-funding models, from $5K to $400K.",
+    "about_note": null,
+    "founded": 2023,
+    "hq": "Hong Kong",
+    "currency": "USD",
+    "website": "https://www.goatfundedtrader.com/",
+    "affiliate_link": "",
+    "platforms": [
+      "MT5",
+      "cTrader",
+      "Match-Trader",
+      "TradeLocker",
+      "Volumetrica"
+    ],
+    "countries": {
+      "restricted": [
+        "AF",
+        "BY",
+        "BO",
+        "BA",
+        "CF",
+        "CL",
+        "CU",
+        "CD",
+        "HK",
+        "IR",
+        "IL",
+        "JO",
+        "LA",
+        "LB",
+        "LY",
+        "ML",
+        "MM",
+        "KP",
+        "PG",
+        "RU",
+        "SN",
+        "SG",
+        "SO",
+        "KR",
+        "SS",
+        "SD",
+        "SY",
+        "TG",
+        "UA",
+        "VE",
+        "YE",
+        "ZW"
+      ],
+      "allowed_only": null,
+      "notes": "People and groups on terrorism sanctions lists are also excluded.",
+      "source": "https://help.goatfundedtrader.com/get-started.html",
+      "last_checked": "2026-10-11"
+    },
+    "reviews": {
+      "checked": "2026-10-11",
+      "trustpilot": null,
+      "trustpilot_note": "Trustpilot is not showing a score for this firm. Its page says this is because of a breach of Trustpilot's guidelines (4,350 reviews, checked 11 Oct 2026).",
+      "google": null,
+      "google_note": "Google rating not checked yet."
+    },
+    "review_alert": {
+      "summary": "Of the 20 most recent Trustpilot reviews, about 13 describe a payout being denied or withheld, or an account being closed after a verification interview. The firm had replied to most of them. Trustpilot is also not showing a score for this firm; its page says this is because of a breach of its guidelines.",
+      "checked": "2026-10-11",
+      "url": "https://www.trustpilot.com/review/goatfundedtrader.com?sort=recency"
+    },
+    "markets": [
+      {
+        "market": "forex",
+        "promo_code": "GFT45",
+        "programs": [
+          {
+            "program": "1-step",
+            "tiers": [
+              {
+                "tier": "1-Step",
+                "tagline": "Static max loss · No consistency rule",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 41,
+                    "standard": 74.0
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 63,
+                    "standard": 114.0
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 118,
+                    "standard": 214.0
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 173,
+                    "standard": 314.0
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 292,
+                    "standard": 530.0
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 503,
+                    "standard": 914.0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "2-step",
+            "tiers": [
+              {
+                "tier": "2-Step GOAT",
+                "tagline": "Lower profit targets · 4% daily loss",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 8,
+                  "phase2_target": 6,
+                  "funded_target": "n/a",
+                  "daily_loss": 4,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 17,
+                    "standard": 36.0
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 36,
+                    "standard": 65.0
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 87,
+                    "standard": 158.0
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 169,
+                    "standard": 308.0
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 263,
+                    "standard": 478.0
+                  },
+                  {
+                    "size": 150000,
+                    "promo": 417,
+                    "standard": 758.0
+                  }
+                ]
+              },
+              {
+                "tier": "2-Step Standard",
+                "tagline": "5% daily loss · No consistency rule",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": 10,
+                  "phase2_target": 5,
+                  "funded_target": "n/a",
+                  "daily_loss": 5,
+                  "max_loss": 10,
+                  "drawdown_type": "static",
+                  "profit_split_max": 80,
+                  "min_trading_days": 3,
+                  "consistency": "none",
+                  "trading_period": "unlimited",
+                  "fee_refund": true
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 17,
+                    "standard": 52.0
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 50,
+                    "standard": 90.0
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 129,
+                    "standard": 234.0
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 197,
+                    "standard": 358.0
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 345,
+                    "standard": 628.0
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 659,
+                    "standard": 1198.0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "program": "instant",
+            "tiers": [
+              {
+                "tier": "Instant GOAT",
+                "tagline": "No evaluation · Trailing daily and max loss · 15% consistency",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": "n/a",
+                  "phase2_target": "n/a",
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": 80,
+                  "min_trading_days": 5,
+                  "consistency": "15%",
+                  "trading_period": "n/a",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 59,
+                    "standard": 108.0
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 87,
+                    "standard": 158.0
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 175,
+                    "standard": 318.0
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 268,
+                    "standard": 488.0
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 448,
+                    "standard": 815.0
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 915,
+                    "standard": 1663.0
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 1319,
+                    "standard": 2398.0
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1649,
+                    "standard": 2998.0
+                  }
+                ]
+              },
+              {
+                "tier": "Instant HERO",
+                "tagline": "No evaluation · 5% trailing max loss · 100% split as a paid add-on",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": "n/a",
+                  "phase2_target": "n/a",
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 5,
+                  "drawdown_type": "trailing",
+                  "profit_split_max": 90,
+                  "min_trading_days": 6,
+                  "consistency": "15%",
+                  "trading_period": "n/a",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 17,
+                    "standard": 58.0
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 59,
+                    "standard": 107.0
+                  },
+                  {
+                    "size": 15000,
+                    "promo": 86,
+                    "standard": 157.0
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 132,
+                    "standard": 240.0
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 196,
+                    "standard": 357.0
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 361,
+                    "standard": 657.0
+                  },
+                  {
+                    "size": 200000,
+                    "promo": 636,
+                    "standard": 1157.0
+                  },
+                  {
+                    "size": 300000,
+                    "promo": 915,
+                    "standard": 1663.0
+                  },
+                  {
+                    "size": 400000,
+                    "promo": 1282,
+                    "standard": 2330.0
+                  }
+                ]
+              },
+              {
+                "tier": "Instant Premium",
+                "tagline": "No evaluation · No consistency rule",
+                "rules": {
+                  "unit": "percent",
+                  "phase1_target": "n/a",
+                  "phase2_target": "n/a",
+                  "funded_target": null,
+                  "daily_loss": 3,
+                  "max_loss": 6,
+                  "drawdown_type": "Intraday trailing",
+                  "profit_split_max": 80,
+                  "min_trading_days": 5,
+                  "consistency": "none",
+                  "trading_period": "n/a",
+                  "fee_refund": null
+                },
+                "accounts": [
+                  {
+                    "size": 5000,
+                    "promo": 87,
+                    "standard": 158.0
+                  },
+                  {
+                    "size": 10000,
+                    "promo": 163,
+                    "standard": 297.0
+                  },
+                  {
+                    "size": 15000,
+                    "promo": 218,
+                    "standard": 397.0
+                  },
+                  {
+                    "size": 25000,
+                    "promo": 310,
+                    "standard": 563.0
+                  },
+                  {
+                    "size": 50000,
+                    "promo": 447,
+                    "standard": 813.0
+                  },
+                  {
+                    "size": 100000,
+                    "promo": 722,
+                    "standard": 1313.0
+                  },
+                  {
+                    "size": 150000,
+                    "promo": 1172,
+                    "standard": 2130.0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

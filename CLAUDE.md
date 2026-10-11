@@ -26,7 +26,7 @@ Section list lives in `src/lib/sections.ts` (header, homepage cards and
 
 | Section | Route | Status |
 |---|---|---|
-| Funded accounts (prop firms) | `/funded-accounts` | **live** — 24 firms. Forex: Audacity Capital, BrightFunded, City Traders Imperium, FTMO, Funded Trading Plus, FundingPips, FXIFY, The5ers. Futures: Apex Trader Funding, Bulenox, Earn2Trade, Elite Trader Funding, Funded Futures Network, Lucid Trading, MyFundedFutures, Take Profit Trader, Top One Futures, Topstep, TradeDay, Tradeify, UProfit. Both: Alpha Funded, E8 Markets, FundedNext |
+| Funded accounts (prop firms) | `/funded-accounts` | **live** — 29 firms. Forex: Audacity Capital, BrightFunded, City Traders Imperium, FTMO, Funded Trading Plus, FunderPro, FundingPips, FXIFY, Goat Funded Trader, The5ers. Futures: Apex Trader Funding, Bulenox, Earn2Trade, Elite Trader Funding, Funded Futures Network, LeeLoo Trading, Lucid Trading, MyFundedFutures, Phidias, Take Profit Trader, Top One Futures, Topstep, TradeDay, Tradeify, UProfit. Both: Alpha Funded, Blue Guardian, E8 Markets, FundedNext. Firms whose recent reviews show many payout complaints carry a dated `review_alert` (warning box + card badge) instead of being left out |
 | Courses | `/courses` | **live** — 29 courses: 247 Research, Ace of Trades, Bear Bull Traders, Bulls on Wall Street, Chroma Trading, Crystal Academy, EliteClouds Trading Education, Humbled Trader, Inner Circle Trader (ICT), Investors Underground, Kaizen, Miles High Club, No Nonsense Forex, Option Alpha, Owls Options Traders, PJ Trades Premium, RakeTrades, Six Figure Capital, Skylit, SMB Training, Stocks with Josh, tastylive, Team Bull Trading, The Peachy Investor, Trade Momentum, Trading Profit Path, Urban Forex, Warrior Trading, Wealth Group |
 | Signal groups | `/signal-groups` | next up |
 | Brokers | `/brokers` | coming soon |
@@ -70,6 +70,7 @@ in `src/lib/` → a directory page with filters → a detail page per listing.
   we don't verify, and we must be able to delist fast.
 - Every page carries the footer disclaimer (`SiteFooter.tsx`) — never remove it.
 - Sponsored listings must always be visibly labelled "Sponsored".
+- **Before going fully live:** get UAE legal advice on the prop firm `review_alert` warnings (UAE defamation law). Until then a red "Team reminder" shows in each warning box (`SHOW_LEGAL_REMINDER` in `src/components/PropFirmReviewAlert.tsx`); turn it off once cleared.
 - Testimonials must always show their source and the "not independently
   verified" note.
 - Descriptions are written **in our own words** — never copy text from a
