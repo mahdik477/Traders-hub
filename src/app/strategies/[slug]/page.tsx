@@ -13,6 +13,7 @@ import {
   STRATEGY_MARKET_LABELS,
   STRATEGY_TIER_LABELS,
   STRATEGY_TIMEFRAME_LABELS,
+  youtubeThumbnail,
 } from "@/lib/strategy-types";
 import { getStrategy, strategies } from "@/lib/strategies";
 
@@ -334,23 +335,42 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
             control, so we haven&apos;t fact-checked every claim made in them. Judge the content on
             its own merits.
           </p>
-          <ul className="mt-4 space-y-3">
-            {s.videos.map((v) => (
-              <li key={v.url} className="rounded-xl border border-border bg-surface p-4">
-                <a
-                  href={v.url}
-                  target="_blank"
-                  rel="noopener"
-                  className="flex items-start gap-3 font-semibold text-foreground hover:text-accent"
-                >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent/12 text-accent">
-                    <PlayIcon className="size-4" />
-                  </span>
-                  <span>{v.title}</span>
-                </a>
-                {v.note && <p className="mt-2 pl-11 text-sm leading-relaxed text-muted">{v.note}</p>}
-              </li>
-            ))}
+          <ul className="mt-4 space-y-4">
+            {s.videos.map((v) => {
+              const thumbnail = youtubeThumbnail(v.url);
+              return (
+                <li key={v.url} className="rounded-xl border border-border bg-surface p-4">
+                  <p className="font-semibold text-foreground">{v.title}</p>
+                  <a
+                    href={v.url}
+                    target="_blank"
+                    rel="noopener"
+                    className="group relative mt-3 block aspect-video w-full max-w-sm overflow-hidden rounded-lg border border-border bg-surface-2"
+                  >
+                    {thumbnail ? (
+                      <Image
+                        src={thumbnail}
+                        alt={`Thumbnail for ${v.title}`}
+                        fill
+                        sizes="(min-width: 640px) 24rem, 100vw"
+                        className="object-cover transition-transform duration-200 group-hover:scale-105"
+                        unoptimized
+                      />
+                    ) : (
+                      <span className="flex h-full items-center justify-center text-sm text-muted">
+                        Watch on YouTube
+                      </span>
+                    )}
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/35">
+                      <span className="flex size-12 items-center justify-center rounded-full bg-danger/90 text-white shadow-glow">
+                        <PlayIcon className="size-5" />
+                      </span>
+                    </span>
+                  </a>
+                  {v.note && <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">{v.note}</p>}
+                </li>
+              );
+            })}
           </ul>
         </section>
       )}
