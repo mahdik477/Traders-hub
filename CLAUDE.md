@@ -26,8 +26,8 @@ Section list lives in `src/lib/sections.ts` (header, homepage cards and
 
 | Section | Route | Status |
 |---|---|---|
-| Funded accounts (prop firms) | `/funded-accounts` | **live** — FTMO, Alpha Funded |
-| Courses | `/courses` | **live** — Six Figure Capital |
+| Funded accounts (prop firms) | `/funded-accounts` | **live** — 24 firms. Forex: Audacity Capital, BrightFunded, City Traders Imperium, FTMO, Funded Trading Plus, FundingPips, FXIFY, The5ers. Futures: Apex Trader Funding, Bulenox, Earn2Trade, Elite Trader Funding, Funded Futures Network, Lucid Trading, MyFundedFutures, Take Profit Trader, Top One Futures, Topstep, TradeDay, Tradeify, UProfit. Both: Alpha Funded, E8 Markets, FundedNext |
+| Courses | `/courses` | **live** — 29 courses: 247 Research, Ace of Trades, Bear Bull Traders, Bulls on Wall Street, Chroma Trading, Crystal Academy, EliteClouds Trading Education, Humbled Trader, Inner Circle Trader (ICT), Investors Underground, Kaizen, Miles High Club, No Nonsense Forex, Option Alpha, Owls Options Traders, PJ Trades Premium, RakeTrades, Six Figure Capital, Skylit, SMB Training, Stocks with Josh, tastylive, Team Bull Trading, The Peachy Investor, Trade Momentum, Trading Profit Path, Urban Forex, Warrior Trading, Wealth Group |
 | Signal groups | `/signal-groups` | next up |
 | Brokers | `/brokers` | coming soon |
 | Tools | `/tools` | coming soon |

@@ -14,7 +14,8 @@
     "affiliate_program": "Has a program (signup: https://bulenox.com/member/aff/signup). 'Earn Up To 15% Commissions' of revenue from each referred account. Commission is earned on a 'Completed Transaction' = delivered, return period expired, and 30 days since full payment. Payout by PayPal or direct deposit (the form asks for a US-style routing number). Affiliate must own the website or social account; may not bid on Bulenox trademarks/keywords or register domains using the brand. Cookie length: not stated. Comparison sites: not mentioned (websites are allowed). UAE-based affiliates: not mentioned (the UAE is not on the trader restricted list).",
     "marketing_stats_excluded": "None reproduced.",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
-    "null_means": "Not stated on an official Bulenox page, or varies by payout number (see notes)."
+    "null_means": "Not stated on an official Bulenox page, or varies by payout number (see notes).",
+    "company_check": "Re-checked 2026-10-11: bulenox.com states no founding date (no About page). founded still null."
   },
   "firm": {
     "id": "bulenox",
@@ -307,7 +308,7 @@
                 "accounts": [
                   {
                     "size": 25000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": "none",
                     "max_loss": 1000,
                     "max_contracts": 3,
@@ -317,7 +318,7 @@
                   },
                   {
                     "size": 50000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": "none",
                     "max_loss": 2250,
                     "max_contracts": 7,
@@ -327,7 +328,7 @@
                   },
                   {
                     "size": 100000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": "none",
                     "max_loss": 4000,
                     "max_contracts": 12,
@@ -337,7 +338,7 @@
                   },
                   {
                     "size": 150000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": "none",
                     "max_loss": 5500,
                     "max_contracts": 15,

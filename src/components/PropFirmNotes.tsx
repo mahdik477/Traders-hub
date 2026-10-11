@@ -46,11 +46,16 @@ export default function PropFirmNotes({
           </li>
         )}
         <li>
+          <strong className="font-semibold text-foreground">N/A, None and —:</strong>{" "}
+          &ldquo;N/A&rdquo; means the rule doesn&apos;t apply to that account type
+          (e.g. a Phase 2 target on a 1-step challenge); &ldquo;None&rdquo; means
+          the firm&apos;s own website says there is no such rule or limit; a dash
+          (—) means we haven&apos;t confirmed that detail from the firm&apos;s own
+          pages yet.
+        </li>
+        <li>
           Prices, promotions and rules change often. Always check the firm&apos;s
-          own website before buying. A dash (—) means we haven&apos;t confirmed
-          that detail from the firm&apos;s own pages yet. &ldquo;None&rdquo; means
-          the firm says there is no such limit. We do not verify trading
-          performance.
+          own website before buying. We do not verify trading performance.
         </li>
       </ul>
     </details>

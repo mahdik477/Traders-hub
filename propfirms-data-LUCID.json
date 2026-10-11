@@ -14,7 +14,8 @@
     "affiliate_program": "Exists but CLOSED to applications. The affiliate page (archived 10 Jun 2026) says: 'Applications are closed... Our team scouts partners directly' based on trading credibility, community, brand alignment and consistency; there is no application form. No commission %, cookie length or payout method is published. A comparison site would have to be approached by Lucid. Could not confirm whether this is still the case on the live site (blocked).",
     "marketing_stats_excluded": "None reproduced.",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
-    "null_means": "Not stated on an official Lucid page we could read. Prices especially need screenshots."
+    "null_means": "Not stated on an official Lucid page we could read. Prices especially need screenshots.",
+    "company_check": "Re-checked 2026-10-11: lucidtrading.com still blocks automated access (403). founded still null."
   },
   "firm": {
     "id": "lucid-trading",
@@ -297,7 +298,7 @@
                     "daily_loss": 600,
                     "max_loss": 1000,
                     "max_contracts": 2,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": null
                   },
@@ -307,7 +308,7 @@
                     "daily_loss": 1200,
                     "max_loss": 2000,
                     "max_contracts": 4,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": null
                   },
@@ -317,7 +318,7 @@
                     "daily_loss": 1800,
                     "max_loss": 3000,
                     "max_contracts": 6,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": null
                   },
@@ -327,7 +328,7 @@
                     "daily_loss": 2700,
                     "max_loss": 4500,
                     "max_contracts": 10,
-                    "payout_cap": null,
+                    "payout_cap": "none",
                     "promo": null,
                     "standard": null
                   }
@@ -353,7 +354,7 @@
                 "accounts": [
                   {
                     "size": 25000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": "none",
                     "max_loss": 1000,
                     "max_contracts": 2,
@@ -363,7 +364,7 @@
                   },
                   {
                     "size": 50000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": 1200,
                     "max_loss": 2000,
                     "max_contracts": 4,
@@ -373,7 +374,7 @@
                   },
                   {
                     "size": 100000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": 2100,
                     "max_loss": 3500,
                     "max_contracts": 6,
@@ -383,7 +384,7 @@
                   },
                   {
                     "size": 150000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": 3000,
                     "max_loss": 5000,
                     "max_contracts": 10,

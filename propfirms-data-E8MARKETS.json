@@ -9,7 +9,8 @@
     "forex_rules": "All E8 products are single-phase. E8 One: drawdown customisable 4-14% (profit target = 1.5x drawdown, daily drawdown ~0.66x drawdown); values here are the website's default 6% configuration ($100K: $9,000 target, $6,000 dynamic drawdown, $4,000 daily drawdown). Note: the E8 One help article describes a different preset (6% target, 3% daily, 4% dynamic drawdown) - the website configurator was used because its prices match. 'Dynamic' drawdown trails closed profits only and locks at the starting balance. 40% best-day rule on the performance account only; news trading banned around high-impact news on the performance account. E8 Pro: 8% target, 8% static drawdown (moves only after first payout), 2.5% daily drawdown, 2% daily profit cap counts toward target and payouts, no consistency, daily payouts with 1% minimum profit; payout split 80% or 100% (paid add-on). E8 Signature (Classic Markets): 6% target, end-of-day dynamic drawdown of 4% on $25K and $50K and 3% on $100K and $150K ($1,000 / $2,000 / $3,000 / $4,500), so max_loss is left null; no daily limit in the challenge, a 2% soft 'daily pause' on the performance account only; 35% best-day rule on payouts; payout caps per payout ($1,000-$5,250) and a buffer equal to the drawdown. All forex products: unlimited time, but at least one trade every 60 days.",
     "futures_rules": "Futures market (e8futures.com, Tradovate/NinjaTrader). E8 Signature Futures: 6% target, end-of-day dynamic drawdown ($4,000 on $150K applies to accounts bought after 1 Oct 2026), 2% daily pause on the performance account only ($500 / $1,000 / $2,000 / $3,000) so daily_loss is null, 35% best-day rule on payouts, max 4 payouts per account then a free new challenge; payout_cap = cap on the 1st and 2nd payout (3rd and 4th: $1,250 / $2,000 / $3,000 / $3,500). E8 Zero Starter and Max: identical rules, differ only in price and payout caps; 3% end-of-day dynamic drawdown (USD amounts not stated, so max_loss is null), no daily loss limit, 40% best-day rule in the challenge only, no consistency/minimum days on the performance account, daily payouts ($100 minimum), max 4 payouts per account; payout split 80% or 100%. max_contracts = challenge allowance in full-size contracts (micros = 10x); E8 Zero performance accounts start lower (2/3/4) and scale up with profit. Signature needs at least one trade every 60 days, Zero every 7 days. Positions are closed daily (Zero: 15:10 CT).",
     "not_listed": "Perpetual Futures market (E8 One and E8 Pro on E8 Terminal / Hyperliquid, crypto and other perpetuals) is not listed separately; it uses the same E8 One / E8 Pro prices with a bigger first-order discount (50%). The free trial (E8 Trial One) is also not listed.",
-    "company": "Footer: E8 Funding LLC, 4101 McEwen Rd #205, Dallas, TX (operates TradeLocker, cTrader, Match-Trader); E8 Markets Ltd, Saint Lucia, reg. 2025-00347 (operates MT5); website subject to the policies of Digital Renaissance LLC (Puerto Rico). Founded 2021 as E8 Funding (help centre)."
+    "company": "Footer: E8 Funding LLC, 4101 McEwen Rd #205, Dallas, TX (operates TradeLocker, cTrader, Match-Trader); E8 Markets Ltd, Saint Lucia, reg. 2025-00347 (operates MT5); website subject to the policies of Digital Renaissance LLC (Puerto Rico). Founded 2021 as E8 Funding (help centre).",
+    "company_check": "Founded 2021 as E8 Funding (E8 help centre, see source). HQ from the site footer: E8 Funding LLC, 4101 McEwen Rd #205, Dallas, TX."
   },
   "firm": {
     "id": "e8-markets",
@@ -19,6 +20,8 @@
     "name_note": "Formerly E8 Funding.",
     "about": "E8 Markets sells single-phase simulated trading challenges for forex/CFD and futures traders, with several rule sets to choose from and accounts from $5K to $500K. It started in 2021 as E8 Funding and is based in Dallas, Texas.",
     "about_note": null,
+    "founded": 2021,
+    "hq": "Dallas, Texas, USA",
     "currency": "USD",
     "website": "https://e8markets.com/",
     "affiliate_link": "",
@@ -114,8 +117,8 @@
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 9,
-                  "phase2_target": null,
-                  "funded_target": null,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
                   "daily_loss": 4,
                   "max_loss": 6,
                   "drawdown_type": "dynamic",
@@ -174,8 +177,8 @@
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 8,
-                  "phase2_target": null,
-                  "funded_target": null,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
                   "daily_loss": 2.5,
                   "max_loss": 8,
                   "drawdown_type": "static",
@@ -234,9 +237,9 @@
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 6,
-                  "phase2_target": null,
-                  "funded_target": null,
-                  "daily_loss": null,
+                  "phase2_target": "n/a",
+                  "funded_target": "n/a",
+                  "daily_loss": "none",
                   "max_loss": null,
                   "drawdown_type": "EOD",
                   "profit_split_max": 80,

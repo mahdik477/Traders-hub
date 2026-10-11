@@ -13,7 +13,8 @@
     "company": "Official footer: Tradeify Holdings, Corp., 1700 S. Dixie Highway, Suite 305, Boca Raton, FL 33432, USA; payment agent Novaflame LTD (Cyprus). Help centre names Brett Simberkoff as founder and CEO. No official page states a founding date (third-party sites disagree: 2022 vs 2024), so founded is null.",
     "marketing_stats_excluded": "The site advertises pass rates, payout totals and a '0% payout denial' figure; none of these are reproduced here (directory policy).",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
-    "null_means": "Not stated on an official Tradeify page, or not expressible as one number (see the notes above). Check the live pricing table before publishing."
+    "null_means": "Not stated on an official Tradeify page, or not expressible as one number (see the notes above). Check the live pricing table before publishing.",
+    "company_check": "Re-checked 2026-10-11: https://tradeify.co/ and https://tradeify.co/about state no founding date. founded still null."
   },
   "firm": {
     "id": "tradeify",
@@ -272,7 +273,7 @@
                 "accounts": [
                   {
                     "size": 25000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": "none",
                     "max_loss": 1000,
                     "max_contracts": 1,
@@ -282,7 +283,7 @@
                   },
                   {
                     "size": 50000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": 1250,
                     "max_loss": 2000,
                     "max_contracts": 4,
@@ -292,7 +293,7 @@
                   },
                   {
                     "size": 100000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": 2500,
                     "max_loss": 4000,
                     "max_contracts": 8,
@@ -302,7 +303,7 @@
                   },
                   {
                     "size": 150000,
-                    "profit_target": null,
+                    "profit_target": "n/a",
                     "daily_loss": 3000,
                     "max_loss": 5250,
                     "max_contracts": 12,
