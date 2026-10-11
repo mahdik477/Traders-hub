@@ -14,9 +14,12 @@ export default function SiteFooter() {
           nothing on this site is financial advice. Some links are affiliate
           links, which means we may earn a commission if you sign up.
         </p>
-        <p className="meta">
+        <p className="meta flex flex-wrap gap-x-4 gap-y-1">
           <Link href="/disclaimer" className="underline hover:text-foreground">
             Read the full disclaimer
+          </Link>
+          <Link href="/privacy" className="underline hover:text-foreground">
+            View our privacy policy
           </Link>
         </p>
         <p className="text-xs text-subtle">
