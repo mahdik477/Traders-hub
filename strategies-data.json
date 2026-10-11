@@ -2604,7 +2604,52 @@
         "Investopedia, \"Divergence\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/rsi-divergence.png",
+        "caption": "A synthetic chart showing price printing a higher high while RSI prints a lower high — classic bearish divergence."
+      },
+      "step_by_step": [
+        {
+          "title": "Confirm the prevailing trend first",
+          "detail": "Check a higher timeframe or a moving average to see whether the market is trending up, trending down, or just ranging sideways. Regular RSI divergence is a reversal signal, so it only means something once there's an established trend for it to reverse."
+        },
+        {
+          "title": "Keep RSI on its default 14-period setting",
+          "detail": "Shorter lengths throw up more divergences, but most of the extra ones are noise. Stick with 14 on whatever timeframe you actually trade — a daily or 4-hour divergence carries far more weight than one on a 5-minute chart."
+        },
+        {
+          "title": "Mark the price's recent swing high or low",
+          "detail": "For a possible bearish signal, watch for price printing a higher high than its last swing high. For a possible bullish signal, watch for price printing a lower low than its last swing low."
+        },
+        {
+          "title": "Compare that swing to RSI at the same two points",
+          "detail": "Bearish divergence: price makes a higher high while RSI makes a lower high. Bullish divergence: price makes a lower low while RSI makes a higher low. Draw a line connecting the two RSI peaks (or troughs) so the mismatch with price is visible."
+        },
+        {
+          "title": "Treat the divergence as a warning, not a signal on its own",
+          "detail": "Divergence only tells you that momentum is fading under the current move — it doesn't say when, or if, price will actually turn. It can sit there for many bars before anything happens, or not resolve at all."
+        },
+        {
+          "title": "Wait for a structure break to confirm it",
+          "detail": "For a bearish setup, wait for price to break a nearby support level, break an up-trendline, or for RSI itself to cross back below 50. For a bullish setup, wait for the mirror image of all three."
+        },
+        {
+          "title": "Enter on the confirmation and set a stop beyond the extreme",
+          "detail": "Enter once the break happens, not before. Place the stop above the higher high (bearish) or below the lower low (bullish) that created the divergence in the first place — if price reclaims that extreme, the setup is invalidated."
+        },
+        {
+          "title": "Target the start of the prior move or a fixed risk-to-reward multiple",
+          "detail": "A common target is the point where the move that caused the divergence began, or simply a multiple of your stop distance (e.g. twice the risk) if there's no obvious nearby level."
+        }
+      ],
+      "videos": [
+        {
+          "title": "RSI Divergence Trading Strategy: How to Identify and use RSI",
+          "url": "https://www.youtube.com/watch?v=LbdufsyEdyM",
+          "note": "Walks through spotting bullish and bearish RSI divergence on a live chart and explains why it's read as an early warning on trend reversals, not a standalone signal."
+        }
+      ]
     },
     {
       "ref_id": "T3-02",
@@ -2668,7 +2713,52 @@
         "Appel"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/macd-divergence.png",
+        "caption": "A synthetic chart showing price making a higher high while the MACD histogram makes a lower high."
+      },
+      "step_by_step": [
+        {
+          "title": "Set up MACD with its standard inputs",
+          "detail": "Use the default 12/26/9 settings (fast EMA, slow EMA, signal line) applied to the close. These are what almost every chart platform ships with by default, and what most of the research behind this strategy actually tested."
+        },
+        {
+          "title": "Establish the prevailing trend on a higher timeframe",
+          "detail": "MACD divergence is a reversal signal, so check a daily or 4-hour chart (or a simple moving average) first to confirm there's an actual trend in place for the divergence to challenge."
+        },
+        {
+          "title": "Mark the price's swing highs or lows",
+          "detail": "For bearish divergence, look for price making a higher high. For bullish divergence, look for price making a lower low — exactly the same structure as RSI divergence, just read off MACD instead."
+        },
+        {
+          "title": "Compare that swing to the MACD line or histogram",
+          "detail": "Bearish divergence: price makes a higher high while the MACD line or histogram peaks lower than its previous peak. Bullish divergence: price makes a lower low while MACD's trough is higher than its previous trough."
+        },
+        {
+          "title": "Know the three divergence types you'll actually see",
+          "detail": "Regular divergence (price extreme vs. MACD extreme, as above) signals a possible reversal. Hidden divergence (the mirror pattern) signals a possible trend continuation instead — don't mix the two up when deciding your bias."
+        },
+        {
+          "title": "Wait for a signal-line cross or a structure break to confirm",
+          "detail": "Don't act on the divergence itself. Wait for MACD to cross its own signal line in the new direction, or for price to break a nearby support/resistance level or trendline, before treating the divergence as confirmed."
+        },
+        {
+          "title": "Enter on the confirmation bar and place your stop",
+          "detail": "Enter once confirmed, with a stop beyond the swing high or low that created the divergence — that's the level which, if price reclaims it, tells you the reversal read was wrong."
+        },
+        {
+          "title": "Add one more filter before relying on it alone",
+          "detail": "Pairing MACD divergence with RSI or a volume read (and never trading it against the dominant higher-timeframe trend) is what most of the sources behind this strategy point to as the difference between a clean signal and a false one."
+        }
+      ],
+      "videos": [
+        {
+          "title": "MACD Divergence Trading Strategy (Bullish, Bearish, Normal, Histogram and Line Divergence)",
+          "url": "https://www.youtube.com/watch?v=TcfPUQgZYow",
+          "note": "Covers all four divergence variants (bullish/bearish, line/histogram) with chart examples of each, which is useful since MACD divergence shows up in more flavours than RSI divergence does."
+        }
+      ]
     },
     {
       "ref_id": "T3-03",
@@ -2729,7 +2819,52 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/stochastic-oscillator.png",
+        "caption": "A synthetic chart with %K and %D crossing up from below 20 and down from above 80."
+      },
+      "step_by_step": [
+        {
+          "title": "Add the Stochastic with settings matched to your style",
+          "detail": "The default is %K 14, %D 3. Faster settings (5,3,3) suit scalping, the default suits day trading, and slower settings (21,7,7) suit swing trading — the faster the setting, the more signals, but the more noise too."
+        },
+        {
+          "title": "Determine the underlying trend first",
+          "detail": "Use a higher timeframe or a simple moving average (the 200 SMA is common) to establish whether the market is trending up, down, or range-bound, since that decides which Stochastic readings you'll actually act on."
+        },
+        {
+          "title": "Read the overbought/oversold zones in context",
+          "detail": "Above 80 is overbought, below 20 is oversold — but in an uptrend, treat oversold readings as potential buying opportunities rather than automatic sell signals, and vice versa in a downtrend. Taking oversold as an automatic 'sell the top' signal against the trend is the most common misuse of this indicator."
+        },
+        {
+          "title": "Watch for the %K/%D crossover, not just the zone",
+          "detail": "A %K line crossing above %D while both are below 20 suggests a possible bounce; %K crossing below %D while both are above 80 suggests a possible drop. The crossover is the actual trigger — being in the zone alone is not."
+        },
+        {
+          "title": "Add one layer of outside confirmation",
+          "detail": "Use price action (a reversal candle), a nearby support/resistance level, or another indicator to support the Stochastic reading before acting on it. Stochastic alone, especially in a strong trend, tends to give crossovers well before the move is actually over."
+        },
+        {
+          "title": "Enter after the crossover and confirmation line up",
+          "detail": "Place the entry once both the crossover and your chosen confirmation have happened, not on the crossover alone — this costs you a little in entry price but cuts out a large share of false signals."
+        },
+        {
+          "title": "Place a stop at the recent swing",
+          "detail": "A stop just beyond the swing high or low that the setup formed against gives the trade room to be wrong without an arbitrarily tight exit."
+        },
+        {
+          "title": "Manage the trade to the opposing level or a fixed target",
+          "detail": "Many traders exit (or trail) as Stochastic reaches the opposite extreme, or simply use a fixed risk-to-reward multiple if there's no clear nearby level to aim for."
+        }
+      ],
+      "videos": [
+        {
+          "title": "How Traders Really Use the Stochastic Oscillator (Beginner Guide + Real Examples)",
+          "url": "https://www.youtube.com/watch?v=69uD9nqhrTc",
+          "note": "A beginner-pitched walkthrough of reading momentum, spotting reversals, timing pullbacks and confirming breakouts with the Stochastic — useful because it covers more than just the textbook overbought/oversold read."
+        }
+      ]
     },
     {
       "ref_id": "T3-04",
@@ -2791,7 +2926,52 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/cci-strategies.png",
+        "caption": "A synthetic chart showing CCI swinging between the ±100 extreme levels."
+      },
+      "step_by_step": [
+        {
+          "title": "Add CCI to your chart",
+          "detail": "Most platforms list it under 'Commodity Channel Index' in the indicators search. The default length is 20 periods."
+        },
+        {
+          "title": "Learn the key levels you're watching for",
+          "detail": "CCI oscillates mostly between −100 and +100 in normal conditions; readings beyond ±200 are considered extreme. Your attention should mainly be on the 0, ±100 and ±200 lines."
+        },
+        {
+          "title": "Decide whether you're trading trend or reversion with it",
+          "detail": "These are two different approaches with the same indicator, so pick one for a given setup rather than mixing signals from both at once."
+        },
+        {
+          "title": "For trend trading: wait for a zero-line break",
+          "detail": "In a strong uptrend, treat a break above the zero line as a buy signal; in a downtrend, treat a break below zero as a sell signal. This is the slower, trend-following use of CCI."
+        },
+        {
+          "title": "For mean reversion: use the re-entry method",
+          "detail": "Wait for CCI to drop below −100 (oversold), then wait for it to cross back above −100, and enter on the next candle. Mirror this for sells: wait for CCI above +100, then a cross back below it."
+        },
+        {
+          "title": "Filter with a longer-term moving average",
+          "detail": "Only take buy signals when price is above a long-term moving average, and only take sell signals when price is below it — this keeps you from fading a strong trend with the reversion method."
+        },
+        {
+          "title": "Set your stop and target around the zero-line crossovers",
+          "detail": "A short-term stop or target is often set at the next zero-line crossover; longer-term trades use the opposite extreme value as the target instead."
+        },
+        {
+          "title": "Treat every signal as conditional on the broader trend",
+          "detail": "CCI readings mean very different things in a trending market versus a ranging one, so revisit step 3 each time before acting on a new signal."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Master The CCI Indicator in 3 Minutes - Trading Made Simple!",
+          "url": "https://www.youtube.com/watch?v=0ooJv5e3ho0",
+          "note": "A quick, beginner-pitched run-through of what CCI measures and how to read zero-line crosses and trendline breaks — good as a first pass before the more advanced strategy videos out there."
+        }
+      ]
     },
     {
       "ref_id": "T3-05",
@@ -2853,7 +3033,52 @@
         "StockCharts ChartSchool, \"Williams %R\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/williams-percent-r.png",
+        "caption": "A synthetic chart showing Williams %R on its inverted 0 to −100 scale."
+      },
+      "step_by_step": [
+        {
+          "title": "Understand the inverted scale before anything else",
+          "detail": "Unlike most oscillators, Williams %R reads from 0 (top) to −100 (bottom) — a reading near 0 is overbought and near −100 is oversold, which trips people up the first time they use it."
+        },
+        {
+          "title": "Pick a period length for your style",
+          "detail": "14 periods is the default, balancing speed and reliability. Use 7-10 for faster, noisier signals on quick swings, or 20-30 for smoother but slower signals."
+        },
+        {
+          "title": "Establish the broader trend direction",
+          "detail": "Like the other oscillators here, Williams %R works best read with the trend rather than against it — confirm the direction on a higher timeframe or moving average first."
+        },
+        {
+          "title": "Watch for the indicator to leave the extreme and turn",
+          "detail": "A common setup is buying once the indicator moves back above −80 after being below it (a reversal up from oversold), or selling once it moves back below −20 after being above it."
+        },
+        {
+          "title": "Confirm with a moving average before entering",
+          "detail": "Wait for price to actually cross your chosen moving average in the signalled direction before entering, rather than acting the moment Williams %R ticks off its extreme."
+        },
+        {
+          "title": "Enter on the confirmed move and set a stop",
+          "detail": "Place the stop beyond the recent swing high or low that the setup formed at."
+        },
+        {
+          "title": "Target major support/resistance or a fixed risk-to-reward",
+          "detail": "Aim for the next clear support/resistance level, or simply use a 1:2 risk-to-reward ratio if no obvious level is nearby."
+        },
+        {
+          "title": "Re-check the trend before every new signal",
+          "detail": "Because this is a bounded oscillator, it will keep producing overbought/oversold readings in a strong trend long before that trend actually ends — don't treat every reading as an entry."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Williams R Indicator Explained For Beginners (Learn How To Use Williams R In Trading Strategy)",
+          "url": "https://www.youtube.com/watch?v=Zt9QLDHBRf0",
+          "note": "A beginner-focused explanation of the indicator and how to build it into a basic strategy, which helps since Williams %R's inverted scale (0 to −100) is the first thing that trips people up."
+        }
+      ]
     },
     {
       "ref_id": "T3-06",
@@ -2913,7 +3138,52 @@
         "StockCharts ChartSchool, \"Rate of Change (ROC)\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/momentum-rate-of-change.png",
+        "caption": "A synthetic chart showing price with its Rate of Change oscillator below, crossing the zero line."
+      },
+      "step_by_step": [
+        {
+          "title": "Choose your look-back period",
+          "detail": "12 periods is the standard, balanced setting. Shorter (e.g. 6) reacts faster but whipsaws more; longer (e.g. 24) is smoother but slower to signal."
+        },
+        {
+          "title": "Add a trend filter alongside ROC",
+          "detail": "ROC on its own just measures the percentage change over N periods — pair it with a simple moving average (a 20-period SMA is common) so you're only taking signals in the direction price is actually closing."
+        },
+        {
+          "title": "Wait for a zero-line crossover",
+          "detail": "A move from negative to positive suggests upward momentum is building; from positive to negative suggests the opposite. The further ROC moves from zero, the stronger the momentum is read to be."
+        },
+        {
+          "title": "Confirm with your trend filter before acting",
+          "detail": "Only take the bullish crossover when price is also closing above your moving average filter (and the mirror for bearish), to cut down on false signals in a choppy market."
+        },
+        {
+          "title": "Enter at the next candle open after confirmation",
+          "detail": "Enter once both the ROC crossover and the trend filter line up, rather than acting mid-bar."
+        },
+        {
+          "title": "Place a stop just below (or above) the recent swing",
+          "detail": "A stop at the recent swing low (longs) or swing high (shorts) gives the trade room while still capping the downside if the signal was wrong."
+        },
+        {
+          "title": "Watch for ROC to roll over as a trim signal",
+          "detail": "When ROC peaks and turns back toward zero, it's often treated as a cue to trail the stop tighter or take partial profit, even before the zero-line cross happens."
+        },
+        {
+          "title": "Exit the remainder on the opposite zero-line cross",
+          "detail": "Closing the rest of the position once ROC crosses back through zero keeps the exit rule as mechanical as the entry rule."
+        }
+      ],
+      "videos": [
+        {
+          "title": "How to Use the Rate of Change (ROC) Indicator: A Complete Trading Guide",
+          "url": "https://www.youtube.com/watch?v=7sdTEjkzUwg",
+          "note": "Frames ROC as a speedometer for price momentum and covers using it to spot trend exhaustion, which is the practical use case most traders get out of it beyond the basic zero-line cross."
+        }
+      ]
     },
     {
       "ref_id": "T3-07",
@@ -2973,7 +3243,52 @@
         "StockCharts ChartSchool, \"Relative Strength (Price Relative)\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/relative-strength-rotation.png",
+        "caption": "A synthetic comparison of a leading sector, a lagging sector and the benchmark they're measured against."
+      },
+      "step_by_step": [
+        {
+          "title": "Pick your universe of assets",
+          "detail": "The classic version uses the 11 S&P sector ETFs against the S&P 500 itself, but the same method works on any basket (country ETFs, asset classes, or a watchlist of individual stocks) as long as they're comparable."
+        },
+        {
+          "title": "Decide your look-back window",
+          "detail": "3-month and 6-month relative performance are the most commonly used windows in the research behind this strategy. Shorter windows react faster but rotate holdings more often; longer windows are steadier."
+        },
+        {
+          "title": "Calculate relative strength against the benchmark",
+          "detail": "For each asset, compare its return over the look-back window to the benchmark's return over the same window — this is what separates genuine outperformance from an asset that's simply up because the whole market is up."
+        },
+        {
+          "title": "Rank every asset in your universe",
+          "detail": "Order the whole basket from strongest relative performer to weakest. Some versions adjust each asset's return by its own volatility before ranking, so a steadier outperformer doesn't lose to a more volatile one."
+        },
+        {
+          "title": "Hold only the top-ranked group",
+          "detail": "A common rule is holding the top 3-4 out of 11 sectors, or the top third of a larger universe, and avoiding (or shorting, in more advanced versions) the weakest group."
+        },
+        {
+          "title": "Set a fixed rebalance schedule",
+          "detail": "Monthly rebalancing is the most common cadence in the research; some faster versions rebalance every 2-4 weeks. Pick one in advance and stick to it rather than reacting to short-term noise."
+        },
+        {
+          "title": "Exit a holding only when it drops out of the top group",
+          "detail": "The exit rule is built into the rebalance itself — an asset leaves the portfolio once it's no longer ranked in your chosen top tier, not because of a price target or stop being hit."
+        },
+        {
+          "title": "Expect this to be a slower, lower-turnover approach",
+          "detail": "This isn't a trade-by-trade setup like the other indicator strategies here — it's closer to a portfolio discipline, and it's judged over many rebalance cycles rather than individual trades."
+        }
+      ],
+      "videos": [
+        {
+          "title": "How to Find Sector Leadership with Relative Strength!",
+          "url": "https://www.youtube.com/watch?v=z9OS9Zebp0s",
+          "note": "A practical, retail-friendly take on using relative strength to identify leading sectors — less dense than the institutional Relative Rotation Graph (RRG) videos, which assume more charting background."
+        }
+      ]
     },
     {
       "ref_id": "T3-08",
@@ -3031,7 +3346,52 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/on-balance-volume.png",
+        "caption": "A synthetic chart showing price printing a lower low while On-Balance Volume prints a higher low."
+      },
+      "step_by_step": [
+        {
+          "title": "Add OBV below your price chart",
+          "detail": "OBV has no inputs to set — it's a running total that adds the day's volume on an up day and subtracts it on a down day. What matters is its shape and direction, not its absolute number."
+        },
+        {
+          "title": "Use it to confirm breakouts first",
+          "detail": "The simplest use: when price breaks a resistance level, check that OBV is also breaking its own recent high at the same time. If OBV confirms, the breakout has more volume support behind it; if it doesn't, treat the breakout with more caution."
+        },
+        {
+          "title": "Mark price's recent swing highs or lows for divergence",
+          "detail": "For bearish divergence, watch for price printing a higher high. For bullish divergence, watch for price printing a lower low — same structure as RSI or MACD divergence, just measured against volume flow instead of momentum."
+        },
+        {
+          "title": "Compare that swing to OBV at the same points",
+          "detail": "Bearish divergence: price makes a higher high while OBV makes a lower high (the rally isn't backed by equivalent buying volume). Bullish divergence: price makes a lower low while OBV makes a higher low."
+        },
+        {
+          "title": "Require at least two clear divergent swings",
+          "detail": "A single mismatch between price and OBV is weak evidence on its own — look for the pattern to repeat across at least two swing points spanning several periods before treating it seriously."
+        },
+        {
+          "title": "Favour daily and weekly charts over intraday",
+          "detail": "OBV divergence tends to be noticeably cleaner on daily and weekly charts; intraday volume is choppier and produces far more false divergences."
+        },
+        {
+          "title": "Wait for a price confirmation before entering",
+          "detail": "For bullish divergence, wait for a bullish reversal candle or a break back above a recent high before entering. For bearish divergence, wait for a bearish engulfing candle or a breakdown of a recent low."
+        },
+        {
+          "title": "Set your stop beyond the recent swing and target the next level",
+          "detail": "Stop just beyond the swing that formed the divergence, and target the prior support/resistance or a 1:2 risk-to-reward ratio if nothing else is close by."
+        }
+      ],
+      "videos": [
+        {
+          "title": "OBV Indicator Explained (On Balance Volume): Strategy + Divergence (TradingView)",
+          "url": "https://www.youtube.com/watch?v=z-NEhA3EJk4",
+          "note": "Covers OBV's best settings (there aren't many to set) alongside the divergence technique specifically, which is the part of OBV most worth learning well."
+        }
+      ]
     },
     {
       "ref_id": "T3-09",
@@ -3094,7 +3454,52 @@
         "Wilder (1978)"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/adx-dmi-trend-strength.png",
+        "caption": "A synthetic chart showing +DI, −DI and ADX, with ADX rising above the 25 trend-strength line."
+      },
+      "step_by_step": [
+        {
+          "title": "Add ADX/DMI with the standard 14-period setting",
+          "detail": "This gives you three lines: +DI (upward movement strength), −DI (downward movement strength) and ADX itself (overall trend strength, regardless of direction)."
+        },
+        {
+          "title": "Check ADX before anything else",
+          "detail": "ADX above 25 suggests a trend is in place and worth trading with trend-following methods; below 20 suggests a weak trend or a range, where mean-reversion approaches tend to do better instead."
+        },
+        {
+          "title": "Watch for the +DI/−DI crossover for direction",
+          "detail": "When +DI crosses above −DI, that's a buy signal; when +DI crosses below −DI, that's a sell signal — but only act on these once ADX confirms there's an actual trend to trade (step 2)."
+        },
+        {
+          "title": "Apply the extreme point rule before entering",
+          "detail": "On the day of a crossover, don't enter immediately. Note the day's high (for a buy signal) or low (for a sell signal) — that's the 'extreme point'. Only enter if price breaks that extreme on the next bar, which filters out a lot of crossovers that reverse immediately."
+        },
+        {
+          "title": "Read what ADX is doing, not just its level",
+          "detail": "ADX crossing above 25 from below signals a trend starting; crossing below 25 from above signals it weakening back into consolidation; crossing above 40 signals a genuinely strong trend phase."
+        },
+        {
+          "title": "Scale your stop to the ADX reading",
+          "detail": "Use a wider stop in strong-trend conditions (high ADX) since pullbacks tend to be deeper, and a tighter stop in weak-trend conditions (low ADX)."
+        },
+        {
+          "title": "Exit on the opposite DI cross or an ADX roll-over",
+          "detail": "Treat a −DI cross back above +DI (for a long) as your exit signal, or exit/tighten up when ADX itself starts falling from a high level, since that's telling you the trend is losing strength."
+        },
+        {
+          "title": "Add a multi-timeframe check for extra confidence",
+          "detail": "Confirm the trend direction on a higher timeframe (daily or 4-hour) before taking entries on a lower one (1-hour or 15-minute) — trading only when both agree cuts down on a lot of false starts."
+        }
+      ],
+      "videos": [
+        {
+          "title": "The ADX Indicator Strategy (DMI) For Stock Beginners",
+          "url": "https://www.youtube.com/watch?v=e1bPmiz9FAc",
+          "note": "A beginner-focused walkthrough of setting up and reading ADX/DMI for finding and confirming trends, including platform setup on common charting tools."
+        }
+      ]
     },
     {
       "ref_id": "T3-10",
@@ -3162,7 +3567,48 @@
         "kind": "synthetic",
         "src": "/strategies/supertrend.png",
         "caption": "Synthetic price with an ATR-based Supertrend line flipping between support and resistance."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Choose settings matched to your trading style",
+          "detail": "The default is period 10, multiplier 3. Scalpers often use period 7, multiplier 2 for faster signals; swing traders use period 14, multiplier 3-4 for fewer flips; volatile assets like crypto often use a multiplier of 5 to cut down on noise."
+        },
+        {
+          "title": "Watch the line's colour and position relative to price",
+          "detail": "When the line sits below price and is green, that's a long bias. When it sits above price and is red, that's a short/exit bias — the line only ever sits on one side of price at a time."
+        },
+        {
+          "title": "Start by just observing before trading it",
+          "detail": "Watch how the line behaves across both trending and sideways days on the exact instrument and timeframe you plan to trade, without risking anything — Supertrend whipsaws heavily in choppy, non-trending conditions."
+        },
+        {
+          "title": "Enter on the flip, in the new direction",
+          "detail": "Go long when the line flips from red to green; go short (or exit an existing long) when it flips from green to red. This is the basic trend-following version of the strategy."
+        },
+        {
+          "title": "Place your stop at the Supertrend line itself",
+          "detail": "The line value on your entry bar becomes your initial stop — this ties your risk directly to the indicator's own measure of volatility rather than an arbitrary distance."
+        },
+        {
+          "title": "Trail your stop as the trend continues",
+          "detail": "Each new bar, move your stop to the current Supertrend line value. This lets you stay in a strong trend while still locking in progressively more protection as it extends."
+        },
+        {
+          "title": "Add a confirmation filter before trusting a flip",
+          "detail": "A common combination is Supertrend plus a 14-period RSI: only take a long on a green flip if RSI is also above 50, confirming bullish momentum, and mirror this for shorts."
+        },
+        {
+          "title": "Backtest the exact flips on your instrument first",
+          "detail": "Because Supertrend is purely reactive to price, how well it performs varies a lot by instrument and timeframe — check how it would have behaved recently before committing real risk to it."
+        }
+      ],
+      "videos": [
+        {
+          "title": "The Simplest SuperTrend Trading Strategy (Clear Entry & Exit Rules)",
+          "url": "https://www.youtube.com/watch?v=5YQwV-tohDY",
+          "note": "A clean run-through of the basic flip-to-flip Supertrend approach with explicit entry and exit rules, good as a first pass before adding confirmation filters."
+        }
+      ]
     },
     {
       "ref_id": "T3-11",
@@ -3225,7 +3671,52 @@
         "Wilder (1978)"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/parabolic-sar.png",
+        "caption": "A synthetic chart showing Parabolic SAR dots flipping between sitting above and below price."
+      },
+      "step_by_step": [
+        {
+          "title": "Set the standard acceleration parameters",
+          "detail": "The reference configuration is a start of 0.02, an increment of 0.02, and a maximum of 0.20. Start sets the initial acceleration, increment controls how fast it speeds up after a new price extreme, and maximum caps it."
+        },
+        {
+          "title": "Understand this is a stop-and-reverse system by design",
+          "detail": "Each entry signal is also the exit signal for the opposite position — when the dots flip, you exit entirely and (in the pure version) enter in the new direction, all in one action."
+        },
+        {
+          "title": "Wait for the candle to close before acting on a flip",
+          "detail": "Act only after the candle closes below the dots (bearish flip) or above them (bullish flip) — reacting mid-bar to a flip that hasn't closed yet is a common source of false signals."
+        },
+        {
+          "title": "Enter at the next open or at the closing price",
+          "detail": "Once a flip is confirmed by the close, enter a long position at the next market open (or with a limit order at the closing price of the flip bar)."
+        },
+        {
+          "title": "Use the most recent SAR dot as your stop",
+          "detail": "This gives you a built-in trailing stop — as the SAR dots update each new bar, your stop moves with them automatically."
+        },
+        {
+          "title": "Treat a flip against your position as your exit",
+          "detail": "Monitor the dots every new candle. If they flip to the other side of price, that's your signal to exit (and, in the pure stop-and-reverse version, to flip direction)."
+        },
+        {
+          "title": "Always pair SAR with a trend or momentum filter",
+          "detail": "Parabolic SAR performs poorly in sideways markets, flipping back and forth repeatedly. Combining it with a 20-period EMA and a 14-period RSI, or only taking signals when ADX is above 25, filters out a large share of these false flips."
+        },
+        {
+          "title": "Exit the trade the moment PSAR flips, filter or no filter",
+          "detail": "Whatever filter you use for entries, the exit rule stays mechanical: once the PSAR flips against your position, that's the exit, regardless of how the trade is doing."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Parabolic SAR Indicator Explained For Beginners... Simple and Effective Exit Strategy",
+          "url": "https://www.youtube.com/watch?v=ARQSqbdzIcc",
+          "note": "Frames Parabolic SAR primarily as an exit/trailing-stop tool rather than a standalone entry signal, which matches how most experienced traders actually use it."
+        }
+      ]
     },
     {
       "ref_id": "T3-12",
@@ -3288,7 +3779,52 @@
         "StockCharts ChartSchool, \"Heikin-Ashi\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/heikin-ashi-trend.png",
+        "caption": "A synthetic Heikin-Ashi chart showing runs of same-colour, low-wick candles during a trend."
+      },
+      "step_by_step": [
+        {
+          "title": "Switch your chart type to Heikin-Ashi",
+          "detail": "Most platforms offer this as a chart-type toggle. Remember the candles are averaged (close = (O+H+L+C)/4) — they smooth out noise but no longer show the real open, high, low or close."
+        },
+        {
+          "title": "Start on a higher timeframe to read the overall trend",
+          "detail": "Long runs of same-coloured candles usually indicate a strong trend; frequent colour alternation usually signals consolidation. If there's no clear run of one colour, it's generally better to wait rather than force a read."
+        },
+        {
+          "title": "Drop to your trading timeframe for confirmation",
+          "detail": "Look for two or three consecutive candles in the same direction — ideally with little or no wick on the opposing side (little lower wick for bullish candles, little upper wick for bearish ones), which marks a genuinely strong move rather than a choppy one."
+        },
+        {
+          "title": "Treat wick-less candles as the strongest trend signal",
+          "detail": "A long run of bullish candles with no lower wicks is read as a strong uptrend; a run of bearish candles with no upper wicks is read as a strong downtrend. Candles with wicks on both sides suggest the move is losing conviction."
+        },
+        {
+          "title": "Enter at the open of the next candle, using the real market price",
+          "detail": "This is the step most people get wrong: enter using the actual market price, never the averaged Heikin-Ashi value, since the HA value isn't a real tradable price."
+        },
+        {
+          "title": "Switch back to a regular candlestick chart to set your stop",
+          "detail": "Place the stop at the most recent swing high or low on the real price chart — not on the Heikin-Ashi candle's high or low, which is an average and not a real level the market actually touched."
+        },
+        {
+          "title": "Watch for a colour change or shrinking bodies as an exit cue",
+          "detail": "A colour flip, or a run of small-bodied candles with wicks on both sides, is typically read as the trend losing steam — that's the point to tighten up or exit rather than wait for a full reversal."
+        },
+        {
+          "title": "Don't act on the first colour change without confirmation",
+          "detail": "A single flipped candle or doji-like bar can be noise rather than a genuine reversal — wait for the next candle, or support from another indicator, before treating it as confirmed."
+        }
+      ],
+      "videos": [
+        {
+          "title": "How to Trade Heikin Ashi Candlesticks l Step by Step Beginner's Guide",
+          "url": "https://www.youtube.com/watch?v=wf5hzAY_7j8",
+          "note": "A beginner-pitched, step-by-step walkthrough of reading Heikin-Ashi candles for trend strength, which is the main practical use case for this chart type."
+        }
+      ]
     },
     {
       "ref_id": "T3-13",
@@ -3351,7 +3887,52 @@
         "StockCharts ChartSchool, \"Average True Range\" and \"Chandelier Exit\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/atr-volatility-breakout.png",
+        "caption": "A synthetic chart showing a volatility breakout above an ATR-based trigger level."
+      },
+      "step_by_step": [
+        {
+          "title": "Add ATR with its standard 14-period setting",
+          "detail": "ATR measures the average size of a bar's trading range over the chosen period — it doesn't tell you direction, only how much an instrument is typically moving."
+        },
+        {
+          "title": "Identify a consolidation phase first",
+          "detail": "Look for price trading within a narrow range, with ATR itself relatively low and flat — this is the 'coiled spring' condition the breakout strategy is designed to catch the release from."
+        },
+        {
+          "title": "Watch for ATR to start rising",
+          "detail": "A meaningful increase in ATR signals that volatility is expanding, which is what you want to see alongside a price move out of the range, not a move on flat or falling volatility."
+        },
+        {
+          "title": "Define your breakout trigger as a multiple of ATR",
+          "detail": "A common rule is entering when price closes beyond the day's open (or the prior close) by more than k times ATR — using ATR instead of a fixed point/pip distance means the trigger automatically adapts to how volatile the instrument currently is."
+        },
+        {
+          "title": "Enter in the direction of the confirmed breakout",
+          "detail": "Enter once price has closed beyond the ATR-based trigger level, in the direction of the move — this dynamic threshold is specifically meant to filter out minor price wiggles that aren't a genuine expansion."
+        },
+        {
+          "title": "Set your initial stop as a different ATR multiple",
+          "detail": "A separate, usually smaller multiple of ATR from your entry (entry minus m×ATR for longs) gives you a stop sized to current volatility rather than an arbitrary fixed amount."
+        },
+        {
+          "title": "Trail the stop with a Chandelier-style exit as the trade runs",
+          "detail": "The Chandelier Exit trails the stop from the highest high reached since entry, minus a multiple of ATR (and the mirror for shorts) — this lets the stop follow the trade without giving back the whole move on a pullback."
+        },
+        {
+          "title": "Reassess if volatility collapses again",
+          "detail": "If ATR falls back toward its pre-breakout level, the expansion that triggered the trade may be over — treat that as a cue to tighten the stop further rather than assuming the move will keep going."
+        }
+      ],
+      "videos": [
+        {
+          "title": "How To Use ATR For Stop Loss In Trading",
+          "url": "https://www.youtube.com/watch?v=3RCFmTrEsZI",
+          "note": "Focuses specifically on using ATR to size stops to current volatility rather than a fixed distance, which is the part of this strategy most traders get the most direct use out of."
+        }
+      ]
     },
     {
       "ref_id": "T3-14",
@@ -3414,7 +3995,52 @@
         "StockCharts ChartSchool, \"Keltner Channels\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/keltner-channel-pullback.png",
+        "caption": "A synthetic chart showing price trending inside Keltner Channel bands with a pullback to the midline."
+      },
+      "step_by_step": [
+        {
+          "title": "Add Keltner Channels with the standard setup",
+          "detail": "A 20-period EMA as the middle line, with the upper and lower bands set at an ATR multiple above and below it (common multiples are 1.5-2x ATR)."
+        },
+        {
+          "title": "Establish the channel's slope and direction",
+          "detail": "An upward-sloping channel with a pattern of higher highs and higher lows defines an uptrend setup; a downward-sloping channel with lower highs and lower lows defines a downtrend setup."
+        },
+        {
+          "title": "Wait for a pullback toward the middle line",
+          "detail": "In an uptrend, wait for price to pull back from the upper band toward the centreline EMA (or into the lower half of the channel) rather than chasing price while it's still extended at the upper band."
+        },
+        {
+          "title": "Check that the prior swing low hasn't broken",
+          "detail": "The pullback should hold above the previous swing low — if that level breaks during the pullback, the trend structure itself is now in question, and this setup no longer applies."
+        },
+        {
+          "title": "Wait for a clear bullish (or bearish) trigger at the centreline",
+          "detail": "Don't enter on the pullback alone — wait for a specific trigger such as a bullish engulfing candle at the centreline, a reclaim of a short-term high, or a break of the pullback's own minor trendline."
+        },
+        {
+          "title": "Enter on the trigger, with the trend",
+          "detail": "For the mirror short setup: a downward-sloping channel, a pullback up into the upper half, and a bearish trigger at the centreline."
+        },
+        {
+          "title": "Place your stop beyond the pullback's swing",
+          "detail": "Stop just past the pullback's low (longs) or high (shorts) — ideally not sitting exactly on a channel line, since price can briefly tag a band without the setup actually failing."
+        },
+        {
+          "title": "Target the opposite band",
+          "detail": "The far channel line (upper band for longs, lower band for shorts) is the typical target, which tends to give roughly a 2:1 reward-to-risk ratio since the stop distance is usually about half the distance to that target."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Keltner Channel Trading Strategy Explained For Beginners",
+          "url": "https://www.youtube.com/watch?v=ylmMOcYPtQw",
+          "note": "A beginner-focused explanation of how to use Keltner Channels for trend and pullback trading, useful background before the more advanced backtested versions out there."
+        }
+      ]
     },
     {
       "ref_id": "T3-15",
@@ -3477,7 +4103,52 @@
         "Investopedia, \"Pullback\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/ma-pullback-continuation.png",
+        "caption": "A synthetic chart showing price pulling back to a rising moving average before continuing the trend."
+      },
+      "step_by_step": [
+        {
+          "title": "Confirm the trend with two moving averages",
+          "detail": "A common setup uses the 20 EMA and 50 EMA: the 20 EMA staying above the 50 EMA signals an ongoing uptrend, and the 20 EMA below the 50 EMA signals a downtrend."
+        },
+        {
+          "title": "Be patient and wait for the pullback to actually happen",
+          "detail": "Once the trend is established, wait for price to retrace back to a key moving average (the 20 or 50 EMA) rather than chasing it while it's still extended — pullbacks typically retrace somewhere between 20-62% of the preceding move, often near the 38.2%, 50% or 61.8% Fibonacci levels too."
+        },
+        {
+          "title": "Watch which moving average price is pulling back to",
+          "detail": "A shallower pullback that holds the 20 EMA suggests a stronger trend; a deeper one that reaches the 50 EMA is still valid but suggests the trend has lost a bit more steam."
+        },
+        {
+          "title": "Look for a specific confirmation candle",
+          "detail": "A bullish engulfing candle or a hammer at the moving average, in an uptrend, both suggest buyers are stepping back in. The mirror patterns — a bearish engulfing candle or a shooting star — suggest the same for a downtrend."
+        },
+        {
+          "title": "Enter once the confirmation candle closes",
+          "detail": "Enter as price shows signs of resuming the trend, rather than anticipating the bounce before it's actually confirmed."
+        },
+        {
+          "title": "Place your stop beyond the pullback's extreme",
+          "detail": "Stop slightly below the recent swing low (uptrend) or above the recent swing high (downtrend) that the pullback formed."
+        },
+        {
+          "title": "Target the previous high, a resistance level, or a fixed ratio",
+          "detail": "Common targets are the prior swing high (for longs), a known resistance level, or simply a 1:2 risk-to-reward ratio from your stop distance."
+        },
+        {
+          "title": "Reset and wait for the next pullback once the trade closes",
+          "detail": "This is a repeatable, trend-following setup rather than a one-off trade — in a persistent trend, the same process can be applied again at the next pullback to the moving average."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Trade Pullbacks Like a Pro: Simple Moving Average Strategy That Works",
+          "url": "https://www.youtube.com/watch?v=zOMBmkBaP6A",
+          "note": "Covers the moving-average pullback approach alongside basic trend trading and multi-timeframe context, which is useful since this setup depends heavily on correctly reading the higher-timeframe trend first."
+        }
+      ]
     },
     {
       "ref_id": "T3-16",
@@ -3539,7 +4210,52 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/pivot-points.png",
+        "caption": "A synthetic chart showing standard pivot, support and resistance levels (P, R1, R2, S1, S2)."
+      },
+      "step_by_step": [
+        {
+          "title": "Calculate the standard pivot and its levels",
+          "detail": "P = (H+L+C)/3 using the prior period's high, low and close. From there: R1 = 2P−L, S1 = 2P−H, R2 = P+(H−L), S2 = P−(H−L), with R3 and S3 extending the pattern further. Most charting platforms calculate and plot these automatically."
+        },
+        {
+          "title": "Use the central pivot (P) as your daily bias line",
+          "detail": "Price trading above P for the session is generally read as a bullish bias for the day; trading below P is read as bearish — this is the first, simplest read before looking at any of the other levels."
+        },
+        {
+          "title": "Decide whether the market is trending or ranging",
+          "detail": "This decision changes how you use every level below it — pivot points are best used for trend breakouts in a trending market, and best avoided (or used only for the bounce strategy) in a ranging one."
+        },
+        {
+          "title": "In ranging conditions, trade the bounce off S1/R1",
+          "detail": "Wait for price to reach S1 or R1, then look for a bullish (at S1) or bearish (at R1) candlestick pattern, or another indicator turning in your favour, before entering — don't fade the level purely because price touched it."
+        },
+        {
+          "title": "In trending conditions, trade the breakout of R1/S1",
+          "detail": "In a strong uptrend, enter aggressively as price breaks decisively above R1 or R2, or wait for a retest where the broken resistance now holds as support before entering with more confirmation."
+        },
+        {
+          "title": "Place your stop just below the support (bounce) or the breakout level (trend)",
+          "detail": "For a bounce trade, stop just below the support level; for a breakout trade, stop just below the level that was broken, since a failed retest there invalidates the setup."
+        },
+        {
+          "title": "Target the next pivot level",
+          "detail": "R1/R2 (or S1/S2 for shorts) are the typical targets — the central pivot (P) itself is treated as bias, not usually a target."
+        },
+        {
+          "title": "Re-calculate at the start of each new session",
+          "detail": "Daily pivots use the prior day's high/low/close, weekly pivots use the prior week's, and so on — recalculate fresh levels at the start of each period you trade rather than carrying old ones forward."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Pivot Points Day Trading Strategy That Actually Works!",
+          "url": "https://www.youtube.com/watch?v=TMv1wJsU5lA",
+          "note": "A practical day-trading walkthrough of using pivot levels, which pairs well with the bounce-versus-breakout distinction that's the most important judgment call in this strategy."
+        }
+      ]
     },
     {
       "ref_id": "T3-17",
@@ -3600,7 +4316,52 @@
         "TradingView Help, \"VWAP\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/vwap-reversion-trend.png",
+        "caption": "A synthetic chart showing price fading back toward VWAP from an extended standard-deviation band."
+      },
+      "step_by_step": [
+        {
+          "title": "Anchor VWAP to the session open",
+          "detail": "For intraday trading, VWAP should reset at the start of each session so it reflects that day's volume-weighted fair value, not a running average carried over from previous days."
+        },
+        {
+          "title": "Plot standard-deviation bands around VWAP",
+          "detail": "Bands at one and two (sometimes three) standard deviations above and below VWAP expand and contract with volatility, and are what the reversion side of this strategy actually trades off of."
+        },
+        {
+          "title": "Read the day's regime before picking an approach",
+          "detail": "Watch whether a push away from VWAP gets strong follow-through (suggesting a trending session, favouring trend trades with VWAP) or gets rejected back toward VWAP (suggesting a sideways session, favouring reversion trades)."
+        },
+        {
+          "title": "For reversion: wait for price to reach an extreme band",
+          "detail": "Price needs to trade to or beyond the second standard-deviation band, during sideways/choppy conditions with no strong news driver, before the reversion setup applies at all."
+        },
+        {
+          "title": "Wait for a rejection candle at that extreme before entering",
+          "detail": "A long upper wick at the upper band, or a long lower wick at the lower band, signals that buyers or sellers absorbed the push — that rejection candle, not the band touch itself, is the actual entry trigger."
+        },
+        {
+          "title": "For trend trades: buy pullbacks to VWAP instead of fading it",
+          "detail": "On a day that's showing strong directional follow-through, treat the first pullback to VWAP as a continuation entry in the direction of that follow-through, rather than fading the move."
+        },
+        {
+          "title": "Set your target and stop around VWAP itself",
+          "detail": "For reversion trades, a first target is the midpoint back toward VWAP (around 1 to 1.5R), with a stop placed just beyond the 2SD band; if price pushes through to the 3SD band, the reversion read is broken and it's time to exit. For trend trades, VWAP itself often becomes the trailing stop level."
+        },
+        {
+          "title": "Avoid this strategy entirely on strong trend days",
+          "detail": "VWAP reversion performs badly on days with a clear, strong trend and no chop — a regime filter (step 3) isn't optional, it's what keeps this strategy from losing badly on the wrong kind of day."
+        }
+      ],
+      "videos": [
+        {
+          "title": "VWAP Trading Strategy Explained (Best Entry & Exit Setup)",
+          "url": "https://www.youtube.com/watch?v=qw9ypnmAQ-E",
+          "note": "Covers both entry and exit mechanics around VWAP specifically, which matters here since knowing when to exit a reversion trade (back at VWAP, or at the first standard-deviation band) is as important as the entry."
+        }
+      ]
     },
     {
       "ref_id": "T3-18",
@@ -3666,7 +4427,48 @@
         "kind": "synthetic",
         "src": "/strategies/opening-range-breakout.png",
         "caption": "A fabricated opening range with price breaking above it later in the session."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Pick your opening-range window",
+          "detail": "5, 15 or 30 minutes after the open are the most common choices — a 15-minute window is the most widely used, balancing speed of signal against reliability."
+        },
+        {
+          "title": "Draw the range's high and low",
+          "detail": "On a 1-, 3- or 5-minute chart, mark the highest high and lowest low of that opening window as a box — that box is the 'opening range' the rest of the strategy is built around."
+        },
+        {
+          "title": "Favour instruments with a reason to move",
+          "detail": "This strategy works best on stocks or instruments with high trading volume, pre-market news, an earnings announcement, a gap at the open, or otherwise unusual momentum — a quiet, low-volume name is a weak candidate for it."
+        },
+        {
+          "title": "Wait for a candle close beyond the range, not just a wick",
+          "detail": "A bullish breakout needs a candle to close above the range high; a bearish breakout needs a close below the range low. A wick alone that pokes outside the range and closes back inside is not a confirmed breakout."
+        },
+        {
+          "title": "Check volume on the breakout candle",
+          "detail": "Relative volume (RVOL) above about 1.5, with the breakout candle's volume higher than the prior 5-10 bars, meaningfully increases the odds the breakout holds rather than immediately failing."
+        },
+        {
+          "title": "Choose between an aggressive or a retest entry",
+          "detail": "An aggressive entry takes the breakout as soon as it's confirmed; a more conservative entry waits for price to pull back and retest the broken level before entering, trading a worse average price for better confirmation."
+        },
+        {
+          "title": "Set your stop at the opposite side of the range",
+          "detail": "For a long entered on an upside breakout, stop below the range low; for a short, stop above the range high."
+        },
+        {
+          "title": "Target a multiple of the range itself",
+          "detail": "A first target of 1x the range's height is common, with further targets at 2x the range or at the next session level (such as the pre-market high/low or VWAP), aiming for at least a 1:1 risk-to-reward and often 1.5-2:1 when conditions are strong."
+        }
+      ],
+      "videos": [
+        {
+          "title": "MASTER the 15-Minute ORB in 8 Minutes [Opening Range Breakout]",
+          "url": "https://www.youtube.com/watch?v=Kw0pk9QCbOE",
+          "note": "A condensed walkthrough of the 15-minute opening-range version specifically, which is the most commonly used window for this strategy."
+        }
+      ]
     },
     {
       "ref_id": "T3-19",
@@ -3723,7 +4525,52 @@
         "Investopedia, \"Gap\" and \"Gap Trading\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/gap-fill-gap-and-go.png",
+        "caption": "A synthetic chart showing a gap up against the prior close, the level a gap-fill trade would target."
+      },
+      "step_by_step": [
+        {
+          "title": "Identify the gap at the open",
+          "detail": "A gap occurs when price opens meaningfully above or below the previous day's close — note the size of the gap (often expressed as a percentage) as your first filter."
+        },
+        {
+          "title": "Check for a catalyst behind the gap",
+          "detail": "A strong catalyst (an earnings beat, FDA approval, M&A news) reduces the odds of the gap filling and favours the gap-and-go approach. No catalyst, or a weak one (an analyst note, sector sympathy), favours the gap-fill approach instead."
+        },
+        {
+          "title": "Check pre-market and early volume",
+          "detail": "High pre-market volume on the gap suggests genuine institutional interest rather than a handful of retail orders moving a thin stock — low volume on a big gap is a warning sign either way."
+        },
+        {
+          "title": "Let the first few minutes of chaos settle",
+          "detail": "For a potential gap-fill trade, watch the first 15 minutes: if the stock fails to make a new high (on a gap-up) and shows rejection candles, the odds of a fill increase. For a potential gap-and-go trade, let the first 5-minute candle close before acting at all."
+        },
+        {
+          "title": "For gap-and-go: enter above the early high with volume behind it",
+          "detail": "Enter above the high of the first few minutes once that first candle closes, with the stop placed below the low of the same window — this is a continuation trade, riding the gap's direction."
+        },
+        {
+          "title": "For gap-fill: enter on a break of the opening range, against the gap",
+          "detail": "Enter when price breaks below the opening range (for a gap-up fill trade), with the stop placed above the high of day — this is a reversion trade, betting the gap closes back toward the prior close."
+        },
+        {
+          "title": "Target appropriately for each approach",
+          "detail": "For gap-and-go, trail the stop behind each new opening-range retest rather than exiting the whole position at once. For gap-fill, target the previous close — the actual 'fill' level — and consider taking partial profit at the halfway point."
+        },
+        {
+          "title": "Never run both approaches on the same gap at once",
+          "detail": "Gap-fill and gap-and-go are opposite bets on the same setup — decide which one the catalyst and early price action supports (steps 2-4) before choosing a side, rather than trying to play both."
+        }
+      ],
+      "videos": [
+        {
+          "title": "This Gap Trading Strategy Prints You Money (Gap Up, Gap Down, Gap Fill)",
+          "url": "https://www.youtube.com/watch?v=qkChxbuUqvU",
+          "note": "Covers gap-up, gap-down and gap-fill scenarios in one video, which suits this strategy since it's really two opposite approaches (continuation vs. reversion) to the same setup."
+        }
+      ]
     },
     {
       "ref_id": "T3-20",
@@ -3784,7 +4631,52 @@
         "StockCharts ChartSchool, \"Narrow Range Day NR7\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/inside-bar-nr7.png",
+        "caption": "A synthetic chart showing a narrow-range inside bar before a breakout."
+      },
+      "step_by_step": [
+        {
+          "title": "Understand what you're screening for",
+          "detail": "An inside bar has its full range contained within the prior bar's range. NR7 is a bar whose range is the smallest of the last 7 bars (including itself). Both describe the same underlying idea: volatility has contracted."
+        },
+        {
+          "title": "Build a watchlist using either (or both) conditions",
+          "detail": "Scan for instruments currently printing an NR7 bar, an inside bar, or the stricter combination of both (sometimes called ID/NR4 when paired with a 4-bar range check) — most charting platforms can screen for these automatically."
+        },
+        {
+          "title": "Treat the pattern as a volatility-contraction signal, not a direction signal",
+          "detail": "The idea mirrors a Bollinger Band squeeze: a period of unusually low volatility tends to be followed by a period of higher volatility — the pattern doesn't tell you which way the expansion will break, only that one is more likely coming."
+        },
+        {
+          "title": "Mark the narrow bar's high and low as your trigger levels",
+          "detail": "These two levels — the top and bottom of the contracted bar — become the breakout triggers for whichever direction the market actually chooses."
+        },
+        {
+          "title": "Place entry stops on both sides",
+          "detail": "A buy-stop just above the narrow bar's high and a sell-stop just below its low, with one order automatically cancelling the other once either is triggered — this is a 'straddle' approach that doesn't require you to predict direction in advance."
+        },
+        {
+          "title": "Let whichever side triggers first become your position",
+          "detail": "Once price breaks one side, you're in that direction, and the untouched opposite-side order is cancelled."
+        },
+        {
+          "title": "Set your stop at the opposite side of the narrow bar",
+          "detail": "If you're long after an upside break, your stop sits at the low of the narrow bar (now acting as the opposite stop-and-reverse point); mirror this for a short entry."
+        },
+        {
+          "title": "Target a measured move from the breakout",
+          "detail": "A common approach projects the height of the narrow bar's range (or a recent average range) from the breakout point as a first target, adjusting based on how strongly the move is following through."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Learn To Trade The Inside Day NR5 + NR7 Bars",
+          "url": "https://www.youtube.com/watch?v=kJFVvZ4Xbio",
+          "note": "Covers the inside-bar and NR7 concepts together in one video, which matches how this strategy page treats them as the same underlying idea read two different ways."
+        }
+      ]
     },
     {
       "ref_id": "T3-21",
@@ -3848,7 +4740,52 @@
         "Rhea, \"The Dow Theory\""
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/dow-theory.png",
+        "caption": "A schematic of a Dow Theory primary uptrend: higher highs and higher lows with secondary reactions between them."
+      },
+      "step_by_step": [
+        {
+          "title": "Learn the three trend timeframes",
+          "detail": "Dow Theory separates the primary trend (the broad, months-to-years direction), the secondary trend (weeks-to-months corrections against it) and the minor trend (day-to-day noise). Use a weekly chart for the primary trend, daily for secondary, and intraday only for the minor trend."
+        },
+        {
+          "title": "Confirm the primary trend with higher highs and higher lows",
+          "detail": "An uptrend is defined by a consistent pattern of higher highs and higher lows; a downtrend by lower highs and lower lows. This structural read is the foundation everything else in the theory builds on."
+        },
+        {
+          "title": "Look for confirmation across related indices",
+          "detail": "The classic version of this requires the Dow Jones Industrial Average and Dow Jones Transportation Average to move in the same direction before a trend is considered valid — the modern equivalent is checking that a market's major index and a closely related gauge (for example, a sector index and its leading component) are telling the same story."
+        },
+        {
+          "title": "Check that volume supports the trend",
+          "detail": "Rising prices on increasing volume is read as a strong, healthy trend. Look for above-average volume on moves with the trend and lower volume on counter-trend pullbacks."
+        },
+        {
+          "title": "Expect and wait out secondary reactions",
+          "detail": "A primary trend doesn't move in a straight line — secondary reactions typically retrace 33-66% of the move so far. Don't treat a pullback of this size as a trend change; wait for it to end and for price to resume with volume support before acting."
+        },
+        {
+          "title": "Only trade in the direction of the confirmed primary trend",
+          "detail": "Enter in the direction of the established higher-high/higher-low (or lower-high/lower-low) structure, once a secondary reaction has run its course — Dow Theory is a trend-following framework, not a reversal-picking one."
+        },
+        {
+          "title": "Treat a reversal as unconfirmed until proven",
+          "detail": "A trend is assumed intact until it gives a clear signal otherwise — specifically, a lower high followed by a break of the prior swing low (for an uptrend) is what marks a confirmed reversal, not a single lower high on its own."
+        },
+        {
+          "title": "Place your stop below the most recent confirmed higher low",
+          "detail": "This keeps your risk tied to the same structural logic the strategy uses to define the trend in the first place, and apply 1-2% account risk per trade as a general rule, reducing it further during high-volatility periods like earnings season."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Master Dow Theory: Read Market Trends Like a Professional Trader",
+          "url": "https://www.youtube.com/watch?v=Rtyl12u1_3k",
+          "note": "Frames Dow Theory as a structured way to read overall market direction rather than reacting to every short-term wiggle, which is how it's actually used by most traders today."
+        }
+      ]
     },
     {
       "ref_id": "T3-22",
@@ -3911,7 +4848,52 @@
         "TradingView Education"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/supply-and-demand-zones.png",
+        "caption": "A synthetic chart showing a demand zone that price departs from sharply, then returns to later."
+      },
+      "step_by_step": [
+        {
+          "title": "Find a clear, sharp move away from a level",
+          "detail": "Look for a rally or decline that departed quickly and decisively from a price area — the sharper and faster the departure, the more significant the zone it left behind is considered."
+        },
+        {
+          "title": "Trace the move back to where it started",
+          "detail": "Follow the rally or decline backward to its origin — the small area of consolidation just before the sharp move began is the 'base', and that base is what becomes your zone."
+        },
+        {
+          "title": "Mark the zone as a range, not a single line",
+          "detail": "Draw a rectangle encompassing the full price range of that base/consolidation area, rather than a single horizontal line — zones are areas where orders are thought to sit, not an exact price point."
+        },
+        {
+          "title": "Check volume at the base for extra confidence",
+          "detail": "Higher volume during the base's formation is read as stronger evidence of real demand (or supply) sitting in that area, versus a quiet, low-volume base."
+        },
+        {
+          "title": "Prefer zones price hasn't returned to yet",
+          "detail": "A 'fresh' zone — one price hasn't revisited since it was formed — is considered to have a better chance of producing a reaction than one that's already been tested and partly used up."
+        },
+        {
+          "title": "Confirm the zone across two timeframes if you can",
+          "detail": "Identify the zone on a higher timeframe (e.g. daily) first, then zoom into a lower timeframe (e.g. 4-hour) to find a smaller zone that sits within it — when both line up, the case for a reaction there is considered stronger."
+        },
+        {
+          "title": "Wait for price to return and show a reaction, not just arrive",
+          "detail": "For a demand zone, wait for a bounce to actually show up — a bullish engulfing candle or a visible surge in buying — rather than entering the instant price touches the zone. Mirror this for supply zones and bearish rejection."
+        },
+        {
+          "title": "Set your stop just beyond the zone and target the opposite one",
+          "detail": "A stop a little below a demand zone (or above a supply zone) gives the trade room without being unreasonably wide, and the next opposing zone (supply for a long, demand for a short) becomes the typical target."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Supply and Demand Trading Strategy (Beginners Tutorial)",
+          "url": "https://www.youtube.com/watch?v=EL6CelKWvuA",
+          "note": "A step-by-step beginner's guide to marking and trading supply/demand zones, applicable to both forex and stocks, which matches how this strategy is used across different markets."
+        }
+      ]
     },
     {
       "ref_id": "T3-23",
@@ -3977,7 +4959,48 @@
         "kind": "synthetic",
         "src": "/strategies/head-and-shoulders.png",
         "caption": "A schematic head-and-shoulders top with its neckline marked."
-      }
+      },
+      "step_by_step": [
+        {
+          "title": "Identify the three peaks (or troughs for the inverse)",
+          "detail": "Classic head and shoulders: a left shoulder, a higher middle peak (the head), then a right shoulder roughly matching the left — all forming after an uptrend. Inverse head and shoulders is the same shape flipped upside down, forming after a downtrend, with three troughs instead of three peaks."
+        },
+        {
+          "title": "Draw the neckline",
+          "detail": "Connect the two low points between the shoulders and the head (for the standard pattern), or the two high points between them (for the inverse) — this line is what the pattern needs to break for confirmation."
+        },
+        {
+          "title": "Wait for a decisive close beyond the neckline",
+          "detail": "Confirmation happens when price closes clearly beyond the neckline, ideally on strong volume — a brief wick through the neckline that closes back on the other side doesn't count as confirmation."
+        },
+        {
+          "title": "Choose between an immediate entry or a retest entry",
+          "detail": "You can enter as soon as the neckline break is confirmed, or wait for price to pull back and retest the broken neckline (which now often acts as the opposite type of level) before entering — the retest trades a worse price for more confidence."
+        },
+        {
+          "title": "Place your stop based on your risk tolerance",
+          "detail": "A tighter stop sits just beyond the right shoulder; a wider stop that allows for more fluctuation sits beyond the head itself. Pick based on how much room you want to give the trade."
+        },
+        {
+          "title": "Measure the pattern's height for your target",
+          "detail": "Measure the vertical distance from the head to the neckline, then project that same distance from the breakout point in the direction of the new trend — this gives an approximate price target."
+        },
+        {
+          "title": "Keep risk small and consistent regardless of pattern type",
+          "detail": "Limiting risk to roughly 1-2% of account capital per trade applies just as much to a chart-pattern trade like this as to any indicator-based one."
+        },
+        {
+          "title": "Know what a failed pattern looks like too",
+          "detail": "If price breaks the neckline but quickly reclaims it and continues the original trend instead, the pattern has failed — treat that reclaim as your cue to exit rather than waiting for the stop to be hit."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Head and shoulders patterns - trade like the pros",
+          "url": "https://www.youtube.com/watch?v=kYdNIqn3I3o",
+          "note": "Covers both the standard and inverse versions of the pattern in detail, including the market psychology behind why the pattern is read the way it is and a rule-based plan for trading it."
+        }
+      ]
     },
     {
       "ref_id": "T3-24",
@@ -4041,7 +5064,52 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/flags-pennants-wedges.png",
+        "caption": "A synthetic chart showing a flagpole move, a flag consolidation, and a continuation breakout."
+      },
+      "step_by_step": [
+        {
+          "title": "Learn the shared structure: pole, consolidation, breakout",
+          "detail": "Every flag or pennant has a sharp 'flagpole' move, a brief consolidation against that move, and then a breakout continuing in the pole's original direction. Wedges share the converging-lines look but are typically read differently (see step 2)."
+        },
+        {
+          "title": "Tell the three patterns apart by shape",
+          "detail": "A flag consolidates in a shallow, roughly parallel channel angled against the pole. A pennant consolidates into a small symmetrical triangle. A wedge has converging lines like a pennant, but both lines slope the same direction (rising or falling) rather than one flat and one sloped."
+        },
+        {
+          "title": "Confirm the prior trend the pattern formed in",
+          "detail": "Flags and pennants need an established trend before them to be continuation patterns at all — without a clear prior pole move, what looks like a flag or pennant is just a random consolidation."
+        },
+        {
+          "title": "Check the volume pattern through the formation",
+          "detail": "Expect high volume during the pole, decreasing volume during the consolidation, and a renewed spike in volume on the eventual breakout — a breakout on weak volume is a lower-confidence signal."
+        },
+        {
+          "title": "Treat rising/falling wedges with the opposite bias",
+          "detail": "A rising wedge inside an uptrend is read as more likely to break down (bearish) roughly two-thirds of the time, and a falling wedge inside a downtrend as more likely to break up (bullish) — this is the opposite read from flags and pennants, so don't apply continuation logic to a wedge by habit."
+        },
+        {
+          "title": "Choose your entry style",
+          "detail": "A more aggressive entry acts on a candle close beyond the pattern's boundary with a volume spike; a more conservative entry waits for price to break out and then pull back to retest the broken boundary before entering."
+        },
+        {
+          "title": "Place your stop at the pattern's far boundary",
+          "detail": "For flags and pennants, a stop at the low (for a bullish breakout) or high (for a bearish one) of the pattern — a break back through that level means the pattern has failed."
+        },
+        {
+          "title": "Target the flagpole's length from the breakout",
+          "detail": "Measure the height of the flagpole move and project that same distance from the breakout point — this measured-move target is the standard way these continuation patterns are projected forward."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Using Triangles, Pennants, Flags & Head & Shoulders Patterns To Interpret Price Action",
+          "url": "https://www.youtube.com/watch?v=reGqqMrkN7s",
+          "note": "Covers flags, pennants and wedge-adjacent triangle patterns together, which is useful since telling these shapes apart by eye (and knowing which ones reverse versus continue) is the hardest part of trading them."
+        }
+      ]
     },
     {
       "ref_id": "T3-25",
@@ -4100,7 +5168,52 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/cup-and-handle.png",
+        "caption": "A synthetic chart showing a rounded cup, a handle pullback, and a breakout above the cup's rim."
+      },
+      "step_by_step": [
+        {
+          "title": "Confirm the prior trend was bullish",
+          "detail": "A genuine cup and handle needs an existing uptrend before it forms — this is a continuation pattern, not one that appears out of nowhere in a downtrend or a flat market."
+        },
+        {
+          "title": "Check the cup's shape and depth",
+          "detail": "The cup should look like a smooth, rounded 'U' rather than a sharp V, with a depth that retraces roughly 30-50% from the prior high. This typically takes weeks to months to form, not days."
+        },
+        {
+          "title": "Check the handle's shape and depth separately",
+          "detail": "The handle is a smaller downward drift or sideways move after the cup, retracing ideally 10-30% of the cup's height, and typically taking days to weeks to form — a handle that's too deep or too long starts to undermine the pattern."
+        },
+        {
+          "title": "Wait for the handle to fully complete",
+          "detail": "Only consider entering once price has finished consolidating near resistance at the end of the handle — entering while the handle is still forming risks catching it before it's actually done."
+        },
+        {
+          "title": "Enter on a strong-volume breakout above handle resistance",
+          "detail": "A volume spike on the breakout is the key confirmation signal here. More conservative traders wait for a full daily (or weekly) close above the breakout level rather than acting on an intraday poke above it."
+        },
+        {
+          "title": "Place your stop below the handle's low",
+          "detail": "A stop slightly below the handle's low, or at the handle's midpoint for a tighter risk, limits the damage if the breakout fails and price falls back into the handle."
+        },
+        {
+          "title": "Measure the cup's depth for your profit target",
+          "detail": "Measure from the cup's low to its rim (the neckline level), then project that same distance upward from the breakout point as your target."
+        },
+        {
+          "title": "Apply a hard loss-cut rule regardless of the stop",
+          "detail": "William O'Neil, who popularised this pattern, suggested cutting losses at roughly 7-8% below the breakout point no matter what — a hard backstop in case the technical stop level doesn't hold cleanly."
+        }
+      ],
+      "videos": [
+        {
+          "title": "Mastering the Cup and Handle Pattern: A Complete Guide",
+          "url": "https://www.youtube.com/watch?v=7Eb6sdZWojA",
+          "note": "A complete walkthrough of the pattern's characteristics, the step-by-step trading process, and how to calculate the measured target — including the inverted (bearish) version of the pattern too."
+        }
+      ]
     },
     {
       "ref_id": "T3-W1",
