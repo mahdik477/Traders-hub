@@ -2604,7 +2604,11 @@
         "Investopedia, \"Divergence\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/rsi-divergence.png",
+        "caption": "A synthetic chart showing price printing a higher high while RSI prints a lower high — classic bearish divergence."
+      },
       "step_by_step": [
         {
           "title": "Confirm the prevailing trend first",
@@ -2709,7 +2713,11 @@
         "Appel"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/macd-divergence.png",
+        "caption": "A synthetic chart showing price making a higher high while the MACD histogram makes a lower high."
+      },
       "step_by_step": [
         {
           "title": "Set up MACD with its standard inputs",
@@ -2811,7 +2819,11 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/stochastic-oscillator.png",
+        "caption": "A synthetic chart with %K and %D crossing up from below 20 and down from above 80."
+      },
       "step_by_step": [
         {
           "title": "Add the Stochastic with settings matched to your style",
@@ -2914,7 +2926,11 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/cci-strategies.png",
+        "caption": "A synthetic chart showing CCI swinging between the ±100 extreme levels."
+      },
       "step_by_step": [
         {
           "title": "Add CCI to your chart",
@@ -3017,7 +3033,11 @@
         "StockCharts ChartSchool, \"Williams %R\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/williams-percent-r.png",
+        "caption": "A synthetic chart showing Williams %R on its inverted 0 to −100 scale."
+      },
       "step_by_step": [
         {
           "title": "Understand the inverted scale before anything else",
@@ -3118,7 +3138,11 @@
         "StockCharts ChartSchool, \"Rate of Change (ROC)\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/momentum-rate-of-change.png",
+        "caption": "A synthetic chart showing price with its Rate of Change oscillator below, crossing the zero line."
+      },
       "step_by_step": [
         {
           "title": "Choose your look-back period",
@@ -3219,7 +3243,11 @@
         "StockCharts ChartSchool, \"Relative Strength (Price Relative)\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/relative-strength-rotation.png",
+        "caption": "A synthetic comparison of a leading sector, a lagging sector and the benchmark they're measured against."
+      },
       "step_by_step": [
         {
           "title": "Pick your universe of assets",
@@ -3318,7 +3346,11 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/on-balance-volume.png",
+        "caption": "A synthetic chart showing price printing a lower low while On-Balance Volume prints a higher low."
+      },
       "step_by_step": [
         {
           "title": "Add OBV below your price chart",
@@ -3422,7 +3454,11 @@
         "Wilder (1978)"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/adx-dmi-trend-strength.png",
+        "caption": "A synthetic chart showing +DI, −DI and ADX, with ADX rising above the 25 trend-strength line."
+      },
       "step_by_step": [
         {
           "title": "Add ADX/DMI with the standard 14-period setting",
@@ -3635,7 +3671,11 @@
         "Wilder (1978)"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/parabolic-sar.png",
+        "caption": "A synthetic chart showing Parabolic SAR dots flipping between sitting above and below price."
+      },
       "step_by_step": [
         {
           "title": "Set the standard acceleration parameters",
@@ -3739,7 +3779,11 @@
         "StockCharts ChartSchool, \"Heikin-Ashi\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/heikin-ashi-trend.png",
+        "caption": "A synthetic Heikin-Ashi chart showing runs of same-colour, low-wick candles during a trend."
+      },
       "step_by_step": [
         {
           "title": "Switch your chart type to Heikin-Ashi",
@@ -3843,7 +3887,11 @@
         "StockCharts ChartSchool, \"Average True Range\" and \"Chandelier Exit\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/atr-volatility-breakout.png",
+        "caption": "A synthetic chart showing a volatility breakout above an ATR-based trigger level."
+      },
       "step_by_step": [
         {
           "title": "Add ATR with its standard 14-period setting",
@@ -3947,7 +3995,11 @@
         "StockCharts ChartSchool, \"Keltner Channels\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/keltner-channel-pullback.png",
+        "caption": "A synthetic chart showing price trending inside Keltner Channel bands with a pullback to the midline."
+      },
       "step_by_step": [
         {
           "title": "Add Keltner Channels with the standard setup",
@@ -4051,7 +4103,11 @@
         "Investopedia, \"Pullback\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/ma-pullback-continuation.png",
+        "caption": "A synthetic chart showing price pulling back to a rising moving average before continuing the trend."
+      },
       "step_by_step": [
         {
           "title": "Confirm the trend with two moving averages",
@@ -4154,7 +4210,11 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/pivot-points.png",
+        "caption": "A synthetic chart showing standard pivot, support and resistance levels (P, R1, R2, S1, S2)."
+      },
       "step_by_step": [
         {
           "title": "Calculate the standard pivot and its levels",
@@ -4256,7 +4316,11 @@
         "TradingView Help, \"VWAP\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/vwap-reversion-trend.png",
+        "caption": "A synthetic chart showing price fading back toward VWAP from an extended standard-deviation band."
+      },
       "step_by_step": [
         {
           "title": "Anchor VWAP to the session open",
@@ -4461,7 +4525,11 @@
         "Investopedia, \"Gap\" and \"Gap Trading\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/gap-fill-gap-and-go.png",
+        "caption": "A synthetic chart showing a gap up against the prior close, the level a gap-fill trade would target."
+      },
       "step_by_step": [
         {
           "title": "Identify the gap at the open",
@@ -4563,7 +4631,11 @@
         "StockCharts ChartSchool, \"Narrow Range Day NR7\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/inside-bar-nr7.png",
+        "caption": "A synthetic chart showing a narrow-range inside bar before a breakout."
+      },
       "step_by_step": [
         {
           "title": "Understand what you're screening for",
@@ -4668,7 +4740,11 @@
         "Rhea, \"The Dow Theory\""
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/dow-theory.png",
+        "caption": "A schematic of a Dow Theory primary uptrend: higher highs and higher lows with secondary reactions between them."
+      },
       "step_by_step": [
         {
           "title": "Learn the three trend timeframes",
@@ -4772,7 +4848,11 @@
         "TradingView Education"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/supply-and-demand-zones.png",
+        "caption": "A synthetic chart showing a demand zone that price departs from sharply, then returns to later."
+      },
       "step_by_step": [
         {
           "title": "Find a clear, sharp move away from a level",
@@ -4984,7 +5064,11 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/flags-pennants-wedges.png",
+        "caption": "A synthetic chart showing a flagpole move, a flag consolidation, and a continuation breakout."
+      },
       "step_by_step": [
         {
           "title": "Learn the shared structure: pole, consolidation, breakout",
@@ -5084,7 +5168,11 @@
         "Investopedia"
       ],
       "controversy_flag": false,
-      "image": null,
+      "image": {
+        "kind": "synthetic",
+        "src": "/strategies/cup-and-handle.png",
+        "caption": "A synthetic chart showing a rounded cup, a handle pullback, and a breakout above the cup's rim."
+      },
       "step_by_step": [
         {
           "title": "Confirm the prior trend was bullish",

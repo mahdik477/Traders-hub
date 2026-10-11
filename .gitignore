@@ -42,3 +42,7 @@ next-env.d.ts
 
 # claude code (personal settings)
 .claude/settings.local.json
+
+# python (scripts/gen-strategy-charts.py)
+__pycache__/
+*.pyc
