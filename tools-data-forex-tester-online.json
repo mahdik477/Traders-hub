@@ -1,0 +1,38 @@
+{
+  "tool": {
+    "slug": "forex-tester-online",
+    "name": "Forex Tester Online",
+    "category": "backtesting",
+    "priority": 4,
+    "description": "Forex Tester Online is a browser backtester for forex and other retail markets. You replay tick data across several charts and can test both manual and automated ideas. A free demo is offered.",
+    "features": [
+      "Tick-level historical data and synced multi-chart replay",
+      "Economic calendar and project history that does not expire on the annual plans",
+      "The Pro plan adds a larger symbol list, an exit optimizer and prop-firm challenge practice",
+      "Free demo, with no card required to start"
+    ],
+    "plans": [
+      {
+        "name": "Starter, annual",
+        "price": "$159/yr",
+        "detail": "Promo price, shown as $13.25 per month. Non-promo price on the same page: $199 per year. The page says the promo price stays locked on renewal."
+      },
+      {
+        "name": "Pro, annual",
+        "price": "$239/yr",
+        "detail": "Promo price, shown as $19.92 per month. Non-promo price on the same page: $299 per year."
+      }
+    ],
+    "platforms": [
+      "Web"
+    ],
+    "website": "https://forextester.com/",
+    "pricing_note": "Annual USD prices from the official site on 11 Oct 2026. Monthly and lifetime options are also offered there. Taxes may apply.",
+    "affiliate_link": "",
+    "logo": "/tools/forex-tester-online.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://forextester.com/"
+  }
+}

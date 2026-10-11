@@ -1,0 +1,44 @@
+{
+  "tool": {
+    "slug": "chartvps",
+    "name": "ChartVPS",
+    "category": "vps",
+    "priority": 100,
+    "description": "ChartVPS sells managed trading servers, including CPU plans and GPU plans aimed at order-flow charts. Locations include Chicago, New York, London, Frankfurt, Singapore, Tokyo, Dallas and Hong Kong.",
+    "features": [
+      "CPU VPS on AMD Ryzen, plus NVIDIA GPU plans",
+      "Aimed at NinjaTrader, MetaTrader, MultiCharts, TradeStation, cTrader and thinkorswim",
+      "Daily snapshots and DDoS protection included, according to the homepage",
+      "Chicago latency to CME described as 0 to 1 ms typical"
+    ],
+    "plans": [
+      {
+        "name": "Alpha series",
+        "price": "From $50/mo",
+        "detail": "CPU VPS. Example spec: 2 cores, 4 GB RAM, 128 GB NVMe."
+      },
+      {
+        "name": "Gamma series",
+        "price": "From $100/mo",
+        "detail": "GPU-assisted VPS. Example spec: 3 cores, 10 GB RAM, 250 GB NVMe, NVIDIA L4."
+      },
+      {
+        "name": "Delta series",
+        "price": "From $250/mo",
+        "detail": "Dedicated server. Example spec: 16 cores, 128 GB RAM, 2 TB-class NVMe."
+      }
+    ],
+    "platforms": [
+      "Windows VPS",
+      "Remote desktop"
+    ],
+    "website": "https://chartvps.com/",
+    "pricing_note": "Starting prices from the official homepage on 11 Oct 2026. Higher specs inside each series cost more.",
+    "affiliate_link": "",
+    "logo": "/tools/chartvps.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://chartvps.com/"
+  }
+}

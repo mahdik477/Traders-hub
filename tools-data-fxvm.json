@@ -1,0 +1,49 @@
+{
+  "tool": {
+    "slug": "fxvm",
+    "name": "FXVM",
+    "category": "vps",
+    "priority": 100,
+    "description": "FXVM provides Windows VPS hosting for MetaTrader and other trading terminals. Plans differ by memory, storage and how many terminals they suggest, and by which cities are available.",
+    "features": [
+      "Windows Server VPS for trading terminals",
+      "Locations that include London, New York, Chicago, Amsterdam, Singapore, Tokyo and Dubai, depending on the plan",
+      "The Virtual Desktop plan is limited to one trading platform",
+      "A 7-day trial was listed at $0.99"
+    ],
+    "plans": [
+      {
+        "name": "Virtual Desktop",
+        "price": "$15/mo",
+        "detail": "Or $12.75/mo at the 15 percent discount shown. 1 terminal, 2 cores, 3 GB RAM, 10 GB."
+      },
+      {
+        "name": "Lite",
+        "price": "$25/mo",
+        "detail": "Or $21.25/mo at the discount shown. 1 to 2 terminals, 2 cores, 1.5 GB RAM, 60 GB."
+      },
+      {
+        "name": "Basic",
+        "price": "$35/mo",
+        "detail": "Or $29.75/mo at the discount shown. 3 to 4 terminals, 2 cores, 2.5 GB RAM, 80 GB."
+      },
+      {
+        "name": "Advanced",
+        "price": "$50/mo",
+        "detail": "Or $42.50/mo at the discount shown. 4 to 6 terminals, 2 cores, 4 GB RAM, 90 GB."
+      }
+    ],
+    "platforms": [
+      "Windows Server",
+      "Remote desktop"
+    ],
+    "website": "https://fxvm.net/",
+    "pricing_note": "Monthly prices and the 15 percent discounted monthly figures from the official homepage on 11 Oct 2026.",
+    "affiliate_link": "",
+    "logo": "/tools/fxvm.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://fxvm.net/"
+  }
+}

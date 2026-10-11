@@ -1,0 +1,56 @@
+{
+  "tool": {
+    "slug": "tradingview",
+    "name": "TradingView",
+    "category": "charting",
+    "priority": 1,
+    "description": "TradingView is a charting platform for forex, stocks, futures and crypto. Charts, alerts, a screener and paper trading run in the browser, with desktop and mobile apps that keep the same layouts.",
+    "features": [
+      "Charts, drawing tools and a large built-in indicator set, plus community scripts",
+      "Price alerts, watchlists and stock, ETF and crypto screeners",
+      "Bar replay and strategy testing, with higher limits on paid plans",
+      "Web, desktop and mobile apps"
+    ],
+    "plans": [
+      {
+        "name": "Basic",
+        "price": "Free",
+        "detail": "The free plan on the pricing page."
+      },
+      {
+        "name": "Essential",
+        "price": "$12.95/mo",
+        "detail": "Annual billing, shown as a special price."
+      },
+      {
+        "name": "Plus",
+        "price": "$29.95/mo",
+        "detail": "Annual billing. The page says this saves $60 a year."
+      },
+      {
+        "name": "Premium",
+        "price": "$59.95/mo",
+        "detail": "Annual billing. The page says this saves $120 a year."
+      },
+      {
+        "name": "Ultimate",
+        "price": "$199.95/mo",
+        "detail": "Annual billing. The page says this saves $480 a year."
+      }
+    ],
+    "platforms": [
+      "Web",
+      "Desktop",
+      "iOS",
+      "Android"
+    ],
+    "website": "https://www.tradingview.com/",
+    "pricing_note": "Annual billing prices shown on the official pricing page on 11 Oct 2026. Monthly billing is also offered. Extra real-time exchange data is a separate charge.",
+    "affiliate_link": "",
+    "logo": "/tools/tradingview.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://www.tradingview.com/pricing/"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "tool": {
+    "slug": "finviz",
+    "name": "Finviz",
+    "category": "market-data",
+    "priority": 100,
+    "description": "Finviz is a stock screener and chart site for NASDAQ, NYSE and AMEX. The free site uses delayed quotes. Elite adds real-time quotes, more filters, alerts and data export.",
+    "features": [
+      "Stock screener, maps and quote pages",
+      "Free quotes are delayed. Elite quotes are real-time, including premarket and after-hours",
+      "Elite adds multi-layout charts, unlimited alerts and CSV or Excel export",
+      "Coverage stated on the site: NASDAQ, NYSE and AMEX"
+    ],
+    "plans": [
+      {
+        "name": "Free",
+        "price": "Free",
+        "detail": "Registered account with delayed quotes and basic screener filters."
+      },
+      {
+        "name": "Elite",
+        "price": "$39.50/mo",
+        "detail": "Or $299.50 per year, shown as $24.96 per month. A free trial requires a card."
+      }
+    ],
+    "platforms": [
+      "Web"
+    ],
+    "website": "https://finviz.com/",
+    "pricing_note": "Prices from the official Elite page on 11 Oct 2026. Refunds are described for the first 30 days.",
+    "affiliate_link": "",
+    "logo": "/tools/finviz.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://finviz.com/elite.ashx"
+  }
+}

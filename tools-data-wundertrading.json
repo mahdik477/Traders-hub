@@ -1,0 +1,27 @@
+{
+  "tool": {
+    "slug": "wundertrading",
+    "name": "WunderTrading",
+    "category": "automation",
+    "priority": 100,
+    "description": "WunderTrading is a cloud platform for crypto trading bots, including grid, DCA and signal bots that can take TradingView alerts. It connects to exchanges with API keys and does not hold the funds.",
+    "features": [
+      "Grid, DCA, signal and other crypto bots, with no code required for the built-in bots",
+      "A trading terminal, spread tools and a pump screener",
+      "A free plan, plus a 7-day Pro trial with no card required",
+      "Spot and futures on supported exchanges, including Hyperliquid"
+    ],
+    "plans": [],
+    "platforms": [
+      "Web"
+    ],
+    "website": "https://wundertrading.com/",
+    "pricing_note": "The official pricing page lists Free, Basic, Pro and Premium, and says annual billing saves up to 25 percent. Dollar amounts did not load in the page text checked on 11 Oct 2026. Hyperliquid use includes Premium features with a 0.035 percent builder fee per trade, charged on the exchange.",
+    "affiliate_link": "",
+    "logo": "/tools/wundertrading.png"
+  },
+  "_notes": {
+    "last_verified": "2026-10-11",
+    "pricing_source": "https://wundertrading.com/en/pricing"
+  }
+}
