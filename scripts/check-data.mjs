@@ -47,6 +47,24 @@ const KNOWN_TOOL_CATEGORIES = new Set([
 // Keep in sync with CourseMarket in src/lib/course-types.ts.
 const KNOWN_MARKETS = new Set(["forex", "futures", "options", "stocks", "crypto", "commodities"]);
 
+// Keep in sync with the *_LABELS records in src/lib/strategy-types.ts.
+const STRATEGY_FILE = "strategies-data.json";
+const KNOWN_STRATEGY_TIERS = new Set(["free", "intermediate", "advanced"]);
+const KNOWN_STRATEGY_DIFFICULTY = new Set(["beginner", "intermediate", "advanced"]);
+const KNOWN_STRATEGY_MARKETS = new Set(["forex", "stocks", "crypto", "futures", "commodities", "etfs"]);
+const KNOWN_STRATEGY_CATEGORIES = new Set([
+  "trend_following",
+  "mean_reversion",
+  "breakout",
+  "price_action",
+  "momentum",
+  "volume_order_flow",
+  "market_structure",
+  "quantitative",
+]);
+const KNOWN_STRATEGY_EXECUTION = new Set(["mechanical", "semi_mechanical", "discretionary"]);
+const KNOWN_STRATEGY_EVIDENCE = new Set(["strong", "mixed", "weak", "little"]);
+
 function checkMarkets(file, where, markets) {
   if (markets == null) return;
   if (!Array.isArray(markets)) return err(file, `${where}.markets must be a list`);
@@ -440,6 +458,59 @@ function checkTool(file, data) {
     err(file, `tool.pricing_note must be text or left out`);
 }
 
+// One strategy entry inside the single strategies-data.json file. Educational
+// reference content, not a listing — so no affiliate link, no website, no
+// logo checks here, but the banned-wording scan still applies (see scanWording
+// below) and matters more than anywhere else on the site: this is exactly the
+// content CLAUDE.md's "no guaranteed-return... never suggest a reader will
+// profit" rule exists for.
+function checkStrategyEntry(file, s, i) {
+  const where = `strategies[${i}]`;
+  if (!/^[a-z0-9-]+$/.test(s.slug ?? "")) err(file, `${where}.slug must be lowercase letters, numbers and dashes (got "${s.slug}")`);
+  if (!s.ref_id) err(file, `${where}.ref_id is missing (e.g. "T1-01")`);
+  if (!s.name) err(file, `${where}.name is missing`);
+  if (!KNOWN_STRATEGY_TIERS.has(s.tier)) err(file, `${where}.tier "${s.tier}" must be one of ${[...KNOWN_STRATEGY_TIERS].join(", ")}`);
+  if (!KNOWN_STRATEGY_CATEGORIES.has(s.category)) err(file, `${where}.category "${s.category}" is not a known category`);
+  if (!KNOWN_STRATEGY_DIFFICULTY.has(s.difficulty)) err(file, `${where}.difficulty "${s.difficulty}" must be one of ${[...KNOWN_STRATEGY_DIFFICULTY].join(", ")}`);
+  if (!KNOWN_STRATEGY_EXECUTION.has(s.execution_type)) err(file, `${where}.execution_type "${s.execution_type}" is not a known value`);
+  if (!s.evidence || !KNOWN_STRATEGY_EVIDENCE.has(s.evidence.rating))
+    err(file, `${where}.evidence.rating must be one of ${[...KNOWN_STRATEGY_EVIDENCE].join(", ")}`);
+  if (!s.evidence?.summary) warn(file, `${where}.evidence.summary is empty - say what the independent research actually found`);
+  if (!s.public_teaser) err(file, `${where}.public_teaser is missing`);
+  if (!s.core_concept) warn(file, `${where}.core_concept is empty`);
+  if (!s.win_rate_note) warn(file, `${where}.win_rate_note is empty`);
+  if (!Array.isArray(s.markets) || s.markets.length === 0) warn(file, `${where}.markets is empty - won't show up under any market filter`);
+  (s.markets ?? []).forEach((m) => {
+    if (!KNOWN_STRATEGY_MARKETS.has(m)) err(file, `${where}.markets has an unknown market "${m}"`);
+  });
+  if (!Array.isArray(s.sources) || s.sources.length === 0) warn(file, `${where}.sources is empty - every strategy should cite where its evidence rating comes from`);
+  if (s.image) {
+    if (s.image.kind !== "synthetic" && s.image.kind !== "diagram") err(file, `${where}.image.kind must be "synthetic" or "diagram"`);
+    if (!s.image.src?.startsWith("/")) err(file, `${where}.image.src should be a path under /public`);
+    else if (!existsSync(path.join(ROOT, "public", s.image.src))) err(file, `${where}.image file not found: public${s.image.src}`);
+    if (!s.image.caption) warn(file, `${where}.image.caption is empty`);
+  }
+}
+
+function checkStrategies(file, data) {
+  const list = data?.strategies;
+  if (!Array.isArray(list) || list.length === 0) return err(file, `missing or empty top-level "strategies" array`);
+  const slugs = new Set();
+  const refIds = new Set();
+  list.forEach((s, i) => {
+    checkStrategyEntry(file, s, i);
+    scanWording(file, s, [`strategies[${i}]`]);
+    if (s.slug) {
+      if (slugs.has(s.slug)) err(file, `strategies[${i}].slug "${s.slug}" is used more than once`);
+      slugs.add(s.slug);
+    }
+    if (s.ref_id) {
+      if (refIds.has(s.ref_id)) err(file, `strategies[${i}].ref_id "${s.ref_id}" is used more than once`);
+      refIds.add(s.ref_id);
+    }
+  });
+}
+
 function checkAll() {
   const files = readdirSync(ROOT)
     .filter(
@@ -448,7 +519,8 @@ function checkAll() {
         COURSE_PATTERN.test(f) ||
         PROVIDER_PATTERN.test(f) ||
         BROKER_PATTERN.test(f) ||
-        TOOL_PATTERN.test(f),
+        TOOL_PATTERN.test(f) ||
+        f === STRATEGY_FILE,
     )
     .sort();
   const ids = new Map();
@@ -458,6 +530,11 @@ function checkAll() {
       data = JSON.parse(readFileSync(path.join(ROOT, file), "utf-8"));
     } catch (e) {
       err(file, `is not valid JSON - ${e.message}`);
+      continue;
+    }
+    if (file === STRATEGY_FILE) {
+      checkStrategies(file, data);
+      checkVerified(file, data._notes);
       continue;
     }
     const isProp = PROP_PATTERN.test(file);

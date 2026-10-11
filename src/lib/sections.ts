@@ -52,8 +52,8 @@ export const sections: Section[] = [
     slug: "strategies",
     title: "Strategies",
     summary:
-      "Educational write-ups of trading strategies. Any backtests shown will be clearly labelled as historical and hypothetical.",
-    status: "coming-soon",
+      "58 trading strategies explained honestly — what each one is, how it's traditionally traded, and what independent research actually found, including when the answer is \"not much.\"",
+    status: "live",
   },
 ];
 
