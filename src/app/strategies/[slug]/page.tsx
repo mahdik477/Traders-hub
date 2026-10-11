@@ -28,22 +28,49 @@ export async function generateMetadata({ params }: PageProps<"/strategies/[slug]
   return { title: s.name, description: s.summaryOneLine };
 }
 
+const TONE_CLASS = {
+  accent: "bg-accent/12 text-accent",
+  success: "bg-success/12 text-success",
+  warning: "bg-warning/12 text-warning",
+  danger: "bg-danger/12 text-danger",
+} as const;
+
 function SectionHeading({
   id,
   icon: Icon,
+  tone = "accent",
   children,
 }: {
   id: string;
   icon: (p: { className?: string }) => JSX.Element;
+  tone?: keyof typeof TONE_CLASS;
   children: ReactNode;
 }) {
   return (
     <h2 id={id} className="section-title flex items-center gap-2.5 scroll-mt-24">
-      <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
+      <span className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${TONE_CLASS[tone]}`}>
         <Icon className="size-4" />
       </span>
       {children}
     </h2>
+  );
+}
+
+// Quick-jump pills — these pages have gotten long with the deeper content, so
+// a short nav at the top lets a visitor skip straight to what they want.
+function QuickNav({ items }: { items: { href: string; label: string }[] }) {
+  return (
+    <nav aria-label="Jump to section" className="mt-6 -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+      {items.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          className="inline-flex min-h-9 shrink-0 items-center rounded-full border border-border-strong bg-surface px-3.5 text-xs font-medium text-muted transition-colors hover:border-accent/50 hover:text-foreground"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
   );
 }
 
@@ -71,6 +98,12 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         <div className="p-5 sm:p-6">
           <div className="flex flex-wrap items-center gap-2">
             <span className="pill">{STRATEGY_TIER_LABELS[s.tier]}</span>
+            {s.stepByStep.length > 0 && (
+              <span className="badge badge-success inline-flex items-center gap-1">
+                <PlayIcon className="size-3" />
+                In-depth guide
+              </span>
+            )}
             {s.tier !== "free" && (
               <span className="badge badge-promo inline-flex items-center gap-1">
                 <LinkIcon className="size-3" />
@@ -102,6 +135,17 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         </dl>
       </header>
 
+      <QuickNav
+        items={[
+          { href: "#concept-heading", label: "Core concept" },
+          { href: "#rules-heading", label: "Rules" },
+          ...(s.stepByStep.length > 0 ? [{ href: "#walkthrough-heading", label: "Step by step" }] : []),
+          { href: "#conditions-heading", label: "Market conditions" },
+          { href: "#evidence-heading", label: "Evidence" },
+          ...(s.videos.length > 0 ? [{ href: "#videos-heading", label: "Videos" }] : []),
+        ]}
+      />
+
       {s.controversyFlag && (
         <p className="badge-warning mt-6 flex items-start gap-2 rounded-lg px-4 py-3 text-sm leading-relaxed max-w-3xl">
           <ShieldIcon className="mt-0.5 size-4 shrink-0" />
@@ -112,7 +156,7 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
       )}
 
       {s.image && (
-        <figure className="mt-8 overflow-hidden rounded-xl border border-border bg-surface">
+        <figure className="mt-8 overflow-hidden rounded-xl border border-accent/30 bg-surface shadow-glow">
           <Image
             src={s.image.src}
             alt={s.image.caption}
@@ -121,8 +165,8 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
             className="w-full"
             priority
           />
-          <figcaption className="meta border-t border-border px-4 py-3">
-            {s.image.caption}
+          <figcaption className="border-t border-border bg-surface-2 px-4 py-3">
+            <span className="meta font-medium text-foreground">{s.image.caption}</span>
             {s.image.kind === "synthetic" && (
               <span className="block text-xs text-subtle">
                 Illustrative chart generated from synthetic data to show the setup — not a real
@@ -174,18 +218,28 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
             {s.typicalTimeframes.map((t) => STRATEGY_TIMEFRAME_LABELS[t]).join(", ")}
           </p>
         )}
+        {s.stepByStep.length > 0 && (
+          <a
+            href="#walkthrough-heading"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-success hover:underline"
+          >
+            <PlayIcon className="size-3.5" />
+            That&apos;s the quick version — see the full step-by-step walkthrough below
+          </a>
+        )}
       </section>
 
       {s.stepByStep.length > 0 && (
         <section aria-labelledby="walkthrough-heading" className="mt-10">
-          <SectionHeading id="walkthrough-heading" icon={PlayIcon}>
+          <SectionHeading id="walkthrough-heading" icon={PlayIcon} tone="success">
             Step by step: how to actually trade this
           </SectionHeading>
           <p className="meta mt-2 max-w-2xl">
-            A more detailed walkthrough than the short rules above — click a step to open it.
+            The full process, broken into {s.stepByStep.length} steps — click one to open it, and
+            check it off once you&apos;ve got it down.
           </p>
           <div className="mt-4">
-            <StrategyWalkthrough steps={s.stepByStep} />
+            <StrategyWalkthrough slug={s.slug} steps={s.stepByStep} />
           </div>
         </section>
       )}
@@ -209,7 +263,7 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
       )}
 
       <section aria-labelledby="conditions-heading" className="mt-10 max-w-3xl">
-        <SectionHeading id="conditions-heading" icon={InfoIcon}>
+        <SectionHeading id="conditions-heading" icon={InfoIcon} tone="warning">
           Market conditions
         </SectionHeading>
         <dl className="mt-4 space-y-3">
@@ -272,7 +326,7 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
 
       {s.videos.length > 0 && (
         <section aria-labelledby="videos-heading" className="mt-10 max-w-3xl">
-          <SectionHeading id="videos-heading" icon={PlayIcon}>
+          <SectionHeading id="videos-heading" icon={PlayIcon} tone="danger">
             Watch and learn
           </SectionHeading>
           <p className="meta mt-2">
