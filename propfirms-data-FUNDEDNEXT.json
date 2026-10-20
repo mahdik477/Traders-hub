@@ -318,6 +318,7 @@
               {
                 "tier": "Flex",
                 "tagline": "One-time fee · No daily loss limit · Promo price on first two purchases",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",
@@ -362,6 +363,7 @@
               {
                 "tier": "Legacy",
                 "tagline": "One-time fee · No daily loss limit · Consistency rule in challenge only",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",
@@ -406,6 +408,7 @@
               {
                 "tier": "Rapid Pro",
                 "tagline": "One-time fee · No daily loss limit · Consistency rule on funded account only",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",
@@ -450,6 +453,7 @@
               {
                 "tier": "Rapid Daily",
                 "tagline": "One-time fee · Daily loss limit · No consistency rule · Payouts can be requested daily",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",

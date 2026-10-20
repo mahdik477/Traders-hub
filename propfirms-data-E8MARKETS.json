@@ -288,6 +288,7 @@
               {
                 "tier": "E8 Signature Futures",
                 "tagline": "One-time fee · Single phase · End-of-day drawdown · Up to 4 payouts per account",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",
@@ -342,6 +343,7 @@
               {
                 "tier": "E8 Zero Starter",
                 "tagline": "One-time fee · No daily loss limit · Consistency rule in challenge only · Smaller payout caps",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",
@@ -396,6 +398,7 @@
               {
                 "tier": "E8 Zero Max",
                 "tagline": "One-time fee · No daily loss limit · Consistency rule in challenge only · Larger payout caps",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD",

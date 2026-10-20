@@ -171,6 +171,7 @@
               {
                 "tier": "EOD",
                 "tagline": "One-time fee, 30-day access · PA activation fee ($109-$159) after passing · 50% consistency rule on payouts only",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD trailing",
@@ -225,6 +226,7 @@
               {
                 "tier": "EOD · No Activation Fee",
                 "tagline": "One-time fee, 30-day access · Higher price, but no PA activation fee after passing · 50% consistency rule on payouts only",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD trailing",
@@ -279,6 +281,7 @@
               {
                 "tier": "Intraday",
                 "tagline": "One-time fee, 30-day access · PA activation fee ($89-$149) after passing · No daily loss limit · 50% consistency rule on payouts only",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "Intraday trailing",
@@ -333,6 +336,7 @@
               {
                 "tier": "Intraday · No Activation Fee",
                 "tagline": "One-time fee, 30-day access · Higher price, but no PA activation fee after passing · No daily loss limit · 50% consistency rule on payouts only",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "Intraday trailing",

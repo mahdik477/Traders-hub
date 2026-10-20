@@ -150,6 +150,7 @@
               {
                 "tier": "Growth",
                 "tagline": "One-time fee · No activation fee · Soft daily loss limit · 35% consistency rule on payouts only",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD trailing",
@@ -204,6 +205,7 @@
               {
                 "tier": "Select",
                 "tagline": "One-time fee · No activation fee · No daily loss limit in the evaluation · 40% consistency rule in the evaluation only · Choose daily or 5-day payouts after passing",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD trailing",
@@ -263,6 +265,7 @@
               {
                 "tier": "Lightning Funded",
                 "tagline": "One-time fee · No evaluation · No resets · Consistency rule on payouts rises from 20% to 30%",
+                "billing": "one-time",
                 "rules": {
                   "unit": "usd",
                   "drawdown_type": "EOD trailing",
