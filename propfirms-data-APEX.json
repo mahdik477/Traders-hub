@@ -135,7 +135,7 @@
       },
       "trustpilot_note": null,
       "google": null,
-      "google_note": "No Google Business profile found for this firm.",
+      "google_note": "We couldn't find a Google rating for this firm.",
       "trustpilot_quotes": [
         {
           "quote": "Clear rules, easy and fast payout, great way to get the discipline in trading right.",
@@ -170,7 +170,7 @@
             "tiers": [
               {
                 "tier": "EOD",
-                "tagline": "One-time fee, 30-day access · PA activation fee ($109-$159) after passing · 50% consistency rule on payouts only",
+                "tagline": "30-day access · Activation fee ($109-$159) after passing · 50% consistency on payouts",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -225,7 +225,7 @@
               },
               {
                 "tier": "EOD · No Activation Fee",
-                "tagline": "One-time fee, 30-day access · Higher price, but no PA activation fee after passing · 50% consistency rule on payouts only",
+                "tagline": "30-day access · Costs more upfront, no activation fee after passing · 50% consistency on payouts",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -280,7 +280,7 @@
               },
               {
                 "tier": "Intraday",
-                "tagline": "One-time fee, 30-day access · PA activation fee ($89-$149) after passing · No daily loss limit · 50% consistency rule on payouts only",
+                "tagline": "30-day access · Activation fee ($89-$149) after passing · No daily loss limit",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -335,7 +335,7 @@
               },
               {
                 "tier": "Intraday · No Activation Fee",
-                "tagline": "One-time fee, 30-day access · Higher price, but no PA activation fee after passing · No daily loss limit · 50% consistency rule on payouts only",
+                "tagline": "30-day access · Costs more upfront, no activation fee after passing · No daily loss limit",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",

@@ -16,7 +16,8 @@
     "null_means": "Not stated on an official Topstep page (or not expressible as one number - see the notes above). Check the live plan page before publishing.",
     "company_check": "https://www.topstep.com/about-us/ (checked 2026-10-11): timeline shows 2010 founding of Patak Trading Partners (the beginning of what became Topstep), 2012 launch of Topstep Trader (recorded as founded), 2013 first office in the Chicago West Loop.",
     "affiliate_program": "Topstep is 'launching a new affiliate program and rolling it out gradually' (help centre, Oct 2026). Affiliate Terms (updated mid-Oct 2026): affiliates get a code that gives a new user 20% off one purchase of the Topstep prop programs, and 'the Affiliate may be compensated by Topstep'. Commission %, cookie length, payout method and country rules not published on the pages read. Terms: https://www.topstep.com/affiliate-terms-and-conditions",
-    "google_rating": "Google Maps (2026-10-20): 'Topstep', financial institution, 130 S Jefferson St, Chicago (website topstep.com) - 3.3 from 101 reviews."
+    "google_rating": "Google Maps (2026-10-20): 'Topstep', financial institution, 130 S Jefferson St, Chicago (website topstep.com) - 3.3 from 101 reviews.",
+    "no_activation_fee_promo": "Promo set to null on 2026-10-20: the lower $85/$129/$199 prices are the price with the optional Daily Loss Limit on, not a discount; the tagline explains the difference."
   },
   "firm": {
     "id": "topstep",
@@ -187,7 +188,7 @@
                     "max_loss": 2000,
                     "max_contracts": 5,
                     "payout_cap": null,
-                    "promo": 85,
+                    "promo": null,
                     "standard": 95
                   },
                   {
@@ -197,7 +198,7 @@
                     "max_loss": 3000,
                     "max_contracts": 10,
                     "payout_cap": null,
-                    "promo": 129,
+                    "promo": null,
                     "standard": 149
                   },
                   {
@@ -207,7 +208,7 @@
                     "max_loss": 4500,
                     "max_contracts": 15,
                     "payout_cap": null,
-                    "promo": 199,
+                    "promo": null,
                     "standard": 229
                   }
                 ]

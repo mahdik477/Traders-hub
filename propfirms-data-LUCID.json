@@ -172,7 +172,7 @@
             "tiers": [
               {
                 "tier": "LucidFlex",
-                "tagline": "One-time fee · No activation fee · Daily loss limit optional (price shown is with it on; off costs $15-$45 more) · 50% consistency rule in the evaluation",
+                "tagline": "No activation fee · Optional daily loss limit (price shown with it on) · 50% consistency in the evaluation",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -227,7 +227,7 @@
               },
               {
                 "tier": "LucidPro",
-                "tagline": "One-time fee · No activation fee · Minimum 1 trading day · Daily loss limit can be turned off at checkout for a higher price · 40% consistency rule on payouts only",
+                "tagline": "No activation fee · 1 trading day minimum · 40% consistency on payouts only",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -282,7 +282,7 @@
               },
               {
                 "tier": "LucidDaily · EOD eval",
-                "tagline": "One-time fee · Daily payouts · 50% consistency rule in the evaluation only · Daily loss limit can be turned off at checkout for a higher price · Funded account uses intraday drawdown",
+                "tagline": "End-of-day drawdown in the evaluation, intraday once funded · Daily payouts",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -337,7 +337,7 @@
               },
               {
                 "tier": "LucidDaily · Intraday eval",
-                "tagline": "One-time fee · Daily payouts · 50% consistency rule in the evaluation only · Daily loss limit can be turned off at checkout for a higher price · Funded account uses intraday drawdown",
+                "tagline": "Intraday drawdown in the evaluation and funded · Daily payouts",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
