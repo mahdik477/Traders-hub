@@ -1,8 +1,8 @@
 {
   "_notes": {
-    "last_verified": "2026-10-21",
-    "source": "Live https://www.toponefutures.com/ pricing panels read in Chrome on 2026-10-21 (Elite Daily, Elite Access, Instant Sim Funded, Ignite - every size), help-centre affiliate articles and Google Maps. Earlier sources listed in git history.",
-    "pricing": "standard = crossed-out price, promo = discounted price shown on the homepage cards (one-time fees). On 2026-10-21 one code, 30M, applied to the discounted plans: Elite Daily 50% off (was 60% with WC), Ignite 50% off, Instant Sim Funded 45% off (prices unchanged). Elite Access is 'BOGO' (buy one get one) at the flat $39 fee. A '$30 Million account giveaway' was also advertised.",
+    "last_verified": "2026-10-20",
+    "source": "Live https://www.toponefutures.com/ pricing panels read in Chrome on 2026-10-20 (Elite Daily, Elite Access, Instant Sim Funded, Ignite - every size), help-centre affiliate articles and Google Maps. Earlier sources listed in git history.",
+    "pricing": "standard = crossed-out price, promo = discounted price shown on the homepage cards (one-time fees). On 2026-10-20 one code, 30M, applied to the discounted plans: Elite Daily 50% off (was 60% with WC), Ignite 50% off, Instant Sim Funded 45% off (prices unchanged). Elite Access is 'BOGO' (buy one get one) at the flat $39 fee. A '$30 Million account giveaway' was also advertised.",
     "elite_access_price": "Elite Access is a flat $39 evaluation fee for every size (help centre). The homepage shows $139 / $189 / $259 / $359 crossed out next to $39, but those amounts match the activation fee due after passing (help centre: '$139 to $359, depending on account size'), not a full price, so standard = 39 and promo = null.",
     "rules_detail": "Elite Daily (V2): one-phase evaluation, 6% target, EOD trailing drawdown, daily loss limit in evaluation and funded, 40% consistency in the evaluation only, no activation fee, daily payouts, 50% daily progression rule; funded drawdown $1,000 / $2,000 / $2,500 / $3,500 (evaluation $1,000 / $2,000 / $3,000 / $4,500 recorded); minimum 1 trading day on the funded account, none stated for the evaluation. Elite Access: $39 evaluation, 30 days to pass, no daily loss limit in the evaluation (funded DLL $500 / $1,000 / $1,250 / $1,750), evaluation drawdown $1,000 / $2,000 / $3,000 / $4,000 (funded $3,500 on 150K), minimum 1 trading day, 40% consistency on the funded account only, 5 profitable days per payout. Instant Sim Funded 2.0 (bought from 27 Jul 2026): no evaluation, no minimum trading days, EOD trailing drawdown, 20% consistency for payouts, profit target per payout 6% / 5% / 4%. Ignite: no evaluation, no minimum trading days, EOD trailing drawdown, 15% consistency, 5% profit target per payout, no overnight holding.",
     "payout_caps": "Max per payout in the sim-funded stage (help centre 'Maximum Payout Until Live'). Removed once moved to a live account.",
@@ -14,8 +14,8 @@
     "marketing_stats_excluded": "Payout totals, named trader payout amounts and the homepage 'earning potential' calculator are not reproduced.",
     "rule_units": "Futures rules are fixed USD amounts per account size.",
     "null_means": "Not stated on an official Top One Futures page we could read.",
-    "affiliate_program": "help.toponefutures.com affiliate articles (updated 2 Oct 2026; read 2026-10-21): first-time Elite / Instant Sim purchases 10% (Affiliate), 13% (Gold, $30K sales), 16% (Platinum, $100K), 20% (Diamond, $500K); recurring Instant Sim purchases 5% / 6% / 8% / 10%; $5 per reset and per activation fee; 2nd-tier 5% on first-time sales of affiliates you refer. Paid automatically on the 15th of each month to the method set in the dashboard, $100 minimum, 30-day verification per sale. Cookie length, country and comparison-site rules not read. Apply: https://www.toponefutures.com/affiliate-program",
-    "company_check": "Google Maps search (2026-10-21) found no Top One Futures listing."
+    "affiliate_program": "help.toponefutures.com affiliate articles (updated 2 Oct 2026; read 2026-10-20): first-time Elite / Instant Sim purchases 10% (Affiliate), 13% (Gold, $30K sales), 16% (Platinum, $100K), 20% (Diamond, $500K); recurring Instant Sim purchases 5% / 6% / 8% / 10%; $5 per reset and per activation fee; 2nd-tier 5% on first-time sales of affiliates you refer. Paid automatically on the 15th of each month to the method set in the dashboard, $100 minimum, 30-day verification per sale. Cookie length, country and comparison-site rules not read. Apply: https://www.toponefutures.com/affiliate-program",
+    "company_check": "Google Maps search (2026-10-20) found no Top One Futures listing."
   },
   "firm": {
     "id": "top-one-futures",
@@ -137,7 +137,7 @@
             "tiers": [
               {
                 "tier": "Elite Daily",
-                "tagline": "One-time fee · No activation fee · Daily payouts · 40% consistency in the evaluation only · 60% off with code WC",
+                "tagline": "One-time fee · No activation fee · Daily payouts · 40% consistency in the evaluation only",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -252,7 +252,7 @@
             "tiers": [
               {
                 "tier": "Instant Sim Funded",
-                "tagline": "No evaluation · 20% consistency for payouts · 45% off with code OCT",
+                "tagline": "No evaluation · 20% consistency for payouts",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
@@ -307,7 +307,7 @@
               },
               {
                 "tier": "Ignite",
-                "tagline": "No evaluation · 15% consistency · 5% profit target per payout · 60% off with code WC",
+                "tagline": "No evaluation · 15% consistency · 5% profit target per payout",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",

@@ -127,7 +127,7 @@
             "tiers": [
               {
                 "tier": "2-Step Bright",
-                "tagline": "Discount code RALLY25",
+                "tagline": "Static drawdown · 4% daily, 8% max loss · 5 minimum trading days",
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 8,

@@ -69,7 +69,7 @@
             "tiers": [
               {
                 "tier": "1 Step Flex (3% daily)",
-                "tagline": "One phase · 12% target · Pass in one day",
+                "tagline": "One phase · 12% target · No minimum trading days",
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 12,
@@ -114,7 +114,7 @@
               },
               {
                 "tier": "1 Step Flex (2% daily)",
-                "tagline": "One phase · 12% target · Pass in one day · Tighter 2% daily loss, lower price",
+                "tagline": "One phase · 12% target · No minimum trading days · Tighter 2% daily loss, lower price",
                 "rules": {
                   "unit": "percent",
                   "phase1_target": 12,

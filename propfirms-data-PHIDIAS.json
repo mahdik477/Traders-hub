@@ -1,6 +1,6 @@
 {
   "_notes": {
-    "last_verified": "2026-10-21",
+    "last_verified": "2026-10-20",
     "source": "Live https://phidiaspropfirm.com/ account configurator read in Chrome on 2026-10-20/21 (Express to Live, Fundamental, Premium; every size; 'One-Time Payment'; platform choice does not change the price), /affiliate-program, Trustpilot (20 newest reviews) and Google Maps. Earlier sources listed in git history.",
     "pricing": "Each account can be bought as a one-time payment with no fees after passing (recorded: standard = 'without code' price, promo = price with code BIG50 as displayed) or a cheaper evaluation fee plus an activation fee after passing (not recorded). Discount shown on 2026-10-20: 75-85% depending on size. The full one-time prices for Fundamental and Premium have risen a lot since 2026-10-11 (e.g. Premium 50K $275 -> $723) while the discounted prices stayed similar, and Fundamental is now labelled 'Professional Intraday'. A pop-up giveaway offers an 80% code in exchange for an email (not entered).",
     "rules_detail": "Express to Live: static drawdown, no daily loss limit, no consistency rule, no minimum days; hitting the target on the funded (Cash) account gives a bonus payout (80/20) and moves you to a live account. Fundamental: EOD trailing drawdown, no daily loss limit, no consistency rule in the evaluation, 30% max-day rule on the funded account, 3 minimum days, 10 funded days per payout. Premium: same targets and drawdowns, 1 minimum day, can hold overnight and over weekends, profit split rises 75% / 80% / 85% / 90% / 100% over payouts 1-5 (recorded as 100).",
@@ -122,7 +122,7 @@
             "tiers": [
               {
                 "tier": "Express to Live",
-                "tagline": "One-time payment shown (or a cheaper eval fee + activation fee) · Static drawdown · No daily loss limit · 25K: code PHIDIAS80",
+                "tagline": "One-time payment shown (or a cheaper eval fee + activation fee) · Static drawdown · No daily loss limit",
                 "billing": "one-time",
                 "rules": {
                   "unit": "usd",
