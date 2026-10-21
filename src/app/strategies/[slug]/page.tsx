@@ -45,6 +45,16 @@ const TONE_CLASS = {
   danger: "bg-danger/12 text-danger",
 } as const;
 
+// Text colour for the heading itself, not just its icon chip — the colour
+// is part of what makes each section feel like its own moment rather than
+// the same dark-grey heading repeated with a different icon.
+const TONE_TEXT_CLASS = {
+  accent: "text-foreground",
+  success: "text-success",
+  warning: "text-warning",
+  danger: "text-danger",
+} as const;
+
 function SectionHeading({
   id,
   icon: Icon,
@@ -57,9 +67,13 @@ function SectionHeading({
   children: ReactNode;
 }) {
   return (
-    <h2 id={id} className="section-title flex items-center gap-2.5 scroll-mt-24">
-      <span className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${TONE_CLASS[tone]}`}>
-        <Icon className="size-4" />
+    <h2
+      id={id}
+      className={`flex items-center gap-3 scroll-mt-24 text-2xl font-bold tracking-tight sm:text-3xl ${TONE_TEXT_CLASS[tone]}`}
+      style={{ fontFamily: "var(--font-heading)" }}
+    >
+      <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${TONE_CLASS[tone]}`}>
+        <Icon className="size-5" />
       </span>
       {children}
     </h2>
@@ -150,8 +164,8 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
       />
 
       {s.controversyFlag && (
-        <p className="badge-warning mt-6 flex items-start gap-2 rounded-lg px-4 py-3 text-sm leading-relaxed max-w-3xl">
-          <ShieldIcon className="mt-0.5 size-4 shrink-0" />
+        <p className="badge-warning mt-6 flex items-start gap-2 rounded-lg px-4 py-3 text-base font-medium leading-relaxed max-w-3xl">
+          <ShieldIcon className="mt-0.5 size-5 shrink-0" />
           This is one of the more debated methods on the site. It&apos;s widely taught and widely
           marketed — read Market conditions and Common pitfalls below with extra scepticism before
           treating it as proven.
@@ -184,14 +198,20 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
           paragraph block. The one idea worth reading first gets the one
           moment of genuinely large type on the page. */}
       <section aria-labelledby="concept-heading" className="mt-10 max-w-3xl">
-        <h2 id="concept-heading" className="eyebrow scroll-mt-24">
+        <h2
+          id="concept-heading"
+          className="text-sm font-bold uppercase tracking-wider text-accent scroll-mt-24"
+        >
           Core concept
         </h2>
-        <blockquote className="mt-3 border-l-4 border-accent pl-5 text-xl font-medium leading-snug text-foreground sm:text-2xl">
+        <blockquote
+          className="mt-3 border-l-4 border-accent pl-5 text-2xl font-medium italic leading-snug text-foreground sm:text-3xl"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
           {s.coreConcept}
         </blockquote>
         {s.toolsAndDefaults && (
-          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">
             <strong className="font-semibold text-foreground">Tools &amp; defaults: </strong>
             {s.toolsAndDefaults}
           </p>
@@ -208,31 +228,31 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         {s.rules.kind === "structured" ? (
           <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             <div className="rounded-xl border border-accent/30 bg-accent/5 p-4">
-              <div className="flex items-center gap-2">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-gold-ink">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-base font-bold text-gold-ink">
                   E
                 </span>
-                <dt className="font-semibold text-foreground">Entry</dt>
+                <dt className="text-lg font-bold text-foreground">Entry</dt>
               </div>
-              <dd className="mt-2.5 text-sm leading-relaxed text-muted">{s.rules.entry}</dd>
+              <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.entry}</dd>
             </div>
             <div className="rounded-xl border border-border-strong bg-surface p-4">
-              <div className="flex items-center gap-2">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-2 text-sm font-bold text-foreground">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-2 text-base font-bold text-foreground">
                   X
                 </span>
-                <dt className="font-semibold text-foreground">Exit</dt>
+                <dt className="text-lg font-bold text-foreground">Exit</dt>
               </div>
-              <dd className="mt-2.5 text-sm leading-relaxed text-muted">{s.rules.exit}</dd>
+              <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.exit}</dd>
             </div>
             <div className="rounded-xl border border-danger/30 bg-danger/5 p-4">
-              <div className="flex items-center gap-2">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-danger text-sm font-bold text-white">
+              <div className="flex items-center gap-2.5">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-danger text-base font-bold text-white">
                   S
                 </span>
-                <dt className="font-semibold text-foreground">Stop</dt>
+                <dt className="text-lg font-bold text-foreground">Stop</dt>
               </div>
-              <dd className="mt-2.5 text-sm leading-relaxed text-muted">{s.rules.stop}</dd>
+              <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.stop}</dd>
             </div>
           </dl>
         ) : (
@@ -278,10 +298,10 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
           <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {Object.entries(s.assetClassNotes).map(([market, note]) => (
               <li key={market} className="rounded-xl border border-border bg-surface p-4">
-                <h3 className="text-sm font-semibold text-foreground">
+                <h3 className="text-lg font-bold text-foreground">
                   {STRATEGY_MARKET_LABELS[market as keyof typeof STRATEGY_MARKET_LABELS] ?? market}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">{note}</p>
+                <p className="mt-1.5 text-base leading-relaxed text-foreground/90">{note}</p>
               </li>
             ))}
           </ul>
@@ -298,43 +318,43 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         </SectionHeading>
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-success/30 bg-success/8 p-4">
-            <dt className="flex items-center gap-2 font-semibold text-success">
-              <CheckIcon className="size-4" />
+            <dt className="flex items-center gap-2 text-lg font-bold text-success">
+              <CheckIcon className="size-5" />
               Works best
             </dt>
-            <dd className="mt-2 text-sm leading-relaxed text-foreground/90">
+            <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">
               {s.marketConditions.worksBest}
             </dd>
           </div>
           <div className="rounded-xl border border-warning/30 bg-warning/8 p-4">
-            <dt className="flex items-center gap-2 font-semibold text-warning">
-              <InfoIcon className="size-4" />
+            <dt className="flex items-center gap-2 text-lg font-bold text-warning">
+              <InfoIcon className="size-5" />
               Struggles
             </dt>
-            <dd className="mt-2 text-sm leading-relaxed text-foreground/90">
+            <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">
               {s.marketConditions.struggles}
             </dd>
           </div>
           <div className="rounded-xl border border-danger/30 bg-danger/8 p-4">
-            <dt className="flex items-center gap-2 font-semibold text-danger">
-              <ShieldIcon className="size-4" />
+            <dt className="flex items-center gap-2 text-lg font-bold text-danger">
+              <ShieldIcon className="size-5" />
               Common failure mode
             </dt>
-            <dd className="mt-2 text-sm leading-relaxed text-foreground/90">
+            <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">
               {s.marketConditions.failureModes}
             </dd>
           </div>
         </dl>
         {s.commonPitfalls.length > 0 && (
           <div className="mt-5 rounded-xl border border-warning/30 bg-warning/5 p-4">
-            <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
-              <InfoIcon className="size-4 text-warning" />
+            <h3 className="flex items-center gap-2 text-lg font-bold text-foreground">
+              <InfoIcon className="size-5 text-warning" />
               Common pitfalls
             </h3>
-            <ul className="mt-2.5 space-y-1.5 text-sm leading-relaxed text-muted">
+            <ul className="mt-3 space-y-2 text-base leading-relaxed text-foreground/90">
               {s.commonPitfalls.map((p) => (
-                <li key={p} className="flex gap-2">
-                  <span aria-hidden="true" className="text-warning">
+                <li key={p} className="flex gap-2.5">
+                  <span aria-hidden="true" className="font-bold text-warning">
                     —
                   </span>
                   {p}
@@ -351,12 +371,12 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         </SectionHeading>
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-border bg-surface p-4">
-            <dt className="eyebrow">Platform / testability</dt>
-            <dd className="mt-1.5 text-sm leading-relaxed text-muted">{s.platformTestability}</dd>
+            <dt className="text-lg font-bold text-foreground">Platform / testability</dt>
+            <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">{s.platformTestability}</dd>
           </div>
           <div className="rounded-xl border border-border bg-surface p-4">
-            <dt className="eyebrow">Data needed</dt>
-            <dd className="mt-1.5 text-sm leading-relaxed text-muted">{s.dataRequirement}</dd>
+            <dt className="text-lg font-bold text-foreground">Data needed</dt>
+            <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">{s.dataRequirement}</dd>
           </div>
         </dl>
       </section>
@@ -376,7 +396,7 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
               const thumbnail = youtubeThumbnail(v.url);
               return (
                 <li key={v.url} className="rounded-xl border border-border bg-surface p-4">
-                  <p className="font-semibold text-foreground">{v.title}</p>
+                  <p className="text-lg font-bold text-foreground">{v.title}</p>
                   <a
                     href={v.url}
                     target="_blank"
@@ -403,7 +423,7 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
                       </span>
                     </span>
                   </a>
-                  {v.note && <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">{v.note}</p>}
+                  {v.note && <p className="mt-3 max-w-sm text-base leading-relaxed text-muted">{v.note}</p>}
                 </li>
               );
             })}
