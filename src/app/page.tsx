@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { SITE_NAME, sections } from "@/lib/sections";
 import { propFirms } from "@/lib/propfirms";
@@ -6,22 +7,12 @@ import { courses } from "@/lib/courses";
 import { brokers } from "@/lib/brokers";
 import { tools } from "@/lib/tools";
 import { toolPriceLabel } from "@/lib/tool-types";
-import { strategiesInDisplayOrder } from "@/lib/strategies";
+import { strategies, strategiesInDisplayOrder } from "@/lib/strategies";
 import { STRATEGY_TIER_LABELS, STRATEGY_CATEGORY_LABELS } from "@/lib/strategy-types";
 import { allAccounts } from "@/lib/propfirm-filters";
 import { BROKER_MARKET_LABELS } from "@/lib/broker-types";
 import FirmBadge from "@/components/FirmBadge";
-
-// Real counts, computed from the data at build time — never hand-typed, so
-// this line can't go stale the way a written "29 prop firms" sentence would
-// the day someone adds a 30th.
-const STATS = [
-  { label: "prop firms", count: propFirms.length },
-  { label: "courses", count: courses.length },
-  { label: "strategies", count: strategiesInDisplayOrder.length },
-  { label: "brokers", count: brokers.length },
-  { label: "tools", count: tools.length },
-];
+import { LinkIcon, ShieldIcon, TagIcon, UsersIcon } from "@/components/icons";
 
 function money(n: number, currency: string) {
   return new Intl.NumberFormat("en-US", {
@@ -121,62 +112,114 @@ function strategiesSnapshot() {
   }));
 }
 
+const TRUST_POINTS = [
+  {
+    icon: ShieldIcon,
+    text: "We're a directory, not a verifier — we never score anyone's performance or win rate.",
+  },
+  {
+    icon: UsersIcon,
+    text: "Not a broker, not a signal provider, not a financial adviser. Nothing here is advice.",
+  },
+  {
+    icon: TagIcon,
+    text: "Sponsored listings are always labelled “Sponsored” — in our own words, not copied pitches.",
+  },
+  {
+    icon: LinkIcon,
+    text: "We earn through affiliate commissions and clearly disclosed sponsored placements.",
+  },
+];
+
+const FAQ = [
+  {
+    q: "How does Tradox make money?",
+    a: "Mainly affiliate commissions when you sign up with a firm, course or tool through our links, plus clearly labelled sponsored placements. It costs you nothing extra — most of these are the same prices you'd get going direct.",
+  },
+  {
+    q: "Do you verify trading performance or win rates?",
+    a: "No. We list what each provider publishes — pricing, rules, terms — and we never display or imply a performance, accuracy or win-rate score for any firm, course, strategy or signal group. “Discovery, not verification” is the whole model.",
+  },
+  {
+    q: "Is anything on this site financial advice?",
+    a: "No. We're a comparison and discovery platform for informational purposes only. Nothing here is a recommendation to use any specific firm, course or strategy — see the full disclaimer for the details.",
+  },
+  {
+    q: "Why do some firms or courses show an “Our choice” badge?",
+    a: "It means we have a real, tracked affiliate relationship with them — not a performance ranking. It's there so you know exactly where our incentive sits, not to imply they're objectively “best.”",
+  },
+];
+
 export default function Home() {
   const liveSections = sections.filter((s) => s.status === "live");
   const upcomingSections = sections.filter((s) => s.status !== "live");
+  const featuredStrategyImage = strategies.find((s) => s.slug === "moving-average-crossover")?.image ?? null;
 
   return (
     <>
-      <section className="hero-intro pb-10 pt-2 sm:pb-14 sm:pt-6">
-        <h1 className="title-rule page-title max-w-2xl sm:text-5xl lg:text-6xl">
-          Compare trading products side by side, honestly
+      {/* Hero — one confident statement, real numbers woven into the copy
+          rather than parked in a separate stat row, one clear way in. */}
+      <section className="hero-intro pb-12 pt-4 sm:pb-16 sm:pt-8">
+        <p className="eyebrow">{SITE_NAME} — discovery, not verification</p>
+        <h1 className="page-title mt-3 max-w-3xl text-[2.75rem] leading-[1.05] sm:text-6xl lg:text-7xl">
+          Compare trading products side by side.{" "}
+          <span className="text-accent">Honestly.</span>
         </h1>
-        <p className="mt-5 max-w-xl text-lg text-muted">
-          {SITE_NAME} puts real prop firm, course, broker and tool pricing
-          next to each other — so you can see the facts and decide for
-          yourself, instead of trusting one provider&apos;s own pitch.
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          <span className="figure text-foreground">{propFirms.length}</span> prop firms,{" "}
+          <span className="figure text-foreground">{courses.length}</span> courses,{" "}
+          <span className="figure text-foreground">{strategies.length}</span> strategies,{" "}
+          <span className="figure text-foreground">{brokers.length}</span> brokers and{" "}
+          <span className="figure text-foreground">{tools.length}</span> tools, with real pricing
+          pulled straight from each provider&apos;s own pages — so you see the facts and decide
+          for yourself, instead of trusting one provider&apos;s own pitch.
         </p>
-        <dl className="mt-7 flex flex-wrap gap-x-7 gap-y-3">
-          {STATS.map((stat) => (
-            <div key={stat.label}>
-              <dt className="eyebrow">{stat.label}</dt>
-              <dd className="figure-lg text-accent">{stat.count}</dd>
-            </div>
-          ))}
-        </dl>
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <Link href="/funded-accounts" className="btn btn-primary">
+            Start comparing
+          </Link>
+          <div className="flex flex-wrap gap-2">
+            {liveSections.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/${s.slug}`}
+                className="pill transition-colors hover:border-accent/50 hover:text-foreground"
+              >
+                {s.title}
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section
-        aria-labelledby="what-we-are"
-        className="panel-accent rounded-xl border border-border bg-surface p-6"
-      >
-        <h2 id="what-we-are" className="section-title">
+      {/* Trust strip — a thin banner, not a boxed card, so it reads like a
+          masthead statement rather than another panel in a stack of panels. */}
+      <section aria-labelledby="what-we-are" className="border-y border-border py-7">
+        <h2 id="what-we-are" className="sr-only">
           Discovery, not verification
         </h2>
-        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-muted marker:text-accent">
-          <li>We are a directory and comparison site.</li>
-          <li>
-            We are not a broker, not a signal provider and not a financial
-            adviser.
-          </li>
-          <li>
-            We do not verify or rank anyone&apos;s trading performance, accuracy
-            or win rate.
-          </li>
-          <li>
-            We earn money through affiliate links and clearly labelled sponsored
-            listings.
-          </li>
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TRUST_POINTS.map(({ icon: Icon, text }) => (
+            <li key={text} className="flex items-start gap-3">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
+                <Icon className="size-4" />
+              </span>
+              <span className="meta leading-relaxed">{text}</span>
+            </li>
+          ))}
         </ul>
       </section>
 
-      <section aria-labelledby="sections-heading" className="pt-14">
+      {/* Editorial section list — numbered like a contents page, full-width,
+          alternating sides, real data throughout. Replaces the card grid. */}
+      <section aria-labelledby="sections-heading" className="py-2">
         <h2 id="sections-heading" className="sr-only">
           What you&apos;ll find here
         </h2>
 
         <div className="flex flex-col divide-y divide-border">
           <SectionShowcase
+            index={1}
             section={liveSections.find((s) => s.slug === "funded-accounts")}
             totalCount={propFirms.length}
             reverse={false}
@@ -185,6 +228,7 @@ export default function Home() {
           </SectionShowcase>
 
           <SectionShowcase
+            index={2}
             section={liveSections.find((s) => s.slug === "courses")}
             totalCount={courses.length}
             reverse={true}
@@ -193,6 +237,7 @@ export default function Home() {
           </SectionShowcase>
 
           <SectionShowcase
+            index={3}
             section={liveSections.find((s) => s.slug === "brokers")}
             totalCount={brokers.length}
             reverse={false}
@@ -201,6 +246,7 @@ export default function Home() {
           </SectionShowcase>
 
           <SectionShowcase
+            index={4}
             section={liveSections.find((s) => s.slug === "tools")}
             totalCount={tools.length}
             reverse={true}
@@ -209,11 +255,29 @@ export default function Home() {
           </SectionShowcase>
 
           <SectionShowcase
+            index={5}
             section={liveSections.find((s) => s.slug === "strategies")}
             totalCount={strategiesInDisplayOrder.length}
             reverse={false}
           >
-            <StrategySnapshotList items={strategiesSnapshot()} />
+            <div className="grid gap-5 sm:grid-cols-2">
+              {featuredStrategyImage && (
+                <Link
+                  href="/strategies/moving-average-crossover"
+                  className="lift-card hidden overflow-hidden rounded-xl border border-border bg-surface sm:block"
+                >
+                  <Image
+                    src={featuredStrategyImage.src}
+                    alt={featuredStrategyImage.caption}
+                    width={600}
+                    height={338}
+                    className="aspect-video w-full object-cover"
+                  />
+                  <span className="meta block px-3 py-2">Moving Average Crossover</span>
+                </Link>
+              )}
+              <StrategySnapshotList items={strategiesSnapshot()} />
+            </div>
           </SectionShowcase>
         </div>
 
@@ -235,20 +299,49 @@ export default function Home() {
           </ul>
         )}
       </section>
+
+      {/* FAQ — answers the questions a first-time visitor actually has,
+          grounded in the same facts as the disclaimer, not sales copy. */}
+      <section aria-labelledby="faq-heading" className="mt-6 border-t border-border py-14">
+        <h2 id="faq-heading" className="section-title">
+          Questions people actually ask
+        </h2>
+        <dl className="mt-6 grid gap-x-10 gap-y-8 lg:grid-cols-2">
+          {FAQ.map(({ q, a }) => (
+            <div key={q}>
+              <dt className="text-base font-semibold">{q}</dt>
+              <dd className="mt-2 leading-relaxed text-muted">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="meta mt-8">
+          More detail on all of this in the{" "}
+          <Link href="/disclaimer" className="text-accent hover:underline">
+            full disclaimer
+          </Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="text-accent hover:underline">
+            privacy policy
+          </Link>
+          .
+        </p>
+      </section>
     </>
   );
 }
 
-// A full-width row: the section's name and summary on one side, a real
-// snapshot of its listings on the other. Alternates which side the text
-// sits on (reverse) so a long stack of these doesn't read as one repeating
-// template — a deliberate break from the identical-card grid this replaced.
+// A full-width row: a faint running number, the section's name and summary
+// on one side, a real snapshot of its listings on the other. Alternates
+// which side the text sits on so a long stack of these doesn't read as one
+// repeating template.
 function SectionShowcase({
+  index,
   section,
   totalCount,
   reverse,
   children,
 }: {
+  index: number;
   section: { slug: string; title: string; summary: string } | undefined;
   totalCount: number;
   reverse: boolean;
@@ -256,10 +349,18 @@ function SectionShowcase({
 }) {
   if (!section) return null;
   return (
-    <div className="grid gap-6 py-10 first:pt-0 last:pb-0 lg:grid-cols-2 lg:items-center lg:gap-12">
-      <div className={reverse ? "lg:order-2" : undefined}>
-        <span className="eyebrow">{totalCount} listed</span>
-        <h3 className="mt-2 text-2xl font-semibold">
+    <div className="grid gap-6 py-12 first:pt-0 last:pb-0 lg:grid-cols-[auto_1fr_1fr] lg:items-center lg:gap-10">
+      <span
+        aria-hidden="true"
+        className="hidden text-6xl font-bold text-border-strong lg:block"
+        style={{ fontFamily: "var(--font-heading)" }}
+      >
+        {String(index).padStart(2, "0")}
+      </span>
+      <div className={reverse ? "lg:order-3" : undefined}>
+        <span className="eyebrow lg:hidden">{String(index).padStart(2, "0")} — {totalCount} listed</span>
+        <span className="eyebrow hidden lg:inline">{totalCount} listed</span>
+        <h3 className="mt-2 text-2xl font-semibold sm:text-3xl">
           <Link href={`/${section.slug}`} className="hover:text-accent">
             {section.title}
           </Link>
@@ -269,19 +370,19 @@ function SectionShowcase({
           Browse {section.title.toLowerCase()}
         </Link>
       </div>
-      <div className={reverse ? "lg:order-1" : undefined}>{children}</div>
+      <div className={reverse ? "lg:order-2" : undefined}>{children}</div>
     </div>
   );
 }
 
 function SnapshotList({ items }: { items: SnapshotItem[] }) {
   return (
-    <ul className="space-y-2.5">
+    <ul className="divide-y divide-border rounded-xl border border-border">
       {items.map((item) => (
         <li key={item.href}>
           <Link
             href={item.href}
-            className="lift-card flex items-center gap-3 rounded-xl border border-border bg-surface p-3.5"
+            className="flex items-center gap-3 p-3.5 transition-colors hover:bg-surface-2"
           >
             <FirmBadge name={item.name} logo={item.logo} logoBg={item.logoBg} />
             <span className="min-w-0 flex-1 truncate font-semibold">{item.name}</span>
@@ -306,12 +407,12 @@ function StrategySnapshotList({
   items: { href: string; name: string; tier: string; category: string }[];
 }) {
   return (
-    <ul className="space-y-2.5">
+    <ul className="divide-y divide-border rounded-xl border border-border">
       {items.map((item) => (
         <li key={item.href}>
           <Link
             href={item.href}
-            className="lift-card flex items-center gap-3 rounded-xl border border-border bg-surface p-3.5"
+            className="flex items-center gap-3 p-3.5 transition-colors hover:bg-surface-2"
           >
             <span className="flex-1">
               <span className="block font-semibold">{item.name}</span>
