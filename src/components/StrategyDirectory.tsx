@@ -6,7 +6,6 @@ import { Suspense, useState } from "react";
 import {
   STRATEGY_CATEGORY_LABELS,
   STRATEGY_DIFFICULTY_LABELS,
-  STRATEGY_EVIDENCE_LABELS,
   STRATEGY_MARKET_LABELS,
   STRATEGY_TIER_LABELS,
   type StrategyView,
@@ -22,10 +21,12 @@ import { ShieldIcon } from "@/components/icons";
 
 // Same filter-bar pattern as CourseDirectory/PropFirmDirectory: state saved
 // in the address so a trip into a strategy page and back keeps the filters.
-// Only 6 of the research doc's ~11 facets became real filter controls (tier,
-// market, difficulty, style, evidence, controversy) — execution type, data
-// requirement and platform testability still show on every card and detail
-// page as plain metadata, to keep the bar usable on a phone.
+// Only 5 of the research doc's ~11 facets became real filter controls (tier,
+// market, difficulty, style, controversy) — execution type, data requirement,
+// platform testability and independent-evidence rating still exist in the
+// data but aren't surfaced in the UI, to keep the bar usable on a phone and
+// because a rating badge reads as a performance score, which this site
+// doesn't do (see CLAUDE.md).
 export default function StrategyDirectory({ strategies }: { strategies: StrategyView[] }) {
   return (
     <Suspense fallback={<Directory strategies={strategies} initialFilters={EMPTY_FILTERS} />}>
@@ -68,7 +69,7 @@ function Directory({
     <div>
       <form
         aria-label="Filter strategies"
-        className="grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-6"
+        className="grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-5"
         onSubmit={(e) => e.preventDefault()}
       >
         <Select
@@ -94,12 +95,6 @@ function Directory({
           value={filters.category}
           onChange={(v) => updateFilters({ category: v })}
           options={categoryOptions.map((c) => [c, STRATEGY_CATEGORY_LABELS[c]])}
-        />
-        <Select
-          label="Evidence"
-          value={filters.evidence}
-          onChange={(v) => updateFilters({ evidence: v })}
-          options={(["strong", "mixed", "weak", "little"] as const).map((e) => [e, STRATEGY_EVIDENCE_LABELS[e]])}
         />
         <Select
           label="Controversial methods"
@@ -163,9 +158,6 @@ function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; l
       <div className="flex flex-1 flex-col p-5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="pill">{STRATEGY_TIER_LABELS[s.tier]}</span>
-          {s.evidence.rating === "strong" && (
-            <span className="badge badge-success">{STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence</span>
-          )}
           {s.controversyFlag && (
             <span className="badge badge-warning inline-flex items-center gap-1">
               <ShieldIcon className="size-3" />
@@ -233,8 +225,6 @@ function activeFilterChips(f: Filters): { key: keyof Filters; label: string }[] 
     chips.push({ key: "difficulty", label: STRATEGY_DIFFICULTY_LABELS[f.difficulty as keyof typeof STRATEGY_DIFFICULTY_LABELS] });
   if (f.category)
     chips.push({ key: "category", label: STRATEGY_CATEGORY_LABELS[f.category as keyof typeof STRATEGY_CATEGORY_LABELS] });
-  if (f.evidence)
-    chips.push({ key: "evidence", label: `${STRATEGY_EVIDENCE_LABELS[f.evidence as keyof typeof STRATEGY_EVIDENCE_LABELS]} evidence` });
   if (f.controversial) chips.push({ key: "controversial", label: "Hiding controversial" });
   return chips;
 }

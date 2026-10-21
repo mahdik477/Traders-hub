@@ -4,11 +4,20 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import StrategyBackLink from "@/components/StrategyBackLink";
 import StrategyWalkthrough from "@/components/StrategyWalkthrough";
-import { ShieldIcon, InfoIcon, BookIcon, LayersIcon, TagIcon, LinkIcon, MonitorIcon, QuoteIcon, PlayIcon } from "@/components/icons";
+import {
+  ShieldIcon,
+  InfoIcon,
+  BookIcon,
+  LayersIcon,
+  TagIcon,
+  LinkIcon,
+  MonitorIcon,
+  PlayIcon,
+  CheckIcon,
+} from "@/components/icons";
 import {
   STRATEGY_CATEGORY_LABELS,
   STRATEGY_DIFFICULTY_LABELS,
-  STRATEGY_EVIDENCE_LABELS,
   STRATEGY_EXECUTION_LABELS,
   STRATEGY_MARKET_LABELS,
   STRATEGY_TIER_LABELS,
@@ -111,11 +120,6 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
                 Premium library
               </span>
             )}
-            {s.evidence.rating === "strong" && (
-              <span className="badge badge-success">
-                {STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} evidence
-              </span>
-            )}
             {s.controversyFlag && (
               <span className="badge badge-warning inline-flex items-center gap-1">
                 <ShieldIcon className="size-3" />
@@ -128,11 +132,10 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
           <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{s.publicTeaser}</p>
         </div>
 
-        <dl className="grid grid-cols-2 gap-px border-t border-border bg-border sm:grid-cols-4">
+        <dl className="grid grid-cols-3 gap-px border-t border-border bg-border">
           <Stat label="Style" value={STRATEGY_CATEGORY_LABELS[s.category]} />
           <Stat label="Difficulty" value={STRATEGY_DIFFICULTY_LABELS[s.difficulty]} />
           <Stat label="Execution" value={STRATEGY_EXECUTION_LABELS[s.executionType]} />
-          <Stat label="Evidence" value={STRATEGY_EVIDENCE_LABELS[s.evidence.rating]} />
         </dl>
       </header>
 
@@ -142,7 +145,6 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
           { href: "#rules-heading", label: "Rules" },
           ...(s.stepByStep.length > 0 ? [{ href: "#walkthrough-heading", label: "Step by step" }] : []),
           { href: "#conditions-heading", label: "Market conditions" },
-          { href: "#evidence-heading", label: "Evidence" },
           ...(s.videos.length > 0 ? [{ href: "#videos-heading", label: "Videos" }] : []),
         ]}
       />
@@ -151,8 +153,8 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         <p className="badge-warning mt-6 flex items-start gap-2 rounded-lg px-4 py-3 text-sm leading-relaxed max-w-3xl">
           <ShieldIcon className="mt-0.5 size-4 shrink-0" />
           This is one of the more debated methods on the site. It&apos;s widely taught and widely
-          marketed, but independent testing is thin or non-existent — see Independent evidence
-          below before treating it as proven.
+          marketed — read Market conditions and Common pitfalls below with extra scepticism before
+          treating it as proven.
         </p>
       )}
 
@@ -178,36 +180,59 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         </figure>
       )}
 
+      {/* Core concept — a pull-quote, not another icon-heading-plus-grey-
+          paragraph block. The one idea worth reading first gets the one
+          moment of genuinely large type on the page. */}
       <section aria-labelledby="concept-heading" className="mt-10 max-w-3xl">
-        <SectionHeading id="concept-heading" icon={InfoIcon}>
+        <h2 id="concept-heading" className="eyebrow scroll-mt-24">
           Core concept
-        </SectionHeading>
-        <p className="mt-3 leading-relaxed text-muted">{s.coreConcept}</p>
+        </h2>
+        <blockquote className="mt-3 border-l-4 border-accent pl-5 text-xl font-medium leading-snug text-foreground sm:text-2xl">
+          {s.coreConcept}
+        </blockquote>
         {s.toolsAndDefaults && (
-          <p className="mt-3 leading-relaxed text-muted">
+          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
             <strong className="font-semibold text-foreground">Tools &amp; defaults: </strong>
             {s.toolsAndDefaults}
           </p>
         )}
       </section>
 
+      {/* Rules — three lettered, tinted cards instead of three identical
+          plain boxes, so entry/exit/stop read as three different kinds of
+          decision rather than three copies of the same card. */}
       <section aria-labelledby="rules-heading" className="mt-10">
         <SectionHeading id="rules-heading" icon={BookIcon}>
           Rules as traditionally taught
         </SectionHeading>
         {s.rules.kind === "structured" ? (
           <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-border bg-surface p-4">
-              <dt className="eyebrow">Entry</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-muted">{s.rules.entry}</dd>
+            <div className="rounded-xl border border-accent/30 bg-accent/5 p-4">
+              <div className="flex items-center gap-2">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-gold-ink">
+                  E
+                </span>
+                <dt className="font-semibold text-foreground">Entry</dt>
+              </div>
+              <dd className="mt-2.5 text-sm leading-relaxed text-muted">{s.rules.entry}</dd>
             </div>
-            <div className="rounded-xl border border-border bg-surface p-4">
-              <dt className="eyebrow">Exit</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-muted">{s.rules.exit}</dd>
+            <div className="rounded-xl border border-border-strong bg-surface p-4">
+              <div className="flex items-center gap-2">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-2 text-sm font-bold text-foreground">
+                  X
+                </span>
+                <dt className="font-semibold text-foreground">Exit</dt>
+              </div>
+              <dd className="mt-2.5 text-sm leading-relaxed text-muted">{s.rules.exit}</dd>
             </div>
-            <div className="rounded-xl border border-border bg-surface p-4">
-              <dt className="eyebrow">Stop</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-muted">{s.rules.stop}</dd>
+            <div className="rounded-xl border border-danger/30 bg-danger/5 p-4">
+              <div className="flex items-center gap-2">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-danger text-sm font-bold text-white">
+                  S
+                </span>
+                <dt className="font-semibold text-foreground">Stop</dt>
+              </div>
+              <dd className="mt-2.5 text-sm leading-relaxed text-muted">{s.rules.stop}</dd>
             </div>
           </dl>
         ) : (
@@ -263,50 +288,61 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         </section>
       )}
 
-      <section aria-labelledby="conditions-heading" className="mt-10 max-w-3xl">
+      {/* Market conditions — three tinted panels instead of three lines of
+          coloured inline text. The colour now carries a background and an
+          icon, not just a word, so each state is readable as its own block
+          at a glance rather than three paragraphs that only differ by hue. */}
+      <section aria-labelledby="conditions-heading" className="mt-10">
         <SectionHeading id="conditions-heading" icon={InfoIcon} tone="warning">
           Market conditions
         </SectionHeading>
-        <dl className="mt-4 space-y-3">
-          <div>
-            <dt className="text-sm font-semibold text-success">Works best</dt>
-            <dd className="mt-1 text-sm leading-relaxed text-muted">{s.marketConditions.worksBest}</dd>
+        <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="rounded-xl border border-success/30 bg-success/8 p-4">
+            <dt className="flex items-center gap-2 font-semibold text-success">
+              <CheckIcon className="size-4" />
+              Works best
+            </dt>
+            <dd className="mt-2 text-sm leading-relaxed text-foreground/90">
+              {s.marketConditions.worksBest}
+            </dd>
           </div>
-          <div>
-            <dt className="text-sm font-semibold text-warning">Struggles</dt>
-            <dd className="mt-1 text-sm leading-relaxed text-muted">{s.marketConditions.struggles}</dd>
+          <div className="rounded-xl border border-warning/30 bg-warning/8 p-4">
+            <dt className="flex items-center gap-2 font-semibold text-warning">
+              <InfoIcon className="size-4" />
+              Struggles
+            </dt>
+            <dd className="mt-2 text-sm leading-relaxed text-foreground/90">
+              {s.marketConditions.struggles}
+            </dd>
           </div>
-          <div>
-            <dt className="text-sm font-semibold text-danger">Common failure mode</dt>
-            <dd className="mt-1 text-sm leading-relaxed text-muted">{s.marketConditions.failureModes}</dd>
+          <div className="rounded-xl border border-danger/30 bg-danger/8 p-4">
+            <dt className="flex items-center gap-2 font-semibold text-danger">
+              <ShieldIcon className="size-4" />
+              Common failure mode
+            </dt>
+            <dd className="mt-2 text-sm leading-relaxed text-foreground/90">
+              {s.marketConditions.failureModes}
+            </dd>
           </div>
         </dl>
         {s.commonPitfalls.length > 0 && (
-          <>
-            <h3 className="mt-5 text-sm font-semibold text-foreground">Common pitfalls</h3>
-            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted">
+          <div className="mt-5 rounded-xl border border-warning/30 bg-warning/5 p-4">
+            <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
+              <InfoIcon className="size-4 text-warning" />
+              Common pitfalls
+            </h3>
+            <ul className="mt-2.5 space-y-1.5 text-sm leading-relaxed text-muted">
               {s.commonPitfalls.map((p) => (
-                <li key={p}>{p}</li>
+                <li key={p} className="flex gap-2">
+                  <span aria-hidden="true" className="text-warning">
+                    —
+                  </span>
+                  {p}
+                </li>
               ))}
             </ul>
-          </>
+          </div>
         )}
-      </section>
-
-      <section aria-labelledby="evidence-heading" className="mt-10 max-w-3xl">
-        <SectionHeading id="evidence-heading" icon={ShieldIcon}>
-          Independent evidence
-        </SectionHeading>
-        {s.evidence.rating === "strong" && (
-          <p className="mt-3">
-            <span className="badge badge-success">{STRATEGY_EVIDENCE_LABELS[s.evidence.rating]}</span>
-          </p>
-        )}
-        <p className="mt-3 leading-relaxed text-muted">{s.evidence.summary}</p>
-        <div className="mt-4 rounded-xl border border-border-strong bg-surface-2 p-4">
-          <h3 className="text-sm font-semibold text-foreground">On winning and losing trades</h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted">{s.winRateNote}</p>
-        </div>
       </section>
 
       <section aria-labelledby="practical-heading" className="mt-10">
@@ -375,19 +411,6 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
         </section>
       )}
 
-      {s.sources.length > 0 && (
-        <section aria-labelledby="sources-heading" className="mt-10 max-w-3xl">
-          <SectionHeading id="sources-heading" icon={QuoteIcon}>
-            Sources
-          </SectionHeading>
-          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted">
-            {s.sources.map((src) => (
-              <li key={src.label}>{src.label}</li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {s.markets.length > 0 && (
         <section aria-labelledby="tags-heading" className="mt-10">
           <SectionHeading id="tags-heading" icon={TagIcon}>
@@ -404,10 +427,9 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
       )}
 
       <p className="meta mt-10 max-w-3xl">
-        This page describes how {s.name} is traditionally defined and taught, and what independent
-        research has or has not found about it. It is not a recommendation to use it, not
-        financial advice, and not a claim that it will make you money. Markets involve real risk of
-        loss. See the full{" "}
+        This page describes how {s.name} is traditionally defined and taught. It is not a
+        recommendation to use it, not financial advice, and not a claim that it will make you
+        money. Markets involve real risk of loss. See the full{" "}
         <a href="/disclaimer" className="text-accent hover:underline">
           disclaimer
         </a>
