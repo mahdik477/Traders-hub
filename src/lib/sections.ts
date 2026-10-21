@@ -52,7 +52,7 @@ export const sections: Section[] = [
     slug: "strategies",
     title: "Strategies",
     summary:
-      "58 trading strategies explained honestly — what each one is, how it's traditionally traded, and what independent research actually found, including when the answer is \"not much.\"",
+      "58 trading strategies explained honestly — what each one is, how it's traditionally traded, and a step-by-step walkthrough for actually learning it, with real charts and videos.",
     status: "live",
   },
 ];

@@ -5,14 +5,13 @@
 // every card and detail page as plain metadata rather than filters, to keep
 // the bar usable on a phone.
 
-import type { StrategyCategory, StrategyDifficulty, StrategyEvidenceRating, StrategyMarket, StrategyPricingTier, StrategyView } from "./strategy-types";
+import type { StrategyCategory, StrategyDifficulty, StrategyMarket, StrategyPricingTier, StrategyView } from "./strategy-types";
 
 export type Filters = {
   tier: string;
   market: string;
   difficulty: string;
   category: string;
-  evidence: string;
   controversial: string; // "hide" | "" (never defaults to hiding)
 };
 
@@ -21,7 +20,6 @@ export const EMPTY_FILTERS: Filters = {
   market: "",
   difficulty: "",
   category: "",
-  evidence: "",
   controversial: "",
 };
 
@@ -31,7 +29,6 @@ export function matchesFilters(s: StrategyView, f: Filters): boolean {
     (!f.market || s.markets.includes(f.market as StrategyMarket)) &&
     (!f.difficulty || s.difficulty === (f.difficulty as StrategyDifficulty)) &&
     (!f.category || s.category === (f.category as StrategyCategory)) &&
-    (!f.evidence || s.evidence.rating === (f.evidence as StrategyEvidenceRating)) &&
     (!f.controversial || !s.controversyFlag)
   );
 }
@@ -43,7 +40,6 @@ const QUERY_KEYS: Record<keyof Filters, string> = {
   market: "market",
   difficulty: "level",
   category: "style",
-  evidence: "evidence",
   controversial: "hide_controversial",
 };
 

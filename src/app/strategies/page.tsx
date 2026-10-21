@@ -15,10 +15,8 @@ export default function StrategiesPage() {
       <p className="mt-4 max-w-2xl text-lg text-muted">{section.summary}</p>
       <p className="meta mt-3 max-w-2xl">
         Educational write-ups only — never financial advice, and never a claim that any of these
-        will make you money. Every strategy shows what independent research actually found,
-        including when that&apos;s &ldquo;not much&rdquo;. The 10 Free-tier strategies are open to everyone; the
-        rest are part of the paid library and, for now, open too while we finish building it —
-        see the{" "}
+        will make you money. The 10 Free-tier strategies are open to everyone; the rest are part
+        of the paid library and, for now, open too while we finish building it — see the{" "}
         <Link href="/disclaimer" className="text-accent hover:underline">
           disclaimer
         </Link>{" "}
