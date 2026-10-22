@@ -28,8 +28,12 @@ import { getStrategy, strategies } from "@/lib/strategies";
 
 export const dynamicParams = false;
 
+// moving-average-crossover has its own literal route (a one-off interactive
+// page, see src/app/strategies/moving-average-crossover/page.tsx) which
+// Next.js resolves ahead of this dynamic one for that exact path — excluded
+// here too so there's only ever one static page generated for that slug.
 export function generateStaticParams() {
-  return strategies.map((s) => ({ slug: s.slug }));
+  return strategies.filter((s) => s.slug !== "moving-average-crossover").map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/strategies/[slug]">): Promise<Metadata> {
