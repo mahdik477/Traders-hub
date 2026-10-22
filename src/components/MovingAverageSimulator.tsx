@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { genSeries, sma, findCrossings, toPath } from "@/lib/ma-chart-utils";
 
 // A live, in-browser moving-average crossover simulator — built only for
 // this one strategy page, not a shared component, since it's tied directly
@@ -15,57 +16,12 @@ const HEIGHT = 320;
 const PAD = 28;
 const N = 90;
 
-function seededRandom(seed: number) {
-  let t = seed;
-  return () => {
-    t += 0x6d2b79f5;
-    let x = t;
-    x = Math.imul(x ^ (x >>> 15), x | 1);
-    x ^= x + Math.imul(x ^ (x >>> 7), x | 61);
-    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function genSeries(seed: number): number[] {
-  const rand = seededRandom(seed);
-  const closes = [100];
-  for (let i = 1; i < N; i++) {
-    const drift = Math.sin(i / 14) * 0.35; // gentle wave so crossovers actually happen
-    closes.push(closes[i - 1] + drift + (rand() - 0.5) * 1.6);
-  }
-  return closes;
-}
-
-function sma(values: number[], period: number): (number | null)[] {
-  return values.map((_, i) => {
-    if (i < period - 1) return null;
-    let sum = 0;
-    for (let j = i - period + 1; j <= i; j++) sum += values[j];
-    return sum / period;
-  });
-}
-
-function toPath(values: (number | null)[], min: number, max: number): string {
-  const xStep = (WIDTH - PAD * 2) / (N - 1);
-  const yFor = (v: number) => HEIGHT - PAD - ((v - min) / (max - min)) * (HEIGHT - PAD * 2);
-  let d = "";
-  let drawing = false;
-  values.forEach((v, i) => {
-    if (v == null) return;
-    const x = PAD + i * xStep;
-    const y = yFor(v);
-    d += drawing ? ` L ${x} ${y}` : `M ${x} ${y}`;
-    drawing = true;
-  });
-  return d;
-}
-
 export default function MovingAverageSimulator() {
   const [seed, setSeed] = useState(1);
   const [fast, setFast] = useState(9);
   const [slow, setSlow] = useState(26);
 
-  const closes = useMemo(() => genSeries(seed), [seed]);
+  const closes = useMemo(() => genSeries(seed, N), [seed]);
   const fastLine = useMemo(() => sma(closes, fast), [closes, fast]);
   const slowLine = useMemo(() => sma(closes, slow), [closes, slow]);
 
@@ -77,23 +33,7 @@ export default function MovingAverageSimulator() {
     return { min: Math.min(...all) - 1, max: Math.max(...all) + 1 };
   }, [closes, fastLine, slowLine]);
 
-  const crossings = useMemo(() => {
-    const points: { i: number; golden: boolean }[] = [];
-    for (let i = 1; i < N; i++) {
-      const f0 = fastLine[i - 1];
-      const f1 = fastLine[i];
-      const s0 = slowLine[i - 1];
-      const s1 = slowLine[i];
-      if (f0 == null || f1 == null || s0 == null || s1 == null) continue;
-      const wasBelow = f0 <= s0;
-      const isAbove = f1 > s1;
-      const wasAbove = f0 >= s0;
-      const isBelow = f1 < s1;
-      if (wasBelow && isAbove) points.push({ i, golden: true });
-      else if (wasAbove && isBelow) points.push({ i, golden: false });
-    }
-    return points;
-  }, [fastLine, slowLine]);
+  const crossings = useMemo(() => findCrossings(fastLine, slowLine), [fastLine, slowLine]);
 
   const xStep = (WIDTH - PAD * 2) / (N - 1);
   const yFor = (v: number) => HEIGHT - PAD - ((v - min) / (max - min)) * (HEIGHT - PAD * 2);
@@ -127,9 +67,9 @@ export default function MovingAverageSimulator() {
               strokeWidth={1}
             />
           ))}
-          <path d={toPath(closes, min, max)} fill="none" stroke="var(--color-muted)" strokeWidth={1.5} opacity={0.55} />
-          <path d={toPath(slowLine, min, max)} fill="none" stroke="var(--color-gold)" strokeWidth={2.5} />
-          <path d={toPath(fastLine, min, max)} fill="none" stroke="var(--color-gold-bright)" strokeWidth={2.5} />
+          <path d={toPath(closes, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-muted)" strokeWidth={1.5} opacity={0.55} />
+          <path d={toPath(slowLine, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold)" strokeWidth={2.5} />
+          <path d={toPath(fastLine, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold-bright)" strokeWidth={2.5} />
           {crossings.map((c) => {
             const v = fastLine[c.i];
             if (v == null) return null;
