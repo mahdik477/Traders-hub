@@ -1,9 +1,16 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import SignalGroupLogo from "@/components/SignalGroupLogo";
 import VisitSiteLink from "@/components/VisitSiteLink";
+import {
+  signalFilterTickCount,
+  signalFiltersFromSearch,
+  signalFiltersToSearch,
+  signalGroupMatchesFilters,
+  type SignalFilterSelection,
+} from "@/lib/signal-group-filters";
 import {
   SIGNAL_EXTRA_LABELS,
   SIGNAL_EXTRA_ORDER,
@@ -21,18 +28,6 @@ import {
 } from "@/lib/signal-group-types";
 
 type MarketFilter = SignalMarket | "all";
-type StyleFilter = SignalStyle | "any";
-type PriceFilter = SignalPrice | "any";
-type Panel = "note" | "style" | "price" | "extras" | "language" | null;
-
-type Filters = {
-  market: MarketFilter;
-  style: StyleFilter;
-  price: PriceFilter;
-  extras: SignalExtra[];
-  language: string;
-  query: string;
-};
 
 const MARKET_NOTE =
   "Indices includes NQ, US30, the S&P 500 and DAX. Oil & commodities includes silver and other metals, not only crude oil.";
@@ -51,20 +46,22 @@ function DirectoryFromAddress({ groups }: { groups: SignalGroupView[] }) {
 }
 
 function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initialQuery: string }) {
-  const initial = filtersFromQuery(initialQuery);
+  const initial = signalFiltersFromSearch(initialQuery);
   const [market, setMarket] = useState<MarketFilter>(initial.market);
-  const [style, setStyle] = useState<StyleFilter>(initial.style);
-  const [price, setPrice] = useState<PriceFilter>(initial.price);
+  const [styles, setStyles] = useState<SignalStyle[]>(initial.styles);
+  const [prices, setPrices] = useState<SignalPrice[]>(initial.prices);
   const [extras, setExtras] = useState<SignalExtra[]>(initial.extras);
-  const [language, setLanguage] = useState(initial.language);
+  const [languages, setLanguages] = useState<string[]>(initial.languages);
   const [query, setQuery] = useState(initial.query);
-  const [panel, setPanel] = useState<Panel>(null);
-  const [sheetOpen, setSheetOpen] = useState(false);
+  const [noteOpen, setNoteOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const filtersButtonRef = useRef<HTMLButtonElement>(null);
   const headerOffset = useSiteHeaderHeight();
+  const narrow = useNarrowScreen();
 
-  const filters: Filters = { market, style, price, extras, language, query };
+  const filters: SignalFilterSelection = { market, styles, prices, extras, languages, query };
 
   const marketCounts = useMemo(() => {
     const map = new Map<SignalMarket, number>();
@@ -74,62 +71,52 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
     return map;
   }, [groups]);
 
-  const languages = useMemo(() => {
-    return [...new Set(groups.map((group) => group.language).filter(Boolean))].sort((a, b) =>
+  const matching = groups.filter((group) => matches(group, filters));
+  const tickCount = signalFilterTickCount(filters);
+  const languageOptions = useMemo(() => {
+    return [...new Set([...languages, ...groups.map((group) => group.language).filter(Boolean)])].sort((a, b) =>
       a.localeCompare(b),
     );
-  }, [groups]);
+  }, [groups, languages]);
 
-  const matching = groups.filter((group) => matches(group, filters));
-
-  const filtersActive =
-    market !== "all" || style !== "any" || price !== "any" || extras.length > 0 || language !== "any";
-  const styleCount = style === "any" ? 0 : 1;
-  const priceCount = price === "any" ? 0 : 1;
-  const languageCount = language === "any" ? 0 : 1;
-  const activeCount = styleCount + priceCount + extras.length + languageCount + (market === "all" ? 0 : 1);
-
-  function commit(next: Filters) {
+  function commit(next: SignalFilterSelection) {
     setMarket(next.market);
-    setStyle(next.style);
-    setPrice(next.price);
+    setStyles(next.styles);
+    setPrices(next.prices);
     setExtras(next.extras);
-    setLanguage(next.language);
+    setLanguages(next.languages);
     setQuery(next.query);
-    const params = new URLSearchParams();
-    if (next.market !== "all") params.set("market", next.market);
-    if (next.style !== "any") params.set("style", next.style);
-    if (next.price !== "any") params.set("price", next.price);
-    if (next.extras.length) params.set("extras", next.extras.join(","));
-    if (next.language !== "any") params.set("language", next.language);
-    const trimmed = next.query.trim();
-    if (trimmed) params.set("q", trimmed);
-    const qs = params.toString();
+    const qs = signalFiltersToSearch(next);
     window.history.replaceState(null, "", window.location.pathname + (qs ? `?${qs}` : ""));
   }
 
-  function toggleExtra(extra: SignalExtra) {
-    const nextExtras = extras.includes(extra) ? extras.filter((item) => item !== extra) : [...extras, extra];
-    commit({ ...filters, extras: nextExtras });
+  function toggleValue<T extends string>(list: T[], value: T): T[] {
+    return list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
   }
 
-  function clearFilters() {
-    commit({ ...filters, market: "all", style: "any", price: "any", extras: [], language: "any" });
-    setPanel(null);
+  function clearTicks() {
+    commit({ ...filters, styles: [], prices: [], extras: [], languages: [] });
   }
 
-  function togglePanel(next: Panel) {
-    setPanel((current) => (current === next ? null : next));
+  function closeFilters() {
+    setFiltersOpen(false);
+    filtersButtonRef.current?.focus();
   }
 
   useEffect(() => {
-    if (!panel) return;
+    if (!filtersOpen && !noteOpen) return;
     function onPointerDown(event: PointerEvent) {
-      if (barRef.current?.contains(event.target as Node)) return;
-      setPanel(null);
+      const target = event.target as Node;
+      if (barRef.current?.contains(target)) return;
+      if (panelRef.current?.contains(target)) return;
+      setFiltersOpen(false);
+      setNoteOpen(false);
     }
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setPanel(null);
+      if (event.key !== "Escape") return;
+      setFiltersOpen(false);
+      setNoteOpen(false);
+      filtersButtonRef.current?.focus();
     }
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -137,59 +124,43 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [panel]);
+  }, [filtersOpen, noteOpen]);
 
   useEffect(() => {
-    if (!sheetOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const media = window.matchMedia("(min-width: 768px)");
-    const closeOnDesktop = () => {
-      if (media.matches) setSheetOpen(false);
+    if (!filtersOpen) return;
+    const media = window.matchMedia("(max-width: 767px)");
+    const applyLock = () => {
+      document.body.style.overflow = media.matches ? "hidden" : "";
     };
-    media.addEventListener("change", closeOnDesktop);
+    applyLock();
+    if (media.matches) panelRef.current?.focus();
+    media.addEventListener("change", applyLock);
     return () => {
-      document.body.style.overflow = previousOverflow;
-      media.removeEventListener("change", closeOnDesktop);
+      media.removeEventListener("change", applyLock);
+      document.body.style.overflow = "";
     };
-  }, [sheetOpen]);
+  }, [filtersOpen]);
 
   return (
     <div>
       <div ref={barRef} className="signal-filter-bar" style={{ top: headerOffset }}>
-        <div className="flex items-center gap-2">
-          <label className="min-w-0 flex-1 md:w-64 md:flex-none">
+        <div className="flex flex-col gap-2 md:flex-row md:items-center">
+          <label className="min-w-0 md:w-64 md:flex-none">
             <span className="sr-only">Search</span>
             <input
               type="search"
               value={query}
               onChange={(event) => commit({ ...filters, query: event.target.value })}
-              onFocus={() => setPanel(null)}
+              onFocus={() => {
+                setNoteOpen(false);
+                setFiltersOpen(false);
+              }}
               placeholder="Search by name, market or language"
               className="field signal-filter-search"
             />
           </label>
 
-          <button
-            ref={filtersButtonRef}
-            type="button"
-            className={`inline-flex h-11 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium md:hidden ${
-              filtersActive
-                ? "border-accent bg-accent/15 text-foreground"
-                : "border-border-strong bg-surface text-muted"
-            }`}
-            aria-expanded={sheetOpen}
-            aria-controls="signal-filter-sheet"
-            onClick={() => {
-              setPanel(null);
-              setSheetOpen(true);
-            }}
-          >
-            Filters
-            {activeCount > 0 && <CountBadge count={activeCount} />}
-          </button>
-
-          <div className="hidden min-w-0 flex-1 items-center gap-2 md:flex">
+          <div className="flex min-w-0 items-center gap-2 md:flex-1">
             <MarketSegments
               market={market}
               counts={marketCounts}
@@ -197,166 +168,67 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
               onChange={(next) => commit({ ...filters, market: next })}
             />
             <NoteButton
-              open={panel === "note"}
-              onClick={() => togglePanel("note")}
+              open={noteOpen}
+              onClick={() => {
+                setFiltersOpen(false);
+                setNoteOpen((open) => !open);
+              }}
               onHover={(hovering) => {
-                if (hovering) setPanel("note");
-                else setPanel((current) => (current === "note" ? null : current));
+                if (hovering) {
+                  setFiltersOpen(false);
+                  setNoteOpen(true);
+                } else setNoteOpen(false);
               }}
             />
           </div>
         </div>
 
-        <div className="mt-1.5 flex items-center gap-1.5 md:mt-2">
-          <div className="hidden min-w-0 flex-1 items-center gap-1.5 md:flex">
-            <FilterMenu
-              id="signal-style-menu"
-              label="Style"
-              count={styleCount}
-              open={panel === "style"}
-              onToggle={() => togglePanel("style")}
-            >
-              <OptionButton
-                pressed={style === "any"}
-                onClick={() => {
-                  commit({ ...filters, style: "any" });
-                  setPanel(null);
-                }}
-              >
-                Any
-              </OptionButton>
-              {SIGNAL_STYLE_ORDER.map((id) => (
-                <OptionButton
-                  key={id}
-                  pressed={style === id}
-                  onClick={() => {
-                    commit({ ...filters, style: id });
-                    setPanel(null);
-                  }}
-                >
-                  {SIGNAL_STYLE_LABELS[id]}
-                </OptionButton>
-              ))}
-            </FilterMenu>
-
-            <FilterMenu
-              id="signal-price-menu"
-              label="Price"
-              count={priceCount}
-              open={panel === "price"}
-              onToggle={() => togglePanel("price")}
-            >
-              <OptionButton
-                pressed={price === "any"}
-                onClick={() => {
-                  commit({ ...filters, price: "any" });
-                  setPanel(null);
-                }}
-              >
-                Any
-              </OptionButton>
-              {SIGNAL_PRICE_ORDER.map((id) => (
-                <OptionButton
-                  key={id}
-                  pressed={price === id}
-                  onClick={() => {
-                    commit({ ...filters, price: id });
-                    setPanel(null);
-                  }}
-                >
-                  {SIGNAL_PRICE_LABELS[id]}
-                </OptionButton>
-              ))}
-            </FilterMenu>
-
-            <FilterMenu
-              id="signal-extras-menu"
-              label="Extras"
-              count={extras.length}
-              open={panel === "extras"}
-              onToggle={() => togglePanel("extras")}
-              align="end"
-            >
-              {SIGNAL_EXTRA_ORDER.map((id) => (
-                <OptionButton key={id} pressed={extras.includes(id)} onClick={() => toggleExtra(id)}>
-                  {SIGNAL_EXTRA_LABELS[id]}
-                </OptionButton>
-              ))}
-            </FilterMenu>
-
-            <FilterMenu
-              id="signal-language-menu"
-              label="Language"
-              count={languageCount}
-              open={panel === "language"}
-              onToggle={() => togglePanel("language")}
-              align="end"
-            >
-              <OptionButton
-                pressed={language === "any"}
-                onClick={() => {
-                  commit({ ...filters, language: "any" });
-                  setPanel(null);
-                }}
-              >
-                Any
-              </OptionButton>
-              {languages.map((name) => (
-                <OptionButton
-                  key={name}
-                  pressed={language === name}
-                  onClick={() => {
-                    commit({ ...filters, language: name });
-                    setPanel(null);
-                  }}
-                >
-                  {name}
-                </OptionButton>
-              ))}
-              {languages.length === 0 && <span className="meta block px-2.5 py-2">No languages listed yet.</span>}
-            </FilterMenu>
-
-            <button
-              type="button"
-              onClick={clearFilters}
-              disabled={!filtersActive}
-              className="inline-flex h-9 shrink-0 items-center px-1.5 text-sm font-medium text-accent underline-offset-2 hover:underline disabled:text-subtle disabled:no-underline disabled:opacity-50"
-            >
-              Clear
-            </button>
-          </div>
+        <div className="relative mt-2 flex items-center gap-2">
+          <button
+            ref={filtersButtonRef}
+            type="button"
+            className={`inline-flex h-11 shrink-0 items-center gap-1.5 rounded-full border px-3 text-sm font-medium md:h-9 ${
+              tickCount > 0 || filtersOpen
+                ? "border-accent bg-accent/15 text-foreground"
+                : "border-border-strong bg-surface text-muted hover:border-subtle hover:text-foreground"
+            }`}
+            aria-expanded={filtersOpen}
+            aria-controls="signal-filter-panel"
+            onClick={() => {
+              setNoteOpen(false);
+              setFiltersOpen((open) => !open);
+            }}
+          >
+            <FilterIcon />
+            Filters
+            {tickCount > 0 && <CountBadge count={tickCount} />}
+          </button>
 
           <p aria-live="polite" className="ml-auto shrink-0 text-right text-xs text-muted">
             <span className="font-semibold tabular-nums text-foreground">{matching.length}</span> of {groups.length}{" "}
             shown
           </p>
+
+          {filtersOpen && (
+            <FilterPanel
+              panelRef={panelRef}
+              sheet={narrow}
+              styles={styles}
+              prices={prices}
+              extras={extras}
+              languages={languages}
+              languageOptions={languageOptions}
+              tickCount={tickCount}
+              onToggleStyle={(id) => commit({ ...filters, styles: toggleValue(styles, id) })}
+              onTogglePrice={(id) => commit({ ...filters, prices: toggleValue(prices, id) })}
+              onToggleExtra={(id) => commit({ ...filters, extras: toggleValue(extras, id) })}
+              onToggleLanguage={(name) => commit({ ...filters, languages: toggleValue(languages, name) })}
+              onClear={clearTicks}
+              onClose={closeFilters}
+            />
+          )}
         </div>
       </div>
-
-      {sheetOpen && (
-        <FilterSheet
-          groups={groups}
-          matchingCount={matching.length}
-          market={market}
-          style={style}
-          price={price}
-          extras={extras}
-          language={language}
-          languages={languages}
-          marketCounts={marketCounts}
-          filtersActive={filtersActive}
-          onMarket={(next) => commit({ ...filters, market: next })}
-          onStyle={(next) => commit({ ...filters, style: next })}
-          onPrice={(next) => commit({ ...filters, price: next })}
-          onToggleExtra={toggleExtra}
-          onLanguage={(next) => commit({ ...filters, language: next })}
-          onClear={clearFilters}
-          onClose={() => {
-            setSheetOpen(false);
-            filtersButtonRef.current?.focus();
-          }}
-        />
-      )}
 
       {groups.length === 0 ? (
         <EmptyDirectory />
@@ -373,6 +245,18 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
       )}
     </div>
   );
+}
+
+function useNarrowScreen() {
+  const [narrow, setNarrow] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const apply = () => setNarrow(media.matches);
+    apply();
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
+  }, []);
+  return narrow;
 }
 
 function useSiteHeaderHeight() {
@@ -517,72 +401,225 @@ function NoteButton({
   );
 }
 
-function FilterMenu({
-  id,
-  label,
-  count,
-  open,
-  onToggle,
-  align = "start",
-  children,
+function FilterPanel({
+  panelRef,
+  sheet,
+  styles,
+  prices,
+  extras,
+  languages,
+  languageOptions,
+  tickCount,
+  onToggleStyle,
+  onTogglePrice,
+  onToggleExtra,
+  onToggleLanguage,
+  onClear,
+  onClose,
 }: {
-  id: string;
-  label: string;
-  count: number;
-  open: boolean;
-  onToggle: () => void;
-  align?: "start" | "end";
-  children: ReactNode;
+  panelRef: RefObject<HTMLDivElement | null>;
+  sheet: boolean;
+  styles: SignalStyle[];
+  prices: SignalPrice[];
+  extras: SignalExtra[];
+  languages: string[];
+  languageOptions: string[];
+  tickCount: number;
+  onToggleStyle: (id: SignalStyle) => void;
+  onTogglePrice: (id: SignalPrice) => void;
+  onToggleExtra: (id: SignalExtra) => void;
+  onToggleLanguage: (name: string) => void;
+  onClear: () => void;
+  onClose: () => void;
 }) {
-  const active = count > 0;
-  return (
-    <div className="relative shrink-0">
+  const choices = (
+    <FilterChoices
+      styles={styles}
+      prices={prices}
+      extras={extras}
+      languages={languages}
+      languageOptions={languageOptions}
+      onToggleStyle={onToggleStyle}
+      onTogglePrice={onTogglePrice}
+      onToggleExtra={onToggleExtra}
+      onToggleLanguage={onToggleLanguage}
+    />
+  );
+  const footer = (
+    <div className={`flex items-center justify-end gap-2 border-t border-border px-4 py-3 ${sheet ? "pb-[max(0.75rem,env(safe-area-inset-bottom))]" : "px-3"}`}>
       <button
         type="button"
-        aria-expanded={open}
-        aria-controls={id}
-        aria-haspopup="true"
-        onClick={onToggle}
-        className={`inline-flex h-9 items-center gap-1.5 rounded-full border px-3 text-sm font-medium whitespace-nowrap transition-colors duration-150 ${
-          active || open
-            ? "border-accent bg-accent/15 text-foreground"
-            : "border-border-strong bg-surface text-muted hover:border-subtle hover:text-foreground"
-        }`}
+        onClick={onClear}
+        disabled={tickCount === 0}
+        className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-accent underline-offset-2 hover:underline disabled:text-subtle disabled:no-underline disabled:opacity-50 md:min-h-9"
       >
-        {label}
-        {active && <CountBadge count={count} />}
-        <Chevron open={open} />
+        Clear all
       </button>
-      {open && (
-        <div id={id} className={`absolute top-full z-20 pt-1.5 ${align === "end" ? "right-0" : "left-0"}`}>
-          <div className="signal-popover w-max min-w-44 rounded-xl p-1">{children}</div>
+      <button type="button" onClick={onClose} className="btn btn-primary md:min-h-9">
+        Done
+      </button>
+    </div>
+  );
+
+  if (!sheet) {
+    return (
+      <div className="absolute top-full left-0 z-20 pt-1.5">
+        <div
+          ref={panelRef}
+          id="signal-filter-panel"
+          role="dialog"
+          aria-labelledby="signal-filter-panel-title"
+          className="signal-popover flex max-h-[min(70vh,32rem)] w-[min(36rem,calc(100vw-2rem))] flex-col rounded-xl"
+        >
+          <h2 id="signal-filter-panel-title" className="px-3 pt-3 text-sm font-semibold text-foreground">
+            Filters
+          </h2>
+          <div className="overflow-y-auto px-3 py-3">{choices}</div>
+          {footer}
         </div>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <button type="button" aria-label="Close filters" className="fixed inset-0 z-40 bg-black/65" onClick={onClose} />
+      <div
+        ref={panelRef}
+        id="signal-filter-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="signal-filter-panel-title"
+        tabIndex={-1}
+        className="signal-sheet-panel fixed inset-x-0 bottom-0 z-50 flex max-h-[min(85vh,40rem)] flex-col rounded-t-2xl border border-border-strong bg-surface outline-none"
+      >
+        <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-border-strong" aria-hidden="true" />
+        <div className="flex items-center justify-between px-4 pt-2 pb-1">
+          <h2 id="signal-filter-panel-title" className="text-base font-semibold text-foreground">
+            Filters
+          </h2>
+          <button type="button" onClick={onClose} className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-muted">
+            Close
+          </button>
+        </div>
+        <div className="overflow-y-auto overscroll-contain px-4 pb-3">{choices}</div>
+        {footer}
+      </div>
+    </>
+  );
+}
+
+function FilterChoices({
+  styles,
+  prices,
+  extras,
+  languages,
+  languageOptions,
+  onToggleStyle,
+  onTogglePrice,
+  onToggleExtra,
+  onToggleLanguage,
+}: {
+  styles: SignalStyle[];
+  prices: SignalPrice[];
+  extras: SignalExtra[];
+  languages: string[];
+  languageOptions: string[];
+  onToggleStyle: (id: SignalStyle) => void;
+  onTogglePrice: (id: SignalPrice) => void;
+  onToggleExtra: (id: SignalExtra) => void;
+  onToggleLanguage: (name: string) => void;
+}) {
+  return (
+    <div className="flex flex-col gap-3">
+      <FilterSection label="Trading style">
+        {SIGNAL_STYLE_ORDER.map((id) => (
+          <CheckPill key={id} checked={styles.includes(id)} onClick={() => onToggleStyle(id)} label={SIGNAL_STYLE_LABELS[id]} />
+        ))}
+      </FilterSection>
+      <FilterSection label="Price">
+        {SIGNAL_PRICE_ORDER.map((id) => (
+          <CheckPill key={id} checked={prices.includes(id)} onClick={() => onTogglePrice(id)} label={SIGNAL_PRICE_LABELS[id]} />
+        ))}
+      </FilterSection>
+      <FilterSection label="Extras">
+        {SIGNAL_EXTRA_ORDER.map((id) => (
+          <CheckPill key={id} checked={extras.includes(id)} onClick={() => onToggleExtra(id)} label={SIGNAL_EXTRA_LABELS[id]} />
+        ))}
+      </FilterSection>
+      <FilterSection label="Language">
+        {languageOptions.map((name) => (
+          <CheckPill key={name} checked={languages.includes(name)} onClick={() => onToggleLanguage(name)} label={name} />
+        ))}
+        {languageOptions.length === 0 && <span className="meta">No languages listed yet.</span>}
+      </FilterSection>
     </div>
   );
 }
 
-function OptionButton({
-  pressed,
-  onClick,
-  children,
-}: {
-  pressed: boolean;
-  onClick: () => void;
-  children: ReactNode;
-}) {
+function FilterSection({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <fieldset className="border-0 p-0">
+      <legend className="eyebrow">{label}</legend>
+      <div className="mt-1.5 flex flex-wrap gap-1.5">{children}</div>
+    </fieldset>
+  );
+}
+
+function CheckPill({ checked, onClick, label }: { checked: boolean; onClick: () => void; label: string }) {
   return (
     <button
       type="button"
-      aria-pressed={pressed}
+      role="checkbox"
+      aria-checked={checked}
       onClick={onClick}
-      className={`flex min-h-9 w-full items-center justify-between gap-3 rounded-lg px-2.5 text-left text-sm font-medium whitespace-nowrap ${
-        pressed ? "bg-accent/15 text-foreground" : "text-muted hover:bg-surface-2 hover:text-foreground"
+      className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border px-2.5 text-sm font-medium md:min-h-8 ${
+        checked
+          ? "border-accent bg-accent/15 text-foreground"
+          : "border-border-strong bg-surface text-muted hover:border-subtle hover:text-foreground"
       }`}
     >
-      <span>{children}</span>
-      {pressed ? <Check /> : <span className="size-3.5 shrink-0" aria-hidden="true" />}
+      <CheckboxMark checked={checked} />
+      {label}
     </button>
+  );
+}
+
+function CheckboxMark({ checked }: { checked: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border ${
+        checked ? "border-accent bg-gold-fill text-gold-ink" : "border-border-strong bg-background"
+      }`}
+    >
+      {checked && (
+        <svg viewBox="0 0 16 16" className="size-2.5">
+          <path
+            d="M3.5 8.2 6.4 11.1 12.5 4.9"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )}
+    </span>
+  );
+}
+
+function FilterIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true" className="size-3.5 shrink-0">
+      <path
+        d="M2.25 3.25h11.5L9.4 8.15V12.2L6.6 13.5V8.15L2.25 3.25Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
@@ -591,240 +628,6 @@ function CountBadge({ count }: { count: number }) {
     <span className="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-gold-fill px-1 text-[10px] font-semibold tabular-nums text-gold-ink">
       {count}
     </span>
-  );
-}
-
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      aria-hidden="true"
-      className={`size-3.5 shrink-0 transition-transform duration-150 motion-reduce:transition-none ${open ? "rotate-180" : ""}`}
-    >
-      <path
-        d="M4 6.25 8 10.25 12 6.25"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function Check() {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" className="size-3.5 shrink-0 text-accent">
-      <path
-        d="M3.5 8.2 6.4 11.1 12.5 4.9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function FilterSheet({
-  groups,
-  matchingCount,
-  market,
-  style,
-  price,
-  extras,
-  language,
-  languages,
-  marketCounts,
-  filtersActive,
-  onMarket,
-  onStyle,
-  onPrice,
-  onToggleExtra,
-  onLanguage,
-  onClear,
-  onClose,
-}: {
-  groups: SignalGroupView[];
-  matchingCount: number;
-  market: MarketFilter;
-  style: StyleFilter;
-  price: PriceFilter;
-  extras: SignalExtra[];
-  language: string;
-  languages: string[];
-  marketCounts: Map<SignalMarket, number>;
-  filtersActive: boolean;
-  onMarket: (market: MarketFilter) => void;
-  onStyle: (style: StyleFilter) => void;
-  onPrice: (price: PriceFilter) => void;
-  onToggleExtra: (extra: SignalExtra) => void;
-  onLanguage: (language: string) => void;
-  onClear: () => void;
-  onClose: () => void;
-}) {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const onCloseRef = useRef(onClose);
-
-  useEffect(() => {
-    onCloseRef.current = onClose;
-  }, [onClose]);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    dialog?.focus();
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        event.stopPropagation();
-        onCloseRef.current();
-        return;
-      }
-      if (event.key !== "Tab" || !dialog) return;
-      const items = [...dialog.querySelectorAll<HTMLElement>("button, input, [href], [tabindex]:not([tabindex='-1'])")].filter(
-        (item) => !item.hasAttribute("disabled"),
-      );
-      if (items.length === 0) return;
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    }
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
-
-  return (
-    <div className="fixed inset-0 z-50 md:hidden">
-      <button type="button" aria-label="Close filters" className="absolute inset-0 bg-black/65" onClick={onClose} />
-      <div
-        ref={dialogRef}
-        id="signal-filter-sheet"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="signal-filter-sheet-title"
-        tabIndex={-1}
-        className="signal-sheet-panel absolute inset-x-0 bottom-0 flex max-h-[min(85vh,40rem)] flex-col rounded-t-2xl border border-border-strong bg-surface outline-none"
-      >
-        <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-border-strong" aria-hidden="true" />
-        <div className="flex items-center justify-between px-4 pt-2 pb-2">
-          <h2 id="signal-filter-sheet-title" className="text-base font-semibold text-foreground">
-            Filters
-          </h2>
-          <button type="button" onClick={onClose} className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-muted">
-            Close
-          </button>
-        </div>
-
-        <div className="overflow-y-auto overscroll-contain px-4 pb-4">
-          <p className="eyebrow">Market</p>
-          <div className="mt-2">
-            <MarketSegments tall market={market} counts={marketCounts} total={groups.length} onChange={onMarket} />
-          </div>
-          <p className="mt-2 text-xs leading-relaxed text-muted">{MARKET_NOTE}</p>
-
-          <SheetGroup label="Style">
-            <SheetChoice pressed={style === "any"} onClick={() => onStyle("any")}>
-              Any
-            </SheetChoice>
-            {SIGNAL_STYLE_ORDER.map((id) => (
-              <SheetChoice key={id} pressed={style === id} onClick={() => onStyle(id)}>
-                {SIGNAL_STYLE_LABELS[id]}
-              </SheetChoice>
-            ))}
-          </SheetGroup>
-
-          <SheetGroup label="Price">
-            <SheetChoice pressed={price === "any"} onClick={() => onPrice("any")}>
-              Any
-            </SheetChoice>
-            {SIGNAL_PRICE_ORDER.map((id) => (
-              <SheetChoice key={id} pressed={price === id} onClick={() => onPrice(id)}>
-                {SIGNAL_PRICE_LABELS[id]}
-              </SheetChoice>
-            ))}
-          </SheetGroup>
-
-          <SheetGroup label="Extras">
-            {SIGNAL_EXTRA_ORDER.map((id) => (
-              <SheetChoice key={id} pressed={extras.includes(id)} onClick={() => onToggleExtra(id)}>
-                {SIGNAL_EXTRA_LABELS[id]}
-              </SheetChoice>
-            ))}
-          </SheetGroup>
-
-          <SheetGroup label="Language">
-            <SheetChoice pressed={language === "any"} onClick={() => onLanguage("any")}>
-              Any
-            </SheetChoice>
-            {languages.map((name) => (
-              <SheetChoice key={name} pressed={language === name} onClick={() => onLanguage(name)}>
-                {name}
-              </SheetChoice>
-            ))}
-            {languages.length === 0 && <p className="meta px-3 py-3">No languages listed yet.</p>}
-          </SheetGroup>
-        </div>
-
-        <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-          <p className="text-xs text-muted" aria-hidden="true">
-            <span className="font-semibold tabular-nums text-foreground">{matchingCount}</span> of {groups.length} shown
-          </p>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={onClear}
-              disabled={!filtersActive}
-              className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-accent disabled:text-subtle disabled:opacity-50"
-            >
-              Clear
-            </button>
-            <button type="button" onClick={onClose} className="btn btn-primary">
-              Done
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SheetGroup({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <fieldset className="mt-4 border-0 p-0">
-      <legend className="eyebrow">{label}</legend>
-      <div className="mt-1.5 overflow-hidden rounded-xl border border-border">{children}</div>
-    </fieldset>
-  );
-}
-
-function SheetChoice({
-  pressed,
-  onClick,
-  children,
-}: {
-  pressed: boolean;
-  onClick: () => void;
-  children: ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed={pressed}
-      onClick={onClick}
-      className={`flex min-h-11 w-full items-center justify-between gap-3 border-b border-border px-3 text-left text-sm font-medium last:border-b-0 ${
-        pressed ? "bg-accent/15 text-foreground" : "bg-surface text-muted"
-      }`}
-    >
-      <span>{children}</span>
-      {pressed ? <Check /> : <span className="size-3.5 shrink-0" aria-hidden="true" />}
-    </button>
   );
 }
 
@@ -922,12 +725,8 @@ function EmptyDirectory() {
   );
 }
 
-function matches(group: SignalGroupView, filters: Filters): boolean {
-  if (filters.market !== "all" && !group.markets.includes(filters.market)) return false;
-  if (filters.style !== "any" && !group.styles.includes(filters.style)) return false;
-  if (filters.price !== "any" && group.price !== filters.price) return false;
-  if (filters.extras.some((extra) => !group.extras.includes(extra))) return false;
-  if (filters.language !== "any" && group.language !== filters.language) return false;
+function matches(group: SignalGroupView, filters: SignalFilterSelection): boolean {
+  if (!signalGroupMatchesFilters(group, filters)) return false;
   return matchesQuery(group, filters.query);
 }
 
@@ -949,21 +748,3 @@ function matchesQuery(group: SignalGroupView, query: string): boolean {
   return haystack.includes(needle);
 }
 
-function filtersFromQuery(initialQuery: string): Filters {
-  const params = new URLSearchParams(initialQuery);
-  const market = params.get("market") ?? "all";
-  const style = params.get("style") ?? "any";
-  const price = params.get("price") ?? "any";
-  const language = params.get("language") ?? "any";
-  const extras = (params.get("extras") ?? "")
-    .split(",")
-    .filter((extra): extra is SignalExtra => extra in SIGNAL_EXTRA_LABELS);
-  return {
-    market: market in SIGNAL_MARKET_LABELS ? (market as SignalMarket) : "all",
-    style: style in SIGNAL_STYLE_LABELS ? (style as SignalStyle) : "any",
-    price: price in SIGNAL_PRICE_LABELS ? (price as SignalPrice) : "any",
-    extras,
-    language,
-    query: params.get("q") ?? "",
-  };
-}
