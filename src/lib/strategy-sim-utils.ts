@@ -80,6 +80,120 @@ export function genDoublePattern(seed: number, n: number, top: boolean): number[
   return values;
 }
 
+export type BreakoutDemo = {
+  bars: OHLC[];
+  rangeEndI: number;
+  breakoutI: number;
+  hi: number;
+  lo: number;
+  up: boolean;
+};
+
+/** A deliberately-shaped OHLC series: a tight, flat consolidation range for
+ *  the first chunk of bars, then one clean, decisive breakout candle and a
+ *  short continuation in that direction. Like genDoublePattern, this is a
+ *  crafted shape rather than a plain random walk — a random walk only
+ *  rarely produces one single, unambiguous range with one single,
+ *  unambiguous breakout, which is the whole point of the pattern. Still
+ *  synthetic, still labelled as such. */
+export function genBreakoutDemo(seed: number, n: number): BreakoutDemo {
+  const rand = seededRandom(seed);
+  const rangeEndI = Math.round(n * 0.6);
+  const up = rand() > 0.5;
+  const mid = 100;
+  const rangeHalf = 1.8;
+  const bars: OHLC[] = [];
+  let prevClose = mid;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    let close: number;
+    let high: number;
+    let low: number;
+    if (i <= rangeEndI) {
+      const target = mid + (rand() - 0.5) * rangeHalf * 1.5;
+      close = Math.max(mid - rangeHalf * 0.95, Math.min(mid + rangeHalf * 0.95, target));
+      high = Math.min(mid + rangeHalf, Math.max(open, close) + rand() * 0.4);
+      low = Math.max(mid - rangeHalf, Math.min(open, close) - rand() * 0.4);
+    } else if (i === rangeEndI + 1) {
+      close = up ? mid + rangeHalf + 1.6 + rand() * 0.5 : mid - rangeHalf - 1.6 - rand() * 0.5;
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    } else {
+      close = open + (up ? 1 : -1) * (0.7 + rand() * 0.5);
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    }
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+  return { bars, rangeEndI, breakoutI: rangeEndI + 1, hi: mid + rangeHalf, lo: mid - rangeHalf, up };
+}
+
+export type CandleReversalDemo = {
+  bars: OHLC[];
+  patternI: number;
+  bullish: boolean;
+  kind: "engulfing" | "pinbar";
+};
+
+/** A deliberately-shaped OHLC series: plain, calm candles with exactly one
+ *  obvious engulfing or pin bar/hammer inserted at a known bar — not a
+ *  heuristic scan over a noisy random walk, which can turn up several
+ *  marginal, debatable "patterns" at once. There's never more than one
+ *  real answer here. Still synthetic, still labelled as such. */
+export function genCandleReversalDemo(seed: number, n: number): CandleReversalDemo {
+  const rand = seededRandom(seed);
+  const patternI = Math.round(n * 0.55);
+  const kind: "engulfing" | "pinbar" = rand() > 0.5 ? "engulfing" : "pinbar";
+  const bullish = rand() > 0.5;
+
+  const bars: OHLC[] = [];
+  let prevClose = 100;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    let close: number;
+    let high: number;
+    let low: number;
+
+    if (kind === "engulfing" && i === patternI - 1) {
+      // The candle about to be engulfed: a clear, modest body opposite the
+      // reversal direction.
+      close = open + (bullish ? -1 : 1) * (1.4 + rand() * 0.4);
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    } else if (kind === "engulfing" && i === patternI) {
+      // The engulfing candle: fully covers the prior body, clearly, in the
+      // reversal direction.
+      const priorOpen = bars[i - 1].o;
+      close = priorOpen + (bullish ? 1 : -1) * 0.6;
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    } else if (kind === "pinbar" && i === patternI) {
+      // A small body with one wick several times the body's length.
+      const bodyLen = 0.35 + rand() * 0.15;
+      close = bullish ? open + bodyLen : open - bodyLen;
+      const wick = 3.2 + rand() * 0.6;
+      if (bullish) {
+        high = Math.max(open, close) + 0.2;
+        low = Math.min(open, close) - wick;
+      } else {
+        high = Math.max(open, close) + wick;
+        low = Math.min(open, close) - 0.2;
+      }
+    } else {
+      // A plain, calm candle — small body, modest wicks.
+      close = open + (rand() - 0.5) * 1.0;
+      high = Math.max(open, close) + rand() * 0.35;
+      low = Math.min(open, close) - rand() * 0.35;
+    }
+
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+
+  return { bars, patternI, bullish, kind };
+}
+
 export function sma(values: number[], period: number): (number | null)[] {
   return values.map((_, i) => {
     if (i < period - 1) return null;
