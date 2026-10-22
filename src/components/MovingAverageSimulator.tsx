@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { genSeries, sma, findCrossings, toPath } from "@/lib/ma-chart-utils";
+import { genSeries, sma, findCrossings, toPath } from "@/lib/strategy-sim-utils";
 
 // A live, in-browser moving-average crossover simulator — built only for
 // this one strategy page, not a shared component, since it's tied directly
@@ -79,7 +79,7 @@ export default function MovingAverageSimulator() {
                   cx={PAD + c.i * xStep}
                   cy={yFor(v)}
                   r={6}
-                  fill={c.golden ? "var(--color-success)" : "var(--color-danger)"}
+                  fill={c.up ? "var(--color-success)" : "var(--color-danger)"}
                   stroke="var(--color-background)"
                   strokeWidth={2}
                 />
