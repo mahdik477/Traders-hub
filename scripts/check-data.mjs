@@ -601,15 +601,13 @@ function checkSignalGroup(file, data) {
   if (!g.telegram_url) err(file, `group.telegram_url is missing - Join needs the group's Telegram link`);
   else checkLink(file, "group.telegram_url", g.telegram_url);
   if (!Number.isInteger(g.rank) || g.rank < 1) err(file, `group.rank must be a whole number from 1 up`);
-  if (typeof g.always_free !== "boolean")
-    err(file, `group.always_free must be true or false - it keeps a group visible if the free preview is turned on`);
   if (g.logo) {
     if (typeof g.logo !== "string" || !g.logo.startsWith("/signal-groups/"))
       err(file, `group.logo must be a path under /signal-groups/`);
     else if (!existsSync(path.join(ROOT, "public", g.logo)))
       warn(file, `group.logo "${g.logo}" is not in public/`);
   }
-  for (const key of ["partner_broker", "trades_with_partner", "partner_brokers", "broker_promoted"]) {
+  for (const key of ["partner_broker", "trades_with_partner", "partner_brokers", "broker_promoted", "always_free"]) {
     if (key in g) err(file, `group.${key} is not a signal-group field`);
   }
 }

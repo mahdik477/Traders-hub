@@ -87,9 +87,4 @@ export type SignalGroupView = {
   logo: string | null;
   /** Lower numbers are listed first. */
   rank: number;
-  /**
-   * Stays on the page even after the free-preview limit is turned on.
-   * Not tied to any broker.
-   */
-  alwaysFree: boolean;
 };

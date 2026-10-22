@@ -34,7 +34,6 @@ type RawFile = {
     telegram_url?: string | null;
     logo?: string | null;
     rank?: number | null;
-    always_free?: boolean | null;
   };
 };
 
@@ -102,7 +101,6 @@ function buildGroup(file: string, group: RawFile["group"]): SignalGroupView {
     telegramUrl: safeLink(group.telegram_url),
     logo: group.logo?.trim() || null,
     rank: typeof group.rank === "number" ? group.rank : 100,
-    alwaysFree: group.always_free === true,
   };
 }
 

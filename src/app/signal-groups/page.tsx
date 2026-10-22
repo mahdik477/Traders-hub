@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import SignalGroupDirectory from "@/components/SignalGroupDirectory";
-import { visibleSignalGroups } from "@/lib/signal-preview";
 import { signalGroups } from "@/lib/signal-groups";
 import { getSection } from "@/lib/sections";
 import { SIGNAL_MARKET_ORDER } from "@/lib/signal-group-types";
@@ -32,10 +31,7 @@ const faqs = [
 ];
 
 export default function SignalGroupsPage() {
-  // Preview filtering stays on the server. Pass `listed`, never the raw
-  // `signalGroups` array, or groups hidden by the free-preview limit would
-  // still be embedded in the page for anyone to read.
-  const listed = visibleSignalGroups(signalGroups);
+  const listed = signalGroups;
 
   return (
     <>
