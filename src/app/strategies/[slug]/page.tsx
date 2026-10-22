@@ -28,12 +28,27 @@ import { getStrategy, strategies } from "@/lib/strategies";
 
 export const dynamicParams = false;
 
-// moving-average-crossover has its own literal route (a one-off interactive
-// page, see src/app/strategies/moving-average-crossover/page.tsx) which
-// Next.js resolves ahead of this dynamic one for that exact path — excluded
-// here too so there's only ever one static page generated for that slug.
+// Every free-tier strategy now has its own literal route (a one-off
+// interactive page with a live simulator + a quiz, see e.g.
+// src/app/strategies/moving-average-crossover/page.tsx) which Next.js
+// resolves ahead of this dynamic one for that exact path — excluded here
+// too so there's only ever one static page generated for each of these
+// slugs.
+const INTERACTIVE_SLUGS = [
+  "moving-average-crossover",
+  "support-and-resistance",
+  "trendline-trading",
+  "rsi-overbought-oversold",
+  "macd-signal-line-crossover",
+  "bollinger-band-basics",
+  "range-breakout",
+  "candlestick-reversal-basics",
+  "fibonacci-retracement-basics",
+  "basic-chart-patterns",
+];
+
 export function generateStaticParams() {
-  return strategies.filter((s) => s.slug !== "moving-average-crossover").map((s) => ({ slug: s.slug }));
+  return strategies.filter((s) => !INTERACTIVE_SLUGS.includes(s.slug)).map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/strategies/[slug]">): Promise<Metadata> {

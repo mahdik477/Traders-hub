@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, type MouseEvent } from "react";
-import { genSeries, sma, findCrossings, toPath, type Crossing } from "@/lib/ma-chart-utils";
+import { genSeries, sma, findCrossings, toPath, type Crossing } from "@/lib/strategy-sim-utils";
 import { CheckIcon, PlayIcon } from "@/components/icons";
 
 // A click-the-chart quiz: spot where the fast MA actually crosses the slow
@@ -21,15 +21,15 @@ const TOLERANCE_BARS = 3;
 type Mode = "buy" | "sell";
 
 function pickTarget(crossings: Crossing[], preferred: Mode): { mode: Mode; crossing: Crossing } | null {
-  const golden = crossings.filter((c) => c.golden);
-  const death = crossings.filter((c) => !c.golden);
+  const golden = crossings.filter((c) => c.up);
+  const death = crossings.filter((c) => !c.up);
   const wantGolden = preferred === "buy";
   const pool = wantGolden ? golden : death;
   const fallback = wantGolden ? death : golden;
   const chosenPool = pool.length > 0 ? pool : fallback;
   if (chosenPool.length === 0) return null;
   const crossing = chosenPool[Math.floor(chosenPool.length / 2)];
-  return { mode: crossing.golden ? "buy" : "sell", crossing };
+  return { mode: crossing.up ? "buy" : "sell", crossing };
 }
 
 export default function MovingAverageSignalQuiz() {
