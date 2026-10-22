@@ -69,11 +69,11 @@ function SectionHeading({
   return (
     <h2
       id={id}
-      className={`flex items-center gap-3 scroll-mt-24 text-2xl font-bold tracking-tight sm:text-3xl ${TONE_TEXT_CLASS[tone]}`}
+      className={`flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight sm:text-4xl ${TONE_TEXT_CLASS[tone]}`}
       style={{ fontFamily: "var(--font-heading)" }}
     >
-      <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${TONE_CLASS[tone]}`}>
-        <Icon className="size-5" />
+      <span className={`flex size-12 shrink-0 items-center justify-center rounded-xl ${TONE_CLASS[tone]}`}>
+        <Icon className="size-6" />
       </span>
       {children}
     </h2>
@@ -82,12 +82,12 @@ function SectionHeading({
 
 function QuickNav({ items }: { items: { href: string; label: string }[] }) {
   return (
-    <nav aria-label="Jump to section" className="mt-6 -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+    <nav aria-label="Jump to section" className="mt-6 -mx-1 flex flex-wrap gap-2.5 px-1 pb-1">
       {items.map((item) => (
         <a
           key={item.href}
           href={item.href}
-          className="inline-flex min-h-9 shrink-0 items-center rounded-full border border-border-strong bg-surface px-3.5 text-xs font-medium text-muted transition-colors hover:border-accent/50 hover:text-foreground"
+          className="inline-flex min-h-12 shrink-0 items-center rounded-full border-2 border-border-strong bg-surface px-5 text-sm font-bold text-foreground transition-all hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-glow"
         >
           {item.label}
         </a>
@@ -153,7 +153,7 @@ export default function MovingAverageCrossoverPage() {
       />
 
       {s.image && (
-        <figure className="mt-8 overflow-hidden rounded-xl border border-accent/30 bg-surface shadow-glow">
+        <figure className="mt-8 overflow-hidden rounded-xl border border-accent/30 bg-surface shadow-glow transition-colors hover:border-accent">
           <Image
             src={s.image.src}
             alt={s.image.caption}
@@ -179,19 +179,15 @@ export default function MovingAverageCrossoverPage() {
       <section aria-labelledby="simulator-heading" className="mt-10">
         <h2
           id="simulator-heading"
-          className="flex items-center gap-3 scroll-mt-24 text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-success/12 text-success">
-            <PlayIcon className="size-5" />
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-success/12 text-success">
+            <PlayIcon className="size-6" />
           </span>
           See it happen, live
         </h2>
-        <p className="meta mt-2 max-w-2xl">
-          This is the actual strategy running in your browser — move the sliders and watch the
-          crossovers change in real time.
-        </p>
-        <div className="mt-4">
+        <div className="mt-5">
           <MovingAverageSimulator />
         </div>
       </section>
@@ -203,20 +199,15 @@ export default function MovingAverageCrossoverPage() {
       <section aria-labelledby="quiz-heading" className="mt-10">
         <h2
           id="quiz-heading"
-          className="flex items-center gap-3 scroll-mt-24 text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
-            <CheckIcon className="size-5" />
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+            <CheckIcon className="size-6" />
           </span>
           Test yourself
         </h2>
-        <p className="meta mt-2 max-w-2xl">
-          The simulator shows you the crossover once you already know what to look for. This
-          doesn&apos;t — click the chart where you think the signal actually is, then see how
-          close you got.
-        </p>
-        <div className="mt-4">
+        <div className="mt-5">
           <MovingAverageSignalQuiz />
         </div>
       </section>
@@ -248,7 +239,7 @@ export default function MovingAverageCrossoverPage() {
         </SectionHeading>
         {s.rules.kind === "structured" ? (
           <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-accent/30 bg-accent/5 p-4">
+            <div className="rounded-xl border border-accent/30 bg-accent/5 p-4 transition-colors hover:border-accent hover:shadow-glow">
               <div className="flex items-center gap-2.5">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-base font-bold text-gold-ink">
                   E
@@ -257,7 +248,7 @@ export default function MovingAverageCrossoverPage() {
               </div>
               <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.entry}</dd>
             </div>
-            <div className="rounded-xl border border-border-strong bg-surface p-4">
+            <div className="rounded-xl border border-border-strong bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
               <div className="flex items-center gap-2.5">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-2 text-base font-bold text-foreground">
                   X
@@ -266,7 +257,7 @@ export default function MovingAverageCrossoverPage() {
               </div>
               <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.exit}</dd>
             </div>
-            <div className="rounded-xl border border-danger/30 bg-danger/5 p-4">
+            <div className="rounded-xl border border-danger/30 bg-danger/5 p-4 transition-colors hover:border-accent hover:shadow-glow">
               <div className="flex items-center gap-2.5">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-danger text-base font-bold text-white">
                   S
@@ -318,7 +309,7 @@ export default function MovingAverageCrossoverPage() {
           </SectionHeading>
           <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {Object.entries(s.assetClassNotes).map(([market, note]) => (
-              <li key={market} className="rounded-xl border border-border bg-surface p-4">
+              <li key={market} className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
                 <h3 className="text-lg font-bold text-foreground">
                   {STRATEGY_MARKET_LABELS[market as keyof typeof STRATEGY_MARKET_LABELS] ?? market}
                 </h3>
@@ -334,7 +325,7 @@ export default function MovingAverageCrossoverPage() {
           Market conditions
         </SectionHeading>
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border border-success/30 bg-success/8 p-4">
+          <div className="rounded-xl border border-success/30 bg-success/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="flex items-center gap-2 text-lg font-bold text-success">
               <CheckIcon className="size-5" />
               Works best
@@ -343,7 +334,7 @@ export default function MovingAverageCrossoverPage() {
               {s.marketConditions.worksBest}
             </dd>
           </div>
-          <div className="rounded-xl border border-warning/30 bg-warning/8 p-4">
+          <div className="rounded-xl border border-warning/30 bg-warning/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="flex items-center gap-2 text-lg font-bold text-warning">
               <InfoIcon className="size-5" />
               Struggles
@@ -352,7 +343,7 @@ export default function MovingAverageCrossoverPage() {
               {s.marketConditions.struggles}
             </dd>
           </div>
-          <div className="rounded-xl border border-danger/30 bg-danger/8 p-4">
+          <div className="rounded-xl border border-danger/30 bg-danger/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="flex items-center gap-2 text-lg font-bold text-danger">
               <ShieldIcon className="size-5" />
               Common failure mode
@@ -363,7 +354,7 @@ export default function MovingAverageCrossoverPage() {
           </div>
         </dl>
         {s.commonPitfalls.length > 0 && (
-          <div className="mt-5 rounded-xl border border-warning/30 bg-warning/5 p-4">
+          <div className="mt-5 rounded-xl border border-warning/30 bg-warning/5 p-4 transition-colors hover:border-accent hover:shadow-glow">
             <h3 className="flex items-center gap-2 text-lg font-bold text-foreground">
               <InfoIcon className="size-5 text-warning" />
               Common pitfalls
@@ -387,11 +378,11 @@ export default function MovingAverageCrossoverPage() {
           Testing this yourself
         </SectionHeading>
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-border bg-surface p-4">
+          <div className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="text-lg font-bold text-foreground">Platform / testability</dt>
             <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">{s.platformTestability}</dd>
           </div>
-          <div className="rounded-xl border border-border bg-surface p-4">
+          <div className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="text-lg font-bold text-foreground">Data needed</dt>
             <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">{s.dataRequirement}</dd>
           </div>
@@ -412,7 +403,7 @@ export default function MovingAverageCrossoverPage() {
             {s.videos.map((v) => {
               const thumbnail = youtubeThumbnail(v.url);
               return (
-                <li key={v.url} className="rounded-xl border border-border bg-surface p-4">
+                <li key={v.url} className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
                   <p className="text-lg font-bold text-foreground">{v.title}</p>
                   <a
                     href={v.url}
@@ -455,7 +446,7 @@ export default function MovingAverageCrossoverPage() {
           </SectionHeading>
           <ul className="mt-4 flex flex-wrap gap-2">
             {s.markets.map((m) => (
-              <li key={m} className="pill">
+              <li key={m} className="pill transition-colors hover:border-accent hover:text-accent">
                 {STRATEGY_MARKET_LABELS[m]}
               </li>
             ))}
