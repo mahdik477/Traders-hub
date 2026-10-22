@@ -143,11 +143,11 @@ export default function MovingAverageCrossoverPage() {
       <QuickNav
         items={[
           { href: "#simulator-heading", label: "Try it live" },
-          { href: "#quiz-heading", label: "Test yourself" },
           { href: "#concept-heading", label: "Core concept" },
           { href: "#rules-heading", label: "Rules" },
           ...(s.stepByStep.length > 0 ? [{ href: "#walkthrough-heading", label: "Step by step" }] : []),
           { href: "#conditions-heading", label: "Market conditions" },
+          { href: "#quiz-heading", label: "Test yourself" },
           ...(s.videos.length > 0 ? [{ href: "#videos-heading", label: "Videos" }] : []),
         ]}
       />
@@ -189,26 +189,6 @@ export default function MovingAverageCrossoverPage() {
         </h2>
         <div className="mt-5">
           <MovingAverageSimulator />
-        </div>
-      </section>
-
-      {/* A second, different kind of interactivity — not another slider, a
-          test. Seeing the lines cross on command (above) is a different
-          skill from spotting a cross on an unlabelled chart, which is the
-          actual real-world task. */}
-      <section aria-labelledby="quiz-heading" className="mt-10">
-        <h2
-          id="quiz-heading"
-          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
-            <CheckIcon className="size-6" />
-          </span>
-          Test yourself
-        </h2>
-        <div className="mt-5">
-          <MovingAverageSignalQuiz />
         </div>
       </section>
 
@@ -387,6 +367,26 @@ export default function MovingAverageCrossoverPage() {
             <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">{s.dataRequirement}</dd>
           </div>
         </dl>
+      </section>
+
+      {/* Right after "testing this yourself" — not another slider, a test.
+          Seeing the lines cross on command (the simulator above) is a
+          different skill from spotting a cross on an unlabelled chart,
+          which is the actual real-world task. */}
+      <section aria-labelledby="quiz-heading" className="mt-10">
+        <h2
+          id="quiz-heading"
+          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+            <CheckIcon className="size-6" />
+          </span>
+          Test yourself
+        </h2>
+        <div className="mt-5">
+          <MovingAverageSignalQuiz />
+        </div>
       </section>
 
       {s.videos.length > 0 && (
