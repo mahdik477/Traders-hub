@@ -16,6 +16,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { signalFiltersFromSearch, signalGroupMatchesFilters } from "../src/lib/signal-group-filters.mjs";
 
 const ROOT =
   process.env.CLAUDE_PROJECT_DIR ||
@@ -35,6 +36,10 @@ const STALE_AFTER_DAYS = 30;
 const KNOWN_BROKER_MARKETS = new Set(["stocks", "options", "futures", "forex", "bonds", "funds", "crypto", "cfds"]);
 
 // Keep in sync with the signal-group unions in src/lib/signal-group-types.ts.
+// A listing stores one price and one language. The directory can tick several:
+// style, price and language ticks combine with OR inside the group and AND
+// across groups. Extras are AND (every ticked extra must be on the group).
+// The rules themselves are checked in checkSignalFilterRules().
 const KNOWN_SIGNAL_MARKETS = new Set([
   "gold",
   "forex-majors",
@@ -631,7 +636,83 @@ function checkStrategies(file, data) {
   });
 }
 
+function checkSignalFilterRules() {
+  const freeScalp = {
+    markets: ["gold"],
+    styles: ["scalping"],
+    price: "free",
+    extras: ["education"],
+    language: "English",
+  };
+  const paidSwing = {
+    markets: ["indices"],
+    styles: ["swing"],
+    price: "paid",
+    extras: ["education", "copy-trading"],
+    language: "Arabic",
+  };
+  const dayOnly = {
+    markets: ["crypto"],
+    styles: ["day-trading"],
+    price: "free-and-vip",
+    extras: [],
+    language: "English",
+  };
+  const none = { market: "all", styles: [], prices: [], extras: [], languages: [] };
+  const assert = (condition, message) => {
+    if (!condition) err("signal-filter-rules", message);
+  };
+
+  assert(signalGroupMatchesFilters(freeScalp, none), "nothing ticked should match every group");
+  assert(
+    signalGroupMatchesFilters(freeScalp, { ...none, styles: ["scalping", "swing"] }),
+    "Scalping OR Swing should include a scalping group",
+  );
+  assert(
+    signalGroupMatchesFilters(paidSwing, { ...none, styles: ["scalping", "swing"] }),
+    "Scalping OR Swing should include a swing group",
+  );
+  assert(
+    !signalGroupMatchesFilters(dayOnly, { ...none, styles: ["scalping", "swing"] }),
+    "Scalping OR Swing should exclude a day-trading-only group",
+  );
+  assert(
+    signalGroupMatchesFilters(freeScalp, { ...none, styles: ["scalping", "swing"], prices: ["free"] }),
+    "(Scalping OR Swing) AND Free should include a free scalping group",
+  );
+  assert(
+    !signalGroupMatchesFilters(paidSwing, { ...none, styles: ["scalping", "swing"], prices: ["free"] }),
+    "(Scalping OR Swing) AND Free should exclude a paid swing group",
+  );
+  assert(
+    signalGroupMatchesFilters(paidSwing, { ...none, extras: ["education", "copy-trading"] }),
+    "every ticked extra should match a group that has them all",
+  );
+  assert(
+    !signalGroupMatchesFilters(freeScalp, { ...none, extras: ["education", "copy-trading"] }),
+    "a group missing one ticked extra should be excluded",
+  );
+  assert(
+    signalGroupMatchesFilters(freeScalp, { ...none, languages: ["English", "Arabic"] }),
+    "English OR Arabic should include an English group",
+  );
+  assert(
+    !signalGroupMatchesFilters(freeScalp, { ...none, languages: ["Arabic"] }),
+    "Arabic alone should exclude an English group",
+  );
+
+  const parsed = signalFiltersFromSearch("style=scalping,swing&price=free&extras=education,prop-firm&language=any");
+  assert(parsed.styles.join(",") === "scalping,swing", "a style query can list more than one style");
+  assert(parsed.prices.join(",") === "free", "a price query can list prices");
+  assert(parsed.extras.join(",") === "education,prop-firm", "an extras query lists every ticked extra");
+  assert(parsed.languages.length === 0, "language=any means no language filter");
+  const legacy = signalFiltersFromSearch("style=scalping&price=any");
+  assert(legacy.styles.join(",") === "scalping", "an older single style value still counts as one tick");
+  assert(legacy.prices.length === 0, "price=any means no price filter");
+}
+
 function checkAll() {
+  checkSignalFilterRules();
   const files = readdirSync(ROOT)
     .filter(
       (f) =>
