@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 
 const faqs = [
   {
-    q: "Do you rank signal groups by results?",
-    a: "No. This is a directory. We do not score accuracy, returns or how often a group's calls make money. The list order is a manual rank, then the name.",
+    q: "Do you rank signal groups?",
+    a: "No. This is a directory. The list order is a manual rank, then the name.",
   },
   {
     q: "What does Join open?",
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "Are member counts a ranking?",
-    a: "No. The number on a card is the approximate count we saw on Telegram on the date printed under it. Counts change, and a larger group is not a better one. We do not score results.",
+    a: "No. The number on a card is the approximate count we saw on Telegram on the date printed under it. Counts change, and a larger group is not a better one.",
   },
 ];
 
@@ -41,16 +41,15 @@ export default function SignalGroupsPage() {
         is on Telegram.
       </p>
 
-      <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+      <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
         <Fact value={String(listed.length)} label="Groups listed" />
         <Fact value={String(SIGNAL_MARKET_ORDER.length)} label="Markets" />
-        <Fact value="Not scored" label="Trading results" />
       </dl>
 
       <p className="meta mt-4 max-w-2xl">
         Descriptions are in our own words. Member counts are approximate snapshots from the day we
-        checked them, not a live total and not a score. A price, trading style or signal frequency
-        is shown only when a source stated it. We do not verify trading results.
+        checked them, not a live total. A price, trading style or signal frequency is shown only
+        when a source stated it.
       </p>
 
       <div className="mt-8">

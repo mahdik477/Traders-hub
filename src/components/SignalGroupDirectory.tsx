@@ -719,7 +719,6 @@ function EmptyDirectory() {
       <ul className="mt-4 max-w-2xl list-disc space-y-1.5 pl-5 text-sm text-muted marker:text-accent">
         <li>No guaranteed-return language, and no pressure to deposit more money.</li>
         <li>A free option or a trial is available.</li>
-        <li>We do not score results, accuracy or how often a group&apos;s calls make money.</li>
       </ul>
     </div>
   );
