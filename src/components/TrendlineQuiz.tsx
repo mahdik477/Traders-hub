@@ -4,8 +4,9 @@ import { useMemo, useState, type MouseEvent } from "react";
 import { genSeries, findPivots, toPath, type Pivot } from "@/lib/strategy-sim-utils";
 import { CheckIcon, PlayIcon } from "@/components/icons";
 
-// A click-the-chart quiz: spot where price actually comes back and touches
-// the trendline, before the chart marks it for you.
+// A click-the-chart quiz: the trendline is drawn on from the start (there's
+// no guessing which line it is) — the question is only where price actually
+// comes back and touches it.
 
 const WIDTH = 760;
 const HEIGHT = 300;
@@ -113,18 +114,21 @@ export default function TrendlineQuiz() {
           {[0.25, 0.5, 0.75].map((f) => (
             <line key={f} x1={PAD} x2={WIDTH - PAD} y1={PAD + f * (HEIGHT - PAD * 2)} y2={PAD + f * (HEIGHT - PAD * 2)} stroke="var(--color-border)" strokeWidth={1} />
           ))}
+          <path d={toPath(lineValues, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold)" strokeWidth={2} strokeDasharray="7 4" />
           <path d={toPath(closes, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold-bright)" strokeWidth={2.5} />
 
           {guessIndex != null && (
             <line x1={PAD + guessIndex * xStep} x2={PAD + guessIndex * xStep} y1={PAD} y2={HEIGHT - PAD} stroke={isCorrect ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2} strokeDasharray="4 3" />
           )}
           {answered && (
-            <>
-              <path d={toPath(lineValues, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold)" strokeWidth={2} strokeDasharray="7 4" />
-              <circle cx={PAD + targetI * xStep} cy={yFor(closes[targetI])} r={7} fill={line.up ? "var(--color-success)" : "var(--color-danger)"} stroke="var(--color-background)" strokeWidth={2} />
-            </>
+            <circle cx={PAD + targetI * xStep} cy={yFor(closes[targetI])} r={7} fill={line.up ? "var(--color-success)" : "var(--color-danger)"} stroke="var(--color-background)" strokeWidth={2} />
           )}
         </svg>
+        <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-muted">
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block h-0.5 w-3 border-t-2 border-dashed border-gold" /> Trendline ({line.up ? "rising support" : "falling resistance"})
+          </span>
+        </div>
 
         {answered ? (
           <div className={`mt-4 flex items-start gap-3 rounded-xl border p-4 ${isCorrect ? "border-success/30 bg-success/8" : "border-danger/30 bg-danger/8"}`}>
@@ -134,8 +138,8 @@ export default function TrendlineQuiz() {
             <div className="flex-1">
               <p className={`text-lg font-bold ${isCorrect ? "text-success" : "text-danger"}`}>{isCorrect ? "Right on it." : "Not quite."}</p>
               <p className="mt-1 text-base leading-relaxed text-foreground/90">
-                The trendline only shows up once you answer — the solid dot is the bar where price
-                actually reached it. Your click is the dashed vertical line.
+                The solid dot is the bar where price actually reached the trendline. Your click is
+                the dashed vertical line.
               </p>
               <button type="button" onClick={nextRound} className="btn btn-primary mt-3">
                 <PlayIcon className="size-3.5" />

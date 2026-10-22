@@ -1,13 +1,14 @@
 "use client";
 
 import { useMemo, useState, type MouseEvent } from "react";
-import { genOHLC, findCandlePatterns } from "@/lib/strategy-sim-utils";
+import { genCandleReversalDemo } from "@/lib/strategy-sim-utils";
 import { CheckIcon, PlayIcon } from "@/components/icons";
 
 // A click-the-candle quiz: spot which candle is actually a reversal
-// pattern, before the chart marks it for you. Unlike the other quizzes,
-// the target here is a specific candle, not an x-position — you click
-// anywhere within a candle's column to select it.
+// pattern, before the chart marks it for you. There's always exactly one
+// real answer — see genCandleReversalDemo for why. Unlike the other
+// quizzes, the target here is a specific candle, not an x-position — you
+// click anywhere within a candle's column to select it.
 
 const WIDTH = 760;
 const HEIGHT = 300;
@@ -19,9 +20,7 @@ export default function CandlestickQuiz() {
   const [guessIndex, setGuessIndex] = useState<number | null>(null);
   const [score, setScore] = useState({ correct: 0, total: 0 });
 
-  const bars = useMemo(() => genOHLC(seed, N), [seed]);
-  const patterns = useMemo(() => findCandlePatterns(bars), [bars]);
-  const target = patterns.length ? patterns[Math.floor(patterns.length / 2)] : null;
+  const { bars, patternI, kind, bullish } = useMemo(() => genCandleReversalDemo(seed, N), [seed]);
 
   const { min, max } = useMemo(() => {
     const highs = bars.map((b) => b.h);
@@ -35,34 +34,22 @@ export default function CandlestickQuiz() {
   const indexFor = (x: number) => Math.max(0, Math.min(N - 1, Math.round((x - PAD) / xStep)));
 
   const answered = guessIndex != null;
-  const isCorrect = target != null && guessIndex === target.i;
+  const isCorrect = guessIndex === patternI;
+  const patternName = kind === "engulfing" ? (bullish ? "bullish engulfing" : "bearish engulfing") : bullish ? "hammer" : "pin bar";
 
   function handleClick(e: MouseEvent<SVGSVGElement>) {
-    if (answered || !target) return;
+    if (answered) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const svgX = ((e.clientX - rect.left) / rect.width) * WIDTH;
     const idx = indexFor(svgX);
     setGuessIndex(idx);
-    setScore((s) => ({ correct: s.correct + (idx === target.i ? 1 : 0), total: s.total + 1 }));
+    setScore((s) => ({ correct: s.correct + (idx === patternI ? 1 : 0), total: s.total + 1 }));
   }
 
   function nextRound() {
     setSeed((n) => n + 1);
     setGuessIndex(null);
   }
-
-  if (!target) {
-    return (
-      <div className="rounded-2xl border border-border bg-surface p-5 text-center">
-        <p className="text-muted">That run didn&apos;t produce a clean pattern — try another.</p>
-        <button type="button" onClick={nextRound} className="btn btn-outline mt-3">
-          New chart
-        </button>
-      </div>
-    );
-  }
-
-  const patternName = target.kind === "engulfing" ? (target.bullish ? "bullish engulfing" : "bearish engulfing") : target.bullish ? "hammer" : "pin bar";
 
   return (
     <div className="overflow-hidden rounded-2xl border border-success/30 bg-surface shadow-glow">
@@ -84,12 +71,12 @@ export default function CandlestickQuiz() {
           ))}
           {bars.map((b, i) => {
             const x = PAD + i * xStep;
-            const bullish = b.c > b.o;
+            const up = b.c > b.o;
             const bodyTop = yFor(Math.max(b.o, b.c));
             const bodyBottom = yFor(Math.min(b.o, b.c));
-            const color = bullish ? "var(--color-success)" : "var(--color-danger)";
+            const color = up ? "var(--color-success)" : "var(--color-danger)";
             const isGuess = guessIndex === i;
-            const isTarget = answered && i === target.i;
+            const isTarget = answered && i === patternI;
             return (
               <g key={i}>
                 <line x1={x} x2={x} y1={yFor(b.h)} y2={yFor(b.l)} stroke={color} strokeWidth={1.5} />

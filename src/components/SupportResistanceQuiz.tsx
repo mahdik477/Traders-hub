@@ -4,8 +4,9 @@ import { useMemo, useState, type MouseEvent } from "react";
 import { genSeries, findPivots, toPath, type Pivot } from "@/lib/strategy-sim-utils";
 import { CheckIcon, PlayIcon } from "@/components/icons";
 
-// A click-the-chart quiz: spot where price actually touches the support or
-// resistance level, before the chart marks it for you.
+// A click-the-chart quiz: the support and resistance lines are drawn on
+// from the start (there's no guessing where they are) — the question is
+// only where price actually comes back and touches one.
 
 const WIDTH = 760;
 const HEIGHT = 300;
@@ -131,6 +132,12 @@ export default function SupportResistanceQuiz() {
               strokeWidth={1}
             />
           ))}
+          {resistance != null && (
+            <line x1={PAD} x2={WIDTH - PAD} y1={yFor(resistance)} y2={yFor(resistance)} stroke="var(--color-danger)" strokeWidth={2} strokeDasharray="6 4" />
+          )}
+          {support != null && (
+            <line x1={PAD} x2={WIDTH - PAD} y1={yFor(support)} y2={yFor(support)} stroke="var(--color-success)" strokeWidth={2} strokeDasharray="6 4" />
+          )}
           <path d={toPath(closes, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold-bright)" strokeWidth={2.5} />
 
           {guessIndex != null && (
@@ -145,27 +152,24 @@ export default function SupportResistanceQuiz() {
             />
           )}
           {answered && (
-            <>
-              <line
-                x1={PAD}
-                x2={WIDTH - PAD}
-                y1={yFor(target.mode === "support" ? support! : resistance!)}
-                y2={yFor(target.mode === "support" ? support! : resistance!)}
-                stroke={target.mode === "support" ? "var(--color-success)" : "var(--color-danger)"}
-                strokeWidth={2}
-                strokeDasharray="6 4"
-              />
-              <circle
-                cx={PAD + target.touch.i * xStep}
-                cy={yFor(closes[target.touch.i])}
-                r={7}
-                fill={target.mode === "support" ? "var(--color-success)" : "var(--color-danger)"}
-                stroke="var(--color-background)"
-                strokeWidth={2}
-              />
-            </>
+            <circle
+              cx={PAD + target.touch.i * xStep}
+              cy={yFor(closes[target.touch.i])}
+              r={7}
+              fill={target.mode === "support" ? "var(--color-success)" : "var(--color-danger)"}
+              stroke="var(--color-background)"
+              strokeWidth={2}
+            />
           )}
         </svg>
+        <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-muted">
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block h-0.5 w-3 border-t-2 border-dashed border-danger" /> Resistance
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block h-0.5 w-3 border-t-2 border-dashed border-success" /> Support
+          </span>
+        </div>
 
         {answered ? (
           <div className={`mt-4 flex items-start gap-3 rounded-xl border p-4 ${isCorrect ? "border-success/30 bg-success/8" : "border-danger/30 bg-danger/8"}`}>

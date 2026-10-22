@@ -1,14 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { genOHLC, findCandlePatterns } from "@/lib/strategy-sim-utils";
+import { genCandleReversalDemo } from "@/lib/strategy-sim-utils";
 
-// A live candlestick simulator — shuffle the chart and any bar matching a
-// classic reversal pattern (bullish/bearish engulfing, or a pin
-// bar/hammer) gets outlined in gold automatically. Same synthetic-data
-// convention as every other interactive strategy page, just as OHLC bars
-// instead of a close-only line, since these patterns are about candle
-// shape, not just price direction.
+// A live candlestick simulator. This pattern only reads clearly if there's
+// exactly one obvious example on the chart, so — unlike the other free
+// strategies — this doesn't scan a random walk for whatever patterns
+// happen to show up; it generates one deliberate, obvious engulfing or
+// pin bar/hammer every time, in an otherwise plain run of candles. Still
+// entirely synthetic, still labelled as such.
 
 const WIDTH = 760;
 const HEIGHT = 320;
@@ -18,9 +18,7 @@ const N = 50;
 export default function CandlestickSimulator() {
   const [seed, setSeed] = useState(2);
 
-  const bars = useMemo(() => genOHLC(seed, N), [seed]);
-  const patterns = useMemo(() => findCandlePatterns(bars), [bars]);
-  const patternByIndex = useMemo(() => new Map(patterns.map((p) => [p.i, p])), [patterns]);
+  const { bars, patternI, kind, bullish } = useMemo(() => genCandleReversalDemo(seed, N), [seed]);
 
   const { min, max } = useMemo(() => {
     const highs = bars.map((b) => b.h);
@@ -31,13 +29,14 @@ export default function CandlestickSimulator() {
   const xStep = (WIDTH - PAD * 2) / (N - 1);
   const candleWidth = xStep * 0.55;
   const yFor = (v: number) => HEIGHT - PAD - ((v - min) / (max - min)) * (HEIGHT - PAD * 2);
+  const patternName = kind === "engulfing" ? (bullish ? "bullish engulfing" : "bearish engulfing") : bullish ? "hammer" : "pin bar";
 
   return (
     <div className="overflow-hidden rounded-2xl border border-accent/30 bg-surface shadow-glow">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface-2 px-4 py-3 sm:px-5">
         <div>
           <p className="text-lg font-bold text-foreground">Try it yourself</p>
-          <p className="meta mt-0.5">Shuffle the chart — any genuine engulfing or pin bar/hammer gets outlined in gold.</p>
+          <p className="meta mt-0.5">Shuffle the chart — the reversal candle is always outlined in gold.</p>
         </div>
         <button type="button" onClick={() => setSeed((n) => n + 1)} className="btn btn-outline">
           Shuffle price data
@@ -51,11 +50,11 @@ export default function CandlestickSimulator() {
           ))}
           {bars.map((b, i) => {
             const x = PAD + i * xStep;
-            const bullish = b.c > b.o;
+            const up = b.c > b.o;
             const bodyTop = yFor(Math.max(b.o, b.c));
             const bodyBottom = yFor(Math.min(b.o, b.c));
-            const pattern = patternByIndex.get(i);
-            const color = bullish ? "var(--color-success)" : "var(--color-danger)";
+            const isPattern = i === patternI;
+            const color = up ? "var(--color-success)" : "var(--color-danger)";
             return (
               <g key={i}>
                 <line x1={x} x2={x} y1={yFor(b.h)} y2={yFor(b.l)} stroke={color} strokeWidth={1.5} />
@@ -65,9 +64,9 @@ export default function CandlestickSimulator() {
                   width={candleWidth}
                   height={Math.max(bodyBottom - bodyTop, 1.5)}
                   fill={color}
-                  opacity={pattern ? 1 : 0.7}
-                  stroke={pattern ? "var(--color-gold-bright)" : "none"}
-                  strokeWidth={pattern ? 2.5 : 0}
+                  opacity={isPattern ? 1 : 0.7}
+                  stroke={isPattern ? "var(--color-gold-bright)" : "none"}
+                  strokeWidth={isPattern ? 2.5 : 0}
                   rx={1}
                 />
               </g>
@@ -87,9 +86,8 @@ export default function CandlestickSimulator() {
         </div>
 
         <p className="meta mt-4">
-          {patterns.length} pattern{patterns.length === 1 ? "" : "s"} found on this run (engulfing and
-          pin bar/hammer only — this is a simplified scan, not a production pattern recognizer).
-          Synthetic candles, regenerated each shuffle — not a real historical chart.
+          This run&apos;s pattern is a {patternName} at bar {patternI + 1}. Deliberately-shaped
+          synthetic candles, regenerated each shuffle — not a real historical chart.
         </p>
       </div>
     </div>

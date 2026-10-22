@@ -4,8 +4,9 @@ import { useMemo, useState, type MouseEvent } from "react";
 import { genSeries, findBiggestSwing, fibPrice, FIB_LEVELS, toPath } from "@/lib/strategy-sim-utils";
 import { CheckIcon, PlayIcon } from "@/components/icons";
 
-// A click-the-chart quiz: spot where price actually pulls back to a fib
-// level after the swing, before the chart marks it for you.
+// A click-the-chart quiz: the fib levels are drawn on from the start (same
+// as the simulator) — the question is only where price actually reacted
+// off one of them.
 
 const WIDTH = 760;
 const HEIGHT = 320;
@@ -85,8 +86,8 @@ export default function FibonacciQuiz() {
     <div className="overflow-hidden rounded-2xl border border-success/30 bg-surface shadow-glow">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface-2 px-4 py-3 sm:px-5">
         <div>
-          <p className="text-lg font-bold text-foreground">Spot the retracement</p>
-          <p className="meta mt-0.5">Click the chart where price pulls back and touches a fib level.</p>
+          <p className="text-lg font-bold text-foreground">Spot the reaction</p>
+          <p className="meta mt-0.5">Click the area where price reacted off a fib level.</p>
         </div>
         <span className="pill">
           Score: {score.correct}/{score.total}
@@ -96,20 +97,23 @@ export default function FibonacciQuiz() {
       <div className="p-4 sm:p-5">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className={`w-full rounded-lg ${answered ? "" : "cursor-crosshair"}`} role="img" aria-label="Click where you think the signal happens" onClick={handleClick}>
           <rect x={0} y={0} width={WIDTH} height={HEIGHT} fill="var(--color-background)" opacity={0.3} />
+          {levels.map(({ level, price }) => (
+            <line key={level} x1={PAD + afterSwingI * xStep} x2={WIDTH - PAD} y1={yFor(price)} y2={yFor(price)} stroke="var(--color-gold)" strokeWidth={1} opacity={0.6} strokeDasharray="4 3" />
+          ))}
           <path d={toPath(closes, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold-bright)" strokeWidth={2.5} />
 
           {guessIndex != null && (
             <line x1={PAD + guessIndex * xStep} x2={PAD + guessIndex * xStep} y1={PAD} y2={HEIGHT - PAD} stroke={isCorrect ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2} strokeDasharray="4 3" />
           )}
           {answered && (
-            <>
-              {levels.map(({ level, price }) => (
-                <line key={level} x1={PAD + afterSwingI * xStep} x2={WIDTH - PAD} y1={yFor(price)} y2={yFor(price)} stroke="var(--color-gold)" strokeWidth={1} opacity={0.6} strokeDasharray="4 3" />
-              ))}
-              <circle cx={PAD + targetTouch.i * xStep} cy={yFor(closes[targetTouch.i])} r={7} fill="var(--color-success)" stroke="var(--color-background)" strokeWidth={2} />
-            </>
+            <circle cx={PAD + targetTouch.i * xStep} cy={yFor(closes[targetTouch.i])} r={7} fill="var(--color-success)" stroke="var(--color-background)" strokeWidth={2} />
           )}
         </svg>
+        <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-muted">
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block h-0.5 w-3 border-t-2 border-dashed border-gold" /> Fib levels
+          </span>
+        </div>
 
         {answered ? (
           <div className={`mt-4 flex items-start gap-3 rounded-xl border p-4 ${isCorrect ? "border-success/30 bg-success/8" : "border-danger/30 bg-danger/8"}`}>
@@ -119,9 +123,8 @@ export default function FibonacciQuiz() {
             <div className="flex-1">
               <p className={`text-lg font-bold ${isCorrect ? "text-success" : "text-danger"}`}>{isCorrect ? "Right on it." : "Not quite."}</p>
               <p className="mt-1 text-base leading-relaxed text-foreground/90">
-                The fib levels and the solid dot only show up once you answer — that&apos;s the bar
-                where price actually reached the {(targetTouch.level * 100).toFixed(1)}% level. Your
-                click is the dashed line.
+                The solid dot is the bar where price actually reacted off the{" "}
+                {(targetTouch.level * 100).toFixed(1)}% level. Your click is the dashed line.
               </p>
               <button type="button" onClick={nextRound} className="btn btn-primary mt-3">
                 <PlayIcon className="size-3.5" />
