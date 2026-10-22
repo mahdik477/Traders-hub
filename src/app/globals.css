@@ -424,6 +424,72 @@ body {
   backdrop-filter: blur(16px);
 }
 
+/* Signal Groups filter bar. Sits under the sticky header. The negative
+   margins match container-page so the blur covers the content column. */
+.signal-filter-bar {
+  position: sticky;
+  z-index: 30;
+  margin-inline: -1rem;
+  padding: 0.55rem 1rem 0.65rem;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-background) 90%, transparent);
+  box-shadow: inset 0 -1px 0 rgb(232 197 106 / 0.16);
+  backdrop-filter: blur(16px);
+}
+
+@media (width >= 40rem) {
+  .signal-filter-bar {
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (width >= 64rem) {
+  .signal-filter-bar {
+    margin-inline: -2rem;
+    padding-inline: 2rem;
+  }
+}
+
+input.signal-filter-search {
+  height: 2.75rem;
+  min-height: 2.75rem;
+}
+
+@media (width >= 48rem) {
+  input.signal-filter-search {
+    height: 2.25rem;
+    min-height: 2.25rem;
+    padding-block: 0;
+    font-size: 0.875rem;
+  }
+}
+
+.signal-popover {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  box-shadow:
+    inset 0 1px 0 rgb(245 215 110 / 0.28),
+    0 18px 40px -24px rgb(0 0 0 / 0.85);
+}
+
+@keyframes signal-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .signal-sheet-panel {
+    animation: signal-sheet-in 180ms ease-out;
+  }
+}
+
 .nav-scroll {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -548,6 +614,17 @@ body {
 :root[data-theme="light"] .site-header {
   background: color-mix(in srgb, #ffffff 92%, transparent);
   box-shadow: 0 1px 0 #ddd9d0, 0 10px 24px -20px rgb(20 20 20 / 0.28);
+}
+
+:root[data-theme="light"] .signal-filter-bar {
+  background: color-mix(in srgb, #ffffff 94%, transparent);
+  box-shadow: 0 1px 0 #ddd9d0;
+}
+
+:root[data-theme="light"] .signal-popover {
+  box-shadow:
+    0 1px 2px rgb(20 20 20 / 0.06),
+    0 16px 36px -20px rgb(20 20 20 / 0.28);
 }
 
 :root[data-theme="light"] .nav-fade {
