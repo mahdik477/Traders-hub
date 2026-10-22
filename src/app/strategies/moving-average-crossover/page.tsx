@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import StrategyBackLink from "@/components/StrategyBackLink";
 import StrategyWalkthrough from "@/components/StrategyWalkthrough";
 import MovingAverageSimulator from "@/components/MovingAverageSimulator";
+import MovingAverageSignalQuiz from "@/components/MovingAverageSignalQuiz";
 import {
   ShieldIcon,
   InfoIcon,
@@ -142,6 +143,7 @@ export default function MovingAverageCrossoverPage() {
       <QuickNav
         items={[
           { href: "#simulator-heading", label: "Try it live" },
+          { href: "#quiz-heading", label: "Test yourself" },
           { href: "#concept-heading", label: "Core concept" },
           { href: "#rules-heading", label: "Rules" },
           ...(s.stepByStep.length > 0 ? [{ href: "#walkthrough-heading", label: "Step by step" }] : []),
@@ -191,6 +193,31 @@ export default function MovingAverageCrossoverPage() {
         </p>
         <div className="mt-4">
           <MovingAverageSimulator />
+        </div>
+      </section>
+
+      {/* A second, different kind of interactivity — not another slider, a
+          test. Seeing the lines cross on command (above) is a different
+          skill from spotting a cross on an unlabelled chart, which is the
+          actual real-world task. */}
+      <section aria-labelledby="quiz-heading" className="mt-10">
+        <h2
+          id="quiz-heading"
+          className="flex items-center gap-3 scroll-mt-24 text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+            <CheckIcon className="size-5" />
+          </span>
+          Test yourself
+        </h2>
+        <p className="meta mt-2 max-w-2xl">
+          The simulator shows you the crossover once you already know what to look for. This
+          doesn&apos;t — click the chart where you think the signal actually is, then see how
+          close you got.
+        </p>
+        <div className="mt-4">
+          <MovingAverageSignalQuiz />
         </div>
       </section>
 
