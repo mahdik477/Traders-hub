@@ -31,7 +31,7 @@ export const sections: Section[] = [
     slug: "signal-groups",
     title: "Signal Groups",
     summary:
-      "Telegram signal groups you can filter by market, trading style, price and language. A directory only — we do not rank groups by results.",
+      "Telegram signal groups you can filter by market, trading style, price and language. A directory only — we list groups, we do not rank them.",
     status: "live",
   },
   {
