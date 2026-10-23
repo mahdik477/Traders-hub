@@ -28,13 +28,14 @@ import { getStrategy, strategies } from "@/lib/strategies";
 
 export const dynamicParams = false;
 
-// Every free-tier strategy now has its own literal route (a one-off
-// interactive page with a live simulator + a quiz, see e.g.
-// src/app/strategies/moving-average-crossover/page.tsx) which Next.js
-// resolves ahead of this dynamic one for that exact path — excluded here
-// too so there's only ever one static page generated for each of these
-// slugs.
+// Every free- and intermediate-tier strategy now has its own literal
+// route (a one-off interactive page with a live simulator + a quiz, see
+// e.g. src/app/strategies/moving-average-crossover/page.tsx) which
+// Next.js resolves ahead of this dynamic one for that exact path —
+// excluded here too so there's only ever one static page generated for
+// each of these slugs.
 const INTERACTIVE_SLUGS = [
+  // Free tier
   "moving-average-crossover",
   "support-and-resistance",
   "trendline-trading",
@@ -45,6 +46,34 @@ const INTERACTIVE_SLUGS = [
   "candlestick-reversal-basics",
   "fibonacci-retracement-basics",
   "basic-chart-patterns",
+  // Intermediate tier
+  "rsi-divergence",
+  "macd-divergence",
+  "stochastic-oscillator",
+  "cci-strategies",
+  "williams-percent-r",
+  "momentum-rate-of-change",
+  "relative-strength-rotation",
+  "on-balance-volume",
+  "adx-dmi-trend-strength",
+  "supertrend",
+  "parabolic-sar",
+  "heikin-ashi-trend",
+  "atr-volatility-breakout",
+  "keltner-channel-pullback",
+  "ma-pullback-continuation",
+  "pivot-points",
+  "vwap-reversion-trend",
+  "opening-range-breakout",
+  "gap-fill-gap-and-go",
+  "inside-bar-nr7",
+  "dow-theory",
+  "supply-and-demand-zones",
+  "head-and-shoulders",
+  "flags-pennants-wedges",
+  "cup-and-handle",
+  "multi-timeframe-analysis",
+  "trading-styles-scalp-day-swing-position",
 ];
 
 export function generateStaticParams() {
