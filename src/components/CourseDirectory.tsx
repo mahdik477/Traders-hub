@@ -80,6 +80,15 @@ function Directory({
   initialFilters: Filters;
 }) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+
+  function toggleCompare(id: string) {
+    setCompareIds((ids) => {
+      if (ids.includes(id)) return ids.filter((i) => i !== id);
+      if (ids.length >= 3) return ids;
+      return [...ids, id];
+    });
+  }
 
   const entries: Entry[] = [
     ...courses.map((c) => ({
@@ -136,7 +145,7 @@ function Directory({
   const chips = activeFilterChips(filters);
 
   return (
-    <div>
+    <div className={compareIds.length > 0 ? "pb-20" : ""}>
       {/* Filter bar */}
       <form
         aria-label="Filter courses"
@@ -227,6 +236,22 @@ function Directory({
               className="lift-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface"
             >
               <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
+              <label
+                className={`absolute right-3 top-4 z-10 flex min-h-8 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium backdrop-blur-sm transition-colors ${
+                  compareIds.includes(entry.id)
+                    ? "border-accent bg-accent/12 text-accent"
+                    : "border-border-strong bg-surface/95 text-muted hover:border-accent/50 hover:text-foreground"
+                } ${!compareIds.includes(entry.id) && compareIds.length >= 3 ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={compareIds.includes(entry.id)}
+                  onChange={() => toggleCompare(entry.id)}
+                  disabled={!compareIds.includes(entry.id) && compareIds.length >= 3}
+                  className="size-3.5 accent-[var(--color-gold-bright)]"
+                />
+                Compare
+              </label>
               <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-center gap-3">
                   {entry.logo ? (
@@ -301,6 +326,54 @@ function Directory({
             </li>
           ))}
         </ul>
+      )}
+
+      {compareIds.length > 0 && (
+        <div className="fixed inset-x-0 bottom-0 z-40">
+          <div className="container-page pb-4">
+            <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4">
+              <span className="meta hidden sm:inline">Comparing:</span>
+              <div className="flex flex-wrap items-center gap-2">
+                {compareIds.map((id) => {
+                  const e = entries.find((en) => en.id === id);
+                  if (!e) return null;
+                  return (
+                    <span
+                      key={id}
+                      className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-border-strong bg-surface-2 py-1 pl-3 pr-2 text-xs font-medium text-foreground"
+                    >
+                      {e.name}
+                      <button
+                        type="button"
+                        onClick={() => toggleCompare(id)}
+                        aria-label={`Remove ${e.name} from comparison`}
+                        className="text-muted hover:text-foreground"
+                      >
+                        ✕
+                      </button>
+                    </span>
+                  );
+                })}
+              </div>
+              <div className="ml-auto flex items-center gap-3">
+                {compareIds.length < 2 ? (
+                  <span className="meta">Pick at least 2 to compare</span>
+                ) : (
+                  <Link href={`/courses/compare?ids=${compareIds.join(",")}`} className="btn btn-primary">
+                    Compare ({compareIds.length})
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setCompareIds([])}
+                  className="text-sm text-muted underline hover:text-foreground"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
