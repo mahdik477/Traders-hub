@@ -236,24 +236,26 @@ function Directory({
               className="lift-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface"
             >
               <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
-              <label
-                className={`absolute right-3 top-20 z-10 flex min-h-8 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium backdrop-blur-sm transition-colors ${
-                  compareIds.includes(entry.id)
-                    ? "border-accent bg-accent/12 text-accent"
-                    : "border-border-strong bg-surface/95 text-muted hover:border-accent/50 hover:text-foreground"
-                } ${!compareIds.includes(entry.id) && compareIds.length >= 3 ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-              >
-                <input
-                  type="checkbox"
-                  checked={compareIds.includes(entry.id)}
-                  onChange={() => toggleCompare(entry.id)}
-                  disabled={!compareIds.includes(entry.id) && compareIds.length >= 3}
-                  className="size-3.5 accent-[var(--color-gold-bright)]"
-                />
-                Compare
-              </label>
               <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-center gap-3">
+                <div className="relative z-10 flex justify-end">
+                  <label
+                    className={`flex min-h-8 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors ${
+                      compareIds.includes(entry.id)
+                        ? "border-accent bg-accent/12 text-accent"
+                        : "border-border-strong bg-surface-2 text-muted hover:border-accent/50 hover:text-foreground"
+                    } ${!compareIds.includes(entry.id) && compareIds.length >= 3 ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={compareIds.includes(entry.id)}
+                      onChange={() => toggleCompare(entry.id)}
+                      disabled={!compareIds.includes(entry.id) && compareIds.length >= 3}
+                      className="size-3.5 accent-[var(--color-gold-bright)]"
+                    />
+                    Compare
+                  </label>
+                </div>
+                <div className="mt-3 flex items-center gap-3">
                   {entry.logo ? (
                     <div
                       className={`flex size-14 shrink-0 items-center justify-center rounded-lg p-2 ${
