@@ -81,13 +81,20 @@ function Directory({
 }) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [compareNote, setCompareNote] = useState("");
 
   function toggleCompare(id: string) {
-    setCompareIds((ids) => {
-      if (ids.includes(id)) return ids.filter((i) => i !== id);
-      if (ids.length >= 3) return ids;
-      return [...ids, id];
-    });
+    if (compareIds.includes(id)) {
+      setCompareIds((ids) => ids.filter((i) => i !== id));
+      setCompareNote("");
+      return;
+    }
+    if (compareIds.length >= 3) {
+      setCompareNote("You can compare up to 3 courses. Remove one to add another.");
+      return;
+    }
+    setCompareIds((ids) => [...ids, id]);
+    setCompareNote("");
   }
 
   const entries: Entry[] = [
@@ -237,23 +244,19 @@ function Directory({
             >
               <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
               <div className="flex flex-1 flex-col p-5">
-                <div className="relative z-10 flex justify-end">
-                  <label
-                    className={`flex min-h-8 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors ${
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    aria-pressed={compareIds.includes(entry.id)}
+                    onClick={() => toggleCompare(entry.id)}
+                    className={`relative z-10 inline-flex min-h-11 items-center rounded-lg border px-3 text-xs font-semibold transition-colors duration-150 ${
                       compareIds.includes(entry.id)
-                        ? "border-accent bg-accent/12 text-accent"
-                        : "border-border-strong bg-surface-2 text-muted hover:border-accent/50 hover:text-foreground"
-                    } ${!compareIds.includes(entry.id) && compareIds.length >= 3 ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                        ? "border-accent bg-accent/12 text-foreground"
+                        : "border-border-strong text-muted hover:border-subtle hover:text-foreground"
+                    }`}
                   >
-                    <input
-                      type="checkbox"
-                      checked={compareIds.includes(entry.id)}
-                      onChange={() => toggleCompare(entry.id)}
-                      disabled={!compareIds.includes(entry.id) && compareIds.length >= 3}
-                      className="size-3.5 accent-[var(--color-gold-bright)]"
-                    />
-                    Compare
-                  </label>
+                    {compareIds.includes(entry.id) ? "In compare" : "Compare"}
+                  </button>
                 </div>
                 <div className="mt-3 flex items-center gap-3">
                   {entry.logo ? (
@@ -357,6 +360,7 @@ function Directory({
                   );
                 })}
               </div>
+              {compareNote && <p role="status" className="meta w-full sm:w-auto">{compareNote}</p>}
               <div className="ml-auto flex items-center gap-3">
                 {compareIds.length < 2 ? (
                   <span className="meta">Pick at least 2 to compare</span>
@@ -367,7 +371,10 @@ function Directory({
                 )}
                 <button
                   type="button"
-                  onClick={() => setCompareIds([])}
+                  onClick={() => {
+                    setCompareIds([]);
+                    setCompareNote("");
+                  }}
                   className="text-sm text-muted underline hover:text-foreground"
                 >
                   Clear
