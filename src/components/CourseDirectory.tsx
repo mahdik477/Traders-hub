@@ -237,7 +237,7 @@ function Directory({
             >
               <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
               <label
-                className={`absolute right-3 top-4 z-10 flex min-h-8 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium backdrop-blur-sm transition-colors ${
+                className={`absolute right-3 top-20 z-10 flex min-h-8 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium backdrop-blur-sm transition-colors ${
                   compareIds.includes(entry.id)
                     ? "border-accent bg-accent/12 text-accent"
                     : "border-border-strong bg-surface/95 text-muted hover:border-accent/50 hover:text-foreground"
