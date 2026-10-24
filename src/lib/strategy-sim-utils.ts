@@ -224,6 +224,24 @@ export function ema(values: number[], period: number): (number | null)[] {
   return out;
 }
 
+/** sma() over a series that already has leading nulls — same reasoning as
+ *  emaSkipNulls just below. */
+export function smaSkipNulls(values: (number | null)[], period: number): (number | null)[] {
+  const dense = values.filter((v): v is number => v != null);
+  const denseSma = sma(dense, period);
+  const out: (number | null)[] = [];
+  let j = 0;
+  for (const v of values) {
+    if (v == null) {
+      out.push(null);
+    } else {
+      out.push(denseSma[j]);
+      j++;
+    }
+  }
+  return out;
+}
+
 /** ema() over a series that already has leading nulls (e.g. MACD, which is
  *  only defined once the slow EMA kicks in) — skips the nulls, runs ema on
  *  what's left, then puts the nulls back in their original positions. This
@@ -462,4 +480,655 @@ export function xStepFor(n: number, width: number, pad: number): number {
 
 export function yForFn(min: number, max: number, height: number, pad: number) {
   return (v: number) => height - pad - ((v - min) / (max - min)) * (height - pad * 2);
+}
+
+// ---------------------------------------------------------------------------
+// Everything below is for the intermediate-tier interactive strategies —
+// oscillators, trend-flip indicators, bands and the deliberately-shaped
+// chart patterns that need their own generator the same way genDoublePattern
+// does. Same rules as above throughout: every series is synthetic and
+// deterministic per seed, never real market data.
+
+export function trueRange(bars: OHLC[]): number[] {
+  return bars.map((b, i) => {
+    if (i === 0) return b.h - b.l;
+    const prevClose = bars[i - 1].c;
+    return Math.max(b.h - b.l, Math.abs(b.h - prevClose), Math.abs(b.l - prevClose));
+  });
+}
+
+/** Wilder's smoothing — the running average ATR, Supertrend, ADX and
+ *  Parabolic SAR are all traditionally built from. */
+function wilderSmooth(values: number[], period: number): (number | null)[] {
+  const out: (number | null)[] = new Array(values.length).fill(null);
+  if (values.length < period) return out;
+  let avg = values.slice(0, period).reduce((a, b) => a + b, 0) / period;
+  out[period - 1] = avg;
+  for (let i = period; i < values.length; i++) {
+    avg = (avg * (period - 1) + values[i]) / period;
+    out[i] = avg;
+  }
+  return out;
+}
+
+export function atr(bars: OHLC[], period: number): (number | null)[] {
+  return wilderSmooth(trueRange(bars), period);
+}
+
+export function stochastic(
+  bars: OHLC[],
+  period: number,
+  smoothK: number,
+  smoothD: number,
+): { k: (number | null)[]; d: (number | null)[] } {
+  const rawK: (number | null)[] = bars.map((_, i) => {
+    if (i < period - 1) return null;
+    const window = bars.slice(i - period + 1, i + 1);
+    const hi = Math.max(...window.map((b) => b.h));
+    const lo = Math.min(...window.map((b) => b.l));
+    return hi === lo ? 50 : ((bars[i].c - lo) / (hi - lo)) * 100;
+  });
+  const k = smaSkipNulls(rawK, smoothK);
+  const d = smaSkipNulls(k, smoothD);
+  return { k, d };
+}
+
+export function cci(bars: OHLC[], period: number): (number | null)[] {
+  const typical = bars.map((b) => (b.h + b.l + b.c) / 3);
+  const mid = sma(typical, period);
+  return typical.map((tp, i) => {
+    const m = mid[i];
+    if (m == null) return null;
+    let deviation = 0;
+    for (let j = i - period + 1; j <= i; j++) deviation += Math.abs(typical[j] - m);
+    const meanDeviation = deviation / period;
+    return meanDeviation === 0 ? 0 : (tp - m) / (0.015 * meanDeviation);
+  });
+}
+
+export function williamsR(bars: OHLC[], period: number): (number | null)[] {
+  return bars.map((_, i) => {
+    if (i < period - 1) return null;
+    const window = bars.slice(i - period + 1, i + 1);
+    const hi = Math.max(...window.map((b) => b.h));
+    const lo = Math.min(...window.map((b) => b.l));
+    return hi === lo ? -50 : ((hi - bars[i].c) / (hi - lo)) * -100;
+  });
+}
+
+export function roc(values: number[], period: number): (number | null)[] {
+  return values.map((v, i) => (i < period ? null : ((v - values[i - period]) / values[i - period]) * 100));
+}
+
+/** A fabricated volume series to go with a close/OHLC series — never real
+ *  volume, same synthetic-data convention as everything else here. Shaped
+ *  so it's loosely bigger on bigger moves, since that's what OBV/VWAP
+ *  actually need to look like anything. */
+export function genVolume(seed: number, bars: OHLC[]): number[] {
+  const rand = seededRandom(seed + 1);
+  return bars.map((b) => Math.round(400 + Math.abs(b.c - b.o) * 300 + rand() * 500));
+}
+
+/** Same idea as genVolume, but for a plain close-only series rather than
+ *  OHLC bars — what OBV/divergence pages need since they work off
+ *  genDivergenceSeries, not genOHLC. */
+export function genVolumeFromCloses(seed: number, closes: number[]): number[] {
+  const rand = seededRandom(seed + 1);
+  return closes.map((c, i) => {
+    const move = i === 0 ? 0 : Math.abs(c - closes[i - 1]);
+    return Math.round(400 + move * 300 + rand() * 500);
+  });
+}
+
+export function obv(bars: OHLC[], volumes: number[]): number[] {
+  return obvFromCloses(bars.map((b) => b.c), volumes);
+}
+
+export function obvFromCloses(closes: number[], volumes: number[]): number[] {
+  const out = [0];
+  for (let i = 1; i < closes.length; i++) {
+    const prev = out[i - 1];
+    if (closes[i] > closes[i - 1]) out.push(prev + volumes[i]);
+    else if (closes[i] < closes[i - 1]) out.push(prev - volumes[i]);
+    else out.push(prev);
+  }
+  return out;
+}
+
+export function vwap(bars: OHLC[], volumes: number[]): number[] {
+  let cumPV = 0;
+  let cumV = 0;
+  return bars.map((b, i) => {
+    const typical = (b.h + b.l + b.c) / 3;
+    cumPV += typical * volumes[i];
+    cumV += volumes[i];
+    return cumPV / cumV;
+  });
+}
+
+export function heikinAshi(bars: OHLC[]): OHLC[] {
+  const out: OHLC[] = [];
+  bars.forEach((b, i) => {
+    const c = (b.o + b.h + b.l + b.c) / 4;
+    const o = i === 0 ? (b.o + b.c) / 2 : (out[i - 1].o + out[i - 1].c) / 2;
+    const h = Math.max(b.h, o, c);
+    const l = Math.min(b.l, o, c);
+    out.push({ o, h, l, c });
+  });
+  return out;
+}
+
+export type DmiAdx = { plusDi: (number | null)[]; minusDi: (number | null)[]; adx: (number | null)[] };
+
+export function adxDmi(bars: OHLC[], period: number): DmiAdx {
+  const plusDm: number[] = [0];
+  const minusDm: number[] = [0];
+  for (let i = 1; i < bars.length; i++) {
+    const upMove = bars[i].h - bars[i - 1].h;
+    const downMove = bars[i - 1].l - bars[i].l;
+    plusDm.push(upMove > downMove && upMove > 0 ? upMove : 0);
+    minusDm.push(downMove > upMove && downMove > 0 ? downMove : 0);
+  }
+  const tr = trueRange(bars);
+  const smoothTr = wilderSmooth(tr, period);
+  const smoothPlusDm = wilderSmooth(plusDm, period);
+  const smoothMinusDm = wilderSmooth(minusDm, period);
+  const plusDi = smoothPlusDm.map((v, i) => (v == null || !smoothTr[i] ? null : (v / smoothTr[i]!) * 100));
+  const minusDi = smoothMinusDm.map((v, i) => (v == null || !smoothTr[i] ? null : (v / smoothTr[i]!) * 100));
+  const dx = plusDi.map((p, i) => {
+    const m = minusDi[i];
+    if (p == null || m == null || p + m === 0) return null;
+    return (Math.abs(p - m) / (p + m)) * 100;
+  });
+  const dense = dx.filter((v): v is number => v != null);
+  const adxDense = wilderSmooth(dense, period);
+  const adx: (number | null)[] = [];
+  let j = 0;
+  for (const v of dx) {
+    if (v == null) adx.push(null);
+    else {
+      adx.push(adxDense[j]);
+      j++;
+    }
+  }
+  return { plusDi, minusDi, adx };
+}
+
+export type FlipLine = { value: number; up: boolean }[];
+
+/** Supertrend — a trailing line that sits below price in an uptrend, above
+ *  it in a downtrend, and flips sides the bar after price closes through
+ *  it. The flip is the signal. */
+export function supertrend(bars: OHLC[], period: number, mult: number): FlipLine {
+  const atrLine = atr(bars, period);
+  const out: FlipLine = [];
+  let up = true;
+  let line = bars[0].c;
+  for (let i = 0; i < bars.length; i++) {
+    const a = atrLine[i];
+    if (a == null) {
+      out.push({ value: bars[i].c, up });
+      continue;
+    }
+    const basicUpper = (bars[i].h + bars[i].l) / 2 + mult * a;
+    const basicLower = (bars[i].h + bars[i].l) / 2 - mult * a;
+    if (up) {
+      line = Math.max(line, basicLower);
+      if (bars[i].c < line) {
+        up = false;
+        line = basicUpper;
+      }
+    } else {
+      line = Math.min(line, basicUpper);
+      if (bars[i].c > line) {
+        up = true;
+        line = basicLower;
+      }
+    }
+    out.push({ value: line, up });
+  }
+  return out;
+}
+
+/** Parabolic SAR — dots that sit below price while it rises, above it
+ *  while it falls, and flip sides on a reversal. Same signal idea as
+ *  Supertrend, different line. */
+export function parabolicSar(bars: OHLC[], step = 0.02, maxStep = 0.2): FlipLine {
+  const out: FlipLine = [];
+  let up = true;
+  let sar = bars[0].l;
+  let ep = bars[0].h;
+  let af = step;
+  for (let i = 0; i < bars.length; i++) {
+    if (i > 0) {
+      sar = sar + af * (ep - sar);
+      if (up) {
+        sar = Math.min(sar, bars[i - 1].l, i > 1 ? bars[i - 2].l : bars[i - 1].l);
+        if (bars[i].l < sar) {
+          up = false;
+          sar = ep;
+          ep = bars[i].l;
+          af = step;
+        } else if (bars[i].h > ep) {
+          ep = bars[i].h;
+          af = Math.min(af + step, maxStep);
+        }
+      } else {
+        sar = Math.max(sar, bars[i - 1].h, i > 1 ? bars[i - 2].h : bars[i - 1].h);
+        if (bars[i].h > sar) {
+          up = true;
+          sar = ep;
+          ep = bars[i].h;
+          af = step;
+        } else if (bars[i].l < ep) {
+          ep = bars[i].l;
+          af = Math.min(af + step, maxStep);
+        }
+      }
+    }
+    out.push({ value: sar, up });
+  }
+  return out;
+}
+
+export type PivotLevels = { r2: number; r1: number; p: number; s1: number; s2: number };
+
+/** Classic floor-trader pivots, from the prior period's high/low/close —
+ *  a fixed set of horizontal levels, same idea as support/resistance but
+ *  computed by formula instead of read off swing points. */
+export function classicPivots(prevHigh: number, prevLow: number, prevClose: number): PivotLevels {
+  const p = (prevHigh + prevLow + prevClose) / 3;
+  const r1 = 2 * p - prevLow;
+  const s1 = 2 * p - prevHigh;
+  const r2 = p + (prevHigh - prevLow);
+  const s2 = p - (prevHigh - prevLow);
+  return { r2, r1, p, s1, s2 };
+}
+
+export type Divergence = { priceI1: number; priceI2: number; oscI1: number; oscI2: number; bullish: boolean };
+
+/** Divergence: price makes a lower low while the oscillator makes a higher
+ *  low (bullish), or price makes a higher high while the oscillator makes a
+ *  lower high (bearish) — the two pivot points that actually define it. */
+export function findDivergence(values: number[], oscillator: (number | null)[], strength: number): Divergence | null {
+  const pivots = findPivots(values, strength);
+  const highs = pivots.filter((p) => p.high);
+  const lows = pivots.filter((p) => !p.high);
+  // Bearish: last two swing highs, price higher but oscillator lower.
+  if (highs.length >= 2) {
+    const [h1, h2] = highs.slice(-2);
+    const o1 = oscillator[h1.i];
+    const o2 = oscillator[h2.i];
+    if (o1 != null && o2 != null && h2.value > h1.value && o2 < o1) {
+      return { priceI1: h1.i, priceI2: h2.i, oscI1: h1.i, oscI2: h2.i, bullish: false };
+    }
+  }
+  // Bullish: last two swing lows, price lower but oscillator higher.
+  if (lows.length >= 2) {
+    const [l1, l2] = lows.slice(-2);
+    const o1 = oscillator[l1.i];
+    const o2 = oscillator[l2.i];
+    if (o1 != null && o2 != null && l2.value < l1.value && o2 > o1) {
+      return { priceI1: l1.i, priceI2: l2.i, oscI1: l1.i, oscI2: l2.i, bullish: true };
+    }
+  }
+  return null;
+}
+
+/** A deliberately-shaped series containing one genuine divergence — same
+ *  reasoning as genDoublePattern: a plain random walk only rarely lines up
+ *  into a clean divergence on demand, so this one is built to contain it.
+ *  Two swing lows (or highs) where price goes one way and momentum fades
+ *  the other. */
+export function genDivergenceSeries(seed: number, n: number, bullish: boolean, warmup = 0): number[] {
+  const rand = seededRandom(seed);
+  const sign = bullish ? -1 : 1;
+  const p1 = Math.max(Math.round(n * 0.3), warmup + 6);
+  const p2 = Math.max(Math.round(n * 0.68), p1 + 15);
+  const values: number[] = [100];
+  for (let i = 1; i < n; i++) {
+    // Two swings of decreasing momentum (steeper into p1, shallower into
+    // p2) but the second one still reaches further in price — that gap in
+    // momentum vs. price is the divergence.
+    let target = 100;
+    const width = n * 0.1;
+    const depth1 = 10;
+    const depth2 = 13;
+    target += sign * depth1 * Math.exp(-((i - p1) ** 2) / (2 * width * width * 0.6));
+    target += sign * depth2 * Math.exp(-((i - p2) ** 2) / (2 * width * width * 1.6));
+    values.push(target + (rand() - 0.5) * 1.1);
+  }
+  return values;
+}
+
+export type ObvDivergenceDemo = { closes: number[]; volumes: number[] };
+
+/** OBV is a running total, not a bounded oscillator, so it doesn't
+ *  naturally "lose momentum" the way RSI/MACD do on the same crafted
+ *  price series — genDivergenceSeries's price shape alone won't produce
+ *  a real OBV divergence. This builds price the same way, then chooses
+ *  each bar's (fabricated) volume so OBV's own two swings come out with
+ *  the depths swapped relative to price's: price's second swing is the
+ *  bigger one, OBV's second swing is deliberately the smaller one — that
+ *  gap is the actual divergence. Every bar's volume still moves OBV in
+ *  the same direction price closed that bar, same as the real formula. */
+export function genObvDivergenceDemo(seed: number, n: number, bullish: boolean): ObvDivergenceDemo {
+  const closes = genDivergenceSeries(seed, n, bullish);
+  const rand = seededRandom(seed + 3);
+  const p1 = Math.max(Math.round(n * 0.3), 6);
+  const p2 = Math.max(Math.round(n * 0.68), p1 + 15);
+  const width = n * 0.12;
+  // Rather than trying to shape OBV's cumulative total to hit an exact
+  // target (which fights the noisy day-to-day direction baked into
+  // price), this just makes volume itself bigger around the first swing
+  // and deliberately smaller around the second one. OBV only cares about
+  // the sign of each day's move — price decides that — but the relative
+  // SIZE of each swing's contribution to the running total is entirely
+  // down to volume, so a bigger first swing's worth of volume and a
+  // smaller second swing's worth reliably produces a shallower second
+  // peak/trough in OBV even though price's second swing is the deeper
+  // one. That gap is the divergence.
+  const volumes: number[] = [500];
+  for (let i = 1; i < n; i++) {
+    const envelope1 = Math.exp(-((i - p1) ** 2) / (2 * width * width));
+    const envelope2 = Math.exp(-((i - p2) ** 2) / (2 * width * width));
+    const base = 40 + rand() * 30;
+    volumes.push(base + 650 * envelope1 + 180 * envelope2);
+  }
+  return { closes, volumes };
+}
+
+export type GapDemo = { bars: OHLC[]; gapI: number; up: boolean; filled: boolean; fillI: number | null };
+
+/** A deliberate price gap between one candle's close and the next one's
+ *  open — genOHLC never gaps (it always opens at the prior close), so gap
+ *  strategies need their own generator. Either fills back to the pre-gap
+ *  level within the window (gap fill) or keeps running (gap-and-go). */
+export function genGapDemo(seed: number, n: number, fills: boolean): GapDemo {
+  const rand = seededRandom(seed);
+  const gapI = Math.round(n * 0.45);
+  const up = rand() > 0.5;
+  const bars: OHLC[] = [];
+  let prevClose = 100;
+  for (let i = 0; i < n; i++) {
+    let open = prevClose;
+    if (i === gapI) open = prevClose + (up ? 1 : -1) * (2.2 + rand() * 0.6);
+    let close: number;
+    if (i === gapI) {
+      close = open + (up ? 1 : -1) * (0.6 + rand() * 0.4);
+    } else if (fills && i > gapI && i <= gapI + Math.round(n * 0.12)) {
+      close = open - (up ? 1 : -1) * (0.5 + rand() * 0.4);
+    } else if (!fills && i > gapI) {
+      close = open + (up ? 1 : -1) * (0.5 + rand() * 0.4);
+    } else {
+      close = open + (rand() - 0.5) * 1.0;
+    }
+    const high = Math.max(open, close) + rand() * 0.3;
+    const low = Math.min(open, close) - rand() * 0.3;
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+  const preGapClose = bars[gapI - 1].c;
+  let fillI: number | null = null;
+  if (fills) {
+    for (let i = gapI; i < bars.length; i++) {
+      if ((up && bars[i].c <= preGapClose) || (!up && bars[i].c >= preGapClose)) {
+        fillI = i;
+        break;
+      }
+    }
+  }
+  return { bars, gapI, up, filled: fills && fillI != null, fillI };
+}
+
+export type InsideBarDemo = { bars: OHLC[]; motherI: number; insideI: number };
+
+/** A deliberate inside bar: one candle (the "mother bar") followed by one
+ *  whose entire high/low range sits inside the mother bar's range — in an
+ *  otherwise plain run, same "exactly one real answer" approach as
+ *  genCandleReversalDemo. */
+export function genInsideBarDemo(seed: number, n: number): InsideBarDemo {
+  const rand = seededRandom(seed);
+  const motherI = Math.round(n * 0.55);
+  const bars: OHLC[] = [];
+  let prevClose = 100;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    let close: number;
+    let high: number;
+    let low: number;
+    if (i === motherI) {
+      close = open + (rand() > 0.5 ? 1 : -1) * (1.6 + rand() * 0.5);
+      high = Math.max(open, close) + 0.6 + rand() * 0.3;
+      low = Math.min(open, close) - 0.6 - rand() * 0.3;
+    } else if (i === motherI + 1) {
+      const motherHigh = bars[motherI].h;
+      const motherLow = bars[motherI].l;
+      const mid = (motherHigh + motherLow) / 2;
+      const span = (motherHigh - motherLow) * 0.45;
+      close = mid + (rand() - 0.5) * span * 0.6;
+      high = mid + span / 2;
+      low = mid - span / 2;
+    } else {
+      close = open + (rand() - 0.5) * 1.0;
+      high = Math.max(open, close) + rand() * 0.35;
+      low = Math.min(open, close) - rand() * 0.35;
+    }
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+  return { bars, motherI, insideI: motherI + 1 };
+}
+
+export type ThreePointPattern = { left: number; mid: number; right: number; necklineI: number; necklineV: number; inverse: boolean };
+
+/** A deliberately-shaped head-and-shoulders (or, mirrored, an inverse
+ *  head-and-shoulders): three peaks/troughs, the middle one the most
+ *  extreme, with a neckline connecting the two troughs/peaks between them.
+ *  Same reasoning as genDoublePattern — needs a crafted shape to actually
+ *  show the pattern rather than hoping a random walk produces one. */
+export function genHeadShouldersPattern(seed: number, n: number, inverse: boolean): number[] {
+  const rand = seededRandom(seed);
+  const sign = inverse ? -1 : 1;
+  const positions = [Math.round(n * 0.22), Math.round(n * 0.5), Math.round(n * 0.78)];
+  const heights = [11, 15, 11.5];
+  const values: number[] = [100];
+  for (let i = 1; i < n; i++) {
+    let target = 100;
+    positions.forEach((p, idx) => {
+      const dist = i - p;
+      const width = n * 0.1;
+      target += sign * heights[idx] * Math.exp(-(dist * dist) / (2 * width * width));
+    });
+    if (i > positions[2] + n * 0.06) target -= sign * ((i - positions[2]) / n) * heights[2] * 1.4;
+    values.push(target + (rand() - 0.5) * 1.1);
+  }
+  return values;
+}
+
+export function findThreePointPattern(values: number[], inverse: boolean, strength = 4): ThreePointPattern | null {
+  const pivots = findPivots(values, strength).filter((p) => p.high === !inverse);
+  if (pivots.length < 3) return null;
+  const sorted = [...pivots].sort((a, b) => (inverse ? a.value - b.value : b.value - a.value));
+  const top3 = sorted.slice(0, 3).sort((a, b) => a.i - b.i);
+  const [left, mid, right] = top3;
+  if (!(mid.value === (inverse ? Math.min(left.value, mid.value, right.value) : Math.max(left.value, mid.value, right.value)))) {
+    return null;
+  }
+  let necklineI = left.i;
+  let necklineV = values[left.i];
+  for (let i = left.i; i <= right.i; i++) {
+    if (inverse ? values[i] > necklineV : values[i] < necklineV) {
+      necklineV = values[i];
+      necklineI = i;
+    }
+  }
+  return { left: left.i, mid: mid.i, right: right.i, necklineI, necklineV, inverse };
+}
+
+export type FlagDemo = { values: number[]; poleStartI: number; poleEndI: number; flagEndI: number; breakoutI: number; up: boolean };
+
+/** A deliberate flag/pennant: a sharp "flagpole" move, then a tight
+ *  consolidation drifting gently against it (the "flag"), then a clean
+ *  breakout continuing the pole's direction. */
+export function genFlagDemo(seed: number, n: number): FlagDemo {
+  const rand = seededRandom(seed);
+  const up = rand() > 0.5;
+  const sign = up ? 1 : -1;
+  const poleStartI = Math.round(n * 0.1);
+  const poleEndI = Math.round(n * 0.35);
+  const flagEndI = Math.round(n * 0.7);
+  const values: number[] = [100];
+  for (let i = 1; i < n; i++) {
+    const prev = values[i - 1];
+    let next: number;
+    if (i < poleStartI) {
+      next = prev + (rand() - 0.5) * 0.5;
+    } else if (i <= poleEndI) {
+      next = prev + sign * (0.9 + rand() * 0.3);
+    } else if (i <= flagEndI) {
+      next = prev - sign * (0.15 + rand() * 0.2);
+    } else if (i === flagEndI + 1) {
+      next = prev + sign * (1.8 + rand() * 0.4);
+    } else {
+      next = prev + sign * (0.5 + rand() * 0.4);
+    }
+    values.push(next);
+  }
+  return { values, poleStartI, poleEndI, flagEndI, breakoutI: flagEndI + 1, up };
+}
+
+export type CupHandleDemo = { values: number[]; cupStartI: number; cupEndI: number; handleEndI: number; breakoutI: number; rimV: number };
+
+/** A deliberate cup and handle: a U-shaped recovery back to its starting
+ *  level (the "cup"), a small pullback (the "handle"), then a breakout
+ *  above the cup's rim. */
+export function genCupHandleDemo(seed: number, n: number): CupHandleDemo {
+  const rand = seededRandom(seed);
+  const cupStartI = Math.round(n * 0.08);
+  const cupEndI = Math.round(n * 0.62);
+  const handleEndI = Math.round(n * 0.82);
+  const depth = 9 + rand() * 2;
+  const rimV = 100;
+  const values: number[] = [];
+  for (let i = 0; i < n; i++) {
+    let target: number;
+    if (i < cupStartI) {
+      target = rimV + (rand() - 0.5) * 0.6;
+    } else if (i <= cupEndI) {
+      const t = (i - cupStartI) / (cupEndI - cupStartI);
+      // A gentle U shape: a sine arc from the rim down to the bottom of
+      // the cup and back up to the rim.
+      target = rimV - depth * Math.sin(t * Math.PI);
+    } else if (i <= handleEndI) {
+      target = rimV - depth * 0.22 + (rand() - 0.5) * 0.8;
+    } else if (i === handleEndI + 1) {
+      target = rimV + 1.6 + rand() * 0.5;
+    } else {
+      target = values[i - 1] + 0.5 + rand() * 0.4;
+    }
+    values.push(target + (rand() - 0.5) * 0.5);
+  }
+  return { values, cupStartI, cupEndI, handleEndI, breakoutI: handleEndI + 1, rimV };
+}
+
+/** A deliberate clean trend followed by a reversal — built specifically so
+ *  its Heikin-Ashi conversion shows the textbook pattern (a run of
+ *  same-colour candles with no opposite wicks, then a flip) clearly rather
+ *  than hoping a noisy random walk produces one. Returns plain OHLC; call
+ *  heikinAshi() on the result to get the HA candles. */
+export function genHeikinAshiTrendDemo(seed: number, n: number): { bars: OHLC[]; flipI: number; up: boolean } {
+  const rand = seededRandom(seed);
+  const up = rand() > 0.5;
+  const sign = up ? 1 : -1;
+  const flipI = Math.round(n * 0.58);
+  const bars: OHLC[] = [];
+  let prevClose = 100;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    const dir = i < flipI ? sign : -sign;
+    const close = open + dir * (0.7 + rand() * 0.4);
+    const high = Math.max(open, close) + rand() * 0.25;
+    const low = Math.min(open, close) - rand() * 0.25;
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+  return { bars, flipI, up };
+}
+
+export type MtfCandidate = { values: number[]; aligned: boolean };
+export type MtfDemo = { htfTrend: number[]; candidates: MtfCandidate[]; correctIdx: number };
+
+/** The higher-timeframe trend, plus three lower-timeframe snippets — only
+ *  one of which actually continues in the higher-timeframe's direction
+ *  (a pullback that resumes). The other two are a reversal and a
+ *  sideways chop, both genuinely plausible-looking entries that just
+ *  don't agree with the bigger trend. */
+export function genMtfDemo(seed: number, n: number): MtfDemo {
+  const rand = seededRandom(seed);
+  const up = rand() > 0.5;
+  const sign = up ? 1 : -1;
+  const htfTrend: number[] = [100];
+  for (let i = 1; i < n; i++) {
+    htfTrend.push(htfTrend[i - 1] + sign * (0.5 + rand() * 0.3) + (rand() - 0.5) * 0.6);
+  }
+
+  const m = Math.round(n * 0.6);
+  function pullbackThenContinue(): number[] {
+    const vals: number[] = [100];
+    for (let i = 1; i < m; i++) {
+      const dir = i < m * 0.4 ? -sign : sign;
+      vals.push(vals[i - 1] + dir * (0.4 + rand() * 0.3));
+    }
+    return vals;
+  }
+  function reversal(): number[] {
+    const vals: number[] = [100];
+    for (let i = 1; i < m; i++) {
+      vals.push(vals[i - 1] - sign * (0.5 + rand() * 0.3));
+    }
+    return vals;
+  }
+  function chop(): number[] {
+    const vals: number[] = [100];
+    for (let i = 1; i < m; i++) {
+      vals.push(vals[i - 1] + (rand() - 0.5) * 0.9);
+    }
+    return vals;
+  }
+
+  const options: MtfCandidate[] = [
+    { values: pullbackThenContinue(), aligned: true },
+    { values: reversal(), aligned: false },
+    { values: chop(), aligned: false },
+  ];
+  // Shuffle the three into a random, seed-stable order.
+  const order = [0, 1, 2];
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  const candidates = order.map((i) => options[i]);
+  const correctIdx = candidates.findIndex((c) => c.aligned);
+  return { htfTrend, candidates, correctIdx };
+}
+
+export type RelativeStrengthSeries = { label: string; values: number[] };
+
+/** Several fabricated return series over the same window — one of them
+ *  deliberately the strongest, the rest genuinely mixed (not just flat
+ *  losers), so "which one would a momentum rotation buy" has exactly one
+ *  real answer without being a trivial pick. */
+export function genRelativeStrengthSeries(seed: number, n: number, count = 4): RelativeStrengthSeries[] {
+  const rand = seededRandom(seed);
+  const winner = Math.floor(rand() * count);
+  const labels = ["Asset A", "Asset B", "Asset C", "Asset D"].slice(0, count);
+  return labels.map((label, idx) => {
+    const drift = idx === winner ? 0.55 + rand() * 0.15 : (rand() - 0.55) * 0.35;
+    const values: number[] = [100];
+    for (let i = 1; i < n; i++) {
+      values.push(values[i - 1] + drift + (rand() - 0.5) * 1.3);
+    }
+    return { label, values };
+  });
 }
