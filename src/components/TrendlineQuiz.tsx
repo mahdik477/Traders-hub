@@ -57,23 +57,23 @@ export default function TrendlineQuiz() {
     return out;
   }, [closes, lineValues, line, tolerance]);
 
-  const targetI = touches.length ? touches[Math.floor(touches.length / 2)] : null;
-
+  // A trendline usually gets touched more than once — any of those
+  // touches is a genuinely correct answer, not just one chosen one.
   const xStep = (WIDTH - PAD * 2) / (N - 1);
   const yFor = (v: number) => HEIGHT - PAD - ((v - min) / (max - min)) * (HEIGHT - PAD * 2);
   const indexFor = (x: number) => Math.round((x - PAD) / xStep);
 
   const answered = guessIndex != null;
-  const isCorrect = targetI != null && guessIndex != null && Math.abs(guessIndex - targetI) <= TOLERANCE_BARS;
+  const isCorrect = guessIndex != null && touches.some((i) => Math.abs(guessIndex - i) <= TOLERANCE_BARS);
 
   function handleClick(e: MouseEvent<SVGSVGElement>) {
-    if (answered || targetI == null) return;
+    if (answered || touches.length === 0) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const svgX = ((e.clientX - rect.left) / rect.width) * WIDTH;
     const idx = Math.max(0, Math.min(N - 1, indexFor(svgX)));
     setGuessIndex(idx);
     setScore((s) => ({
-      correct: s.correct + (Math.abs(idx - targetI) <= TOLERANCE_BARS ? 1 : 0),
+      correct: s.correct + (touches.some((i) => Math.abs(idx - i) <= TOLERANCE_BARS) ? 1 : 0),
       total: s.total + 1,
     }));
   }
@@ -83,7 +83,7 @@ export default function TrendlineQuiz() {
     setGuessIndex(null);
   }
 
-  if (targetI == null || !line) {
+  if (touches.length === 0 || !line) {
     return (
       <div className="rounded-2xl border border-border bg-surface p-5 text-center">
         <p className="text-muted">That run didn&apos;t produce a clean trendline touch — try another.</p>
@@ -100,7 +100,7 @@ export default function TrendlineQuiz() {
         <div>
           <p className="text-lg font-bold text-foreground">Spot the trendline touch</p>
           <p className="meta mt-0.5">
-            Click the chart where price comes back and touches the {line.up ? "rising support" : "falling resistance"} line.
+            Click the chart where price comes back and touches the {line.up ? "rising support" : "falling resistance"} line — any touch counts.
           </p>
         </div>
         <span className="pill">
@@ -120,9 +120,10 @@ export default function TrendlineQuiz() {
           {guessIndex != null && (
             <line x1={PAD + guessIndex * xStep} x2={PAD + guessIndex * xStep} y1={PAD} y2={HEIGHT - PAD} stroke={isCorrect ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2} strokeDasharray="4 3" />
           )}
-          {answered && (
-            <circle cx={PAD + targetI * xStep} cy={yFor(closes[targetI])} r={7} fill={line.up ? "var(--color-success)" : "var(--color-danger)"} stroke="var(--color-background)" strokeWidth={2} />
-          )}
+          {answered &&
+            touches.map((i) => (
+              <circle key={i} cx={PAD + i * xStep} cy={yFor(closes[i])} r={7} fill={line.up ? "var(--color-success)" : "var(--color-danger)"} stroke="var(--color-background)" strokeWidth={2} />
+            ))}
         </svg>
         <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-muted">
           <span className="flex items-center gap-1.5">
@@ -138,8 +139,8 @@ export default function TrendlineQuiz() {
             <div className="flex-1">
               <p className={`text-lg font-bold ${isCorrect ? "text-success" : "text-danger"}`}>{isCorrect ? "Right on it." : "Not quite."}</p>
               <p className="mt-1 text-base leading-relaxed text-foreground/90">
-                The solid dot is the bar where price actually reached the trendline. Your click is
-                the dashed vertical line.
+                Every solid dot is a bar where price actually reached the trendline — any of them
+                counted. Your click is the dashed vertical line.
               </p>
               <button type="button" onClick={nextRound} className="btn btn-primary mt-3">
                 <PlayIcon className="size-3.5" />

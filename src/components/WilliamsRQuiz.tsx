@@ -5,7 +5,8 @@ import { genOHLC, williamsR, findCrossings, type Crossing } from "@/lib/strategy
 import { CheckIcon, PlayIcon } from "@/components/icons";
 
 // A click-the-chart quiz: spot where Williams %R actually crosses back
-// out of overbought/oversold, before the chart marks it for you.
+// out of overbought/oversold. %R can cross a threshold more than once in
+// a run, so any crossing of the asked-about kind counts, not just one.
 
 const WIDTH = 760;
 const PAD = 28;
@@ -34,14 +35,11 @@ function pathFor(values: (number | null)[], yFn: (v: number) => number, xStep: n
   return d;
 }
 
-function pickTarget(buy: Crossing[], sell: Crossing[], preferred: Mode): { mode: Mode; crossing: Crossing } | null {
+function pickMode(buy: Crossing[], sell: Crossing[], preferred: Mode): Mode | null {
   const pool = preferred === "buy" ? buy : sell;
+  if (pool.length > 0) return preferred;
   const fallback = preferred === "buy" ? sell : buy;
-  const usingBuyPool = pool.length > 0 ? preferred === "buy" : preferred !== "buy";
-  const chosen = pool.length > 0 ? pool : fallback;
-  if (chosen.length === 0) return null;
-  const crossing = chosen[Math.floor(chosen.length / 2)];
-  return { mode: usingBuyPool ? "buy" : "sell", crossing };
+  return fallback.length > 0 ? (preferred === "buy" ? "sell" : "buy") : null;
 }
 
 export default function WilliamsRQuiz() {
@@ -56,23 +54,24 @@ export default function WilliamsRQuiz() {
   const minus80 = useMemo(() => wr.map(() => -80), [wr]);
   const buySignals = useMemo(() => findCrossings(wr, minus80).filter((c) => c.up), [wr, minus80]);
   const sellSignals = useMemo(() => findCrossings(wr, minus20).filter((c) => !c.up), [wr, minus20]);
-  const target = useMemo(() => pickTarget(buySignals, sellSignals, preferredMode), [buySignals, sellSignals, preferredMode]);
+  const mode = useMemo(() => pickMode(buySignals, sellSignals, preferredMode), [buySignals, sellSignals, preferredMode]);
+  const matching = useMemo(() => (mode === "buy" ? buySignals : mode === "sell" ? sellSignals : []), [mode, buySignals, sellSignals]);
 
   const xStep = (WIDTH - PAD * 2) / (N - 1);
   const yForOsc = (v: number) => BOTTOM - ((v + 100) / 100) * (BOTTOM - TOP);
   const indexFor = (x: number) => Math.round((x - PAD) / xStep);
 
   const answered = guessIndex != null;
-  const isCorrect = target != null && guessIndex != null && Math.abs(guessIndex - target.crossing.i) <= TOLERANCE_BARS;
+  const isCorrect = guessIndex != null && matching.some((c) => Math.abs(guessIndex - c.i) <= TOLERANCE_BARS);
 
   function handleClick(e: MouseEvent<SVGSVGElement>) {
-    if (answered || !target) return;
+    if (answered || matching.length === 0) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const svgX = ((e.clientX - rect.left) / rect.width) * WIDTH;
     const idx = Math.max(0, Math.min(N - 1, indexFor(svgX)));
     setGuessIndex(idx);
     setScore((s) => ({
-      correct: s.correct + (Math.abs(idx - target.crossing.i) <= TOLERANCE_BARS ? 1 : 0),
+      correct: s.correct + (matching.some((c) => Math.abs(idx - c.i) <= TOLERANCE_BARS) ? 1 : 0),
       total: s.total + 1,
     }));
   }
@@ -83,7 +82,7 @@ export default function WilliamsRQuiz() {
     setPreferredMode((m) => (m === "buy" ? "sell" : "buy"));
   }
 
-  if (!target) {
+  if (!mode || matching.length === 0) {
     return (
       <div className="rounded-2xl border border-border bg-surface p-5 text-center">
         <p className="text-muted">That run didn&apos;t produce a clean signal — try another.</p>
@@ -98,9 +97,9 @@ export default function WilliamsRQuiz() {
     <div className="overflow-hidden rounded-2xl border border-success/30 bg-surface shadow-glow">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface-2 px-4 py-3 sm:px-5">
         <div>
-          <p className="text-lg font-bold text-foreground">Spot the {target.mode} signal</p>
+          <p className="text-lg font-bold text-foreground">Spot the {mode} signal</p>
           <p className="meta mt-0.5">
-            Click the %R line where it crosses back {target.mode === "buy" ? "above −80" : "below −20"}.
+            Click the %R line where it crosses back {mode === "buy" ? "above −80" : "below −20"} — any crossing counts.
           </p>
         </div>
         <span className="pill">
@@ -118,9 +117,10 @@ export default function WilliamsRQuiz() {
           {guessIndex != null && (
             <line x1={PAD + guessIndex * xStep} x2={PAD + guessIndex * xStep} y1={TOP} y2={BOTTOM} stroke={isCorrect ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2} strokeDasharray="4 3" />
           )}
-          {answered && wr[target.crossing.i] != null && (
-            <circle cx={PAD + target.crossing.i * xStep} cy={yForOsc(wr[target.crossing.i]!)} r={7} fill={target.mode === "buy" ? "var(--color-success)" : "var(--color-danger)"} stroke="var(--color-background)" strokeWidth={2} />
-          )}
+          {answered &&
+            matching.map((c) => wr[c.i] != null && (
+              <circle key={c.i} cx={PAD + c.i * xStep} cy={yForOsc(wr[c.i]!)} r={7} fill={mode === "buy" ? "var(--color-success)" : "var(--color-danger)"} stroke="var(--color-background)" strokeWidth={2} />
+            ))}
         </svg>
 
         {answered ? (
@@ -131,8 +131,8 @@ export default function WilliamsRQuiz() {
             <div className="flex-1">
               <p className={`text-lg font-bold ${isCorrect ? "text-success" : "text-danger"}`}>{isCorrect ? "Right on it." : "Not quite."}</p>
               <p className="mt-1 text-base leading-relaxed text-foreground/90">
-                The solid dot marks the bar where %R actually {target.mode === "buy" ? "closed back above −80" : "closed back below −20"}.
-                Your click is the dashed line.
+                Every solid dot is a bar where %R actually {mode === "buy" ? "closed back above −80" : "closed back below −20"} —
+                any of them counted. Your click is the dashed line.
               </p>
               <button type="button" onClick={nextRound} className="btn btn-primary mt-3">
                 <PlayIcon className="size-3.5" />
