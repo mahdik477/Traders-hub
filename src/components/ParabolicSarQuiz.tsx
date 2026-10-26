@@ -4,8 +4,10 @@ import { useMemo, useState, type MouseEvent } from "react";
 import { genOHLC, parabolicSar, toPath } from "@/lib/strategy-sim-utils";
 import { CheckIcon, PlayIcon } from "@/components/icons";
 
-// A click-the-chart quiz: spot where the SAR dots actually flip sides,
-// before the chart marks it for you.
+// A click-the-chart quiz: the SAR dots are drawn on from the start
+// (there's no guessing where they are) — the question is only where
+// price actually flips them. They can flip more than once in a run, so
+// any flip counts.
 
 const WIDTH = 760;
 const HEIGHT = 300;
@@ -26,7 +28,6 @@ export default function ParabolicSarQuiz() {
     for (let i = 1; i < sar.length; i++) if (sar[i].up !== sar[i - 1].up) out.push(i);
     return out;
   }, [sar]);
-  const targetI = flips.length ? flips[Math.floor(flips.length / 2)] : null;
 
   const { min, max } = useMemo(() => {
     const all = closes.concat(sar.map((p) => p.value));
@@ -37,16 +38,16 @@ export default function ParabolicSarQuiz() {
   const indexFor = (x: number) => Math.round((x - PAD) / xStep);
 
   const answered = guessIndex != null;
-  const isCorrect = targetI != null && guessIndex != null && Math.abs(guessIndex - targetI) <= TOLERANCE_BARS;
+  const isCorrect = guessIndex != null && flips.some((i) => Math.abs(guessIndex - i) <= TOLERANCE_BARS);
 
   function handleClick(e: MouseEvent<SVGSVGElement>) {
-    if (answered || targetI == null) return;
+    if (answered || flips.length === 0) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const svgX = ((e.clientX - rect.left) / rect.width) * WIDTH;
     const idx = Math.max(0, Math.min(N - 1, indexFor(svgX)));
     setGuessIndex(idx);
     setScore((s) => ({
-      correct: s.correct + (Math.abs(idx - targetI) <= TOLERANCE_BARS ? 1 : 0),
+      correct: s.correct + (flips.some((i) => Math.abs(idx - i) <= TOLERANCE_BARS) ? 1 : 0),
       total: s.total + 1,
     }));
   }
@@ -56,7 +57,7 @@ export default function ParabolicSarQuiz() {
     setGuessIndex(null);
   }
 
-  if (targetI == null) {
+  if (flips.length === 0) {
     return (
       <div className="rounded-2xl border border-border bg-surface p-5 text-center">
         <p className="text-muted">That run didn&apos;t flip cleanly — try another.</p>
@@ -72,7 +73,7 @@ export default function ParabolicSarQuiz() {
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface-2 px-4 py-3 sm:px-5">
         <div>
           <p className="text-lg font-bold text-foreground">Spot the flip</p>
-          <p className="meta mt-0.5">Click the chart where price actually reverses through the SAR dots.</p>
+          <p className="meta mt-0.5">Click the chart where price actually reverses through the SAR dots — any flip counts.</p>
         </div>
         <span className="pill">
           Score: {score.correct}/{score.total}
@@ -82,19 +83,18 @@ export default function ParabolicSarQuiz() {
       <div className="p-4 sm:p-5">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className={`w-full rounded-lg ${answered ? "" : "cursor-crosshair"}`} role="img" aria-label="Click where you think the signal happens" onClick={handleClick}>
           <rect x={0} y={0} width={WIDTH} height={HEIGHT} fill="var(--color-background)" opacity={0.3} />
+          {sar.map((p, i) => (
+            <circle key={i} cx={PAD + i * xStep} cy={yFor(p.value)} r={2.5} fill={p.up ? "var(--color-success)" : "var(--color-danger)"} />
+          ))}
           <path d={toPath(closes, min, max, WIDTH, HEIGHT, PAD)} fill="none" stroke="var(--color-gold-bright)" strokeWidth={2.5} />
 
           {guessIndex != null && (
             <line x1={PAD + guessIndex * xStep} x2={PAD + guessIndex * xStep} y1={PAD} y2={HEIGHT - PAD} stroke={isCorrect ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2} strokeDasharray="4 3" />
           )}
-          {answered && (
-            <>
-              {sar.map((p, i) => (
-                <circle key={i} cx={PAD + i * xStep} cy={yFor(p.value)} r={2.5} fill={p.up ? "var(--color-success)" : "var(--color-danger)"} opacity={0.75} />
-              ))}
-              <circle cx={PAD + targetI * xStep} cy={yFor(sar[targetI].value)} r={7} fill="none" stroke={sar[targetI].up ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2.5} />
-            </>
-          )}
+          {answered &&
+            flips.map((i) => (
+              <circle key={`flip${i}`} cx={PAD + i * xStep} cy={yFor(sar[i].value)} r={7} fill="none" stroke={sar[i].up ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2.5} />
+            ))}
         </svg>
 
         {answered ? (
@@ -105,8 +105,8 @@ export default function ParabolicSarQuiz() {
             <div className="flex-1">
               <p className={`text-lg font-bold ${isCorrect ? "text-success" : "text-danger"}`}>{isCorrect ? "Right on it." : "Not quite."}</p>
               <p className="mt-1 text-base leading-relaxed text-foreground/90">
-                The dots only show up once you answer — the ringed one is the bar where price actually
-                reversed through them. Your click is the dashed line.
+                Every ringed dot is a bar where price actually reversed through them — any of them
+                counted. Your click is the dashed line.
               </p>
               <button type="button" onClick={nextRound} className="btn btn-primary mt-3">
                 <PlayIcon className="size-3.5" />

@@ -7,7 +7,7 @@
     "tagline": "ICT-style trading education and live streams from Ryan (\"Dodgy\"), built around his iFVG methodology.",
     "about": "Dodgy's Dungeon is a trading education community run by Ryan (\"Dodgy\"), teaching ICT-style concepts — market structure, order blocks, fair value gaps, liquidity — with a focus on his own iFVG (Implied Fair Value Gap) methodology. A free Discord community includes a free ICT bootcamp course and daily live streams; the paid products below add more on top of that.",
     "website": "https://dodgysdungeon.com/",
-    "affiliate_link": null,
+    "affiliate_link": "https://whop.com/dodgys-dungeon/dodgys-dungeon?a=user50f81875135",
     "trustpilot": {
       "rating": 2.7,
       "review_count": 9,
@@ -16,7 +16,7 @@
     },
     "whop": {
       "rating": 4.8,
-      "review_count": 680,
+      "review_count": 770,
       "url": "https://whop.com/dodgys-dungeon/reviews/"
     },
     "partner_firms": [
@@ -57,9 +57,10 @@
         "pricing": [
           {
             "name": "Monthly",
-            "price": "$40/month",
+            "price": "$70/month",
             "billing_note": "No refunds; monthly access only.",
-            "highlight": null
+            "highlight": null,
+            "link": "https://whop.com/dodgys-dungeon/ifvg-ultimate-dodgysdd?a=user50f81875135"
           }
         ],
         "testimonials": []
@@ -94,13 +95,15 @@
             "name": "Monthly",
             "price": "$100/month",
             "billing_note": "No refunds; monthly access only.",
-            "highlight": null
+            "highlight": null,
+            "link": "https://whop.com/dodgys-dungeon/dodgys-dungeon?a=user50f81875135"
           },
           {
             "name": "3 Months",
             "price": "$300",
             "billing_note": "Prepaid 3-month bundle (3 × $100/month).",
-            "highlight": null
+            "highlight": null,
+            "link": "https://whop.com/dodgys-dungeon/dodgys-dungeon?a=user50f81875135"
           }
         ],
         "testimonials": [
@@ -124,7 +127,7 @@
     ]
   },
   "_notes": {
-    "last_verified": "2026-10-03",
-    "source": "dodgysdungeon.com (home/testimonials); Trustpilot; Whop pages for iFVG indicator and Premium (some pricing confirmed via third-party review sites topwhops.com and thestockdork.com, since Whop's own checkout pages are JS-rendered and didn't expose full pricing to a fetch). Whop rating/review count is an average across several search snapshots (4.75-4.8, 609-765 reviews) for the same reason — not a single confirmed read of the live page, which climbs often anyway as new reviews come in."
+    "last_verified": "2026-10-08",
+    "source": "dodgysdungeon.com (home/testimonials); Trustpilot; Whop pages for iFVG indicator and Premium. Real tracked affiliate links added for both products, provided directly: iFVG Ultimate+ (now confirmed named \"iFVG Ultimate+ Deluxe\" on Whop) and Premium. Price for the iFVG product corrected from $40/month to $70/month per the person's direct correction, independently cross-confirmed via whoptrends.com (which also showed its full product name and a 4.9/767-review rating). Both products pay a 30% affiliate commission, confirmed via whoptrends.com. Whop review count refreshed to 770 (previously an averaged estimate of 609-765, since Whop's own checkout pages are JS-rendered and didn't expose full pricing/reviews to a fetch)."
   }
 }
