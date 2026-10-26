@@ -119,7 +119,13 @@ export function genBreakoutDemo(seed: number, n: number): BreakoutDemo {
       high = Math.max(open, close) + rand() * 0.3;
       low = Math.min(open, close) - rand() * 0.3;
     } else {
-      close = open + (up ? 1 : -1) * (0.7 + rand() * 0.5);
+      // Continuation, but not every bar runs the same way — a genuine
+      // pullback candle every so often, same as a real breakout, so the
+      // answer isn't just "the last bar before the colour changes".
+      const pullback = rand() < 0.35;
+      const dir = pullback ? -1 : 1;
+      const magnitude = pullback ? 0.4 + rand() * 0.3 : 0.7 + rand() * 0.5;
+      close = open + (up ? dir : -dir) * magnitude;
       high = Math.max(open, close) + rand() * 0.3;
       low = Math.min(open, close) - rand() * 0.3;
     }

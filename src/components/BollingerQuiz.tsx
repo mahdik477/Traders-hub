@@ -36,14 +36,16 @@ export default function BollingerQuiz() {
     return out;
   }, [closes, upper, lower]);
 
-  const target = useMemo(() => {
-    const pool = touches.filter((t) => t.band === preferredMode);
-    const fallback = touches.filter((t) => t.band !== preferredMode);
-    const chosen = pool.length > 0 ? pool : fallback;
-    if (chosen.length === 0) return null;
-    const touch = chosen[Math.floor(chosen.length / 2)];
-    return { mode: touch.band, touch };
+  // A band usually gets touched more than once — any touch of the
+  // asked-about band is a genuinely correct answer, not just one chosen
+  // one.
+  const mode: Mode | null = useMemo(() => {
+    const hasPreferred = touches.some((t) => t.band === preferredMode);
+    if (hasPreferred) return preferredMode;
+    const other = touches.find((t) => t.band !== preferredMode);
+    return other ? other.band : null;
   }, [touches, preferredMode]);
+  const matchingTouches = useMemo(() => touches.filter((t) => t.band === mode), [touches, mode]);
 
   const { min, max } = useMemo(() => {
     const all = closes.concat(upper.filter((v): v is number => v != null), lower.filter((v): v is number => v != null));
@@ -55,16 +57,16 @@ export default function BollingerQuiz() {
   const indexFor = (x: number) => Math.round((x - PAD) / xStep);
 
   const answered = guessIndex != null;
-  const isCorrect = target != null && guessIndex != null && Math.abs(guessIndex - target.touch.i) <= TOLERANCE_BARS;
+  const isCorrect = guessIndex != null && matchingTouches.some((t) => Math.abs(guessIndex - t.i) <= TOLERANCE_BARS);
 
   function handleClick(e: MouseEvent<SVGSVGElement>) {
-    if (answered || !target) return;
+    if (answered || matchingTouches.length === 0) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const svgX = ((e.clientX - rect.left) / rect.width) * WIDTH;
     const idx = Math.max(0, Math.min(N - 1, indexFor(svgX)));
     setGuessIndex(idx);
     setScore((s) => ({
-      correct: s.correct + (Math.abs(idx - target.touch.i) <= TOLERANCE_BARS ? 1 : 0),
+      correct: s.correct + (matchingTouches.some((t) => Math.abs(idx - t.i) <= TOLERANCE_BARS) ? 1 : 0),
       total: s.total + 1,
     }));
   }
@@ -75,7 +77,7 @@ export default function BollingerQuiz() {
     setPreferredMode((m) => (m === "upper" ? "lower" : "upper"));
   }
 
-  if (!target) {
+  if (!mode || matchingTouches.length === 0) {
     return (
       <div className="rounded-2xl border border-border bg-surface p-5 text-center">
         <p className="text-muted">That run didn&apos;t produce a clean band touch — try another.</p>
@@ -90,10 +92,8 @@ export default function BollingerQuiz() {
     <div className="overflow-hidden rounded-2xl border border-success/30 bg-surface shadow-glow">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface-2 px-4 py-3 sm:px-5">
         <div>
-          <p className="text-lg font-bold text-foreground">Spot the {target.mode} band touch</p>
-          <p className="meta mt-0.5">
-            Click the chart where price reaches the {target.mode === "upper" ? "upper" : "lower"} band.
-          </p>
+          <p className="text-lg font-bold text-foreground">Spot the {mode} band touch</p>
+          <p className="meta mt-0.5">Click the chart where price reaches the {mode} band — any touch counts.</p>
         </div>
         <span className="pill">
           Score: {score.correct}/{score.total}
@@ -113,9 +113,10 @@ export default function BollingerQuiz() {
           {guessIndex != null && (
             <line x1={PAD + guessIndex * xStep} x2={PAD + guessIndex * xStep} y1={PAD} y2={HEIGHT - PAD} stroke={isCorrect ? "var(--color-success)" : "var(--color-danger)"} strokeWidth={2} strokeDasharray="4 3" />
           )}
-          {answered && (
-            <circle cx={PAD + target.touch.i * xStep} cy={yFor(closes[target.touch.i])} r={7} fill={target.mode === "upper" ? "var(--color-danger)" : "var(--color-success)"} stroke="var(--color-background)" strokeWidth={2} />
-          )}
+          {answered &&
+            matchingTouches.map((t) => (
+              <circle key={t.i} cx={PAD + t.i * xStep} cy={yFor(closes[t.i])} r={7} fill={mode === "upper" ? "var(--color-danger)" : "var(--color-success)"} stroke="var(--color-background)" strokeWidth={2} />
+            ))}
         </svg>
         <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-muted">
           <span className="flex items-center gap-1.5">
@@ -134,8 +135,8 @@ export default function BollingerQuiz() {
             <div className="flex-1">
               <p className={`text-lg font-bold ${isCorrect ? "text-success" : "text-danger"}`}>{isCorrect ? "Right on it." : "Not quite."}</p>
               <p className="mt-1 text-base leading-relaxed text-foreground/90">
-                The solid dot is the bar where price actually reached the {target.mode} band. Your
-                click is the dashed line.
+                Every solid dot is a bar where price actually reached the {mode} band — any of them
+                counted. Your click is the dashed line.
               </p>
               <button type="button" onClick={nextRound} className="btn btn-primary mt-3">
                 <PlayIcon className="size-3.5" />
