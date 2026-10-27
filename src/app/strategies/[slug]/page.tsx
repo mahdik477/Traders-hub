@@ -74,6 +74,28 @@ const INTERACTIVE_SLUGS = [
   "cup-and-handle",
   "multi-timeframe-analysis",
   "trading-styles-scalp-day-swing-position",
+  // Advanced tier
+  "wyckoff-method",
+  "volume-spread-analysis",
+  "market-profile",
+  "volume-profile",
+  "order-flow-footprint-charts",
+  "anchored-vwap",
+  "ict-smart-money-concepts",
+  "elliott-wave-theory",
+  "harmonic-patterns",
+  "gann-methods",
+  "fibonacci-confluence",
+  "cycle-analysis",
+  "ichimoku-advanced",
+  "renko-kagi-point-figure",
+  "turtle-trading-donchian",
+  "time-series-momentum",
+  "connors-rsi-2",
+  "elder-triple-screen",
+  "ttm-squeeze",
+  "pairs-trading-stat-arb",
+  "intermarket-analysis",
 ];
 
 export function generateStaticParams() {
