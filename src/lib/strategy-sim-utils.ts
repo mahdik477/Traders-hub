@@ -1138,3 +1138,582 @@ export function genRelativeStrengthSeries(seed: number, n: number, count = 4): R
     return { label, values };
   });
 }
+
+// ---------------------------------------------------------------------------
+// Everything below is for the advanced-tier interactive strategies — same
+// rules as the free and intermediate tiers throughout: every series is
+// synthetic and deterministic per seed, never real market data, and every
+// generated pattern is crafted deliberately where a plain random walk would
+// only rarely produce the shape on demand.
+
+export type ConfluenceDemo = { values: number[]; swing1: Swing; swing2: Swing; confluencePrice: number; touchI: number };
+
+/** Two deliberately distinct swings (not detected by pivot strength, which
+ *  tends to find the same dominant move twice) — an earlier, smaller one
+ *  and a later, bigger one — each with its own fib levels. Confluence is
+ *  wherever a level from each swing lands at nearly the same price; this
+ *  is built so that always happens, with price then pulling back to
+ *  actually test it. */
+export function genConfluenceDemo(seed: number, n: number): ConfluenceDemo {
+  const rand = seededRandom(seed);
+  const up = rand() > 0.5;
+  const sign = up ? 1 : -1;
+  const s1a = Math.round(n * 0.05);
+  const s1b = Math.round(n * 0.3);
+  const s2a = Math.round(n * 0.38);
+  const s2b = Math.round(n * 0.62);
+  const testI = Math.round(n * 0.85);
+
+  const v0 = 100;
+  const swing1: Swing = { startI: s1a, startV: v0, endI: s1b, endV: v0 + sign * 9 };
+  const swing2: Swing = { startI: s2a, startV: swing1.endV - sign * 2, endI: s2b, endV: swing1.endV + sign * 16 };
+
+  // Find the two levels (one per swing) that land closest together.
+  let best = { l1: FIB_LEVELS[0], l2: FIB_LEVELS[0], dist: Infinity };
+  for (const l1 of FIB_LEVELS) {
+    for (const l2 of FIB_LEVELS) {
+      const p1 = fibPrice(swing1, l1);
+      const p2 = fibPrice(swing2, l2);
+      const dist = Math.abs(p1 - p2);
+      if (dist < best.dist) best = { l1, l2, dist };
+    }
+  }
+  const confluencePrice = (fibPrice(swing1, best.l1) + fibPrice(swing2, best.l2)) / 2;
+
+  const values: number[] = [v0];
+  for (let i = 1; i < n; i++) {
+    let target: number;
+    if (i <= s1b) {
+      const t = (i - s1a) / (s1b - s1a);
+      target = v0 + sign * 9 * Math.max(0, Math.min(1, t));
+    } else if (i <= s2a) {
+      const t = (i - s1b) / (s2a - s1b);
+      target = swing1.endV - sign * 2 * Math.max(0, Math.min(1, t));
+    } else if (i <= s2b) {
+      const t = (i - s2a) / (s2b - s2a);
+      target = swing2.startV + sign * 18 * Math.max(0, Math.min(1, t));
+    } else if (i <= testI) {
+      const t = (i - s2b) / (testI - s2b);
+      target = swing2.endV + (confluencePrice - swing2.endV) * Math.max(0, Math.min(1, t));
+    } else {
+      target = confluencePrice + sign * ((i - testI) / (n - testI)) * 4;
+    }
+    values.push(target + (rand() - 0.5) * 0.7);
+  }
+  return { values, swing1, swing2, confluencePrice, touchI: testI };
+}
+
+export type ElderScreenDemo = { htfTrend: number[]; ltf: number[]; oscillator: (number | null)[]; dipI: number; triggerI: number; up: boolean };
+
+/** Elder's three screens, built deliberately: screen 1 is the higher-
+ *  timeframe trend (just direction, nothing to click); screen 2 is a
+ *  short-period oscillator on the lower timeframe dipping against that
+ *  trend (the pullback); screen 3 is the actual entry trigger — the bar
+ *  where price breaks back above (or below) its recent short-term range
+ *  once the pullback is done. */
+export function genElderScreenDemo(seed: number, n: number): ElderScreenDemo {
+  const rand = seededRandom(seed);
+  const up = rand() > 0.5;
+  const sign = up ? 1 : -1;
+
+  const htfTrend: number[] = [100];
+  for (let i = 1; i < n; i++) htfTrend.push(htfTrend[i - 1] + sign * (0.4 + rand() * 0.25));
+
+  const pullbackEndI = Math.round(n * 0.65);
+  const ltf: number[] = [100];
+  for (let i = 1; i < n; i++) {
+    const dir = i < pullbackEndI ? -sign : sign;
+    ltf.push(ltf[i - 1] + dir * (0.35 + rand() * 0.3));
+  }
+
+  const oscillator = rsi(ltf, 5);
+  // The dip is the actual low (or high, in a downtrend) the pullback
+  // makes — a sustained one-directional pullback saturates a short RSI
+  // at 0/100 for most of its length, so price itself is the reliable
+  // signal for exactly where it turns.
+  let dipI = 0;
+  let dipVal = up ? Infinity : -Infinity;
+  for (let i = 0; i < pullbackEndI; i++) {
+    const v = ltf[i];
+    if (up ? v < dipVal : v > dipVal) {
+      dipVal = v;
+      dipI = i;
+    }
+  }
+
+  // The trigger is the first bar after the dip whose close breaks the
+  // high (or low) of the few bars right before it.
+  let triggerI = pullbackEndI;
+  for (let i = dipI + 2; i < n; i++) {
+    const lookback = ltf.slice(Math.max(0, i - 3), i);
+    const edge = up ? Math.max(...lookback) : Math.min(...lookback);
+    if (up ? ltf[i] > edge : ltf[i] < edge) {
+      triggerI = i;
+      break;
+    }
+  }
+
+  return { htfTrend, ltf, oscillator, dipI, triggerI, up };
+}
+
+export type WyckoffDemo = { bars: OHLC[]; rangeEndI: number; hi: number; lo: number; breakI: number; reclaimI: number; spring: boolean };
+
+/** A Wyckoff spring (price breaks below range support, then reclaims back
+ *  inside — a false breakdown) or upthrust (the mirror, above resistance).
+ *  The reclaim is the actual signal; the break on its own is a trap. */
+export function genWyckoffDemo(seed: number, n: number, spring: boolean): WyckoffDemo {
+  const rand = seededRandom(seed);
+  const rangeEndI = Math.round(n * 0.55);
+  const mid = 100;
+  const rangeHalf = 1.6;
+  const sign = spring ? -1 : 1;
+  const bars: OHLC[] = [];
+  let prevClose = mid;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    let close: number;
+    let high: number;
+    let low: number;
+    if (i <= rangeEndI) {
+      const target = mid + (rand() - 0.5) * rangeHalf * 1.4;
+      close = Math.max(mid - rangeHalf * 0.9, Math.min(mid + rangeHalf * 0.9, target));
+      high = Math.min(mid + rangeHalf, Math.max(open, close) + rand() * 0.3);
+      low = Math.max(mid - rangeHalf, Math.min(open, close) - rand() * 0.3);
+    } else if (i === rangeEndI + 1) {
+      // The false break — a decisive poke outside the range.
+      close = mid + sign * (rangeHalf + 1.0 + rand() * 0.4);
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    } else if (i === rangeEndI + 2) {
+      // The reclaim — a sharp move straight back inside the range, the
+      // actual signal.
+      close = mid - sign * (0.3 + rand() * 0.3);
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    } else {
+      close = open - sign * (0.5 + rand() * 0.4);
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    }
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+  return { bars, rangeEndI, hi: mid + rangeHalf, lo: mid - rangeHalf, breakI: rangeEndI + 1, reclaimI: rangeEndI + 2, spring };
+}
+
+export type VsaDemo = { bars: OHLC[]; volumes: number[]; signalI: number; bullish: boolean };
+
+/** VSA "stopping volume": a bar with a narrow spread (small high-to-low
+ *  range) but unusually heavy volume, appearing right after a run in one
+ *  direction — read as that move running out of willing sellers (or
+ *  buyers), not confirmation of it. */
+export function genVsaDemo(seed: number, n: number, bullish: boolean): VsaDemo {
+  const rand = seededRandom(seed);
+  const sign = bullish ? -1 : 1; // the run is in this direction before the stopping bar
+  const signalI = Math.round(n * 0.6);
+  const bars: OHLC[] = [];
+  const volumes: number[] = [];
+  let prevClose = 100;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    let close: number;
+    let high: number;
+    let low: number;
+    let volume: number;
+    if (i === signalI) {
+      // Narrow spread, closing mid-range — but about to get heavy volume.
+      close = open + (rand() - 0.5) * 0.3;
+      high = Math.max(open, close) + 0.15;
+      low = Math.min(open, close) - 0.15;
+      volume = 1400 + rand() * 300;
+    } else if (i < signalI) {
+      close = open + sign * (0.5 + rand() * 0.4);
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+      volume = 300 + rand() * 200;
+    } else {
+      close = open - sign * (0.4 + rand() * 0.4);
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+      volume = 300 + rand() * 250;
+    }
+    bars.push({ o: open, h: high, l: low, c: close });
+    volumes.push(volume);
+    prevClose = close;
+  }
+  return { bars, volumes, signalI, bullish };
+}
+
+export type ProfileLevel = { price: number; volume: number };
+export type ProfileDemo = { bars: OHLC[]; levels: ProfileLevel[]; pocPrice: number; lvnPrice: number; breakoutI: number };
+
+/** A volume/market profile: how much time (or volume) price spent at each
+ *  price level over the window, built up from the same bars shown on the
+ *  chart. The point of control (POC) is the busiest level; a low-volume
+ *  node (LVN) is a level price spent hardly any time at — exactly the
+ *  level price tends to move through quickly once it gets there. */
+export function genProfileDemo(seed: number, n: number): ProfileDemo {
+  const rand = seededRandom(seed);
+  const bars: OHLC[] = [];
+  let prevClose = 100;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    const close = open + (rand() - 0.5) * 1.0 + Math.sin(i / 10) * 0.15;
+    const high = Math.max(open, close) + rand() * 0.4;
+    const low = Math.min(open, close) - rand() * 0.4;
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+  const min = Math.min(...bars.map((b) => b.l));
+  const max = Math.max(...bars.map((b) => b.h));
+  const buckets = 24;
+  const step = (max - min) / buckets;
+  const levels: ProfileLevel[] = Array.from({ length: buckets }, (_, i) => ({ price: min + (i + 0.5) * step, volume: 0 }));
+  for (const b of bars) {
+    const loIdx = Math.max(0, Math.floor((b.l - min) / step));
+    const hiIdx = Math.min(buckets - 1, Math.floor((b.h - min) / step));
+    for (let idx = loIdx; idx <= hiIdx; idx++) levels[idx].volume += 1;
+  }
+  const pocIdx = levels.reduce((best, l, i) => (l.volume > levels[best].volume ? i : best), 0);
+  // The lowest-volume bucket that isn't at the very edge of the range (an
+  // edge is just "price didn't go further", not a real low-volume node).
+  let lvnIdx = pocIdx;
+  let lvnVol = Infinity;
+  for (let i = 2; i < buckets - 2; i++) {
+    if (levels[i].volume < lvnVol) {
+      lvnVol = levels[i].volume;
+      lvnIdx = i;
+    }
+  }
+  // A breakout bar that actually trades through the LVN quickly.
+  let breakoutI = bars.length - 1;
+  for (let i = 0; i < bars.length; i++) {
+    if (bars[i].l <= levels[lvnIdx].price && bars[i].h >= levels[lvnIdx].price) {
+      breakoutI = i;
+    }
+  }
+  return { bars, levels, pocPrice: levels[pocIdx].price, lvnPrice: levels[lvnIdx].price, breakoutI };
+}
+
+export type DeltaDivergenceDemo = { closes: number[]; delta: number[] };
+
+/** Cumulative delta (buy volume minus sell volume) is a running total like
+ *  OBV — so it needs the same envelope trick OBV's divergence generator
+ *  uses rather than trying to hit an exact target shape against noisy
+ *  day-to-day price direction. */
+export function genDeltaDivergenceDemo(seed: number, n: number, bullish: boolean): DeltaDivergenceDemo {
+  const closes = genDivergenceSeries(seed, n, bullish);
+  const rand = seededRandom(seed + 5);
+  const p1 = Math.max(Math.round(n * 0.3), 6);
+  const p2 = Math.max(Math.round(n * 0.68), p1 + 15);
+  const width = n * 0.12;
+  const volumes: number[] = [500];
+  for (let i = 1; i < n; i++) {
+    const envelope1 = Math.exp(-((i - p1) ** 2) / (2 * width * width));
+    const envelope2 = Math.exp(-((i - p2) ** 2) / (2 * width * width));
+    const base = 40 + rand() * 30;
+    volumes.push(base + 650 * envelope1 + 180 * envelope2);
+  }
+  const delta = obvFromCloses(closes, volumes);
+  return { closes, delta };
+}
+
+export type FvgDemo = { bars: OHLC[]; gapI: number; up: boolean; gapTop: number; gapBottom: number };
+
+/** An ICT Fair Value Gap: three candles in a row where the first candle's
+ *  wick and the third candle's wick don't overlap, leaving a gap in the
+ *  middle candle's range that price never actually traded through — the
+ *  "imbalance" ICT material refers to. */
+export function genFvgDemo(seed: number, n: number): FvgDemo {
+  const rand = seededRandom(seed);
+  const up = rand() > 0.5;
+  const sign = up ? 1 : -1;
+  const gapI = Math.round(n * 0.55);
+  const bars: OHLC[] = [];
+  let prevClose = 100;
+  for (let i = 0; i < n; i++) {
+    const open = prevClose;
+    let close: number;
+    let high: number;
+    let low: number;
+    if (i === gapI - 1 || i === gapI || i === gapI + 1) {
+      // Three decisive candles in the same direction, each one's wick
+      // clearing the one two bars back — that's the gap.
+      close = open + sign * (1.1 + rand() * 0.3);
+      high = Math.max(open, close) + rand() * 0.15;
+      low = Math.min(open, close) - rand() * 0.15;
+    } else {
+      close = open + (rand() - 0.5) * 0.8;
+      high = Math.max(open, close) + rand() * 0.3;
+      low = Math.min(open, close) - rand() * 0.3;
+    }
+    bars.push({ o: open, h: high, l: low, c: close });
+    prevClose = close;
+  }
+  const first = bars[gapI - 1];
+  const third = bars[gapI + 1];
+  const gapTop = up ? third.l : first.l;
+  const gapBottom = up ? first.h : third.h;
+  return { bars, gapI, up, gapTop: Math.max(gapTop, gapBottom), gapBottom: Math.min(gapTop, gapBottom) };
+}
+
+export type ElliottWaveDemo = { values: number[]; waveEnds: number[]; impulseEndI: number; up: boolean };
+
+/** A deliberately-shaped five-wave Elliott impulse (three moves with the
+ *  trend, two corrective moves against it) followed by a correction. Wave
+ *  3 is the longest leg, same as the textbook rule; the end of wave 5 is
+ *  the signal — the whole impulse is done and the correction starts. */
+export function genElliottWaveDemo(seed: number, n: number): ElliottWaveDemo {
+  const rand = seededRandom(seed);
+  const up = rand() > 0.5;
+  const sign = up ? 1 : -1;
+  // Lengths of waves 1-5 as fractions of the total impulse length, with
+  // wave 3 deliberately the longest.
+  const lengths = [8, 5, 13, 4, 7].map((l) => l + rand() * 2);
+  const total = lengths.reduce((a, b) => a + b, 0);
+  const impulseBars = Math.round(n * 0.75);
+  const waveEnds: number[] = [];
+  let acc = 0;
+  for (const l of lengths) {
+    acc += l;
+    waveEnds.push(Math.round((acc / total) * impulseBars));
+  }
+  const values: number[] = [100];
+  const waveDir = [1, -1, 1, -1, 1];
+  for (let i = 1; i < n; i++) {
+    const waveIdx = waveEnds.findIndex((w) => i <= w);
+    let dir: number;
+    if (i > impulseBars) {
+      dir = -sign; // the correction after wave 5
+    } else {
+      dir = sign * (waveIdx === -1 ? waveDir[4] : waveDir[waveIdx]);
+    }
+    const magnitude = i > impulseBars ? 0.5 + rand() * 0.3 : 0.6 + rand() * 0.4;
+    values.push(values[i - 1] + dir * magnitude);
+  }
+  return { values, waveEnds: waveEnds.slice(0, 4), impulseEndI: waveEnds[4], up };
+}
+
+export type HarmonicDemo = { values: number[]; xI: number; aI: number; bI: number; cI: number; dI: number; bullish: boolean };
+
+/** A deliberately-shaped Gartley-style XABCD harmonic pattern: X-A is the
+ *  initial leg, A-B retraces it by roughly 61.8%, B-C retraces A-B by
+ *  roughly 38-88%, and C-D completes near a 78.6% retracement of X-A —
+ *  point D is the pattern's completion and the signal to act on. */
+export function genHarmonicDemo(seed: number, n: number): HarmonicDemo {
+  const rand = seededRandom(seed);
+  const bullish = rand() > 0.5;
+  const sign = bullish ? 1 : -1;
+  const xI = Math.round(n * 0.08);
+  const aI = Math.round(n * 0.28);
+  const bI = Math.round(n * 0.46);
+  const cI = Math.round(n * 0.64);
+  const dI = Math.round(n * 0.86);
+  const xV = 100;
+  const legXA = 14;
+  const aV = xV + sign * legXA;
+  const bV = aV - sign * legXA * 0.618;
+  const cV = bV + sign * (aV - bV) * 0.5;
+  const dV = xV + sign * legXA * (1 - 0.786);
+
+  const points: [number, number][] = [
+    [0, xV],
+    [xI, xV],
+    [aI, aV],
+    [bI, bV],
+    [cI, cV],
+    [dI, dV],
+    [n - 1, dV],
+  ];
+  const values: number[] = [];
+  for (let i = 0; i < n; i++) {
+    let seg = 0;
+    while (seg < points.length - 2 && i > points[seg + 1][0]) seg++;
+    const [i0, v0] = points[seg];
+    const [i1, v1] = points[seg + 1];
+    const t = i1 === i0 ? 0 : (i - i0) / (i1 - i0);
+    values.push(v0 + (v1 - v0) * t + (rand() - 0.5) * 0.6);
+  }
+  return { values, xI, aI, bI, cI, dI, bullish };
+}
+
+export type CycleDemo = { values: number[]; period: number; priorLows: number[]; nextLowI: number };
+
+/** A deliberately periodic (cyclical) series — the thing cycle analysis is
+ *  actually looking for — with a clean, fixed period so "where's the next
+ *  low, given the established rhythm" has one genuinely correct answer. */
+export function genCycleDemo(seed: number, n: number): CycleDemo {
+  const rand = seededRandom(seed);
+  const period = 14 + Math.floor(rand() * 5);
+  const phase = rand() * period;
+  const values: number[] = [];
+  for (let i = 0; i < n; i++) {
+    values.push(100 + 6 * Math.sin(((i + phase) / period) * Math.PI * 2) + (rand() - 0.5) * 0.8);
+  }
+  const priorLows: number[] = [];
+  for (let i = 0; i + period < n - period; i += period) {
+    // The trough nearest each expected low, within a small window.
+    let bestI = i;
+    for (let j = Math.max(0, i - 2); j <= Math.min(n - 1, i + 2); j++) {
+      if (values[j] < values[bestI]) bestI = j;
+    }
+    priorLows.push(bestI);
+  }
+  const nextLowI = priorLows.length ? priorLows[priorLows.length - 1] + period : null;
+  return { values, period, priorLows, nextLowI: nextLowI != null && nextLowI < n ? nextLowI : n - 3 };
+}
+
+export type Ichimoku = {
+  tenkan: (number | null)[];
+  kijun: (number | null)[];
+  senkouA: (number | null)[];
+  senkouB: (number | null)[];
+};
+
+function midpoint(bars: OHLC[], i: number, period: number): number | null {
+  if (i < period - 1) return null;
+  const window = bars.slice(i - period + 1, i + 1);
+  const hi = Math.max(...window.map((b) => b.h));
+  const lo = Math.min(...window.map((b) => b.l));
+  return (hi + lo) / 2;
+}
+
+/** Ichimoku's lines, un-shifted for simplicity (a real chart plots the
+ *  cloud 26 bars ahead and Chikou 26 bars back — shown here lined up with
+ *  the price that produced them instead, so the crossovers are easy to
+ *  read against the bars that caused them). */
+export function ichimoku(bars: OHLC[]): Ichimoku {
+  const tenkan = bars.map((_, i) => midpoint(bars, i, 9));
+  const kijun = bars.map((_, i) => midpoint(bars, i, 26));
+  const senkouA = tenkan.map((t, i) => (t != null && kijun[i] != null ? (t + kijun[i]!) / 2 : null));
+  const senkouB = bars.map((_, i) => midpoint(bars, i, 52));
+  return { tenkan, kijun, senkouA, senkouB };
+}
+
+export type RenkoBrick = { i: number; close: number; up: boolean };
+
+/** Converts a close series into Renko bricks of a fixed size — only a new
+ *  brick when price has moved a full brick size, and a reversal needs two
+ *  bricks the other way, same as the real charting method. */
+export function toRenko(closes: number[], brickSize: number): RenkoBrick[] {
+  const bricks: RenkoBrick[] = [];
+  let level = closes[0];
+  let up = true;
+  for (let i = 1; i < closes.length; i++) {
+    while (true) {
+      if (up) {
+        if (closes[i] >= level + brickSize) {
+          level += brickSize;
+          bricks.push({ i, close: level, up: true });
+          continue;
+        }
+        if (closes[i] <= level - brickSize * 2) {
+          up = false;
+          level -= brickSize * 2;
+          bricks.push({ i, close: level, up: false });
+          continue;
+        }
+      } else {
+        if (closes[i] <= level - brickSize) {
+          level -= brickSize;
+          bricks.push({ i, close: level, up: false });
+          continue;
+        }
+        if (closes[i] >= level + brickSize * 2) {
+          up = true;
+          level += brickSize * 2;
+          bricks.push({ i, close: level, up: true });
+          continue;
+        }
+      }
+      break;
+    }
+  }
+  return bricks;
+}
+
+export type PairsDemo = { a: number[]; b: number[]; spread: number[]; peakI: number; reversionI: number };
+
+/** Two correlated series and the (fabricated) spread between them — the
+ *  spread is built to stretch away from zero, then drift back, since
+ *  mean reversion is the entire premise of the strategy. Both the peak
+ *  stretch and the actual reversion point are found from the generated
+ *  data rather than assumed from fixed indices, so they're right even
+ *  with the noise added on top. */
+export function genPairsDemo(seed: number, n: number): PairsDemo {
+  const rand = seededRandom(seed);
+  const stretchI = Math.round(n * 0.5);
+  const reversionI = Math.round(n * 0.75);
+  const a: number[] = [100];
+  const b: number[] = [100];
+  const spread: number[] = [0];
+  for (let i = 1; i < n; i++) {
+    const common = (rand() - 0.5) * 1.2;
+    let idio = (rand() - 0.5) * 0.25;
+    if (i >= stretchI && i < reversionI) idio += 0.4;
+    else if (i >= reversionI) idio -= 0.35;
+    a.push(a[i - 1] + common + idio);
+    b.push(b[i - 1] + common - idio * 0.2);
+    spread.push(a[i] - b[i]);
+  }
+  let peakI = 0;
+  for (let i = 1; i < n; i++) if (Math.abs(spread[i]) > Math.abs(spread[peakI])) peakI = i;
+  let revealedReversionI = n - 2;
+  for (let i = peakI + 1; i < n; i++) {
+    if (Math.abs(spread[i]) <= Math.abs(spread[peakI]) * 0.5) {
+      revealedReversionI = i;
+      break;
+    }
+  }
+  return { a, b, spread, peakI, reversionI: revealedReversionI };
+}
+
+export type IntermarketDemo = { market1: number[]; market2: number[]; divergeI: number; bullish: boolean };
+
+/** Two markets that normally move together — until one of them stops
+ *  confirming the other's new high/low, which is the actual intermarket
+ *  signal (not just "they moved the same amount"). */
+export function genIntermarketDemo(seed: number, n: number, bullish: boolean): IntermarketDemo {
+  const market1 = genDivergenceSeries(seed, n, bullish);
+  const rand = seededRandom(seed + 7);
+  const sign = bullish ? -1 : 1;
+  const p1 = Math.max(Math.round(n * 0.3), 6);
+  const p2 = Math.max(Math.round(n * 0.68), p1 + 15);
+  // Market 2 moves with market 1 — same two swings, same timing — but its
+  // SECOND swing is deliberately the shallower one (market1's is the
+  // deeper one), so it fails to confirm market1's more extreme move.
+  // That gap between the two markets is the actual signal.
+  const market2: number[] = [100];
+  for (let i = 1; i < n; i++) {
+    let target = 100;
+    const width = n * 0.1;
+    target += sign * 13 * Math.exp(-((i - p1) ** 2) / (2 * width * width * 0.6));
+    target += sign * 8 * Math.exp(-((i - p2) ** 2) / (2 * width * width * 1.6));
+    market2.push(target + (rand() - 0.5) * 1.1);
+  }
+  return { market1, market2, divergeI: p2, bullish };
+}
+
+export type GannAngleDemo = { values: number[]; anchorI: number; anchorV: number; slope: number; touches: number[] };
+
+/** A classic Gann 1x1 angle: a straight line rising (or falling) from a
+ *  significant swing at a fixed, conventional rate, acting as support or
+ *  resistance on the way back. The exact "right" slope depends on a
+ *  price-per-bar scaling convention that varies by instrument — this uses
+ *  one fixed, clearly-labelled scale for illustration, same spirit as
+ *  every other synthetic chart here. */
+export function genGannAngleDemo(seed: number, n: number): GannAngleDemo {
+  const values = genSeries(seed, n, { driftAmplitude: 0.5 });
+  const pivots = findPivots(values, 4);
+  const lows = pivots.filter((p) => !p.high);
+  const anchor = lows.length ? lows[0] : { i: 5, value: values[5] };
+  const slope = (Math.max(...values) - Math.min(...values)) / n / 2;
+  const line = values.map((_, i) => (i >= anchor.i ? anchor.value + slope * (i - anchor.i) : null));
+  const tolerance = (Math.max(...values) - Math.min(...values)) * 0.02;
+  const touches: number[] = [];
+  values.forEach((v, i) => {
+    const lv = line[i];
+    if (lv != null && i > anchor.i + 3 && Math.abs(v - lv) <= tolerance) touches.push(i);
+  });
+  return { values, anchorI: anchor.i, anchorV: anchor.value, slope, touches };
+}
