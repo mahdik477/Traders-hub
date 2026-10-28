@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { StrategyStep } from "@/lib/strategy-types";
 import { CheckIcon, ChevronDownIcon } from "@/components/icons";
+import GlossaryText from "@/components/GlossaryText";
 
 // Same controlled-accordion pattern as CourseCurriculum.tsx (numbered circles,
 // smooth grid-rows height animation, Expand/Collapse all) — adapted for a
@@ -147,7 +148,7 @@ export default function StrategyWalkthrough({ slug, steps }: { slug: string; ste
               >
                 <div className="overflow-hidden">
                   <p className="border-t border-border px-5 py-4 pl-[3.75rem] text-sm leading-relaxed text-muted">
-                    {step.detail}
+                    <GlossaryText text={step.detail} />
                   </p>
                 </div>
               </div>
