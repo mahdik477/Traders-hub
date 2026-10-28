@@ -721,12 +721,13 @@ input.signal-filter-search {
 }
 
 /* Strategy glossary — the hoverable/tappable definitions on technical
-   terms across the strategies section (GlossaryTerm.tsx). */
-.glossary-wrap {
-  position: relative;
-  display: inline;
-}
-
+   terms across the strategies section (GlossaryTerm.tsx). The tooltip
+   itself is rendered into a portal at the end of <body> (not nested
+   inside the term), positioned with `top`/`left`/`width` set inline from
+   the term's actual on-screen position — several ancestor cards on this
+   page use `overflow-hidden` for their rounded corners, which would
+   otherwise clip or bury a tooltip nested inside them regardless of its
+   z-index. */
 .glossary-term {
   display: inline;
   border-bottom: 1px dotted var(--color-accent);
@@ -742,31 +743,15 @@ input.signal-filter-search {
 }
 
 .glossary-tooltip {
-  position: absolute;
-  top: calc(100% + 6px);
-  z-index: 50;
+  position: fixed;
+  z-index: 200;
   display: block;
-  width: max-content;
-  max-width: min(78vw, 300px);
   padding: 0.6rem 0.75rem;
   border-radius: 0.625rem;
   border: 1px solid var(--color-border-strong);
   background: var(--color-surface);
   box-shadow: var(--shadow-glow);
   pointer-events: none;
-}
-
-.glossary-tooltip-center {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.glossary-tooltip-left {
-  left: 0;
-}
-
-.glossary-tooltip-right {
-  right: 0;
 }
 
 .glossary-tooltip-term {
