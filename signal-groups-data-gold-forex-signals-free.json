@@ -1,0 +1,39 @@
+{
+  "group": {
+    "slug": "gold-forex-signals-free",
+    "name": "Gold Forex Signals (Free)",
+    "description": "A Telegram channel for gold and forex majors. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "markets": [
+      "gold",
+      "forex-majors"
+    ],
+    "styles": [],
+    "price": "free-and-vip",
+    "price_label": "Free + paid VIP",
+    "member_count": "5.9K members",
+    "member_count_as_of": "2026-10-22",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/gold_forex_signale",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-22",
+    "member_count_exact": 5897,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/gold_forex_signale",
+    "price_seen": "Free + paid VIP · price not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Gold Forex Signals (Free)",
+    "source_urls": [
+      "https://t.me/gold_forex_signale"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

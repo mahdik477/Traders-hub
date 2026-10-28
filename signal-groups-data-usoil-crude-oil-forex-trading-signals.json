@@ -1,0 +1,42 @@
+{
+  "group": {
+    "slug": "usoil-crude-oil-forex-trading-signals",
+    "name": "USOIL/CRUDE OIL FOREX TRADING SIGNALS",
+    "description": "A Telegram channel for gold, forex minors & exotics, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
+    "markets": [
+      "gold",
+      "forex-minors",
+      "oil"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "1.7K members",
+    "member_count_as_of": "2026-10-27",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/usoiltrading_service",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-27",
+    "member_count_exact": 1695,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/usoiltrading_service",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "USOIL/CRUDE OIL FOREX TRADING SIGNALS",
+    "source_urls": [
+      "https://t.me/usoiltrading_service"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

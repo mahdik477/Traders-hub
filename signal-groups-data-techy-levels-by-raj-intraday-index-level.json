@@ -1,0 +1,44 @@
+{
+  "group": {
+    "slug": "techy-levels-by-raj-intraday-index-level",
+    "name": "TECHY LEVELS BY RAJ..🔥🏌‍♂ (Intraday index level)",
+    "description": "A Telegram channel for indices, oil and other commodities, and stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading style as day trading. Education is included on the listing.",
+    "markets": [
+      "indices",
+      "oil",
+      "stocks-options"
+    ],
+    "styles": [
+      "day-trading"
+    ],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "3.9K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/techylevelsbyraj11",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 3932,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/techylevelsbyraj11",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": "day-trading",
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "TECHY LEVELS BY RAJ..🔥🏌‍♂ (Intraday index level)",
+    "source_urls": [
+      "https://t.me/techylevelsbyraj11"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

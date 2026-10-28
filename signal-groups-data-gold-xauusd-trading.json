@@ -1,0 +1,39 @@
+{
+  "group": {
+    "slug": "gold-xauusd-trading",
+    "name": "GOLD XAUUSD TRADING",
+    "description": "A Telegram channel for gold and crypto. It was listed as a free channel.",
+    "markets": [
+      "gold",
+      "crypto"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "1.1K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/xauusd_king_fx_127",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 1070,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/xauusd_king_fx_127",
+    "price_seen": "Free",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "GOLD XAUUSD TRADING",
+    "source_urls": [
+      "https://t.me/xauusd_king_fx_127"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

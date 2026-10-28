@@ -1,0 +1,41 @@
+{
+  "group": {
+    "slug": "stock-market-only",
+    "name": "STOCK MARKET ONLY",
+    "description": "A Telegram channel for indices and stocks & options. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
+    "markets": [
+      "indices",
+      "stocks-options"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "8.7K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/stockmarketonlyofficial",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 8650,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/stockmarketonlyofficial",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "STOCK MARKET ONLY",
+    "source_urls": [
+      "https://t.me/stockmarketonlyofficial"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

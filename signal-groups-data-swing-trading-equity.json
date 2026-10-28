@@ -1,0 +1,42 @@
+{
+  "group": {
+    "slug": "swing-trading-equity",
+    "name": "Swing Trading - Equity",
+    "description": "A Telegram channel for stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading style as swing. Education is included on the listing.",
+    "markets": [
+      "stocks-options"
+    ],
+    "styles": [
+      "swing"
+    ],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "2.1K members",
+    "member_count_as_of": "2026-10-22",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/stocks_zone",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-22",
+    "member_count_exact": 2054,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/stocks_zone",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": "swing",
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Swing Trading - Equity",
+    "source_urls": [
+      "https://t.me/stocks_zone"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

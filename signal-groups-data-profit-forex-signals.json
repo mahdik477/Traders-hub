@@ -1,0 +1,38 @@
+{
+  "group": {
+    "slug": "profit-forex-signals",
+    "name": "Profit Forex Signals",
+    "description": "A Telegram channel for forex majors. It was listed as a free channel, and a paid tier was not stated. The listing language is Russian.",
+    "markets": [
+      "forex-majors"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "8.3K members",
+    "member_count_as_of": "2026-10-22",
+    "language": "Russian",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/profit_forex_signals",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-22",
+    "member_count_exact": 8254,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/profit_forex_signals",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "Russian",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Profit Forex Signals",
+    "source_urls": [
+      "https://t.me/profit_forex_signals"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

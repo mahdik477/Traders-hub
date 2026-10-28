@@ -1,0 +1,40 @@
+{
+  "group": {
+    "slug": "tslab-trading",
+    "name": "TSLab 💎 Trading",
+    "description": "A Telegram channel for indices, oil and other commodities, and stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing language is Russian.",
+    "markets": [
+      "indices",
+      "oil",
+      "stocks-options"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "3.4K members",
+    "member_count_as_of": "2026-10-27",
+    "language": "Russian",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/tslab_trading",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-27",
+    "member_count_exact": 3378,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/tslab_trading",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "Russian",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "TSLab 💎 Trading",
+    "source_urls": [
+      "https://t.me/tslab_trading"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

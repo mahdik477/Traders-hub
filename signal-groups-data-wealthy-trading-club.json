@@ -1,0 +1,39 @@
+{
+  "group": {
+    "slug": "wealthy-trading-club",
+    "name": "Wealthy Trading Club 🇺🇸",
+    "description": "A Telegram channel for gold and crypto. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "markets": [
+      "gold",
+      "crypto"
+    ],
+    "styles": [],
+    "price": "free-and-vip",
+    "price_label": "Free + paid VIP",
+    "member_count": "2.1K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/wealthytradingclub",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 2118,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/wealthytradingclub",
+    "price_seen": "Free + paid VIP · price not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Wealthy Trading Club 🇺🇸",
+    "source_urls": [
+      "https://t.me/wealthytradingclub"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}
