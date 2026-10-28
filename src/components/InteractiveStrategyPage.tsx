@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import StrategyBackLink from "@/components/StrategyBackLink";
 import StrategyWalkthrough from "@/components/StrategyWalkthrough";
+import GlossaryText from "@/components/GlossaryText";
 import {
   ShieldIcon,
   InfoIcon,
@@ -138,7 +139,9 @@ export default function InteractiveStrategyPage({
           </div>
           <p className="meta mt-3">{s.refId}</p>
           <h1 className="page-title mt-1">{s.name}</h1>
-          <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{s.publicTeaser}</p>
+          <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
+            <GlossaryText text={s.publicTeaser} />
+          </p>
         </div>
 
         <dl className="grid grid-cols-3 gap-px border-t border-border bg-border">
@@ -199,12 +202,12 @@ export default function InteractiveStrategyPage({
           className="mt-3 border-l-4 border-accent pl-5 text-2xl font-medium italic leading-snug text-foreground sm:text-3xl"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          {s.coreConcept}
+          <GlossaryText text={s.coreConcept} />
         </blockquote>
         {s.toolsAndDefaults && (
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">
             <strong className="font-semibold text-foreground">Tools &amp; defaults: </strong>
-            {s.toolsAndDefaults}
+            <GlossaryText text={s.toolsAndDefaults} />
           </p>
         )}
       </section>
@@ -222,7 +225,9 @@ export default function InteractiveStrategyPage({
                 </span>
                 <dt className="text-lg font-bold text-foreground">Entry</dt>
               </div>
-              <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.entry}</dd>
+              <dd className="mt-3 text-base leading-relaxed text-foreground/90">
+                <GlossaryText text={s.rules.entry} />
+              </dd>
             </div>
             <div className="rounded-xl border border-border-strong bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
               <div className="flex items-center gap-2.5">
@@ -231,7 +236,9 @@ export default function InteractiveStrategyPage({
                 </span>
                 <dt className="text-lg font-bold text-foreground">Exit</dt>
               </div>
-              <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.exit}</dd>
+              <dd className="mt-3 text-base leading-relaxed text-foreground/90">
+                <GlossaryText text={s.rules.exit} />
+              </dd>
             </div>
             <div className="rounded-xl border border-danger/30 bg-danger/5 p-4 transition-colors hover:border-accent hover:shadow-glow">
               <div className="flex items-center gap-2.5">
@@ -240,11 +247,15 @@ export default function InteractiveStrategyPage({
                 </span>
                 <dt className="text-lg font-bold text-foreground">Stop</dt>
               </div>
-              <dd className="mt-3 text-base leading-relaxed text-foreground/90">{s.rules.stop}</dd>
+              <dd className="mt-3 text-base leading-relaxed text-foreground/90">
+                <GlossaryText text={s.rules.stop} />
+              </dd>
             </div>
           </dl>
         ) : (
-          <p className="mt-3 max-w-3xl leading-relaxed text-muted">{s.rules.text}</p>
+          <p className="mt-3 max-w-3xl leading-relaxed text-muted">
+            <GlossaryText text={s.rules.text} />
+          </p>
         )}
         {s.typicalTimeframes.length > 0 && (
           <p className="meta mt-4">
@@ -291,7 +302,9 @@ export default function InteractiveStrategyPage({
                 <h3 className="text-lg font-bold text-foreground">
                   {STRATEGY_MARKET_LABELS[market as keyof typeof STRATEGY_MARKET_LABELS] ?? market}
                 </h3>
-                <p className="mt-1.5 text-base leading-relaxed text-foreground/90">{note}</p>
+                <p className="mt-1.5 text-base leading-relaxed text-foreground/90">
+                  <GlossaryText text={note} />
+                </p>
               </li>
             ))}
           </ul>
@@ -308,14 +321,18 @@ export default function InteractiveStrategyPage({
               <CheckIcon className="size-5" />
               Works best
             </dt>
-            <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">{s.marketConditions.worksBest}</dd>
+            <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">
+              <GlossaryText text={s.marketConditions.worksBest} />
+            </dd>
           </div>
           <div className="rounded-xl border border-warning/30 bg-warning/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="flex items-center gap-2 text-lg font-bold text-warning">
               <InfoIcon className="size-5" />
               Struggles
             </dt>
-            <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">{s.marketConditions.struggles}</dd>
+            <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">
+              <GlossaryText text={s.marketConditions.struggles} />
+            </dd>
           </div>
           <div className="rounded-xl border border-danger/30 bg-danger/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="flex items-center gap-2 text-lg font-bold text-danger">
@@ -323,7 +340,7 @@ export default function InteractiveStrategyPage({
               Common failure mode
             </dt>
             <dd className="mt-2.5 text-base leading-relaxed text-foreground/90">
-              {s.marketConditions.failureModes}
+              <GlossaryText text={s.marketConditions.failureModes} />
             </dd>
           </div>
         </dl>
@@ -339,7 +356,7 @@ export default function InteractiveStrategyPage({
                   <span aria-hidden="true" className="font-bold text-warning">
                     —
                   </span>
-                  {p}
+                  <GlossaryText text={p} />
                 </li>
               ))}
             </ul>
@@ -354,11 +371,15 @@ export default function InteractiveStrategyPage({
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="text-lg font-bold text-foreground">Platform / testability</dt>
-            <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">{s.platformTestability}</dd>
+            <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">
+              <GlossaryText text={s.platformTestability} />
+            </dd>
           </div>
           <div className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
             <dt className="text-lg font-bold text-foreground">Data needed</dt>
-            <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">{s.dataRequirement}</dd>
+            <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">
+              <GlossaryText text={s.dataRequirement} />
+            </dd>
           </div>
         </dl>
       </section>
@@ -426,7 +447,11 @@ export default function InteractiveStrategyPage({
                       </span>
                     </span>
                   </a>
-                  {v.note && <p className="mt-3 max-w-sm text-base leading-relaxed text-muted">{v.note}</p>}
+                  {v.note && (
+                    <p className="mt-3 max-w-sm text-base leading-relaxed text-muted">
+                      <GlossaryText text={v.note} />
+                    </p>
+                  )}
                 </li>
               );
             })}
