@@ -88,3 +88,13 @@ export type SignalGroupView = {
   /** Lower numbers are listed first. */
   rank: number;
 };
+
+/** "2026-10-27" → "27 Oct 2026". Null when the value is missing or not a date. */
+export function formatSignalDate(iso: string | null | undefined): string | null {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
+  const [year, month, day] = iso.split("-").map(Number);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const name = months[(month ?? 0) - 1];
+  if (!name || !year || !day) return null;
+  return `${day} ${name} ${year}`;
+}

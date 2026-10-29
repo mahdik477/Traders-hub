@@ -1,21 +1,34 @@
 import Image from "next/image";
 
 const SIZES = {
-  md: { box: "size-14", text: "text-base", img: 56 },
+  sm: { box: "size-8 text-[11px]", img: 32 },
+  md: { box: "size-10 text-xs", img: 40 },
 } as const;
 
 function initials(name: string): string {
-  const words = name.replace(/[^A-Za-z0-9 ]/g, " ").trim().split(/\s+/).filter(Boolean);
+  const words = name
+    .replace(/[^A-Za-z0-9 ]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
   if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
   return (words[0] ?? "SG").slice(0, 2).toUpperCase();
 }
 
-export default function SignalGroupLogo({ name, logo }: { name: string; logo: string | null }) {
-  const s = SIZES.md;
+export default function SignalGroupLogo({
+  name,
+  logo,
+  size = "sm",
+}: {
+  name: string;
+  logo: string | null;
+  size?: keyof typeof SIZES;
+}) {
+  const s = SIZES[size];
   if (!logo) {
     return (
       <div
-        className={`flex ${s.box} shrink-0 items-center justify-center rounded-xl border border-border bg-accent/12 font-semibold tracking-tight text-foreground ${s.text}`}
+        className={`flex ${s.box} shrink-0 items-center justify-center rounded-lg border border-border bg-surface-2 font-medium tracking-wide text-muted`}
         aria-hidden="true"
       >
         {initials(name)}
@@ -25,7 +38,7 @@ export default function SignalGroupLogo({ name, logo }: { name: string; logo: st
 
   return (
     <div
-      className={`flex ${s.box} shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white p-1.5`}
+      className={`flex ${s.box} shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-white p-1`}
     >
       <Image
         src={logo}
