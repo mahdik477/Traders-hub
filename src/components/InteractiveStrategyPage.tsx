@@ -137,8 +137,7 @@ export default function InteractiveStrategyPage({
               Interactive
             </span>
           </div>
-          <p className="meta mt-3">{s.refId}</p>
-          <h1 className="page-title mt-1">{s.name}</h1>
+          <h1 className="page-title mt-3">{s.name}</h1>
           <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
             <GlossaryText text={s.publicTeaser} />
           </p>
@@ -166,14 +165,9 @@ export default function InteractiveStrategyPage({
       {s.image && (
         <figure className="mt-8 overflow-hidden rounded-xl border border-accent/30 bg-surface shadow-glow transition-colors hover:border-accent">
           <Image src={s.image.src} alt={s.image.caption} width={1200} height={675} className="w-full" priority />
-          <figcaption className="border-t border-border bg-surface-2 px-4 py-3">
-            <span className="meta font-medium text-foreground">{s.image.caption}</span>
-            {s.image.kind === "synthetic" && (
-              <span className="block text-xs text-subtle">
-                Illustrative chart generated from synthetic data to show the setup — not a real
-                historical trade.
-              </span>
-            )}
+          <figcaption className="meta border-t border-border bg-surface-2 px-4 py-3">
+            <span className="font-medium text-foreground">{s.image.caption}</span>
+            {s.image.kind === "synthetic" && " — an illustrative chart from synthetic data, not a real trade."}
           </figcaption>
         </figure>
       )}
@@ -408,9 +402,7 @@ export default function InteractiveStrategyPage({
             Watch and learn
           </SectionHeading>
           <p className="meta mt-2">
-            Videos we found genuinely useful for this strategy — from outside creators we don&apos;t
-            control, so we haven&apos;t fact-checked every claim made in them. Judge the content on its
-            own merits.
+            From outside creators we don&apos;t control or fact-check — judge the content on its own merits.
           </p>
           <ul className="mt-4 space-y-4">
             {s.videos.map((v) => {

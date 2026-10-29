@@ -10,6 +10,18 @@
 // file" workflow here, and the 56 entries are tightly ordered and
 // cross-referenced (T1 free tier, T2 advanced, T3 intermediate).
 
+import type { JSX } from "react";
+import {
+  TrendUpIcon,
+  RevertIcon,
+  BreakoutIcon,
+  CandleIcon,
+  BoltIcon,
+  VolumeBarsIcon,
+  WaveStructureIcon,
+  GridIcon,
+} from "@/components/icons";
+
 export type StrategyPricingTier = "free" | "intermediate" | "advanced";
 
 export const STRATEGY_TIER_LABELS: Record<StrategyPricingTier, string> = {
@@ -71,6 +83,19 @@ export const STRATEGY_CATEGORY_LABELS: Record<StrategyCategory, string> = {
   volume_order_flow: "Volume / Order Flow",
   market_structure: "Market Structure / Wave Theory",
   quantitative: "Multi-Market / Quantitative",
+};
+
+/** One icon per category so a directory card is recognisable at a glance,
+ *  not just from small text underneath the name. */
+export const STRATEGY_CATEGORY_ICONS: Record<StrategyCategory, (props: { className?: string }) => JSX.Element> = {
+  trend_following: TrendUpIcon,
+  mean_reversion: RevertIcon,
+  breakout: BreakoutIcon,
+  price_action: CandleIcon,
+  momentum: BoltIcon,
+  volume_order_flow: VolumeBarsIcon,
+  market_structure: WaveStructureIcon,
+  quantitative: GridIcon,
 };
 
 export type StrategyExecution = "mechanical" | "semi_mechanical" | "discretionary";

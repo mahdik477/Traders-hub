@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import {
+  STRATEGY_CATEGORY_ICONS,
   STRATEGY_CATEGORY_LABELS,
   STRATEGY_DIFFICULTY_LABELS,
   STRATEGY_MARKET_LABELS,
   STRATEGY_TIER_LABELS,
+  type StrategyPricingTier,
   type StrategyView,
 } from "@/lib/strategy-types";
 import {
@@ -149,15 +151,37 @@ function Directory({
   );
 }
 
+// Colours the two ends of the tier spectrum (free = nothing to lose,
+// advanced = harder, slow down) and leaves intermediate neutral — three
+// distinct hues would have clashed with the site's gold accent.
+const TIER_BADGE_CLASS: Record<StrategyPricingTier, string> = {
+  free: "badge-success",
+  intermediate: "",
+  advanced: "badge-warning",
+};
+
 function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; listingQuery: string }) {
   const href = listingQuery ? `/strategies/${s.slug}${listingQuery}` : `/strategies/${s.slug}`;
+  const CategoryIcon = STRATEGY_CATEGORY_ICONS[s.category];
+  const tierClass = TIER_BADGE_CLASS[s.tier];
 
   return (
     <li className="lift-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface">
       <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="pill">{STRATEGY_TIER_LABELS[s.tier]}</span>
+        <div className="flex items-start gap-3">
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+            <CategoryIcon className="size-6" />
+          </span>
+          <div className="min-w-0 flex-1 pt-0.5">
+            <h2 className="text-lg font-semibold leading-snug">{s.name}</h2>
+            <p className="mt-0.5 text-xs font-medium text-subtle">{STRATEGY_CATEGORY_LABELS[s.category]}</p>
+          </div>
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-center gap-1.5">
+          <span className={tierClass ? `badge ${tierClass}` : "pill"}>{STRATEGY_TIER_LABELS[s.tier]}</span>
+          <span className="pill">{STRATEGY_DIFFICULTY_LABELS[s.difficulty]}</span>
           {s.controversyFlag && (
             <span className="badge badge-warning inline-flex items-center gap-1">
               <ShieldIcon className="size-3" />
@@ -165,22 +189,19 @@ function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; l
             </span>
           )}
         </div>
-        <h2 className="mt-3 text-lg font-semibold">{s.name}</h2>
-        <p className="mt-1 text-xs font-medium uppercase tracking-wide text-subtle">
-          {STRATEGY_CATEGORY_LABELS[s.category]} · {STRATEGY_DIFFICULTY_LABELS[s.difficulty]}
-        </p>
-        <p className="mt-3 line-clamp-3 flex-1 text-sm text-muted">{s.publicTeaser}</p>
+
+        <p className="mt-3 line-clamp-2 flex-1 text-sm text-muted">{s.publicTeaser}</p>
+
         <div className="mt-4 flex flex-wrap gap-1.5">
-          {s.markets.slice(0, 4).map((m) => (
+          {s.markets.slice(0, 3).map((m) => (
             <span key={m} className="pill text-xs">
               {STRATEGY_MARKET_LABELS[m]}
             </span>
           ))}
+          {s.markets.length > 3 && <span className="pill text-xs">+{s.markets.length - 3} more</span>}
         </div>
-        <Link
-          href={href}
-          className="btn btn-outline mt-5 w-full after:absolute after:inset-0"
-        >
+
+        <Link href={href} className="btn btn-outline mt-5 w-full after:absolute after:inset-0">
           View strategy
           <span className="sr-only"> — {s.name}</span>
         </Link>
