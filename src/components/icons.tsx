@@ -148,6 +148,82 @@ export function StarIcon({
   );
 }
 
+// Strategy-category icons — one per StrategyCategory (strategy-types.ts),
+// used on the strategies directory cards so the kind of strategy is
+// recognisable at a glance, not just stated in small text underneath.
+export function TrendUpIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M3 17 9.5 10.5l4 4L21 6" />
+      <path d="M21 6h-5.5M21 6v5.5" />
+    </svg>
+  );
+}
+
+export function RevertIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M3 12h18" strokeDasharray="1.5 3" />
+      <path d="M4 7c2.5 0 2.5 5 5 5s2.5-5 5-5 2.5 5 5 5 2.5-5 5-5" />
+    </svg>
+  );
+}
+
+export function BreakoutIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="3" y="11" width="12" height="10" rx="1.5" />
+      <path d="M12 11 20.5 2.5" />
+      <path d="M20.5 2.5h-5.8M20.5 2.5v5.8" />
+    </svg>
+  );
+}
+
+export function CandleIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M7 3v4M7 15v6M17 3v8M17 17v4" />
+      <rect x="4" y="7" width="6" height="8" rx="1" />
+      <rect x="14" y="11" width="6" height="6" rx="1" />
+    </svg>
+  );
+}
+
+export function BoltIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M13 2 4.5 14h5.8l-1.3 8L19.5 10h-5.8L15 2h-2Z" />
+    </svg>
+  );
+}
+
+export function VolumeBarsIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M4 20v-6M9.5 20V8M15 20v-3M20 20V4" />
+    </svg>
+  );
+}
+
+export function WaveStructureIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M2.5 17 7 7.5l4 7 3.5-11 4 9.5 3-5.5" />
+    </svg>
+  );
+}
+
+export function GridIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
+      <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.2" />
+      <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.2" />
+      <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.2" />
+    </svg>
+  );
+}
+
 // Generic label→icon lookup used for course "formats" (label text drives it).
 export function formatIcon(label: string): (props: IconProps) => JSX.Element {
   const l = label.toLowerCase();
