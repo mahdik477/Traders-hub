@@ -1,0 +1,42 @@
+{
+  "group": {
+    "slug": "foreximo-alerts",
+    "name": "Foreximo - Alerts 🚨",
+    "description": "A Telegram channel for gold and forex majors. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading styles as scalping and day trading.",
+    "markets": [
+      "gold",
+      "forex-majors"
+    ],
+    "styles": [
+      "scalping",
+      "day-trading"
+    ],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "2.4K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/foreximosignals",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 2383,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/foreximosignals",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": "scalping,day-trading",
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Foreximo - Alerts 🚨",
+    "source_urls": [
+      "https://t.me/foreximosignals"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

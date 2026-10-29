@@ -1,0 +1,43 @@
+{
+  "group": {
+    "slug": "signalprovider-free-forex-trading-signals",
+    "name": "SignalProvider (Free Forex Trading Signals)",
+    "description": "A Telegram channel for gold, forex majors, and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing gives the trading styles as day trading and swing.",
+    "markets": [
+      "gold",
+      "forex-majors",
+      "forex-minors"
+    ],
+    "styles": [
+      "day-trading",
+      "swing"
+    ],
+    "price": "free-and-vip",
+    "price_label": "Free + paid VIP",
+    "member_count": "18.1K members",
+    "member_count_as_of": "2026-10-22",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/signalsproviderfxx1",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-22",
+    "member_count_exact": 18087,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/signalsproviderfxx1",
+    "price_seen": "Free + paid VIP · price not stated",
+    "trading_style_seen": "day-trading, swing",
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "SignalProvider (Free Forex Trading Signals)",
+    "source_urls": [
+      "https://t.me/signalsproviderfxx1"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

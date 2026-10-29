@@ -1,0 +1,45 @@
+{
+  "group": {
+    "slug": "blue-world-fx-signal",
+    "name": "Blue World Fx Signal",
+    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, and indices. It was listed as a free channel. The listing gives the trading style as swing. Education is included on the listing.",
+    "markets": [
+      "gold",
+      "forex-majors",
+      "forex-minors",
+      "indices"
+    ],
+    "styles": [
+      "swing"
+    ],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "2.6K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/bwfxsignal",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 2575,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/bwfxsignal",
+    "price_seen": "Free",
+    "trading_style_seen": "swing",
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Blue World Fx Signal",
+    "source_urls": [
+      "https://t.me/bwfxsignal"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

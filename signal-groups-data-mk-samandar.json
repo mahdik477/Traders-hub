@@ -1,0 +1,38 @@
+{
+  "group": {
+    "slug": "mk-samandar",
+    "name": "MK SAMANDAR 🇺🇿💸",
+    "description": "A Telegram channel for crypto. It was listed as a free channel, and a paid tier was not stated. The listing language is Uzbek.",
+    "markets": [
+      "crypto"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "10.4K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "Uzbek",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/MKSAMANDAR_BEPULKURS",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 10421,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/MKSAMANDAR_BEPULKURS",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "Uzbek",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "MK SAMANDAR 🇺🇿💸",
+    "source_urls": [
+      "https://t.me/MKSAMANDAR_BEPULKURS"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

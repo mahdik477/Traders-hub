@@ -1,0 +1,42 @@
+{
+  "group": {
+    "slug": "forex-de-precision-stop-loss-de-2-pips-senales-ict-trading",
+    "name": "Forex de precisión - Stop loss de 2 pips señales ICT- trading",
+    "description": "A Telegram channel for forex majors, forex minors & exotics, and indices. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing gives the trading style as scalping. The listing language is Spanish.",
+    "markets": [
+      "forex-majors",
+      "forex-minors",
+      "indices"
+    ],
+    "styles": [
+      "scalping"
+    ],
+    "price": "free-and-vip",
+    "price_label": "Free + paid VIP",
+    "member_count": "1.3K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "Spanish",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/forexdeprecision",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 1290,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/forexdeprecision",
+    "price_seen": "Free + paid VIP · price not stated",
+    "trading_style_seen": "scalping",
+    "signals_per_day_seen": null,
+    "language_seen": "Spanish",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Forex de precisión - Stop loss de 2 pips señales ICT- trading",
+    "source_urls": [
+      "https://t.me/forexdeprecision"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

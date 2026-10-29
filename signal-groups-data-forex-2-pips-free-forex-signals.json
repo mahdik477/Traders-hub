@@ -1,0 +1,39 @@
+{
+  "group": {
+    "slug": "forex-2-pips-free-forex-signals",
+    "name": "Forex 2 Pips • Free Forex Signals",
+    "description": "A Telegram channel for forex majors and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "markets": [
+      "forex-majors",
+      "forex-minors"
+    ],
+    "styles": [],
+    "price": "free-and-vip",
+    "price_label": "Free + paid VIP",
+    "member_count": "8.8K members",
+    "member_count_as_of": "2026-10-27",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/freeforexpipssignals",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-27",
+    "member_count_exact": 8804,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/freeforexpipssignals",
+    "price_seen": "Free + paid VIP · price not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Forex 2 Pips • Free Forex Signals",
+    "source_urls": [
+      "https://t.me/freeforexpipssignals"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

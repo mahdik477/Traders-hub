@@ -1,0 +1,40 @@
+{
+  "group": {
+    "slug": "nite-ez-algo-bot-alerts-market-thoughts",
+    "name": "Nite ⚡️EZ ALGO ⋀⋁ Bot Alerts & Market Thoughts",
+    "description": "A Telegram channel for crypto. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
+    "markets": [
+      "crypto"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "2.4K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/cryptonite_alerts",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 2417,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/cryptonite_alerts",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Nite ⚡️EZ ALGO ⋀⋁ Bot Alerts & Market Thoughts",
+    "source_urls": [
+      "https://t.me/cryptonite_alerts"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "group": {
+    "slug": "mcx-commoditytm",
+    "name": "MCX COMMODITY™️",
+    "description": "A Telegram channel for oil and other commodities. It was listed as a free channel. Education is included on the listing. The listing language is Hindi.",
+    "markets": [
+      "oil"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "5.5K members",
+    "member_count_as_of": "2026-10-27",
+    "language": "Hindi",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/NaturalGasCrudeoil0",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-27",
+    "member_count_exact": 5509,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/NaturalGasCrudeoil0",
+    "price_seen": "Free",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "Hindi",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "MCX COMMODITY™️",
+    "source_urls": [
+      "https://t.me/NaturalGasCrudeoil0"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

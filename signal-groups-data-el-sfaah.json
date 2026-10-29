@@ -1,0 +1,40 @@
+{
+  "group": {
+    "slug": "el-sfaah",
+    "name": "EL SFAAH (فضه)",
+    "description": "A Telegram channel for oil and other commodities. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading style as scalping. The listing language is Arabic.",
+    "markets": [
+      "oil"
+    ],
+    "styles": [
+      "scalping"
+    ],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "28.4K members",
+    "member_count_as_of": "2026-10-26",
+    "language": "Arabic",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/elsafaa_1",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-26",
+    "member_count_exact": 28407,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/elsafaa_1",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": "scalping",
+    "signals_per_day_seen": null,
+    "language_seen": "Arabic",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "EL SFAAH (فضه)",
+    "source_urls": [
+      "https://t.me/elsafaa_1"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "group": {
+    "slug": "senales-de-criptomonedas-futuros",
+    "name": "Señales de Criptomonedas Futuros",
+    "description": "A Telegram channel for crypto and stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing language is Spanish.",
+    "markets": [
+      "crypto",
+      "stocks-options"
+    ],
+    "styles": [],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "23.5K members",
+    "member_count_as_of": "2026-10-22",
+    "language": "Spanish",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/criptomonedas_senales",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-22",
+    "member_count_exact": 23507,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/criptomonedas_senales",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "Spanish",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Señales de Criptomonedas Futuros",
+    "source_urls": [
+      "https://t.me/criptomonedas_senales"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

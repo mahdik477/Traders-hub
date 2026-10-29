@@ -1,0 +1,41 @@
+{
+  "group": {
+    "slug": "shree-samarth-stock-market",
+    "name": "🎯SHREE SAMARTH STOCK MARKET🎯",
+    "description": "A Telegram channel for indices and stocks & options. A free feed is listed, along with a paid premium. The price on the listing was ₹2,999 a month up to ₹5,999 lifetime. Education is included on the listing.",
+    "markets": [
+      "indices",
+      "stocks-options"
+    ],
+    "styles": [],
+    "price": "free-and-vip",
+    "price_label": "Free + paid premium · ₹2,999/mo to ₹5,999 lifetime (Oct 2026)",
+    "member_count": "19.9K members",
+    "member_count_as_of": "2026-10-27",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/samarthstockmarketo",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-27",
+    "member_count_exact": 19929,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/samarthstockmarketo",
+    "price_seen": "Free + paid premium · ₹2,999/mo to ₹5,999 lifetime",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "🎯SHREE SAMARTH STOCK MARKET🎯",
+    "source_urls": [
+      "https://t.me/samarthstockmarketo"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

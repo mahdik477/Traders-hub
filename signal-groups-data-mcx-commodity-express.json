@@ -1,0 +1,40 @@
+{
+  "group": {
+    "slug": "mcx-commodity-express",
+    "name": "MCX COMMODITY EXPRESS",
+    "description": "A Telegram channel for oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated. Education is included on the listing.",
+    "markets": [
+      "oil"
+    ],
+    "styles": [],
+    "price": "free-and-vip",
+    "price_label": "Free + paid VIP",
+    "member_count": "2.4K members",
+    "member_count_as_of": "2026-10-27",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [
+      "education"
+    ],
+    "telegram_url": "https://t.me/mcxcommodityexpress_education",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-27",
+    "member_count_exact": 2399,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/mcxcommodityexpress_education",
+    "price_seen": "Free + paid VIP · price not stated",
+    "trading_style_seen": null,
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "MCX COMMODITY EXPRESS",
+    "source_urls": [
+      "https://t.me/mcxcommodityexpress_education"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

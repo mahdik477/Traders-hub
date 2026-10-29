@@ -1,0 +1,43 @@
+{
+  "group": {
+    "slug": "nas100us30snipershq",
+    "name": "NAS100 - US30 Snipers",
+    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, and indices. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading style as scalping.",
+    "markets": [
+      "gold",
+      "forex-majors",
+      "forex-minors",
+      "indices"
+    ],
+    "styles": [
+      "scalping"
+    ],
+    "price": "free",
+    "price_label": "Free",
+    "member_count": "8.6K members",
+    "member_count_as_of": "2026-10-27",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/nas100us30snipershq",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-27",
+    "member_count_exact": 8563,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/nas100us30snipershq",
+    "price_seen": "Free channel · paid tiers not stated",
+    "trading_style_seen": "scalping",
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "NAS100 - US30 Snipers",
+    "source_urls": [
+      "https://t.me/nas100us30snipershq"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}

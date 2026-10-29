@@ -1,0 +1,40 @@
+{
+  "group": {
+    "slug": "satoshi-zero",
+    "name": "Satoshi Zero",
+    "description": "A Telegram channel for crypto. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing gives the trading style as scalping.",
+    "markets": [
+      "crypto"
+    ],
+    "styles": [
+      "scalping"
+    ],
+    "price": "free-and-vip",
+    "price_label": "Free + paid VIP",
+    "member_count": "2.0K members",
+    "member_count_as_of": "2026-10-22",
+    "language": "English",
+    "signals_per_day": null,
+    "extras": [],
+    "telegram_url": "https://t.me/satoshizerox",
+    "logo": null,
+    "rank": 100
+  },
+  "_notes": {
+    "last_verified": "2026-10-22",
+    "member_count_exact": 1992,
+    "member_count_type": "subscribers",
+    "member_count_source": "https://t.me/satoshizerox",
+    "price_seen": "Free + paid VIP · price not stated",
+    "trading_style_seen": "scalping",
+    "signals_per_day_seen": null,
+    "language_seen": "English",
+    "last_public_post_utc": null,
+    "market_evidence": "Markets recorded on the verified research sheet for this Telegram channel.",
+    "telegram_title_seen": "Satoshi Zero",
+    "source_urls": [
+      "https://t.me/satoshizerox"
+    ],
+    "research_notes": "Added from the verified Telegram research sheet. The public description was written from the recorded markets, price, style and extras."
+  }
+}
