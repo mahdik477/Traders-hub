@@ -56,10 +56,34 @@ export function filtersToQuery(f: Filters): string {
   return qs ? `?${qs}` : "";
 }
 
+// A stale or hand-edited address — an old bookmark, a shared link from
+// before a category was renamed, a typo — could otherwise hold a value
+// that matches nothing, silently showing an empty page with no obvious way
+// out. Anything that isn't a real option for that filter is dropped back to
+// "no filter" instead.
+const VALID_VALUES: Record<string, readonly string[]> = {
+  tier: ["free", "intermediate", "advanced"],
+  difficulty: ["beginner", "intermediate", "advanced"],
+  category: [
+    "trend_following",
+    "mean_reversion",
+    "breakout",
+    "price_action",
+    "momentum",
+    "volume_order_flow",
+    "market_structure",
+    "quantitative",
+  ],
+  market: ["forex", "stocks", "crypto", "futures", "commodities", "etfs"],
+  controversial: ["hide"],
+};
+
 export function filtersFromQuery(params: { get(name: string): string | null }): Filters {
   const f = { ...EMPTY_FILTERS };
   for (const key of Object.keys(QUERY_KEYS) as (keyof Filters)[]) {
-    f[key] = params.get(QUERY_KEYS[key]) ?? "";
+    const raw = params.get(QUERY_KEYS[key]) ?? "";
+    const valid = VALID_VALUES[key];
+    f[key] = valid && raw && !valid.includes(raw) ? "" : raw;
   }
   return f;
 }

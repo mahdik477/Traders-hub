@@ -122,10 +122,25 @@ export function filtersToQuery(f: Filters): string {
   return qs ? `?${qs}` : "";
 }
 
+// A stale or hand-edited address — an old bookmark, a shared link — could
+// otherwise hold a value that matches nothing, silently showing an empty
+// page with no obvious way out. Anything that isn't a real option for that
+// filter is dropped back to "no filter" instead. maxPrice is deliberately
+// not validated here — matchesFilters already treats a non-numeric value
+// as "no filter" via Number.isNaN.
+const VALID_VALUES: Record<string, readonly string[]> = {
+  market: ["forex", "futures", "options", "stocks", "crypto", "commodities"],
+  minRating: ["3", "3.5", "4", "4.5"],
+  live: ["yes"],
+  free: ["yes"],
+};
+
 export function filtersFromQuery(params: { get(name: string): string | null }): Filters {
   const f = { ...EMPTY_FILTERS };
   for (const key of Object.keys(QUERY_KEYS) as (keyof Filters)[]) {
-    f[key] = params.get(QUERY_KEYS[key]) ?? "";
+    const raw = params.get(QUERY_KEYS[key]) ?? "";
+    const valid = VALID_VALUES[key];
+    f[key] = valid && raw && !valid.includes(raw) ? "" : raw;
   }
   return f;
 }
