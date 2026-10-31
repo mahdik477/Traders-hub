@@ -18,6 +18,8 @@ import {
 } from "@/lib/course-filters";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
+import ScrollReveal from "@/components/ScrollReveal";
+import { SearchIcon } from "@/components/icons";
 
 type Entry = {
   id: string;
@@ -153,10 +155,22 @@ function Directory({
 
   return (
     <div className={compareIds.length > 0 ? "pb-20" : ""}>
+      <label className="flex min-h-12 items-center gap-2.5 rounded-xl border border-border bg-surface px-3.5">
+        <SearchIcon className="size-4.5 shrink-0 text-subtle" />
+        <span className="sr-only">Search courses by name</span>
+        <input
+          type="search"
+          value={filters.search}
+          onChange={(e) => updateFilters({ search: e.target.value })}
+          placeholder="Search by name — e.g. “ICT” or “price action”"
+          className="min-w-0 flex-1 bg-transparent py-3 text-base text-foreground outline-none placeholder:text-subtle"
+        />
+      </label>
+
       {/* Filter bar */}
       <form
         aria-label="Filter courses"
-        className="grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-5"
+        className="mt-3 grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-5"
         onSubmit={(e) => e.preventDefault()}
       >
         <Select
@@ -236,6 +250,7 @@ function Directory({
           No courses match these filters.
         </p>
       ) : (
+        <ScrollReveal>
         <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {matching.map((entry) => (
             <li
@@ -331,6 +346,7 @@ function Directory({
             </li>
           ))}
         </ul>
+        </ScrollReveal>
       )}
 
       {compareIds.length > 0 && (
@@ -390,6 +406,7 @@ function Directory({
 
 function activeFilterChips(f: Filters): { key: keyof Filters; label: string }[] {
   const chips: { key: keyof Filters; label: string }[] = [];
+  if (f.search) chips.push({ key: "search", label: `“${f.search}”` });
   if (f.market) chips.push({ key: "market", label: MARKET_LABELS[f.market as keyof typeof MARKET_LABELS] ?? f.market });
   if (f.maxPrice) chips.push({ key: "maxPrice", label: `Max $${f.maxPrice}` });
   if (f.minRating) chips.push({ key: "minRating", label: `${f.minRating}+ stars` });

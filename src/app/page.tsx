@@ -4,15 +4,33 @@ import Link from "next/link";
 import { SITE_NAME, sections } from "@/lib/sections";
 import { propFirms } from "@/lib/propfirms";
 import { courses } from "@/lib/courses";
+import { providers } from "@/lib/providers";
 import { brokers } from "@/lib/brokers";
 import { tools } from "@/lib/tools";
 import { toolPriceLabel } from "@/lib/tool-types";
+import { signalGroups } from "@/lib/signal-groups";
 import { strategies, strategiesInDisplayOrder } from "@/lib/strategies";
 import { STRATEGY_TIER_LABELS, STRATEGY_CATEGORY_LABELS } from "@/lib/strategy-types";
 import { allAccounts } from "@/lib/propfirm-filters";
 import { BROKER_MARKET_LABELS } from "@/lib/broker-types";
 import FirmBadge from "@/components/FirmBadge";
-import { LinkIcon, ShieldIcon, TagIcon, UsersIcon } from "@/components/icons";
+import MovingAverageSimulator from "@/components/MovingAverageSimulator";
+import ScrollReveal from "@/components/ScrollReveal";
+import CountUpStat from "@/components/CountUpStat";
+import FaqAccordion from "@/components/FaqAccordion";
+import {
+  BuildingIcon,
+  BookIcon,
+  SignalIcon,
+  MonitorIcon,
+  WaveStructureIcon,
+  ShieldIcon,
+  UsersIcon,
+  TagIcon,
+  LinkIcon,
+  CheckIcon,
+  PlayIcon,
+} from "@/components/icons";
 
 function money(n: number, currency: string) {
   return new Intl.NumberFormat("en-US", {
@@ -23,12 +41,11 @@ function money(n: number, currency: string) {
   }).format(n);
 }
 
-/** One row of the snapshot list on a showcase row's "examples" side — a
- *  logo (or lettermark), a name, and up to two short facts. Shared shape
- *  across all five sections below so the eye reads them the same way even
- *  though the underlying data is different for each. */
+/** One row of a section card's snapshot list — a logo (or lettermark), a
+ *  name, and up to two short facts. Shared shape so the eye reads every
+ *  card's preview the same way even though the underlying data differs. */
 type SnapshotItem = {
-  href: string;
+  href: string | null;
   name: string;
   logo: string | null;
   logoBg: "white" | "dark";
@@ -103,6 +120,20 @@ function toolsSnapshot(): SnapshotItem[] {
   }));
 }
 
+function signalGroupsSnapshot(): SnapshotItem[] {
+  // No individual detail pages for these yet — Join goes straight to
+  // Telegram from the directory — so these rows are a preview only, not a
+  // link each; the card's one CTA button is what actually goes anywhere.
+  return signalGroups.slice(0, 3).map((g) => ({
+    href: null,
+    name: g.name,
+    logo: null,
+    logoBg: "white" as const,
+    primary: g.priceLabel,
+    secondary: g.memberCount,
+  }));
+}
+
 function strategiesSnapshot() {
   return strategiesInDisplayOrder.slice(0, 3).map((s) => ({
     href: `/strategies/${s.slug}`,
@@ -112,22 +143,59 @@ function strategiesSnapshot() {
   }));
 }
 
-const TRUST_POINTS = [
+// One entry per live section on the homepage's "Explore everything" grid —
+// icon, a couple of plain-English sentences, and a data-driven snapshot.
+// Order matches the header nav / sections.ts.
+const EXPLORE_META: Record<
+  string,
+  { icon: (p: { className?: string }) => ReactNode; blurb: string }
+> = {
+  "funded-accounts": {
+    icon: ShieldIcon,
+    blurb: "Evaluation fees, account sizes, drawdown rules and profit splits — pulled from each firm's own pricing page, not a sales call.",
+  },
+  courses: {
+    icon: BookIcon,
+    blurb: "What each course actually covers, how it's delivered, and independent Trustpilot ratings alongside the price.",
+  },
+  "signal-groups": {
+    icon: SignalIcon,
+    blurb: "Telegram groups filtered by market and style. No guaranteed-return pitches get listed — a free tier or trial is required.",
+  },
+  brokers: {
+    icon: BuildingIcon,
+    blurb: "Retail brokers for trading your own money — regulation, minimum deposits and supported platforms, side by side.",
+  },
+  tools: {
+    icon: MonitorIcon,
+    blurb: "Charting, scanners, automation and VPS hosting, with prices confirmed from each tool's own site wherever we could.",
+  },
+  strategies: {
+    icon: WaveStructureIcon,
+    blurb: "58 strategies explained in plain English — each with a live chart you can play with and a quiz to test what stuck.",
+  },
+};
+
+const WHY_POINTS = [
   {
     icon: ShieldIcon,
-    text: "We're a directory, not a verifier — we never score anyone's performance or win rate.",
+    title: "We don't score anyone",
+    text: "No performance ratings, no win-rate claims, no \"best firm\" rankings. We show what each provider actually publishes and let you judge it.",
   },
   {
     icon: UsersIcon,
-    text: "Not a broker, not a signal provider, not a financial adviser. Nothing here is advice.",
+    title: "Not advice, not a broker",
+    text: "We're not a broker, a signal provider or a financial adviser. Nothing on this site tells you what to trade — it's here so you can decide for yourself.",
   },
   {
     icon: TagIcon,
-    text: "Sponsored listings are always labelled “Sponsored” — in our own words, not copied pitches.",
+    title: "Sponsored is always labelled",
+    text: "If a placement is sponsored, it says so — visibly, every time. Written in our own words, never a copied pitch.",
   },
   {
     icon: LinkIcon,
-    text: "We earn through affiliate commissions and clearly disclosed sponsored placements.",
+    title: "How we actually make money",
+    text: "Mainly affiliate commissions when you sign up through our links, plus clearly labelled sponsored spots. It costs you nothing extra.",
   },
 ];
 
@@ -138,252 +206,315 @@ const FAQ = [
   },
   {
     q: "Do you verify trading performance or win rates?",
-    a: "No. We list what each provider publishes — pricing, rules, terms — and we never display or imply a performance, accuracy or win-rate score for any firm, course, strategy or signal group. “Discovery, not verification” is the whole model.",
+    a: "No. We list what each provider publishes — pricing, rules, terms — and we never display or imply a performance, accuracy or win-rate score for any firm, course, strategy or signal group.",
   },
   {
     q: "Is anything on this site financial advice?",
-    a: "No. We're a comparison and discovery platform for informational purposes only. Nothing here is a recommendation to use any specific firm, course or strategy — see the full disclaimer for the details.",
+    a: "No. We're a discovery platform for informational purposes only. Nothing here is a recommendation to use any specific firm, course or strategy — see the full disclaimer for the details.",
   },
   {
-    q: "Why do some firms or courses show an “Our choice” badge?",
-    a: "It means we have a real, tracked affiliate relationship with them — not a performance ranking. It's there so you know exactly where our incentive sits, not to imply they're objectively “best.”",
+    q: "Why do some firms or courses show an \"Our choice\" badge?",
+    a: "It means we have a real, tracked affiliate relationship with them — not a performance ranking. It's there so you know exactly where our incentive sits, not to imply they're objectively \"best.\"",
+  },
+  {
+    q: "Can I actually practice a strategy here, or is it just descriptions?",
+    a: "Both. Every strategy page has a live, click-to-test simulator built from made-up (clearly labelled synthetic) price data, plus a short quiz — so you can see a setup happen and then prove to yourself you'd actually spot it.",
   },
 ];
 
+const TOTAL_LISTINGS =
+  propFirms.length + courses.length + providers.length + brokers.length + tools.length + strategies.length + signalGroups.length;
+
 export default function Home() {
   const liveSections = sections.filter((s) => s.status === "live");
-  const upcomingSections = sections.filter((s) => s.status !== "live");
   const featuredStrategyImage = strategies.find((s) => s.slug === "moving-average-crossover")?.image ?? null;
+
+  const sectionCounts: Record<string, number> = {
+    "funded-accounts": propFirms.length,
+    courses: courses.length + providers.length,
+    "signal-groups": signalGroups.length,
+    brokers: brokers.length,
+    tools: tools.length,
+    strategies: strategies.length,
+  };
+
+  const sectionSnapshots: Record<string, ReactNode> = {
+    "funded-accounts": <SnapshotList items={fundedAccountsSnapshot()} />,
+    courses: <SnapshotList items={coursesSnapshot()} />,
+    "signal-groups": <SnapshotList items={signalGroupsSnapshot()} />,
+    brokers: <SnapshotList items={brokersSnapshot()} />,
+    tools: <SnapshotList items={toolsSnapshot()} />,
+    strategies: <StrategySnapshotList items={strategiesSnapshot()} />,
+  };
 
   return (
     <>
-      {/* Hero — one confident statement, real numbers woven into the copy
-          rather than parked in a separate stat row, one clear way in. */}
-      <section className="hero-intro pb-12 pt-4 sm:pb-16 sm:pt-8">
-        <p className="eyebrow">{SITE_NAME} — discovery, not verification</p>
-        <h1 className="page-title mt-3 max-w-3xl text-[2.75rem] leading-[1.05] sm:text-6xl lg:text-7xl">
-          Compare trading products side by side.{" "}
-          <span className="text-accent">Honestly.</span>
+      {/* ---------------------------------------------------------------- */}
+      {/* Hero                                                              */}
+      {/* ---------------------------------------------------------------- */}
+      <section className="hero-intro relative overflow-hidden pb-10 pt-6 sm:pb-14 sm:pt-10">
+        <HeroChartDecoration />
+
+        <p className="eyebrow">Built for traders who are just starting out</p>
+        <h1 className="page-title mt-3 max-w-3xl text-[2.6rem] leading-[1.08] sm:text-6xl lg:text-[4.5rem]">
+          Trading has a lot of moving parts.{" "}
+          <span className="text-accent">We put them in one place.</span>
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-          <span className="figure text-foreground">{propFirms.length}</span> prop firms,{" "}
-          <span className="figure text-foreground">{courses.length}</span> courses,{" "}
-          <span className="figure text-foreground">{strategies.length}</span> strategies,{" "}
-          <span className="figure text-foreground">{brokers.length}</span> brokers and{" "}
-          <span className="figure text-foreground">{tools.length}</span> tools, with real pricing
-          pulled straight from each provider&apos;s own pages — so you see the facts and decide
-          for yourself, instead of trusting one provider&apos;s own pitch.
+          Prop firms, courses, signal groups, brokers, tools and strategies — real pricing and
+          real rules pulled straight from each provider, plus live strategy simulators you can
+          actually practice on. No performance scores, no sales pitches.
         </p>
+
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link href="/funded-accounts" className="btn btn-primary">
-            Start comparing
+            Start exploring
           </Link>
-          <div className="flex flex-wrap gap-2">
-            {liveSections.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/${s.slug}`}
-                className="pill transition-colors hover:border-accent/50 hover:text-foreground"
-              >
-                {s.title}
-              </Link>
-            ))}
-          </div>
+          <a href="#explore" className="btn btn-outline">
+            See everything we offer
+          </a>
         </div>
-      </section>
 
-      {/* Trust strip — a thin banner, not a boxed card, so it reads like a
-          masthead statement rather than another panel in a stack of panels. */}
-      <section aria-labelledby="what-we-are" className="border-y border-border py-7">
-        <h2 id="what-we-are" className="sr-only">
-          Discovery, not verification
-        </h2>
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {TRUST_POINTS.map(({ icon: Icon, text }) => (
-            <li key={text} className="flex items-start gap-3">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
-                <Icon className="size-4" />
-              </span>
-              <span className="meta leading-relaxed">{text}</span>
-            </li>
-          ))}
+        {/* Quick-access tiles — also the "what's actually in here" answer,
+            right up top instead of buried further down the page. */}
+        <ul className="mt-9 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+          {liveSections.map((s) => {
+            const meta = EXPLORE_META[s.slug];
+            const Icon = meta?.icon ?? WaveStructureIcon;
+            return (
+              <li key={s.slug}>
+                <Link
+                  href={`/${s.slug}`}
+                  className="hero-tile group flex h-full flex-col gap-2 rounded-xl border border-border bg-surface p-3.5 transition-colors hover:border-accent/50 hover:bg-surface-2"
+                >
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent transition-transform group-hover:scale-105">
+                    <Icon className="size-4.5" />
+                  </span>
+                  <span className="text-sm font-semibold leading-tight text-foreground">{s.title}</span>
+                  <span className="meta">{sectionCounts[s.slug] ?? 0} listed</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
-      {/* Editorial section list — numbered like a contents page, full-width,
-          alternating sides, real data throughout. Replaces the card grid. */}
-      <section aria-labelledby="sections-heading" className="py-2">
-        <h2 id="sections-heading" className="sr-only">
-          What you&apos;ll find here
-        </h2>
+      {/* ---------------------------------------------------------------- */}
+      {/* Big combined number — one confident stat, not a repeat of the    */}
+      {/* per-section counts above.                                        */}
+      {/* ---------------------------------------------------------------- */}
+      <ScrollReveal>
+        <section aria-labelledby="scale-heading" className="border-y border-border py-10 text-center">
+          <h2 id="scale-heading" className="sr-only">
+            Everything in one place
+          </h2>
+          <p className="figure-lg text-5xl text-accent sm:text-6xl">
+            <CountUpStat value={TOTAL_LISTINGS} suffix="+" />
+          </p>
+          <p className="mt-2 text-base text-muted">
+            real listings across every section below — not one of them scored, ranked by
+            performance, or written as a sales pitch.
+          </p>
+        </section>
+      </ScrollReveal>
 
-        <div className="flex flex-col divide-y divide-border">
-          <SectionShowcase
-            index={1}
-            section={liveSections.find((s) => s.slug === "funded-accounts")}
-            totalCount={propFirms.length}
-            reverse={false}
-          >
-            <SnapshotList items={fundedAccountsSnapshot()} />
-          </SectionShowcase>
-
-          <SectionShowcase
-            index={2}
-            section={liveSections.find((s) => s.slug === "courses")}
-            totalCount={courses.length}
-            reverse={true}
-          >
-            <SnapshotList items={coursesSnapshot()} />
-          </SectionShowcase>
-
-          <SectionShowcase
-            index={3}
-            section={liveSections.find((s) => s.slug === "brokers")}
-            totalCount={brokers.length}
-            reverse={false}
-          >
-            <SnapshotList items={brokersSnapshot()} />
-          </SectionShowcase>
-
-          <SectionShowcase
-            index={4}
-            section={liveSections.find((s) => s.slug === "tools")}
-            totalCount={tools.length}
-            reverse={true}
-          >
-            <SnapshotList items={toolsSnapshot()} />
-          </SectionShowcase>
-
-          <SectionShowcase
-            index={5}
-            section={liveSections.find((s) => s.slug === "strategies")}
-            totalCount={strategiesInDisplayOrder.length}
-            reverse={false}
-          >
-            <div className="grid gap-5 sm:grid-cols-2">
-              {featuredStrategyImage && (
-                <Link
-                  href="/strategies/moving-average-crossover"
-                  className="lift-card hidden overflow-hidden rounded-xl border border-border bg-surface sm:block"
-                >
-                  <Image
-                    src={featuredStrategyImage.src}
-                    alt={featuredStrategyImage.caption}
-                    width={600}
-                    height={338}
-                    className="aspect-video w-full object-cover"
-                  />
-                  <span className="meta block px-3 py-2">Moving Average Crossover</span>
-                </Link>
-              )}
-              <StrategySnapshotList items={strategiesSnapshot()} />
+      {/* ---------------------------------------------------------------- */}
+      {/* See it in action — an actual live simulator, not another         */}
+      {/* screenshot or paragraph describing one.                          */}
+      {/* ---------------------------------------------------------------- */}
+      <ScrollReveal>
+        <section aria-labelledby="demo-heading" className="py-14">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow">Not just a list — try it yourself</p>
+              <h2 id="demo-heading" className="section-title mt-2 text-3xl sm:text-4xl">
+                This is a real, live strategy simulator
+              </h2>
+              <p className="mt-2 max-w-xl text-muted">
+                Every one of our 58 strategies has one of these built in. Drag the sliders,
+                shuffle the chart, and watch the signals happen in front of you — made-up price
+                data, real mechanics.
+              </p>
             </div>
-          </SectionShowcase>
-        </div>
+            <Link href="/strategies" className="btn btn-outline shrink-0">
+              Browse all 58 strategies
+            </Link>
+          </div>
+          <div className="mt-6">
+            <MovingAverageSimulator />
+          </div>
+        </section>
+      </ScrollReveal>
 
-        {upcomingSections.length > 0 && (
-          <ul className="mt-2 flex flex-wrap gap-3 border-t border-border pt-8">
-            {upcomingSections.map((section) => (
-              <li key={section.slug}>
-                <Link
-                  href={`/${section.slug}`}
-                  className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-border-strong hover:text-foreground"
-                >
-                  <span className="pill">
-                    {section.status === "next-up" ? "Next up" : "Coming soon"}
-                  </span>
-                  {section.title}
-                </Link>
+      {/* ---------------------------------------------------------------- */}
+      {/* Explore everything — the full 6-up grid, each card data-driven.  */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="explore" aria-labelledby="explore-heading" className="scroll-mt-20 border-t border-border py-14">
+        <h2 id="explore-heading" className="section-title text-3xl sm:text-4xl">
+          Everything we offer
+        </h2>
+        <p className="mt-2 max-w-xl text-muted">One site, six ways to get your bearings — pick wherever you want to start.</p>
+
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {liveSections.map((s, i) => {
+            const meta = EXPLORE_META[s.slug];
+            const Icon = meta?.icon ?? WaveStructureIcon;
+            const isStrategies = s.slug === "strategies";
+            return (
+              <ScrollReveal key={s.slug} delay={(i % 3) * 60}>
+                <div className="lift-card group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface">
+                  <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+                        <Icon className="size-5.5" />
+                      </span>
+                      <span className="pill shrink-0">{sectionCounts[s.slug] ?? 0} listed</span>
+                    </div>
+                    <h3 className="mt-3 text-xl font-bold">
+                      <Link href={`/${s.slug}`} className="hover:text-accent">
+                        {s.title}
+                      </Link>
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted">{meta?.blurb ?? s.summary}</p>
+
+                    {isStrategies && featuredStrategyImage && (
+                      <Link
+                        href="/strategies/moving-average-crossover"
+                        className="mt-4 block overflow-hidden rounded-lg border border-border"
+                      >
+                        <Image
+                          src={featuredStrategyImage.src}
+                          alt={featuredStrategyImage.caption}
+                          width={600}
+                          height={338}
+                          className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                        />
+                      </Link>
+                    )}
+
+                    <div className="mt-4 flex-1">{sectionSnapshots[s.slug]}</div>
+
+                    <Link href={`/${s.slug}`} className="btn btn-outline mt-5 w-full">
+                      Browse {s.title.toLowerCase()}
+                    </Link>
+                  </div>
+                </div>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Why Tradox — the trust facts, presented as a real section        */}
+      {/* instead of a thin strip of text.                                  */}
+      {/* ---------------------------------------------------------------- */}
+      <ScrollReveal>
+        <section aria-labelledby="why-heading" className="border-t border-border py-14">
+          <h2 id="why-heading" className="section-title text-3xl sm:text-4xl">
+            Why Tradox
+          </h2>
+          <p className="mt-2 max-w-xl text-muted">The short version of how this site works and why we built it this way.</p>
+
+          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {WHY_POINTS.map(({ icon: Icon, title, text }) => (
+              <li
+                key={title}
+                className="flex gap-4 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-accent/40"
+              >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
+                  <Icon className="size-5" />
+                </span>
+                <div>
+                  <p className="font-semibold text-foreground">{title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted">{text}</p>
+                </div>
               </li>
             ))}
           </ul>
-        )}
-      </section>
+        </section>
+      </ScrollReveal>
 
-      {/* FAQ — answers the questions a first-time visitor actually has,
-          grounded in the same facts as the disclaimer, not sales copy. */}
-      <section aria-labelledby="faq-heading" className="mt-6 border-t border-border py-14">
-        <h2 id="faq-heading" className="section-title">
-          Questions people actually ask
-        </h2>
-        <dl className="mt-6 grid gap-x-10 gap-y-8 lg:grid-cols-2">
-          {FAQ.map(({ q, a }) => (
-            <div key={q}>
-              <dt className="text-base font-semibold">{q}</dt>
-              <dd className="mt-2 leading-relaxed text-muted">{a}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="meta mt-8">
-          More detail on all of this in the{" "}
-          <Link href="/disclaimer" className="text-accent hover:underline">
-            full disclaimer
-          </Link>{" "}
-          and{" "}
-          <Link href="/privacy" className="text-accent hover:underline">
-            privacy policy
+      {/* ---------------------------------------------------------------- */}
+      {/* FAQ — now an accordion instead of a flat wall of Q&As.            */}
+      {/* ---------------------------------------------------------------- */}
+      <ScrollReveal>
+        <section aria-labelledby="faq-heading" className="border-t border-border py-14">
+          <h2 id="faq-heading" className="section-title text-3xl sm:text-4xl">
+            Questions people actually ask
+          </h2>
+          <div className="mt-6 max-w-2xl">
+            <FaqAccordion items={FAQ} />
+          </div>
+          <p className="meta mt-6">
+            More detail in the{" "}
+            <Link href="/disclaimer" className="text-accent hover:underline">
+              full disclaimer
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="text-accent hover:underline">
+              privacy policy
+            </Link>
+            .
+          </p>
+        </section>
+      </ScrollReveal>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Closing CTA band                                                  */}
+      {/* ---------------------------------------------------------------- */}
+      <ScrollReveal>
+        <section className="relative overflow-hidden rounded-2xl border border-accent/30 bg-surface p-8 text-center shadow-glow sm:p-12">
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-gold-fill/15 via-transparent to-transparent"
+          />
+          <PlayIcon className="mx-auto size-9 text-accent" />
+          <h2 className="section-title mt-4 text-2xl sm:text-3xl">Not sure where to start?</h2>
+          <p className="mx-auto mt-2 max-w-md text-muted">
+            Try a free strategy first — it&apos;s the fastest way to see what {SITE_NAME} actually
+            is before you dig into firms, courses or anything else.
+          </p>
+          <Link href="/strategies" className="btn btn-primary mt-6 inline-flex">
+            <CheckIcon className="size-4" />
+            Start with a free strategy
           </Link>
-          .
-        </p>
-      </section>
+        </section>
+      </ScrollReveal>
     </>
   );
 }
 
-// A full-width row: a faint running number, the section's name and summary
-// on one side, a real snapshot of its listings on the other. Alternates
-// which side the text sits on so a long stack of these doesn't read as one
-// repeating template.
-function SectionShowcase({
-  index,
-  section,
-  totalCount,
-  reverse,
-  children,
-}: {
-  index: number;
-  section: { slug: string; title: string; summary: string } | undefined;
-  totalCount: number;
-  reverse: boolean;
-  children: ReactNode;
-}) {
-  if (!section) return null;
+// A faint, decorative "price chart" line behind the hero headline — purely
+// visual, aria-hidden, never presented as real market data (see the
+// synthetic-chart convention used everywhere else on the site).
+function HeroChartDecoration() {
   return (
-    <div className="grid gap-6 py-12 first:pt-0 last:pb-0 lg:grid-cols-[auto_1fr_1fr] lg:items-center lg:gap-10">
-      <span
-        aria-hidden="true"
-        className="hidden text-6xl font-bold text-border-strong lg:block"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        {String(index).padStart(2, "0")}
-      </span>
-      <div className={reverse ? "lg:order-3" : undefined}>
-        <span className="eyebrow lg:hidden">{String(index).padStart(2, "0")} — {totalCount} listed</span>
-        <span className="eyebrow hidden lg:inline">{totalCount} listed</span>
-        <h3 className="mt-2 text-2xl font-semibold sm:text-3xl">
-          <Link href={`/${section.slug}`} className="hover:text-accent">
-            {section.title}
-          </Link>
-        </h3>
-        <p className="mt-2 max-w-md text-muted">{section.summary}</p>
-        <Link href={`/${section.slug}`} className="btn btn-outline mt-5">
-          Browse {section.title.toLowerCase()}
-        </Link>
-      </div>
-      <div className={reverse ? "lg:order-2" : undefined}>{children}</div>
-    </div>
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 800 260"
+      preserveAspectRatio="none"
+      className="hero-chart-deco pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full opacity-[0.07]"
+    >
+      <path
+        d="M0 190 L60 170 L110 200 L170 120 L230 150 L290 70 L350 110 L410 40 L470 90 L540 30 L600 75 L660 20 L720 60 L800 10"
+        fill="none"
+        stroke="var(--color-gold-bright)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
 function SnapshotList({ items }: { items: SnapshotItem[] }) {
   return (
     <ul className="divide-y divide-border rounded-xl border border-border">
-      {items.map((item) => (
-        <li key={item.href}>
-          <Link
-            href={item.href}
-            className="flex items-center gap-3 p-3.5 transition-colors hover:bg-surface-2"
-          >
+      {items.map((item) => {
+        const row = (
+          <>
             <FirmBadge name={item.name} logo={item.logo} logoBg={item.logoBg} />
             <span className="min-w-0 flex-1 truncate font-semibold">{item.name}</span>
             {(item.primary || item.secondary) && (
@@ -392,9 +523,20 @@ function SnapshotList({ items }: { items: SnapshotItem[] }) {
                 {item.secondary && <span className="meta block">{item.secondary}</span>}
               </span>
             )}
-          </Link>
-        </li>
-      ))}
+          </>
+        );
+        return (
+          <li key={item.name}>
+            {item.href ? (
+              <Link href={item.href} className="flex items-center gap-3 p-3 transition-colors hover:bg-surface-2">
+                {row}
+              </Link>
+            ) : (
+              <div className="flex items-center gap-3 p-3">{row}</div>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -410,10 +552,7 @@ function StrategySnapshotList({
     <ul className="divide-y divide-border rounded-xl border border-border">
       {items.map((item) => (
         <li key={item.href}>
-          <Link
-            href={item.href}
-            className="flex items-center gap-3 p-3.5 transition-colors hover:bg-surface-2"
-          >
+          <Link href={item.href} className="flex items-center gap-3 p-3 transition-colors hover:bg-surface-2">
             <span className="flex-1">
               <span className="block font-semibold">{item.name}</span>
               <span className="meta mt-0.5 block">{item.category}</span>
