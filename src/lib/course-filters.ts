@@ -7,6 +7,7 @@ import type { CourseMarket, CourseView, TrustpilotRating } from "./course-types"
 import type { ProviderView } from "./provider-types";
 
 export type Filters = {
+  search: string;
   market: string;
   maxPrice: string;
   minRating: string;
@@ -15,6 +16,7 @@ export type Filters = {
 };
 
 export const EMPTY_FILTERS: Filters = {
+  search: "",
   market: "",
   maxPrice: "",
   minRating: "",
@@ -27,6 +29,7 @@ export const EMPTY_FILTERS: Filters = {
 // courses would).
 export type Listing = {
   id: string;
+  name: string;
   markets: CourseMarket[];
   /** The cheapest tier's price, as a plain currency-agnostic number (see
    *  parsePrice) — an approximation used only for filtering/sorting, never
@@ -63,6 +66,7 @@ export function listingFromCourse(c: CourseView): Listing {
   const prices = c.pricing.map((p) => parsePrice(p.price)).filter((n): n is number => n != null);
   return {
     id: c.id,
+    name: c.name,
     markets: c.markets,
     startingPrice: prices.length ? Math.min(...prices) : null,
     hasFreeTier: prices.includes(0),
@@ -77,6 +81,7 @@ export function listingFromProvider(p: ProviderView): Listing {
     .filter((n): n is number => n != null);
   return {
     id: p.id,
+    name: p.name,
     markets: [...new Set(p.courses.flatMap((c) => c.markets))],
     startingPrice: prices.length ? Math.min(...prices) : null,
     hasFreeTier: prices.includes(0),
@@ -88,6 +93,7 @@ export function listingFromProvider(p: ProviderView): Listing {
 export function matchesFilters(l: Listing, f: Filters): boolean {
   const maxPrice = f.maxPrice === "" ? NaN : Number(f.maxPrice);
   return (
+    (!f.search || l.name.toLowerCase().includes(f.search.trim().toLowerCase())) &&
     (!f.market || l.markets.includes(f.market as CourseMarket)) &&
     (Number.isNaN(maxPrice) || (l.startingPrice != null && l.startingPrice <= maxPrice)) &&
     (!f.minRating || (l.bestRating != null && l.bestRating >= Number(f.minRating))) &&
@@ -99,6 +105,7 @@ export function matchesFilters(l: Listing, f: Filters): boolean {
 // ---- Filters in the web address ---------------------------------------------
 
 const QUERY_KEYS: Record<keyof Filters, string> = {
+  search: "q",
   market: "market",
   maxPrice: "max",
   minRating: "rating",
