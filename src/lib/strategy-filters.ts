@@ -8,6 +8,7 @@
 import type { StrategyCategory, StrategyDifficulty, StrategyMarket, StrategyPricingTier, StrategyView } from "./strategy-types";
 
 export type Filters = {
+  search: string;
   tier: string;
   market: string;
   difficulty: string;
@@ -16,6 +17,7 @@ export type Filters = {
 };
 
 export const EMPTY_FILTERS: Filters = {
+  search: "",
   tier: "",
   market: "",
   difficulty: "",
@@ -25,6 +27,7 @@ export const EMPTY_FILTERS: Filters = {
 
 export function matchesFilters(s: StrategyView, f: Filters): boolean {
   return (
+    (!f.search || s.name.toLowerCase().includes(f.search.trim().toLowerCase())) &&
     (!f.tier || s.tier === (f.tier as StrategyPricingTier)) &&
     (!f.market || s.markets.includes(f.market as StrategyMarket)) &&
     (!f.difficulty || s.difficulty === (f.difficulty as StrategyDifficulty)) &&
@@ -36,6 +39,7 @@ export function matchesFilters(s: StrategyView, f: Filters): boolean {
 // ---- Filters in the web address ---------------------------------------------
 
 const QUERY_KEYS: Record<keyof Filters, string> = {
+  search: "q",
   tier: "tier",
   market: "market",
   difficulty: "level",

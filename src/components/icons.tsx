@@ -244,6 +244,15 @@ export function BuildingIcon({ className = base }: IconProps) {
   );
 }
 
+export function SearchIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m20 20-4.8-4.8" />
+    </svg>
+  );
+}
+
 // Generic label→icon lookup used for course "formats" (label text drives it).
 export function formatIcon(label: string): (props: IconProps) => JSX.Element {
   const l = label.toLowerCase();
