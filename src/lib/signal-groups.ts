@@ -18,6 +18,7 @@ import {
 } from "./signal-group-types";
 
 type RawFile = {
+  _notes?: { last_verified?: string | null };
   group: {
     slug: string;
     name: string;
@@ -39,12 +40,13 @@ type RawFile = {
 
 const DATA_FILE_PATTERN = /^signal-groups-data-.+\.json$/i;
 
-function loadSignalGroups(): SignalGroupView[] {
+function loadSignalGroups(): { groups: SignalGroupView[]; lastVerified: string | null } {
   const dir = process.cwd();
   const files = readdirSync(/*turbopackIgnore: true*/ dir)
     .filter((file) => DATA_FILE_PATTERN.test(file))
     .sort();
 
+  let lastVerified = "";
   const groups = files.map((file) => {
     let data: RawFile;
     try {
@@ -52,6 +54,8 @@ function loadSignalGroups(): SignalGroupView[] {
     } catch (err) {
       throw new Error(`Could not read signal group file "${file}": ${err}`);
     }
+    const verified = data?._notes?.last_verified?.trim() ?? "";
+    if (/^\d{4}-\d{2}-\d{2}$/.test(verified) && verified > lastVerified) lastVerified = verified;
     const group = data?.group;
     if (!group?.slug || !group.name) {
       throw new Error(`Signal group file "${file}" is missing "group.slug" or "group.name".`);
@@ -68,7 +72,10 @@ function loadSignalGroups(): SignalGroupView[] {
   const duplicate = slugs.find((slug, index) => slugs.indexOf(slug) !== index);
   if (duplicate) throw new Error(`Two signal group files use the slug "${duplicate}".`);
 
-  return groups.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
+  return {
+    groups: groups.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name)),
+    lastVerified: lastVerified || null,
+  };
 }
 
 function buildGroup(file: string, group: RawFile["group"]): SignalGroupView {
@@ -114,4 +121,9 @@ function safeLink(url: string | null | undefined): string | null {
   }
 }
 
-export const signalGroups: SignalGroupView[] = loadSignalGroups();
+const loaded = loadSignalGroups();
+
+export const signalGroups: SignalGroupView[] = loaded.groups;
+
+/** Newest `_notes.last_verified` across the directory, or null if none are dated. */
+export const signalGroupsLastVerified: string | null = loaded.lastVerified;
