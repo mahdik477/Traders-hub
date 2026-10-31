@@ -183,9 +183,12 @@ function Directory({
       </div>
 
       {matching.length === 0 ? (
-        <p className="mt-6 rounded-xl border border-dashed border-border-strong p-10 text-center text-muted">
-          No strategies match these filters.
-        </p>
+        <div className="mt-6 rounded-xl border border-dashed border-border-strong p-10 text-center">
+          <p className="text-muted">No strategies match these filters.</p>
+          <button type="button" onClick={() => updateFilters(EMPTY_FILTERS)} className="btn btn-outline mt-4">
+            Clear filters and show everything
+          </button>
+        </div>
       ) : (
         <ScrollReveal>
           <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
