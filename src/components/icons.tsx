@@ -224,6 +224,26 @@ export function GridIcon({ className = base }: IconProps) {
   );
 }
 
+// Homepage section tiles — Signal Groups and Brokers didn't have a natural
+// fit among the icons above.
+export function SignalIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none" />
+      <path d="M5 15a4 4 0 0 1 4 4M5 11a8 8 0 0 1 8 8M5 7a12 12 0 0 1 12 12" />
+    </svg>
+  );
+}
+
+export function BuildingIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M4 21h16M4 21V10l8-6 8 6v11" />
+      <path d="M9 21v-7h6v7" />
+    </svg>
+  );
+}
+
 // Generic label→icon lookup used for course "formats" (label text drives it).
 export function formatIcon(label: string): (props: IconProps) => JSX.Element {
   const l = label.toLowerCase();
