@@ -21,7 +21,6 @@ import {
   type Filters,
 } from "@/lib/strategy-filters";
 import { SearchIcon, ShieldIcon } from "@/components/icons";
-import ScrollReveal from "@/components/ScrollReveal";
 
 // Strategy categories in a fixed, deliberate order (not alphabetical) for
 // the quick-pick pill row — trend-following and mean-reversion first since
@@ -190,13 +189,11 @@ function Directory({
           </button>
         </div>
       ) : (
-        <ScrollReveal>
-          <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {matching.map((s) => (
-              <StrategyCard key={s.slug} strategy={s} listingQuery={filtersToQuery(filters)} />
-            ))}
-          </ul>
-        </ScrollReveal>
+        <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {matching.map((s) => (
+            <StrategyCard key={s.slug} strategy={s} listingQuery={filtersToQuery(filters)} />
+          ))}
+        </ul>
       )}
     </div>
   );
