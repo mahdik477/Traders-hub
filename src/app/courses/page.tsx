@@ -5,8 +5,9 @@ import { courses } from "@/lib/courses";
 import { providers } from "@/lib/providers";
 import { parsePrice } from "@/lib/course-filters";
 import { getSection } from "@/lib/sections";
-import CountUpStat from "@/components/CountUpStat";
-import { BookIcon } from "@/components/icons";
+import TerminalStatPanel from "@/components/TerminalStatPanel";
+import IconPatternBackdrop from "@/components/IconPatternBackdrop";
+import { BookIcon, CheckIcon, StarIcon } from "@/components/icons";
 
 const section = getSection("courses");
 
@@ -21,16 +22,22 @@ export default function CoursesPage() {
 
   return (
     <>
-      <header className="detail-hero mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
-        <div className="p-5 sm:p-7">
+      <section className="grid grid-cols-1 gap-8 py-8 sm:py-10 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-8">
+        <div>
           <p className="eyebrow">{section.title}</p>
-          <h1 className="page-title mt-2">Find a course that actually fits how you trade</h1>
-          <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted">
+          <h1 className="page-title mt-2 text-[clamp(2rem,5vw,3rem)] leading-[1.05]">
+            Find a course that{" "}
+            <span className="brand-wordmark" style={{ fontFamily: "var(--font-heading)" }}>
+              actually fits
+            </span>{" "}
+            how you trade
+          </h1>
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
             What each course covers, how it&apos;s delivered and what it costs — plus independent
             Trustpilot ratings, not just the provider&apos;s own claims. We don&apos;t verify
             trading performance or results.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <a href="#browse" className="btn btn-primary">
               <BookIcon className="size-4" />
               Browse all courses
@@ -41,27 +48,22 @@ export default function CoursesPage() {
           </div>
         </div>
 
-        <dl className="grid grid-cols-3 gap-px border-t border-border bg-border">
-          <HeroStat label="Courses" value={courses.length + providers.length} />
-          <HeroStat label="With a free tier" value={freeTierCount} />
-          <HeroStat label="Independently rated" value={ratedCount} />
-        </dl>
-      </header>
+        <TerminalStatPanel
+          caption="The directory, at a glance"
+          backdrop={<IconPatternBackdrop icons={[BookIcon, StarIcon, CheckIcon]} />}
+          stats={[
+            { label: "Courses & providers", value: courses.length + providers.length },
+            { label: "With a free tier", value: freeTierCount },
+            { label: "Independently rated", value: ratedCount },
+            { label: "Performance scores shown", value: 0 },
+          ]}
+          footnote="Ratings come from Trustpilot or Whop, sourced and linked on every course page — never our own score."
+        />
+      </section>
 
-      <div id="browse" className="mt-10 scroll-mt-20">
+      <div id="browse" className="mt-6 scroll-mt-20 border-t border-border pt-10">
         <CourseDirectory courses={courses} providers={providers} />
       </div>
     </>
-  );
-}
-
-function HeroStat({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="min-w-0 bg-surface px-4 py-3 sm:px-5">
-      <div className="eyebrow">{label}</div>
-      <div className="figure-lg mt-1 text-foreground sm:text-xl">
-        <CountUpStat value={value} />
-      </div>
-    </div>
   );
 }
