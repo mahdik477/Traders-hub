@@ -7,6 +7,16 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 // once. Respects prefers-reduced-motion (renders fully visible immediately,
 // no observer needed) and degrades safely if IntersectionObserver is ever
 // unavailable.
+//
+// Belt and suspenders: IntersectionObserver's first callback can land
+// before layout has fully settled (fonts/images still loading, a Suspense
+// boundary still resolving above it) and, on some real devices, never
+// re-fire after that if nothing else triggers a layout change — leaving
+// the content stuck invisible until something unrelated forces a
+// re-render. A hard timeout guarantees it reveals itself regardless, so a
+// purely decorative animation can never block real content from showing.
+const REVEAL_TIMEOUT_MS = 1800;
+
 export default function ScrollReveal({
   children,
   delay = 0,
@@ -38,7 +48,11 @@ export default function ScrollReveal({
       { threshold: 0.15 },
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    const timeout = setTimeout(() => setVisible(true), REVEAL_TIMEOUT_MS);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeout);
+    };
   }, []);
 
   return (

@@ -18,7 +18,6 @@ import {
 } from "@/lib/course-filters";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
-import ScrollReveal from "@/components/ScrollReveal";
 import { SearchIcon } from "@/components/icons";
 
 type Entry = {
@@ -253,7 +252,6 @@ function Directory({
           </button>
         </div>
       ) : (
-        <ScrollReveal>
         <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {matching.map((entry) => (
             <li
@@ -349,7 +347,6 @@ function Directory({
             </li>
           ))}
         </ul>
-        </ScrollReveal>
       )}
 
       {compareIds.length > 0 && (
