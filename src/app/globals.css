@@ -816,3 +816,58 @@ input.signal-filter-search {
     transform: none;
   }
 }
+
+/* Terminal-style stat panel (TerminalStatPanel.tsx) — a faint graph-paper
+   texture so it reads as a data readout, not just another bordered card. */
+.terminal-panel {
+  background-image:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-gold) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--color-gold) 7%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+}
+
+/* Hero ticker strip — a continuous scrolling line of live counts right
+   under the header, duplicated once in the markup so translateX(-50%)
+   loops seamlessly. Decorative (aria-hidden); the real, accessible
+   numbers live in the hero panel and the explore cards below it. */
+.ticker-strip {
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+
+.ticker-track {
+  display: inline-flex;
+  width: max-content;
+  gap: 2.5rem;
+  padding: 0.55rem 1.25rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ticker-track {
+    animation: ticker-scroll 34s linear infinite;
+  }
+  .ticker-strip:hover .ticker-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Big gradient brand wordmark in the homepage hero. */
+.brand-wordmark {
+  background-image: linear-gradient(100deg, var(--color-gold-deep), var(--color-gold-bright) 55%, var(--color-gold) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getSection } from "@/lib/sections";
 import { strategies, strategiesInDisplayOrder } from "@/lib/strategies";
+import { STRATEGY_CATEGORY_ICONS } from "@/lib/strategy-types";
 import StrategyDirectory from "@/components/StrategyDirectory";
-import CountUpStat from "@/components/CountUpStat";
+import TerminalStatPanel from "@/components/TerminalStatPanel";
+import IconPatternBackdrop from "@/components/IconPatternBackdrop";
 import { PlayIcon, CheckIcon } from "@/components/icons";
 
 const section = getSection("strategies");
@@ -17,16 +19,22 @@ export default function StrategiesPage() {
 
   return (
     <div>
-      <header className="detail-hero mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
-        <div className="p-5 sm:p-7">
+      <section className="grid grid-cols-1 gap-8 py-8 sm:py-10 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-8">
+        <div>
           <p className="eyebrow">{section.title}</p>
-          <h1 className="page-title mt-2">Learn a strategy, then prove you&apos;ve got it</h1>
-          <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted">
+          <h1 className="page-title mt-2 text-[clamp(2rem,5vw,3rem)] leading-[1.05]">
+            Learn a strategy, then{" "}
+            <span className="brand-wordmark" style={{ fontFamily: "var(--font-heading)" }}>
+              prove
+            </span>{" "}
+            you&apos;ve got it
+          </h1>
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
             {strategies.length} trading strategies explained in plain English — what each one is,
             how it&apos;s traditionally traded, and a live chart you can click on, right on the
             page. Never a claim that any of them will make you money.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <a href="#browse" className="btn btn-primary">
               <PlayIcon className="size-4" />
               Browse all strategies
@@ -37,14 +45,20 @@ export default function StrategiesPage() {
           </div>
         </div>
 
-        <dl className="grid grid-cols-3 gap-px border-t border-border bg-border">
-          <HeroStat label="Free" value={freeCount} />
-          <HeroStat label="Intermediate" value={intermediateCount} />
-          <HeroStat label="Advanced" value={advancedCount} />
-        </dl>
-      </header>
+        <TerminalStatPanel
+          caption="The library, by tier"
+          backdrop={<IconPatternBackdrop icons={Object.values(STRATEGY_CATEGORY_ICONS)} />}
+          stats={[
+            { label: "Free", value: freeCount },
+            { label: "Intermediate", value: intermediateCount },
+            { label: "Advanced", value: advancedCount },
+            { label: "With a live quiz", value: strategies.length },
+          ]}
+          footnote="Every strategy has a live simulator — shuffle the chart, test yourself, no account needed."
+        />
+      </section>
 
-      <div id="browse" className="mt-10 scroll-mt-20">
+      <div id="browse" className="mt-6 scroll-mt-20 border-t border-border pt-10">
         <h2 className="section-title flex items-center gap-2 text-2xl">
           <CheckIcon className="size-5 text-accent" />
           Browse the library
@@ -60,17 +74,6 @@ export default function StrategiesPage() {
         <div className="mt-6">
           <StrategyDirectory strategies={strategiesInDisplayOrder} />
         </div>
-      </div>
-    </div>
-  );
-}
-
-function HeroStat({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="min-w-0 bg-surface px-4 py-3 sm:px-5">
-      <div className="eyebrow">{label}</div>
-      <div className="figure-lg mt-1 text-foreground sm:text-xl">
-        <CountUpStat value={value} />
       </div>
     </div>
   );

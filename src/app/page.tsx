@@ -16,8 +16,8 @@ import { BROKER_MARKET_LABELS } from "@/lib/broker-types";
 import FirmBadge from "@/components/FirmBadge";
 import MovingAverageSimulator from "@/components/MovingAverageSimulator";
 import ScrollReveal from "@/components/ScrollReveal";
-import CountUpStat from "@/components/CountUpStat";
 import FaqAccordion from "@/components/FaqAccordion";
+import TerminalStatPanel from "@/components/TerminalStatPanel";
 import {
   BuildingIcon,
   BookIcon,
@@ -30,6 +30,7 @@ import {
   LinkIcon,
   CheckIcon,
   PlayIcon,
+  SearchIcon,
 } from "@/components/icons";
 
 function money(n: number, currency: string) {
@@ -180,6 +181,24 @@ const EXPLORE_META: Record<
   },
 };
 
+const HOW_IT_WORKS = [
+  {
+    icon: SearchIcon,
+    title: "Browse",
+    text: "Six sections, real data pulled from each provider's own pages — not sales copy.",
+  },
+  {
+    icon: PlayIcon,
+    title: "Practice",
+    text: "Every strategy has a live simulator and a quiz. Learn by doing, not just reading.",
+  },
+  {
+    icon: CheckIcon,
+    title: "Decide",
+    text: "No scores, no rankings, no pressure to pick anything. You see the facts and choose.",
+  },
+];
+
 const WHY_POINTS = [
   {
     icon: ShieldIcon,
@@ -251,74 +270,105 @@ export default function Home() {
     strategies: <StrategySnapshotList items={strategiesSnapshot()} />,
   };
 
+  const tickerItems = liveSections.map((s) => `${sectionCounts[s.slug] ?? 0} ${s.title}`.toUpperCase());
+
   return (
     <>
-      {/* ---------------------------------------------------------------- */}
-      {/* Hero                                                              */}
-      {/* ---------------------------------------------------------------- */}
-      <section className="hero-intro relative overflow-hidden pb-10 pt-6 sm:pb-14 sm:pt-10">
-        <HeroChartDecoration />
+      {/* A continuous line of live counts right under the header — purely
+          decorative (the real, accessible numbers are in the panel below
+          and on the explore cards further down), but it's the first thing
+          that moves on the page, and it says "this is a live data site"
+          before a single word of copy does. */}
+      <div className="ticker-strip -mx-4 sm:-mx-6 lg:-mx-8" aria-hidden="true">
+        <div className="ticker-track">
+          {[0, 1].map((rep) =>
+            tickerItems.map((item, i) => (
+              <span key={`${rep}-${i}`} className="inline-flex items-center gap-2.5 font-mono text-xs tracking-wider text-muted">
+                {item}
+                <span className="text-gold-bright">·</span>
+              </span>
+            )),
+          )}
+        </div>
+      </div>
 
-        <p className="eyebrow">Built for traders who are just starting out</p>
-        <h1 className="page-title mt-3 max-w-3xl text-[2.6rem] leading-[1.08] sm:text-6xl lg:text-[4.5rem]">
-          Trading has a lot of moving parts.{" "}
-          <span className="text-accent">We put them in one place.</span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-          Prop firms, courses, signal groups, brokers, tools and strategies — real pricing and
-          real rules pulled straight from each provider, plus live strategy simulators you can
-          actually practice on. No performance scores, no sales pitches.
-        </p>
-
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link href="/funded-accounts" className="btn btn-primary">
-            Start exploring
-          </Link>
-          <a href="#explore" className="btn btn-outline">
-            See everything we offer
-          </a>
+      {/* ---------------------------------------------------------------- */}
+      {/* Hero — the brand name itself is the first visual anchor, not a   */}
+      {/* small logo in the corner, paired with a live data readout rather */}
+      {/* than another block of plain-left-aligned marketing copy.         */}
+      {/* ---------------------------------------------------------------- */}
+      <section className="hero-intro grid grid-cols-1 gap-10 py-10 sm:py-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-8">
+        <div className="relative">
+          <p className="eyebrow">UAE · Built for traders just starting out</p>
+          <h1 className="mt-3 leading-[0.95]">
+            <span
+              className="brand-wordmark block text-[clamp(3.25rem,13vw,6.75rem)] font-extrabold tracking-tight"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {SITE_NAME}
+            </span>
+            <span
+              className="mt-2 block text-[clamp(1.5rem,4.5vw,2.5rem)] font-semibold tracking-tight text-foreground"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Trading, decoded.
+            </span>
+          </h1>
+          <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
+            Prop firms, courses, signal groups, brokers, tools and strategies — real pricing,
+            real rules, and live simulators you can actually practice on before you spend a
+            cent.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link href="/funded-accounts" className="btn btn-primary">
+              Start exploring
+            </Link>
+            <a href="#explore" className="btn btn-outline">
+              See everything we offer
+            </a>
+          </div>
         </div>
 
-        {/* Quick-access tiles — also the "what's actually in here" answer,
-            right up top instead of buried further down the page. */}
-        <ul className="mt-9 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
-          {liveSections.map((s) => {
-            const meta = EXPLORE_META[s.slug];
-            const Icon = meta?.icon ?? WaveStructureIcon;
-            return (
-              <li key={s.slug}>
-                <Link
-                  href={`/${s.slug}`}
-                  className="hero-tile group flex h-full flex-col gap-2 rounded-xl border border-border bg-surface p-3.5 transition-colors hover:border-accent/50 hover:bg-surface-2"
-                >
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent transition-transform group-hover:scale-105">
-                    <Icon className="size-4.5" />
-                  </span>
-                  <span className="text-sm font-semibold leading-tight text-foreground">{s.title}</span>
-                  <span className="meta">{sectionCounts[s.slug] ?? 0} listed</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <TerminalStatPanel
+          caption="Live across the site"
+          backdrop={<HeroChartDecoration />}
+          stats={[
+            { label: "Prop firms", value: propFirms.length },
+            { label: "Courses", value: courses.length + providers.length },
+            { label: "Strategies", value: strategies.length },
+            { label: "Signal groups", value: signalGroups.length },
+          ]}
+          footnote={`${TOTAL_LISTINGS}+ listings total — zero performance scores, zero rankings.`}
+        />
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Big combined number — one confident stat, not a repeat of the    */}
-      {/* per-section counts above.                                        */}
+      {/* How it works — three steps, added so the hero isn't carrying the */}
+      {/* entire first impression on its own.                              */}
       {/* ---------------------------------------------------------------- */}
       <ScrollReveal>
-        <section aria-labelledby="scale-heading" className="border-y border-border py-10 text-center">
-          <h2 id="scale-heading" className="sr-only">
-            Everything in one place
+        <section aria-labelledby="how-heading" className="border-y border-border py-12">
+          <h2 id="how-heading" className="sr-only">
+            How {SITE_NAME} works
           </h2>
-          <p className="figure-lg text-5xl text-accent sm:text-6xl">
-            <CountUpStat value={TOTAL_LISTINGS} suffix="+" />
-          </p>
-          <p className="mt-2 text-base text-muted">
-            real listings across every section below — not one of them scored, ranked by
-            performance, or written as a sales pitch.
-          </p>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6">
+            {HOW_IT_WORKS.map(({ icon: Icon, title, text }, i) => (
+              <div key={title} className="relative pl-0 sm:border-t-2 sm:border-gold-fill/30 sm:pt-6">
+                <span
+                  aria-hidden="true"
+                  className="block text-5xl font-bold text-border-strong sm:text-6xl"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="mt-2 flex size-10 items-center justify-center rounded-lg bg-accent/12 text-accent">
+                  <Icon className="size-5" />
+                </span>
+                <h3 className="mt-3 text-lg font-bold text-foreground">{title}</h3>
+                <p className="mt-1.5 max-w-xs text-sm leading-relaxed text-muted">{text}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </ScrollReveal>
 
@@ -497,12 +547,12 @@ function HeroChartDecoration() {
   return (
     <svg
       aria-hidden="true"
-      viewBox="0 0 800 260"
+      viewBox="0 0 500 260"
       preserveAspectRatio="none"
-      className="hero-chart-deco pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full opacity-[0.07]"
+      className="hero-chart-deco pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full opacity-[0.12]"
     >
       <path
-        d="M0 190 L60 170 L110 200 L170 120 L230 150 L290 70 L350 110 L410 40 L470 90 L540 30 L600 75 L660 20 L720 60 L800 10"
+        d="M0 190 L40 170 L70 200 L105 120 L145 150 L180 70 L220 110 L255 40 L295 90 L335 30 L375 75 L415 20 L450 60 L500 10"
         fill="none"
         stroke="var(--color-gold-bright)"
         strokeWidth="3"
