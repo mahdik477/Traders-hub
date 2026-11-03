@@ -2,6 +2,7 @@
   "broker": {
     "id": "vt-markets",
     "name": "VT Markets",
+    "category": "cfd",
     "logo": "/brokers/vt-markets.png",
     "logo_bg": "dark",
     "our_choice": true,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ChevronDown, TriangleAlert } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import SignalGroupDirectory from "@/components/SignalGroupDirectory";
+import SignalGroupRiskDisclaimer from "@/components/SignalGroupRiskDisclaimer";
 import SignalGroupsIntro from "@/components/SignalGroupsIntro";
 import { signalGroups, signalGroupsLastVerified } from "@/lib/signal-groups";
 import { getSection } from "@/lib/sections";
@@ -30,6 +30,10 @@ const faqs = [
   {
     q: "Are member counts a ranking?",
     a: "No. The number is the approximate count we saw on Telegram on the date printed with it. Counts change, and a larger group is not a better one.",
+  },
+  {
+    q: "What do I see if I open a group?",
+    a: "That group's page: its description, market, price, language, member count and a Join button for its Telegram chat. If no description was recorded, the page uses a short summary built only from those listing fields. We still do not score results.",
   },
 ];
 
@@ -73,26 +77,7 @@ export default function SignalGroupsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="signal-risk-heading" className="mt-10 rounded-lg border border-border bg-surface p-4 sm:p-6">
-        <div className="flex gap-3">
-          <TriangleAlert className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden="true" />
-          <div>
-            <h2 id="signal-risk-heading" className="text-sm font-semibold text-foreground">
-              Risk disclaimer
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-              Signal groups are third-party chats. Tradox lists them so you can find and compare them. We do not
-              verify calls, accuracy or results, and a member count is not a measure of quality. Trading involves a
-              high level of risk and you can lose money. Joining a group is not financial advice. Some Join links are
-              affiliate links, which means we may earn a commission if you sign up.{" "}
-              <Link href="/disclaimer" className="font-medium text-foreground underline decoration-border-strong underline-offset-2 hover:text-accent">
-                Read the full disclaimer
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
+      <SignalGroupRiskDisclaimer className="mt-10" />
     </>
   );
 }

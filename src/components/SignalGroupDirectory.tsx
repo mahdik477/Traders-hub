@@ -1,6 +1,7 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Suspense,
   useEffect,
@@ -10,6 +11,7 @@ import {
   useRef,
   useState,
   type KeyboardEvent,
+  type MouseEvent,
   type ReactNode,
   type RefObject,
 } from "react";
@@ -29,6 +31,7 @@ import {
   X,
 } from "lucide-react";
 import SignalGroupLogo from "@/components/SignalGroupLogo";
+import { signalGroupDetailHref } from "@/lib/signal-group-links";
 import {
   signalFilterTickCount,
   signalFiltersFromSearch,
@@ -211,16 +214,14 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
 
   useListFlip(listRef, listSignature, reduce);
 
+  const listingSearch = listingSearchFor(filters, sort, view, safePage);
+
   useEffect(() => {
-    const params = new URLSearchParams(signalFiltersToSearch(filters));
-    if (sort !== "listed") params.set("sort", sort);
-    if (view === "grid") params.set("view", "grid");
-    if (safePage > 1) params.set("page", String(safePage));
-    const qs = params.toString();
+    const qs = listingSearch;
     const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
     const current = `${window.location.pathname}${window.location.search}`;
     if (next !== current) window.history.replaceState(null, "", next);
-  }, [filters, sort, view, safePage]);
+  }, [listingSearch]);
 
   useEffect(() => {
     if (!filtersOpen && !noteOpen) return;
@@ -504,6 +505,7 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
                     key={group.slug}
                     group={group}
                     view={view}
+                    listingSearch={listingSearch}
                     seen={seen}
                     stagger={stagger}
                     reduce={reduce}
@@ -523,32 +525,41 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
 function SignalRow({
   group,
   view,
+  listingSearch,
   seen,
   stagger,
   reduce,
 }: {
   group: SignalGroupView;
   view: ViewKey;
+  listingSearch: string;
   seen: RefObject<Set<string>>;
   stagger: () => number;
   reduce: boolean;
 }) {
   const ref = useRef<HTMLLIElement>(null);
+  const router = useRouter();
   useEnterMotion(ref, group.slug, reduce, seen, stagger);
   const headingId = `signal-${group.slug}`;
   const asOf = formatSignalDate(group.memberCountAsOf);
   const orderedMarkets = SIGNAL_MARKET_ORDER.filter((id) => group.markets.includes(id));
+  const href = signalGroupDetailHref(group.slug, listingSearch);
+  const openGroup = (event: MouseEvent<HTMLElement>) => {
+    if (event.target instanceof Element && event.target.closest("a, button")) return;
+    router.push(href);
+  };
 
   if (view === "grid") {
     return (
       <li ref={ref} data-signal-slug={group.slug} className="min-w-0">
-        <article className="flex h-full flex-col rounded-lg border border-border bg-surface p-4 transition-colors duration-150 hover:bg-surface-2 motion-reduce:transition-none">
+        <article
+          onClick={openGroup}
+          className="group flex h-full cursor-pointer flex-col rounded-lg border border-border bg-surface p-4 transition-colors duration-150 hover:bg-surface-2 motion-reduce:transition-none"
+        >
           <div className="flex items-start gap-3">
             <SignalGroupLogo name={group.name} logo={group.logo} size="md" />
-            <div className="min-w-0">
-              <h3 id={headingId} className="line-clamp-2 text-sm font-semibold leading-5 tracking-tight text-foreground" title={group.name}>
-                {group.name}
-              </h3>
+            <div className="min-w-0 flex-1">
+              <GroupName id={headingId} name={group.name} href={href} />
               <p className="mt-1 text-xs text-muted">Telegram</p>
             </div>
           </div>
@@ -582,14 +593,13 @@ function SignalRow({
     <li
       ref={ref}
       data-signal-slug={group.slug}
-      className={`grid min-w-0 grid-cols-2 gap-x-4 gap-y-3 rounded-lg border border-border bg-surface p-4 transition-colors duration-150 hover:bg-surface-2 motion-reduce:transition-none lg:items-center lg:gap-x-3 lg:rounded-none lg:border-0 lg:border-b lg:border-border lg:bg-transparent lg:px-4 lg:py-3 lg:hover:bg-surface-2 lg:last:border-b-0 ${TABLE_COLS}`}
+      onClick={openGroup}
+      className={`group grid min-w-0 cursor-pointer grid-cols-2 gap-x-4 gap-y-3 rounded-lg border border-border bg-surface p-4 transition-colors duration-150 hover:bg-surface-2 motion-reduce:transition-none lg:items-center lg:gap-x-3 lg:rounded-none lg:border-0 lg:border-b lg:border-border lg:bg-transparent lg:px-4 lg:py-3 lg:hover:bg-surface-2 lg:last:border-b-0 ${TABLE_COLS}`}
     >
       <div className="col-span-2 flex min-w-0 items-start gap-3 lg:col-span-1">
         <SignalGroupLogo name={group.name} logo={group.logo} size="sm" />
-        <div className="min-w-0">
-          <h3 id={headingId} className="line-clamp-2 text-sm font-semibold leading-5 tracking-tight text-foreground" title={group.name}>
-            {group.name}
-          </h3>
+        <div className="min-w-0 flex-1">
+          <GroupName id={headingId} name={group.name} href={href} />
           {group.description && (
             <p className="mt-1 line-clamp-2 text-sm leading-5 text-muted lg:hidden">{group.description}</p>
           )}
@@ -626,6 +636,35 @@ function SignalRow({
       </div>
     </li>
   );
+}
+
+function GroupName({ id, name, href }: { id: string; name: string; href: string }) {
+  return (
+    <div className="flex min-w-0 items-start gap-1">
+      <h3 id={id} title={name} className="line-clamp-2 min-w-0 text-sm font-semibold leading-5 tracking-tight text-foreground">
+        <Link
+          href={href}
+          className="underline-offset-2 outline-none group-hover:underline focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          {name}
+        </Link>
+      </h3>
+      <ChevronRight className="mt-0.5 size-3.5 shrink-0 text-muted" aria-hidden="true" />
+    </div>
+  );
+}
+
+function listingSearchFor(
+  filters: SignalFilterSelection,
+  sort: SortKey,
+  view: ViewKey,
+  page: number,
+): string {
+  const params = new URLSearchParams(signalFiltersToSearch(filters));
+  if (sort !== "listed") params.set("sort", sort);
+  if (view === "grid") params.set("view", "grid");
+  if (page > 1) params.set("page", String(page));
+  return params.toString();
 }
 
 function FieldLabel({ children }: { children: ReactNode }) {

@@ -38,7 +38,7 @@ export const sections: Section[] = [
     slug: "brokers",
     title: "Brokers",
     summary:
-      "Retail brokers for trading your own capital, filterable by regulatory status, minimum deposit and supported platforms.",
+      "CFD brokers are listed now. Stock brokers and crypto exchanges are coming soon. Published terms only — we do not score results.",
     status: "live",
   },
   {

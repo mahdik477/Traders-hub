@@ -8,7 +8,13 @@
 
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import type { BrokerMarket, BrokerView } from "./broker-types";
+import {
+  BROKER_RESERVED_IDS,
+  isBrokerCategory,
+  type BrokerCategory,
+  type BrokerMarket,
+  type BrokerView,
+} from "./broker-types";
 
 type RawRow = { label: string; value: string; note?: string | null };
 
@@ -16,6 +22,7 @@ type RawFile = {
   broker: {
     id: string;
     name: string;
+    category?: BrokerCategory | null;
     logo?: string | null;
     logo_bg?: "white" | "dark" | null;
     tagline?: string | null;
@@ -89,7 +96,12 @@ function loadBrokers(): BrokerView[] {
         `Broker data file "${file}": "id" must use only lowercase letters, numbers and dashes.`,
       );
     }
-    return buildBroker(data.broker);
+    if ((BROKER_RESERVED_IDS as readonly string[]).includes(data.broker.id)) {
+      throw new Error(
+        `Broker data file "${file}": "id" "${data.broker.id}" is reserved for a Brokers tab.`,
+      );
+    }
+    return buildBroker(data.broker, file);
   });
 
   const ids = brokers.map((b) => b.id);
@@ -102,10 +114,16 @@ function buildRow(r: RawRow) {
   return { label: r.label, value: r.value, note: r.note || null };
 }
 
-function buildBroker(b: RawFile["broker"]): BrokerView {
+function buildBroker(b: RawFile["broker"], file: string): BrokerView {
+  if (!isBrokerCategory(b.category)) {
+    throw new Error(
+      `Broker data file "${file}": "category" must be "cfd", "stocks" or "crypto".`,
+    );
+  }
   return {
     id: b.id,
     name: b.name,
+    category: b.category,
     logo: b.logo || null,
     logoBg: b.logo_bg === "dark" ? "dark" : "white",
     tagline: b.tagline || null,

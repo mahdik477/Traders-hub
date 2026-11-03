@@ -65,7 +65,7 @@ function loadSignalGroups(): { groups: SignalGroupView[]; lastVerified: string |
         `Signal group file "${file}": "slug" must use only lowercase letters, numbers and dashes.`,
       );
     }
-    return buildGroup(file, group);
+    return buildGroup(file, group, verified);
   });
 
   const slugs = groups.map((group) => group.slug);
@@ -78,7 +78,7 @@ function loadSignalGroups(): { groups: SignalGroupView[]; lastVerified: string |
   };
 }
 
-function buildGroup(file: string, group: RawFile["group"]): SignalGroupView {
+function buildGroup(file: string, group: RawFile["group"], checkedOn: string): SignalGroupView {
   const markets = (group.markets ?? []).filter((market): market is SignalMarket =>
     Boolean(SIGNAL_MARKET_LABELS[market as SignalMarket]),
   );
@@ -107,6 +107,7 @@ function buildGroup(file: string, group: RawFile["group"]): SignalGroupView {
     extras,
     telegramUrl: safeLink(group.telegram_url),
     logo: group.logo?.trim() || null,
+    checkedOn: /^\d{4}-\d{2}-\d{2}$/.test(checkedOn) ? checkedOn : null,
     rank: typeof group.rank === "number" ? group.rank : 100,
   };
 }
@@ -124,6 +125,12 @@ function safeLink(url: string | null | undefined): string | null {
 const loaded = loadSignalGroups();
 
 export const signalGroups: SignalGroupView[] = loaded.groups;
+
+const signalGroupsBySlug = new Map(signalGroups.map((group) => [group.slug, group]));
+
+export function getSignalGroup(slug: string): SignalGroupView | undefined {
+  return signalGroupsBySlug.get(slug);
+}
 
 /** Newest `_notes.last_verified` across the directory, or null if none are dated. */
 export const signalGroupsLastVerified: string | null = loaded.lastVerified;

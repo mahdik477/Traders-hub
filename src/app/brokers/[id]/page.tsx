@@ -1,5 +1,6 @@
 import type { JSX, ReactNode } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import BrokerBackLink from "@/components/BrokerBackLink";
 import BrokerLogo from "@/components/BrokerLogo";
@@ -11,7 +12,14 @@ import StickyVisitBar from "@/components/StickyVisitBar";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import VisitSiteLink from "@/components/VisitSiteLink";
 import { InfoIcon, LayersIcon, MonitorIcon, ShieldIcon, TagIcon } from "@/components/icons";
-import { BROKER_MARKET_LABELS, brokerOutboundUrl, formatDeposit, type CostRow } from "@/lib/broker-types";
+import {
+  BROKER_CATEGORY_LABELS,
+  BROKER_CATEGORY_PATHS,
+  BROKER_MARKET_LABELS,
+  brokerOutboundUrl,
+  formatDeposit,
+  type CostRow,
+} from "@/lib/broker-types";
 import { brokers, getBroker } from "@/lib/brokers";
 import { leverageLabel } from "@/lib/broker-filters";
 
@@ -80,6 +88,9 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
 
   const visitHref = brokerOutboundUrl(broker);
   const deposit = formatDeposit(broker.minDeposit, broker.currency);
+  const placeLine = [broker.founded ? `Since ${broker.founded}` : null, broker.headquarters]
+    .filter(Boolean)
+    .join(" · ");
 
   const jumps = [
     broker.about ? ["about-heading", "About"] : null,
@@ -108,11 +119,17 @@ export default async function BrokerPage({ params }: PageProps<"/brokers/[id]">)
               {broker.ourChoice && <OurChoiceBadge />}
             </div>
             {broker.ourChoice && (
-              <p className="meta mt-2">Featured listing on Tradox. It is not a score of trading results.</p>
+              <p className="meta mt-2">
+                Listed first among the CFD brokers. This is not a score of trading results, and it is not a
+                recommendation to open an account.
+              </p>
             )}
             {broker.tagline && <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{broker.tagline}</p>}
             <p className="meta mt-2">
-              {[broker.founded ? `Since ${broker.founded}` : null, broker.headquarters].filter(Boolean).join(" · ")}
+              <Link href={BROKER_CATEGORY_PATHS[broker.category]} className="font-medium text-foreground hover:underline">
+                {BROKER_CATEGORY_LABELS[broker.category]}
+              </Link>
+              {placeLine ? ` · ${placeLine}` : ""}
             </p>
             {broker.trustpilot && (
               <div className="mt-3">

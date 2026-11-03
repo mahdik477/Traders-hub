@@ -3,6 +3,7 @@ import Image from "next/image";
 const SIZES = {
   sm: { box: "size-8 text-[11px]", img: 32 },
   md: { box: "size-10 text-xs", img: 40 },
+  lg: { box: "size-14 text-base sm:size-16", img: 64 },
 } as const;
 
 function initials(name: string): string {

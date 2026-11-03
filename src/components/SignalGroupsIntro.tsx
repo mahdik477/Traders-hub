@@ -19,7 +19,8 @@ export default function SignalGroupsIntro({
           Signal Groups
         </h1>
         <p className="mt-2 text-sm leading-6 text-muted sm:text-[0.9375rem]">
-          Telegram signal groups you can filter by market, style, price and language.
+          Telegram signal groups you can filter by market, style, price and language. Open a group for its
+          full listing.
         </p>
         {count == null ? (
           <div className="mt-3 flex h-5 items-center gap-2" aria-hidden="true">

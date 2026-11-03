@@ -3,6 +3,52 @@
 
 import type { PricingTier, TrustpilotRating } from "./course-types";
 
+/**
+ * Which Brokers tab a listing belongs on. These three are the whole
+ * directory: CFD is the only tab with listings (VT Markets and PU Prime).
+ * Stock brokers and crypto exchanges stay empty until a real listing exists.
+ */
+export type BrokerCategory = "cfd" | "stocks" | "crypto";
+
+export const BROKER_CATEGORY_ORDER: BrokerCategory[] = ["cfd", "stocks", "crypto"];
+
+export const BROKER_CATEGORY_LABELS: Record<BrokerCategory, string> = {
+  cfd: "CFD brokers",
+  stocks: "Stock brokers",
+  crypto: "Crypto exchanges",
+};
+
+/** Singular label for one row, such as the homepage preview. */
+export const BROKER_CATEGORY_ITEM_LABELS: Record<BrokerCategory, string> = {
+  cfd: "CFD broker",
+  stocks: "Stock broker",
+  crypto: "Crypto exchange",
+};
+
+/**
+ * Canonical page for each tab. CFD lives at /brokers. The other two are
+ * their own addresses so a tab can be shared. /brokers?type=stocks and
+ * /brokers/cfd redirect to these (see src/proxy.ts).
+ */
+export const BROKER_CATEGORY_PATHS: Record<BrokerCategory, string> = {
+  cfd: "/brokers",
+  stocks: "/brokers/stocks",
+  crypto: "/brokers/crypto",
+};
+
+export const BROKER_CATEGORY_DESCRIPTIONS: Record<BrokerCategory, string> = {
+  cfd: "Two CFD brokers side by side: deposit, leverage and regulators. VT Markets is listed first. We do not score trading results.",
+  stocks: "Stock brokers for trading your own capital. None are listed yet.",
+  crypto: "Crypto exchanges for trading your own capital. None are listed yet.",
+};
+
+/** Route segments that are tabs, not broker pages. A listing id must not use one. */
+export const BROKER_RESERVED_IDS = ["cfd", "stocks", "crypto"] as const;
+
+export function isBrokerCategory(value: string | null | undefined): value is BrokerCategory {
+  return value === "cfd" || value === "stocks" || value === "crypto";
+}
+
 // What you can trade through the broker — used for the directory filter.
 export type BrokerMarket =
   | "stocks"
@@ -70,6 +116,8 @@ export type BrokerView = {
   /** Also the page address: /brokers/<id>. */
   id: string;
   name: string;
+  /** Which tab this listing appears on. */
+  category: BrokerCategory;
   /** Path under /public. Null falls back to a lettermark. */
   logo: string | null;
   logoBg: "white" | "dark";

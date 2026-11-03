@@ -2,6 +2,7 @@
   "broker": {
     "id": "pu-prime",
     "name": "PU Prime",
+    "category": "cfd",
     "logo": "/brokers/pu-prime.png",
     "logo_bg": "dark",
     "tagline": "Its site names 5 regulators, including FSA (Seychelles), FSC (Mauritius), and FSCA. Rules depend on where you live. Advertised leverage: Up to 1:1000.",

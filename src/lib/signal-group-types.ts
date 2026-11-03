@@ -85,6 +85,8 @@ export type SignalGroupView = {
    */
   telegramUrl: string | null;
   logo: string | null;
+  /** YYYY-MM-DD the listing was last checked. Null when the file has no date. */
+  checkedOn: string | null;
   /** Lower numbers are listed first. */
   rank: number;
 };
