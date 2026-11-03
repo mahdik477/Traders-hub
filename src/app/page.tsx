@@ -415,7 +415,7 @@ export default function Home() {
             const isStrategies = s.slug === "strategies";
             return (
               <ScrollReveal key={s.slug} delay={(i % 3) * 60}>
-                <div className="lift-card group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface">
+                <div className="lift-card group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-border bg-surface">
                   <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
                   <div className="flex flex-1 flex-col p-5">
                     <div className="flex items-start justify-between gap-3">
@@ -425,7 +425,7 @@ export default function Home() {
                       <span className="pill shrink-0">{sectionCounts[s.slug] ?? 0} listed</span>
                     </div>
                     <h3 className="mt-3 text-xl font-bold">
-                      <Link href={`/${s.slug}`} className="hover:text-accent">
+                      <Link href={`/${s.slug}`} className="card-stretch rounded-xl hover:text-accent">
                         {s.title}
                       </Link>
                     </h3>
@@ -434,7 +434,7 @@ export default function Home() {
                     {isStrategies && featuredStrategyImage && (
                       <Link
                         href="/strategies/moving-average-crossover"
-                        className="mt-4 block overflow-hidden rounded-lg border border-border"
+                        className="relative z-10 mt-4 block overflow-hidden rounded-lg border border-border"
                       >
                         <Image
                           src={featuredStrategyImage.src}
@@ -448,7 +448,7 @@ export default function Home() {
 
                     <div className="mt-4 flex-1">{sectionSnapshots[s.slug]}</div>
 
-                    <Link href={`/${s.slug}`} className="btn btn-outline mt-5 w-full">
+                    <Link href={`/${s.slug}`} className="btn btn-outline relative z-10 mt-5 w-full">
                       Browse {s.title.toLowerCase()}
                     </Link>
                   </div>

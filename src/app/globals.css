@@ -383,16 +383,89 @@ body {
   color: var(--color-accent);
 }
 
-.our-choice-quiet {
-  border-color: var(--color-border-strong);
-  background: transparent;
-  padding: 0.125rem 0.5rem;
-  color: var(--color-muted);
-  letter-spacing: 0.02em;
+.our-choice-prominent {
+  gap: 0.35rem;
+  border-color: var(--color-gold);
+  background: color-mix(in srgb, var(--color-gold-fill) 32%, var(--color-surface));
+  padding: 0.28rem 0.7rem 0.28rem 0.48rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-gold) 28%, transparent);
 }
 
-.our-choice-quiet .our-choice-mark {
-  color: var(--color-foreground);
+.our-choice-prominent .our-choice-mark {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--color-gold-bright);
+}
+
+/* One sweep of gold around the Our choice card, then a still edge.
+   The ring clips the spinning light. The shell keeps the settled glow,
+   which overflow would otherwise cut off. */
+.choice-shell {
+  border-radius: 1rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.choice-ring {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  border-radius: inherit;
+  padding: 2px;
+  background: var(--color-border);
+}
+
+.choice-shell.is-running {
+  box-shadow: 0 0 22px -8px color-mix(in srgb, var(--color-gold-bright) 85%, transparent);
+}
+
+.choice-shell.is-settled {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-gold) 28%, transparent),
+    0 12px 28px -18px color-mix(in srgb, var(--color-gold) 70%, transparent);
+}
+
+.choice-shell.is-settled .choice-ring {
+  background: color-mix(in srgb, var(--color-gold) 62%, var(--color-border));
+}
+
+.choice-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  aspect-ratio: 1;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 250deg,
+    color-mix(in srgb, var(--color-gold) 40%, transparent) 300deg,
+    var(--color-gold) 332deg,
+    var(--color-gold-bright) 348deg,
+    #fff8dc 356deg,
+    #fff 360deg
+  );
+  animation: choice-beam-spin 2s linear 1 forwards;
+}
+
+@keyframes choice-beam-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.card-stretch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
 }
 
 .broker-heading {
@@ -421,6 +494,13 @@ body {
     border-color: var(--color-border-strong);
     box-shadow: 0 16px 32px -24px rgb(0 0 0 / 0.55);
   }
+  .choice-shell:hover {
+    transform: translateY(-2px);
+  }
+  .choice-shell:hover .broker-panel {
+    transform: none;
+    box-shadow: none;
+  }
   .broker-tab-indicator {
     transition:
       left 280ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -430,8 +510,22 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .broker-panel,
-  .broker-tab-indicator {
+  .broker-tab-indicator,
+  .choice-shell,
+  .choice-beam {
     transition: none;
+    animation: none;
+  }
+  .choice-shell {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-gold) 28%, transparent),
+      0 12px 28px -18px color-mix(in srgb, var(--color-gold) 70%, transparent);
+  }
+  .choice-ring {
+    background: color-mix(in srgb, var(--color-gold) 62%, var(--color-border));
+  }
+  .choice-beam {
+    display: none;
   }
 }
 
@@ -649,6 +743,13 @@ input.signal-filter-search {
   }
 }
 
+@media (hover: hover) and (width >= 64rem) {
+  .signal-row.lift-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .hero-intro {
     animation: hero-in 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -757,6 +858,27 @@ input.signal-filter-search {
 
 :root[data-theme="light"] .our-choice-mark {
   color: #a87a1f;
+}
+
+:root[data-theme="light"] .our-choice-prominent {
+  border-color: #a87a1f;
+  background: #fff6e4;
+  color: #5c3e0c;
+  box-shadow: 0 0 0 1px rgb(168 122 31 / 0.28);
+}
+
+:root[data-theme="light"] .our-choice-prominent .our-choice-mark {
+  color: #8f6716;
+}
+
+:root[data-theme="light"] .choice-shell.is-settled {
+  box-shadow:
+    0 0 0 1px rgb(168 122 31 / 0.35),
+    0 10px 24px -16px rgb(143 103 22 / 0.45);
+}
+
+:root[data-theme="light"] .choice-shell.is-settled .choice-ring {
+  background: #c4922a;
 }
 
 /* Secondary line on a bronze fill. 75% white is 3.6:1; 92% clears AA. */

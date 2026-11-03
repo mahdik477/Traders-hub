@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
   Suspense,
   useEffect,
@@ -11,7 +11,6 @@ import {
   useRef,
   useState,
   type KeyboardEvent,
-  type MouseEvent,
   type ReactNode,
   type RefObject,
 } from "react";
@@ -538,24 +537,16 @@ function SignalRow({
   reduce: boolean;
 }) {
   const ref = useRef<HTMLLIElement>(null);
-  const router = useRouter();
   useEnterMotion(ref, group.slug, reduce, seen, stagger);
   const headingId = `signal-${group.slug}`;
   const asOf = formatSignalDate(group.memberCountAsOf);
   const orderedMarkets = SIGNAL_MARKET_ORDER.filter((id) => group.markets.includes(id));
   const href = signalGroupDetailHref(group.slug, listingSearch);
-  const openGroup = (event: MouseEvent<HTMLElement>) => {
-    if (event.target instanceof Element && event.target.closest("a, button")) return;
-    router.push(href);
-  };
 
   if (view === "grid") {
     return (
       <li ref={ref} data-signal-slug={group.slug} className="min-w-0">
-        <article
-          onClick={openGroup}
-          className="group flex h-full cursor-pointer flex-col rounded-lg border border-border bg-surface p-4 transition-colors duration-150 hover:bg-surface-2 motion-reduce:transition-none"
-        >
+        <article className="lift-card group relative flex h-full cursor-pointer flex-col rounded-lg border border-border bg-surface p-4">
           <div className="flex items-start gap-3">
             <SignalGroupLogo name={group.name} logo={group.logo} size="md" />
             <div className="min-w-0 flex-1">
@@ -581,7 +572,7 @@ function SignalRow({
               <StyleValue group={group} />
             </Meta>
           </dl>
-          <div className="mt-4">
+          <div className="relative z-10 mt-4">
             <JoinLink group={group} full />
           </div>
         </article>
@@ -593,8 +584,7 @@ function SignalRow({
     <li
       ref={ref}
       data-signal-slug={group.slug}
-      onClick={openGroup}
-      className={`group grid min-w-0 cursor-pointer grid-cols-2 gap-x-4 gap-y-3 rounded-lg border border-border bg-surface p-4 transition-colors duration-150 hover:bg-surface-2 motion-reduce:transition-none lg:items-center lg:gap-x-3 lg:rounded-none lg:border-0 lg:border-b lg:border-border lg:bg-transparent lg:px-4 lg:py-3 lg:hover:bg-surface-2 lg:last:border-b-0 ${TABLE_COLS}`}
+      className={`signal-row lift-card group relative grid min-w-0 cursor-pointer grid-cols-2 gap-x-4 gap-y-3 rounded-lg border border-border bg-surface p-4 lg:items-center lg:gap-x-3 lg:rounded-none lg:border-0 lg:border-b lg:border-border lg:bg-transparent lg:px-4 lg:py-3 lg:shadow-none lg:hover:translate-y-0 lg:hover:bg-surface-2 lg:hover:shadow-none lg:last:border-b-0 ${TABLE_COLS}`}
     >
       <div className="col-span-2 flex min-w-0 items-start gap-3 lg:col-span-1">
         <SignalGroupLogo name={group.name} logo={group.logo} size="sm" />
@@ -631,7 +621,7 @@ function SignalRow({
         <FieldLabel>Language</FieldLabel>
         <p className="truncate text-sm text-foreground lg:text-[13px]">{group.language || <Dash />}</p>
       </div>
-      <div className="col-span-2 lg:col-span-1 lg:justify-self-end">
+      <div className="relative z-10 col-span-2 lg:col-span-1 lg:justify-self-end">
         <JoinLink group={group} />
       </div>
     </li>
@@ -644,7 +634,7 @@ function GroupName({ id, name, href }: { id: string; name: string; href: string 
       <h3 id={id} title={name} className="line-clamp-2 min-w-0 text-sm font-semibold leading-5 tracking-tight text-foreground">
         <Link
           href={href}
-          className="underline-offset-2 outline-none group-hover:underline focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-accent"
+          className="card-stretch rounded-lg underline-offset-2 outline-none group-hover:underline focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-accent"
         >
           {name}
         </Link>
@@ -763,7 +753,7 @@ function JoinLink({ group, full = false }: { group: SignalGroupView; full?: bool
       target="_blank"
       rel="noopener sponsored"
       aria-label={`Join ${group.name} on Telegram (opens in a new tab)`}
-      className={`inline-flex h-11 items-center justify-center gap-1.5 rounded-lg bg-gold-fill px-3 text-sm font-semibold text-gold-ink transition-colors duration-150 hover:bg-[var(--color-gold-fill-hover)] active:brightness-95 ${
+      className={`relative z-10 inline-flex h-11 items-center justify-center gap-1.5 rounded-lg bg-gold-fill px-3 text-sm font-semibold text-gold-ink transition-colors duration-150 hover:bg-[var(--color-gold-fill-hover)] active:brightness-95 ${
         full ? "w-full" : "w-full lg:h-8 lg:w-auto"
       }`}
     >

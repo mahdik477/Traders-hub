@@ -256,7 +256,7 @@ function Directory({
           {matching.map((entry) => (
             <li
               key={entry.id}
-              className="lift-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface"
+              className="lift-card group relative flex cursor-pointer flex-col overflow-hidden rounded-xl border border-border bg-surface"
             >
               <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
               <div className="flex flex-1 flex-col p-5">
@@ -296,11 +296,15 @@ function Directory({
                   )}
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                      <h2 className="text-lg font-semibold">{entry.name}</h2>
+                      <h2 className="text-lg font-semibold">
+                        <Link href={entry.href} className="card-stretch rounded-xl">
+                          {entry.name}
+                        </Link>
+                      </h2>
                       {entry.affiliateLink && <OurChoiceBadge />}
                     </div>
                     {(entry.trustpilot || entry.whop) && (
-                      <div className="mt-1 flex flex-col gap-0.5 text-xs">
+                      <div className="relative z-10 mt-1 flex flex-col gap-0.5 text-xs">
                         {entry.trustpilot && <TrustpilotStars rating={entry.trustpilot} size="sm" />}
                         {entry.whop && <TrustpilotStars rating={entry.whop} size="sm" platform="Whop" />}
                       </div>
@@ -338,7 +342,7 @@ function Directory({
 
                 <Link
                   href={entry.href}
-                  className="btn btn-primary mt-5 w-full after:absolute after:inset-0"
+                  className="btn btn-primary relative z-10 mt-5 w-full"
                 >
                   {entry.courseCountLabel ? "View courses" : "View course"}
                   <span className="sr-only"> — {entry.name}</span>

@@ -165,9 +165,13 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
             return (
               <li
                 key={course.slug}
-                className="lift-card group relative flex flex-col rounded-xl border border-border bg-surface p-5"
+                className="lift-card group relative flex cursor-pointer flex-col rounded-xl border border-border bg-surface p-5"
               >
-                <h3 className="text-lg font-semibold">{course.name}</h3>
+                <h3 className="text-lg font-semibold">
+                  <Link href={`/courses/${provider.id}/${course.slug}`} className="card-stretch rounded-xl">
+                    {course.name}
+                  </Link>
+                </h3>
                 {course.bundleOf.length > 0 && (
                   <p className="meta mt-1">Bundle of {course.bundleOf.join(", ")}</p>
                 )}
@@ -180,7 +184,7 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
                 )}
                 <Link
                   href={`/courses/${provider.id}/${course.slug}`}
-                  className="btn btn-primary mt-5 w-full after:absolute after:inset-0"
+                  className="btn btn-primary relative z-10 mt-5 w-full"
                 >
                   View course
                   <span className="sr-only"> — {course.name}</span>

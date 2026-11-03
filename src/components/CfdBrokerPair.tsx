@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BrokerLogo from "@/components/BrokerLogo";
+import ChoiceBeam from "@/components/ChoiceBeam";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
 import ScrollReveal from "@/components/ScrollReveal";
 import VisitSiteLink from "@/components/VisitSiteLink";
@@ -16,7 +17,9 @@ export default function CfdBrokerPair({ brokers }: { brokers: BrokerView[] }) {
       {brokers.map((broker, index) => (
         <li key={broker.id} className="h-full">
           <ScrollReveal delay={index * 80} className="h-full">
-            <CfdBrokerCard broker={broker} priority={index === 0} />
+            <ChoiceBeam active={broker.ourChoice}>
+              <CfdBrokerCard broker={broker} priority={index === 0} />
+            </ChoiceBeam>
           </ScrollReveal>
         </li>
       ))}
@@ -29,13 +32,22 @@ function CfdBrokerCard({ broker, priority }: { broker: BrokerView; priority: boo
   const facts = cardFacts(broker);
 
   return (
-    <article className="broker-panel flex h-full flex-col rounded-2xl border border-border bg-surface p-6 sm:p-8">
+    <article
+      className={`broker-panel relative flex h-full cursor-pointer flex-col bg-surface p-6 sm:p-8 ${
+        broker.ourChoice ? "rounded-[14px]" : "rounded-2xl border border-border"
+      }`}
+    >
       <div className="flex items-start justify-between gap-4">
         <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} size="md" priority={priority} />
         {broker.ourChoice && <OurChoiceBadge compact />}
       </div>
 
-      <h2 className="broker-heading mt-6 text-2xl font-semibold tracking-tight text-foreground">{broker.name}</h2>
+      <h2 className="broker-heading mt-6 text-2xl font-semibold tracking-tight text-foreground">
+        <Link href={`/brokers/${broker.id}`} className="card-stretch rounded-2xl">
+          {broker.name}
+          <span className="sr-only"> listing</span>
+        </Link>
+      </h2>
       {broker.tagline && (
         <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">{broker.tagline}</p>
       )}
@@ -49,13 +61,13 @@ function CfdBrokerCard({ broker, priority }: { broker: BrokerView; priority: boo
         ))}
       </dl>
 
-      <div className="mt-auto pt-8">
+      <div className="relative z-10 mt-auto pt-8">
         {visitHref && (
-          <VisitSiteLink href={visitHref} firmName={broker.name} label="Visit broker" className="w-full" />
+          <VisitSiteLink href={visitHref} firmName={broker.name} label="Visit broker" className="relative z-10 w-full" />
         )}
         <Link
           href={`/brokers/${broker.id}`}
-          className="mt-1 flex min-h-11 items-center justify-center text-sm font-medium text-muted hover:text-foreground"
+          className="relative z-10 mt-1 flex min-h-11 items-center justify-center text-sm font-medium text-muted hover:text-foreground"
         >
           View listing
           <span className="sr-only"> for {broker.name}</span>

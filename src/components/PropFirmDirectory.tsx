@@ -206,12 +206,16 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
             return (
               <li
                 key={firm.id}
-                className="lift-card relative flex flex-col rounded-xl border border-border bg-surface p-5"
+                className="lift-card relative flex cursor-pointer flex-col rounded-xl border border-border bg-surface p-5"
               >
                 <div className="flex items-center gap-3">
                   <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
                   <div className="min-w-0">
-                    <h2 className="truncate text-lg font-semibold">{firm.name}</h2>
+                    <h2 className="truncate text-lg font-semibold">
+                      <Link href={`/funded-accounts/${firm.id}${query}`} className="card-stretch rounded-xl">
+                        {firm.name}
+                      </Link>
+                    </h2>
                     <div className="mt-1 flex flex-wrap gap-1.5">
                       {firm.markets.map((m) => (
                         <span key={m.market} className="pill">
@@ -245,7 +249,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                 {/* The whole card is clickable through this link's overlay. */}
                 <Link
                   href={`/funded-accounts/${firm.id}${query}`}
-                  className="btn btn-primary mt-5 w-full after:absolute after:inset-0 after:rounded-xl"
+                  className="btn btn-primary relative z-10 mt-5 w-full"
                 >
                   View challenges
                   <span className="sr-only"> — {firm.name}</span>

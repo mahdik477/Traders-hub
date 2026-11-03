@@ -264,14 +264,25 @@ function BrokerCard({
 
   return (
     <li
-      className="broker-card lift-card group relative flex flex-col rounded-xl border border-border bg-surface p-4 sm:p-5"
+      className="broker-card lift-card group relative flex cursor-pointer flex-col rounded-xl border border-border bg-surface p-4 sm:p-5"
       style={{ animationDelay: `${Math.min(index, 8) * 45}ms` }}
     >
       <div className="flex items-start gap-3">
         <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <h2 className="text-base font-semibold tracking-tight text-foreground">{broker.name}</h2>
+            <h2 className="text-base font-semibold tracking-tight text-foreground">
+              <Link
+                href={
+                  listingQuery
+                    ? `/brokers/${broker.id}?back=${encodeURIComponent(listingQuery)}`
+                    : `/brokers/${broker.id}`
+                }
+                className="card-stretch rounded-xl"
+              >
+                {broker.name}
+              </Link>
+            </h2>
             {broker.ourChoice && <OurChoiceBadge />}
           </div>
           {broker.founded && <p className="meta mt-0.5">Since {broker.founded}</p>}
@@ -317,7 +328,7 @@ function BrokerCard({
               ? `/brokers/${broker.id}?back=${encodeURIComponent(listingQuery)}`
               : `/brokers/${broker.id}`
           }
-          className="inline-flex min-h-9 items-center text-sm font-semibold text-foreground after:absolute after:inset-0"
+          className="relative z-10 inline-flex min-h-11 items-center text-sm font-semibold text-foreground"
         >
           View
           <span className="sr-only"> {broker.name}</span>
