@@ -1,0 +1,43 @@
+{
+  "tool": {
+    "slug": "fx-replay",
+    "name": "FX Replay",
+    "category": "backtesting",
+    "priority": 8,
+    "description": "FX Replay is a browser tool for replaying past market prices and placing simulated trades. Forex is included, and higher plans add other markets and finer data. FX Replay says it is not a broker and does not send trade signals.",
+    "features": [
+      "Replay past prices in the browser and place simulated trades, candle by candle",
+      "A journal stores those session trades. How many screenshots you can keep depends on the plan",
+      "Indicators are included, with a higher limit on the paid plans",
+      "Intermediate and Pro add a prop firm simulator. Pro adds seconds data and futures data"
+    ],
+    "plans": [
+      {
+        "name": "Beginner",
+        "price": "Free",
+        "detail": "The free plan on the pricing page. It includes 2 backtesting sessions, 1 indicator and 1 week of data retention. The page says no card is required."
+      },
+      {
+        "name": "Intermediate, annual",
+        "price": "$15/mo",
+        "detail": "Yearly billing at $180 per year. The same page says monthly billing is $17.99. Includes 10 sessions, 200 trades per session, 6 months of data retention, 3 indicators and 2 charts."
+      },
+      {
+        "name": "Pro, annual",
+        "price": "$29.16/mo",
+        "detail": "Yearly billing at $350 per year. The pricing card shows $29.16 per month. The FAQ on the same page says $29.17 per month. Monthly billing is $35. Adds unlimited sessions and indicators, seconds data, and futures data."
+      }
+    ],
+    "platforms": [
+      "Web"
+    ],
+    "website": "https://fxreplay.com/",
+    "pricing_note": "USD prices from the official pricing page on 3 Nov 2026, with yearly billing selected. Taxes may apply. The FAQ on that page rounds the Pro yearly rate to $29.17 per month.",
+    "affiliate_link": "https://www.fxreplay.com?utm_campaign=affiliate_program&utm_medium=affiliate&utm_source=rewardful&via=tradox"
+  },
+  "_notes": {
+    "last_verified": "2026-11-03",
+    "pricing_source": "https://fxreplay.com/pricing",
+    "source": "Pricing page https://fxreplay.com/pricing . What the product is, and that it is not a broker or a signal service: https://support.fxreplay.com/articles/what-is-fx-replay . Paid-plan simulator and data limits: https://support.fxreplay.com/articles/what-are-the-differences-between-fx-replay-plans-and-their-pricing"
+  }
+}
