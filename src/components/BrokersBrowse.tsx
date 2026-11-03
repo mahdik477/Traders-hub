@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Where does Visit broker go?",
-    a: "For now it opens the broker's official homepage. If an affiliate link is added later, it lives in one field on that broker's listing and the button uses it automatically. The footer explains when a link may earn us a commission.",
+    a: "Visit broker opens that broker's site in a new tab. When the listing has an affiliate link, the button uses it, and we may earn a commission if you sign up. It costs you nothing extra. The footer says the same.",
   },
 ];
 
