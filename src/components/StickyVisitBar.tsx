@@ -14,6 +14,7 @@ export default function StickyVisitBar({
   visitHref,
   visitLabel = "Visit site",
   wideLogo = false,
+  quiet = false,
 }: {
   courseName: string;
   logo: string | null;
@@ -23,6 +24,8 @@ export default function StickyVisitBar({
   visitLabel?: string;
   /** Wider tile for wordmarks. Courses leave this off. */
   wideLogo?: boolean;
+  /** Flat bar for broker pages. Courses and tools keep the floating card. */
+  quiet?: boolean;
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -40,12 +43,16 @@ export default function StickyVisitBar({
   return (
     <div
       aria-hidden={!visible}
-      className={`fixed inset-x-0 bottom-0 z-40 transition-all duration-300 ${
-        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-full opacity-0"
+      className={`fixed inset-x-0 bottom-0 z-40 transition-transform duration-300 motion-reduce:transition-none ${
+        visible ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
     >
-      <div className="container-page pb-4">
-        <div className="flex items-center gap-3 rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4">
+      <div className={quiet ? "border-t border-border bg-background/95 backdrop-blur-md" : "container-page pb-4"}>
+        <div
+          className={`flex items-center gap-3 ${
+            quiet ? "container-page py-3" : "rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4"
+          }`}
+        >
           {logo && (
             <div
               className={`flex shrink-0 items-center justify-center rounded-lg p-1.5 ${

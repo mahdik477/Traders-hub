@@ -1,15 +1,19 @@
+import BrokerAccordion from "@/components/BrokerAccordion";
 import BrokerCategoryEmpty from "@/components/BrokerCategoryEmpty";
 import BrokerCategoryNav from "@/components/BrokerCategoryNav";
+import BrokerCompare from "@/components/BrokerCompare";
 import BrokerDirectory from "@/components/BrokerDirectory";
 import CfdBrokerPair from "@/components/CfdBrokerPair";
+import ScrollReveal from "@/components/ScrollReveal";
 import { sortBrokers } from "@/lib/broker-filters";
 import { brokers } from "@/lib/brokers";
-import {
-  BROKER_CATEGORY_LABELS,
-  BROKER_CATEGORY_ORDER,
-  type BrokerCategory,
-} from "@/lib/broker-types";
-import { getSection } from "@/lib/sections";
+import { BROKER_CATEGORY_DESCRIPTIONS, BROKER_CATEGORY_LABELS, type BrokerCategory } from "@/lib/broker-types";
+import { SITE_NAME, getSection } from "@/lib/sections";
+
+const DIRECTORY_RISK = `${SITE_NAME} is a discovery and comparison platform for informational purposes only. We do not verify trading performance, accuracy or results, and nothing on this site is financial advice.`;
+
+const CFD_RISK =
+  "These are the only CFD brokers listed. Our choice puts VT Markets first. It is not a score of trading results, and it is not a recommendation to open an account. Trustpilot figures are that site's review scores, not a measure of trading results. Leverage on a card is the highest figure the broker advertises. It increases losses, and the cap you get depends on where you live.";
 
 const faqs = [
   {
@@ -20,82 +24,70 @@ const faqs = [
     q: "Do you rank brokers by results?",
     a: "No. Tradox is a directory. We do not score win rate, accuracy or returns. Trustpilot numbers are that site's review scores, shown with a link back to the source.",
   },
-  {
-    q: "Where does Visit broker go?",
-    a: "Visit broker opens that broker's site in a new tab. When the listing has an affiliate link, the button uses it, and we may earn a commission if you sign up. It costs you nothing extra. The footer says the same.",
-  },
 ];
+
+const AFFILIATE =
+  "Visit broker opens that broker's site in a new tab. When the listing has an affiliate link, the button uses it, and we may earn a commission if you sign up. It costs you nothing extra. The footer says the same.";
 
 export default function BrokersBrowse({ category }: { category: BrokerCategory }) {
   const section = getSection("brokers");
   const listed = sortBrokers(
-    brokers.filter((b) => b.category === category),
+    brokers.filter((broker) => broker.category === category),
     "name",
   );
-  const counts = Object.fromEntries(
-    BROKER_CATEGORY_ORDER.map((id) => [id, brokers.filter((b) => b.category === id).length]),
-  ) as Record<BrokerCategory, number>;
-  const regulatorCount = new Set(listed.flatMap((b) => b.regulators.map((r) => r.regulator))).size;
   const showPair = category === "cfd" && listed.length > 0;
 
   return (
-    <>
-      <h1 className="title-rule page-title">{section.title}</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">{section.summary}</p>
+    <div className="pb-8">
+      <header className="max-w-2xl">
+        <h1 className="page-title">{section.title}</h1>
+        <p className="mt-4 text-base leading-7 text-muted">{BROKER_CATEGORY_DESCRIPTIONS[category]}</p>
+      </header>
 
-      <BrokerCategoryNav active={category} counts={counts} />
+      <div className="mt-8 rounded-lg bg-surface-2 px-4 py-4 sm:px-5">
+        <p className="text-[13px] leading-6 text-muted">{showPair ? CFD_RISK : DIRECTORY_RISK}</p>
+      </div>
 
-      {listed.length > 0 && (
-        <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
-          <Fact value={String(listed.length)} label={listed.length === 1 ? "Broker listed" : "Brokers listed"} />
-          <Fact value={String(regulatorCount)} label="Regulator names on file" />
-          <Fact value="Not scored" label="Trading results" />
-        </dl>
-      )}
+      <BrokerCategoryNav active={category} />
 
-      <section aria-label={BROKER_CATEGORY_LABELS[category]}>
+      <section aria-label={BROKER_CATEGORY_LABELS[category]} className="mt-16 sm:mt-20">
         {showPair ? (
           <CfdBrokerPair brokers={listed} />
         ) : listed.length === 0 ? (
           <BrokerCategoryEmpty category={category} />
         ) : (
-          <div className="mt-8">
-            <BrokerDirectory brokers={listed} />
-          </div>
+          <BrokerDirectory brokers={listed} />
         )}
       </section>
 
       {showPair && (
-        <section aria-labelledby="broker-faq-heading" className="mt-14 max-w-2xl border-t border-border pt-8">
-          <h2 id="broker-faq-heading" className="section-title">
-            How to read this page
+        <ScrollReveal className="mt-24 sm:mt-32">
+          <BrokerCompare brokers={listed} />
+        </ScrollReveal>
+      )}
+
+      <ScrollReveal className="mt-24 sm:mt-32 max-w-2xl">
+        <section aria-labelledby="how-we-pick-heading">
+          <h2 id="how-we-pick-heading" className="broker-heading text-xl font-semibold tracking-tight">
+            How we pick brokers
           </h2>
-          <div className="mt-4 divide-y divide-border">
+          {showPair && (
+            <p className="mt-4 text-base leading-7 text-muted">
+              Our choice puts VT Markets first. It is not a score of trading results, and it is not a
+              recommendation to open an account.
+            </p>
+          )}
+          <h3 className="mt-10 text-sm font-semibold text-foreground">Affiliate disclosure</h3>
+          <p className="mt-3 text-sm leading-6 text-muted">{AFFILIATE}</p>
+          <div className="mt-8 border-t border-border">
             {faqs.map((item) => (
-              <details key={item.q} className="group py-3">
-                <summary className="cursor-pointer list-none font-medium text-foreground [&::-webkit-details-marker]:hidden">
-                  <span className="flex items-center justify-between gap-4">
-                    {item.q}
-                    <span aria-hidden="true" className="text-muted transition-transform duration-200 group-open:rotate-45">
-                      +
-                    </span>
-                  </span>
-                </summary>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.a}</p>
-              </details>
+              <BrokerAccordion key={item.q} title={item.q}>
+                {item.a}
+              </BrokerAccordion>
             ))}
           </div>
         </section>
-      )}
-    </>
-  );
-}
-
-function Fact({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="bg-surface px-4 py-3">
-      <dt className="eyebrow">{label}</dt>
-      <dd className="mt-1 text-lg font-semibold tracking-tight text-foreground">{value}</dd>
+      </ScrollReveal>
     </div>
   );
 }

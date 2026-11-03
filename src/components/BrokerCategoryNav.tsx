@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import {
   BROKER_CATEGORY_LABELS,
   BROKER_CATEGORY_ORDER,
@@ -6,40 +9,52 @@ import {
   type BrokerCategory,
 } from "@/lib/broker-types";
 
-export default function BrokerCategoryNav({
-  active,
-  counts,
-}: {
-  active: BrokerCategory;
-  counts: Record<BrokerCategory, number>;
-}) {
+export default function BrokerCategoryNav({ active }: { active: BrokerCategory }) {
+  const listRef = useRef<HTMLUListElement>(null);
+  const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
+
+  const measure = useCallback(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const current = list.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!current) return;
+    setIndicator({ left: current.offsetLeft, width: current.offsetWidth });
+  }, []);
+
+  useLayoutEffect(() => {
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [measure, active]);
+
   return (
-    <nav aria-label="Broker types" className="mt-6">
-      <ul className="flex flex-wrap gap-2">
+    <nav aria-label="Broker types" className="mt-8">
+      <ul ref={listRef} className="nav-scroll relative flex gap-8 overflow-x-auto border-b border-border">
         {BROKER_CATEGORY_ORDER.map((id) => {
           const selected = id === active;
-          const count = counts[id];
           return (
-            <li key={id}>
+            <li key={id} className="shrink-0">
               <Link
                 href={BROKER_CATEGORY_PATHS[id]}
                 aria-current={selected ? "page" : undefined}
-                className={`inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-3.5 text-sm font-medium transition-colors duration-150 ${
-                  selected
-                    ? "border-accent bg-accent/15 text-foreground"
-                    : "border-border-strong bg-surface text-muted hover:border-subtle hover:text-foreground"
+                className={`inline-flex min-h-11 items-center pb-3 text-[15px] tracking-tight ${
+                  selected ? "font-medium text-foreground" : "text-muted hover:text-foreground"
                 }`}
               >
                 {BROKER_CATEGORY_LABELS[id]}
-                {count > 0 && (
-                  <span className={`tabular-nums ${selected ? "text-foreground" : "text-subtle"}`}>
-                    {count}
-                  </span>
-                )}
               </Link>
             </li>
           );
         })}
+        <span
+          aria-hidden="true"
+          className="broker-tab-indicator"
+          style={
+            indicator
+              ? { left: indicator.left, width: indicator.width }
+              : { left: 0, width: 0, opacity: 0 }
+          }
+        />
       </ul>
     </nav>
   );

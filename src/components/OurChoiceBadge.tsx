@@ -2,9 +2,9 @@
 // marker, so the badge is not identified by colour alone. It is not a
 // score of trading results.
 
-export default function OurChoiceBadge() {
+export default function OurChoiceBadge({ compact = false }: { compact?: boolean }) {
   return (
-    <span className="our-choice-badge">
+    <span className={compact ? "our-choice-badge our-choice-quiet" : "our-choice-badge"}>
       <svg viewBox="0 0 12 12" className="our-choice-mark" aria-hidden="true">
         <path
           fill="currentColor"

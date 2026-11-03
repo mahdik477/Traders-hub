@@ -1,106 +1,66 @@
-import type { ReactNode } from "react";
 import Link from "next/link";
 import BrokerLogo from "@/components/BrokerLogo";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
-import TrustpilotStars from "@/components/TrustpilotStars";
-import { leverageLabel } from "@/lib/broker-filters";
-import { formatDeposit, type BrokerView } from "@/lib/broker-types";
+import ScrollReveal from "@/components/ScrollReveal";
+import VisitSiteLink from "@/components/VisitSiteLink";
+import { cardFacts } from "@/lib/broker-facts";
+import { brokerOutboundUrl, type BrokerView } from "@/lib/broker-types";
 
 /**
- * The CFD tab is a permanent pair: VT Markets, then PU Prime. Two large
- * cards, not a filterable grid.
+ * The CFD tab is a pair: VT Markets, then PU Prime. Two equal cards.
+ * The visit button uses the listing's affiliate link.
  */
 export default function CfdBrokerPair({ brokers }: { brokers: BrokerView[] }) {
   return (
-    <div className="mt-8">
-      <ul className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2 lg:gap-6">
-        {brokers.map((broker, index) => (
-          <CfdBrokerCard key={broker.id} broker={broker} priority={index === 0} />
-        ))}
-      </ul>
-      <p className="meta mt-4 max-w-2xl">
-        These are the only CFD brokers listed. Our choice puts VT Markets first. It is not a score
-        of trading results, and it is not a recommendation to open an account. Trustpilot figures
-        are that site&apos;s review scores, not a measure of trading results. Leverage on a card is
-        the highest figure the broker advertises. It increases losses, and the cap you get depends
-        on where you live.
-      </p>
-    </div>
+    <ul className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+      {brokers.map((broker, index) => (
+        <li key={broker.id} className="h-full">
+          <ScrollReveal delay={index * 80} className="h-full">
+            <CfdBrokerCard broker={broker} priority={index === 0} />
+          </ScrollReveal>
+        </li>
+      ))}
+    </ul>
   );
 }
 
 function CfdBrokerCard({ broker, priority }: { broker: BrokerView; priority: boolean }) {
-  const deposit = formatDeposit(broker.minDeposit, broker.currency);
-  const regulators = broker.regulators.map((r) => r.regulator).join(", ");
-  const href = `/brokers/${broker.id}`;
+  const visitHref = brokerOutboundUrl(broker);
+  const facts = cardFacts(broker);
 
   return (
-    <li className="broker-card lift-card group relative flex h-full flex-col rounded-2xl border border-border bg-surface p-5 sm:p-7">
-      <div className="flex flex-col gap-4">
-        <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} size="lg" priority={priority} />
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
-            <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">{broker.name}</h2>
-            {broker.ourChoice && <OurChoiceBadge />}
-          </div>
-          {broker.founded != null && <p className="meta mt-1">Since {broker.founded}</p>}
-          {broker.trustpilot && (
-            <div className="relative z-10 mt-1 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center">
-              <TrustpilotStars rating={broker.trustpilot} size="sm" />
-            </div>
-          )}
-        </div>
+    <article className="broker-panel flex h-full flex-col rounded-2xl border border-border bg-surface p-6 sm:p-8">
+      <div className="flex items-start justify-between gap-4">
+        <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} size="md" priority={priority} />
+        {broker.ourChoice && <OurChoiceBadge compact />}
       </div>
 
+      <h2 className="broker-heading mt-6 text-2xl font-semibold tracking-tight text-foreground">{broker.name}</h2>
       {broker.tagline && (
-        <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">{broker.tagline}</p>
+        <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">{broker.tagline}</p>
       )}
 
-      <div className="mt-5 flex flex-1 flex-col justify-end">
-        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border">
-          <Fact label="Min. deposit">{deposit ?? "Varies"}</Fact>
-          <Fact label="Leverage">{leverageLabel(broker)}</Fact>
-          <Fact label="Regulators" wide>
-            {regulators || "None listed"}
-          </Fact>
-          <Fact label="Platforms" wide>
-            {broker.platforms.length ? broker.platforms.join(", ") : "Not listed"}
-          </Fact>
-        </dl>
+      <dl className="mt-8 border-t border-border">
+        {facts.map((fact) => (
+          <div key={fact.label} className="grid grid-cols-[7.25rem_1fr] gap-4 border-b border-border py-3.5 sm:grid-cols-[8.5rem_1fr]">
+            <dt className="text-[13px] leading-5 text-subtle">{fact.label}</dt>
+            <dd className="text-sm font-medium leading-5 text-foreground">{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
 
-        <div className="mt-5 flex items-center justify-end">
-          <Link
-            href={href}
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground after:absolute after:inset-0"
-          >
-            View details
-            <span className="sr-only"> for {broker.name}</span>
-            <span
-              aria-hidden="true"
-              className="ml-1 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transform-none"
-            >
-              →
-            </span>
-          </Link>
-        </div>
+      <div className="mt-auto pt-8">
+        {visitHref && (
+          <VisitSiteLink href={visitHref} firmName={broker.name} label="Visit broker" className="w-full" />
+        )}
+        <Link
+          href={`/brokers/${broker.id}`}
+          className="mt-1 flex min-h-11 items-center justify-center text-sm font-medium text-muted hover:text-foreground"
+        >
+          View listing
+          <span className="sr-only"> for {broker.name}</span>
+        </Link>
       </div>
-    </li>
-  );
-}
-
-function Fact({
-  label,
-  children,
-  wide = false,
-}: {
-  label: string;
-  children: ReactNode;
-  wide?: boolean;
-}) {
-  return (
-    <div className={`bg-surface px-4 py-3 ${wide ? "col-span-2" : ""}`}>
-      <dt className="eyebrow">{label}</dt>
-      <dd className="mt-1 text-sm font-semibold leading-snug text-foreground">{children}</dd>
-    </div>
+    </article>
   );
 }
