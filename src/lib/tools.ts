@@ -91,11 +91,14 @@ function buildTool(t: RawFile["tool"]): ToolView {
 
 export { toolOutboundUrl } from "./tool-types";
 
+// Only allow normal web links, so a typo can't produce "javascript:...".
+// Keep the address as written. new URL().href inserts a slash before a
+// query on a bare host, and Visit tool must use the stored affiliate URL.
 function safeLink(url: string | null | undefined): string | null {
   if (!url) return null;
   try {
     const u = new URL(url);
-    return u.protocol === "https:" || u.protocol === "http:" ? u.href : null;
+    return u.protocol === "https:" || u.protocol === "http:" ? url : null;
   } catch {
     return null;
   }
