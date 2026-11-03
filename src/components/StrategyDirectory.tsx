@@ -214,7 +214,7 @@ function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; l
   const tierClass = TIER_BADGE_CLASS[s.tier];
 
   return (
-    <li className="lift-card group relative flex flex-col overflow-hidden rounded-xl border border-border bg-surface">
+    <li className="lift-card group relative flex cursor-pointer flex-col overflow-hidden rounded-xl border border-border bg-surface">
       <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start gap-3">
@@ -222,7 +222,11 @@ function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; l
             <CategoryIcon className="size-6" />
           </span>
           <div className="min-w-0 flex-1 pt-0.5">
-            <h2 className="text-lg font-semibold leading-snug">{s.name}</h2>
+            <h2 className="text-lg font-semibold leading-snug">
+              <Link href={href} className="card-stretch rounded-xl">
+                {s.name}
+              </Link>
+            </h2>
             <p className="mt-0.5 text-xs font-medium text-subtle">{STRATEGY_CATEGORY_LABELS[s.category]}</p>
           </div>
         </div>
@@ -249,7 +253,7 @@ function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; l
           {s.markets.length > 3 && <span className="pill text-xs">+{s.markets.length - 3} more</span>}
         </div>
 
-        <Link href={href} className="btn btn-outline mt-5 w-full after:absolute after:inset-0">
+        <Link href={href} className="btn btn-outline relative z-10 mt-5 w-full">
           View strategy
           <span className="sr-only"> — {s.name}</span>
         </Link>
