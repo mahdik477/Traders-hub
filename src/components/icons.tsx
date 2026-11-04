@@ -244,6 +244,79 @@ export function BuildingIcon({ className = base }: IconProps) {
   );
 }
 
+export function ChevronRightIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="m9.5 6 6 6-6 6" />
+    </svg>
+  );
+}
+
+// Learn section icons — one per topic, plus a couple of widget icons.
+export function CompassIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m14.5 9.5-2 5-5 2 2-5 5-2Z" />
+    </svg>
+  );
+}
+
+export function TrendDownIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M3 7 9.5 13.5l4-4L21 18" />
+      <path d="M21 12.5V18h-5.5" />
+    </svg>
+  );
+}
+
+export function ClockIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3.5 2" />
+    </svg>
+  );
+}
+
+export function ScaleIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M12 3v18M7 21h10" />
+      <path d="M12 6 4 8l4 7a4 4 0 0 0 4 0Z" />
+      <path d="M12 6l8 2-4 7a4 4 0 0 1-4 0Z" />
+    </svg>
+  );
+}
+
+export function BrainIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M9 4.5a2.5 2.5 0 0 0-2.5 2.5v.3A3 3 0 0 0 5 10v1a3 3 0 0 0 1.5 2.6V15a3 3 0 0 0 3 3 2 2 0 0 0 2-2V6.5A2 2 0 0 0 9 4.5Z" />
+      <path d="M15 4.5A2.5 2.5 0 0 1 17.5 7v.3a3 3 0 0 1 1.5 2.7v1a3 3 0 0 1-1.5 2.6V15a3 3 0 0 1-3 3 2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2Z" />
+    </svg>
+  );
+}
+
+export function CalculatorIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="4" y="3" width="16" height="18" rx="2" />
+      <path d="M8 7h8M7 12h2M11 12h2M15 12h2M7 16h2M11 16h2M15 16v4" />
+    </svg>
+  );
+}
+
+export function ReceiptIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3Z" />
+      <path d="M9 8h6M9 12h6" />
+    </svg>
+  );
+}
+
 export function SearchIcon({ className = base }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>

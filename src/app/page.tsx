@@ -11,6 +11,7 @@ import { toolPriceLabel } from "@/lib/tool-types";
 import { signalGroups } from "@/lib/signal-groups";
 import { strategies, strategiesInDisplayOrder } from "@/lib/strategies";
 import { STRATEGY_TIER_LABELS, STRATEGY_CATEGORY_LABELS } from "@/lib/strategy-types";
+import { LEARN_TOPICS } from "@/lib/learn-topics";
 import { allAccounts } from "@/lib/propfirm-filters";
 import { BROKER_CATEGORY_ITEM_LABELS } from "@/lib/broker-types";
 import { sortBrokers } from "@/lib/broker-filters";
@@ -32,6 +33,8 @@ import {
   CheckIcon,
   PlayIcon,
   SearchIcon,
+  CompassIcon,
+  ChevronRightIcon,
 } from "@/components/icons";
 
 function money(n: number, currency: string) {
@@ -154,6 +157,10 @@ const EXPLORE_META: Record<
   string,
   { icon: (p: { className?: string }) => ReactNode; blurb: string }
 > = {
+  learn: {
+    icon: CompassIcon,
+    blurb: "A free, 9-part intro to trading from zero — markets, orders, candlesticks, risk, psychology and more, each with something to click on.",
+  },
   "funded-accounts": {
     icon: ShieldIcon,
     blurb: "Evaluation fees, account sizes, drawdown rules and profit splits — pulled from each firm's own pricing page, not a sales call.",
@@ -184,7 +191,7 @@ const HOW_IT_WORKS = [
   {
     icon: SearchIcon,
     title: "Browse",
-    text: "Six sections, real data pulled from each provider's own pages — not sales copy.",
+    text: "Seven sections, real data pulled from each provider's own pages — not sales copy.",
   },
   {
     icon: PlayIcon,
@@ -252,6 +259,7 @@ export default function Home() {
   const featuredStrategyImage = strategies.find((s) => s.slug === "moving-average-crossover")?.image ?? null;
 
   const sectionCounts: Record<string, number> = {
+    learn: LEARN_TOPICS.length,
     "funded-accounts": propFirms.length,
     courses: courses.length + providers.length,
     "signal-groups": signalGroups.length,
@@ -261,6 +269,7 @@ export default function Home() {
   };
 
   const sectionSnapshots: Record<string, ReactNode> = {
+    learn: <LearnSnapshotList />,
     "funded-accounts": <SnapshotList items={fundedAccountsSnapshot()} />,
     courses: <SnapshotList items={coursesSnapshot()} />,
     "signal-groups": <SnapshotList items={signalGroupsSnapshot()} />,
@@ -406,7 +415,7 @@ export default function Home() {
         <h2 id="explore-heading" className="section-title text-3xl sm:text-4xl">
           Everything we offer
         </h2>
-        <p className="mt-2 max-w-xl text-muted">One site, six ways to get your bearings — pick wherever you want to start.</p>
+        <p className="mt-2 max-w-xl text-muted">One site, seven ways to get your bearings — pick wherever you want to start.</p>
 
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {liveSections.map((s, i) => {
@@ -449,7 +458,7 @@ export default function Home() {
                     <div className="mt-4 flex-1">{sectionSnapshots[s.slug]}</div>
 
                     <Link href={`/${s.slug}`} className="btn btn-outline relative z-10 mt-5 w-full">
-                      Browse {s.title.toLowerCase()}
+                      {s.slug === "learn" ? "Start learning" : `Browse ${s.title.toLowerCase()}`}
                     </Link>
                   </div>
                 </div>
@@ -611,6 +620,33 @@ function StrategySnapshotList({
               <span className="meta mt-0.5 block">{item.category}</span>
             </span>
             <span className="pill shrink-0">{item.tier}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// The Learn course's first few parts — same list shape as the others, but
+// numbered instead of priced, since it's a fixed curriculum, not listings.
+function LearnSnapshotList() {
+  return (
+    <ul className="divide-y divide-border rounded-xl border border-border">
+      {LEARN_TOPICS.slice(0, 3).map((topic, i) => (
+        <li key={topic.slug}>
+          <Link href={`/learn/${topic.slug}`} className="flex items-center gap-3 p-3 transition-colors hover:bg-surface-2">
+            <span
+              aria-hidden="true"
+              className="figure shrink-0 text-border-strong"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="min-w-0 flex-1 truncate font-semibold">{topic.shortTitle}</span>
+            <span className="meta shrink-0 flex items-center gap-1">
+              {topic.readMinutes} min
+              <ChevronRightIcon className="size-3.5" />
+            </span>
           </Link>
         </li>
       ))}

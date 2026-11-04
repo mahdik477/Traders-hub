@@ -14,6 +14,13 @@ export const SITE_NAME = "Tradox";
 
 export const sections: Section[] = [
   {
+    slug: "learn",
+    title: "Learn",
+    summary:
+      "A 9-part intro to trading from the ground up — markets, orders, candlesticks, timeframes, technical and fundamental analysis, risk management, psychology, and costs. Free, no account needed.",
+    status: "live",
+  },
+  {
     slug: "funded-accounts",
     title: "Funded Accounts",
     summary:
