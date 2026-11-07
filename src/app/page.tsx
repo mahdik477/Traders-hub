@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode, JSX } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SITE_NAME, sections } from "@/lib/sections";
@@ -7,7 +7,7 @@ import { courses } from "@/lib/courses";
 import { providers } from "@/lib/providers";
 import { brokers } from "@/lib/brokers";
 import { tools } from "@/lib/tools";
-import { toolPriceLabel } from "@/lib/tool-types";
+import { toolPriceLabel, TOOL_CATEGORY_LABELS, TOOL_CATEGORY_ORDER } from "@/lib/tool-types";
 import { signalGroups } from "@/lib/signal-groups";
 import { strategies, strategiesInDisplayOrder } from "@/lib/strategies";
 import { STRATEGY_TIER_LABELS, STRATEGY_CATEGORY_LABELS } from "@/lib/strategy-types";
@@ -16,10 +16,17 @@ import { allAccounts } from "@/lib/propfirm-filters";
 import { BROKER_CATEGORY_ITEM_LABELS } from "@/lib/broker-types";
 import { sortBrokers } from "@/lib/broker-filters";
 import FirmBadge from "@/components/FirmBadge";
-import MovingAverageSimulator from "@/components/MovingAverageSimulator";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
-import TerminalStatPanel from "@/components/TerminalStatPanel";
+import CinematicHero from "@/components/hero/CinematicHero";
+import CountUpStat from "@/components/CountUpStat";
+import SpotlightRow from "@/components/explore/SpotlightRow";
+import MiniCurriculumPath from "@/components/explore/MiniCurriculumPath";
+import MiniBarCompare, { type BarItem } from "@/components/explore/MiniBarCompare";
+import MiniDotPlot from "@/components/explore/MiniDotPlot";
+import MiniPulseFeed from "@/components/explore/MiniPulseFeed";
+import MiniIconCluster from "@/components/explore/MiniIconCluster";
+import MiniCandlePreview from "@/components/explore/MiniCandlePreview";
 import {
   BuildingIcon,
   BookIcon,
@@ -35,6 +42,10 @@ import {
   SearchIcon,
   CompassIcon,
   ChevronRightIcon,
+  VolumeBarsIcon,
+  RevertIcon,
+  BoltIcon,
+  GridIcon,
 } from "@/components/icons";
 
 function money(n: number, currency: string) {
@@ -44,6 +55,16 @@ function money(n: number, currency: string) {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(n);
+}
+
+// Pulls the first dollar figure out of a price string like "$199/month" or
+// "≈ $1,580/year" — null for anything that doesn't have one ("Free", or a
+// price we don't carry in USD), which the dot plot then just leaves out
+// rather than guessing a number.
+function firstDollarAmount(priceText: string): number | null {
+  const match = priceText.match(/\$\s?([\d,]+(?:\.\d+)?)/);
+  if (!match) return null;
+  return Number(match[1].replace(/,/g, ""));
 }
 
 /** One row of a section card's snapshot list — a logo (or lettermark), a
@@ -147,6 +168,72 @@ function strategiesSnapshot() {
     name: s.name,
     tier: STRATEGY_TIER_LABELS[s.tier],
     category: STRATEGY_CATEGORY_LABELS[s.category],
+  }));
+}
+
+// The small interactive chart on each "Everything we offer" row — real
+// figures, never a ranking. Same curated firms as fundedAccountsSnapshot,
+// so the two parts of the row stay consistent with each other.
+function fundedAccountsSplitChart(): BarItem[] {
+  const ids = ["ftmo", "alpha-funded", "topstep", "fundingpips"];
+  const chosen = ids.map((id) => propFirms.find((f) => f.id === id)).filter((f) => f != null);
+  return chosen
+    .map((firm) => {
+      const splits = allAccounts(firm)
+        .map((a) => a.profitSplit)
+        .filter((s): s is number => s != null);
+      if (splits.length === 0) return null;
+      const max = Math.max(...splits);
+      return { name: firm.name, value: max, display: `${max}%` };
+    })
+    .filter((x): x is BarItem => x != null);
+}
+
+function brokersDepositChart(): BarItem[] {
+  const picked = sortBrokers(brokers.filter((b) => b.category === "cfd" && b.minDeposit != null), "name").slice(0, 4);
+  return picked.map((b) => ({
+    name: b.name,
+    // Lower is "better" for a minimum deposit, so the bar reflects how
+    // accessible it is (smaller deposit = shorter bar), not just the raw
+    // number — still the real published figure, just inverted for the
+    // bar's own logic.
+    value: 1 / Math.max(b.minDeposit!, 1),
+    display: money(b.minDeposit!, b.currency),
+  }));
+}
+
+function coursesPriceDots() {
+  return courses
+    .map((c) => {
+      const priceText = c.pricing[0]?.price;
+      if (!priceText) return null;
+      const amount = firstDollarAmount(priceText);
+      if (amount == null) return null;
+      return { name: c.name, price: amount, display: `$${amount}` };
+    })
+    .filter((x): x is { name: string; price: number; display: string } => x != null)
+    .slice(0, 8);
+}
+
+function signalGroupsFeed() {
+  return signalGroups.slice(0, 3).map((g) => ({ name: g.name, priceLabel: g.priceLabel, memberCount: g.memberCount }));
+}
+
+const TOOL_CATEGORY_ICONS: Record<string, (p: { className?: string }) => JSX.Element> = {
+  charting: WaveStructureIcon,
+  indicators: VolumeBarsIcon,
+  backtesting: RevertIcon,
+  journals: BookIcon,
+  automation: BoltIcon,
+  vps: MonitorIcon,
+  "market-data": GridIcon,
+  copiers: LinkIcon,
+};
+
+function toolCategoryCluster() {
+  return TOOL_CATEGORY_ORDER.slice(0, 8).map((cat) => ({
+    label: TOOL_CATEGORY_LABELS[cat],
+    icon: TOOL_CATEGORY_ICONS[cat] ?? MonitorIcon,
   }));
 }
 
@@ -256,7 +343,6 @@ const TOTAL_LISTINGS =
 
 export default function Home() {
   const liveSections = sections.filter((s) => s.status === "live");
-  const featuredStrategyImage = strategies.find((s) => s.slug === "moving-average-crossover")?.image ?? null;
 
   const sectionCounts: Record<string, number> = {
     learn: LEARN_TOPICS.length,
@@ -278,10 +364,26 @@ export default function Home() {
     strategies: <StrategySnapshotList items={strategiesSnapshot()} />,
   };
 
+  // The small interactive chart for each row — a different, genuinely
+  // data-driven visual per section rather than one widget reused seven
+  // times. See src/components/explore/ for each one.
+  const sectionCharts: Record<string, ReactNode> = {
+    learn: <MiniCurriculumPath topics={LEARN_TOPICS} />,
+    "funded-accounts": <MiniBarCompare items={fundedAccountsSplitChart()} label="Profit split, by firm" />,
+    courses: <MiniDotPlot items={coursesPriceDots()} />,
+    "signal-groups": <MiniPulseFeed items={signalGroupsFeed()} />,
+    brokers: <MiniBarCompare items={brokersDepositChart()} label="Minimum deposit, by broker" />,
+    tools: <MiniIconCluster items={toolCategoryCluster()} />,
+    strategies: <MiniCandlePreview />,
+  };
+
   const tickerItems = liveSections.map((s) => `${sectionCounts[s.slug] ?? 0} ${s.title}`.toUpperCase());
 
   return (
-    <>
+    <div
+      className="homepage-v3"
+      style={{ "--font-heading": "var(--font-display)" } as React.CSSProperties}
+    >
       {/* A continuous line of live counts right under the header — purely
           decorative (the real, accessible numbers are in the panel below
           and on the explore cards further down), but it's the first thing
@@ -301,33 +403,49 @@ export default function Home() {
       </div>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Hero — the brand name itself is the first visual anchor, not a   */}
-      {/* small logo in the corner, paired with a live data readout rather */}
-      {/* than another block of plain-left-aligned marketing copy.         */}
+      {/* Hero — a full-bleed WebGL terrain (its ridges built from a       */}
+      {/* synthetic price walk, same convention as every other decorative  */}
+      {/* chart on the site) standing in for "Trading, decoded." as an     */}
+      {/* actual visual event rather than only a tagline. Pinned while you */}
+      {/* scroll through it: the camera moves forward and the fog closes   */}
+      {/* in, so the hero recedes into the next section instead of just    */}
+      {/* scrolling away. Real HTML text on top throughout — nothing here  */}
+      {/* is baked into the canvas. See CinematicHero.tsx for the render-  */}
+      {/* mode/accessibility handling.                                     */}
       {/* ---------------------------------------------------------------- */}
-      <section className="hero-intro grid grid-cols-1 gap-10 py-10 sm:py-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-8">
-        <div className="relative">
-          <p className="eyebrow">UAE · Built for traders just starting out</p>
-          <h1 className="mt-3 leading-[0.95]">
+      <CinematicHero>
+        <div className="-mx-4 flex w-full flex-col items-center px-4 text-center sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/brand/tradox-td.png"
+              alt=""
+              width={56}
+              height={56}
+              className="size-8 shrink-0 rounded-lg sm:size-10"
+              priority
+            />
+            <p className="eyebrow text-left">UAE · Trading, simplified for everyone</p>
+          </div>
+          <h1 className="mt-[clamp(0.5rem,2.5vh,1rem)] leading-[0.92]">
             <span
-              className="brand-wordmark block text-[clamp(3.25rem,13vw,6.75rem)] font-extrabold tracking-tight"
+              className="brand-wordmark block text-[clamp(2.75rem,11vw,6.5rem)] font-extrabold tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {SITE_NAME}
             </span>
             <span
-              className="mt-2 block text-[clamp(1.5rem,4.5vw,2.5rem)] font-semibold tracking-tight text-foreground"
+              className="mt-2 block text-[clamp(1.25rem,3.6vw,2.25rem)] font-semibold tracking-tight text-foreground"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Trading, decoded.
             </span>
           </h1>
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
+          <p className="mt-[clamp(0.5rem,2vh,1.25rem)] max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             Prop firms, courses, signal groups, brokers, tools and strategies — real pricing,
             real rules, and live simulators you can actually practice on before you spend a
             cent.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-[clamp(0.75rem,2.5vh,1.5rem)] flex flex-wrap items-center justify-center gap-3">
             <Link href="/funded-accounts" className="btn btn-primary">
               Start exploring
             </Link>
@@ -335,20 +453,43 @@ export default function Home() {
               See everything we offer
             </a>
           </div>
-        </div>
 
-        <TerminalStatPanel
-          caption="Live across the site"
-          backdrop={<HeroChartDecoration />}
-          stats={[
-            { label: "Prop firms", value: propFirms.length },
-            { label: "Courses", value: courses.length + providers.length },
-            { label: "Strategies", value: strategies.length },
-            { label: "Signal groups", value: signalGroups.length },
-          ]}
-          footnote={`${TOTAL_LISTINGS}+ listings total — zero performance scores, zero rankings.`}
-        />
-      </section>
+          <div className="mt-[clamp(0.75rem,3vh,2rem)] w-full max-w-md rounded-2xl border border-border-strong/60 bg-background/35 px-4 py-3 shadow-glow backdrop-blur-md sm:max-w-none sm:px-7 sm:py-3.5">
+            <span className="flex items-center justify-center gap-2 pb-2 sm:hidden">
+              <span className="relative flex size-1.5">
+                <span className="absolute inline-flex size-full rounded-full bg-success opacity-75 motion-safe:animate-ping" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-success" />
+              </span>
+              <span className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-muted">Live</span>
+            </span>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-[auto_repeat(4,1fr)] sm:items-center sm:gap-x-8 sm:gap-y-0">
+              <span className="relative hidden items-center gap-2 pr-3 sm:flex">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex size-full rounded-full bg-success opacity-75 motion-safe:animate-ping" />
+                  <span className="relative inline-flex size-2 rounded-full bg-success" />
+                </span>
+                <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted">Live</span>
+              </span>
+              {[
+                { label: "Prop firms", value: propFirms.length },
+                { label: "Courses", value: courses.length + providers.length },
+                { label: "Strategies", value: strategies.length },
+                { label: "Signal groups", value: signalGroups.length },
+              ].map((s) => (
+                <div key={s.label} className="text-left">
+                  <dd className="figure-lg font-mono text-lg text-foreground sm:text-2xl">
+                    <CountUpStat value={s.value} />
+                  </dd>
+                  <dt className="eyebrow mt-0.5 text-[0.55rem] sm:text-[0.6rem]">{s.label}</dt>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p className="mt-2 hidden font-mono text-[0.7rem] text-subtle sm:block">
+            {TOTAL_LISTINGS}+ listings total — zero performance scores, zero rankings.
+          </p>
+        </div>
+      </CinematicHero>
 
       {/* ---------------------------------------------------------------- */}
       {/* How it works — three steps, added so the hero isn't carrying the */}
@@ -381,35 +522,15 @@ export default function Home() {
       </ScrollReveal>
 
       {/* ---------------------------------------------------------------- */}
-      {/* See it in action — an actual live simulator, not another         */}
-      {/* screenshot or paragraph describing one.                          */}
-      {/* ---------------------------------------------------------------- */}
-      <ScrollReveal>
-        <section aria-labelledby="demo-heading" className="py-14">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow">Not just a list — try it yourself</p>
-              <h2 id="demo-heading" className="section-title mt-2 text-3xl sm:text-4xl">
-                This is a real, live strategy simulator
-              </h2>
-              <p className="mt-2 max-w-xl text-muted">
-                Every one of our 58 strategies has one of these built in. Drag the sliders,
-                shuffle the chart, and watch the signals happen in front of you — made-up price
-                data, real mechanics.
-              </p>
-            </div>
-            <Link href="/strategies" className="btn btn-outline shrink-0">
-              Browse all 58 strategies
-            </Link>
-          </div>
-          <div className="mt-6">
-            <MovingAverageSimulator />
-          </div>
-        </section>
-      </ScrollReveal>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Explore everything — the full 6-up grid, each card data-driven.  */}
+      {/* Everything we offer — one full-width, roomy row per section, each */}
+      {/* with its own real, hover-interactive chart (not a copy of the    */}
+      {/* hero's terrain — a different, data-driven little chart per       */}
+      {/* section: profit splits, a price scale, a live-feel feed, the     */}
+      {/* actual tool categories, a candle preview). Alternates left/right */}
+      {/* for rhythm on wide screens; always stacks the same reading order */}
+      {/* on a phone. This replaced the old compact card grid and the      */}
+      {/* separate "try the simulator" section — the candle preview below  */}
+      {/* now carries that job for Strategies specifically.                */}
       {/* ---------------------------------------------------------------- */}
       <section id="explore" aria-labelledby="explore-heading" className="scroll-mt-20 border-t border-border py-14">
         <h2 id="explore-heading" className="section-title text-3xl sm:text-4xl">
@@ -417,51 +538,45 @@ export default function Home() {
         </h2>
         <p className="mt-2 max-w-xl text-muted">One site, seven ways to get your bearings — pick wherever you want to start.</p>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 flex flex-col gap-5">
           {liveSections.map((s, i) => {
             const meta = EXPLORE_META[s.slug];
             const Icon = meta?.icon ?? WaveStructureIcon;
-            const isStrategies = s.slug === "strategies";
+            const chartFirst = i % 2 === 1;
             return (
-              <ScrollReveal key={s.slug} delay={(i % 3) * 60}>
-                <div className="lift-card group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-border bg-surface">
-                  <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
-                  <div className="flex flex-1 flex-col p-5">
-                    <div className="flex items-start justify-between gap-3">
-                      <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
-                        <Icon className="size-5.5" />
-                      </span>
-                      <span className="pill shrink-0">{sectionCounts[s.slug] ?? 0} listed</span>
+              <ScrollReveal key={s.slug} delay={Math.min(i, 3) * 60}>
+                <SpotlightRow>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch">
+                    <div className={`flex flex-col justify-center p-6 sm:p-8 ${chartFirst ? "lg:order-last" : ""}`}>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+                          <Icon className="size-5.5" />
+                        </span>
+                        <span className="pill shrink-0">{sectionCounts[s.slug] ?? 0} listed</span>
+                      </div>
+                      <h3 className="mt-4 text-2xl font-bold">
+                        <Link href={`/${s.slug}`} className="card-stretch rounded-xl hover:text-accent">
+                          {s.title}
+                        </Link>
+                      </h3>
+                      <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">{meta?.blurb ?? s.summary}</p>
+
+                      <div className="mt-5 max-w-md">{sectionSnapshots[s.slug]}</div>
+
+                      <Link href={`/${s.slug}`} className="btn btn-outline relative z-10 mt-5 w-fit">
+                        {s.slug === "learn" ? "Start learning" : `Browse ${s.title.toLowerCase()}`}
+                      </Link>
                     </div>
-                    <h3 className="mt-3 text-xl font-bold">
-                      <Link href={`/${s.slug}`} className="card-stretch rounded-xl hover:text-accent">
-                        {s.title}
-                      </Link>
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted">{meta?.blurb ?? s.summary}</p>
 
-                    {isStrategies && featuredStrategyImage && (
-                      <Link
-                        href="/strategies/moving-average-crossover"
-                        className="relative z-10 mt-4 block overflow-hidden rounded-lg border border-border"
-                      >
-                        <Image
-                          src={featuredStrategyImage.src}
-                          alt={featuredStrategyImage.caption}
-                          width={600}
-                          height={338}
-                          className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                        />
-                      </Link>
-                    )}
-
-                    <div className="mt-4 flex-1">{sectionSnapshots[s.slug]}</div>
-
-                    <Link href={`/${s.slug}`} className="btn btn-outline relative z-10 mt-5 w-full">
-                      {s.slug === "learn" ? "Start learning" : `Browse ${s.title.toLowerCase()}`}
-                    </Link>
+                    <div
+                      className={`flex items-stretch border-t border-border bg-surface-2/40 p-6 sm:p-8 lg:border-t-0 ${
+                        chartFirst ? "lg:border-r" : "lg:border-l"
+                      }`}
+                    >
+                      <div className="min-h-[220px] w-full">{sectionCharts[s.slug]}</div>
+                    </div>
                   </div>
-                </div>
+                </SpotlightRow>
               </ScrollReveal>
             );
           })}
@@ -544,30 +659,7 @@ export default function Home() {
           </Link>
         </section>
       </ScrollReveal>
-    </>
-  );
-}
-
-// A faint, decorative "price chart" line behind the hero headline — purely
-// visual, aria-hidden, never presented as real market data (see the
-// synthetic-chart convention used everywhere else on the site).
-function HeroChartDecoration() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 500 260"
-      preserveAspectRatio="none"
-      className="hero-chart-deco pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full opacity-[0.12]"
-    >
-      <path
-        d="M0 190 L40 170 L70 200 L105 120 L145 150 L180 70 L220 110 L255 40 L295 90 L335 30 L375 75 L415 20 L450 60 L500 10"
-        fill="none"
-        stroke="var(--color-gold-bright)"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    </div>
   );
 }
 

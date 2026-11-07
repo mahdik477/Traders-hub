@@ -725,6 +725,27 @@ input.signal-filter-search {
   }
 }
 
+/* CountUpStat's entrance — see the long comment in that component for why
+   this has to be an animation added by a class, not a persistent opacity
+   state: the element must be fully visible by default (no JS, or before
+   this class is added) and only gets the blur-in treatment as a bonus. */
+@keyframes stat-settle-in {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateY(0.12em);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+.stat-settle-in {
+  animation: stat-settle-in 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* A quiet hover: the border picks up a trace of gold and the card sits a
    hair above the page. No lift-and-glow halo — that read as the same
    trick on every card on every page, rather than something that stood
@@ -1044,4 +1065,90 @@ input.signal-filter-search {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+/* The cinematic hero reads as black-and-gold regardless of the site's own
+   light/dark toggle — same call every dark-hero marketing site (Linear,
+   Stripe, Raycast) makes, and the WebGL terrain itself only ever makes
+   sense against black. The theme toggle still works normally for every
+   other page, and for the rest of this homepage below the hero: this
+   class re-declares the same values the dark theme block above already
+   uses, scoped to the hero's own subtree, rather than touching the
+   site-wide toggle or :root at all. */
+.hero-force-dark {
+  color-scheme: dark;
+  --color-background: #070708;
+  --color-surface: #101012;
+  --color-surface-2: #18181c;
+  --color-border: #2a261f;
+  --color-border-strong: #433c30;
+  --color-foreground: #f6f3ec;
+  --color-muted: #cfc6b8;
+  --color-subtle: #b3a898;
+  --color-gold-bright: #f5d76e;
+  --color-gold: #e8c56a;
+  --color-gold-deep: #b8860b;
+  --color-gold-ink: #161208;
+  --color-gold-fill: #e0b44a;
+  --color-gold-fill-hover: #f5d76e;
+  --color-brand: var(--color-gold);
+  --color-brand-hover: var(--color-gold-bright);
+  --color-success: #3dce86;
+  --color-warning: #e8a317;
+  --color-danger: #ef5b56;
+  --shadow-glow-color: 0 0 0 1px rgb(232 197 106 / 0.35), 0 16px 40px -22px rgb(184 134 11 / 0.55);
+}
+
+/* Cursor-aware gold spotlight on the "Everything we offer" rows
+   (SpotlightRow.tsx) — a radial gradient whose centre follows --spot-x/
+   --spot-y, set by a pointermove listener. Pure decoration, so it's
+   skipped entirely for reduced-motion (a plain hover border still applies,
+   set in SpotlightRow's own hover: class). */
+.spotlight-glow {
+  background: radial-gradient(
+    480px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    color-mix(in srgb, var(--color-gold) 14%, transparent),
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-glow {
+    display: none;
+  }
+}
+
+/* The Strategies row's small candle+MA preview (MiniCandlePreview.tsx) —
+   the gold moving-average line gently redraws itself on a loop. 300 is a
+   fixed, slightly-generous estimate of MA_PATH's real length in px (the
+   actual path is ~290px) — a CSS stroke-dasharray doesn't respect the
+   SVG pathLength attribute reliably across browsers, so this uses real
+   pixels instead of that normalization trick. */
+@keyframes ma-preview-draw {
+  0%,
+  8% {
+    stroke-dashoffset: 300;
+  }
+  55%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ma-preview-line {
+    stroke-dasharray: 300;
+    animation: ma-preview-draw 4.5s ease-in-out infinite;
+  }
+}
+
+/* A faint film-grain texture over the cinematic hero's black — an inline
+   SVG turbulence filter as a background image, so there's no extra image
+   asset and no runtime cost beyond painting it once. Keeps the terrain's
+   flat blacks from looking like a flat digital fill. */
+.hero-grain {
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
 }
