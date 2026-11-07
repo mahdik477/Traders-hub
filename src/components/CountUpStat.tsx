@@ -1,57 +1,56 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-// A number that counts up from 0 to its real value the first time it
-// scrolls into view — small, dependency-free motion instead of a static
-// figure. Respects prefers-reduced-motion (shows the final number right
-// away, no animation) and always ends on the exact real value.
+// A stat figure that's correct from the very first paint — including the
+// server-rendered HTML, before any JS has run — and gets a tasteful
+// one-time "settle in" animation the first time it scrolls into view.
+//
+// Earlier version of this component started from 0 and counted up on
+// scroll. That meant the real listing counts never actually appeared in
+// the HTML sent to the browser (or to anything that doesn't run JS) —
+// every stat on the homepage read "0" until the animation fired.
+//
+// Fixed properly this time: the number itself is always just rendered as
+// plain text, full opacity, no React state involved in whether it's
+// visible. The entrance motion is a CSS `@keyframes` animation (see
+// `.stat-settle-in` in globals.css) added as a class directly to the DOM
+// node after mount, only if JS runs and the element has scrolled into
+// view. No JS at all → no class is ever added → a plain, fully visible,
+// correct number. That's the only way to guarantee it never flashes a
+// wrong value and never silently stays invisible.
 export default function CountUpStat({
   value,
   suffix = "",
-  durationMs = 1100,
   className = "",
 }: {
   value: number;
   suffix?: string;
-  durationMs?: number;
   className?: string;
 }) {
-  const [display, setDisplay] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
 
   useEffect(() => {
-    const reducedMotion =
-      typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion || typeof IntersectionObserver === "undefined" || !ref.current) {
-      setDisplay(value);
-      return;
-    }
     const el = ref.current;
+    if (!el) return;
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion || typeof IntersectionObserver === "undefined") return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || started.current) return;
-        started.current = true;
-        const start = performance.now();
-        function tick(now: number) {
-          const progress = Math.min(1, (now - start) / durationMs);
-          const eased = 1 - (1 - progress) ** 3; // ease-out cubic
-          setDisplay(Math.round(eased * value));
-          if (progress < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
+        if (!entry.isIntersecting) return;
+        el.classList.add("stat-settle-in");
         observer.disconnect();
       },
       { threshold: 0.4 },
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, durationMs]);
+  }, []);
 
   return (
     <span ref={ref} className={className}>
-      {display}
+      {value}
       {suffix}
     </span>
   );
