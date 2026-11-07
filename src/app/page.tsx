@@ -19,6 +19,7 @@ import FirmBadge from "@/components/FirmBadge";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
 import CinematicHero from "@/components/hero/CinematicHero";
+import StaticHeroBackdrop from "@/components/hero/StaticHeroBackdrop";
 import CountUpStat from "@/components/CountUpStat";
 import SpotlightRow from "@/components/explore/SpotlightRow";
 import MiniCurriculumPath from "@/components/explore/MiniCurriculumPath";
@@ -584,76 +585,95 @@ export default function Home() {
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Why Tradox — the trust facts, presented as a real section        */}
-      {/* instead of a thin strip of text.                                  */}
+      {/* Why Tradox — a manifesto, not a card grid: big statements, one    */}
+      {/* per line, each revealing on scroll. This is the trust section,   */}
+      {/* so it gets the boldest type on the page outside the hero itself. */}
       {/* ---------------------------------------------------------------- */}
-      <ScrollReveal>
-        <section aria-labelledby="why-heading" className="border-t border-border py-14">
-          <h2 id="why-heading" className="section-title text-3xl sm:text-4xl">
+      <section aria-labelledby="why-heading" className="border-t border-border py-16">
+        <ScrollReveal>
+          <p className="eyebrow">The short version</p>
+          <h2 id="why-heading" className="section-title mt-2 text-3xl sm:text-4xl">
             Why Tradox
           </h2>
-          <p className="mt-2 max-w-xl text-muted">The short version of how this site works and why we built it this way.</p>
+        </ScrollReveal>
 
-          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {WHY_POINTS.map(({ icon: Icon, title, text }) => (
-              <li
-                key={title}
-                className="flex gap-4 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-accent/40"
-              >
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
-                  <Icon className="size-5" />
+        <div className="mt-10 divide-y divide-border border-y border-border">
+          {WHY_POINTS.map(({ icon: Icon, title, text }, i) => (
+            <ScrollReveal key={title} delay={i * 90}>
+              <div className="flex flex-col gap-3 py-7 sm:flex-row sm:items-baseline sm:gap-8">
+                <span
+                  aria-hidden="true"
+                  className="shrink-0 font-mono text-sm text-border-strong sm:w-10"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <div>
-                  <p className="font-semibold text-foreground">{title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted">{text}</p>
+                <div className="flex-1">
+                  <h3 className="flex items-center gap-3 text-2xl font-bold leading-tight text-foreground sm:text-[2.1rem]">
+                    <Icon className="hidden size-6 shrink-0 text-accent sm:inline-flex" />
+                    {title}
+                  </h3>
+                  <p className="mt-2 max-w-2xl text-muted sm:text-lg">{text}</p>
                 </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </ScrollReveal>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* FAQ — now an accordion instead of a flat wall of Q&As.            */}
+      {/* FAQ — a clean animated accordion, split with the surrounding     */}
+      {/* copy on wide screens instead of floating centred on its own.     */}
       {/* ---------------------------------------------------------------- */}
       <ScrollReveal>
-        <section aria-labelledby="faq-heading" className="border-t border-border py-14">
-          <h2 id="faq-heading" className="section-title text-3xl sm:text-4xl">
-            Questions people actually ask
-          </h2>
-          <div className="mt-6 max-w-2xl">
+        <section aria-labelledby="faq-heading" className="border-t border-border py-16">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+            <div>
+              <p className="eyebrow">Still deciding</p>
+              <h2 id="faq-heading" className="section-title mt-2 text-3xl sm:text-4xl">
+                Questions people actually ask
+              </h2>
+              <p className="mt-3 max-w-sm text-muted">
+                The short answers. For the complete legal wording, read the full disclaimer.
+              </p>
+              <p className="meta mt-5">
+                <Link href="/disclaimer" className="text-accent hover:underline">
+                  Full disclaimer
+                </Link>{" "}
+                ·{" "}
+                <Link href="/privacy" className="text-accent hover:underline">
+                  Privacy policy
+                </Link>
+              </p>
+            </div>
             <FaqAccordion items={FAQ} />
           </div>
-          <p className="meta mt-6">
-            More detail in the{" "}
-            <Link href="/disclaimer" className="text-accent hover:underline">
-              full disclaimer
-            </Link>{" "}
-            and{" "}
-            <Link href="/privacy" className="text-accent hover:underline">
-              privacy policy
-            </Link>
-            .
-          </p>
         </section>
       </ScrollReveal>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Closing CTA band                                                  */}
+      {/* Closing CTA band — a smaller, quieter echo of the hero's visual  */}
+      {/* language (the same static gold-horizon image, not a second live  */}
+      {/* WebGL scene — one terrain on the page is enough) as the site's   */}
+      {/* last word before the footer.                                     */}
       {/* ---------------------------------------------------------------- */}
       <ScrollReveal>
-        <section className="relative overflow-hidden rounded-2xl border border-accent/30 bg-surface p-8 text-center shadow-glow sm:p-12">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-gold-fill/15 via-transparent to-transparent"
-          />
-          <PlayIcon className="mx-auto size-9 text-accent" />
-          <h2 className="section-title mt-4 text-2xl sm:text-3xl">Not sure where to start?</h2>
-          <p className="mx-auto mt-2 max-w-md text-muted">
+        <section className="hero-force-dark relative overflow-hidden rounded-2xl border border-gold-fill/30 p-10 text-center shadow-glow sm:p-16">
+          <div className="absolute inset-0 -z-10">
+            <StaticHeroBackdrop />
+          </div>
+          <p className="eyebrow justify-center text-gold-bright/80">Ready when you are</p>
+          <h2
+            className="mx-auto mt-3 max-w-xl text-3xl font-bold leading-tight text-foreground sm:text-5xl"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Not sure where to start?
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-muted sm:text-lg">
             Try a free strategy first — it&apos;s the fastest way to see what {SITE_NAME} actually
             is before you dig into firms, courses or anything else.
           </p>
-          <Link href="/strategies" className="btn btn-primary mt-6 inline-flex">
+          <Link href="/strategies" className="btn btn-primary mt-8 inline-flex">
             <CheckIcon className="size-4" />
             Start with a free strategy
           </Link>
