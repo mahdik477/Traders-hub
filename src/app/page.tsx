@@ -454,7 +454,7 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="mt-[clamp(0.75rem,3vh,2rem)] w-full max-w-md rounded-2xl border border-border-strong/60 bg-background/35 px-4 py-3 shadow-glow backdrop-blur-md sm:max-w-none sm:px-7 sm:py-3.5">
+          <div className="mt-[clamp(0.75rem,3vh,2rem)] w-full max-w-md rounded-2xl border border-border-strong/60 bg-background/75 px-4 py-3 shadow-glow backdrop-blur-md sm:max-w-none sm:px-7 sm:py-3.5">
             <span className="flex items-center justify-center gap-2 pb-2 sm:hidden">
               <span className="relative flex size-1.5">
                 <span className="absolute inline-flex size-full rounded-full bg-success opacity-75 motion-safe:animate-ping" />
@@ -484,10 +484,10 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <p className="mt-3 hidden border-t border-border pt-3 font-mono text-[0.7rem] text-subtle sm:block">
+              {TOTAL_LISTINGS}+ listings total — zero performance scores, zero rankings.
+            </p>
           </div>
-          <p className="mt-2 hidden font-mono text-[0.7rem] text-subtle sm:block">
-            {TOTAL_LISTINGS}+ listings total — zero performance scores, zero rankings.
-          </p>
         </div>
       </CinematicHero>
 

@@ -1,23 +1,27 @@
 "use client";
 
-import { useMemo, useRef } from "react";
-import { Canvas, useFrame, type RootState } from "@react-three/fiber";
+import { useEffect, useMemo, useRef } from "react";
+import { Canvas, useFrame, type RootState, type ThreeEvent } from "@react-three/fiber";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 // The homepage hero's background: a wireframe "terrain" whose ridges come
 // from a synthetic price-style random walk (same "clearly-not-real-data"
 // convention as every other decorative chart on the site — this is an
-// abstract mood graphic, not a claim about any real market), lit only by
-// vertex colour (cheaper than real scene lights, and gives full control
-// over the gold gradient) and faded into the background colour by Three's
-// fog, which also gives the "chaos resolving near the headline" read for
-// free — ridges are brightest and sharpest near the camera, and dissolve
-// into the dark at a distance.
+// abstract mood graphic, not a claim about any real market).
 //
-// All state that changes every frame (scroll progress) is read from a
-// ref, never React state — this is driven by a GSAP ScrollTrigger in
-// CinematicHero.tsx many times a second while scrolling, and funnelling
-// that through React state would mean a full re-render per scroll tick.
+// This isn't just a static shape with a camera moving past it — the
+// terrain itself reacts: it bulges gently toward wherever the cursor is
+// (a live raycast onto the ground plane, fed into the vertex shader as a
+// uniform) and clicking sends a real ripple outward from that point, both
+// computed on the GPU so it costs nothing extra per vertex. A bloom pass
+// gives the brightest ridges an actual light-glow instead of just being a
+// bright colour.
+//
+// All state that changes every frame (scroll progress, pointer position,
+// click timing) is read from refs/uniforms, never React state — this
+// updates many times a second and funnelling it through React state would
+// mean a full re-render per frame.
 
 const GOLD_BRIGHT = new THREE.Color("#f5d76e");
 const GOLD_DEEP = new THREE.Color("#8a6a1f");
@@ -93,9 +97,13 @@ function buildTerrainGeometry() {
     position.setY(i, h * 1.5);
 
     const w = zi / SEG_Z;
-    const heightT = THREE.MathUtils.clamp((h + 1.6) / 3.2, 0, 1);
+    // Capped below 1 so no vertex ever hits raw GOLD_BRIGHT at full
+    // strength — a handful of ridge peaks sitting near the camera were
+    // otherwise bright enough to make the bloom pass blow out into a
+    // wide glare instead of a tasteful glow.
+    const heightT = THREE.MathUtils.clamp((h + 1.6) / 3.2, 0, 0.72);
     tmpColor.copy(GOLD_DEEP).lerp(GOLD_BRIGHT, heightT);
-    tmpColor.lerp(BG, Math.min(1, w * 0.6 + 0.05));
+    tmpColor.lerp(BG, Math.min(1, w * 0.6 + 0.12));
     colors[i * 3] = tmpColor.r;
     colors[i * 3 + 1] = tmpColor.g;
     colors[i * 3 + 2] = tmpColor.b;
@@ -106,21 +114,118 @@ function buildTerrainGeometry() {
   return geometry;
 }
 
-function Terrain() {
+const VERTEX_SHADER = /* glsl */ `
+  uniform float uTime;
+  uniform vec2 uPointer;
+  uniform vec2 uClickPos;
+  uniform float uClickTime;
+  attribute vec3 color;
+  varying vec3 vColor;
+  varying float vGlow;
+
+  void main() {
+    vec3 pos = position;
+
+    // A gentle bulge that follows the cursor's projection onto the
+    // ground plane — the terrain visibly "notices" where you are.
+    float dPointer = distance(pos.xz, uPointer);
+    float pointerBump = exp(-dPointer * dPointer * 0.038) * 1.25;
+
+    // A real ripple radiating from the last click point, decaying with
+    // both distance and time so it reads as one wave passing through,
+    // not a standing distortion.
+    float ripple = 0.0;
+    if (uClickTime > -500.0) {
+      float clickAge = uTime - uClickTime;
+      float dClick = distance(pos.xz, uClickPos);
+      float wave = sin(dClick * 1.1 - clickAge * 6.5);
+      float envelope = exp(-clickAge * 1.1) * exp(-dClick * dClick * 0.006);
+      ripple = wave * envelope * 2.6;
+    }
+
+    // A small ambient sway so the surface is never perfectly still even
+    // with no interaction at all.
+    float ambient = sin(pos.x * 0.15 + uTime * 0.35) * 0.05;
+
+    pos.y += pointerBump + ripple + ambient;
+
+    vColor = color;
+    vGlow = clamp(pointerBump * 0.7 + abs(ripple) * 0.6, 0.0, 1.4);
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+  }
+`;
+
+const FRAGMENT_SHADER = /* glsl */ `
+  uniform vec3 uGlowColor;
+  varying vec3 vColor;
+  varying float vGlow;
+
+  void main() {
+    vec3 col = vColor + uGlowColor * vGlow;
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+function Terrain({ uniformsRef }: { uniformsRef: React.MutableRefObject<TerrainUniforms | null> }) {
   const geometry = useMemo(() => buildTerrainGeometry(), []);
-  return (
-    <mesh geometry={geometry}>
-      <meshBasicMaterial vertexColors wireframe transparent opacity={0.85} />
-    </mesh>
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        vertexShader: VERTEX_SHADER,
+        fragmentShader: FRAGMENT_SHADER,
+        wireframe: true,
+        transparent: false,
+        uniforms: {
+          uTime: { value: 0 },
+          uPointer: { value: new THREE.Vector2(0, 1000) },
+          uClickPos: { value: new THREE.Vector2(0, 0) },
+          uClickTime: { value: -1000 },
+          uGlowColor: { value: new THREE.Color("#fff3d1") },
+        },
+      }),
+    [],
   );
+
+  // Handing the uniforms up to the Rig (which drives them every frame) has
+  // to happen after render, not during it — mutating a ref while useMemo
+  // itself is running is exactly what react-hooks/refs warns against.
+  useEffect(() => {
+    uniformsRef.current = material.uniforms as unknown as TerrainUniforms;
+  }, [material, uniformsRef]);
+
+  function handleClick(e: ThreeEvent<PointerEvent>) {
+    const u = uniformsRef.current;
+    if (!u) return;
+    u.uClickPos.value.set(e.point.x, e.point.z);
+    u.uClickTime.value = u.uTime.value;
+  }
+
+  return <mesh geometry={geometry} material={material} onPointerDown={handleClick} />;
 }
 
+type TerrainUniforms = {
+  uTime: { value: number };
+  uPointer: { value: THREE.Vector2 };
+  uClickPos: { value: THREE.Vector2 };
+  uClickTime: { value: number };
+  uGlowColor: { value: THREE.Color };
+};
+
 // Slow autonomous drift + gentle cursor parallax + the scroll-driven "zoom
-// through" handoff into the next section, all in one useFrame so there's
-// only one subscription doing per-frame camera/fog math.
-function Rig({ progressRef }: { progressRef: React.MutableRefObject<{ t: number }> }) {
+// through" handoff into the next section, plus feeding the live pointer
+// ground-position and clock into the terrain's shader uniforms.
+function Rig({
+  progressRef,
+  uniformsRef,
+}: {
+  progressRef: React.MutableRefObject<{ t: number }>;
+  uniformsRef: React.MutableRefObject<TerrainUniforms | null>;
+}) {
   const startTime = useRef<number | null>(null);
   const smoothPointer = useRef({ x: 0, y: 0 });
+  const groundPlane = useRef(new THREE.Plane(new THREE.Vector3(0, 1, 0), 0));
+  const hitPoint = useRef(new THREE.Vector3());
 
   useFrame((state: RootState) => {
     if (startTime.current == null) startTime.current = state.clock.elapsedTime;
@@ -146,18 +251,30 @@ function Rig({ progressRef }: { progressRef: React.MutableRefObject<{ t: number 
     if (state.scene.fog instanceof THREE.FogExp2) {
       state.scene.fog.density = 0.032 + progress * 0.1;
     }
+
+    const u = uniformsRef.current;
+    if (u) {
+      u.uTime.value = t;
+      state.raycaster.setFromCamera(state.pointer, state.camera);
+      const hit = state.raycaster.ray.intersectPlane(groundPlane.current, hitPoint.current);
+      if (hit) u.uPointer.value.set(hitPoint.current.x, hitPoint.current.z);
+    }
   });
 
   return null;
 }
 
 function Scene({ progressRef }: { progressRef: React.MutableRefObject<{ t: number }> }) {
+  const uniformsRef = useRef<TerrainUniforms | null>(null);
   return (
     <>
       <color attach="background" args={["#070708"]} />
       <fogExp2 attach="fog" args={["#070708", 0.032]} />
-      <Terrain />
-      <Rig progressRef={progressRef} />
+      <Terrain uniformsRef={uniformsRef} />
+      <Rig progressRef={progressRef} uniformsRef={uniformsRef} />
+      <EffectComposer multisampling={0}>
+        <Bloom luminanceThreshold={0.7} luminanceSmoothing={0.1} intensity={0.22} mipmapBlur />
+      </EffectComposer>
     </>
   );
 }
