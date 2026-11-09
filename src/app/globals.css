@@ -1152,3 +1152,75 @@ input.signal-filter-search {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
   background-size: 140px 140px;
 }
+
+/* ---- Site-wide search (SiteSearch.tsx) ----------------------------------
+   The panel drops in from slightly above and the overlay fades; both are
+   short and both stop entirely under prefers-reduced-motion. */
+@keyframes search-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .search-overlay {
+    animation: overlay-in 160ms ease-out;
+  }
+  .search-panel {
+    animation: search-panel-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+:root[data-theme="light"] .search-overlay {
+  background: rgb(237 235 230 / 0.7);
+}
+
+/* Loading placeholder blocks — a soft shimmer across a surface-2 bar.
+   Used by loading.tsx skeletons and anything that waits on the browser. */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-foreground) 6%, transparent),
+      transparent
+    );
+    animation: skeleton-sweep 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}

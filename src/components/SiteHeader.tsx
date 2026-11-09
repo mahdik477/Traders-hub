@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import SiteSearch from "@/components/SiteSearch";
 import ThemeToggle from "@/components/ThemeToggle";
 import { SITE_NAME, sections } from "@/lib/sections";
 
@@ -23,7 +24,8 @@ export default function SiteHeader() {
           />
           <span className="site-wordmark text-sm font-semibold tracking-[0.16em] uppercase">{SITE_NAME}</span>
         </Link>
-        <div className="sm:order-3">
+        <div className="flex items-center gap-2 sm:order-3">
+          <SiteSearch />
           <ThemeToggle />
         </div>
         <nav aria-label="Main" className="relative order-last w-full min-w-0 sm:order-2 sm:w-auto sm:flex-1">
