@@ -46,7 +46,18 @@ export default function CinematicHero({ children }: { children: ReactNode }) {
       setMode("reduced");
       return;
     }
-    const capable = window.innerWidth >= 768;
+    // The WebGL terrain only runs on screens wide enough to show it off AND
+    // on hardware that can carry it: a handful of cores, a few GB of memory
+    // and no "save data" request. Everything else gets the static backdrop,
+    // which is the same composition without the per-frame cost — a low-end
+    // phone or a budget laptop never has to render a 3D scene to read the
+    // page.
+    const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
+    const lowEnd =
+      (typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency <= 2) ||
+      (typeof nav.deviceMemory === "number" && nav.deviceMemory <= 2) ||
+      nav.connection?.saveData === true;
+    const capable = window.innerWidth >= 768 && !lowEnd;
     setMode(capable ? "full" : "simplified");
   }, []);
 

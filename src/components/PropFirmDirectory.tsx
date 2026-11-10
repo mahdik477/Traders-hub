@@ -269,7 +269,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                     type="button"
                     aria-pressed={inCompare}
                     onClick={() => toggleCompare(firm, cheapest ?? matches[0])}
-                    className={`inline-flex min-h-9 items-center rounded-lg border px-2.5 text-xs font-semibold transition-colors duration-150 ${
+                    className={`inline-flex min-h-11 items-center rounded-lg border px-2.5 text-xs font-semibold transition-colors duration-150 ${
                       inCompare
                         ? "border-accent bg-accent/12 text-foreground"
                         : "border-border-strong text-muted hover:border-subtle hover:text-foreground"

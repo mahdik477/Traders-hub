@@ -61,7 +61,7 @@ export default function SaveButton({
       aria-label={label}
       title={saved ? "Saved — click to remove" : "Save for later"}
       onClick={onClick}
-      className={`save-button relative z-10 flex size-9 items-center justify-center rounded-lg border transition-colors ${
+      className={`save-button relative z-10 flex size-11 items-center justify-center rounded-lg border transition-colors ${
         saved ? "border-accent bg-accent/15 text-accent" : "border-border-strong text-muted hover:border-accent hover:text-accent"
       } ${pop ? "is-pop" : ""} ${className}`}
     >
