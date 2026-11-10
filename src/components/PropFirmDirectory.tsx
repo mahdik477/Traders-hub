@@ -22,6 +22,8 @@ import {
   samePlan,
   type PlanKey,
 } from "@/lib/propfirm-compare";
+import CountrySwitch, { useCountry } from "@/components/CountrySwitch";
+import { firmAvailability } from "@/lib/countries";
 
 function uniqueSorted<T>(values: T[], compare?: (a: T, b: T) => number): T[] {
   return [...new Set(values)].sort(compare);
@@ -101,12 +103,20 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
     (a, b) => a - b,
   );
 
-  const matchingFirms = firms
+  // "Available where I live": firms whose published country list blocks the
+  // visitor's country drop into a collapsed list at the bottom instead of
+  // disappearing silently. Firms with no published list stay in the grid
+  // with a note.
+  const [country, setCountry] = useCountry();
+  const withAvailability = firms
     .map((firm) => ({
       firm,
       matches: accountsByFirm.get(firm.id)!.filter((a) => matchesFilters(a, filters)),
+      availability: country ? firmAvailability(firm.countries, country) : null,
     }))
     .filter((x) => x.matches.length > 0);
+  const matchingFirms = withAvailability.filter((x) => x.availability?.status !== "restricted");
+  const restrictedFirms = withAvailability.filter((x) => x.availability?.status === "restricted");
 
   function updateFilters(changes: Partial<Filters>) {
     const next = { ...filters, ...changes };
@@ -125,8 +135,12 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
       next.size = "";
     }
     setFilters(next);
-    // Save the filters in the address without reloading the page.
-    window.history.replaceState(null, "", window.location.pathname + filtersToQuery(next));
+    // Save the filters in the address without reloading the page, keeping
+    // the country switch's own ?country= in place.
+    const params = new URLSearchParams(filtersToQuery(next));
+    if (country) params.set("country", country);
+    const qs = params.toString();
+    window.history.replaceState(null, "", window.location.pathname + (qs ? `?${qs}` : ""));
   }
 
   const query = filtersToQuery(filters);
@@ -134,6 +148,13 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
 
   return (
     <div className={comparePlans.length > 0 ? "pb-24" : ""}>
+      <CountrySwitch
+        country={country}
+        onChange={setCountry}
+        hiddenCount={restrictedFirms.length}
+        unknownCount={matchingFirms.filter((x) => x.availability?.status === "unknown").length}
+      />
+
       {/* Filter bar */}
       <form
         aria-label="Filter prop firm accounts"
@@ -227,7 +248,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
         </p>
       ) : (
         <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {matchingFirms.map(({ firm, matches }) => {
+          {matchingFirms.map(({ firm, matches, availability }) => {
             const cheapest = matches
               .filter((a) => a.lowestPrice != null)
               .reduce<(typeof matches)[number] | null>(
@@ -274,6 +295,11 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                     {firm.reviewAlert && (
                       <span className="badge badge-warning mt-2 whitespace-normal">Payout complaints in recent reviews</span>
                     )}
+                    {availability?.status === "unknown" && (
+                      <span className="pill mt-2 whitespace-normal text-xs" title={availability.reason}>
+                        Country list not published
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -314,6 +340,47 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
             );
           })}
         </ul>
+      )}
+
+      {restrictedFirms.length > 0 && (
+        <details className="group mt-8 rounded-xl border border-border bg-surface">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-surface-2 [&::-webkit-details-marker]:hidden">
+            <span>
+              {restrictedFirms.length} firm{restrictedFirms.length === 1 ? "" : "s"} hidden — their published
+              country list includes where you live
+            </span>
+            <span aria-hidden="true" className="text-muted transition-transform group-open:rotate-180">
+              ▾
+            </span>
+          </summary>
+          <ul className="divide-y divide-border border-t border-border">
+            {restrictedFirms.map(({ firm, availability }) => (
+              <li key={firm.id} className="flex flex-wrap items-center gap-3 px-4 py-3">
+                <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
+                <div className="min-w-0 flex-1">
+                  <Link href={`/funded-accounts/${firm.id}${query}`} className="font-semibold hover:text-accent">
+                    {firm.name}
+                  </Link>
+                  <p className="meta">
+                    {availability?.reason}
+                    {firm.countries?.lastChecked && ` Checked ${firm.countries.lastChecked}.`}
+                  </p>
+                </div>
+                {firm.countries?.source && (
+                  <a
+                    href={firm.countries.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-muted underline hover:text-foreground"
+                  >
+                    Firm&apos;s list
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </details>
       )}
 
       {comparePlans.length > 0 && (
