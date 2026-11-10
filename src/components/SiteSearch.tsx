@@ -11,6 +11,7 @@ import {
 import { flattenGroups, groupHits, searchCatalog } from "@/lib/search";
 import { getCachedCatalog, loadCatalog } from "@/lib/catalog-client";
 import { SearchIcon } from "@/components/icons";
+import { OPEN_SEARCH_EVENT } from "@/components/BottomNav";
 
 // Site-wide search: a button in the header plus Ctrl/⌘+K anywhere. The
 // index is one static JSON file (/api/search-index) fetched the first time
@@ -64,8 +65,14 @@ export default function SiteSearch() {
         setOpen((o) => !o);
       }
     }
+    // The mobile bottom nav's Search tab opens the same dialog.
+    const onOpen = () => setOpen(true);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener(OPEN_SEARCH_EVENT, onOpen);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener(OPEN_SEARCH_EVENT, onOpen);
+    };
   }, []);
 
   const close = useCallback(() => {

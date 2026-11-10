@@ -1,6 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk, Fraunces } from "next/font/google";
 import AuthProvider from "@/components/auth/AuthProvider";
+import BottomNav from "@/components/BottomNav";
+import PageTransition from "@/components/PageTransition";
+import RegisterServiceWorker from "@/components/RegisterServiceWorker";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { SITE_NAME } from "@/lib/sections";
@@ -36,7 +39,29 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT", "WONK"],
 });
 
+// Browser chrome colour for the installed app / mobile address bar.
+export const viewport: Viewport = {
+  themeColor: "#070708",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
+// Absolute URL base for share images and canonical links. Vercel fills
+// VERCEL_PROJECT_PRODUCTION_URL in production; set NEXT_PUBLIC_SITE_URL to
+// override (e.g. once a custom domain is live).
+function siteUrl(): URL {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return new URL(explicit);
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercel) return new URL(`https://${vercel}`);
+  return new URL("http://localhost:3000");
+}
+
 export const metadata: Metadata = {
+  metadataBase: siteUrl(),
+  applicationName: SITE_NAME,
+  appleWebApp: { capable: true, title: SITE_NAME, statusBarStyle: "black-translucent" },
   title: {
     default: `${SITE_NAME} | Compare trading products`,
     template: `%s | ${SITE_NAME}`,
@@ -80,8 +105,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AuthProvider>
           <SiteHeader />
           {/* Every page sits in the same centred container as the header. */}
-          <main className="container-page flex-1 py-10 sm:py-14">{children}</main>
+          <main className="container-page flex-1 py-10 sm:py-14">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <SiteFooter />
+          <BottomNav />
+          <RegisterServiceWorker />
         </AuthProvider>
       </body>
     </html>
