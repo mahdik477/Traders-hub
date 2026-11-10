@@ -17,6 +17,7 @@ import CoursePricing from "@/components/CoursePricing";
 import CourseCurriculum from "@/components/CourseCurriculum";
 import StickyVisitBar from "@/components/StickyVisitBar";
 import PlatformPill from "@/components/PlatformPill";
+import SaveButton from "@/components/SaveButton";
 import {
   BookIcon,
   ChevronLeftIcon,
@@ -95,6 +96,7 @@ export default function CourseDetail({
   ourChoice = false,
   backHref,
   backLabel,
+  saveId = null,
 }: {
   name: string;
   logo: string | null;
@@ -129,6 +131,9 @@ export default function CourseDetail({
   ourChoice?: boolean;
   backHref: string;
   backLabel: string;
+  /** The id to save under (/courses/<id>). Omit for a provider's sub-course,
+   *  which has no card of its own to come back to. */
+  saveId?: string | null;
 }) {
   const totalLessons = curriculum.reduce((n, m) => n + (m.moduleCount ?? m.topics.length), 0);
 
@@ -166,6 +171,7 @@ export default function CourseDetail({
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <h1 className="page-title">{name}</h1>
               {ourChoice && <OurChoiceBadge />}
+              {saveId && <SaveButton kind="course" id={saveId} name={name} variant="label" className="ml-auto" />}
             </div>
             {ourChoice && (
               <p className="meta mt-2">Featured listing on Tradox. It is not a score of trading results.</p>

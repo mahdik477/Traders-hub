@@ -5,6 +5,7 @@ import { LEARN_TOPICS } from "@/lib/learn-topics";
 import TerminalStatPanel from "@/components/TerminalStatPanel";
 import IconPatternBackdrop from "@/components/IconPatternBackdrop";
 import { BookIcon, ChevronRightIcon } from "@/components/icons";
+import { DoneTick, ProgressSummary } from "@/components/ProgressBits";
 
 const section = getSection("learn");
 const totalMinutes = LEARN_TOPICS.reduce((sum, t) => sum + t.readMinutes, 0);
@@ -58,6 +59,7 @@ export default function LearnPage() {
 
       <div className="mt-6 border-t border-border pt-10">
         <h2 className="section-title text-2xl sm:text-3xl">The 9 parts</h2>
+        <ProgressSummary kind="learn" ids={LEARN_TOPICS.map((t) => t.slug)} noun="parts" className="mt-4 max-w-xl" />
         <p className="mt-2 max-w-xl text-muted">Built to go in order, but every part stands on its own if you already know the earlier ones.</p>
 
         <ol className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -80,7 +82,10 @@ export default function LearnPage() {
                     <span className="flex size-9 items-center justify-center rounded-lg bg-accent/12 text-accent">
                       <Icon className="size-4.5" />
                     </span>
-                    <h3 className="mt-2.5 text-lg font-bold text-foreground group-hover:text-accent">{topic.title}</h3>
+                    <h3 className="mt-2.5 flex flex-wrap items-center gap-2 text-lg font-bold text-foreground group-hover:text-accent">
+                      {topic.title}
+                      <DoneTick kind="learn" id={topic.slug} />
+                    </h3>
                     <p className="mt-1 text-sm leading-relaxed text-muted">{topic.summary}</p>
                     <span className="meta mt-3 flex items-center gap-1 text-accent">
                       {topic.readMinutes} min

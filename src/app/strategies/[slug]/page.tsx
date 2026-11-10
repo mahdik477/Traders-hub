@@ -4,6 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import StrategyBackLink from "@/components/StrategyBackLink";
 import StrategyWalkthrough from "@/components/StrategyWalkthrough";
+import SaveButton from "@/components/SaveButton";
+import TrackView from "@/components/TrackView";
 import {
   ShieldIcon,
   InfoIcon,
@@ -187,6 +189,7 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
   return (
     <>
       <StrategyBackLink />
+      <TrackView kind="strategy" id={s.slug} />
 
       <header className="detail-hero mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
         <div className="p-5 sm:p-6">
@@ -212,7 +215,10 @@ export default async function StrategyPage({ params }: PageProps<"/strategies/[s
             )}
           </div>
           <p className="meta mt-3">{s.refId}</p>
-          <h1 className="page-title mt-1">{s.name}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <h1 className="page-title mt-1">{s.name}</h1>
+            <SaveButton kind="strategy" id={s.slug} name={s.name} variant="label" />
+          </div>
           <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{s.publicTeaser}</p>
         </div>
 

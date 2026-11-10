@@ -21,6 +21,7 @@ import { money, moneyRound, sizeLabel } from "@/lib/format-money";
 import { MARKET_LABELS } from "@/components/PropFirmPricing";
 import FirmBadge from "@/components/FirmBadge";
 import CopyButton from "@/components/CopyButton";
+import SaveComparisonButton from "@/components/SaveComparisonButton";
 import VisitSiteLink from "@/components/VisitSiteLink";
 import { formatDate } from "@/components/PropFirmReviews";
 
@@ -206,6 +207,7 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <ShareLink />
+            <SaveComparisonButton kind="firms" title={plans.map((p) => `${p.firm.name} ${p.challenge.label}`).join(" vs ")} />
             <p className="meta">
               Forex rules are a percentage of the account size; the amounts shown are that percentage of the
               size you picked. Futures rules are the firm&apos;s fixed amounts. This is a side-by-side of published

@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import StrategyBackLink from "@/components/StrategyBackLink";
 import StrategyWalkthrough from "@/components/StrategyWalkthrough";
 import GlossaryText from "@/components/GlossaryText";
+import SaveButton from "@/components/SaveButton";
+import TrackView from "@/components/TrackView";
+import MarkDoneButton from "@/components/MarkDoneButton";
 import {
   ShieldIcon,
   InfoIcon,
@@ -121,6 +124,7 @@ export default function InteractiveStrategyPage({
   return (
     <>
       <StrategyBackLink />
+      <TrackView kind="strategy" id={s.slug} />
 
       <header className="detail-hero mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
         <div className="p-5 sm:p-6">
@@ -137,7 +141,10 @@ export default function InteractiveStrategyPage({
               Interactive
             </span>
           </div>
-          <h1 className="page-title mt-3">{s.name}</h1>
+          <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
+            <h1 className="page-title">{s.name}</h1>
+            <SaveButton kind="strategy" id={s.slug} name={s.name} variant="label" />
+          </div>
           <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
             <GlossaryText text={s.publicTeaser} />
           </p>
@@ -394,6 +401,10 @@ export default function InteractiveStrategyPage({
           {quizTitle}
         </h2>
         <div className="mt-5">{quiz}</div>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <MarkDoneButton kind="quiz" id={s.slug} label="Mark this quiz as done" doneLabel="Quiz done" />
+          <p className="meta">Your call — it&apos;s a learning tick, not a score. Shows on the Strategies page and in My Hub.</p>
+        </div>
       </section>
 
       {s.videos.length > 0 && (

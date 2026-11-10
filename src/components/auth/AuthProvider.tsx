@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import AgeConfirmModal from "@/components/auth/AgeConfirmModal";
+import AccountSync from "@/components/auth/AccountSync";
 
 // The one place the site learns who's signed in. Wraps the whole app (see
 // layout.tsx) but does nothing at all when Supabase isn't configured —
@@ -112,6 +113,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={value}>
       {children}
+      <AccountSync />
       {status === "signed-in" && needsAge === true && <AgeConfirmModal onConfirm={confirmAge} onDecline={signOut} />}
     </AuthContext.Provider>
   );

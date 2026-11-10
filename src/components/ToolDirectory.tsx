@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
+import SaveButton from "@/components/SaveButton";
 import ToolLogo from "@/components/ToolLogo";
 import {
   TOOL_CATEGORY_LABELS,
@@ -179,6 +180,7 @@ function ToolCard({
             <span className="pill">{TOOL_CATEGORY_LABELS[tool.category]}</span>
           </p>
         </div>
+        <SaveButton kind="tool" id={tool.slug} name={tool.name} />
       </div>
 
       <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{tool.description}</p>

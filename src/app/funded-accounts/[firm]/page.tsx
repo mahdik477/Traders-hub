@@ -5,6 +5,8 @@ import FirmBadge from "@/components/FirmBadge";
 import PropFirmNotes from "@/components/PropFirmNotes";
 import PropFirmReviewAlert from "@/components/PropFirmReviewAlert";
 import PropFirmReviews from "@/components/PropFirmReviews";
+import SaveButton from "@/components/SaveButton";
+import TrackView from "@/components/TrackView";
 import { getPropFirm, propFirms } from "@/lib/propfirms";
 import { getSection } from "@/lib/sections";
 
@@ -35,9 +37,11 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
     <>
       <BackToFirmsLink />
 
-      <div className="mt-5 flex items-center gap-4">
+      <TrackView kind="firm" id={firm.id} />
+      <div className="mt-5 flex flex-wrap items-center gap-4">
         <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} size="lg" />
-        <h1 className="page-title">{firm.name}</h1>
+        <h1 className="page-title flex-1">{firm.name}</h1>
+        <SaveButton kind="firm" id={firm.id} name={firm.name} variant="label" />
       </div>
       {firm.nameNote && <p className="meta mt-3 max-w-3xl">{firm.nameNote}</p>}
       {firm.reviewAlert && <PropFirmReviewAlert alert={firm.reviewAlert} />}

@@ -18,6 +18,7 @@ import {
 } from "@/lib/course-filters";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
+import SaveButton from "@/components/SaveButton";
 import { SearchIcon } from "@/components/icons";
 
 type Entry = {
@@ -260,7 +261,8 @@ function Directory({
             >
               <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
               <div className="flex flex-1 flex-col p-5">
-                <div className="flex justify-end">
+                <div className="flex items-center justify-end gap-2">
+                  <SaveButton kind="course" id={entry.id} name={entry.name} />
                   <button
                     type="button"
                     aria-pressed={compareIds.includes(entry.id)}

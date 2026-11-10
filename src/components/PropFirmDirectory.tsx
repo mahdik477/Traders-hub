@@ -23,6 +23,7 @@ import {
   type PlanKey,
 } from "@/lib/propfirm-compare";
 import CountrySwitch, { useCountry } from "@/components/CountrySwitch";
+import SaveButton from "@/components/SaveButton";
 import { firmAvailability } from "@/lib/countries";
 
 function uniqueSorted<T>(values: T[], compare?: (a: T, b: T) => number): T[] {
@@ -262,7 +263,8 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                 key={firm.id}
                 className="lift-card relative flex cursor-pointer flex-col rounded-xl border border-border bg-surface p-5"
               >
-                <div className="absolute right-4 top-4 z-10">
+                <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
+                  <SaveButton kind="firm" id={firm.id} name={firm.name} />
                   <button
                     type="button"
                     aria-pressed={inCompare}
@@ -277,7 +279,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                     <span className="sr-only"> — {firm.name}</span>
                   </button>
                 </div>
-                <div className="flex items-center gap-3 pr-24">
+                <div className="flex items-center gap-3 pr-32">
                   <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
                   <div className="min-w-0">
                     <h2 className="truncate text-lg font-semibold">

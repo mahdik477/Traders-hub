@@ -9,6 +9,7 @@ import {
   type CatalogKind,
 } from "@/lib/catalog-types";
 import { flattenGroups, groupHits, searchCatalog } from "@/lib/search";
+import { getCachedCatalog, loadCatalog } from "@/lib/catalog-client";
 import { SearchIcon } from "@/components/icons";
 
 // Site-wide search: a button in the header plus Ctrl/⌘+K anywhere. The
@@ -19,26 +20,6 @@ import { SearchIcon } from "@/components/icons";
 // Everything here is keyboard-first: arrows move through the flat list of
 // results across groups, Enter opens, Esc closes, and focus comes back to
 // the button that opened it.
-
-let indexCache: CatalogItem[] | null = null;
-let indexPromise: Promise<CatalogItem[]> | null = null;
-
-function loadIndex(): Promise<CatalogItem[]> {
-  if (indexCache) return Promise.resolve(indexCache);
-  if (!indexPromise) {
-    indexPromise = fetch("/api/search-index")
-      .then((r) => (r.ok ? (r.json() as Promise<CatalogItem[]>) : Promise.reject(new Error(String(r.status)))))
-      .then((items) => {
-        indexCache = items;
-        return items;
-      })
-      .catch((err) => {
-        indexPromise = null;
-        throw err;
-      });
-  }
-  return indexPromise;
-}
 
 // Shown before the visitor has typed anything — one way in to each section.
 const QUICK_LINKS: { label: string; href: string; hint: string }[] = [
@@ -121,7 +102,7 @@ function SearchDialog({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const pathname = usePathname();
   const [query, setQuery] = useState("");
-  const [index, setIndex] = useState<CatalogItem[] | null>(indexCache);
+  const [index, setIndex] = useState<CatalogItem[] | null>(getCachedCatalog());
   const [failed, setFailed] = useState(false);
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -134,8 +115,8 @@ function SearchDialog({ onClose }: { onClose: () => void }) {
     inputRef.current?.focus();
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    if (!indexCache) {
-      loadIndex().then(setIndex, () => setFailed(true));
+    if (!getCachedCatalog()) {
+      loadCatalog().then(setIndex, () => setFailed(true));
     }
     return () => {
       document.body.style.overflow = prevOverflow;

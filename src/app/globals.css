@@ -1329,3 +1329,22 @@ input.signal-filter-search {
     animation: search-panel-in 160ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
+
+/* ---- Save button ---------------------------------------------------------- */
+@keyframes save-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .save-button.is-pop {
+    animation: save-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}

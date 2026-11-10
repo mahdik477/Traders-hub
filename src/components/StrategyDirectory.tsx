@@ -21,6 +21,8 @@ import {
   type Filters,
 } from "@/lib/strategy-filters";
 import { SearchIcon, ShieldIcon } from "@/components/icons";
+import SaveButton from "@/components/SaveButton";
+import { DoneTick } from "@/components/ProgressBits";
 
 // Strategy categories in a fixed, deliberate order (not alphabetical) for
 // the quick-pick pill row — trend-following and mean-reversion first since
@@ -229,11 +231,13 @@ function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; l
             </h2>
             <p className="mt-0.5 text-xs font-medium text-subtle">{STRATEGY_CATEGORY_LABELS[s.category]}</p>
           </div>
+          <SaveButton kind="strategy" id={s.slug} name={s.name} />
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
           <span className={tierClass ? `badge ${tierClass}` : "pill"}>{STRATEGY_TIER_LABELS[s.tier]}</span>
           <span className="pill">{STRATEGY_DIFFICULTY_LABELS[s.difficulty]}</span>
+          <DoneTick kind="quiz" id={s.slug} />
           {s.controversyFlag && (
             <span className="badge badge-warning inline-flex items-center gap-1">
               <ShieldIcon className="size-3" />

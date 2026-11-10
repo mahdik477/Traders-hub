@@ -9,6 +9,8 @@ import CourseDetail from "@/components/CourseDetail";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import PartnerFirmPill from "@/components/PartnerFirmPill";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
+import SaveButton from "@/components/SaveButton";
+import TrackView from "@/components/TrackView";
 import { ChevronLeftIcon, LinkIcon } from "@/components/icons";
 
 // This one route serves two kinds of page, both addressed as /courses/<id>:
@@ -47,6 +49,8 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
   const course = getCourse(id);
   if (course) {
     return (
+      <>
+      <TrackView kind="course" id={course.id} />
       <CourseDetail
         name={course.name}
         logo={course.logo}
@@ -68,7 +72,9 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
         ourChoice={course.affiliateLink != null}
         backHref="/courses"
         backLabel="Back to courses"
+        saveId={course.id}
       />
+      </>
     );
   }
 
@@ -77,6 +83,7 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
 
   return (
     <>
+      <TrackView kind="course" id={provider.id} />
       <Link href="/courses" className="back-link">
         <ChevronLeftIcon className="size-4" />
         Back to courses
@@ -109,6 +116,7 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <h1 className="page-title">{provider.name}</h1>
               {provider.affiliateLink && <OurChoiceBadge />}
+              <SaveButton kind="course" id={provider.id} name={provider.name} variant="label" className="ml-auto" />
             </div>
             {provider.affiliateLink && (
               <p className="meta mt-2">Featured listing on Tradox. It is not a score of trading results.</p>

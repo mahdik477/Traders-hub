@@ -13,6 +13,7 @@ import TrustpilotStars from "@/components/TrustpilotStars";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
 import PlatformPill from "@/components/PlatformPill";
 import { CheckIcon } from "@/components/icons";
+import SaveComparisonButton from "@/components/SaveComparisonButton";
 
 // The side-by-side view: up to 3 courses/providers, picked on /courses and
 // carried here as ?ids=a,b,c. Reads the selection from the address (same
@@ -58,7 +59,12 @@ function CompareFromAddress({
   }
 
   return (
-    <div className="mt-6 overflow-x-auto rounded-xl border border-border">
+    <>
+    <div className="mt-6 flex flex-wrap items-center gap-3">
+      <SaveComparisonButton kind="courses" title={entries.map((e) => e.name).join(" vs ")} />
+      <p className="meta">Saved comparisons live in My Hub.</p>
+    </div>
+    <div className="mt-4 overflow-x-auto rounded-xl border border-border">
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr>
@@ -165,6 +171,7 @@ function CompareFromAddress({
         </tbody>
       </table>
     </div>
+    </>
   );
 }
 

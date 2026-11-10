@@ -7,6 +7,7 @@ import StrategyDirectory from "@/components/StrategyDirectory";
 import TerminalStatPanel from "@/components/TerminalStatPanel";
 import IconPatternBackdrop from "@/components/IconPatternBackdrop";
 import { PlayIcon, CheckIcon } from "@/components/icons";
+import { ProgressSummary } from "@/components/ProgressBits";
 
 const section = getSection("strategies");
 
@@ -71,6 +72,7 @@ export default function StrategiesPage() {
           </Link>{" "}
           for the full picture.
         </p>
+        <ProgressSummary kind="quiz" ids={strategies.map((s) => s.slug)} noun="quizzes" className="mt-4 max-w-xl" />
         <div className="mt-6">
           <StrategyDirectory strategies={strategiesInDisplayOrder} />
         </div>
