@@ -24,9 +24,14 @@ export async function generateMetadata({
 }: PageProps<"/funded-accounts/[firm]">): Promise<Metadata> {
   const firm = getPropFirm((await params).firm);
   if (!firm) return {};
+  const title = `${firm.name} — ${getSection("funded-accounts").title}`;
+  const description = firm.about ?? `${firm.name} prop firm pricing and rules, from its own pricing page.`;
+  const image = { url: `/api/og/firm/${firm.id}`, width: 1200, height: 630, alt: `${firm.name} on Tradox` };
   return {
-    title: `${firm.name} — ${getSection("funded-accounts").title}`,
-    description: firm.about ?? undefined,
+    title,
+    description,
+    openGraph: { title, description, type: "website", images: [image] },
+    twitter: { card: "summary_large_image", title, description, images: [image.url] },
   };
 }
 

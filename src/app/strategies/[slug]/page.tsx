@@ -27,6 +27,7 @@ import {
   youtubeThumbnail,
 } from "@/lib/strategy-types";
 import { getStrategy, strategies } from "@/lib/strategies";
+import { strategyMetadata } from "@/lib/strategy-metadata";
 
 export const dynamicParams = false;
 
@@ -105,9 +106,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps<"/strategies/[slug]">): Promise<Metadata> {
-  const s = getStrategy((await params).slug);
-  if (!s) return {};
-  return { title: s.name, description: s.summaryOneLine };
+  return strategyMetadata((await params).slug);
 }
 
 const TONE_CLASS = {

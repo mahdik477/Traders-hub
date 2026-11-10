@@ -27,20 +27,18 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/courses/[id]">): Promise<Metadata> {
   const { id } = await params;
   const course = getCourse(id);
-  if (course) {
-    return {
-      title: `${course.name} — ${getSection("courses").title}`,
-      description: course.tagline ?? undefined,
-    };
-  }
-  const provider = getProvider(id);
-  if (provider) {
-    return {
-      title: `${provider.name} — ${getSection("courses").title}`,
-      description: provider.tagline ?? undefined,
-    };
-  }
-  return {};
+  const provider = course ? null : getProvider(id);
+  const entry = course ?? provider;
+  if (!entry) return {};
+  const title = `${entry.name} — ${getSection("courses").title}`;
+  const description = entry.tagline ?? `${entry.name} trading course: what it covers, formats and pricing.`;
+  const image = { url: `/api/og/course/${entry.id}`, width: 1200, height: 630, alt: `${entry.name} on Tradox` };
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "website", images: [image] },
+    twitter: { card: "summary_large_image", title, description, images: [image.url] },
+  };
 }
 
 export default async function CourseOrProviderPage({ params }: PageProps<"/courses/[id]">) {
