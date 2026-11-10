@@ -63,7 +63,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       setStatus(data.session ? "signed-in" : "signed-out");
     });
     const { data: sub } = client.auth.onAuthStateChange((_event, session) => {
-      setUser(toAuthUser(session?.user));
+      // Token refreshes fire this too; keep the same object unless the
+      // person actually changed, so dependents (AccountSync) don't restart.
+      const next = toAuthUser(session?.user);
+      setUser((prev) => (prev && next && prev.id === next.id && prev.email === next.email ? prev : next));
       setStatus(session ? "signed-in" : "signed-out");
       if (!session) setNeedsAge(null);
     });

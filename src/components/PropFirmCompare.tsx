@@ -284,7 +284,7 @@ function ColumnHeader({
           type="button"
           onClick={onRemove}
           aria-label={`Remove ${p.firm.name} from comparison`}
-          className="flex size-9 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-foreground"
+          className="-mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-foreground"
         >
           <X className="size-4" aria-hidden="true" />
         </button>

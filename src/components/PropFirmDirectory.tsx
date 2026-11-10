@@ -279,7 +279,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                     <span className="sr-only"> — {firm.name}</span>
                   </button>
                 </div>
-                <div className="flex items-center gap-3 pr-32">
+                <div className="flex items-center gap-3 pr-36">
                   <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
                   <div className="min-w-0">
                     <h2 className="truncate text-lg font-semibold">
@@ -397,14 +397,14 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                   return (
                     <span
                       key={p.firm}
-                      className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-border-strong bg-surface-2 py-1 pl-3 pr-2 text-xs font-medium text-foreground"
+                      className="inline-flex min-h-11 items-center gap-1 rounded-full border border-border-strong bg-surface-2 pl-3 text-xs font-medium text-foreground"
                     >
                       {firm.name}
                       <button
                         type="button"
                         onClick={() => toggleCompare(firm, undefined)}
                         aria-label={`Remove ${firm.name} from comparison`}
-                        className="flex size-6 items-center justify-center rounded-full text-muted hover:text-foreground"
+                        className="flex size-11 items-center justify-center rounded-full text-muted hover:text-foreground"
                       >
                         ✕
                       </button>

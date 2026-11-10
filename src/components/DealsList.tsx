@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Deal } from "@/lib/deals";
 import { daysSince } from "@/lib/deals";
 import { money, sizeLabel } from "@/lib/format-money";
@@ -82,7 +82,13 @@ export default function DealsList({ deals }: { deals: Deal[] }) {
 }
 
 function DealCard({ deal: d, index }: { deal: Deal; index: number }) {
-  const age = daysSince(d.lastVerified);
+  // Worked out in the browser only: the page is built once, so computing
+  // "N days ago" at build time would disagree with the visitor's clock.
+  const [age, setAge] = useState<number | null>(null);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setAge(daysSince(d.lastVerified));
+  }, [d.lastVerified]);
   const stale = age != null && age > STALE_DAYS;
   const pct = d.minDiscountPct === d.maxDiscountPct ? `${d.maxDiscountPct}%` : `${d.minDiscountPct}–${d.maxDiscountPct}%`;
   const period = d.example?.monthly ? "/month" : "";

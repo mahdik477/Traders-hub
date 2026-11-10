@@ -20,13 +20,19 @@ export default function AgeConfirmModal({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const confirmRef = useRef<HTMLButtonElement>(null);
+  const declineRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     confirmRef.current?.focus();
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // The page behind the dialog is neither clickable nor readable until the
+    // question is answered.
+    const behind = Array.from(document.body.querySelectorAll<HTMLElement>("header, main, footer, nav"));
+    for (const el of behind) el.setAttribute("inert", "");
     return () => {
       document.body.style.overflow = prev;
+      for (const el of behind) el.removeAttribute("inert");
     };
   }, []);
 
@@ -50,9 +56,13 @@ export default function AgeConfirmModal({
         aria-describedby="age-desc"
         className="search-panel w-full max-w-md rounded-2xl border border-border-strong bg-surface p-6 shadow-glow"
         onKeyDown={(e) => {
-          // Esc = decline, same as the button, so there's never a way to
-          // dismiss this without answering.
-          if (e.key === "Escape" && !busy) run(onDecline);
+          // Esc does nothing (a reflex press must never delete an account);
+          // Tab cycles between the two buttons so focus can't leave.
+          if (e.key === "Escape") e.preventDefault();
+          if (e.key === "Tab") {
+            e.preventDefault();
+            (document.activeElement === confirmRef.current ? declineRef : confirmRef).current?.focus();
+          }
         }}
       >
         <span className="flex size-11 items-center justify-center rounded-xl bg-accent/12 text-accent">
@@ -79,7 +89,7 @@ export default function AgeConfirmModal({
           <button ref={confirmRef} type="button" disabled={busy} onClick={() => run(onConfirm)} className="btn btn-primary flex-1 disabled:opacity-60">
             I&apos;m 18 or over
           </button>
-          <button type="button" disabled={busy} onClick={() => run(onDecline)} className="btn btn-outline flex-1 disabled:opacity-60">
+          <button ref={declineRef} type="button" disabled={busy} onClick={() => run(onDecline)} className="btn btn-outline flex-1 disabled:opacity-60">
             I&apos;m under 18 — delete this account
           </button>
         </div>

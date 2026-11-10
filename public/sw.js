@@ -11,6 +11,5 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-self.addEventListener("fetch", () => {
-  // Intentionally empty: default network behaviour.
-});
+// No fetch handler on purpose: the browser's normal network behaviour
+// applies to every request, and Chrome no longer needs one to install.

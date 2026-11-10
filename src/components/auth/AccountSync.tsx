@@ -174,6 +174,7 @@ export default function AccountSync() {
     // One pending reconcile per store, debounced so a burst of clicks is one
     // round-trip.
     const timers: (number | null)[] = SPECS.map(() => null);
+    const pending: boolean[] = SPECS.map(() => false);
 
     (async () => {
       for (let i = 0; i < SPECS.length; i++) {
@@ -184,7 +185,9 @@ export default function AccountSync() {
         unsubs.push(
           spec.store.subscribe(() => {
             if (timers[i]) window.clearTimeout(timers[i]!);
+            pending[i] = true;
             timers[i] = window.setTimeout(() => {
+              pending[i] = false;
               if (!cancelled) reconcile(spec, supabase, user.id, knownBySpec[i]);
             }, 400);
           }),
@@ -193,10 +196,15 @@ export default function AccountSync() {
     })();
 
     return () => {
+      // Push anything still waiting in a debounce before we stop listening,
+      // so a Save made just before a sign-out/refresh isn't lost.
+      for (let i = 0; i < SPECS.length; i++) {
+        if (timers[i]) window.clearTimeout(timers[i]!);
+        if (pending[i]) reconcile(SPECS[i], supabase, user.id, knownBySpec[i]);
+      }
       cancelled = true;
       active.current = false;
       for (const u of unsubs) u();
-      for (const t of timers) if (t) window.clearTimeout(t);
     };
   }, [status, user, supabase]);
 

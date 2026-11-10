@@ -15,7 +15,11 @@ import {
   type MatcherAnswers,
 } from "@/lib/propfirm-matcher";
 import { countryOptions } from "@/lib/countries";
-import { money, sizeLabel } from "@/lib/format-money";
+import { money } from "@/lib/format-money";
+
+// Sizes are pooled across firms that price in different currencies, so the
+// chips show "100K" with no symbol; result cards use each firm's own currency.
+const plainSize = (s: number) => (s < 10_000 ? s.toLocaleString("en-US") : new Intl.NumberFormat("en-US", { notation: "compact" }).format(s));
 import { planToString } from "@/lib/propfirm-compare";
 import FirmBadge from "@/components/FirmBadge";
 import VisitSiteLink from "@/components/VisitSiteLink";
@@ -148,7 +152,7 @@ function Matcher({ firms, initial }: { firms: FirmView[]; initial: MatcherAnswer
                 </Chip>
                 {sizes.map((s) => (
                   <Chip key={s} selected={answers.size === String(s)} onClick={() => update({ size: String(s) })}>
-                    {sizeLabel(s)}
+                    {plainSize(s)}
                   </Chip>
                 ))}
               </div>
@@ -413,7 +417,7 @@ function AnswerChips({
 }) {
   const chips: { step: number; label: string }[] = [];
   chips.push({ step: 0, label: answers.market ? (answers.market === "forex" ? "Forex" : "Futures") : "Any market" });
-  chips.push({ step: 1, label: answers.size ? `${sizeLabel(Number(answers.size))} account` : "Any size" });
+  chips.push({ step: 1, label: answers.size ? `${plainSize(Number(answers.size))} account` : "Any size" });
   chips.push({ step: 2, label: answers.budget ? `Up to ${money(Number(answers.budget))}` : "Any budget" });
   chips.push({ step: 3, label: answers.drawdown ? DRAWDOWN_LABELS[answers.drawdown as keyof typeof DRAWDOWN_LABELS] : "Any drawdown type" });
   chips.push({

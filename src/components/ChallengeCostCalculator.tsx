@@ -61,7 +61,10 @@ function Calculator({ firms, initialFirm }: { firms: FirmView[]; initialFirm: st
     const firm = firms.find((f) => f.id === initialFirm) ?? firms[0];
     return firm ? defaultPlanFor(firm) : null;
   });
-  const [inputs, setInputs] = useState<Inputs>(DEFAULT_INPUTS);
+  const [inputs, setInputs] = useState<Inputs>(() => {
+    const first = key ? resolvePlan(key, firms) : null;
+    return { ...DEFAULT_INPUTS, feeOverride: first?.account.lowestPrice != null ? String(first.account.lowestPrice) : "" };
+  });
 
   const plan = useMemo(() => (key ? resolvePlan(key, firms) : null), [key, firms]);
 
@@ -70,11 +73,13 @@ function Calculator({ firms, initialFirm }: { firms: FirmView[]; initialFirm: st
     const merged = { ...key, ...patch };
     const firm = firms.find((f) => f.id === merged.firm);
     const fixed = firm ? defaultPlanFor(firm, merged) : null;
-    if (fixed) setKey(fixed);
-    // A new plan means the typed-in fee no longer applies.
-    if (patch.firm || patch.market || patch.challenge || patch.tier || patch.size) {
-      setInputs((i) => ({ ...i, feeOverride: "" }));
-    }
+    if (!fixed) return;
+    setKey(fixed);
+    // A new plan means the typed-in fee no longer applies: refill the box
+    // with that plan's price. The box then owns the value until the next
+    // plan change, so it can be cleared and retyped freely.
+    const next = resolvePlan(fixed, firms);
+    setInputs((i) => ({ ...i, feeOverride: next?.account.lowestPrice != null ? String(next.account.lowestPrice) : "" }));
   }
 
   function set(field: keyof Inputs, value: string) {
@@ -85,8 +90,7 @@ function Calculator({ firms, initialFirm }: { firms: FirmView[]; initialFirm: st
 
   const cur = plan.firm.currency;
   const monthly = plan.tier.billing === "monthly";
-  const dataFee = plan.account.lowestPrice ?? 0;
-  const fee = inputs.feeOverride !== "" ? num(inputs.feeOverride) : dataFee;
+  const fee = num(inputs.feeOverride);
   const attempts = Math.max(1, Math.round(num(inputs.attempts)));
   const months = Math.max(1, Math.round(num(inputs.months)));
   const challengeTotal = monthly ? fee * months : fee * attempts;
@@ -190,7 +194,7 @@ function Calculator({ firms, initialFirm }: { firms: FirmView[]; initialFirm: st
                 inputMode="decimal"
                 min={0}
                 className="field"
-                value={inputs.feeOverride !== "" ? inputs.feeOverride : dataFee ? String(dataFee) : ""}
+                value={inputs.feeOverride}
                 placeholder="0"
                 onChange={(e) => set("feeOverride", e.target.value)}
               />
