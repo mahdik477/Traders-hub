@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PropFirmDirectory from "@/components/PropFirmDirectory";
 import PropFirmNotes from "@/components/PropFirmNotes";
+import PropFirmToolbar from "@/components/PropFirmToolbar";
 import { propFirms } from "@/lib/propfirms";
 import { getSection } from "@/lib/sections";
 
@@ -20,6 +21,10 @@ export default function FundedAccountsPage() {
       <p className="mt-3 text-lg text-muted">
         Compare prop firm challenges side by side: price, rules and profit split.
       </p>
+
+      <div className="mt-6">
+        <PropFirmToolbar />
+      </div>
 
       <div className="mt-6">
         <PropFirmNotes currencies={currencies} filterNote />
