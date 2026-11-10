@@ -7,6 +7,7 @@ import PropFirmReviewAlert from "@/components/PropFirmReviewAlert";
 import PropFirmReviews from "@/components/PropFirmReviews";
 import SaveButton from "@/components/SaveButton";
 import TrackView from "@/components/TrackView";
+import AlertOptIn from "@/components/AlertOptIn";
 import { getPropFirm, propFirms } from "@/lib/propfirms";
 import { getSection } from "@/lib/sections";
 
@@ -60,6 +61,8 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
       )}
 
       {firm.reviews && <PropFirmReviews reviews={firm.reviews} />}
+
+      <AlertOptIn firmId={firm.id} firmName={firm.name} />
 
       <section aria-labelledby="pricing-heading" className="mt-12">
         <h2 id="pricing-heading" className="section-title">
