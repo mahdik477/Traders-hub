@@ -113,8 +113,10 @@ in `src/lib/` → a directory page with filters → a detail page per listing.
   `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are
   missing. Tables + row-level security: `supabase/schema.sql`. Set-up guide for
   the team: `SETUP-ACCOUNTS.md`. Env template: `env.example` (copy to
-  `.env.local`, never commit keys). We store only user id, email and an 18+
-  confirmation time; saved items/progress/alert preferences live in the browser
+  `.env.local`, never commit keys). Our own tables store only user id, email
+  and an 18+ confirmation time (Supabase Auth's own tables also keep e.g. the
+  Google profile record — say so in the privacy policy); "I'm under 18"
+  deletes the account via the `delete_my_account` function; saved items/progress/alert preferences live in the browser
   first (`src/lib/local-store.ts`) and sync to the person's own rows
   (`src/components/auth/AccountSync.tsx`).
 - Not set up yet (don't add without asking): Stripe (payments, only for the

@@ -29,7 +29,7 @@ export type PathStage = {
 const FIRST_STRATEGIES = [
   { slug: "support-and-resistance", title: "Support and resistance", detail: "Where price has stopped before — the idea almost every other method builds on." },
   { slug: "moving-average-crossover", title: "Moving average crossover", detail: "The classic trend-following signal. Simple rules, easy to see on the chart." },
-  { slug: "range-breakout", title: "Range breakout", detail: "What a breakout actually looks like, and how often it fails." },
+  { slug: "range-breakout", title: "Range breakout", detail: "What a breakout actually looks like, and why many of them fail." },
 ];
 
 export const START_HERE_PATH: PathStage[] = [

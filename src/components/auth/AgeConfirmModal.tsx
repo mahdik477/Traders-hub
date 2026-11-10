@@ -6,9 +6,10 @@ import { ShieldIcon } from "@/components/icons";
 import { SITE_NAME } from "@/lib/sections";
 
 // Shown once, right after a person's first sign-in, until they confirm
-// they're 18 or over. Declining signs them straight back out. The
-// confirmation is recorded as a timestamp on their profile row — nothing
-// else about them is collected here.
+// they're 18 or over. Declining deletes the just-created account (see
+// AuthProvider.declineAge) and signs them out. The confirmation is
+// recorded as a timestamp on their profile row — nothing else about them is
+// collected here.
 export default function AgeConfirmModal({
   onConfirm,
   onDecline,
@@ -62,7 +63,8 @@ export default function AgeConfirmModal({
         </h2>
         <p id="age-desc" className="mt-2 text-muted">
           {SITE_NAME} is for adults. To use an account you need to confirm you&apos;re 18 or over. We store only
-          your user id, your email address and the time you confirmed — see the{" "}
+          your user id, your email address and the time you confirmed. If you&apos;re under 18, the account
+          that was just created is deleted straight away — see the{" "}
           <Link href="/privacy" className="text-accent underline" target="_blank">
             privacy policy
           </Link>
@@ -78,7 +80,7 @@ export default function AgeConfirmModal({
             I&apos;m 18 or over
           </button>
           <button type="button" disabled={busy} onClick={() => run(onDecline)} className="btn btn-outline flex-1 disabled:opacity-60">
-            I&apos;m under 18 — sign me out
+            I&apos;m under 18 — delete this account
           </button>
         </div>
       </div>

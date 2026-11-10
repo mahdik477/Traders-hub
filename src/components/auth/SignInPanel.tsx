@@ -179,7 +179,7 @@ function Panel({ next, errorKey }: { next: string; errorKey: string | null }) {
 
       <p className="meta mt-4">
         An account stores only your user id and email address, plus what you save on {SITE_NAME}. We don&apos;t
-        copy your Google name or photo. You&apos;ll be asked to confirm you&apos;re 18 or over the first time. See the{" "}
+        use or show your Google name or photo. You&apos;ll be asked to confirm you&apos;re 18 or over the first time. See the{" "}
         <Link href="/privacy" className="text-accent underline">
           privacy policy
         </Link>

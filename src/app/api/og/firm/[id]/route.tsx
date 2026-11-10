@@ -31,7 +31,9 @@ export async function GET(_req: Request, ctx: RouteContext<"/api/og/firm/[id]">)
   return ogCard({
     eyebrow: "Prop firm · Funded accounts",
     title: firm.name,
-    subtitle: firm.reviewAlert ? "Payout complaints in recent public reviews — read them before buying." : firm.about,
+    // Review alerts stay on the page itself (dated, sourced, with the legal
+    // reminder) — a share image travels off-site with none of that context.
+    subtitle: firm.about,
     facts,
     logo: logoDataUrl(firm.logo),
     logoBg: firm.logoBg,

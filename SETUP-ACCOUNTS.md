@@ -13,7 +13,10 @@ No coding.
 > **What gets stored about a person:** their Supabase user id, their email
 > address, the time they ticked "I'm 18 or over", and whatever they save on the
 > site (listings, comparisons, recently viewed, progress ticks, per-firm alert
-> preferences). Nothing else — no names, no photos, no payment details.
+> preferences). Nothing else in our own tables — no names, no photos, no
+> payment details. (Supabase's own sign-in tables also keep the Google profile
+> record and sign-in timestamps for each user; those are deleted with the
+> account.)
 
 ---
 
@@ -161,7 +164,9 @@ Do this in Google Cloud, then paste the result into Supabase.
 3. Save a firm (bookmark icon), open **My Hub** — it should be listed.
 4. Sign out, then try **Continue with Google**.
 5. In Supabase → **Table Editor → profiles** you should see one row: your user
-   id, your email, and the confirmation time. That is all that's stored.
+   id, your email, and the confirmation time. That is all our own tables store
+   (Supabase's **Authentication → Users** screen also holds the sign-in record,
+   including the Google profile details, which go when the account is deleted).
 
 ## If something doesn't work
 

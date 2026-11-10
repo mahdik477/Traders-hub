@@ -30,8 +30,9 @@ export default function PrivacyPage() {
             You can use everything on {SITE_NAME} without an account and without giving us any personal
             data. If you choose to sign in, we store the minimum needed to run your account: a user id,
             your email address, and the time you confirmed you are 18 or over — plus the things you
-            choose to save on the site. We don&apos;t collect names, photos, phone numbers or payment
-            details, we don&apos;t sell your data, and we don&apos;t send marketing email.
+            choose to save on the site. We don&apos;t ask for or use names, photos, phone numbers or
+            payment details (see the note about Google below), we don&apos;t sell your data, and we
+            don&apos;t send marketing email.
           </p>
         </section>
 
@@ -60,9 +61,14 @@ export default function PrivacyPage() {
             </li>
           </ul>
           <p className="mt-2">
-            When you sign in with Google, Google also makes your display name and profile picture
-            available to us. <strong className="font-semibold text-foreground">We do not copy them into
-            our database or show them anywhere.</strong> We use the email address only.
+            When you sign in with Google, Google also sends your display name and profile picture. Our
+            sign-in provider (Supabase) keeps them, along with sign-in timestamps, in its own sign-in
+            record for your account.{" "}
+            <strong className="font-semibold text-foreground">
+              We never copy them into our own tables and never display them
+            </strong>
+            , and they are deleted with everything else when you delete your account. We use the email
+            address only.
           </p>
           <p className="mt-2">
             We don&apos;t use analytics cookies, advertising cookies or tracking pixels. The only cookies
@@ -149,7 +155,7 @@ export default function PrivacyPage() {
             Under GDPR (and the UAE&apos;s PDPL, which gives you similar rights), you can ask us to:
           </p>
           <ul className="mt-2 list-disc space-y-1 pl-5">
-            <li>tell you what data of yours we hold (it&apos;s all visible in My Hub);</li>
+            <li>tell you what data of yours we hold (almost all of it is visible in My Hub);</li>
             <li>correct it, if it&apos;s wrong;</li>
             <li>delete it entirely (&ldquo;the right to be forgotten&rdquo; — see above, it&apos;s self-service);</li>
             <li>stop using it, without deleting it, in some cases;</li>
@@ -167,8 +173,9 @@ export default function PrivacyPage() {
           <h2 className="section-title text-foreground">Children&apos;s privacy</h2>
           <p className="mt-2">
             {SITE_NAME} isn&apos;t directed at children, and accounts are for people aged 18 or over —
-            we ask you to confirm this the first time you sign in, and signing out is the only other
-            option. If we learn an account belongs to someone under 18 we&apos;ll delete it.
+            we ask you to confirm this the first time you sign in. Choosing &ldquo;I&apos;m under 18&rdquo;
+            deletes the account that was just created, email address included. If we learn an account
+            belongs to someone under 18 we&apos;ll delete it.
           </p>
         </section>
 

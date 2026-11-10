@@ -174,7 +174,7 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
                     p.firm.reviewAlert ? (
                       <span className="badge badge-warning whitespace-normal">Payout complaints in recent reviews</span>
                     ) : (
-                      <span className="text-muted">No alert on file</span>
+                      <span className="text-muted">No review alert — we don&apos;t verify payouts</span>
                     )
                   }
                 />

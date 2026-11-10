@@ -8,7 +8,7 @@ import { propFirms } from "@/lib/propfirms";
 export const metadata: Metadata = {
   title: "Deals & promo codes",
   description:
-    "Every active prop firm promo code and discount we've verified, with the discount, an example price and the date we last checked.",
+    "Every active prop firm promo code and discount we've checked on each firm's own pricing page, with the discount, an example price and the date we last looked.",
 };
 
 export default function DealsPage() {

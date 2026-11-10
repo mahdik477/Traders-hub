@@ -26,7 +26,7 @@ import { OPEN_SEARCH_EVENT } from "@/components/BottomNav";
 const QUICK_LINKS: { label: string; href: string; hint: string }[] = [
   { label: "Find my firm", href: "/funded-accounts/find-my-firm", hint: "Answer five quick questions" },
   { label: "Compare prop firms", href: "/funded-accounts/compare", hint: "Up to 3 plans side by side" },
-  { label: "Deals & promo codes", href: "/deals", hint: "Every active code we've verified" },
+  { label: "Deals & promo codes", href: "/deals", hint: "Every active code, with the date we last checked it" },
   { label: "Start here", href: "/start-here", hint: "New to trading? The guided path" },
   { label: "Learn", href: "/learn", hint: "Free 9-part intro" },
   { label: "Strategies", href: "/strategies", hint: "58 strategies with live simulators" },

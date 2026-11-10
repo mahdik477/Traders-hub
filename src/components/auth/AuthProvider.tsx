@@ -98,6 +98,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     setNeedsAge(null);
   }, [supabase]);
 
+  // "I'm under 18": the account that was created a moment ago is deleted
+  // outright (auth row included — it cascades through every table), not
+  // just signed out, so we never keep a child's email address.
+  const declineAge = useCallback(async () => {
+    if (supabase) {
+      const { error } = await supabase.rpc("delete_my_account");
+      if (error) throw error;
+    }
+    await signOut();
+  }, [supabase, signOut]);
+
   const confirmAge = useCallback(async () => {
     if (!supabase || !user) return;
     const { error } = await supabase.from("profiles").upsert(
@@ -114,7 +125,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider value={value}>
       {children}
       <AccountSync />
-      {status === "signed-in" && needsAge === true && <AgeConfirmModal onConfirm={confirmAge} onDecline={signOut} />}
+      {status === "signed-in" && needsAge === true && <AgeConfirmModal onConfirm={confirmAge} onDecline={declineAge} />}
     </AuthContext.Provider>
   );
 }
