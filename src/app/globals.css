@@ -1255,3 +1255,29 @@ input.signal-filter-search {
 .tray-bottom {
   bottom: var(--bottom-nav-height, 0px);
 }
+
+/* ---- Find my firm (FirmMatcher.tsx) --------------------------------------
+   Each question card slides in; result cards stagger in via animationDelay
+   set inline. Nothing moves under reduced motion. */
+@keyframes matcher-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .matcher-step {
+    animation: matcher-step-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .match-card {
+    animation: matcher-step-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .matcher-bar {
+    transition: background-color 300ms ease;
+  }
+}
