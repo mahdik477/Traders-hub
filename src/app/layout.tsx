@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Space_Grotesk, Fraunces } from "next/font/google";
+import AuthProvider from "@/components/auth/AuthProvider";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { SITE_NAME } from "@/lib/sections";
@@ -74,10 +75,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-full flex-col">
-        <SiteHeader />
-        {/* Every page sits in the same centred container as the header. */}
-        <main className="container-page flex-1 py-10 sm:py-14">{children}</main>
-        <SiteFooter />
+        {/* Accounts are optional: with no Supabase variables set, this
+            provider stays inert and every sign-in control hides itself. */}
+        <AuthProvider>
+          <SiteHeader />
+          {/* Every page sits in the same centred container as the header. */}
+          <main className="container-page flex-1 py-10 sm:py-14">{children}</main>
+          <SiteFooter />
+        </AuthProvider>
       </body>
     </html>
   );

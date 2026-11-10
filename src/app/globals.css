@@ -1322,3 +1322,10 @@ input.signal-filter-search {
     transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
+
+/* ---- Account menu ---------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .profile-menu {
+    animation: search-panel-in 160ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
