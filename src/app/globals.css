@@ -1315,3 +1315,10 @@ input.signal-filter-search {
     animation: matcher-step-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
+
+/* ---- Start here path ------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  .path-progress {
+    transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
