@@ -1281,3 +1281,16 @@ input.signal-filter-search {
     transition: background-color 300ms ease;
   }
 }
+
+/* ---- Deals (DealsList.tsx) --------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .deal-card {
+    animation: matcher-step-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* Light bronze is too dark for the dashed code box in light mode; keep the
+   code itself readable on the pale tint. */
+:root[data-theme="light"] .deal-code {
+  color: #734f10;
+}
