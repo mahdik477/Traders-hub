@@ -3,6 +3,7 @@ import ToolDirectory from "@/components/ToolDirectory";
 import { getSection } from "@/lib/sections";
 import { TOOL_CATEGORY_ORDER } from "@/lib/tool-types";
 import { tools } from "@/lib/tools";
+import PageIntro from "@/components/PageIntro";
 
 const section = getSection("tools");
 
@@ -31,10 +32,7 @@ export default function ToolsPage() {
 
   return (
     <>
-      <h1 className="title-rule page-title">{section.title}</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">
-        Compare charting, indicators, backtesting, scanners, automation, trade copiers and VPS hosts side by side.
-      </p>
+      <PageIntro eyebrow="Trading tools" title={<>{section.title}</>} lede={<>Compare charting, indicators, backtesting, scanners, automation, trade copiers and VPS hosts side by side.</>} />
 
       <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
         <Fact value={String(tools.length)} label="Tools listed" />

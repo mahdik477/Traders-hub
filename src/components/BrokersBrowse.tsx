@@ -9,6 +9,7 @@ import { sortBrokers } from "@/lib/broker-filters";
 import { brokers } from "@/lib/brokers";
 import { BROKER_CATEGORY_DESCRIPTIONS, BROKER_CATEGORY_LABELS, type BrokerCategory } from "@/lib/broker-types";
 import { SITE_NAME, getSection } from "@/lib/sections";
+import PageIntro from "@/components/PageIntro";
 
 const DIRECTORY_RISK = `${SITE_NAME} is a discovery and comparison platform for informational purposes only. We do not verify trading performance, accuracy or results, and nothing on this site is financial advice.`;
 
@@ -39,10 +40,7 @@ export default function BrokersBrowse({ category }: { category: BrokerCategory }
 
   return (
     <div className="pb-8">
-      <header className="max-w-2xl">
-        <h1 className="page-title">{section.title}</h1>
-        <p className="mt-4 text-base leading-7 text-muted">{BROKER_CATEGORY_DESCRIPTIONS[category]}</p>
-      </header>
+      <PageIntro eyebrow="Trade your own money" title={section.title} lede={BROKER_CATEGORY_DESCRIPTIONS[category]} />
 
       <div className="mt-8 rounded-lg bg-surface-2 px-4 py-4 sm:px-5">
         <p className="text-[13px] leading-6 text-muted">{showPair ? CFD_RISK : DIRECTORY_RISK}</p>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GLOSSARY } from "@/lib/glossary";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Glossary",
@@ -21,15 +22,12 @@ export default function GlossaryPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="title-rule page-title">Glossary</h1>
-      <p className="mt-3 text-lg text-muted">
-        {entries.length} trading terms, each explained in a sentence or two. These are the same
+      <PageIntro eyebrow="Plain English" title={<>Glossary</>} lede={<>{entries.length} trading terms, each explained in a sentence or two. These are the same
         definitions that pop up when you hover a term on a{" "}
         <Link href="/strategies" className="text-accent hover:underline">
           strategy page
         </Link>
-        .
-      </p>
+        .</>} />
 
       <nav aria-label="Jump to letter" className="mt-6 flex flex-wrap gap-1.5">
         {letters.map((l) => (

@@ -156,18 +156,41 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
         unknownCount={matchingFirms.filter((x) => x.availability?.status === "unknown").length}
       />
 
+      {/* Market: the one choice everyone makes first, so it's a switch, not a dropdown */}
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+        <div className="seg" role="group" aria-label="Market">
+          {(
+            [
+              ["", "All firms"],
+              ["forex", MARKET_LABELS.forex],
+              ["futures", MARKET_LABELS.futures],
+            ] as const
+          ).map(([value, label]) => (
+            <button
+              key={value || "all"}
+              type="button"
+              aria-pressed={filters.market === value}
+              onClick={() => updateFilters({ market: value })}
+              className="seg-btn"
+            >
+              {label}
+              <span className="seg-count">
+                {value ? firms.filter((f) => f.markets.some((m) => m.market === value)).length : firms.length}
+              </span>
+            </button>
+          ))}
+        </div>
+        <p aria-live="polite" className="readout">
+          <span className="text-foreground">{matchingFirms.length}</span> of {firms.length} firms match
+        </p>
+      </div>
+
       {/* Filter bar */}
       <form
         aria-label="Filter prop firm accounts"
-        className="grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
+        className="kit-panel mt-3 grid grid-cols-2 gap-3 p-3 sm:p-4 lg:grid-cols-5"
         onSubmit={(e) => e.preventDefault()}
       >
-        <Select
-          label="Market"
-          value={filters.market}
-          onChange={(v) => updateFilters({ market: v })}
-          options={(["forex", "futures"] as const).map((m) => [m, MARKET_LABELS[m]])}
-        />
         <Select
           label="Challenge type"
           value={filters.challenge}
@@ -199,24 +222,22 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
           onChange={(v) => updateFilters({ minSplit: v })}
           options={splitOptions.map((s) => [String(s), `${s}% or more`])}
         />
-        <Select
-          label="Fee refund"
-          anyLabel="Any"
-          value={filters.feeRefund}
-          onChange={(v) => updateFilters({ feeRefund: v })}
-          options={[
-            ["yes", "Yes"],
-            ["no", "No"],
-          ]}
-        />
+        <div className="col-span-2 lg:col-span-1">
+          <Select
+            label="Fee refund"
+            anyLabel="Any"
+            value={filters.feeRefund}
+            onChange={(v) => updateFilters({ feeRefund: v })}
+            options={[
+              ["yes", "Yes"],
+              ["no", "No"],
+            ]}
+          />
+        </div>
       </form>
 
       {/* Result count + active filters as removable chips */}
-      <div className="mt-3 flex flex-wrap items-center gap-2">
-        <p aria-live="polite" className="meta mr-1">
-          <span className="font-semibold text-foreground">{matchingFirms.length}</span> of{" "}
-          {firms.length} firms match
-        </p>
+      <div className={`flex flex-wrap items-center gap-2 ${chips.length > 0 ? "mt-3" : ""}`}>
         {chips.map(({ key, label }) => (
           <button
             key={key}
@@ -244,11 +265,14 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
 
       {/* Firm cards */}
       {matchingFirms.length === 0 ? (
-        <p className="mt-6 rounded-xl border border-dashed border-border-strong p-10 text-center text-muted">
-          No firms have accounts matching these filters.
-        </p>
+        <div className="mt-6 rounded-xl border border-dashed border-border-strong p-10 text-center">
+          <p className="text-muted">No firms have accounts matching these filters.</p>
+          <button type="button" onClick={() => updateFilters(EMPTY_FILTERS)} className="btn btn-outline mt-4">
+            Clear filters and show everything
+          </button>
+        </div>
       ) : (
-        <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {matchingFirms.map(({ firm, matches, availability }) => {
             const cheapest = matches
               .filter((a) => a.lowestPrice != null)
@@ -258,86 +282,110 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
               );
             const splits = matches.map((a) => a.profitSplit).filter((s): s is number => s != null);
             const inCompare = comparePlans.some((p) => p.firm === firm.id);
+            const sizes = matches.map((a) => a.size);
+            const minSize = Math.min(...sizes);
+            const maxSize = Math.max(...sizes);
             return (
               <li
                 key={firm.id}
-                className="lift-card relative flex cursor-pointer flex-col rounded-xl border border-border bg-surface p-5"
+                className={`lift-card kit-panel listing-card flex cursor-pointer flex-col p-5 ${inCompare ? "is-selected" : ""}`}
               >
-                <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
-                  <SaveButton kind="firm" id={firm.id} name={firm.name} />
-                  <button
-                    type="button"
-                    aria-pressed={inCompare}
-                    onClick={() => toggleCompare(firm, cheapest ?? matches[0])}
-                    className={`inline-flex min-h-11 items-center rounded-lg border px-2.5 text-xs font-semibold transition-colors duration-150 ${
-                      inCompare
-                        ? "border-accent bg-accent/12 text-foreground"
-                        : "border-border-strong text-muted hover:border-subtle hover:text-foreground"
-                    }`}
-                  >
-                    {inCompare ? "In compare" : "Compare"}
-                    <span className="sr-only"> — {firm.name}</span>
-                  </button>
-                </div>
-                <div className="flex items-center gap-3 pr-36">
+                <div className="flex items-start gap-3">
                   <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
-                  <div className="min-w-0">
-                    <h2 className="truncate text-lg font-semibold">
-                      <Link href={`/funded-accounts/${firm.id}${query}`} className="card-stretch rounded-xl">
+                  <div className="min-w-0 flex-1">
+                    <h2 className="truncate text-lg font-semibold leading-tight">
+                      <Link href={`/funded-accounts/${firm.id}${query}`} className="card-stretch rounded-2xl">
                         {firm.name}
                       </Link>
                     </h2>
-                    <div className="mt-1 flex flex-wrap gap-1.5">
+                    <div className="mt-1.5 flex flex-wrap gap-1.5">
                       {firm.markets.map((m) => (
                         <span key={m.market} className="pill">
                           {MARKET_LABELS[m.market]}
                         </span>
                       ))}
                     </div>
+                  </div>
+                  <div className="relative z-10 -mr-1.5 -mt-1.5 shrink-0">
+                    <SaveButton kind="firm" id={firm.id} name={firm.name} />
+                  </div>
+                </div>
+
+                {(firm.reviewAlert || availability?.status === "unknown") && (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
                     {firm.reviewAlert && (
-                      <span className="badge badge-warning mt-2 whitespace-normal">Payout complaints in recent reviews</span>
+                      <span className="badge badge-warning whitespace-normal">Payout complaints in recent reviews</span>
                     )}
                     {availability?.status === "unknown" && (
-                      <span className="pill mt-2 whitespace-normal text-xs" title={availability.reason}>
+                      <span className="pill whitespace-normal text-xs" title={availability.reason}>
                         Country list not published
                       </span>
                     )}
                   </div>
-                </div>
+                )}
 
-                <div className="mt-5 flex flex-wrap items-end justify-between gap-3">
-                  <div>
-                    <div className="eyebrow">From</div>
-                    <div className="figure-lg mt-1 text-accent">
-                      {cheapest
-                        ? money(cheapest.lowestPrice!, firm.currency) + (cheapest.monthly ? "/month" : "")
-                        : "—"}
-                    </div>
+                <div className="mt-auto pt-5">
+                  <div className="eyebrow">From</div>
+                  <div className="figure-lg mt-1 text-accent">
+                    {cheapest ? (
+                      <>
+                        {money(cheapest.lowestPrice!, firm.currency)}
+                        {cheapest.monthly && <span className="ml-1 text-sm font-medium text-muted">/month</span>}
+                      </>
+                    ) : (
+                      "—"
+                    )}
                   </div>
-                  {splits.length > 0 && (
-                    <span className="badge badge-success">Up to {Math.max(...splits)}% split</span>
+                  <dl className="stat-strip mt-3 grid-cols-[1fr_1.4fr_1fr]">
+                    <div className="stat-cell">
+                      <dt className="eyebrow">Max split</dt>
+                      <dd className="stat-value">{splits.length > 0 ? `${Math.max(...splits)}%` : "—"}</dd>
+                    </div>
+                    <div className="stat-cell">
+                      <dt className="eyebrow">Sizes</dt>
+                      <dd className="stat-value">
+                        {minSize === maxSize ? sizeLabel(minSize) : `${sizeLabel(minSize)}–${sizeLabel(maxSize)}`}
+                      </dd>
+                    </div>
+                    <div className="stat-cell">
+                      <dt className="eyebrow">Accounts</dt>
+                      <dd className="stat-value">{matches.length}</dd>
+                    </div>
+                  </dl>
+
+                  {/* The whole card is clickable through the name link's overlay. */}
+                  <div className="relative z-10 mt-4 flex gap-2">
+                    <Link href={`/funded-accounts/${firm.id}${query}`} className="btn btn-soft min-w-0 flex-1 whitespace-nowrap px-3">
+                      View challenges
+                      <span className="sr-only"> — {firm.name}</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                    <button
+                      type="button"
+                      aria-pressed={inCompare}
+                      onClick={() => toggleCompare(firm, cheapest ?? matches[0])}
+                      className={`btn shrink-0 px-3 ${
+                        inCompare
+                          ? "border-accent bg-accent/12 text-foreground"
+                          : "border-border-strong text-muted hover:border-subtle hover:text-foreground"
+                      }`}
+                    >
+                      <span aria-hidden="true" className="font-mono">
+                        {inCompare ? "✓" : "+"}
+                      </span>
+                      {inCompare ? "Comparing" : "Compare"}
+                      <span className="sr-only"> — {firm.name}</span>
+                    </button>
+                  </div>
+                  {firm.affiliateLink && (
+                    <VisitSiteLink
+                      href={firm.affiliateLink}
+                      firmName={firm.name}
+                      variant="outline"
+                      className="relative z-10 mt-2 w-full"
+                    />
                   )}
                 </div>
-                <p className="meta mt-2">
-                  {matches.length} matching account{matches.length === 1 ? "" : "s"}
-                </p>
-
-                {/* The whole card is clickable through this link's overlay. */}
-                <Link
-                  href={`/funded-accounts/${firm.id}${query}`}
-                  className="btn btn-primary relative z-10 mt-5 w-full"
-                >
-                  View challenges
-                  <span className="sr-only"> — {firm.name}</span>
-                </Link>
-                {firm.affiliateLink && (
-                  <VisitSiteLink
-                    href={firm.affiliateLink}
-                    firmName={firm.name}
-                    variant="outline"
-                    className="relative z-10 mt-2 w-full"
-                  />
-                )}
               </li>
             );
           })}
@@ -345,7 +393,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
       )}
 
       {restrictedFirms.length > 0 && (
-        <details className="group mt-8 rounded-xl border border-border bg-surface">
+        <details className="group kit-panel mt-8">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-surface-2 [&::-webkit-details-marker]:hidden">
             <span>
               {restrictedFirms.length} firm{restrictedFirms.length === 1 ? "" : "s"} hidden — their published
@@ -388,7 +436,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
       {comparePlans.length > 0 && (
         <div className="tray-bottom fixed inset-x-0 z-40">
           <div className="container-page pb-4">
-            <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4">
+            <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border-strong bg-surface p-3 shadow-glow sm:p-4">
               <span className="meta hidden sm:inline">Comparing:</span>
               <div className="flex flex-wrap items-center gap-2">
                 {comparePlans.map((p) => {

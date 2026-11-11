@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronLeftIcon } from "@/components/icons";
 import DrawdownSimulator from "@/components/DrawdownSimulator";
 import PropFirmToolbar from "@/components/PropFirmToolbar";
 import { propFirms } from "@/lib/propfirms";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Drawdown explained",
@@ -19,16 +19,14 @@ export default function DrawdownExplainedPage() {
 
   return (
     <>
-      <Link href="/funded-accounts" className="back-link">
-        <ChevronLeftIcon className="size-4" />
-        All firms
-      </Link>
-      <h1 className="page-title mt-5">Drawdown, explained on a chart</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">
-        &ldquo;Max loss&rdquo; sounds like one number, but <em>where the firm draws the line</em> depends on the
+      <PageIntro
+        eyebrow="Prop firm tools"
+        back={{ href: "/funded-accounts", label: "All firms" }}
+        title={<>Drawdown, explained on a chart</>}
+        lede={<>&ldquo;Max loss&rdquo; sounds like one number, but <em>where the firm draws the line</em> depends on the
         drawdown rule — and it&apos;s the single rule that catches most beginners out. Below, the same made-up
-        account runs under all three rules at once.
-      </p>
+        account runs under all three rules at once.</>}
+      />
       <div className="mt-6">
         <PropFirmToolbar current="/funded-accounts/drawdown-explained" />
       </div>

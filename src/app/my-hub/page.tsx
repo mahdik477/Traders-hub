@@ -3,6 +3,7 @@ import MyHub from "@/components/MyHub";
 import { propFirms } from "@/lib/propfirms";
 import { strategies } from "@/lib/strategies";
 import { SITE_NAME } from "@/lib/sections";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "My Hub",
@@ -19,11 +20,8 @@ export default function MyHubPage() {
   const firmNames = Object.fromEntries(propFirms.map((f) => [f.id, f.name]));
   return (
     <>
-      <h1 className="title-rule page-title">My Hub</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">
-        Everything you&apos;ve saved, compared, ticked off or looked at recently — in one place. It works
-        without an account; sign in to keep it across devices.
-      </p>
+      <PageIntro eyebrow="Your things" title={<>My Hub</>} lede={<>Everything you&apos;ve saved, compared, ticked off or looked at recently — in one place. It works
+        without an account; sign in to keep it across devices.</>} />
       <MyHub quizCount={strategies.length} firmNames={firmNames} />
     </>
   );

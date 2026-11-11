@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ChevronLeftIcon } from "@/components/icons";
 import FirmMatcher from "@/components/FirmMatcher";
 import PropFirmToolbar from "@/components/PropFirmToolbar";
 import { propFirms } from "@/lib/propfirms";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Find my firm",
@@ -14,16 +13,14 @@ export const metadata: Metadata = {
 export default function FindMyFirmPage() {
   return (
     <>
-      <Link href="/funded-accounts" className="back-link">
-        <ChevronLeftIcon className="size-4" />
-        All firms
-      </Link>
-      <h1 className="page-title mt-5">Find my firm</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">
-        Five quick questions. We filter the {propFirms.length} listed firms down to the ones whose published
+      <PageIntro
+        eyebrow="Prop firm tools"
+        back={{ href: "/funded-accounts", label: "All firms" }}
+        title={<>Find my firm</>}
+        lede={<>Five quick questions. We filter the {propFirms.length} listed firms down to the ones whose published
         plans fit your answers and show you exactly why each one is there. It&apos;s a filter, not a ranking —
-        we don&apos;t pick a &ldquo;best&rdquo; firm and we don&apos;t verify trading results.
-      </p>
+        we don&apos;t pick a &ldquo;best&rdquo; firm and we don&apos;t verify trading results.</>}
+      />
       <div className="mt-6">
         <PropFirmToolbar current="/funded-accounts/find-my-firm" />
       </div>

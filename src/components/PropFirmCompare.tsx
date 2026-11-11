@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { Share2, X } from "lucide-react";
+import { Suspense, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { X } from "lucide-react";
 import type { FirmView, RuleValue } from "@/lib/propfirm-types";
 import {
   MAX_COMPARE,
@@ -29,10 +29,12 @@ import { formatDate } from "@/components/PropFirmReviews";
 // Side-by-side view of up to 3 prop-firm plans. The selection lives in the
 // address (?p=firm/market/challenge/tier/size, repeated) so a comparison is
 // a shareable link. See docs/ROLLOUT.md → "Step 2" for the design intent:
-// plan cards as column headers, grouped rows, money rules drawn as bars,
-// an "only differences" toggle, a sticky summary strip, scroll-snap on
-// phones, and an empty state with example comparisons. None of it ranks —
-// it's the firms' published terms next to each other.
+// plan cards you configure on top, then one grid (ARIA table) that fits the
+// screen — no sideways scrolling: on phones each row's label sits on its
+// own line above the values. Column names stick under the site header,
+// every row has a plain-English hint, money rules are bars on a shared
+// scale, plus an "only differences" toggle and example comparisons when
+// empty. None of it ranks — it's the firms' published terms side by side.
 
 export default function PropFirmCompare({ firms }: { firms: FirmView[] }) {
   return (
@@ -47,7 +49,10 @@ type RowDef = {
   label: string;
   /** Text used to decide whether columns differ. */
   key: (p: ResolvedPlan) => string;
-  render: (p: ResolvedPlan) => ReactNode;
+  /** One plain-English line under the label, for someone new to prop firms. */
+  hint?: ReactNode;
+  /** `all` is every plan on the page, so bars can share one scale. */
+  render: (p: ResolvedPlan, all: ResolvedPlan[]) => ReactNode;
   highlight?: boolean;
 };
 
@@ -71,7 +76,16 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
     [keys, firms],
   );
   const [onlyDiff, setOnlyDiff] = useState(false);
-  const tableRef = useRef<HTMLDivElement>(null);
+  // The column names stick directly under the site header, whose height
+  // changes between phone (two rows) and desktop (one).
+  const [stickyTop, setStickyTop] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>(".site-header");
+    if (!header || typeof ResizeObserver === "undefined") return;
+    const obs = new ResizeObserver(() => setStickyTop(`${Math.round(header.getBoundingClientRect().height) - 1}px`));
+    obs.observe(header);
+    return () => obs.disconnect();
+  }, []);
 
   function write(next: PlanKey[]) {
     router.replace(`/funded-accounts/compare${plansToQuery(next)}`, { scroll: false });
@@ -110,13 +124,33 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
 
   if (plans.length === 0) return <EmptyState firms={firms} onAdd={add} />;
 
-  return (
-    <div className="mt-6 pb-24 lg:pb-0">
-      <SummaryStrip plans={plans} tableRef={tableRef} />
+  const cols = { "--cols": plans.length, "--cmp-sticky-top": stickyTop } as CSSProperties;
 
-      <div className="flex flex-wrap items-center gap-3">
+  return (
+    <div className="cmp mt-8" style={cols}>
+      {/* 1 — choose the plans */}
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="readout">Step 1</p>
+          <h2 className="section-title mt-1">Your plans</h2>
+        </div>
         <AddPlanControl firms={firms} plans={plans} onAdd={add} />
-        <label className="ml-auto flex min-h-11 cursor-pointer items-center gap-2 text-sm text-muted">
+      </div>
+      <ul className="cmp-plans mt-4">
+        {plans.map((p, i) => (
+          <li key={`${p.firm.id}-${i}`} className="compare-col min-w-0">
+            <PlanCard plan={p} firms={firms} onChange={(patch) => update(i, patch)} onRemove={() => remove(i)} />
+          </li>
+        ))}
+      </ul>
+
+      {/* 2 — read them side by side */}
+      <div className="mt-10 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="readout">Step 2</p>
+          <h2 className="section-title mt-1">Side by side</h2>
+        </div>
+        <label className={`seg-toggle ${onlyDiff ? "is-on" : ""} ${plans.length < 2 ? "opacity-50" : "cursor-pointer"}`}>
           <input
             type="checkbox"
             checked={onlyDiff}
@@ -128,57 +162,65 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
         </label>
       </div>
 
-      <p className="meta mt-3 sm:hidden">Swipe sideways to see every column →</p>
-      <div ref={tableRef} className="compare-scroll mt-3 overflow-x-auto rounded-2xl border border-border bg-surface">
-        <table className="compare-table w-full border-collapse text-sm">
-          <caption className="sr-only">
-            {plans.map((p) => `${p.firm.name} ${p.challenge.label} ${p.tier.name}`).join(", ")} compared from their pricing
-            pages
-          </caption>
-          <thead>
-            <tr data-compare-head>
-              <th scope="col" className="compare-label-col sticky left-0 z-20 bg-surface p-3 align-bottom">
-                <span className="eyebrow">Plan</span>
-              </th>
-              {plans.map((p, i) => (
-                <th key={i} scope="col" className="compare-col border-l border-border p-4 text-left align-top">
-                  <PlanCard plan={p} firms={firms} onChange={(patch) => update(i, patch)} onRemove={() => remove(i)} />
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {groups.map((g) => (
-              <GroupRows key={g.id} group={g} plans={plans} sameByRow={sameByRow} onlyDiff={onlyDiff} />
-            ))}
-            <tr>
-              <th scope="row" className="compare-label-col sticky left-0 z-10 bg-surface p-3" />
-              {plans.map((p, i) => (
-                <td key={i} className="border-l border-border p-4 align-bottom">
-                  <div className="flex flex-col gap-2">
-                    <Link
-                      href={`/funded-accounts/${p.firm.id}?market=${p.market.market}&challenge=${encodeURIComponent(p.challenge.label)}`}
-                      className="btn btn-primary w-full"
-                    >
-                      View {p.firm.name}
-                    </Link>
-                    {p.firm.affiliateLink && (
-                      <VisitSiteLink href={p.firm.affiliateLink} firmName={p.firm.name} variant="outline" className="w-full" />
-                    )}
+      <div
+        role="table"
+        aria-label={`${plans.map((p) => `${p.firm.name} ${p.challenge.label} ${p.tier.name}`).join(", ")} compared from their pricing pages`}
+        className="cmp-table kit-panel mt-4 text-sm"
+      >
+        <div role="rowgroup" className="cmp-head">
+          <div role="row" className="cmp-row">
+            <div role="columnheader" className="cmp-corner">
+              <span className="readout">Plan</span>
+            </div>
+            {plans.map((p, i) => (
+              <div key={i} role="columnheader" className="cmp-cell min-w-0">
+                <div className="flex min-w-0 items-center gap-2.5">
+                  <span className="hidden shrink-0 sm:block">
+                    <FirmBadge name={p.firm.name} logo={p.firm.logo} logoBg={p.firm.logoBg} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="line-clamp-2 break-words text-sm font-semibold leading-tight text-foreground sm:text-base">{p.firm.name}</p>
+                    <p className="truncate font-mono text-[0.7rem] text-muted">
+                      {p.challenge.label} · {sizeLabel(p.account.size, p.firm.currency)}
+                    </p>
                   </div>
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {groups.map((g) => (
+          <GroupRows key={g.id} group={g} plans={plans} sameByRow={sameByRow} onlyDiff={onlyDiff} />
+        ))}
+
+        <div role="rowgroup" className="hidden md:block">
+          <div role="row" className="cmp-row border-t border-border">
+            <div role="rowheader" className="cmp-label" />
+            {plans.map((p, i) => (
+              <div key={i} role="cell" className="cmp-cell">
+                <PlanActions plan={p} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="tray-bottom fixed inset-x-0 z-30 lg:static lg:mt-4">
-        <div className="container-page pb-3 lg:p-0">
-          <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface p-3 shadow-glow lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
+      <ul className="mt-4 space-y-3 md:hidden">
+        {plans.map((p, i) => (
+          <li key={i} className="kit-panel p-4">
+            <p className="mb-3 font-semibold text-foreground">{p.firm.name}</p>
+            <PlanActions plan={p} />
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-5">
+        <div>
+          <div className="flex flex-wrap items-center gap-3">
             <ShareLink />
             <SaveComparisonButton kind="firms" title={plans.map((p) => `${p.firm.name} ${p.challenge.label}`).join(" vs ")} />
-            <p className="meta hidden lg:block">
+            <p className="meta hidden lg:block lg:max-w-2xl">
               Forex rules are a percentage of the account; the amounts shown are that percentage of the size you picked.
               Futures rules are the firm&apos;s fixed amounts. A side-by-side of published terms — not a ranking.
             </p>
@@ -192,6 +234,22 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
   );
 }
 
+function PlanActions({ plan: p }: { plan: ResolvedPlan }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <Link
+        href={`/funded-accounts/${p.firm.id}?market=${p.market.market}&challenge=${encodeURIComponent(p.challenge.label)}`}
+        className="btn btn-primary w-full"
+      >
+        View {p.firm.name}
+      </Link>
+      {p.firm.affiliateLink && (
+        <VisitSiteLink href={p.firm.affiliateLink} firmName={p.firm.name} variant="outline" className="w-full" />
+      )}
+    </div>
+  );
+}
+
 // ---- Rows -------------------------------------------------------------------
 
 function buildGroups(): Group[] {
@@ -201,35 +259,44 @@ function buildGroups(): Group[] {
       id: "price",
       label: "Price & billing",
       rows: [
-        { label: "Price", key: (p) => `${p.account.lowestPrice}|${p.account.promoPrice}`, render: (p) => <PriceCell plan={p} />, highlight: true },
-        { label: "Billing", key: (p) => p.tier.billing, render: (p) => (p.tier.billing === "monthly" ? "Monthly subscription" : "One-time fee") },
-        { label: "Fee refund", key: (p) => String(p.tier.rules.feeRefund), render: (p) => <RefundCell value={p.tier.rules.feeRefund} /> },
+        { label: "Price", hint: "What you pay to start this challenge today.", key: (p) => `${p.account.lowestPrice}|${p.account.promoPrice}`, render: (p) => <PriceCell plan={p} />, highlight: true },
+        { label: "Billing", hint: "One payment, or a subscription that renews.", key: (p) => p.tier.billing, render: (p) => (p.tier.billing === "monthly" ? "Monthly subscription" : "One-time fee") },
+        { label: "Fee refund", hint: "Whether the firm states the fee is refundable.", key: (p) => String(p.tier.rules.feeRefund), render: (p) => <RefundCell value={p.tier.rules.feeRefund} /> },
       ],
     },
     {
       id: "targets",
       label: "Profit targets",
       rows: [
-        { label: "To pass", key: (p) => String(ruleAmount(p, "profitTarget")), render: (p) => <TargetCell plan={p} /> },
-        { label: "Profit split", key: (p) => String(p.tier.rules.profitSplitMax), render: (p) => <span className="text-base font-bold">{ruleText(p.tier.rules.profitSplitMax, (n) => `Up to ${n}%`)}</span> },
+        { label: "To pass", hint: "Profit you have to make before the firm funds you.", key: (p) => String(ruleAmount(p, "profitTarget")), render: (p, all) => <TargetCell plan={p} all={all} /> },
+        { label: "Profit split", hint: "The largest share of profits the firm says you keep.", key: (p) => String(p.tier.rules.profitSplitMax), render: (p) => <span className="cmp-num">{ruleText(p.tier.rules.profitSplitMax, (n) => `Up to ${n}%`)}</span> },
       ],
     },
     {
       id: "loss",
       label: "Loss limits",
       rows: [
-        { label: "In one day", key: (p) => String(ruleAmount(p, "dailyLoss")), render: (p) => <MoneyRule plan={p} which="dailyLoss" /> },
-        { label: "In total", key: (p) => String(ruleAmount(p, "maxLoss")), render: (p) => <MoneyRule plan={p} which="maxLoss" /> },
-        { label: "Drawdown type", key: (p) => p.tier.rules.drawdownType ?? "", render: (p) => text(p.tier.rules.drawdownType) || <Dash /> },
+        { label: "In one day", hint: "Lose more than this in a single day and the account is closed.", key: (p) => String(ruleAmount(p, "dailyLoss")), render: (p, all) => <MoneyRule plan={p} all={all} which="dailyLoss" /> },
+        { label: "In total", hint: "Lose more than this overall and the account is closed.", key: (p) => String(ruleAmount(p, "maxLoss")), render: (p, all) => <MoneyRule plan={p} all={all} which="maxLoss" /> },
+        {
+          label: "Drawdown type",
+          hint: (
+            <>
+              How the loss limit moves as your balance grows.{" "}
+              <Link href="/funded-accounts/drawdown-explained" className="text-accent underline">
+                See it on a chart
+              </Link>
+            </>
+          ), key: (p) => p.tier.rules.drawdownType ?? "", render: (p) => text(p.tier.rules.drawdownType) || <Dash /> },
       ],
     },
     {
       id: "rules",
       label: "Rules",
       rows: [
-        { label: "Min trading days", key: (p) => String(p.tier.rules.minTradingDays), render: (p) => ruleText(p.tier.rules.minTradingDays, (n) => (n === 0 ? "No minimum" : String(n))) },
-        { label: "Consistency", key: (p) => p.tier.rules.consistency ?? "", render: (p) => text(p.tier.rules.consistency) || <Dash /> },
-        { label: "Trading period", key: (p) => p.tier.rules.tradingPeriod ?? "", render: (p) => text(p.tier.rules.tradingPeriod) || <Dash /> },
+        { label: "Min trading days", hint: "Days you must trade before you can pass.", key: (p) => String(p.tier.rules.minTradingDays), render: (p) => ruleText(p.tier.rules.minTradingDays, (n) => (n === 0 ? "No minimum" : String(n))) },
+        { label: "Consistency", hint: "Rules about making too much of your profit in one day.", key: (p) => p.tier.rules.consistency ?? "", render: (p) => text(p.tier.rules.consistency) || <Dash /> },
+        { label: "Trading period", hint: "Any time limit for reaching the target.", key: (p) => p.tier.rules.tradingPeriod ?? "", render: (p) => text(p.tier.rules.tradingPeriod) || <Dash /> },
       ],
     },
     {
@@ -237,7 +304,7 @@ function buildGroups(): Group[] {
       label: "Platforms & reviews",
       rows: [
         {
-          label: "Platforms",
+          label: "Platforms", hint: "The software you place trades with.",
           key: (p) => (p.firm.platforms ?? []).join(","),
           render: (p) =>
             p.firm.platforms?.length ? (
@@ -253,7 +320,7 @@ function buildGroups(): Group[] {
             ),
         },
         {
-          label: "Recent reviews",
+          label: "Recent reviews", hint: "Whether we flagged payout complaints in recent public reviews.",
           key: (p) => String(!!p.firm.reviewAlert),
           render: (p) =>
             p.firm.reviewAlert ? (
@@ -262,7 +329,7 @@ function buildGroups(): Group[] {
               <span className="text-muted">No review alert — we don&apos;t verify payouts</span>
             ),
         },
-        { label: "Data checked", key: (p) => p.firm.lastVerified ?? "", render: (p) => (p.firm.lastVerified ? formatDate(p.firm.lastVerified) : <Dash />) },
+        { label: "Data checked", hint: "When we last compared this with the firm's pricing page.", key: (p) => p.firm.lastVerified ?? "", render: (p) => (p.firm.lastVerified ? formatDate(p.firm.lastVerified) : <Dash />) },
       ],
     },
   ];
@@ -282,37 +349,37 @@ function GroupRows({
   const visible = group.rows.filter((r) => !(onlyDiff && sameByRow.get(`${group.id}:${r.label}`)));
   const hidden = group.rows.length - visible.length;
   return (
-    <>
-      <tr className="compare-group">
-        <th scope="rowgroup" colSpan={plans.length + 1} className="sticky left-0 z-10 bg-surface-2 px-3 py-2 text-left">
-          <span className="eyebrow text-accent">{group.label}</span>
-          {hidden > 0 && <span className="meta ml-2">{hidden} identical row{hidden === 1 ? "" : "s"} hidden</span>}
-        </th>
-      </tr>
+    <div role="rowgroup" className="cmp-group">
+      <div role="row" className="cmp-group-title">
+        <span role="columnheader" className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="readout text-accent">{group.label}</span>
+          {hidden > 0 && (
+            <span className="meta">
+              {hidden} identical row{hidden === 1 ? "" : "s"} hidden
+            </span>
+          )}
+        </span>
+      </div>
       {visible.map((r) => {
         const same = sameByRow.get(`${group.id}:${r.label}`);
         return (
-          <tr key={r.label} className={`compare-row border-t border-border ${r.highlight ? "bg-surface-2/60" : ""}`}>
-            <th
-              scope="row"
-              className={`compare-label-col sticky left-0 z-10 p-3 text-left text-xs font-medium shadow-[inset_-1px_0_0_var(--color-border)] ${
-                r.highlight ? "bg-surface-2 text-accent" : "bg-surface text-muted"
-              }`}
-            >
-              {r.label}
-              {same && plans.length > 1 && (
-                <span className="mt-0.5 block text-[0.65rem] font-normal text-subtle">same for all</span>
-              )}
-            </th>
+          <div key={r.label} role="row" className={`cmp-row cmp-data-row ${r.highlight ? "is-highlight" : ""}`}>
+            <div role="rowheader" className="cmp-label">
+              <span className="flex flex-wrap items-center gap-x-2">
+                <span className={`text-sm font-semibold ${r.highlight ? "text-accent" : "text-foreground"}`}>{r.label}</span>
+                {same && plans.length > 1 && <span className="cmp-same-tag">same for all</span>}
+              </span>
+              {r.hint && <span className="mt-0.5 block text-xs leading-snug text-muted">{r.hint}</span>}
+            </div>
             {plans.map((p, i) => (
-              <td key={i} className={`border-l border-border p-3 align-top text-foreground ${same ? "compare-same" : ""}`}>
-                {r.render(p)}
-              </td>
+              <div key={i} role="cell" className={`cmp-cell min-w-0 text-foreground ${same ? "compare-same" : ""}`}>
+                {r.render(p, plans)}
+              </div>
             ))}
-          </tr>
+          </div>
         );
       })}
-    </>
+    </div>
   );
 }
 
@@ -333,7 +400,7 @@ function PlanCard({
   const price = p.account.lowestPrice;
   const period = p.tier.billing === "monthly" ? "/mo" : "";
   return (
-    <div className="plan-card">
+    <div className="plan-card kit-panel listing-card h-full p-4 sm:p-5">
       <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-3">
           <FirmBadge name={p.firm.name} logo={p.firm.logo} logoBg={p.firm.logoBg} />
@@ -356,7 +423,7 @@ function PlanCard({
       </div>
 
       <p className="mt-3 flex items-baseline gap-2">
-        <span className="figure-lg text-2xl text-accent">{price != null ? money(price, p.firm.currency) + period : "—"}</span>
+        <span className="figure-lg text-3xl text-accent">{price != null ? money(price, p.firm.currency) + period : "—"}</span>
         {p.account.promoPrice != null && p.account.standardPrice != null && (
           <span className="text-xs text-subtle line-through">{money(p.account.standardPrice, p.firm.currency)}{period}</span>
         )}
@@ -366,7 +433,7 @@ function PlanCard({
         {p.challenge.tiers.length > 1 && ` · ${p.tier.name}`} · {sizeLabel(p.account.size, p.firm.currency)}
       </p>
 
-      <div className="mt-3 grid grid-cols-2 gap-1.5">
+      <div className="mt-4 grid grid-cols-2 gap-2 border-t border-border pt-4">
         {firm.markets.length > 1 && (
           <Picker label="Market" value={p.market.market} options={firm.markets.map((m) => [m.market, MARKET_LABELS[m.market]])} onChange={(v) => onChange({ market: v, challenge: undefined, tier: undefined, size: null })} />
         )}
@@ -383,8 +450,8 @@ function PlanCard({
 function Picker({ label, value, options, onChange }: { label: string; value: string; options: [string, string][]; onChange: (v: string) => void }) {
   return (
     <label className="flex min-w-0 flex-col gap-0.5">
-      <span className="eyebrow text-[0.6rem]">{label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="field min-h-10 py-1 text-xs sm:text-xs">
+      <span className="eyebrow">{label}</span>
+      <select value={value} onChange={(e) => onChange(e.target.value)} className="field">
         {options.map(([v, t]) => (
           <option key={v} value={v}>
             {t}
@@ -403,7 +470,7 @@ function PriceCell({ plan: p }: { plan: ResolvedPlan }) {
   if (account.lowestPrice == null) return <Dash />;
   return (
     <div>
-      <div className="figure text-accent">
+      <div className="figure-lg text-accent">
         {money(account.lowestPrice, firm.currency)}
         {period}
       </div>
@@ -414,41 +481,49 @@ function PriceCell({ plan: p }: { plan: ResolvedPlan }) {
             {money(account.standardPrice, firm.currency)}
             {period}
           </div>
-          <span className="badge badge-promo mt-1">{market.promoCode ? `with code ${market.promoCode}` : "current promo"}</span>
+          <span className="badge badge-promo mt-1 whitespace-normal">{market.promoCode ? `with code ${market.promoCode}` : "current promo"}</span>
         </>
       )}
     </div>
   );
 }
 
-/** Amount plus a thin bar: the amount as a share of the account size. A
- *  picture of the published rule, not a verdict. */
-function RuleBar({ amount, size, tone, label }: { amount: RuleValue; size: number; tone: "danger" | "success"; label?: string }) {
-  if (typeof amount !== "number") return null;
-  const pct = Math.max(0, Math.min(100, (amount / size) * 100));
+/** Amount as a share of the account, or null when it isn't a number. */
+function share(amount: RuleValue, size: number): number | null {
+  return typeof amount === "number" && size > 0 ? amount / size : null;
+}
+
+/** Amount plus a bar. The bar is the amount as a share of the account size,
+ *  drawn on one scale across the columns (the largest share in the row
+ *  fills the bar) so the plans can be read against each other. A picture of
+ *  the published rule, not a verdict. */
+function RuleBar({ value, max, tone, label }: { value: number | null; max: number; tone: "loss" | "target"; label?: string }) {
+  if (value == null) return null;
+  const pct = max > 0 ? Math.max(4, Math.min(100, (value / max) * 100)) : 0;
   return (
-    <div className="mt-1.5" aria-hidden="true">
-      <div className="h-1.5 w-full max-w-[160px] overflow-hidden rounded-full bg-surface-2">
-        <div className={`rule-bar h-full rounded-full ${tone === "danger" ? "bg-danger/80" : "bg-success/80"}`} style={{ width: `${pct}%` }} />
+    <div className="mt-2">
+      <div className="cmp-bar" aria-hidden="true">
+        <div className={`rule-bar ${tone === "loss" ? "cmp-bar-loss" : "cmp-bar-target"}`} style={{ width: `${pct}%` }} />
       </div>
-      {label && <span className="mt-0.5 block text-[0.7rem] text-muted">{label}</span>}
+      {label && <span className="mt-1 block text-xs leading-snug text-muted">{label}</span>}
     </div>
   );
 }
 
-function TargetCell({ plan: p }: { plan: ResolvedPlan }) {
+function TargetCell({ plan: p, all }: { plan: ResolvedPlan; all: ResolvedPlan[] }) {
   const amount = ruleAmount(p, "profitTarget");
   const pct1 = rulePercent(p, "phase1Target");
   const pct2 = p.tier.rules.unit === "percent" ? p.tier.rules.phase2Target : "n/a";
   const pct3 = p.tier.rules.unit === "percent" ? p.tier.rules.phase3Target : "n/a";
   const phases = [pct1, pct2, pct3].filter((v) => v !== "n/a");
+  const max = Math.max(0, ...all.map((q) => share(ruleAmount(q, "profitTarget"), q.account.size) ?? 0));
   return (
     <div>
-      <div className="font-semibold">{ruleText(amount, (n) => moneyRound(n, p.firm.currency))}</div>
+      <div className="cmp-num">{ruleText(amount, (n) => moneyRound(n, p.firm.currency))}</div>
       <RuleBar
-        amount={amount}
-        size={p.account.size}
-        tone="success"
+        value={share(amount, p.account.size)}
+        max={max}
+        tone="target"
         label={
           phases.length > 1
             ? phases.map((v, i) => `Phase ${i + 1}: ${ruleText(v, (n) => `${n}%`)}`).join(" · ")
@@ -461,13 +536,14 @@ function TargetCell({ plan: p }: { plan: ResolvedPlan }) {
   );
 }
 
-function MoneyRule({ plan: p, which }: { plan: ResolvedPlan; which: "dailyLoss" | "maxLoss" }) {
+function MoneyRule({ plan: p, all, which }: { plan: ResolvedPlan; all: ResolvedPlan[]; which: "dailyLoss" | "maxLoss" }) {
   const amount = ruleAmount(p, which);
   const pct = rulePercent(p, which);
+  const max = Math.max(0, ...all.map((q) => share(ruleAmount(q, which), q.account.size) ?? 0));
   return (
     <div>
-      <div className="font-semibold">{ruleText(amount, (n) => moneyRound(n, p.firm.currency))}</div>
-      <RuleBar amount={amount} size={p.account.size} tone="danger" label={typeof pct === "number" ? `${pct}% of the account` : undefined} />
+      <div className="cmp-num">{ruleText(amount, (n) => moneyRound(n, p.firm.currency))}</div>
+      <RuleBar value={share(amount, p.account.size)} max={max} tone="loss" label={typeof pct === "number" ? `${pct}% of the account` : undefined} />
     </div>
   );
 }
@@ -507,43 +583,11 @@ function AddPlanControl({ firms, plans, onAdd }: { firms: FirmView[]; plans: Res
   );
 }
 
-/** Slim bar that appears under the site header once the plan cards have
- *  scrolled away, so the reader always knows which column is which. */
-function SummaryStrip({ plans, tableRef }: { plans: ResolvedPlan[]; tableRef: React.RefObject<HTMLDivElement | null> }) {
-  const [shown, setShown] = useState(false);
-  useEffect(() => {
-    // Watch the table's header row: once it has scrolled above the site
-    // header, show the strip; hide it again when it comes back.
-    const head = tableRef.current?.querySelector("thead");
-    if (!head || typeof IntersectionObserver === "undefined") return;
-    const obs = new IntersectionObserver(([e]) => setShown(!e.isIntersecting && e.boundingClientRect.top < 0), {
-      rootMargin: "-80px 0px 0px 0px",
-    });
-    obs.observe(head);
-    return () => obs.disconnect();
-  }, [tableRef, plans.length]);
-  return (
-    <>
-      <div className={`compare-summary ${shown ? "is-shown" : ""}`} aria-hidden={!shown}>
-        <div className="container-page flex items-center gap-2 overflow-x-auto py-2">
-          {plans.map((p, i) => (
-            <span key={i} className="flex min-w-0 shrink-0 items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs">
-              <FirmBadge name={p.firm.name} logo={p.firm.logo} logoBg={p.firm.logoBg} />
-              <span className="truncate font-semibold">{p.firm.name}</span>
-              <span className="text-accent">{p.account.lowestPrice != null ? money(p.account.lowestPrice, p.firm.currency) : "—"}</span>
-            </span>
-          ))}
-        </div>
-      </div>
-    </>
-  );
-}
-
 function EmptyState({ firms, onAdd }: { firms: FirmView[]; onAdd: (firmId: string) => void }) {
   const examples = useMemo(() => exampleComparisons(firms), [firms]);
   return (
     <div className="mt-6 space-y-6">
-      <div className="rounded-2xl border border-dashed border-border-strong p-6 sm:p-8">
+      <div className="kit-panel p-6 sm:p-8">
         <p className="text-lg font-semibold text-foreground">Pick up to three plans</p>
         <p className="meta mt-1">
           Add a firm here, or tick &ldquo;Compare&rdquo; on cards in the{" "}
@@ -564,7 +608,7 @@ function EmptyState({ firms, onAdd }: { firms: FirmView[]; onAdd: (firmId: strin
           <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {examples.map((ex) => (
               <li key={ex.title}>
-                <Link href={`/funded-accounts/compare${plansToQuery(ex.keys)}`} className="lift-card block h-full rounded-xl border border-border bg-surface p-4">
+                <Link href={`/funded-accounts/compare${plansToQuery(ex.keys)}`} className="lift-card kit-panel listing-card block h-full p-4">
                   <p className="eyebrow">{ex.eyebrow}</p>
                   <p className="mt-1 font-semibold text-foreground">{ex.title}</p>
                   <p className="meta mt-2">{ex.firms.join(" · ")}</p>
@@ -588,7 +632,6 @@ function ShareLink() {
   }, [searchParams]);
   return (
     <CopyButton value={url} label="Copy a link to this comparison" copiedLabel="Link copied">
-      <Share2 className="size-4" aria-hidden="true" />
       Share
     </CopyButton>
   );
