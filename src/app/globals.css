@@ -1152,3 +1152,254 @@ input.signal-filter-search {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
   background-size: 140px 140px;
 }
+
+/* ---- Site-wide search (SiteSearch.tsx) ----------------------------------
+   The panel drops in from slightly above and the overlay fades; both are
+   short and both stop entirely under prefers-reduced-motion. */
+@keyframes search-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .search-overlay {
+    animation: overlay-in 160ms ease-out;
+  }
+  .search-panel {
+    animation: search-panel-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+:root[data-theme="light"] .search-overlay {
+  background: rgb(237 235 230 / 0.7);
+}
+
+/* Loading placeholder blocks — a soft shimmer across a surface-2 bar.
+   Used by loading.tsx skeletons and anything that waits on the browser. */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-foreground) 6%, transparent),
+      transparent
+    );
+    animation: skeleton-sweep 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ---- Compare tables -------------------------------------------------------
+   Columns slide in as they're added; the copy button flashes green once
+   something has been copied. Both stop under reduced motion. */
+@keyframes compare-col-in {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .compare-col {
+    animation: compare-col-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+.copy-button.is-copied {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+/* Fixed-to-bottom action bars (compare tray, sticky visit bar) need to
+   sit above the mobile bottom nav when there is one. */
+.tray-bottom {
+  bottom: var(--bottom-nav-height, 0px);
+}
+
+/* ---- Find my firm (FirmMatcher.tsx) --------------------------------------
+   Each question card slides in; result cards stagger in via animationDelay
+   set inline. Nothing moves under reduced motion. */
+@keyframes matcher-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .matcher-step {
+    animation: matcher-step-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .match-card {
+    animation: matcher-step-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .matcher-bar {
+    transition: background-color 300ms ease;
+  }
+}
+
+/* ---- Deals (DealsList.tsx) --------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .deal-card {
+    animation: matcher-step-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* Light bronze is too dark for the dashed code box in light mode; keep the
+   code itself readable on the pale tint. */
+:root[data-theme="light"] .deal-code {
+  color: #734f10;
+}
+
+/* ---- Cost calculator / drawdown chart / rules-in-money ------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  .cost-bar {
+    transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cost-total {
+    animation: stat-settle-in 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dd-equity {
+    stroke-dasharray: 3000;
+    stroke-dashoffset: 3000;
+    animation: hero-chart-draw 1400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .dd-floor {
+    transition: d 300ms ease;
+  }
+  .rules-money-card {
+    animation: matcher-step-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* ---- Start here path ------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  .path-progress {
+    transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* ---- Account menu ---------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .profile-menu {
+    animation: search-panel-in 160ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* ---- Save button ---------------------------------------------------------- */
+@keyframes save-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .save-button.is-pop {
+    animation: save-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+/* ---- Mobile bottom nav + page transitions ----------------------------- */
+:root {
+  --bottom-nav-height: 0px;
+}
+
+@media (width < 48rem) {
+  :root {
+    --bottom-nav-height: calc(3.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  /* Leave room so the footer's last lines and any bottom tray clear the bar. */
+  .site-footer {
+    padding-bottom: var(--bottom-nav-height);
+  }
+}
+
+.bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  border-top: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-background) 92%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgb(232 197 106 / 0.18);
+}
+
+:root[data-theme="light"] .bottom-nav {
+  background: color-mix(in srgb, #ffffff 94%, transparent);
+  box-shadow: 0 -1px 0 #ddd9d0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bottom-nav-icon {
+    transition: background-color 180ms ease, transform 180ms ease;
+  }
+  .bottom-nav a:active .bottom-nav-icon,
+  .bottom-nav button:active .bottom-nav-icon {
+    transform: scale(0.92);
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    animation: page-enter 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}

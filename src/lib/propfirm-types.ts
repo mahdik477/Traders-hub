@@ -19,17 +19,67 @@ export type PriceCell = {
   discountLabel: string | null;
 };
 
+/** A raw rule value as written in the data file. "n/a" = doesn't apply to
+ *  this account type, "none" = the firm says there is no such rule, null =
+ *  not confirmed from the firm's own pages. Forex values are percentages of
+ *  the account size; futures values are fixed USD amounts per account. */
+export type RuleValue = number | "n/a" | "none" | null;
+
+/** The rules behind a tier as plain numbers, so calculators, the compare
+ *  page and the "rules in plain money" panel can do arithmetic instead of
+ *  parsing the formatted table cells. Forex rules live here (one set for
+ *  every size); futures per-size amounts live on each account instead. */
+export type TierRules = {
+  unit: "percent" | "usd";
+  phase1Target: RuleValue;
+  phase2Target: RuleValue;
+  phase3Target: RuleValue;
+  fundedTarget: RuleValue;
+  dailyLoss: RuleValue;
+  maxLoss: RuleValue;
+  /** Free text from the firm, e.g. "EOD trailing", "static". */
+  drawdownType: string | null;
+  profitSplitMax: RuleValue;
+  minTradingDays: RuleValue;
+  consistency: string | null;
+  tradingPeriod: string | null;
+  feeRefund: boolean | "n/a" | "none" | null;
+};
+
+/** Our reading of a free-text drawdown_type string, for filters and the
+ *  matcher. "mixed" = the firm uses different kinds at different stages. */
+export type DrawdownKind = "static" | "eod-trailing" | "intraday-trailing" | "mixed" | "unknown";
+
+export type AccountView = {
+  size: number;
+  /** promo ?? standard — what a visitor would actually pay today. */
+  lowestPrice: number | null;
+  /** Full (undiscounted) price. */
+  standardPrice: number | null;
+  /** Discounted price, null when there's no promo on this size. */
+  promoPrice: number | null;
+  /** The price is a monthly subscription. */
+  monthly: boolean;
+  /** Futures only: fixed USD rule amounts for this size. */
+  profitTarget: RuleValue;
+  dailyLoss: RuleValue;
+  maxLoss: RuleValue;
+};
+
 export type TierView = {
   name: string;
   tagline: string | null;
+  billing: "one-time" | "monthly";
+  rules: TierRules;
+  drawdownKind: DrawdownKind;
   /** Column headings, e.g. "$10K". */
   sizes: string[];
   /** Rule rows down the side; each has one value per account size. */
   rows: { label: string; values: Cell[] }[];
   prices: PriceCell[];
-  /** Raw numbers used by the filter bar, one per account size.
-   *  `monthly` = the price is a monthly subscription. */
-  accounts: { size: number; lowestPrice: number | null; monthly: boolean }[];
+  /** Raw numbers, one per account size — used by the filter bar, the
+   *  compare page, the cost calculator and the deals page. */
+  accounts: AccountView[];
   profitSplit: number | null;
   /** null = not stated on the firm's pricing page. */
   feeRefund: boolean | null;
@@ -88,10 +138,31 @@ export type ReviewQuote = {
   url: string | null;
 };
 
+/** Where a firm does and doesn't accept traders, as published by the firm.
+ *  Codes are ISO 3166-1 alpha-2 ("AE", "US"). restricted = blocked list;
+ *  allowedOnly = the firm only serves these countries. Both null = the firm
+ *  hasn't published a list we could find. */
+export type FirmCountries = {
+  restricted: string[] | null;
+  allowedOnly: string[] | null;
+  notes: string | null;
+  source: string | null;
+  /** YYYY-MM-DD the country rules were read. */
+  lastChecked: string | null;
+};
+
 export type FirmView = {
   /** Also the page address: /funded-accounts/<id>. */
   id: string;
   name: string;
+  /** YYYY-MM-DD the data file was last checked against the firm's live
+   *  pricing page (from _notes.last_verified). Null if the file has none. */
+  lastVerified: string | null;
+  /** The firm's own website (not the affiliate link). */
+  website: string | null;
+  founded: number | null;
+  hq: string | null;
+  countries: FirmCountries | null;
   /** Path under /public, e.g. "/funded-accounts/ftmo-logo.png". Null = show
    *  the firm's initials instead. */
   logo: string | null;

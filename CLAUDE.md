@@ -28,16 +28,35 @@ Section list lives in `src/lib/sections.ts` (header, homepage cards and
 |---|---|---|
 | Funded accounts (prop firms) | `/funded-accounts` | **live** — 29 firms. Forex: Audacity Capital, BrightFunded, City Traders Imperium, FTMO, Funded Trading Plus, FunderPro, FundingPips, FXIFY, Goat Funded Trader, The5ers. Futures: Apex Trader Funding, Bulenox, Earn2Trade, Elite Trader Funding, Funded Futures Network, LeeLoo Trading, Lucid Trading, MyFundedFutures, Phidias, Take Profit Trader, Top One Futures, Topstep, TradeDay, Tradeify, UProfit. Both: Alpha Funded, Blue Guardian, E8 Markets, FundedNext. Firms whose recent reviews show many payout complaints carry a dated `review_alert` (warning box + card badge) instead of being left out |
 | Courses | `/courses` | **live** — 29 courses: 247 Research, Ace of Trades, Bear Bull Traders, Bulls on Wall Street, Chroma Trading, Crystal Academy, EliteClouds Trading Education, Humbled Trader, Inner Circle Trader (ICT), Investors Underground, Kaizen, Miles High Club, No Nonsense Forex, Option Alpha, Owls Options Traders, PJ Trades Premium, RakeTrades, Six Figure Capital, Skylit, SMB Training, Stocks with Josh, tastylive, Team Bull Trading, The Peachy Investor, Trade Momentum, Trading Profit Path, Urban Forex, Warrior Trading, Wealth Group |
-| Signal groups | `/signal-groups` | next up |
-| Brokers | `/brokers` | coming soon |
-| Tools | `/tools` | coming soon |
-| Strategies | `/strategies` | coming soon — build LAST, most carefully |
+| Signal groups | `/signal-groups` | **live** — Telegram signal groups (one `signal-groups-data-<slug>.json` per group) with a detail page each |
+| Brokers | `/brokers` | **live** — CFD brokers (VT Markets, PU Prime); stock brokers and crypto exchanges are empty tabs |
+| Tools | `/tools` | **live** — 15 tools (charting, indicators, backtesting, journals, automation, VPS, scanners, copiers) |
+| Strategies | `/strategies` | **live** — 58 strategies in one `strategies-data.json`; every one has an interactive page with a simulator and quiz |
+| Learn | `/learn` | **live** — 9 hand-written beginner topics (`src/lib/learn-topics.ts`) |
+
+Pages built around that data (not sections, so they are not in `sections.ts`):
+
+| Page | Route | What it is |
+|---|---|---|
+| Site search | header button / Ctrl+K | Searches every listing, Learn topic and glossary term; index served as static JSON from `/api/search-index` (built from `src/lib/catalog.ts`) |
+| Glossary | `/glossary` | Every term from `src/lib/glossary.ts` on one page |
+| Compare prop firms | `/funded-accounts/compare` | Up to 3 plans side by side, shareable `?p=` link |
+| Find my firm | `/funded-accounts/find-my-firm` | 5-question filter; results alphabetical, never ranked |
+| Deals | `/deals` | Every active promo code/discount computed from the data, with the firm's `last_verified` date |
+| Cost calculator | `/funded-accounts/cost-calculator` | Adds up fees only; activation/reset fees are typed in (they are only free text in `_notes`) |
+| Drawdown explained | `/funded-accounts/drawdown-explained` | Static vs EOD vs intraday trailing on one synthetic chart, labelled an illustration |
+| Start here | `/start-here` | Guided path Learn → free strategies → funded accounts, with progress ticks |
+| My Hub | `/my-hub` | Saved listings, saved comparisons, recently viewed, learning progress, alert preferences, account controls |
+| Sign in | `/sign-in` | Google or email link via Supabase Auth; hidden when the env variables are missing |
+
+The prop-firm loader also exposes raw numbers (`tier.rules`, `account.promoPrice`,
+`firm.countries`, `firm.lastVerified`) for these pages — see `src/lib/propfirm-types.ts`.
 
 Do not build ahead into later sections unless we explicitly ask. New sections
 should reuse the existing pattern: JSON data files in the repo root → a loader
 in `src/lib/` → a directory page with filters → a detail page per listing.
 
-## How listing data works (no database yet)
+## How listing data works (listings are files; the database holds only account data)
 - Every listing is one JSON file in the **repo root**, read at build time:
   - prop firms: `propfirms-data-<NAME>.json` → loaded by `src/lib/propfirms.ts`
   - courses: `courses-data-<name>.json` → loaded by `src/lib/courses.ts`
@@ -88,8 +107,24 @@ in `src/lib/` → a directory page with filters → a detail page per listing.
   **Read `AGENTS.md` above: this Next.js has breaking changes vs your training
   data — check `node_modules/next/dist/docs/` before using an API.**
 - Hosting: Vercel, auto-deploys from GitHub; every branch gets a preview link.
-- Not set up yet (don't add without asking): Supabase (database/auth), Stripe
-  (payments, only for the strategies paywall later), analytics, email tool.
+- **Supabase (accounts) is in use, optionally.** `@supabase/supabase-js` +
+  `@supabase/ssr`; browser-side only (no session proxy) plus one Route Handler
+  at `/auth/callback`. Everything account-related hides itself when
+  `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are
+  missing. Tables + row-level security: `supabase/schema.sql`. Set-up guide for
+  the team: `SETUP-ACCOUNTS.md`. Env template: `env.example` (copy to
+  `.env.local`, never commit keys). Our own tables store only user id, email
+  and an 18+ confirmation time (Supabase Auth's own tables also keep e.g. the
+  Google profile record — say so in the privacy policy); "I'm under 18"
+  deletes the account via the `delete_my_account` function; saved items/progress/alert preferences live in the browser
+  first (`src/lib/local-store.ts`) and sync to the person's own rows
+  (`src/components/auth/AccountSync.tsx`).
+- Not set up yet (don't add without asking): Stripe (payments, only for the
+  strategies paywall later), analytics, email tool. The per-firm alert opt-in
+  only records a preference — nothing sends email.
+- Mobile: bottom nav (`BottomNav.tsx`), installable PWA (`src/app/manifest.ts`,
+  `public/icons`, no-cache `public/sw.js`), per-page `loading.tsx` skeletons.
+  Share images for firms/courses/strategies come from `/api/og/...` routes.
 - Styling: reuse the existing utility classes in `src/app/globals.css`
   (`page-title`, `section-title`, `meta`, `text-muted`, `container-page`, …)
   and existing components in `src/components/`. Support light + dark mode

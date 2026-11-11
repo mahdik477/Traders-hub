@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import InteractiveStrategyPage from "@/components/InteractiveStrategyPage";
 import MovingAverageSimulator from "@/components/MovingAverageSimulator";
 import MovingAverageSignalQuiz from "@/components/MovingAverageSignalQuiz";
-import { getStrategy } from "@/lib/strategies";
+import { strategyMetadata } from "@/lib/strategy-metadata";
 
 // A one-off page for this single strategy — not the shared [slug] template.
 // Next.js resolves this literal route ahead of the dynamic one for this
@@ -13,10 +13,7 @@ import { getStrategy } from "@/lib/strategies";
 
 const SLUG = "moving-average-crossover";
 
-export const metadata: Metadata = (() => {
-  const s = getStrategy(SLUG);
-  return s ? { title: s.name, description: s.summaryOneLine } : {};
-})();
+export const metadata: Metadata = strategyMetadata(SLUG);
 
 export default function MovingAverageCrossoverPage() {
   return (

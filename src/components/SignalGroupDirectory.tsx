@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import SignalGroupLogo from "@/components/SignalGroupLogo";
 import { signalGroupDetailHref } from "@/lib/signal-group-links";
+import SaveButton from "@/components/SaveButton";
 import {
   signalFilterTickCount,
   signalFiltersFromSearch,
@@ -553,6 +554,7 @@ function SignalRow({
               <GroupName id={headingId} name={group.name} href={href} />
               <p className="mt-1 text-xs text-muted">Telegram</p>
             </div>
+            <SaveButton kind="signal" id={group.slug} name={group.name} />
           </div>
           <CategoryTags markets={orderedMarkets} className="mt-3" />
           {group.description && (
@@ -621,7 +623,8 @@ function SignalRow({
         <FieldLabel>Language</FieldLabel>
         <p className="truncate text-sm text-foreground lg:text-[13px]">{group.language || <Dash />}</p>
       </div>
-      <div className="relative z-10 col-span-2 lg:col-span-1 lg:justify-self-end">
+      <div className="relative z-10 col-span-2 flex items-center justify-end gap-2 lg:col-span-1 lg:justify-self-end">
+        <SaveButton kind="signal" id={group.slug} name={group.name} />
         <JoinLink group={group} />
       </div>
     </li>

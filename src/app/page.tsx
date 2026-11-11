@@ -27,6 +27,8 @@ import MiniDotPlot from "@/components/explore/MiniDotPlot";
 import MiniPulseFeed from "@/components/explore/MiniPulseFeed";
 import MiniIconCluster from "@/components/explore/MiniIconCluster";
 import MiniCandlePreview from "@/components/explore/MiniCandlePreview";
+import { StartHereMini } from "@/components/StartHerePath";
+import { START_HERE_PATH } from "@/lib/start-here";
 import {
   BuildingIcon,
   BookIcon,
@@ -517,6 +519,49 @@ export default function Home() {
                 <p className="mt-1.5 max-w-xs text-sm leading-relaxed text-muted">{text}</p>
               </div>
             ))}
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* New to trading? Start here — the guided path (Learn → Strategies  */}
+      {/* → Funded Accounts). Progress comes from the browser-side store,   */}
+      {/* so a returning visitor sees where they got to.                    */}
+      {/* ---------------------------------------------------------------- */}
+      <ScrollReveal>
+        <section aria-labelledby="start-here-heading" className="border-t border-border py-14">
+          <div className="start-here-band relative overflow-hidden rounded-2xl border border-accent/30 bg-surface p-6 shadow-glow sm:p-8">
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-gold-fill/12 via-transparent to-transparent" />
+            <div className="relative grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+              <div>
+                <p className="eyebrow">Guided path</p>
+                <h2 id="start-here-heading" className="section-title mt-2 text-3xl sm:text-4xl">
+                  New to trading? Start here.
+                </h2>
+                <p className="mt-3 max-w-md text-muted">
+                  Three stages in the right order: learn the basics, practise on a live chart, then understand
+                  funded-account rules before you ever pay a fee.
+                </p>
+                <div className="mt-5">
+                  <StartHereMini />
+                </div>
+              </div>
+              <ol className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {START_HERE_PATH.map((stage, i) => (
+                  <li key={stage.id} className="relative rounded-xl border border-border bg-background/70 p-4">
+                    <span className="eyebrow">Stage {i + 1}</span>
+                    <p className="mt-1 font-semibold text-foreground">
+                      <Link href={stage.href} className="card-stretch rounded-xl hover:text-accent">
+                        {stage.title}
+                      </Link>
+                    </p>
+                    <p className="mt-1 text-xs text-muted">
+                      {stage.steps.length} step{stage.steps.length === 1 ? "" : "s"}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </section>
       </ScrollReveal>

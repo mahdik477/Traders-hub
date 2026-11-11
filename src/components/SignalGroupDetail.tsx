@@ -3,6 +3,8 @@ import { ExternalLink } from "lucide-react";
 import SignalGroupBackLink from "@/components/SignalGroupBackLink";
 import SignalGroupLogo from "@/components/SignalGroupLogo";
 import SignalGroupRiskDisclaimer from "@/components/SignalGroupRiskDisclaimer";
+import SaveButton from "@/components/SaveButton";
+import TrackView from "@/components/TrackView";
 import { signalGroupSummary } from "@/lib/signal-group-summary";
 import {
   formatSignalDate,
@@ -64,9 +66,13 @@ export default function SignalGroupDetail({ group }: { group: SignalGroupView })
               )}
             </div>
           </div>
-          <JoinButton group={group} />
+          <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+            <JoinButton group={group} />
+            <SaveButton kind="signal" id={group.slug} name={group.name} variant="label" />
+          </div>
         </div>
       </header>
+      <TrackView kind="signal" id={group.slug} />
 
       <section aria-labelledby="signal-about-heading" className="mt-6 max-w-3xl">
         <h2 id="signal-about-heading" className="text-base font-semibold tracking-tight text-foreground">

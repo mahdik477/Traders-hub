@@ -12,9 +12,13 @@ import path from "node:path";
 import type {
   Cell,
   ChallengeView,
+  DrawdownKind,
+  FirmCountries,
   FirmView,
   MarketView,
   ReviewRating,
+  RuleValue,
+  TierRules,
   TierView,
 } from "./propfirm-types";
 
@@ -85,9 +89,20 @@ type RawRating = {
 };
 
 type RawFile = {
+  _notes?: { last_verified?: string | null } | null;
   firm: {
     id: string;
     name: string;
+    founded?: number | null;
+    hq?: string | null;
+    website?: string | null;
+    countries?: {
+      restricted?: string[] | null;
+      allowed_only?: string[] | null;
+      notes?: string | null;
+      source?: string | null;
+      last_checked?: string | null;
+    } | null;
     logo?: string | null;
     logo_bg?: "white" | "dark" | null;
     name_note?: string | null;
@@ -152,7 +167,7 @@ function loadFirms(): FirmView[] {
         `Prop firm data file "${file}": "id" must use only lowercase letters, numbers and dashes.`,
       );
     }
-    return buildFirm(data.firm);
+    return buildFirm(data.firm, data._notes?.last_verified ?? null);
   });
 
   const ids = firms.map((f) => f.id);
@@ -161,7 +176,7 @@ function loadFirms(): FirmView[] {
   return firms;
 }
 
-function buildFirm(firm: RawFile["firm"]): FirmView {
+function buildFirm(firm: RawFile["firm"], lastVerified: string | null): FirmView {
   const markets: MarketView[] = [];
   for (const m of firm.markets) {
     if (m.market !== "forex" && m.market !== "futures") continue;
@@ -179,6 +194,11 @@ function buildFirm(firm: RawFile["firm"]): FirmView {
   return {
     id: firm.id,
     name: firm.name,
+    lastVerified: /^\d{4}-\d{2}-\d{2}$/.test(lastVerified ?? "") ? lastVerified : null,
+    website: safeLink(firm.website),
+    founded: typeof firm.founded === "number" ? firm.founded : null,
+    hq: firm.hq || null,
+    countries: buildCountries(firm.countries),
     // Only local files under /public — never a remote image URL.
     logo: firm.logo?.startsWith("/") ? firm.logo : null,
     logoBg: firm.logo_bg === "dark" ? "dark" : "white",
@@ -213,6 +233,41 @@ function buildFirm(firm: RawFile["firm"]): FirmView {
       : null,
     markets,
   };
+}
+
+function buildCountries(c: RawFile["firm"]["countries"]): FirmCountries | null {
+  if (!c) return null;
+  const codes = (list: string[] | null | undefined) =>
+    Array.isArray(list) ? list.filter((x) => /^[A-Z]{2}$/.test(x)) : null;
+  return {
+    restricted: codes(c.restricted),
+    allowedOnly: codes(c.allowed_only),
+    notes: c.notes || null,
+    source: safeLink(c.source),
+    lastChecked: c.last_checked || null,
+  };
+}
+
+/** Sorts a firm's free-text drawdown description into one of a few kinds.
+ *  Only used for filtering/explaining — the table still shows the firm's
+ *  exact wording. */
+export function classifyDrawdown(text: string | null | undefined): DrawdownKind {
+  if (!text) return "unknown";
+  const t = text.toLowerCase();
+  const eod = /\beod\b|end[- ]of[- ]day/.test(t);
+  const intraday = /intraday|dynamic/.test(t);
+  const trailing = /trailing/.test(t);
+  const isStatic = /static|balance-based/.test(t);
+  const kinds = [eod && "eod", intraday && "intraday", (trailing && !eod && !intraday) && "trailing", isStatic && "static"].filter(Boolean);
+  // "static (trailing once funded)" or "EOD trailing (evaluation), intraday (funded)"
+  if (kinds.length > 1 || /\bor\b|funded\)|evaluation\)/.test(t)) return "mixed";
+  if (eod) return "eod-trailing";
+  if (intraday) return "intraday-trailing";
+  if (isStatic) return "static";
+  // Plain "trailing" with no qualifier — futures firms usually mean the
+  // intraday kind, but we don't guess beyond "trailing".
+  if (trailing) return "intraday-trailing";
+  return "unknown";
 }
 
 function rating(r: RawRating | null | undefined): ReviewRating | null {
@@ -321,9 +376,46 @@ function buildTier(
     rows.push({ label: "Fee refund", values: same(yesNo(r.fee_refund ?? null)) });
   }
 
+  const rules: TierRules =
+    t.rules.unit === "percent"
+      ? {
+          unit: "percent",
+          phase1Target: rule(t.rules.phase1_target),
+          phase2Target: rule(t.rules.phase2_target),
+          phase3Target: t.rules.phase3_target === undefined ? "n/a" : rule(t.rules.phase3_target),
+          fundedTarget: rule(t.rules.funded_target),
+          dailyLoss: rule(t.rules.daily_loss),
+          maxLoss: rule(t.rules.max_loss),
+          drawdownType: t.rules.drawdown_type || null,
+          profitSplitMax: rule(t.rules.profit_split_max),
+          minTradingDays: rule(t.rules.min_trading_days),
+          consistency: t.rules.consistency || null,
+          tradingPeriod: t.rules.trading_period || null,
+          feeRefund: t.rules.fee_refund ?? null,
+        }
+      : {
+          unit: "usd",
+          phase1Target: null,
+          phase2Target: "n/a",
+          phase3Target: "n/a",
+          fundedTarget: null,
+          dailyLoss: null,
+          maxLoss: null,
+          drawdownType: t.rules.drawdown_type || null,
+          profitSplitMax: rule(t.rules.profit_split_max),
+          minTradingDays: rule(t.rules.min_trading_days),
+          consistency:
+            typeof t.rules.consistency_pct === "number" ? `${t.rules.consistency_pct}%` : t.rules.consistency_pct ?? null,
+          tradingPeriod: null,
+          feeRefund: t.rules.fee_refund ?? null,
+        };
+
   return {
     name: t.tier,
     tagline: t.tagline,
+    billing: monthly ? "monthly" : "one-time",
+    rules,
+    drawdownKind: classifyDrawdown(rules.drawdownType),
     sizes: accounts.map((a) => compactMoney(a.size, currency)),
     rows,
     prices: accounts.map((a) => {
@@ -335,7 +427,16 @@ function buildTier(
         discountLabel: hasDiscount ? discountLabel : null,
       };
     }),
-    accounts: accounts.map((a) => ({ size: a.size, lowestPrice: a.promo ?? a.standard, monthly })),
+    accounts: accounts.map((a) => ({
+      size: a.size,
+      lowestPrice: a.promo ?? a.standard,
+      standardPrice: a.standard ?? a.promo,
+      promoPrice: a.promo != null && a.standard != null ? a.promo : null,
+      monthly,
+      profitTarget: rule(a.profit_target),
+      dailyLoss: rule(a.daily_loss),
+      maxLoss: rule(a.max_loss),
+    })),
     // The filters only compare real values; "n/a" / "none" count as unknown.
     profitSplit: typeof t.rules.profit_split_max === "number" ? t.rules.profit_split_max : null,
     feeRefund: typeof t.rules.fee_refund === "boolean" ? t.rules.fee_refund : null,
@@ -361,6 +462,11 @@ function safeLink(url: string | null | undefined): string | null {
 // (PropFirmPricing styles these two by their text.)
 const NOT_APPLICABLE = "N/A";
 const NO_LIMIT = "None";
+
+/** A raw rule value, normalised: undefined becomes null. */
+function rule(v: number | Empty | undefined): RuleValue {
+  return v === undefined ? null : v;
+}
 
 /** Format a rule value, turning "n/a" / "none" into their labels. */
 function show<T>(v: T | Empty | undefined, format: (v: T) => string): Cell {

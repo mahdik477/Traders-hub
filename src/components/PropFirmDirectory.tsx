@@ -15,6 +15,16 @@ import {
 } from "@/lib/propfirm-filters";
 import FirmBadge from "@/components/FirmBadge";
 import VisitSiteLink from "@/components/VisitSiteLink";
+import {
+  MAX_COMPARE,
+  defaultPlanFor,
+  plansToQuery,
+  samePlan,
+  type PlanKey,
+} from "@/lib/propfirm-compare";
+import CountrySwitch, { useCountry } from "@/components/CountrySwitch";
+import SaveButton from "@/components/SaveButton";
+import { firmAvailability } from "@/lib/countries";
 
 function uniqueSorted<T>(values: T[], compare?: (a: T, b: T) => number): T[] {
   return [...new Set(values)].sort(compare);
@@ -51,6 +61,31 @@ function DirectoryFromAddress({ firms }: { firms: FirmView[] }) {
 
 function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilters: Filters }) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
+  // Plans ticked for the compare page. Each is the first plan of that firm
+  // that matches the current filters, so "Compare" on a futures-filtered
+  // list lines up futures plans, not whatever the firm lists first.
+  const [comparePlans, setComparePlans] = useState<PlanKey[]>([]);
+  const [compareNote, setCompareNote] = useState("");
+
+  function toggleCompare(firm: FirmView, match: ReturnType<typeof allAccounts>[number] | undefined) {
+    const existing = comparePlans.find((p) => p.firm === firm.id);
+    if (existing) {
+      setComparePlans((ps) => ps.filter((p) => p.firm !== firm.id));
+      setCompareNote("");
+      return;
+    }
+    if (comparePlans.length >= MAX_COMPARE) {
+      setCompareNote(`You can compare up to ${MAX_COMPARE} firms. Remove one to add another.`);
+      return;
+    }
+    const plan = defaultPlanFor(
+      firm,
+      match ? { market: match.market, challenge: match.challengeKey, tier: match.tier, size: match.size } : undefined,
+    );
+    if (!plan) return;
+    setComparePlans((ps) => (ps.some((p) => samePlan(p, plan)) ? ps : [...ps, plan]));
+    setCompareNote("");
+  }
 
   const accountsByFirm = new Map(firms.map((f) => [f.id, allAccounts(f)]));
   const everyAccount = [...accountsByFirm.values()].flat();
@@ -69,12 +104,20 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
     (a, b) => a - b,
   );
 
-  const matchingFirms = firms
+  // "Available where I live": firms whose published country list blocks the
+  // visitor's country drop into a collapsed list at the bottom instead of
+  // disappearing silently. Firms with no published list stay in the grid
+  // with a note.
+  const [country, setCountry] = useCountry();
+  const withAvailability = firms
     .map((firm) => ({
       firm,
       matches: accountsByFirm.get(firm.id)!.filter((a) => matchesFilters(a, filters)),
+      availability: country ? firmAvailability(firm.countries, country) : null,
     }))
     .filter((x) => x.matches.length > 0);
+  const matchingFirms = withAvailability.filter((x) => x.availability?.status !== "restricted");
+  const restrictedFirms = withAvailability.filter((x) => x.availability?.status === "restricted");
 
   function updateFilters(changes: Partial<Filters>) {
     const next = { ...filters, ...changes };
@@ -93,15 +136,26 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
       next.size = "";
     }
     setFilters(next);
-    // Save the filters in the address without reloading the page.
-    window.history.replaceState(null, "", window.location.pathname + filtersToQuery(next));
+    // Save the filters in the address without reloading the page, keeping
+    // the country switch's own ?country= in place.
+    const params = new URLSearchParams(filtersToQuery(next));
+    if (country) params.set("country", country);
+    const qs = params.toString();
+    window.history.replaceState(null, "", window.location.pathname + (qs ? `?${qs}` : ""));
   }
 
   const query = filtersToQuery(filters);
   const chips = activeFilterChips(filters);
 
   return (
-    <div>
+    <div className={comparePlans.length > 0 ? "pb-24" : ""}>
+      <CountrySwitch
+        country={country}
+        onChange={setCountry}
+        hiddenCount={restrictedFirms.length}
+        unknownCount={matchingFirms.filter((x) => x.availability?.status === "unknown").length}
+      />
+
       {/* Filter bar */}
       <form
         aria-label="Filter prop firm accounts"
@@ -195,7 +249,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
         </p>
       ) : (
         <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {matchingFirms.map(({ firm, matches }) => {
+          {matchingFirms.map(({ firm, matches, availability }) => {
             const cheapest = matches
               .filter((a) => a.lowestPrice != null)
               .reduce<(typeof matches)[number] | null>(
@@ -203,12 +257,29 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                 null,
               );
             const splits = matches.map((a) => a.profitSplit).filter((s): s is number => s != null);
+            const inCompare = comparePlans.some((p) => p.firm === firm.id);
             return (
               <li
                 key={firm.id}
                 className="lift-card relative flex cursor-pointer flex-col rounded-xl border border-border bg-surface p-5"
               >
-                <div className="flex items-center gap-3">
+                <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
+                  <SaveButton kind="firm" id={firm.id} name={firm.name} />
+                  <button
+                    type="button"
+                    aria-pressed={inCompare}
+                    onClick={() => toggleCompare(firm, cheapest ?? matches[0])}
+                    className={`inline-flex min-h-11 items-center rounded-lg border px-2.5 text-xs font-semibold transition-colors duration-150 ${
+                      inCompare
+                        ? "border-accent bg-accent/12 text-foreground"
+                        : "border-border-strong text-muted hover:border-subtle hover:text-foreground"
+                    }`}
+                  >
+                    {inCompare ? "In compare" : "Compare"}
+                    <span className="sr-only"> — {firm.name}</span>
+                  </button>
+                </div>
+                <div className="flex items-center gap-3 pr-36">
                   <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
                   <div className="min-w-0">
                     <h2 className="truncate text-lg font-semibold">
@@ -225,6 +296,11 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                     </div>
                     {firm.reviewAlert && (
                       <span className="badge badge-warning mt-2 whitespace-normal">Payout complaints in recent reviews</span>
+                    )}
+                    {availability?.status === "unknown" && (
+                      <span className="pill mt-2 whitespace-normal text-xs" title={availability.reason}>
+                        Country list not published
+                      </span>
                     )}
                   </div>
                 </div>
@@ -266,6 +342,103 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
             );
           })}
         </ul>
+      )}
+
+      {restrictedFirms.length > 0 && (
+        <details className="group mt-8 rounded-xl border border-border bg-surface">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-surface-2 [&::-webkit-details-marker]:hidden">
+            <span>
+              {restrictedFirms.length} firm{restrictedFirms.length === 1 ? "" : "s"} hidden — their published
+              country list includes where you live
+            </span>
+            <span aria-hidden="true" className="text-muted transition-transform group-open:rotate-180">
+              ▾
+            </span>
+          </summary>
+          <ul className="divide-y divide-border border-t border-border">
+            {restrictedFirms.map(({ firm, availability }) => (
+              <li key={firm.id} className="flex flex-wrap items-center gap-3 px-4 py-3">
+                <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
+                <div className="min-w-0 flex-1">
+                  <Link href={`/funded-accounts/${firm.id}${query}`} className="font-semibold hover:text-accent">
+                    {firm.name}
+                  </Link>
+                  <p className="meta">
+                    {availability?.reason}
+                    {firm.countries?.lastChecked && ` Checked ${firm.countries.lastChecked}.`}
+                  </p>
+                </div>
+                {firm.countries?.source && (
+                  <a
+                    href={firm.countries.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-muted underline hover:text-foreground"
+                  >
+                    Firm&apos;s list
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+
+      {comparePlans.length > 0 && (
+        <div className="tray-bottom fixed inset-x-0 z-40">
+          <div className="container-page pb-4">
+            <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4">
+              <span className="meta hidden sm:inline">Comparing:</span>
+              <div className="flex flex-wrap items-center gap-2">
+                {comparePlans.map((p) => {
+                  const firm = firms.find((f) => f.id === p.firm);
+                  if (!firm) return null;
+                  return (
+                    <span
+                      key={p.firm}
+                      className="inline-flex min-h-11 items-center gap-1 rounded-full border border-border-strong bg-surface-2 pl-3 text-xs font-medium text-foreground"
+                    >
+                      {firm.name}
+                      <button
+                        type="button"
+                        onClick={() => toggleCompare(firm, undefined)}
+                        aria-label={`Remove ${firm.name} from comparison`}
+                        className="flex size-11 items-center justify-center rounded-full text-muted hover:text-foreground"
+                      >
+                        ✕
+                      </button>
+                    </span>
+                  );
+                })}
+              </div>
+              {compareNote && (
+                <p role="status" className="meta w-full sm:w-auto">
+                  {compareNote}
+                </p>
+              )}
+              <div className="ml-auto flex items-center gap-3">
+                {comparePlans.length < 2 ? (
+                  <span className="meta">Pick at least 2 to compare</span>
+                ) : (
+                  <Link href={`/funded-accounts/compare${plansToQuery(comparePlans)}`} className="btn btn-primary">
+                    Compare ({comparePlans.length})
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setComparePlans([]);
+                    setCompareNote("");
+                  }}
+                  className="text-sm text-muted underline hover:text-foreground"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

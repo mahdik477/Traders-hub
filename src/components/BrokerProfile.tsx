@@ -4,7 +4,9 @@ import BrokerBackLink from "@/components/BrokerBackLink";
 import BrokerLogo from "@/components/BrokerLogo";
 import BrokerShowMore from "@/components/BrokerShowMore";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
+import SaveButton from "@/components/SaveButton";
 import ScrollReveal from "@/components/ScrollReveal";
+import TrackView from "@/components/TrackView";
 import StickyVisitBar from "@/components/StickyVisitBar";
 import VisitSiteLink from "@/components/VisitSiteLink";
 import { depositLine, marketLine } from "@/lib/broker-facts";
@@ -25,6 +27,7 @@ export default function BrokerProfile({ broker }: { broker: BrokerView }) {
 
   return (
     <article className="pb-28">
+      <TrackView kind="broker" id={broker.id} />
       <header>
         <BrokerBackLink />
         <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -48,9 +51,12 @@ export default function BrokerProfile({ broker }: { broker: BrokerView }) {
             )}
             {broker.tagline && <p className="mt-4 max-w-xl text-base leading-7 text-muted">{broker.tagline}</p>}
           </div>
-          {visitHref && (
-            <VisitSiteLink href={visitHref} firmName={broker.name} label="Visit broker" className="w-full shrink-0 sm:w-auto" />
-          )}
+          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+            <SaveButton kind="broker" id={broker.id} name={broker.name} variant="label" className="w-full sm:w-auto" />
+            {visitHref && (
+              <VisitSiteLink href={visitHref} firmName={broker.name} label="Visit broker" className="w-full sm:w-auto" />
+            )}
+          </div>
         </div>
 
         <dl className="mt-10 grid grid-cols-3 border-y border-border">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import BrokerLogo from "@/components/BrokerLogo";
 import ChoiceBeam from "@/components/ChoiceBeam";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
+import SaveButton from "@/components/SaveButton";
 import ScrollReveal from "@/components/ScrollReveal";
 import VisitSiteLink from "@/components/VisitSiteLink";
 import { cardFacts } from "@/lib/broker-facts";
@@ -39,7 +40,10 @@ function CfdBrokerCard({ broker, priority }: { broker: BrokerView; priority: boo
     >
       <div className="flex items-start justify-between gap-4">
         <BrokerLogo name={broker.name} logo={broker.logo} logoBg={broker.logoBg} size="md" priority={priority} />
-        {broker.ourChoice && <OurChoiceBadge compact />}
+        <div className="flex items-center gap-2">
+          {broker.ourChoice && <OurChoiceBadge compact />}
+          <SaveButton kind="broker" id={broker.id} name={broker.name} />
+        </div>
       </div>
 
       <h2 className="broker-heading mt-6 text-2xl font-semibold tracking-tight text-foreground">

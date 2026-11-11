@@ -5,6 +5,9 @@ import FirmBadge from "@/components/FirmBadge";
 import PropFirmNotes from "@/components/PropFirmNotes";
 import PropFirmReviewAlert from "@/components/PropFirmReviewAlert";
 import PropFirmReviews from "@/components/PropFirmReviews";
+import SaveButton from "@/components/SaveButton";
+import TrackView from "@/components/TrackView";
+import AlertOptIn from "@/components/AlertOptIn";
 import { getPropFirm, propFirms } from "@/lib/propfirms";
 import { getSection } from "@/lib/sections";
 
@@ -21,9 +24,14 @@ export async function generateMetadata({
 }: PageProps<"/funded-accounts/[firm]">): Promise<Metadata> {
   const firm = getPropFirm((await params).firm);
   if (!firm) return {};
+  const title = `${firm.name} — ${getSection("funded-accounts").title}`;
+  const description = firm.about ?? `${firm.name} prop firm pricing and rules, from its own pricing page.`;
+  const image = { url: `/api/og/firm/${firm.id}`, width: 1200, height: 630, alt: `${firm.name} on Tradox` };
   return {
-    title: `${firm.name} — ${getSection("funded-accounts").title}`,
-    description: firm.about ?? undefined,
+    title,
+    description,
+    openGraph: { title, description, type: "website", images: [image] },
+    twitter: { card: "summary_large_image", title, description, images: [image.url] },
   };
 }
 
@@ -35,9 +43,11 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
     <>
       <BackToFirmsLink />
 
-      <div className="mt-5 flex items-center gap-4">
+      <TrackView kind="firm" id={firm.id} />
+      <div className="mt-5 flex flex-wrap items-center gap-4">
         <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} size="lg" />
-        <h1 className="page-title">{firm.name}</h1>
+        <h1 className="page-title flex-1">{firm.name}</h1>
+        <SaveButton kind="firm" id={firm.id} name={firm.name} variant="label" />
       </div>
       {firm.nameNote && <p className="meta mt-3 max-w-3xl">{firm.nameNote}</p>}
       {firm.reviewAlert && <PropFirmReviewAlert alert={firm.reviewAlert} />}
@@ -56,6 +66,8 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
       )}
 
       {firm.reviews && <PropFirmReviews reviews={firm.reviews} />}
+
+      <AlertOptIn firmId={firm.id} firmName={firm.name} />
 
       <section aria-labelledby="pricing-heading" className="mt-12">
         <h2 id="pricing-heading" className="section-title">

@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import BrokerLogo from "@/components/BrokerLogo";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
+import SaveButton from "@/components/SaveButton";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import {
   BROKER_MARKET_LABELS,
@@ -292,6 +293,7 @@ function BrokerCard({
             </div>
           )}
         </div>
+        <SaveButton kind="broker" id={broker.id} name={broker.name} />
       </div>
 
       {broker.tagline && (

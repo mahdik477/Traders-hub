@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import PropFirmPricing from "@/components/PropFirmPricing";
+import RulesInMoney from "@/components/RulesInMoney";
 import {
   EMPTY_FILTERS,
   filtersFromQuery,
@@ -38,7 +39,12 @@ function FirmPricing({ firm, filters }: { firm: FirmView; filters: Filters }) {
     const match = firstMatch(firm, filters);
     return match ? selectionFor(match) : {};
   });
-  return <PropFirmPricing firm={firm} selection={selection} onSelect={setSelection} />;
+  return (
+    <>
+      <PropFirmPricing firm={firm} selection={selection} onSelect={setSelection} />
+      <RulesInMoney firm={firm} selection={selection} />
+    </>
+  );
 }
 
 /** "Back to all firms", keeping the visitor's filters. */

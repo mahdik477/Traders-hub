@@ -1,172 +1,211 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE_NAME } from "@/lib/sections";
 
 export const metadata: Metadata = { title: "Privacy Policy" };
 
 // Draft wording — have this reviewed by a lawyer before launch, same as
-// /disclaimer. Written to match what the site actually does: we don't have
-// any live signup form yet, so this describes the policy that will govern
-// email collection once one exists, per CLAUDE.md ("email addresses only
-// for now, unticked opt-in, every marketing email needs an unsubscribe
-// link — UAE PDPL + GDPR"). Update this page the day a real form ships.
+// /disclaimer. Written to match what the site actually does today:
+//   * optional accounts (Supabase Auth: Google or email link) storing only a
+//     user id, an email address and an 18+ confirmation time;
+//   * saved listings, comparisons, recently viewed, learning progress and
+//     per-firm alert preferences, kept in the browser and — when signed in —
+//     on the person's own account rows;
+//   * no emails are sent yet; the alert tick is a recorded preference only.
+// Update this page the day any of that changes (an email tool, analytics…).
 export default function PrivacyPage() {
   return (
     <div className="max-w-3xl">
       <h1 className="title-rule page-title">Privacy Policy</h1>
-      <p className="meta mt-3">Last updated: 11 October 2026.</p>
+      <p className="meta mt-3">Last updated: 10 November 2026.</p>
+      <p className="mt-3 rounded-lg border border-dashed border-danger/60 px-3 py-2 text-xs text-danger">
+        Team reminder (remove before launch): have a lawyer review this page — UAE PDPL and UK/EU GDPR
+        — before the site goes fully live, and replace the placeholder contact address at the bottom.
+      </p>
 
       <div className="mt-8 space-y-8 text-muted">
         <section>
           <h2 className="section-title text-foreground">The short version</h2>
           <p className="mt-2">
-            The only personal data {SITE_NAME} collects is your email
-            address, and only if you choose to give it to us — for example
-            by signing up to a newsletter or alert list, if and when we
-            offer one. We don&apos;t collect names, phone numbers, payment
-            details or any other personal information. We don&apos;t sell
-            your email address, and we don&apos;t share it with anyone
-            except a service we use to send emails on our behalf (see
-            &ldquo;Who else sees it&rdquo; below).
+            You can use everything on {SITE_NAME} without an account and without giving us any personal
+            data. If you choose to sign in, we store the minimum needed to run your account: a user id,
+            your email address, and the time you confirmed you are 18 or over — plus the things you
+            choose to save on the site. We don&apos;t ask for or use names, photos, phone numbers or
+            payment details (see the note about Google below), we don&apos;t sell your data, and we
+            don&apos;t send marketing email.
           </p>
         </section>
 
         <section>
-          <h2 className="section-title text-foreground">What we collect</h2>
+          <h2 className="section-title text-foreground">What we collect, and when</h2>
+          <h3 className="mt-3 font-semibold text-foreground">Without an account</h3>
           <p className="mt-2">
-            Email address, and only when you type it into a form on this
-            site and submit it yourself. We don&apos;t use tracking
-            pixels, analytics cookies or any other method to collect your
-            email without you giving it to us directly.
+            Nothing is sent to us. The site remembers a few preferences in your own browser&apos;s local
+            storage so they&apos;re there next visit: your light/dark theme, the country you picked on
+            Funded Accounts, listings you&apos;ve saved, pages you&apos;ve viewed recently, Learn parts and
+            quizzes you&apos;ve marked done, and any price-alert boxes you&apos;ve ticked. That data never
+            leaves your device unless you sign in; clearing your browser&apos;s site data removes it.
+          </p>
+          <h3 className="mt-4 font-semibold text-foreground">With an account</h3>
+          <p className="mt-2">
+            If you sign in (with Google or with a link we email you), our account provider creates a
+            user id for you and we store:
+          </p>
+          <ul className="mt-2 list-disc space-y-1 pl-5">
+            <li>your email address (from Google, or the one you typed);</li>
+            <li>the date and time you ticked &ldquo;I&apos;m 18 or over&rdquo;;</li>
+            <li>
+              the same preferences listed above — saved listings, saved comparisons, recently viewed
+              pages, learning progress, and which firms you&apos;ve asked for price or promo alerts about
+              — so they follow you to other devices.
+            </li>
+          </ul>
+          <p className="mt-2">
+            When you sign in with Google, Google also sends your display name and profile picture. Our
+            sign-in provider (Supabase) keeps them, along with sign-in timestamps, in its own sign-in
+            record for your account.{" "}
+            <strong className="font-semibold text-foreground">
+              We never copy them into our own tables and never display them
+            </strong>
+            , and they are deleted with everything else when you delete your account. We use the email
+            address only.
           </p>
           <p className="mt-2">
-            The only thing we store automatically, without you submitting
-            anything, is your light/dark theme preference, saved in your
-            browser&apos;s local storage so the site remembers it next
-            time you visit. That preference never leaves your device and
-            we never see it.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="section-title text-foreground">
-            Why we collect it, and our legal basis
-          </h2>
-          <p className="mt-2">
-            We use your email address only for what you signed up for —
-            for example, to send you updates about new listings or
-            trading-education content. Any signup form will have an
-            unticked opt-in checkbox and will say clearly what you&apos;re
-            signing up for before you submit it. Under UK/EU GDPR, our
-            legal basis for this is your consent (Article 6(1)(a)). You
-            can withdraw that consent at any time — see &ldquo;Your
-            rights&rdquo; below.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="section-title text-foreground">
-            Who else sees it
-          </h2>
-          <p className="mt-2">
-            We don&apos;t sell, rent or trade your email address to
-            anyone. If we send marketing emails, we&apos;ll use a
-            third-party email delivery service to do it — that&apos;s the
-            only party your email address is shared with, and only to the
-            extent needed to send you the email. We haven&apos;t set up an
-            email tool yet; we&apos;ll name the provider here the day we
-            do.
+            We don&apos;t use analytics cookies, advertising cookies or tracking pixels. The only cookies
+            set are the ones that keep you signed in.
           </p>
         </section>
 
         <section>
-          <h2 className="section-title text-foreground">
-            How long we keep it
-          </h2>
+          <h2 className="section-title text-foreground">Why we collect it, and our legal basis</h2>
+          <ul className="mt-2 list-disc space-y-1 pl-5">
+            <li>
+              <strong className="font-semibold text-foreground">Running your account</strong> — the user
+              id and email are what let you sign in and keep your saved items in sync. Legal basis:
+              performance of a contract with you (GDPR Article 6(1)(b)).
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">The 18+ confirmation</strong> — the site
+              is for adults and we keep a record that you told us so. Legal basis: our legitimate
+              interest in not offering accounts to children (Article 6(1)(f)).
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">Price and promo alerts</strong> — the
+              tick box on a firm&apos;s page is <em>unticked by default</em> and only records that you
+              asked. <strong className="font-semibold text-foreground">No alert emails are sent yet.</strong>{" "}
+              If and when we start sending them, they will go only to people who ticked the box, every
+              email will carry an unsubscribe link, and we&apos;ll update this page first. Legal basis:
+              your consent (Article 6(1)(a)), which you can withdraw by unticking the box or deleting
+              your account.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="section-title text-foreground">Who else sees it</h2>
           <p className="mt-2">
-            We keep your email address for as long as you stay subscribed.
-            If you unsubscribe or ask us to delete it, we&apos;ll remove
-            it from our active list within 30 days, except where we&apos;re
-            required to keep a record of the unsubscribe itself to prove
-            we honoured it.
+            We don&apos;t sell, rent or trade your data to anyone. Two service providers process it on our
+            behalf, only to the extent needed to do their job:
+          </p>
+          <ul className="mt-2 list-disc space-y-1 pl-5">
+            <li>
+              <strong className="font-semibold text-foreground">Supabase</strong> hosts our account
+              database and handles sign-in, including sending the email sign-in link.
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">Google</strong>, if you choose
+              &ldquo;Continue with Google&rdquo;, tells us your email address and that you signed in.
+              Google&apos;s own privacy policy covers what Google itself records.
+            </li>
+          </ul>
+          <p className="mt-2">
+            If we add an email-sending tool for alerts, we&apos;ll name it here the day we do. Our hosting
+            provider (Vercel) serves the pages and sees ordinary web server logs such as IP addresses,
+            as any website host does.
           </p>
         </section>
 
         <section>
-          <h2 className="section-title text-foreground">
-            Unsubscribing
-          </h2>
+          <h2 className="section-title text-foreground">How long we keep it</h2>
           <p className="mt-2">
-            Every marketing email we send will include an unsubscribe
-            link. Clicking it removes you from that list immediately — no
-            need to contact us, though you&apos;re welcome to.
+            For as long as your account exists. Delete your account (see below) and everything about you
+            is removed from our database immediately — the deletion cascades through every table. If
+            you simply stop using the site, we may delete accounts that have been inactive for a long
+            time; we&apos;ll say so here before we start doing that.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="section-title text-foreground">Deleting your account</h2>
+          <p className="mt-2">
+            Open{" "}
+            <Link href="/my-hub" className="text-accent hover:underline">
+              My Hub
+            </Link>{" "}
+            while signed in and choose &ldquo;Delete my account&rdquo;. It asks you to confirm, then
+            removes your user id, email, confirmation time and every saved item, comparison, progress
+            tick and alert preference. There&apos;s no waiting period and nothing is kept in an archive.
+            Anything stored only in your browser stays until you clear that browser&apos;s site data.
           </p>
         </section>
 
         <section>
           <h2 className="section-title text-foreground">Your rights</h2>
           <p className="mt-2">
-            Under GDPR (and the UAE&apos;s PDPL, which gives you similar
-            rights), you can ask us to:
+            Under GDPR (and the UAE&apos;s PDPL, which gives you similar rights), you can ask us to:
           </p>
           <ul className="mt-2 list-disc space-y-1 pl-5">
-            <li>tell you what email address of yours we hold;</li>
+            <li>tell you what data of yours we hold (almost all of it is visible in My Hub);</li>
             <li>correct it, if it&apos;s wrong;</li>
-            <li>
-              delete it entirely (&ldquo;the right to be forgotten&rdquo;);
-            </li>
+            <li>delete it entirely (&ldquo;the right to be forgotten&rdquo; — see above, it&apos;s self-service);</li>
             <li>stop using it, without deleting it, in some cases;</li>
-            <li>
-              give you a copy of it in a portable format, if you want to
-              take it elsewhere; and
-            </li>
-            <li>
-              let you object to us using it, or withdraw your consent,
-              at any time.
-            </li>
+            <li>give you a copy of it in a portable format, if you want to take it elsewhere; and</li>
+            <li>object to us using it, or withdraw your consent, at any time.</li>
           </ul>
           <p className="mt-2">
-            To exercise any of these, contact us using the details below.
-            We&apos;ll respond within 30 days. If you&apos;re not satisfied
-            with how we&apos;ve handled your request, you also have the
+            To exercise any of these, contact us using the details below. We&apos;ll respond within 30
+            days. If you&apos;re not satisfied with how we&apos;ve handled your request, you also have the
             right to complain to your local data protection authority.
           </p>
         </section>
 
         <section>
-          <h2 className="section-title text-foreground">
-            Children&apos;s privacy
-          </h2>
+          <h2 className="section-title text-foreground">Children&apos;s privacy</h2>
           <p className="mt-2">
-            {SITE_NAME} isn&apos;t directed at children, and we don&apos;t
-            knowingly collect data from anyone under 18.
+            {SITE_NAME} isn&apos;t directed at children, and accounts are for people aged 18 or over —
+            we ask you to confirm this the first time you sign in. Choosing &ldquo;I&apos;m under 18&rdquo;
+            deletes the account that was just created, email address included. If we learn an account
+            belongs to someone under 18 we&apos;ll delete it.
           </p>
         </section>
 
         <section>
-          <h2 className="section-title text-foreground">
-            Changes to this policy
-          </h2>
+          <h2 className="section-title text-foreground">Security</h2>
           <p className="mt-2">
-            If what we collect or how we use it changes — for example,
-            once we actually set up a newsletter tool — we&apos;ll update
-            this page and change the &ldquo;last updated&rdquo; date at
-            the top.
+            Your data sits in a database where every table is protected by row-level security: a
+            signed-in person can read and change only their own rows, and nobody can read anyone
+            else&apos;s — including through the public key the website itself uses. There are no passwords
+            on {SITE_NAME} to leak; sign-in is via Google or a one-time link.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="section-title text-foreground">Changes to this policy</h2>
+          <p className="mt-2">
+            If what we collect or how we use it changes — for example when we start sending alert
+            emails, or add analytics — we&apos;ll update this page and change the &ldquo;last updated&rdquo;
+            date at the top.
           </p>
         </section>
 
         <section>
           <h2 className="section-title text-foreground">Contact us</h2>
           <p className="mt-2">
-            For any question about this policy, or to exercise any of the
-            rights above, contact us at{" "}
-            <a
-              href="mailto:privacy@tradox.io"
-              className="text-accent hover:underline"
-            >
+            For any question about this policy, or to exercise any of the rights above, contact us at{" "}
+            <a href="mailto:privacy@tradox.io" className="text-accent hover:underline">
               privacy@tradox.io
             </a>
-            . (Placeholder address — replace with the real contact inbox
-            before launch.)
+            . (Placeholder address — replace with the real contact inbox before launch.)
           </p>
         </section>
       </div>

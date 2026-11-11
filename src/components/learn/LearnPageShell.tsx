@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import TrackView from "@/components/TrackView";
+import MarkDoneButton from "@/components/MarkDoneButton";
 import { LEARN_TOPICS, learnTopicIndex, type LearnTopic } from "@/lib/learn-topics";
 
 // The shared shell every /learn/<slug> page wraps its content in — hero,
@@ -23,6 +25,7 @@ export default function LearnPageShell({
 
   return (
     <div>
+      <TrackView kind="learn" id={topic.slug} />
       <Link href="/learn" className="back-link">
         <ChevronLeftIcon className="size-4" />
         Back to Learn
@@ -63,6 +66,13 @@ export default function LearnPageShell({
       )}
 
       <div className="mt-10 max-w-3xl space-y-12">{children}</div>
+
+      <div className="mt-10 flex max-w-3xl flex-wrap items-center gap-3 rounded-2xl border border-border bg-surface p-4">
+        <MarkDoneButton kind="learn" id={topic.slug} label="Mark this part as done" doneLabel="Part done" />
+        <p className="meta">
+          Part {index + 1} of {LEARN_TOPICS.length}. Ticks show on the Learn page, the Start here path and My Hub.
+        </p>
+      </div>
 
       <p className="meta mt-12 max-w-3xl border-t border-border pt-6">
         This page explains general trading concepts for learning purposes only — it is not

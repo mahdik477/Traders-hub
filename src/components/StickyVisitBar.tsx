@@ -43,7 +43,7 @@ export default function StickyVisitBar({
   return (
     <div
       aria-hidden={!visible}
-      className={`fixed inset-x-0 bottom-0 z-40 transition-transform duration-300 motion-reduce:transition-none ${
+      className={`tray-bottom fixed inset-x-0 z-40 transition-transform duration-300 motion-reduce:transition-none ${
         visible ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
     >

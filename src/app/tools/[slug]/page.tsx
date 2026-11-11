@@ -5,6 +5,8 @@ import BrokerReveal from "@/components/BrokerReveal";
 import StickyVisitBar from "@/components/StickyVisitBar";
 import ToolBackLink from "@/components/ToolBackLink";
 import ToolLogo from "@/components/ToolLogo";
+import SaveButton from "@/components/SaveButton";
+import TrackView from "@/components/TrackView";
 import VisitSiteLink from "@/components/VisitSiteLink";
 import { InfoIcon, LayersIcon, MonitorIcon, TagIcon } from "@/components/icons";
 import { TOOL_CATEGORY_LABELS, toolOutboundUrl, toolPriceLabel } from "@/lib/tool-types";
@@ -63,6 +65,7 @@ export default async function ToolPage({ params }: PageProps<"/tools/[slug]">) {
   return (
     <>
       <ToolBackLink />
+      <TrackView kind="tool" id={tool.slug} />
 
       <header className="detail-hero mt-5 overflow-hidden rounded-2xl border border-border bg-surface">
         <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:p-6">
@@ -72,9 +75,10 @@ export default async function ToolPage({ params }: PageProps<"/tools/[slug]">) {
             <h1 className="page-title mt-3">{tool.name}</h1>
             <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{tool.description}</p>
           </div>
-          {visitHref && (
-            <VisitSiteLink href={visitHref} firmName={tool.name} label="Visit tool" className="shrink-0 sm:self-start" />
-          )}
+          <div className="flex shrink-0 flex-col gap-2 sm:self-start">
+            {visitHref && <VisitSiteLink href={visitHref} firmName={tool.name} label="Visit tool" />}
+            <SaveButton kind="tool" id={tool.slug} name={tool.name} variant="label" />
+          </div>
         </div>
 
         <dl className="grid grid-cols-1 gap-px border-t border-border bg-border sm:grid-cols-3">
