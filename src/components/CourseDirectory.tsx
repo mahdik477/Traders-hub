@@ -365,7 +365,7 @@ function Directory({
       {compareIds.length > 0 && (
         <div className="tray-bottom fixed inset-x-0 z-40">
           <div className="container-page pb-4">
-            <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4">
+            <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border-strong bg-surface p-3 shadow-glow sm:p-4">
               <span className="meta hidden sm:inline">Comparing:</span>
               <div className="flex flex-wrap items-center gap-2">
                 {compareIds.map((id) => {

@@ -68,7 +68,7 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
           ].map(([label, value]) => (
             <div key={label} className="min-w-0 bg-surface px-4 py-3">
               <dt className="eyebrow">{label}</dt>
-              <dd className="mt-1 truncate font-mono text-sm font-semibold text-foreground" title={value}>{value}</dd>
+              <dd className="mt-1 break-words font-mono text-sm font-semibold text-foreground">{value}</dd>
             </div>
           ))}
         </dl>

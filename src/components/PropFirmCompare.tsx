@@ -196,7 +196,9 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
 
         <div role="rowgroup" className="hidden md:block">
           <div role="row" className="cmp-row border-t border-border">
-            <div role="rowheader" className="cmp-label" />
+            <div role="rowheader" className="cmp-label">
+              <span className="sr-only">Links</span>
+            </div>
             {plans.map((p, i) => (
               <div key={i} role="cell" className="cmp-cell">
                 <PlanActions plan={p} />
@@ -268,7 +270,7 @@ function buildGroups(): Group[] {
       id: "targets",
       label: "Profit targets",
       rows: [
-        { label: "To pass", hint: "Profit you have to make before the firm funds you.", key: (p) => String(ruleAmount(p, "profitTarget")), render: (p, all) => <TargetCell plan={p} all={all} /> },
+        { label: "To pass", hint: "Total profit you have to make, across every phase, before the firm funds you.", key: (p) => [targetTotal(p), p.tier.rules.phase2Target, p.tier.rules.phase3Target].join("|"), render: (p, all) => <TargetCell plan={p} all={all} /> },
         { label: "Profit split", hint: "The largest share of profits the firm says you keep.", key: (p) => String(p.tier.rules.profitSplitMax), render: (p) => <span className="cmp-num">{ruleText(p.tier.rules.profitSplitMax, (n) => `Up to ${n}%`)}</span> },
       ],
     },
@@ -276,8 +278,8 @@ function buildGroups(): Group[] {
       id: "loss",
       label: "Loss limits",
       rows: [
-        { label: "In one day", hint: "Lose more than this in a single day and the account is closed.", key: (p) => String(ruleAmount(p, "dailyLoss")), render: (p, all) => <MoneyRule plan={p} all={all} which="dailyLoss" /> },
-        { label: "In total", hint: "Lose more than this overall and the account is closed.", key: (p) => String(ruleAmount(p, "maxLoss")), render: (p, all) => <MoneyRule plan={p} all={all} which="maxLoss" /> },
+        { label: "In one day", hint: "The most you can lose in one day. At most firms going past it closes the account; a few only pause trading until the next day. Check the firm’s rules.", key: (p) => String(ruleAmount(p, "dailyLoss")), render: (p, all) => <MoneyRule plan={p} all={all} which="dailyLoss" /> },
+        { label: "In total", hint: "How far the account can fall before the firm closes it. With a trailing drawdown this is measured from your highest balance, not your starting balance.", key: (p) => String(ruleAmount(p, "maxLoss")), render: (p, all) => <MoneyRule plan={p} all={all} which="maxLoss" /> },
         {
           label: "Drawdown type",
           hint: (
@@ -351,7 +353,7 @@ function GroupRows({
   return (
     <div role="rowgroup" className="cmp-group">
       <div role="row" className="cmp-group-title">
-        <span role="columnheader" className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span role="cell" aria-colspan={plans.length + 1} className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <span className="readout text-accent">{group.label}</span>
           {hidden > 0 && (
             <span className="meta">
@@ -503,20 +505,37 @@ function RuleBar({ value, max, tone, label }: { value: number | null; max: numbe
   return (
     <div className="mt-2">
       <div className="cmp-bar" aria-hidden="true">
-        <div className={`rule-bar ${tone === "loss" ? "cmp-bar-loss" : "cmp-bar-target"}`} style={{ width: `${pct}%` }} />
+        <div
+          className={`rule-bar ${tone === "loss" ? "cmp-bar-loss" : "cmp-bar-target"}`}
+          style={{ transform: `translateX(${pct - 100}%)` }}
+        />
       </div>
       {label && <span className="mt-1 block text-xs leading-snug text-muted">{label}</span>}
     </div>
   );
 }
 
+/** Profit needed to get funded: every phase added up. Forex phases are
+ *  percentages of the account (each phase starts from a fresh balance, so
+ *  they add); futures plans have one fixed amount. */
+function targetTotal(p: ResolvedPlan): RuleValue {
+  const { rules } = p.tier;
+  if (rules.unit !== "percent") return ruleAmount(p, "profitTarget");
+  if (typeof rules.phase1Target !== "number") return rules.phase1Target;
+  const pct = [rules.phase1Target, rules.phase2Target, rules.phase3Target].reduce<number>(
+    (sum, v) => (typeof v === "number" ? sum + v : sum),
+    0,
+  );
+  return Math.round((pct / 100) * p.account.size);
+}
+
 function TargetCell({ plan: p, all }: { plan: ResolvedPlan; all: ResolvedPlan[] }) {
-  const amount = ruleAmount(p, "profitTarget");
+  const amount = targetTotal(p);
   const pct1 = rulePercent(p, "phase1Target");
   const pct2 = p.tier.rules.unit === "percent" ? p.tier.rules.phase2Target : "n/a";
   const pct3 = p.tier.rules.unit === "percent" ? p.tier.rules.phase3Target : "n/a";
   const phases = [pct1, pct2, pct3].filter((v) => v !== "n/a");
-  const max = Math.max(0, ...all.map((q) => share(ruleAmount(q, "profitTarget"), q.account.size) ?? 0));
+  const max = Math.max(0, ...all.map((q) => share(targetTotal(q), q.account.size) ?? 0));
   return (
     <div>
       <div className="cmp-num">{ruleText(amount, (n) => moneyRound(n, p.firm.currency))}</div>

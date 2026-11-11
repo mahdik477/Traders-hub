@@ -1689,7 +1689,7 @@ input.signal-filter-search {
       transform var(--dur-base) var(--ease-out);
   }
   .rule-bar {
-    transition: width 400ms var(--ease-out);
+    transition: transform 400ms var(--ease-out);
   }
   .compare-col {
     animation: compare-col-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -1966,8 +1966,16 @@ input.signal-filter-search {
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
 }
 
+/* Phones: visually hidden but still a column header, so the header row
+   has the same number of columns as the data rows for screen readers.
+   Absolutely positioned items take no grid slot. */
 .cmp-corner {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .cmp-label {
@@ -2046,6 +2054,7 @@ input.signal-filter-search {
 }
 
 .cmp-bar > div {
+  width: 100%;
   height: 100%;
   border-radius: inherit;
 }
@@ -2076,6 +2085,11 @@ input.signal-filter-search {
     grid-template-columns: var(--cmp-label) repeat(var(--cols), minmax(0, 1fr));
   }
   .cmp-corner {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
     display: flex;
     align-items: center;
     padding: 0.75rem 1.125rem;
@@ -2104,11 +2118,12 @@ input.signal-filter-search {
   color: var(--color-accent);
 }
 
-.btn-soft:hover,
-.listing-card:hover .btn-soft {
-  border-color: var(--color-gold-fill);
-  background: var(--color-gold-fill);
-  color: var(--color-gold-ink);
+@media (hover: hover) {
+  .btn-soft:hover {
+    border-color: var(--color-gold-fill);
+    background: var(--color-gold-fill);
+    color: var(--color-gold-ink);
+  }
 }
 
 /* The compare header sticks flush under the site header. */
@@ -2127,11 +2142,17 @@ input.signal-filter-search {
    sections that haven't been rebuilt card-by-card still match. */
 .lift-card.bg-surface {
   background-image: linear-gradient(180deg, color-mix(in srgb, var(--color-gold) 4%, transparent), transparent 7rem);
+}
+
+.lift-card.bg-surface:not(:hover) {
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-gold-bright) 14%, transparent);
 }
 
 :root[data-theme="light"] .lift-card.bg-surface {
   background-image: none;
+}
+
+:root[data-theme="light"] .lift-card.bg-surface:not(:hover) {
   box-shadow: 0 1px 2px rgb(20 20 20 / 0.04);
 }
 
