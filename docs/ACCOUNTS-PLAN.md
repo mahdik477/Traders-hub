@@ -35,13 +35,22 @@ training data — check `node_modules/next/dist/docs/` before using an API.
 The founder was asked three questions and went to bed before answering, so
 the recommended option was taken for each:
 
-1. **Passwords — optional, set from My Hub.** Sign-up stays Google or email
-   link. After the first sign-in, My Hub shows an "Add a password" card
-   (`supabase.auth.updateUser({ password })`). The sign-in page gains a
-   third way in: "Sign in with password" (email + password,
-   `signInWithPassword`) plus "Forgot password?" which sends a reset link
-   (`resetPasswordForEmail` → `/auth/callback?next=/my-hub/password`).
-   Minimum 10 characters; show a strength hint; never log or store it.
+1. **Passwords — a "Choose a password" screen straight after the email
+   link (founder's answer, 2026-11-11).** The first time someone arrives
+   from an email link (or first Google sign-in) and has no password yet,
+   `/auth/callback` sends them to `/welcome/password` before My Hub. The
+   screen: email shown, new password + confirm, show/hide, min 10 chars,
+   strength hint, primary "Save password and continue", and a clear
+   "Skip for now" link that goes on to the `next` page. Skipping is
+   remembered (browser store `tradox:password-skipped`) so it isn't shown
+   again on every sign-in; My Hub keeps an "Add a password" card for later.
+   Saving uses `supabase.auth.updateUser({ password })`; whether a person
+   already has one is read from `user.user_metadata.has_password` (set to
+   true in the same `updateUser` call, `data: { has_password: true }`).
+   The sign-in page gains "Sign in with password" (email + password,
+   `signInWithPassword`) and "Forgot password?" (`resetPasswordForEmail` →
+   `/auth/callback?next=/welcome/password`). Never log or store the
+   password anywhere ourselves.
 2. **"What I'm using" — self-ticked, synced to the person's own rows.** We
    can't see real sign-ups on other sites. People tick it themselves:
    "I'm taking this course", "I trade with this broker", "I have an account
@@ -67,7 +76,7 @@ the recommended option was taken for each:
 | 3 | "What I'm using" store + buttons on listings | todo | |
 | 4 | Database: `my_stack` table + sync | todo | |
 | 5 | My Hub redesign as a profile dashboard | todo | |
-| 6 | Optional password (set, sign in, forgot) | todo | |
+| 6 | Password screen after the link + sign in with password + forgot | todo | |
 | 7 | Privacy policy + schema/README notes | todo | |
 | 8 | Checks, reviews, draft PR | todo | |
 
@@ -150,15 +159,20 @@ Two-column on desktop (single column on phones):
 - Empty states with one clear action each. Tabs on phones are fine
   (`.seg`), all sections stacked on desktop.
 
-### 6. Optional password
-- My Hub "Password" card: "Add a password" / "Change password", two fields
-  (new + confirm), show/hide toggle, min 10 chars, strength hint (length +
-  variety only; no library). On success: "Password set — you can now sign
-  in with it too."
+### 6. Password screen after the link (`src/app/auth/callback/route.ts`, new `src/app/welcome/password/page.tsx`)
+- Callback: after exchanging the code, if the session's user has no
+  `user_metadata.has_password` and isn't a password-reset return, redirect
+  to `/welcome/password?next=<safe next>`. Keep `safeNextPath`. The 18+
+  confirmation (`AgeConfirmModal`) must still happen; check the order works
+  (password screen first, then the 18+ dialog on the next page is fine).
+- `/welcome/password`: a centred `kit-panel` card — "One more step: choose a
+  password", the email, two fields with show/hide, min 10 chars, strength
+  hint (length + variety; no library), "Save password and continue",
+  "Skip for now". Signed-out visitors are sent to `/sign-in`. `robots:
+  noindex`.
+- My Hub "Password" card: "Add a password" / "Change password" (same form).
 - Sign-in page Password tab (from step 1): email + password + "Forgot
   password?".
-- Reset flow: `/my-hub/password` page that shows the set-password form when
-  the person arrives from the reset link.
 - **Founder morning step** (write it in the PR): Supabase → Authentication →
   Providers → Email → make sure email + password is enabled; set minimum
   password length 10.
