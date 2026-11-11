@@ -18,15 +18,15 @@ export default function FirmBadge({
   /** "dark" for a logo that's a white/light mark with no transparent
    *  background — it would look broken in the usual white tile. */
   logoBg?: "white" | "dark";
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
 }) {
   if (logo) {
-    const px = size === "lg" ? 56 : 44;
+    const px = size === "lg" ? 56 : size === "sm" ? 32 : 44;
     return (
       <span
         className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border ${
           logoBg === "dark" ? "bg-black" : "bg-white"
-        } ${size === "lg" ? "size-14 p-1.5" : "size-11 p-1"}`}
+        } ${size === "lg" ? "size-14 p-1.5" : size === "sm" ? "size-8 rounded-md p-0.5" : "size-11 p-1"}`}
       >
         {/* Decorative: the firm's name is always shown right next to it. */}
         <Image src={logo} alt="" width={px} height={px} className="size-full rounded object-contain" />
@@ -38,7 +38,7 @@ export default function FirmBadge({
     <span
       aria-hidden="true"
       className={`flex shrink-0 items-center justify-center rounded-full border border-border-strong bg-surface-2 font-bold tracking-tight text-foreground ${
-        size === "lg" ? "size-14 text-lg" : "size-11 text-sm"
+        size === "lg" ? "size-14 text-lg" : size === "sm" ? "size-8 text-[0.6875rem]" : "size-11 text-sm"
       }`}
     >
       {firmInitials(name)}

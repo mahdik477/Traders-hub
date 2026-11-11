@@ -8,6 +8,7 @@ import {
   type DrawdownRule,
 } from "@/lib/drawdown-sim";
 import { moneyRound } from "@/lib/format-money";
+import Picker from "@/components/Picker";
 
 // The same synthetic account under three drawdown rules, on one chart. Built
 // in the style of the strategy simulators (BreakoutSimulator etc.): header
@@ -73,26 +74,30 @@ export default function DrawdownSimulator() {
       </div>
 
       <div className="flex flex-wrap gap-3 border-b border-border px-4 py-3 sm:px-5">
-        <label className="flex items-center gap-2 text-xs">
-          <span className="eyebrow">Account</span>
-          <select className="field min-h-10 w-auto py-1 text-xs sm:text-xs" value={size} onChange={(e) => setSize(Number(e.target.value))}>
-            {SIZES.map((s) => (
-              <option key={s} value={s}>
-                {moneyRound(s)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="flex items-center gap-2 text-xs">
-          <span className="eyebrow">Max loss</span>
-          <select className="field min-h-10 w-auto py-1 text-xs sm:text-xs" value={lossPct} onChange={(e) => setLossPct(Number(e.target.value))}>
-            {LOSS_PCTS.map((p) => (
-              <option key={p} value={p}>
-                {p}% · {moneyRound((p / 100) * size)}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="flex items-center gap-2 text-xs">
+          <span className="eyebrow" aria-hidden="true">
+            Account
+          </span>
+          <Picker
+            className="w-32"
+            ariaLabel="Account"
+            value={String(size)}
+            onChange={(v) => setSize(Number(v))}
+            options={SIZES.map((s) => ({ value: String(s), label: moneyRound(s) }))}
+          />
+        </div>
+        <div className="flex items-center gap-2 text-xs">
+          <span className="eyebrow" aria-hidden="true">
+            Max loss
+          </span>
+          <Picker
+            className="w-40"
+            ariaLabel="Max loss"
+            value={String(lossPct)}
+            onChange={(v) => setLossPct(Number(v))}
+            options={LOSS_PCTS.map((p) => ({ value: String(p), label: `${p}% · ${moneyRound((p / 100) * size)}` }))}
+          />
+        </div>
         <label className="flex min-h-10 cursor-pointer items-center gap-2 text-xs text-muted">
           <input type="checkbox" checked={lockAtStart} onChange={(e) => setLockAtStart(e.target.checked)} className="size-4 accent-[var(--color-gold-fill)]" />
           Trailing floors stop at the starting balance

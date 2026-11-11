@@ -2180,3 +2180,394 @@ input.signal-filter-search {
     font-size: 0.8125rem;
   }
 }
+
+/* ==========================================================================
+   Picker (Picker.tsx) — the site's one dropdown. Closed it matches the
+   homepage search box; open it is a raised card (desktop) or a bottom
+   sheet (phones). Fade + slide on transform/opacity only; no blur.
+   ========================================================================== */
+.picker {
+  min-width: 0;
+}
+
+.picker-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 26%, var(--color-border-strong));
+  border-radius: 0.625rem;
+  background: var(--color-background);
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: var(--color-foreground);
+}
+
+@media (width >= 40rem) {
+  .picker-trigger {
+    font-size: 0.875rem;
+  }
+}
+
+.picker-trigger-search {
+  min-height: 3.25rem;
+  gap: 0.75rem;
+  padding-inline: 1rem;
+  border-radius: 0.875rem;
+  background: var(--color-surface);
+  font-size: 1rem;
+}
+
+.picker-trigger:hover {
+  border-color: color-mix(in srgb, var(--color-gold) 55%, var(--color-border-strong));
+}
+
+.picker-trigger:focus-visible,
+.picker-trigger.is-open {
+  outline: none;
+  border-color: var(--color-gold-fill);
+  /* A static ring, not an animated shadow. */
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold-fill) 24%, transparent);
+}
+
+.picker-trigger[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.picker-sheet.is-searchable {
+  height: min(86dvh, 40rem);
+}
+
+
+.picker-trigger.is-open .picker-chevron {
+  transform: rotate(180deg);
+}
+
+/* ---- Desktop: floating card ---------------------------------------------- */
+.picker-pop {
+  position: fixed;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 30%, var(--color-border-strong));
+  border-radius: 1rem;
+  background: var(--color-surface);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-bright) 18%, transparent),
+    0 24px 48px -20px rgb(0 0 0 / 0.75),
+    0 2px 8px rgb(0 0 0 / 0.35);
+}
+
+:root[data-theme="light"] .picker-pop {
+  box-shadow:
+    0 24px 48px -22px rgb(20 20 20 / 0.35),
+    0 2px 8px rgb(20 20 20 / 0.08);
+}
+
+/* ---- Phone: bottom sheet -------------------------------------------------- */
+.picker-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: flex-end;
+  background: rgb(0 0 0 / 0.62);
+}
+
+:root[data-theme="light"] .picker-overlay {
+  background: rgb(20 20 20 / 0.45);
+}
+
+.picker-sheet {
+  display: flex;
+  width: 100%;
+  max-height: min(86dvh, 40rem);
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 30%, var(--color-border-strong));
+  border-bottom: 0;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background: var(--color-surface);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.picker-sheet-head {
+  flex-shrink: 0;
+  padding: 0.5rem 0.75rem 0.25rem 1.25rem;
+}
+
+.picker-grab {
+  display: block;
+  width: 2.5rem;
+  height: 0.25rem;
+  margin: 0 auto 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-border-strong);
+}
+
+.picker-close,
+.picker-clear {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.625rem;
+  color: var(--color-muted);
+}
+
+.picker-close:hover,
+.picker-clear:hover {
+  background: var(--color-surface-2);
+  color: var(--color-foreground);
+}
+
+/* ---- Shared insides -------------------------------------------------------- */
+.picker-search {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0 0.25rem 0 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-background) 45%, var(--color-surface));
+}
+
+.picker-search-input {
+  min-width: 0;
+  flex: 1;
+  height: 3rem;
+  background: transparent;
+  font-size: 1rem; /* 16px: stops iOS zooming the page on focus */
+  color: var(--color-foreground);
+  outline: none;
+}
+
+.picker-search-input::placeholder {
+  color: var(--color-subtle);
+}
+
+.picker-search:focus-within {
+  box-shadow: inset 0 -2px 0 var(--color-gold-fill);
+}
+
+.picker-list {
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.375rem;
+  outline: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+.picker-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.picker-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.picker-list::-webkit-scrollbar-thumb {
+  border: 2px solid var(--color-surface);
+  border-radius: 9999px;
+  background: var(--color-border-strong);
+}
+
+.picker-row {
+  position: relative;
+  display: flex;
+  min-height: 2.75rem;
+  cursor: pointer;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  scroll-margin: 0.375rem;
+}
+
+.picker-sheet .picker-row {
+  min-height: 3.25rem;
+  font-size: 1rem;
+}
+
+/* Hover / keyboard highlight: gentle gold tint and a thin bar on the left. */
+.picker-row.is-active {
+  background: color-mix(in srgb, var(--color-gold-fill) 12%, transparent);
+}
+
+.picker-row.is-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 3px;
+  border-radius: 9999px;
+  background: var(--color-gold-fill);
+}
+
+.picker-row.is-disabled {
+  cursor: default;
+}
+
+/* Dim what identifies the row — never the warning badge. */
+.picker-row.is-disabled > span:first-child,
+.picker-row.is-disabled > span > span:first-child {
+  opacity: 0.45;
+}
+
+.picker-meta {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+}
+
+.picker-mark {
+  border-radius: 0.2rem;
+  background: color-mix(in srgb, var(--color-gold-fill) 26%, transparent);
+  color: var(--color-accent);
+}
+
+/* Chips for what's already picked (compare page). */
+.picker-chip {
+  display: inline-flex;
+  min-height: 2.75rem;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.375rem;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 26%, var(--color-border-strong));
+  border-radius: 9999px;
+  background: var(--color-surface);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+@keyframes picker-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes picker-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes picker-overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .picker-trigger {
+    transition:
+      border-color var(--dur-fast) ease,
+      background-color var(--dur-fast) ease;
+  }
+  .picker-chevron {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .edge-fade::before,
+  .edge-fade::after {
+    transition: opacity var(--dur-fast) ease;
+  }
+  .picker-pop {
+    animation: picker-pop-in var(--dur-fast) var(--ease-out);
+  }
+  .picker-overlay {
+    animation: picker-overlay-in var(--dur-fast) ease-out;
+  }
+  .picker-sheet {
+    animation: picker-sheet-in var(--dur-base) var(--ease-out);
+  }
+}
+
+/* ---- Edge fades for sideways-scrolling rows (header nav, quick links) ------
+   EdgeFade.tsx sets data-fade-start / data-fade-end on the wrapper when
+   there is more to scroll that way. */
+.edge-fade {
+  position: relative;
+  min-width: 0;
+}
+
+.edge-fade-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.edge-fade-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.edge-fade::before,
+.edge-fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 2.5rem;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.edge-fade::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--edge-fade-color, var(--color-background)), transparent);
+}
+
+.edge-fade::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--edge-fade-color, var(--color-background)), transparent);
+}
+
+.edge-fade[data-fade-start="true"]::before,
+.edge-fade[data-fade-end="true"]::after {
+  opacity: 1;
+}
+
+:root[data-theme="light"] .site-header .edge-fade {
+  --edge-fade-color: #ffffff;
+}
+
+/* Anything that scrolls sideways is the containing block for what's inside
+   it. Without this, an absolutely positioned child (e.g. a screen-reader-
+   only label in a wide table) escapes the scroller and makes the whole
+   page wider than the screen. In the base layer so `sticky`/`fixed`
+   utilities on the same element still win. */
+@layer base {
+  .overflow-x-auto {
+    position: relative;
+  }
+}
+
+/* Names stay on one line in the desktop card; on the phone sheet they wrap
+   so a long firm name is never cut off. */
+.picker-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-sheet .picker-name {
+  overflow: visible;
+  white-space: normal;
+  line-height: 1.25;
+}

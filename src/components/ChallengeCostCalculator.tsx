@@ -8,6 +8,7 @@ import { defaultPlanFor, resolvePlan, type PlanKey } from "@/lib/propfirm-compar
 import { money, sizeLabel } from "@/lib/format-money";
 import { MARKET_LABELS } from "@/components/PropFirmPricing";
 import FirmBadge from "@/components/FirmBadge";
+import Picker from "@/components/Picker";
 
 // Adds up what a funded-account challenge can actually cost before any
 // trading happens: the challenge fee (times attempts, or times months for a
@@ -113,55 +114,40 @@ function Calculator({ firms, initialFirm }: { firms: FirmView[]; initialFirm: st
         <section className="rounded-2xl border border-border bg-surface p-5">
           <h2 className="section-title">1. Pick a plan</h2>
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <Field label="Firm">
-              <select className="field" value={plan.firm.id} onChange={(e) => change({ firm: e.target.value, market: undefined, challenge: undefined, tier: undefined, size: null })}>
-                {firms.map((f) => (
-                  <option key={f.id} value={f.id}>
-                    {f.name}
-                  </option>
-                ))}
-              </select>
-            </Field>
+            <Picker
+              label="Firm"
+              value={plan.firm.id}
+              onChange={(v) => change({ firm: v, market: undefined, challenge: undefined, tier: undefined, size: null })}
+              options={firms.map((f) => ({ value: f.id, label: f.name, badge: { logo: f.logo, logoBg: f.logoBg } }))}
+            />
             {plan.firm.markets.length > 1 && (
-              <Field label="Market">
-                <select className="field" value={plan.market.market} onChange={(e) => change({ market: e.target.value, challenge: undefined, tier: undefined, size: null })}>
-                  {plan.firm.markets.map((m) => (
-                    <option key={m.market} value={m.market}>
-                      {MARKET_LABELS[m.market]}
-                    </option>
-                  ))}
-                </select>
-              </Field>
+              <Picker
+                label="Market"
+                value={plan.market.market}
+                onChange={(v) => change({ market: v, challenge: undefined, tier: undefined, size: null })}
+                options={plan.firm.markets.map((m) => ({ value: m.market, label: MARKET_LABELS[m.market] }))}
+              />
             )}
-            <Field label="Plan">
-              <select className="field" value={plan.challenge.key} onChange={(e) => change({ challenge: e.target.value, tier: undefined, size: null })}>
-                {plan.market.challenges.map((c) => (
-                  <option key={c.key} value={c.key}>
-                    {c.label}
-                  </option>
-                ))}
-              </select>
-            </Field>
+            <Picker
+              label="Plan"
+              value={plan.challenge.key}
+              onChange={(v) => change({ challenge: v, tier: undefined, size: null })}
+              options={plan.market.challenges.map((c) => ({ value: c.key, label: c.label }))}
+            />
             {plan.challenge.tiers.length > 1 && (
-              <Field label="Tier">
-                <select className="field" value={plan.tier.name} onChange={(e) => change({ tier: e.target.value, size: null })}>
-                  {plan.challenge.tiers.map((t) => (
-                    <option key={t.name} value={t.name}>
-                      {t.name}
-                    </option>
-                  ))}
-                </select>
-              </Field>
+              <Picker
+                label="Tier"
+                value={plan.tier.name}
+                onChange={(v) => change({ tier: v, size: null })}
+                options={plan.challenge.tiers.map((t) => ({ value: t.name, label: t.name }))}
+              />
             )}
-            <Field label="Account size">
-              <select className="field" value={String(plan.account.size)} onChange={(e) => change({ size: Number(e.target.value) })}>
-                {plan.tier.accounts.map((a) => (
-                  <option key={a.size} value={a.size}>
-                    {sizeLabel(a.size, cur)}
-                  </option>
-                ))}
-              </select>
-            </Field>
+            <Picker
+              label="Account size"
+              value={String(plan.account.size)}
+              onChange={(v) => change({ size: Number(v) })}
+              options={plan.tier.accounts.map((a) => ({ value: String(a.size), label: sizeLabel(a.size, cur) }))}
+            />
           </div>
           <div className="mt-4 flex items-center gap-3 rounded-xl border border-border bg-background p-3">
             <FirmBadge name={plan.firm.name} logo={plan.firm.logo} logoBg={plan.firm.logoBg} />

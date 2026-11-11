@@ -22,6 +22,8 @@ import { money } from "@/lib/format-money";
 const plainSize = (s: number) => (s < 10_000 ? s.toLocaleString("en-US") : new Intl.NumberFormat("en-US", { notation: "compact" }).format(s));
 import { planToString } from "@/lib/propfirm-compare";
 import FirmBadge from "@/components/FirmBadge";
+import Picker from "@/components/Picker";
+import { flagEmoji } from "@/components/CountrySwitch";
 import VisitSiteLink from "@/components/VisitSiteLink";
 import { CheckIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
@@ -218,17 +220,17 @@ function Matcher({ firms, initial }: { firms: FirmView[]; initial: MatcherAnswer
                 We check your country against the restricted-country list each firm publishes. Firms that haven&apos;t
                 published one are still shown, with a note. Lists change — always confirm with the firm.
               </p>
-              <label className="mt-4 flex max-w-sm flex-col gap-1">
-                <span className="eyebrow">Country</span>
-                <select className="field" value={answers.country} onChange={(e) => update({ country: e.target.value })}>
-                  <option value="">Skip this question</option>
-                  {countries.map((c) => (
-                    <option key={c.code} value={c.code}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <Picker
+                className="mt-4 max-w-sm"
+                label="Country"
+                value={answers.country}
+                onChange={(v) => update({ country: v })}
+                searchPlaceholder="Search countries"
+                options={[
+                  { value: "", label: "Skip this question" },
+                  ...countries.map((c) => ({ value: c.code, label: c.name, emoji: flagEmoji(c.code), keywords: c.code })),
+                ]}
+              />
             </>
           )}
 
@@ -258,13 +260,20 @@ function Matcher({ firms, initial }: { firms: FirmView[]; initial: MatcherAnswer
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <label className="flex items-center gap-2 text-xs">
-                <span className="eyebrow">Order</span>
-                <select className="field min-h-10 py-1 text-xs sm:text-xs" value={sort} onChange={(e) => setSort(e.target.value as "name" | "price")}>
-                  <option value="name">A to Z</option>
-                  <option value="price">Price, low to high</option>
-                </select>
-              </label>
+              <div className="flex items-center gap-2 text-xs">
+                <span className="eyebrow" aria-hidden="true">
+                  Order
+                </span>
+                <Picker
+                  ariaLabel="Order"
+                  value={sort}
+                  onChange={(v) => setSort(v as "name" | "price")}
+                  options={[
+                    { value: "name", label: "A to Z" },
+                    { value: "price", label: "Price, low to high" },
+                  ]}
+                />
+              </div>
               <button type="button" onClick={() => go(0)} className="btn btn-outline min-h-10">
                 Change answers
               </button>

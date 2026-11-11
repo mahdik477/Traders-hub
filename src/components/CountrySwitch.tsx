@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Picker from "@/components/Picker";
 import { MapPin } from "lucide-react";
 import { countryName, countryOptions, isCountryCode } from "@/lib/countries";
 
@@ -55,6 +56,12 @@ export function useCountry(): [string, (code: string) => void] {
   return [country, setCountry];
 }
 
+/** "AE" → 🇦🇪 (two regional-indicator letters). */
+export function flagEmoji(code: string): string {
+  if (!/^[A-Za-z]{2}$/.test(code)) return "🏳️";
+  return String.fromCodePoint(...[...code.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
+}
+
 export default function CountrySwitch({
   country,
   onChange,
@@ -82,17 +89,17 @@ export default function CountrySwitch({
       <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
         <MapPin className="size-4" aria-hidden="true" />
       </span>
-      <label className="flex min-w-0 flex-1 flex-col gap-1 sm:max-w-xs">
-        <span className="eyebrow">Available where I live</span>
-        <select value={country} onChange={(e) => onChange(e.target.value)} className="field min-h-10 py-1">
-          <option value="">Any country — show every firm</option>
-          {options.map((o) => (
-            <option key={o.code} value={o.code}>
-              {o.name}
-            </option>
-          ))}
-        </select>
-      </label>
+      <Picker
+        className="min-w-0 flex-1 sm:max-w-xs"
+        label="Available where I live"
+        value={country}
+        onChange={onChange}
+        searchPlaceholder="Search countries"
+        options={[
+          { value: "", label: "Any country — show every firm", emoji: "🌍" },
+          ...options.map((o) => ({ value: o.code, label: o.name, emoji: flagEmoji(o.code), keywords: o.code })),
+        ]}
+      />
       <p className="meta min-w-0 flex-1 basis-full sm:basis-auto" aria-live="polite">
         {country ? (
           <>
