@@ -4,6 +4,7 @@ import DealsList from "@/components/DealsList";
 import PropFirmToolbar from "@/components/PropFirmToolbar";
 import { collectDeals } from "@/lib/deals";
 import { propFirms } from "@/lib/propfirms";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Deals & promo codes",
@@ -18,12 +19,9 @@ export default function DealsPage() {
 
   return (
     <>
-      <h1 className="title-rule page-title">Deals &amp; promo codes</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">
-        {deals.length} active discounts across {new Set(deals.map((d) => d.firmId)).size} prop firms, {withCodes} of them
+      <PageIntro eyebrow="Prop firm deals" title={<>Deals &amp; promo codes</>} lede={<>{deals.length} active discounts across {new Set(deals.map((d) => d.firmId)).size} prop firms, {withCodes} of them
         with a code to copy. Each one shows the date we last saw it on the firm&apos;s own pricing page — codes
-        expire without notice, so treat that date as the deal&apos;s shelf life.
-      </p>
+        expire without notice, so treat that date as the deal&apos;s shelf life.</>} />
       <div className="mt-6">
         <PropFirmToolbar current="/deals" />
       </div>

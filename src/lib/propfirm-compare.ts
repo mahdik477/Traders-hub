@@ -133,3 +133,37 @@ export function ruleText(v: RuleValue, format: (n: number) => string): string {
   if (v === "none") return "None";
   return format(v);
 }
+
+// ---- Example comparisons for the empty state ----------------------------------
+
+export type ExampleComparison = { eyebrow: string; title: string; firms: string[]; keys: PlanKey[] };
+
+/** Three ready-made comparisons built from the data: the first three firms
+ *  (alphabetically) that offer a given program, at a common size. Examples
+ *  to click, never a recommendation. */
+export function exampleComparisons(firms: FirmView[]): ExampleComparison[] {
+  const sorted = [...firms].sort((a, b) => a.name.localeCompare(b.name));
+  const out: ExampleComparison[] = [];
+
+  function pick(eyebrow: string, title: string, market: "forex" | "futures", challengeKey: string | null, size: number) {
+    const keys: PlanKey[] = [];
+    const names: string[] = [];
+    for (const f of sorted) {
+      const m = f.markets.find((x) => x.market === market);
+      if (!m) continue;
+      const c = challengeKey ? m.challenges.find((x) => x.key === challengeKey) : m.challenges[0];
+      if (!c) continue;
+      const t = c.tiers.find((tier) => tier.accounts.some((a) => a.size === size));
+      if (!t) continue;
+      keys.push({ firm: f.id, market, challenge: c.key, tier: t.name, size });
+      names.push(f.name);
+      if (keys.length === MAX_COMPARE) break;
+    }
+    if (keys.length >= 2) out.push({ eyebrow, title, firms: names, keys });
+  }
+
+  pick("Forex", "Three 2-step plans at $100K", "forex", "2-step", 100_000);
+  pick("Forex", "Three 1-step plans at $50K", "forex", "1-step", 50_000);
+  pick("Futures", "Three futures evaluations at $50K", "futures", null, 50_000);
+  return out.slice(0, 3);
+}

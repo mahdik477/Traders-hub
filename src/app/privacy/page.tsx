@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_NAME } from "@/lib/sections";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = { title: "Privacy Policy" };
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = { title: "Privacy Policy" };
 export default function PrivacyPage() {
   return (
     <div className="max-w-3xl">
-      <h1 className="title-rule page-title">Privacy Policy</h1>
+      <PageIntro eyebrow="Legal" title={<>Privacy Policy</>} />
       <p className="meta mt-3">Last updated: 10 November 2026.</p>
       <p className="mt-3 rounded-lg border border-dashed border-danger/60 px-3 py-2 text-xs text-danger">
         Team reminder (remove before launch): have a lawyer review this page — UAE PDPL and UK/EU GDPR

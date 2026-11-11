@@ -189,6 +189,9 @@ feature rows, not for dense card grids.
   on phones it sits above the bottom nav via `.tray-bottom`.
 
 ### Compare tables — reference `src/components/PropFirmCompare.tsx`
+**Superseded for prop firms by Compare v2 (see `docs/ROLLOUT.md` → Step 2b):
+no sideways scroll, plan cards on top, hints per row.** The older pattern
+below still describes `CourseCompare.tsx` until it is migrated.
 Horizontal scroll container (`overflow-x-auto rounded-xl border`), a
 sticky first column (`sticky left-0 bg-surface`, row labels in
 `text-xs text-muted`), one column per item (`min-w-[230px]`, `border-l`).
@@ -245,7 +248,33 @@ focus moved in on open and returned on close, Tab trapped, Esc closes
 
 ---
 
-## 5. Rolling this out to other pages (checklist for the next model)
+## 5. Interior kit (every page below the homepage)
+
+Plain classes at the end of `globals.css`. Reference pages:
+`/funded-accounts`, `/funded-accounts/compare`, `/funded-accounts/<firm>`,
+`/courses`.
+
+| Class | What it is |
+|---|---|
+| `kit-panel` | The lit surface: border, 1rem radius, a hair of gold on the top edge. Use for cards, filter forms, asides. |
+| `listing-card` | Add to a `kit-panel` card in a grid: gold top hairline that brightens on hover/focus; `is-selected` when chosen for compare. |
+| `stat-strip` / `stat-cell` / `stat-value` | A row of 2–4 facts with mono figures (add `grid-cols-N`). |
+| `seg` / `seg-btn` / `seg-count` | Segmented switch for 2–4 exclusive views; state via `aria-pressed`. |
+| `seg-toggle` (+ `is-on`) | A checkbox drawn as a pill. |
+| `btn-soft` | Gold-tinted button for actions repeated down a grid; turns solid gold on card hover. `btn-primary` stays one-per-view. |
+| `readout` | Mono uppercase caption ("STEP 1", "29 OF 29 FIRMS MATCH"). |
+| `icon-chip` | 32px gold-tinted icon square for section heads and link rows. |
+| `firm-step` | A 56px link row inside a "Next steps" panel. |
+| `PageIntro` (component) | The top of every page: back link, eyebrow, title, lede, optional aside. |
+
+Page rhythm: `PageIntro` → tools/notes → switch + filter panel → card grid
+(`gap-4`, 1/2/3 columns) → collapsed extras. Detail pages: hero panel with
+a stat strip → two columns (content left, sticky "Next steps" aside right)
+→ full-width tables.
+
+Status and the step-by-step recipe live in `docs/ROLLOUT.md`.
+
+## 6. Rolling this out to other pages (checklist for the next model)
 
 1. Replace any `backdrop-filter` on sticky/fixed elements with 97% surfaces
    (`.signal-filter-bar` still has one — it is not on the homepage, so it

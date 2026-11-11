@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import StartHerePath from "@/components/StartHerePath";
 import { START_HERE_PATH } from "@/lib/start-here";
+import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "New to trading? Start here",
@@ -13,13 +14,9 @@ export default function StartHerePage() {
   const steps = START_HERE_PATH.reduce((n, s) => n + s.steps.length, 0);
   return (
     <>
-      <p className="eyebrow">Guided path</p>
-      <h1 className="page-title mt-2">New to trading? Start here.</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted">
-        {steps} steps in a sensible order: the basics first, then practice on a chart, then — only then —
+      <PageIntro eyebrow="Guided path" title={<>New to trading? Start here.</>} lede={<>{steps} steps in a sensible order: the basics first, then practice on a chart, then — only then —
         how funded accounts work. Skip anything you already know. Nothing here is advice, and nothing here
-        promises you&apos;ll make money; it&apos;s the order we&apos;d want to have learned things in.
-      </p>
+        promises you&apos;ll make money; it&apos;s the order we&apos;d want to have learned things in.</>} />
       <StartHerePath />
       <p className="meta mt-10 max-w-2xl">
         Finished? Browse the full{" "}

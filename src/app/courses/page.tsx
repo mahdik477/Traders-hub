@@ -8,6 +8,7 @@ import { getSection } from "@/lib/sections";
 import TerminalStatPanel from "@/components/TerminalStatPanel";
 import IconPatternBackdrop from "@/components/IconPatternBackdrop";
 import { BookIcon, CheckIcon, StarIcon } from "@/components/icons";
+import PageIntro from "@/components/PageIntro";
 
 const section = getSection("courses");
 
@@ -22,33 +23,21 @@ export default function CoursesPage() {
 
   return (
     <>
-      <section className="grid grid-cols-1 gap-8 py-8 sm:py-10 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-8">
-        <div>
-          <p className="eyebrow">{section.title}</p>
-          <h1 className="page-title mt-2 text-[clamp(2rem,5vw,3rem)] leading-[1.05]">
-            Find a course that{" "}
+      <PageIntro
+        size="lg"
+        eyebrow={section.title}
+        title={
+          <>Find a course that{" "}
             <span className="brand-wordmark" style={{ fontFamily: "var(--font-heading)" }}>
               actually fits
             </span>{" "}
-            how you trade
-          </h1>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            What each course covers, how it&apos;s delivered and what it costs — plus independent
+            how you trade</>
+        }
+        lede={<>What each course covers, how it&apos;s delivered and what it costs — plus independent
             Trustpilot ratings, not just the provider&apos;s own claims. We don&apos;t verify
-            trading performance or results.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a href="#browse" className="btn btn-primary">
-              <BookIcon className="size-4" />
-              Browse all courses
-            </a>
-            <Link href="/strategies" className="btn btn-outline">
-              Prefer to learn for free? Try a strategy
-            </Link>
-          </div>
-        </div>
-
-        <TerminalStatPanel
+            trading performance or results.</>}
+        aside={
+          <TerminalStatPanel
           caption="The directory, at a glance"
           backdrop={<IconPatternBackdrop icons={[BookIcon, StarIcon, CheckIcon]} />}
           stats={[
@@ -59,7 +48,18 @@ export default function CoursesPage() {
           ]}
           footnote="Ratings come from Trustpilot or Whop, sourced and linked on every course page — never our own score."
         />
-      </section>
+        }
+      >
+        <div className="flex flex-wrap items-center gap-3">
+            <a href="#browse" className="btn btn-primary">
+              <BookIcon className="size-4" />
+              Browse all courses
+            </a>
+            <Link href="/strategies" className="btn btn-outline">
+              Prefer to learn for free? Try a strategy
+            </Link>
+          </div>
+      </PageIntro>
 
       <div id="browse" className="mt-6 scroll-mt-20 border-t border-border pt-10">
         <CourseDirectory courses={courses} providers={providers} />

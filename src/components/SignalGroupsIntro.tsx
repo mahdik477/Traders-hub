@@ -1,4 +1,5 @@
 import { formatSignalDate } from "@/lib/signal-group-types";
+import PageIntro from "@/components/PageIntro";
 
 export default function SignalGroupsIntro({
   count,
@@ -13,15 +14,12 @@ export default function SignalGroupsIntro({
   const updatedLabel = formatSignalDate(updated);
 
   return (
-    <header className="grid grid-cols-12 gap-x-4">
-      <div className="col-span-12 max-w-3xl">
-        <h1 className="text-[1.75rem] font-semibold tracking-tight text-foreground sm:text-[2rem] sm:leading-10">
-          Signal Groups
-        </h1>
-        <p className="mt-2 text-sm leading-6 text-muted sm:text-[0.9375rem]">
-          Telegram signal groups you can filter by market, style, price and language. Open a group for its
-          full listing.
-        </p>
+    <PageIntro
+      eyebrow="Telegram"
+      title="Signal Groups"
+      lede="Telegram signal groups you can filter by market, style, price and language. Open a group for its full listing."
+    >
+      <div className="-mt-3">
         {count == null ? (
           <div className="mt-3 flex h-5 items-center gap-2" aria-hidden="true">
             <span className="h-3 w-16 animate-pulse rounded bg-surface-2 motion-reduce:animate-none" />
@@ -50,7 +48,7 @@ export default function SignalGroupsIntro({
           </p>
         )}
       </div>
-    </header>
+    </PageIntro>
   );
 }
 

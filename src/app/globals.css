@@ -579,7 +579,6 @@ body {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--color-border);
   background: color-mix(in srgb, var(--color-background) 92%, transparent);
-  backdrop-filter: blur(12px);
 }
 
 @media (width >= 40rem) {
@@ -1624,4 +1623,560 @@ input.signal-filter-search {
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 560px;
+}
+
+/* ---- Compare page (PropFirmCompare.tsx) -------------------------------------- */
+.compare-scroll {
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.compare-table .compare-col {
+  min-width: 15rem;
+  scroll-snap-align: start;
+}
+
+@media (width >= 40rem) {
+  .compare-table .compare-col {
+    min-width: 17rem;
+  }
+}
+
+.compare-label-col {
+  width: 7rem;
+  min-width: 7rem;
+}
+
+@media (width >= 40rem) {
+  .compare-label-col {
+    width: 9rem;
+    min-width: 9rem;
+  }
+}
+
+.compare-same {
+  color: var(--color-muted);
+}
+
+.compare-group th {
+  border-top: 1px solid var(--color-border);
+}
+
+/* The summary strip sits just under the site header; it slides in on
+   transform/opacity only. */
+.compare-summary {
+  position: fixed;
+  inset-inline: 0;
+  top: var(--header-height, 4.25rem);
+  z-index: 35;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-background) 97%, transparent);
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.compare-summary.is-shown {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .compare-summary {
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+  .rule-bar {
+    transition: transform 400ms var(--ease-out);
+  }
+  .compare-col {
+    animation: compare-col-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* ==========================================================================
+   Site-wide chrome for the Aurora Terminal direction (DESIGN.md → Shared
+   chrome). Static — nothing here animates except on interaction.
+   ========================================================================== */
+
+/* The calm gold wash behind every PageIntro. */
+.page-glow {
+  background:
+    radial-gradient(60% 100% at 20% 0%, color-mix(in srgb, var(--color-gold) 16%, transparent), transparent 70%),
+    radial-gradient(40% 80% at 90% 10%, color-mix(in srgb, #2fb7a6 8%, transparent), transparent 70%);
+  mask-image: linear-gradient(to bottom, black, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+:root[data-theme="light"] .page-glow {
+  background:
+    radial-gradient(60% 100% at 20% 0%, rgb(168 122 31 / 0.14), transparent 70%),
+    radial-gradient(40% 80% at 90% 10%, rgb(47 183 166 / 0.08), transparent 70%);
+}
+
+/* Detail heroes pick up the terminal grid texture so firm/course/strategy
+   pages share the homepage's data-readout feel. */
+.detail-hero {
+  background-image:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-gold) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--color-gold) 6%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: -1px -1px;
+}
+
+/* Buttons press down a hair; cards and chips keep their existing hover. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn:active {
+    transform: scale(0.985);
+  }
+  .btn {
+    transition:
+      background-color var(--dur-fast) ease,
+      border-color var(--dur-fast) ease,
+      color var(--dur-fast) ease,
+      box-shadow var(--dur-fast) ease,
+      transform var(--dur-fast) ease;
+  }
+}
+
+/* Sticky filter bars: no backdrop blur (same rule as the header). */
+.signal-filter-bar {
+  backdrop-filter: none;
+  background: color-mix(in srgb, var(--color-background) 97%, transparent);
+}
+
+:root[data-theme="light"] .signal-filter-bar {
+  background: color-mix(in srgb, #ffffff 97%, transparent);
+}
+
+/* Section headings on directory pages get the same short gold rule as
+   page titles, so a page reads as one system top to bottom. */
+.section-rule::after {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  margin-top: 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-gold-fill), transparent);
+}
+
+/* ==========================================================================
+   Interior kit — the shared look of every page below the homepage
+   (DESIGN.md → "Interior kit"). Plain classes, so don't put a Tailwind
+   utility for the same property on the same element.
+   ========================================================================== */
+
+/* A lit panel: a hair of gold on the top edge and a soft fall-off, so a
+   card reads as a surface under a light rather than a flat box. */
+.kit-panel {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-gold) 4%, var(--color-surface)), var(--color-surface) 7rem);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-gold-bright) 16%, transparent);
+}
+
+:root[data-theme="light"] .kit-panel {
+  background: var(--color-surface);
+  box-shadow:
+    0 1px 2px rgb(20 20 20 / 0.04),
+    0 10px 24px -20px rgb(20 20 20 / 0.25);
+}
+
+/* Listing cards: a gold hairline across the top that brightens on hover
+   or when something inside has focus. Opacity only. */
+.listing-card {
+  overflow: clip;
+}
+
+.listing-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-fill) 30%, var(--color-gold-bright) 60%, transparent);
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .listing-card:hover::before {
+    opacity: 1;
+  }
+}
+
+.listing-card:focus-within::before,
+.listing-card.is-selected::before {
+  opacity: 1;
+}
+
+.listing-card.is-selected {
+  border-color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .listing-card::before {
+    transition: opacity var(--dur-base) ease;
+  }
+}
+
+/* Mono caption, as on the homepage stat panel: "STEP 1", "FILTERS". */
+.readout {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+}
+
+/* A row of facts inside a card: hairline-separated cells, mono figures. */
+.stat-strip {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-border);
+}
+
+.stat-cell {
+  min-width: 0;
+  padding: 0.625rem 0.75rem;
+  background: color-mix(in srgb, var(--color-background) 55%, var(--color-surface));
+}
+
+:root[data-theme="light"] .stat-cell {
+  background: color-mix(in srgb, var(--color-background) 45%, var(--color-surface));
+}
+
+.stat-value {
+  display: block;
+  margin-top: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-foreground);
+}
+
+/* Segmented control: 2–4 mutually exclusive views (All / Forex / Futures). */
+.seg {
+  display: inline-flex;
+  max-width: 100%;
+  gap: 0.25rem;
+  overflow-x: auto;
+  padding: 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.875rem;
+  background: var(--color-surface);
+  scrollbar-width: none;
+}
+
+.seg-btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  transition:
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+.seg-btn:hover {
+  color: var(--color-foreground);
+}
+
+.seg-btn[aria-pressed="true"],
+.seg-btn[aria-current="page"],
+.seg-btn[aria-selected="true"] {
+  background: color-mix(in srgb, var(--color-gold-fill) 16%, transparent);
+  color: var(--color-accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-gold-fill) 45%, transparent);
+}
+
+.seg-count {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+/* A labelled on/off switch drawn as a pill ("Only show differences"). */
+.seg-toggle {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.875rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.seg-toggle.is-on {
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-gold-fill) 12%, transparent);
+  color: var(--color-foreground);
+}
+
+/* Section heading icon chip. */
+.icon-chip {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--color-gold-fill) 14%, transparent);
+  color: var(--color-accent);
+}
+
+/* ---- Compare v2 (PropFirmCompare.tsx) ------------------------------------
+   One grid that always fits the screen. Phones: the row label takes its
+   own line and the values sit in equal columns under it. From 48rem the
+   label becomes a fixed first column. */
+.cmp-plans {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.cmp-table {
+  overflow: clip; /* clip, not hidden: keeps the sticky header row working */
+}
+
+.cmp-row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
+
+/* Phones: visually hidden but still a column header, so the header row
+   has the same number of columns as the data rows for screen readers.
+   Absolutely positioned items take no grid slot. */
+.cmp-corner {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.cmp-label {
+  grid-column: 1 / -1;
+  padding: 0.75rem 0.875rem 0.25rem;
+}
+
+.cmp-cell {
+  padding: 0.625rem 0.875rem 0.875rem;
+}
+
+.cmp-cell + .cmp-cell {
+  border-left: 1px solid var(--color-border);
+}
+
+.cmp-head {
+  position: sticky;
+  top: var(--cmp-sticky-top, 6.75rem);
+  z-index: 20;
+  border-bottom: 1px solid var(--color-border-strong);
+  border-radius: 1rem 1rem 0 0;
+  background: var(--color-surface-2);
+}
+
+.cmp-head .cmp-cell {
+  padding-block: 0.75rem;
+}
+
+.cmp-group-title {
+  display: block;
+  padding: 1.25rem 0.875rem 0.5rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.cmp-head + .cmp-group .cmp-group-title {
+  border-top: 0;
+}
+
+.cmp-data-row {
+  border-top: 1px solid var(--color-border);
+}
+
+.cmp-data-row.is-highlight {
+  background: color-mix(in srgb, var(--color-gold-fill) 6%, transparent);
+}
+
+@media (hover: hover) {
+  .cmp-data-row:hover {
+    background: color-mix(in srgb, var(--color-surface-2) 70%, transparent);
+  }
+}
+
+.cmp-num {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  line-height: 1.2;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.cmp-same-tag {
+  border-radius: 9999px;
+  border: 1px solid var(--color-border-strong);
+  padding: 0 0.5rem;
+  font-size: 0.6875rem;
+  line-height: 1.25rem;
+  color: var(--color-subtle);
+}
+
+.cmp-bar {
+  height: 0.5rem;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: var(--color-surface-2);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.cmp-bar > div {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.cmp-bar-loss {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--color-danger) 55%, transparent), var(--color-danger));
+}
+
+.cmp-bar-target {
+  background: linear-gradient(90deg, var(--color-gold-deep), var(--color-gold-bright));
+}
+
+@media (width >= 40rem) {
+  .cmp-head {
+    top: var(--cmp-sticky-top, 4.5rem);
+  }
+}
+
+@media (width >= 48rem) {
+  .cmp {
+    --cmp-label: 13.5rem;
+  }
+  .cmp-plans {
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    padding-left: var(--cmp-label);
+  }
+  .cmp-row {
+    grid-template-columns: var(--cmp-label) repeat(var(--cols), minmax(0, 1fr));
+  }
+  .cmp-corner {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.125rem;
+  }
+  .cmp-label {
+    grid-column: auto;
+    padding: 1rem 1.125rem;
+  }
+  .cmp-cell {
+    padding: 1rem 1.125rem;
+    border-left: 1px solid var(--color-border);
+  }
+  .cmp-group-title {
+    padding-inline: 1.125rem;
+  }
+  .cmp-num {
+    font-size: 1.25rem;
+  }
+}
+
+/* A quieter call to action for cards that repeat down a grid: gold tint at
+   rest, full gold on hover. Keeps btn-primary for the one main action. */
+.btn-soft {
+  border-color: color-mix(in srgb, var(--color-gold-fill) 40%, transparent);
+  background: color-mix(in srgb, var(--color-gold-fill) 13%, transparent);
+  color: var(--color-accent);
+}
+
+@media (hover: hover) {
+  .btn-soft:hover {
+    border-color: var(--color-gold-fill);
+    background: var(--color-gold-fill);
+    color: var(--color-gold-ink);
+  }
+}
+
+/* The compare header sticks flush under the site header. */
+.cmp-head {
+  border-radius: 0;
+  top: var(--cmp-sticky-top, 6.9rem);
+}
+
+@media (width >= 40rem) {
+  .cmp-head {
+    top: var(--cmp-sticky-top, 4.375rem);
+  }
+}
+
+/* Every existing hover card picks up the lit top edge of the kit, so the
+   sections that haven't been rebuilt card-by-card still match. */
+.lift-card.bg-surface {
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--color-gold) 4%, transparent), transparent 7rem);
+}
+
+.lift-card.bg-surface:not(:hover) {
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-gold-bright) 14%, transparent);
+}
+
+:root[data-theme="light"] .lift-card.bg-surface {
+  background-image: none;
+}
+
+:root[data-theme="light"] .lift-card.bg-surface:not(:hover) {
+  box-shadow: 0 1px 2px rgb(20 20 20 / 0.04);
+}
+
+/* A row in a "Next steps" panel (firm page). */
+.firm-step {
+  display: flex;
+  min-height: 3.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  transition: background-color var(--dur-fast) ease;
+}
+
+.firm-step:hover {
+  background: var(--color-surface-2);
+}
+
+@media (width < 40rem) {
+  .stat-cell {
+    padding: 0.5rem 0.625rem;
+  }
+  .stat-value {
+    font-size: 0.8125rem;
+  }
 }

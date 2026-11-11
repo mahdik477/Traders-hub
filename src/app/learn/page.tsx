@@ -6,6 +6,7 @@ import TerminalStatPanel from "@/components/TerminalStatPanel";
 import IconPatternBackdrop from "@/components/IconPatternBackdrop";
 import { BookIcon, ChevronRightIcon } from "@/components/icons";
 import { DoneTick, ProgressSummary } from "@/components/ProgressBits";
+import PageIntro from "@/components/PageIntro";
 
 const section = getSection("learn");
 const totalMinutes = LEARN_TOPICS.reduce((sum, t) => sum + t.readMinutes, 0);
@@ -18,33 +19,21 @@ export const metadata: Metadata = {
 export default function LearnPage() {
   return (
     <div>
-      <section className="grid grid-cols-1 gap-8 py-8 sm:py-10 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-8">
-        <div>
-          <p className="eyebrow">{section.title}</p>
-          <h1 className="page-title mt-2 text-[clamp(2rem,5vw,3rem)] leading-[1.05]">
-            Start here if you&apos;re{" "}
+      <PageIntro
+        size="lg"
+        eyebrow={section.title}
+        title={
+          <>Start here if you&apos;re{" "}
             <span className="brand-wordmark" style={{ fontFamily: "var(--font-heading)" }}>
               new
             </span>{" "}
-            to trading
-          </h1>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            A 9-part walkthrough of everything a beginner actually needs: what you can trade, how
+            to trading</>
+        }
+        lede={<>A 9-part walkthrough of everything a beginner actually needs: what you can trade, how
             orders work, reading a chart, timeframes, analysis, risk, psychology and costs. No
-            account, no email, free. Go in order or jump straight to what you need.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link href={`/learn/${LEARN_TOPICS[0].slug}`} className="btn btn-primary">
-              <BookIcon className="size-4" />
-              Start with part 1
-            </Link>
-            <Link href="/strategies" className="btn btn-outline">
-              Already know the basics? Try a strategy
-            </Link>
-          </div>
-        </div>
-
-        <TerminalStatPanel
+            account, no email, free. Go in order or jump straight to what you need.</>}
+        aside={
+          <TerminalStatPanel
           caption="The course, at a glance"
           backdrop={<IconPatternBackdrop icons={LEARN_TOPICS.map((t) => t.icon)} />}
           stats={[
@@ -55,7 +44,18 @@ export default function LearnPage() {
           ]}
           footnote="Every part is free and open — no signup wall, no paid tier."
         />
-      </section>
+        }
+      >
+        <div className="flex flex-wrap items-center gap-3">
+            <Link href={`/learn/${LEARN_TOPICS[0].slug}`} className="btn btn-primary">
+              <BookIcon className="size-4" />
+              Start with part 1
+            </Link>
+            <Link href="/strategies" className="btn btn-outline">
+              Already know the basics? Try a strategy
+            </Link>
+          </div>
+      </PageIntro>
 
       <div className="mt-6 border-t border-border pt-10">
         <h2 className="section-title text-2xl sm:text-3xl">The 9 parts</h2>
