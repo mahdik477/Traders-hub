@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import ProfileMenu from "@/components/auth/ProfileMenu";
 import SiteSearch from "@/components/SiteSearch";
 import ThemeToggle from "@/components/ThemeToggle";
+import EdgeFade from "@/components/EdgeFade";
 import { SITE_NAME, sections } from "@/lib/sections";
 
 export default function SiteHeader() {
@@ -30,8 +31,9 @@ export default function SiteHeader() {
           <ThemeToggle />
           <ProfileMenu />
         </div>
-        <nav aria-label="Main" className="relative order-last w-full min-w-0 sm:order-2 sm:w-auto sm:flex-1">
-          <ul className="nav-scroll -mx-1 flex gap-1 overflow-x-auto px-1 py-0.5 pr-8">
+        <nav aria-label="Main" className="order-last w-full min-w-0 sm:order-2 sm:w-auto sm:flex-1">
+          <EdgeFade activeSelector='[aria-current="page"]' watch={pathname}>
+          <ul className="flex w-max gap-1 px-1 py-0.5">
             {sections.map((section) => {
               const href = `/${section.slug}`;
               const active = pathname === href || pathname.startsWith(`${href}/`);
@@ -52,7 +54,7 @@ export default function SiteHeader() {
               );
             })}
           </ul>
-          <span className="nav-fade" aria-hidden="true" />
+          </EdgeFade>
         </nav>
       </div>
     </header>

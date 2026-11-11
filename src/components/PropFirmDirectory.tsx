@@ -25,6 +25,7 @@ import {
 import CountrySwitch, { useCountry } from "@/components/CountrySwitch";
 import SaveButton from "@/components/SaveButton";
 import { firmAvailability } from "@/lib/countries";
+import Picker from "@/components/Picker";
 
 function uniqueSorted<T>(values: T[], compare?: (a: T, b: T) => number): T[] {
   return [...new Set(values)].sort(compare);
@@ -272,7 +273,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
           </button>
         </div>
       ) : (
-        <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {matchingFirms.map(({ firm, matches, availability }) => {
             const cheapest = matches
               .filter((a) => a.lowestPrice != null)
@@ -293,7 +294,7 @@ function Directory({ firms, initialFilters }: { firms: FirmView[]; initialFilter
                 <div className="flex items-start gap-3">
                   <FirmBadge name={firm.name} logo={firm.logo} logoBg={firm.logoBg} />
                   <div className="min-w-0 flex-1">
-                    <h2 className="truncate text-lg font-semibold leading-tight">
+                    <h2 className="line-clamp-2 break-words text-lg font-semibold leading-tight">
                       <Link href={`/funded-accounts/${firm.id}${query}`} className="card-stretch rounded-2xl">
                         {firm.name}
                       </Link>
@@ -524,16 +525,11 @@ function Select({
   anyLabel?: string;
 }) {
   return (
-    <label className="flex flex-col gap-1">
-      <span className="eyebrow">{label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="field">
-        <option value="">{anyLabel}</option>
-        {options.map(([v, text]) => (
-          <option key={v} value={v}>
-            {text}
-          </option>
-        ))}
-      </select>
-    </label>
+    <Picker
+      label={label}
+      value={value}
+      onChange={onChange}
+      options={[{ value: "", label: anyLabel }, ...options.map(([v, text]) => ({ value: v, label: text }))]}
+    />
   );
 }

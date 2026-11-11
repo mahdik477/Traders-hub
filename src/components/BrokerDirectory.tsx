@@ -6,6 +6,7 @@ import { Suspense, useState } from "react";
 import BrokerLogo from "@/components/BrokerLogo";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
 import SaveButton from "@/components/SaveButton";
+import Picker from "@/components/Picker";
 import TrustpilotStars from "@/components/TrustpilotStars";
 import {
   BROKER_MARKET_LABELS,
@@ -492,16 +493,12 @@ function Select({
   anyLabel?: string;
 }) {
   return (
-    <label className="flex min-w-0 flex-col gap-1">
-      <span className="eyebrow">{label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="field">
-        <option value="">{anyLabel}</option>
-        {options.map(([v, text]) => (
-          <option key={v} value={v}>
-            {text}
-          </option>
-        ))}
-      </select>
-    </label>
+    <Picker
+      className="min-w-0"
+      label={label}
+      value={value}
+      onChange={onChange}
+      options={[{ value: "", label: anyLabel }, ...options.map(([v, text]) => ({ value: v, label: text }))]}
+    />
   );
 }

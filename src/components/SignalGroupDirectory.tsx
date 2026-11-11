@@ -17,7 +17,6 @@ import {
 import { createPortal } from "react-dom";
 import {
   Check,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   ExternalLink,
@@ -32,6 +31,7 @@ import {
 import SignalGroupLogo from "@/components/SignalGroupLogo";
 import { signalGroupDetailHref } from "@/lib/signal-group-links";
 import SaveButton from "@/components/SaveButton";
+import Picker from "@/components/Picker";
 import {
   signalFilterTickCount,
   signalFiltersFromSearch,
@@ -175,7 +175,6 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
   const headerOffset = useSiteHeaderHeight();
   const narrow = useNarrowScreen();
   const searchId = useId();
-  const sortId = useId();
   const noteId = useId();
 
   const filters: SignalFilterSelection = useMemo(
@@ -345,27 +344,16 @@ function Directory({ groups, initialQuery }: { groups: SignalGroupView[]; initia
             </label>
 
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <label htmlFor={sortId} className="sr-only">
-                Sort groups
-              </label>
-              <div className="relative min-w-0 flex-1 sm:flex-none">
-                <select
-                  id={sortId}
-                  value={sort}
-                  onChange={(event) => {
-                    setSort(event.target.value as SortKey);
-                    setPage(1);
-                  }}
-                  className="signal-search h-11 w-full appearance-none rounded-lg border border-border-strong bg-background pr-8 pl-3 text-sm text-foreground transition-colors duration-150 outline-none hover:border-subtle focus-visible:border-accent sm:h-9 sm:w-44"
-                >
-                  {SORTS.map((id) => (
-                    <option key={id} value={id}>
-                      {SORT_LABELS[id]}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute top-1/2 right-2 size-4 -translate-y-1/2 text-muted" aria-hidden="true" />
-              </div>
+              <Picker
+                className="min-w-0 flex-1 sm:w-44 sm:flex-none"
+                ariaLabel="Sort groups"
+                value={sort}
+                onChange={(v) => {
+                  setSort(v as SortKey);
+                  setPage(1);
+                }}
+                options={SORTS.map((id) => ({ value: id, label: SORT_LABELS[id] }))}
+              />
 
               <button
                 ref={filtersButtonRef}

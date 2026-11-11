@@ -19,6 +19,7 @@ import {
 import TrustpilotStars from "@/components/TrustpilotStars";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
 import SaveButton from "@/components/SaveButton";
+import Picker from "@/components/Picker";
 import { SearchIcon } from "@/components/icons";
 
 type Entry = {
@@ -442,16 +443,11 @@ function Select({
   anyLabel?: string;
 }) {
   return (
-    <label className="flex flex-col gap-1">
-      <span className="eyebrow">{label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="field">
-        <option value="">{anyLabel}</option>
-        {options.map(([v, text]) => (
-          <option key={v} value={v}>
-            {text}
-          </option>
-        ))}
-      </select>
-    </label>
+    <Picker
+      label={label}
+      value={value}
+      onChange={onChange}
+      options={[{ value: "", label: anyLabel }, ...options.map(([v, text]) => ({ value: v, label: text }))]}
+    />
   );
 }

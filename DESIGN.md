@@ -215,6 +215,33 @@ Save comparison buttons and the "not a ranking" `meta` line.
   **unticked by default** for anything that is consent.
 - Active filters appear as removable chips with ✕ (44px) under the bar.
 
+### Picker — `src/components/Picker.tsx` (the only dropdown; never use `<select>`)
+- **Closed** (`picker-trigger`): matches the homepage search box — dark
+  surface, thin gold-tinted border, chevron on the right, a static 3px gold
+  ring on focus/open. `variant="search"` is the tall version with a search
+  icon (compare "Add a firm"); the default `field` is the 44px form control.
+- **Open, desktop** (`picker-pop`): a raised card in a portal, fixed under
+  the trigger (flips above when there is no room), gold hairline border,
+  soft shadow, max 440px tall, thin dark scrollbar. Enters with a 150ms
+  fade + 6px slide.
+- **Open, phone <768px** (`picker-sheet`): bottom sheet with grab handle,
+  title, close button, sticky search, 52px rows, dimmed (never blurred)
+  background, page scroll locked.
+- **Rows** (`picker-row`): optional logo tile (`FirmBadge size="sm"`) or
+  flag emoji · name · tag pills · right-aligned figure in the card numeral
+  style · gold check on the chosen one. Highlight = gold tint + 3px gold bar
+  on the left. `warning` shows the amber badge (payout complaints) and
+  `disabledNote` dims the row with a gold check ("Added").
+- Search highlights the match in gold, announces the result count, and has
+  a "Clear search" empty state. Shown automatically above 8 options.
+- Order is the caller's (A–Z for firms). Never add "popular" or any ranking.
+- Keyboard: ↑ ↓ Home End Enter Esc Tab; focus returns to the trigger.
+
+### Sideways rows — `src/components/EdgeFade.tsx`
+Header nav and the prop-firm quick links: no scrollbar, a fade on whichever
+edge has more, and the active item centred. Any `overflow-x-auto` box is
+`position: relative` (base layer) so nothing inside can widen the page.
+
 ### Empty states
 `rounded-xl border border-dashed border-border-strong p-10 text-center`,
 one `text-muted` sentence saying what to change, one `btn btn-primary` (or

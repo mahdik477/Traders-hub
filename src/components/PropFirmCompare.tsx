@@ -21,6 +21,8 @@ import {
 import { money, moneyRound, sizeLabel } from "@/lib/format-money";
 import { MARKET_LABELS } from "@/components/PropFirmPricing";
 import FirmBadge from "@/components/FirmBadge";
+import Picker, { type PickerOption } from "@/components/Picker";
+import { allAccounts } from "@/lib/propfirm-filters";
 import CopyButton from "@/components/CopyButton";
 import SaveComparisonButton from "@/components/SaveComparisonButton";
 import VisitSiteLink from "@/components/VisitSiteLink";
@@ -134,7 +136,7 @@ function CompareFromAddress({ firms }: { firms: FirmView[] }) {
           <p className="readout">Step 1</p>
           <h2 className="section-title mt-1">Your plans</h2>
         </div>
-        <AddPlanControl firms={firms} plans={plans} onAdd={add} />
+        <AddPlanControl firms={firms} plans={plans} onAdd={add} onRemove={remove} />
       </div>
       <ul className="cmp-plans mt-4">
         {plans.map((p, i) => (
@@ -437,31 +439,20 @@ function PlanCard({
 
       <div className="mt-4 grid grid-cols-2 gap-2 border-t border-border pt-4">
         {firm.markets.length > 1 && (
-          <Picker label="Market" value={p.market.market} options={firm.markets.map((m) => [m.market, MARKET_LABELS[m.market]])} onChange={(v) => onChange({ market: v, challenge: undefined, tier: undefined, size: null })} />
+          <PlanField label="Market" value={p.market.market} options={firm.markets.map((m) => [m.market, MARKET_LABELS[m.market]])} onChange={(v) => onChange({ market: v, challenge: undefined, tier: undefined, size: null })} />
         )}
-        <Picker label="Plan" value={p.challenge.key} options={p.market.challenges.map((c) => [c.key, c.label])} onChange={(v) => onChange({ challenge: v, tier: undefined, size: null })} />
+        <PlanField label="Plan" value={p.challenge.key} options={p.market.challenges.map((c) => [c.key, c.label])} onChange={(v) => onChange({ challenge: v, tier: undefined, size: null })} />
         {p.challenge.tiers.length > 1 && (
-          <Picker label="Tier" value={p.tier.name} options={p.challenge.tiers.map((t) => [t.name, t.name])} onChange={(v) => onChange({ tier: v, size: null })} />
+          <PlanField label="Tier" value={p.tier.name} options={p.challenge.tiers.map((t) => [t.name, t.name])} onChange={(v) => onChange({ tier: v, size: null })} />
         )}
-        <Picker label="Size" value={String(p.account.size)} options={p.tier.accounts.map((a) => [String(a.size), sizeLabel(a.size, p.firm.currency)])} onChange={(v) => onChange({ size: Number(v) })} />
+        <PlanField label="Size" value={String(p.account.size)} options={p.tier.accounts.map((a) => [String(a.size), sizeLabel(a.size, p.firm.currency)])} onChange={(v) => onChange({ size: Number(v) })} />
       </div>
     </div>
   );
 }
 
-function Picker({ label, value, options, onChange }: { label: string; value: string; options: [string, string][]; onChange: (v: string) => void }) {
-  return (
-    <label className="flex min-w-0 flex-col gap-0.5">
-      <span className="eyebrow">{label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="field">
-        {options.map(([v, t]) => (
-          <option key={v} value={v}>
-            {t}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
+function PlanField({ label, value, options, onChange }: { label: string; value: string; options: [string, string][]; onChange: (v: string) => void }) {
+  return <Picker label={label} value={value} onChange={onChange} options={options.map(([v, t]) => ({ value: v, label: t }))} />;
 }
 
 // ---- Cells -------------------------------------------------------------------
@@ -585,20 +576,80 @@ function Dash() {
 
 // ---- Chrome ------------------------------------------------------------------
 
-function AddPlanControl({ firms, plans, onAdd }: { firms: FirmView[]; plans: ResolvedPlan[]; onAdd: (firmId: string) => void }) {
+/** The firm picker: every firm A–Z (never ranked), with its markets, its
+ *  lowest listed price and — where it has one — the payout-complaints
+ *  badge. Firms already in the comparison are dimmed and marked "Added";
+ *  chips above it show what's picked. */
+function AddPlanControl({
+  firms,
+  plans,
+  onAdd,
+  onRemove,
+}: {
+  firms: FirmView[];
+  plans: ResolvedPlan[];
+  onAdd: (firmId: string) => void;
+  onRemove?: (index: number) => void;
+}) {
   const full = plans.length >= MAX_COMPARE;
+  const options = useMemo<PickerOption[]>(() => {
+    const added = new Set(plans.map((p) => p.firm.id));
+    return [...firms]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((f) => {
+        const prices = allAccounts(f)
+          .map((a) => a.lowestPrice)
+          .filter((n): n is number => n != null);
+        return {
+          value: f.id,
+          label: f.name,
+          keywords: f.markets.map((m) => MARKET_LABELS[m.market]).join(" "),
+          badge: { logo: f.logo, logoBg: f.logoBg },
+          tags: f.markets.map((m) => MARKET_LABELS[m.market]),
+          meta: prices.length > 0 ? `from ${money(Math.min(...prices), f.currency)}` : undefined,
+          warning: f.reviewAlert ? "Payout complaints in recent reviews" : undefined,
+          disabledNote: added.has(f.id) ? "Added" : undefined,
+        };
+      });
+  }, [firms, plans]);
+
   return (
-    <label className="flex min-w-0 flex-1 items-center gap-2 sm:max-w-sm">
-      <span className="eyebrow shrink-0">{full ? `${MAX_COMPARE} of ${MAX_COMPARE}` : "Add a firm"}</span>
-      <select className="field" value="" disabled={full} onChange={(e) => e.target.value && onAdd(e.target.value)} aria-label="Add a firm to the comparison">
-        <option value="">{full ? "Remove one to add another" : "Choose a firm…"}</option>
-        {firms.map((f) => (
-          <option key={f.id} value={f.id}>
-            {f.name}
-          </option>
-        ))}
-      </select>
-    </label>
+    <div className="w-full min-w-0 sm:max-w-md">
+      {plans.length > 0 && onRemove && (
+        <ul className="mb-2 flex flex-wrap gap-2" aria-label="Firms in this comparison">
+          {plans.map((p, i) => (
+            <li key={`${p.firm.id}-${i}`} className="picker-chip">
+              <FirmBadge name={p.firm.name} logo={p.firm.logo} logoBg={p.firm.logoBg} size="sm" />
+              <span className="min-w-0 truncate">{p.firm.name}</span>
+              <button
+                type="button"
+                onClick={() => onRemove(i)}
+                aria-label={`Remove ${p.firm.name} from comparison`}
+                className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground"
+              >
+                <X className="size-4" aria-hidden="true" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <Picker
+        variant="search"
+        ariaLabel="Add a firm to the comparison"
+        sheetTitle="Add a firm"
+        placeholder={full ? "Remove one to add another" : "Add a firm…"}
+        searchPlaceholder="Search firms or markets"
+        searchable
+        note={`${plans.length} of ${MAX_COMPARE} added`}
+        disabled={full}
+        value=""
+        onChange={onAdd}
+        options={options}
+      />
+      <p className="meta mt-1.5 sm:hidden">
+        {plans.length} of {MAX_COMPARE} added · listed A–Z
+      </p>
+    </div>
   );
 }
 
@@ -615,7 +666,7 @@ function EmptyState({ firms, onAdd }: { firms: FirmView[]; onAdd: (firmId: strin
           </Link>
           . You can change the plan and account size in each column afterwards.
         </p>
-        <div className="mt-4 max-w-sm">
+        <div className="mt-4 max-w-md">
           <AddPlanControl firms={firms} plans={[]} onAdd={onAdd} />
         </div>
       </div>

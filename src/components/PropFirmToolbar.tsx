@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { JSX } from "react";
+import EdgeFade from "@/components/EdgeFade";
 import { CalculatorIcon, CompassIcon, GridIcon, TagIcon, WaveStructureIcon } from "@/components/icons";
 
 // The row of beginner tools under the Funded Accounts heading — one place
@@ -15,7 +16,9 @@ const TOOLS: { href: string; label: string; hint: string; icon: (p: { className?
 
 export default function PropFirmToolbar({ current }: { current?: string }) {
   return (
-    <nav aria-label="Prop firm tools" className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+    <nav aria-label="Prop firm tools">
+      <EdgeFade activeSelector='[aria-current="page"]'>
+      <div className="flex w-max gap-2 py-1">
       {TOOLS.map(({ href, label, hint, icon: Icon }) => {
         const active = current === href;
         return (
@@ -39,6 +42,8 @@ export default function PropFirmToolbar({ current }: { current?: string }) {
           </Link>
         );
       })}
+      </div>
+      </EdgeFade>
     </nav>
   );
 }
