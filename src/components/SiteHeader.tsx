@@ -12,7 +12,7 @@ export default function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="site-header sticky top-0 z-40">
+    <header className="site-header sticky top-0 z-40" style={{ viewTransitionName: "site-header" }}>
       <div className="container-page flex flex-wrap items-center gap-x-3 gap-y-1 py-2 sm:flex-nowrap sm:py-2.5">
         <Link href="/" className="mr-auto flex min-h-11 shrink-0 items-center gap-2.5 rounded-lg sm:order-1 sm:mr-0">
           <Image

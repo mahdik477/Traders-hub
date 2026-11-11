@@ -1,22 +1,27 @@
 "use client";
 
-import { createBrowserClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { SUPABASE_KEY, SUPABASE_URL, isSupabaseConfigured } from "./config";
 
-// One browser client for the whole visit. Null when Supabase isn't set up,
-// so callers write `getSupabaseBrowser()?.from(...)` and simply do nothing
-// without an account backend. Sessions live in cookies (the @supabase/ssr
-// default) so the /auth/callback route can finish a sign-in.
+// One browser client for the whole visit, loaded on demand. The Supabase
+// library is ~70 KB of JavaScript, so it is imported dynamically: when
+// accounts are switched off nothing is downloaded at all, and when they're
+// on the download happens after the page is interactive instead of before.
+// Resolves to null when Supabase isn't configured, so callers write
+// `(await loadSupabaseBrowser())?.from(...)` and do nothing otherwise.
 
-let client: SupabaseClient | null | undefined;
+let pending: Promise<SupabaseClient | null> | null = null;
 
-export function getSupabaseBrowser(): SupabaseClient | null {
-  if (client !== undefined) return client;
-  if (typeof window === "undefined" || !isSupabaseConfigured()) {
-    client = null;
-    return client;
+export function loadSupabaseBrowser(): Promise<SupabaseClient | null> {
+  if (typeof window === "undefined" || !isSupabaseConfigured()) return Promise.resolve(null);
+  if (!pending) {
+    pending = import("@supabase/ssr")
+      .then(({ createBrowserClient }) => createBrowserClient(SUPABASE_URL, SUPABASE_KEY))
+      .catch((err) => {
+        pending = null;
+        console.warn("[supabase] client failed to load", err);
+        return null;
+      });
   }
-  client = createBrowserClient(SUPABASE_URL, SUPABASE_KEY);
-  return client;
+  return pending;
 }

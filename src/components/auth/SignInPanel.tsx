@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useAuth } from "@/components/auth/AuthProvider";
-import { getSupabaseBrowser } from "@/lib/supabase/client";
+import { loadSupabaseBrowser } from "@/lib/supabase/client";
 import { safeNextPath } from "@/lib/supabase/config";
 import { SITE_NAME } from "@/lib/sections";
 
@@ -79,7 +79,7 @@ function Panel({ next, errorKey }: { next: string; errorKey: string | null }) {
   const callback = () => `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
 
   async function google() {
-    const supabase = getSupabaseBrowser();
+    const supabase = await loadSupabaseBrowser();
     if (!supabase) return;
     setBusy("google");
     setError(null);
@@ -95,7 +95,7 @@ function Panel({ next, errorKey }: { next: string; errorKey: string | null }) {
 
   async function sendLink(e: React.FormEvent) {
     e.preventDefault();
-    const supabase = getSupabaseBrowser();
+    const supabase = await loadSupabaseBrowser();
     if (!supabase) return;
     const address = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) {

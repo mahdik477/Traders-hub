@@ -562,10 +562,12 @@ body {
 /* ---- Tradox chrome ------------------------------------------------------- */
 
 .site-header {
-  background: color-mix(in srgb, var(--color-background) 86%, transparent);
+  /* Near-solid, no backdrop blur: a blurred sticky header re-composites on
+     every scroll frame, which is the single most expensive thing a header
+     can do on a phone. 97% opacity keeps a hint of depth for free. */
+  background: color-mix(in srgb, var(--color-background) 97%, transparent);
   border-bottom: 1px solid var(--color-border);
   box-shadow: inset 0 -1px 0 rgb(232 197 106 / 0.22);
-  backdrop-filter: blur(16px);
 }
 
 /* Signal Groups filter bar. Sits under the sticky header. The negative
@@ -799,7 +801,7 @@ input.signal-filter-search {
 }
 
 :root[data-theme="light"] .site-header {
-  background: color-mix(in srgb, #ffffff 92%, transparent);
+  background: color-mix(in srgb, #ffffff 97%, transparent);
   box-shadow: 0 1px 0 #ddd9d0, 0 10px 24px -20px rgb(20 20 20 / 0.28);
 }
 
@@ -1003,10 +1005,34 @@ input.signal-filter-search {
     opacity: 0;
     transform: translateY(18px);
     transition:
-      opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
   }
   .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  /* Browsers with scroll-driven animations: the reveal is tied to the
+     element's own position in the viewport and runs on the compositor —
+     no observer, no JS. The JS fallback above still applies elsewhere. */
+  @supports (animation-timeline: view()) {
+    .scroll-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
     opacity: 1;
     transform: none;
   }
@@ -1022,81 +1048,12 @@ input.signal-filter-search {
   background-position: -1px -1px;
 }
 
-/* Hero ticker strip — a continuous scrolling line of live counts right
-   under the header, duplicated once in the markup so translateX(-50%)
-   loops seamlessly. Decorative (aria-hidden); the real, accessible
-   numbers live in the hero panel and the explore cards below it. */
-.ticker-strip {
-  overflow: hidden;
-  white-space: nowrap;
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
-  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
-}
-
-.ticker-track {
-  display: inline-flex;
-  width: max-content;
-  gap: 2.5rem;
-  padding: 0.55rem 1.25rem;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .ticker-track {
-    animation: ticker-scroll 34s linear infinite;
-  }
-  .ticker-strip:hover .ticker-track {
-    animation-play-state: paused;
-  }
-}
-
-@keyframes ticker-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 /* Big gradient brand wordmark in the homepage hero. */
 .brand-wordmark {
   background-image: linear-gradient(100deg, var(--color-gold-deep), var(--color-gold-bright) 55%, var(--color-gold) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-}
-
-/* The cinematic hero reads as black-and-gold regardless of the site's own
-   light/dark toggle — same call every dark-hero marketing site (Linear,
-   Stripe, Raycast) makes, and the WebGL terrain itself only ever makes
-   sense against black. The theme toggle still works normally for every
-   other page, and for the rest of this homepage below the hero: this
-   class re-declares the same values the dark theme block above already
-   uses, scoped to the hero's own subtree, rather than touching the
-   site-wide toggle or :root at all. */
-.hero-force-dark {
-  color-scheme: dark;
-  --color-background: #070708;
-  --color-surface: #101012;
-  --color-surface-2: #18181c;
-  --color-border: #2a261f;
-  --color-border-strong: #433c30;
-  --color-foreground: #f6f3ec;
-  --color-muted: #cfc6b8;
-  --color-subtle: #b3a898;
-  --color-gold-bright: #f5d76e;
-  --color-gold: #e8c56a;
-  --color-gold-deep: #b8860b;
-  --color-gold-ink: #161208;
-  --color-gold-fill: #e0b44a;
-  --color-gold-fill-hover: #f5d76e;
-  --color-brand: var(--color-gold);
-  --color-brand-hover: var(--color-gold-bright);
-  --color-success: #3dce86;
-  --color-warning: #e8a317;
-  --color-danger: #ef5b56;
-  --shadow-glow-color: 0 0 0 1px rgb(232 197 106 / 0.35), 0 16px 40px -22px rgb(184 134 11 / 0.55);
 }
 
 /* Cursor-aware gold spotlight on the "Everything we offer" rows
@@ -1115,6 +1072,17 @@ input.signal-filter-search {
 @media (prefers-reduced-motion: reduce) {
   .spotlight-glow {
     display: none;
+  }
+}
+
+/* The same rows tilt a few degrees toward the pointer (SpotlightRow.tsx
+   sets --tilt-x/--tilt-y). transform only; mouse + motion-safe only. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .spotlight-row {
+    transform: perspective(1400px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition:
+      transform 260ms var(--ease-out),
+      border-color 300ms ease;
   }
 }
 
@@ -1140,17 +1108,6 @@ input.signal-filter-search {
     stroke-dasharray: 300;
     animation: ma-preview-draw 4.5s ease-in-out infinite;
   }
-}
-
-/* A faint film-grain texture over the cinematic hero's black — an inline
-   SVG turbulence filter as a background image, so there's no extra image
-   asset and no runtime cost beyond painting it once. Keeps the terrain's
-   flat blacks from looking like a flat digital fill. */
-.hero-grain {
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  background-size: 140px 140px;
 }
 
 /* ---- Site-wide search (SiteSearch.tsx) ----------------------------------
@@ -1367,13 +1324,12 @@ input.signal-filter-search {
 .bottom-nav {
   padding-bottom: env(safe-area-inset-bottom, 0px);
   border-top: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-background) 92%, transparent);
-  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--color-background) 97%, transparent);
   box-shadow: inset 0 1px 0 rgb(232 197 106 / 0.18);
 }
 
 :root[data-theme="light"] .bottom-nav {
-  background: color-mix(in srgb, #ffffff 94%, transparent);
+  background: color-mix(in srgb, #ffffff 97%, transparent);
   box-shadow: 0 -1px 0 #ddd9d0;
 }
 
@@ -1387,19 +1343,285 @@ input.signal-filter-search {
   }
 }
 
-@keyframes page-enter {
+/* ==========================================================================
+   Design tokens (DESIGN.md → Tokens). Spacing, radius, shadow and motion
+   live here as variables so new components use the same scale instead of
+   one-off values. Colours are defined at the top of this file.
+   ========================================================================== */
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 0.5rem; /* inputs, small chips */
+  --radius-md: 0.75rem; /* cards, buttons */
+  --radius-lg: 1rem; /* feature rows, panels */
+  --radius-xl: 1.5rem; /* hero search, dialogs */
+  --radius-pill: 9999px;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.25);
+  --shadow-2: 0 6px 16px -12px rgb(0 0 0 / 0.45);
+  --shadow-3: 0 16px 40px -22px rgb(0 0 0 / 0.6);
+  /* --shadow-glow-color is the gold halo, defined per theme at the top. */
+
+  --dur-fast: 150ms; /* hover colour, pressed state */
+  --dur-base: 240ms; /* panels, menus, page cross-fade */
+  --dur-slow: 620ms; /* scroll reveals, hero entrances */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* decelerate — everything that enters */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* a small overshoot — confirmations only */
+}
+
+/* ---- Aurora hero (AuroraHero.tsx) ----------------------------------------
+   Three large radial-gradient blobs drift on `transform` only; a grid and a
+   self-drawing price line sit under the copy. The section gets
+   .is-offscreen once scrolled past, which pauses the drift so nothing
+   animates off-screen. Reduced motion: same picture, perfectly still. */
+.aurora-hero {
+  margin-top: -2.5rem; /* cancels main's py-10 so the hero meets the header */
+  --aurora-a: color-mix(in srgb, var(--color-gold) 55%, transparent);
+  --aurora-b: color-mix(in srgb, #2fb7a6 40%, transparent); /* the one cool accent, decoration only */
+  --aurora-c: color-mix(in srgb, var(--color-gold-deep) 60%, transparent);
+  background: var(--color-background);
+  isolation: isolate;
+}
+
+@media (width >= 40rem) {
+  .aurora-hero {
+    margin-top: -3.5rem; /* main's sm:py-14 */
+  }
+}
+
+.aurora-layer {
+  overflow: hidden;
+  contain: strict;
+}
+
+.aurora-blob {
+  position: absolute;
+  width: 52vmax;
+  height: 52vmax;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.aurora-blob-a {
+  top: -30vmax;
+  left: -15vmax;
+  background: radial-gradient(circle at center, var(--aurora-a), transparent 62%);
+}
+
+.aurora-blob-b {
+  top: -20vmax;
+  right: -25vmax;
+  background: radial-gradient(circle at center, var(--aurora-b), transparent 60%);
+  opacity: 0.42;
+}
+
+.aurora-blob-c {
+  bottom: -35vmax;
+  left: 20vmax;
+  background: radial-gradient(circle at center, var(--aurora-c), transparent 64%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aurora-blob-a {
+    animation: aurora-drift-a 22s ease-in-out infinite alternate;
+  }
+  .aurora-blob-b {
+    animation: aurora-drift-b 26s ease-in-out infinite alternate;
+  }
+  .aurora-blob-c {
+    animation: aurora-drift-c 30s ease-in-out infinite alternate;
+  }
+  .aurora-hero.is-offscreen .aurora-blob {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes aurora-drift-a {
+  to {
+    transform: translate3d(12vmax, 8vmax, 0) scale(1.08);
+  }
+}
+@keyframes aurora-drift-b {
+  to {
+    transform: translate3d(-10vmax, 10vmax, 0) scale(1.12);
+  }
+}
+@keyframes aurora-drift-c {
+  to {
+    transform: translate3d(-14vmax, -8vmax, 0) scale(1.05);
+  }
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-gold) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--color-gold) 10%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+}
+
+.hero-fade {
+  background: linear-gradient(to top, var(--color-background), transparent);
+}
+
+.hero-line {
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-line-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: hero-line-draw 1600ms var(--ease-out) 200ms forwards;
+  }
+  .hero-line-area {
+    opacity: 0;
+    animation: hero-line-fill 900ms ease-out 1300ms forwards;
+  }
+  .hero-line-dot {
+    opacity: 0;
+    transform-origin: 1200px 60px;
+    animation: hero-dot-in 500ms var(--ease-spring) 1700ms forwards;
+  }
+}
+
+@keyframes hero-line-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hero-line-fill {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-dot-in {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: scale(0.4);
   }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Word-by-word headline. Words start at 35% opacity (so the text is
+   painted — and counts as rendered — on the first frame) and rise into
+   place with a 70ms stagger set per word via --i in WordReveal. */
+.hero-word {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-word {
+    opacity: 0.35;
+    transform: translateY(0.3em);
+    animation: hero-word-in 640ms var(--ease-out) forwards;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+
+@keyframes hero-word-in {
   to {
     opacity: 1;
     transform: none;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .page-enter {
-    animation: page-enter 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+/* Hero search box: the cycling example text cross-fades (opacity only);
+   the box itself lifts 1px on hover. */
+.hero-search-example {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+/* The incoming line waits for the outgoing one to finish fading, so the
+   two never overlap. */
+.hero-search-example.is-on {
+  position: relative;
+  opacity: 1;
+  transition-delay: 240ms;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hero-search:hover {
+    transform: translateY(-1px);
   }
+}
+
+:root[data-theme="light"] .aurora-hero {
+  --aurora-a: color-mix(in srgb, #c9972a 38%, transparent);
+  --aurora-b: color-mix(in srgb, #2fb7a6 22%, transparent);
+  --aurora-c: color-mix(in srgb, #a87a1f 30%, transparent);
+}
+
+:root[data-theme="light"] .hero-grid {
+  background-image:
+    linear-gradient(90deg, rgb(168 122 31 / 0.12) 1px, transparent 1px),
+    linear-gradient(rgb(168 122 31 / 0.12) 1px, transparent 1px);
+}
+
+/* ---- Page cross-fade (React <ViewTransition default="page"> in layout.tsx)
+   Old page fades out, new one fades in and rises 6px. The sticky header is
+   named so it stays put instead of fading with the page. Reduced motion:
+   instant swap. */
+::view-transition-group(*) {
+  animation-duration: var(--dur-base);
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(.page) {
+  animation: vt-fade-out var(--dur-fast) ease-in both;
+}
+
+::view-transition-new(.page) {
+  animation: vt-fade-in var(--dur-base) var(--ease-out) both;
+}
+
+::view-transition-group(site-header),
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Below-the-fold sections skip style, layout and paint until they're near
+   the viewport. The intrinsic size keeps the scrollbar honest (CLS 0). */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 560px;
 }
