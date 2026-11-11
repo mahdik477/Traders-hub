@@ -40,6 +40,12 @@ import { getStrategy } from "@/lib/strategies";
 // renders everything else — hero, core concept, rules, walkthrough, market
 // conditions, practical info, videos, tags, disclaimer — straight from the
 // strategy's data, same as the plain template.
+//
+// Reading order (deliberate, not incidental): title -> what it actually is
+// (core concept) -> the full explanation (rules, walkthrough, how it plays
+// by market, when it works/fails, how to test it) -> see it live -> prove
+// you got it (quiz). You should know what you're about to watch before you
+// watch it, not the other way around.
 
 const TONE_CLASS = {
   accent: "bg-accent/12 text-accent",
@@ -159,45 +165,23 @@ export default function InteractiveStrategyPage({
 
       <QuickNav
         items={[
-          { href: "#simulator-heading", label: "Try it live" },
-          { href: "#concept-heading", label: "Core concept" },
+          { href: "#concept-heading", label: "What it is" },
           { href: "#rules-heading", label: "Rules" },
           ...(s.stepByStep.length > 0 ? [{ href: "#walkthrough-heading", label: "Step by step" }] : []),
           { href: "#conditions-heading", label: "Market conditions" },
+          { href: "#simulator-heading", label: "Try it live" },
           { href: "#quiz-heading", label: "Test yourself" },
           ...(s.videos.length > 0 ? [{ href: "#videos-heading", label: "Videos" }] : []),
         ]}
       />
 
-      {s.image && (
-        <figure className="mt-8 overflow-hidden rounded-xl border border-accent/30 bg-surface shadow-glow transition-colors hover:border-accent">
-          <Image src={s.image.src} alt={s.image.caption} width={1200} height={675} className="w-full" priority />
-          <figcaption className="meta border-t border-border bg-surface-2 px-4 py-3">
-            <span className="font-medium text-foreground">{s.image.caption}</span>
-            {s.image.kind === "synthetic" && " — an illustrative chart from synthetic data, not a real trade."}
-          </figcaption>
-        </figure>
-      )}
-
-      {/* The one thing the plain strategy template doesn't have — a live,
-          interactive simulator instead of another static image or paragraph. */}
-      <section aria-labelledby="simulator-heading" className="mt-10">
-        <h2
-          id="simulator-heading"
-          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-success/12 text-success">
-            <PlayIcon className="size-6" />
-          </span>
-          {simulatorTitle}
-        </h2>
-        <div className="mt-5">{simulator}</div>
-      </section>
-
+      {/* What it actually is — the plain-English definition, right after
+          the title, before anything else. You should know what you're
+          looking at before you read the rules, try the simulator, or do
+          anything else on this page. */}
       <section aria-labelledby="concept-heading" className="mt-10 max-w-3xl">
         <h2 id="concept-heading" className="text-sm font-bold uppercase tracking-wider text-accent scroll-mt-24">
-          Core concept
+          What it is
         </h2>
         <blockquote
           className="mt-3 border-l-4 border-accent pl-5 text-2xl font-medium italic leading-snug text-foreground sm:text-3xl"
@@ -212,6 +196,23 @@ export default function InteractiveStrategyPage({
           </p>
         )}
       </section>
+
+      {s.image && (
+        <figure className="mt-8 overflow-hidden rounded-xl border border-accent/30 bg-surface shadow-glow transition-colors hover:border-accent">
+          <Image src={s.image.src} alt={s.image.caption} width={1200} height={675} className="w-full" priority />
+          <figcaption className="meta border-t border-border bg-surface-2 px-4 py-3">
+            <span className="font-medium text-foreground">{s.image.caption}</span>
+            {s.image.kind === "synthetic" && " — an illustrative chart from synthetic data, not a real trade."}
+          </figcaption>
+        </figure>
+      )}
+
+      {/* ---------------------------------------------------------------- */}
+      {/* The full explanation: rules as traditionally taught, the detailed */}
+      {/* step-by-step walkthrough (where one exists), how it plays out by  */}
+      {/* market, when it works and fails, and how to actually test it      */}
+      {/* yourself — everything you need before trying it live.             */}
+      {/* ---------------------------------------------------------------- */}
 
       <section aria-labelledby="rules-heading" className="mt-10">
         <SectionHeading id="rules-heading" icon={BookIcon}>
@@ -385,10 +386,25 @@ export default function InteractiveStrategyPage({
         </dl>
       </section>
 
-      {/* Right after "testing this yourself" — not another slider, a test.
-          Seeing the signal on command (the simulator above) is a different
-          skill from spotting one on an unlabelled chart, which is the
-          actual real-world task. */}
+      {/* Now that the whole explanation is behind you — the live demo. */}
+      <section aria-labelledby="simulator-heading" className="mt-10">
+        <h2
+          id="simulator-heading"
+          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-success/12 text-success">
+            <PlayIcon className="size-6" />
+          </span>
+          {simulatorTitle}
+        </h2>
+        <div className="mt-5">{simulator}</div>
+      </section>
+
+      {/* Right after the live demo — not another slider, a test. Seeing
+          the signal on command (the simulator above) is a different skill
+          from spotting one on an unlabelled chart, which is the actual
+          real-world task. */}
       <section aria-labelledby="quiz-heading" className="mt-10">
         <h2
           id="quiz-heading"
