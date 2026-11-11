@@ -1625,3 +1625,141 @@ input.signal-filter-search {
   content-visibility: auto;
   contain-intrinsic-size: auto 560px;
 }
+
+/* ---- Compare page (PropFirmCompare.tsx) -------------------------------------- */
+.compare-scroll {
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.compare-table .compare-col {
+  min-width: 15rem;
+  scroll-snap-align: start;
+}
+
+@media (width >= 40rem) {
+  .compare-table .compare-col {
+    min-width: 17rem;
+  }
+}
+
+.compare-label-col {
+  width: 7rem;
+  min-width: 7rem;
+}
+
+@media (width >= 40rem) {
+  .compare-label-col {
+    width: 9rem;
+    min-width: 9rem;
+  }
+}
+
+.compare-same {
+  color: var(--color-muted);
+}
+
+.compare-group th {
+  border-top: 1px solid var(--color-border);
+}
+
+/* The summary strip sits just under the site header; it slides in on
+   transform/opacity only. */
+.compare-summary {
+  position: fixed;
+  inset-inline: 0;
+  top: var(--header-height, 4.25rem);
+  z-index: 35;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-background) 97%, transparent);
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.compare-summary.is-shown {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .compare-summary {
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+  .rule-bar {
+    transition: width 400ms var(--ease-out);
+  }
+  .compare-col {
+    animation: compare-col-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* ==========================================================================
+   Site-wide chrome for the Aurora Terminal direction (DESIGN.md → Shared
+   chrome). Static — nothing here animates except on interaction.
+   ========================================================================== */
+
+/* The calm gold wash behind every PageIntro. */
+.page-glow {
+  background:
+    radial-gradient(60% 100% at 20% 0%, color-mix(in srgb, var(--color-gold) 16%, transparent), transparent 70%),
+    radial-gradient(40% 80% at 90% 10%, color-mix(in srgb, #2fb7a6 8%, transparent), transparent 70%);
+  mask-image: linear-gradient(to bottom, black, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+:root[data-theme="light"] .page-glow {
+  background:
+    radial-gradient(60% 100% at 20% 0%, rgb(168 122 31 / 0.14), transparent 70%),
+    radial-gradient(40% 80% at 90% 10%, rgb(47 183 166 / 0.08), transparent 70%);
+}
+
+/* Detail heroes pick up the terminal grid texture so firm/course/strategy
+   pages share the homepage's data-readout feel. */
+.detail-hero {
+  background-image:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-gold) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--color-gold) 6%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: -1px -1px;
+}
+
+/* Buttons press down a hair; cards and chips keep their existing hover. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn:active {
+    transform: scale(0.985);
+  }
+  .btn {
+    transition:
+      background-color var(--dur-fast) ease,
+      border-color var(--dur-fast) ease,
+      color var(--dur-fast) ease,
+      box-shadow var(--dur-fast) ease,
+      transform var(--dur-fast) ease;
+  }
+}
+
+/* Sticky filter bars: no backdrop blur (same rule as the header). */
+.signal-filter-bar {
+  backdrop-filter: none;
+  background: color-mix(in srgb, var(--color-background) 97%, transparent);
+}
+
+:root[data-theme="light"] .signal-filter-bar {
+  background: color-mix(in srgb, #ffffff 97%, transparent);
+}
+
+/* Section headings on directory pages get the same short gold rule as
+   page titles, so a page reads as one system top to bottom. */
+.section-rule::after {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  margin-top: 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-gold-fill), transparent);
+}
