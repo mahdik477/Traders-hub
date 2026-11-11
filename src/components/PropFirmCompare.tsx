@@ -597,16 +597,21 @@ function AddPlanControl({
     return [...firms]
       .sort((a, b) => a.name.localeCompare(b.name))
       .map((f) => {
-        const prices = allAccounts(f)
-          .map((a) => a.lowestPrice)
-          .filter((n): n is number => n != null);
+        // The cheapest listed account, kept whole so a monthly subscription
+        // says "/month" exactly as the firm cards do.
+        const cheapest = allAccounts(f)
+          .filter((a) => a.lowestPrice != null)
+          .reduce<ReturnType<typeof allAccounts>[number] | null>(
+            (best, a) => (best == null || a.lowestPrice! < best.lowestPrice! ? a : best),
+            null,
+          );
         return {
           value: f.id,
           label: f.name,
           keywords: f.markets.map((m) => MARKET_LABELS[m.market]).join(" "),
           badge: { logo: f.logo, logoBg: f.logoBg },
           tags: f.markets.map((m) => MARKET_LABELS[m.market]),
-          meta: prices.length > 0 ? `from ${money(Math.min(...prices), f.currency)}` : undefined,
+          meta: cheapest ? `from ${money(cheapest.lowestPrice!, f.currency)}${cheapest.monthly ? "/month" : ""}` : undefined,
           warning: f.reviewAlert ? "Payout complaints in recent reviews" : undefined,
           disabledNote: added.has(f.id) ? "Added" : undefined,
         };

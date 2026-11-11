@@ -2203,9 +2203,6 @@ input.signal-filter-search {
   font-size: 1rem;
   line-height: 1.25rem;
   color: var(--color-foreground);
-  transition:
-    border-color var(--dur-fast) ease,
-    background-color var(--dur-fast) ease;
 }
 
 @media (width >= 40rem) {
@@ -2235,14 +2232,15 @@ input.signal-filter-search {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold-fill) 24%, transparent);
 }
 
-.picker-trigger:disabled {
+.picker-trigger[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.55;
 }
 
-.picker-chevron {
-  transition: transform var(--dur-fast) var(--ease-out);
+.picker-sheet.is-searchable {
+  height: min(86dvh, 40rem);
 }
+
 
 .picker-trigger.is-open .picker-chevron {
   transform: rotate(180deg);
@@ -2421,7 +2419,9 @@ input.signal-filter-search {
   cursor: default;
 }
 
-.picker-row.is-disabled > :not(:last-child) {
+/* Dim what identifies the row — never the warning badge. */
+.picker-row.is-disabled > span:first-child,
+.picker-row.is-disabled > span > span:first-child {
   opacity: 0.45;
 }
 
@@ -2475,6 +2475,18 @@ input.signal-filter-search {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .picker-trigger {
+    transition:
+      border-color var(--dur-fast) ease,
+      background-color var(--dur-fast) ease;
+  }
+  .picker-chevron {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .edge-fade::before,
+  .edge-fade::after {
+    transition: opacity var(--dur-fast) ease;
+  }
   .picker-pop {
     animation: picker-pop-in var(--dur-fast) var(--ease-out);
   }
@@ -2514,7 +2526,6 @@ input.signal-filter-search {
   width: 2.5rem;
   pointer-events: none;
   opacity: 0;
-  transition: opacity var(--dur-fast) ease;
 }
 
 .edge-fade::before {
@@ -2545,4 +2556,18 @@ input.signal-filter-search {
   .overflow-x-auto {
     position: relative;
   }
+}
+
+/* Names stay on one line in the desktop card; on the phone sheet they wrap
+   so a long firm name is never cut off. */
+.picker-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-sheet .picker-name {
+  overflow: visible;
+  white-space: normal;
+  line-height: 1.25;
 }

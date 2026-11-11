@@ -18,7 +18,7 @@ export default function PropFirmToolbar({ current }: { current?: string }) {
   return (
     <nav aria-label="Prop firm tools">
       <EdgeFade activeSelector='[aria-current="page"]'>
-      <div className="flex w-max gap-2 py-1">
+      <div className="flex w-max gap-2 px-1 py-1">
       {TOOLS.map(({ href, label, hint, icon: Icon }) => {
         const active = current === href;
         return (

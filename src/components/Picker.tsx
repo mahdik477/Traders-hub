@@ -100,15 +100,15 @@ export default function Picker({
       <button
         ref={triggerRef}
         type="button"
-        disabled={disabled}
+        aria-disabled={disabled || undefined}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listId : undefined}
         aria-labelledby={label ? `${labelId} ${valueId}` : undefined}
         aria-label={label ? undefined : `${ariaLabel ?? placeholder}${selected ? `: ${selected.label}` : ""}`}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => !disabled && setOpen((o) => !o)}
         onKeyDown={(e) => {
-          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+          if (!disabled && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
             e.preventDefault();
             setOpen(true);
           }
@@ -127,7 +127,7 @@ export default function Picker({
         {note && <span className="readout hidden shrink-0 sm:inline">{note}</span>}
         <ChevronDown className="picker-chevron size-4 shrink-0 text-muted" aria-hidden="true" />
       </button>
-      {open && (
+      {open && !disabled && (
         <PickerPanel
           options={options}
           value={value}
@@ -199,7 +199,9 @@ function PickerPanel({
   // and follow it if the page scrolls or resizes.
   useLayoutEffect(() => {
     if (isPhone) return;
-    function measure() {
+    function measure(e?: Event) {
+      // The list's own scrolling doesn't move the trigger.
+      if (e?.target instanceof Node && panelRef.current?.contains(e.target)) return;
       const r = triggerRef.current?.getBoundingClientRect();
       if (!r) return;
       const gap = 6;
@@ -208,12 +210,17 @@ function PickerPanel({
       const up = below < 240 && above > below;
       const width = Math.min(Math.max(r.width, 288), window.innerWidth - 24);
       const left = Math.max(12, Math.min(r.left, window.innerWidth - width - 12));
-      setPlace({
+      const next: { left: number; width: number; top?: number; bottom?: number; maxHeight: number } = {
         left,
         width,
         maxHeight: Math.max(180, Math.min(440, up ? above : below)),
         ...(up ? { bottom: window.innerHeight - r.top + gap } : { top: r.bottom + gap }),
-      });
+      };
+      setPlace((prev) =>
+        prev && prev.left === next.left && prev.width === next.width && prev.maxHeight === next.maxHeight && prev.top === next.top && prev.bottom === next.bottom
+          ? prev
+          : next,
+      );
     }
     measure();
     window.addEventListener("scroll", measure, { passive: true, capture: true });
@@ -238,13 +245,16 @@ function PickerPanel({
   useEffect(() => {
     (showSearch ? inputRef.current : listRef.current)?.focus({ preventScroll: true });
     function onDown(e: PointerEvent) {
+      // Phones: the dimmed backdrop closes on click (finger up), so the tap
+      // can't fall through to whatever is underneath.
+      if (isPhone) return;
       const t = e.target as Node;
       if (panelRef.current?.contains(t) || triggerRef.current?.contains(t)) return;
       onClose(false);
     }
     document.addEventListener("pointerdown", onDown);
     return () => document.removeEventListener("pointerdown", onDown);
-  }, [onClose, showSearch, triggerRef]);
+  }, [isPhone, onClose, showSearch, triggerRef]);
 
   // Keep the highlighted row in view.
   useEffect(() => {
@@ -266,6 +276,9 @@ function PickerPanel({
         return move(0, 1);
       case "End":
         return move(shown.length - 1, -1);
+      case " ":
+        if (showSearch) return; // a space is a character in the search box
+      // falls through
       case "Enter": {
         e.preventDefault();
         const o = shown[active];
@@ -289,7 +302,7 @@ function PickerPanel({
   const body = (
     <div
       ref={panelRef}
-      className={isPhone ? "picker-sheet" : "picker-pop"}
+      className={isPhone ? `picker-sheet ${showSearch ? "is-searchable" : ""}` : "picker-pop"}
       style={isPhone ? undefined : place ? { ...place } : { top: 0, left: 0, opacity: 0, pointerEvents: "none" }}
       role={isPhone ? "dialog" : undefined}
       aria-modal={isPhone ? true : undefined}
@@ -314,8 +327,8 @@ function PickerPanel({
             ref={inputRef}
             type="text"
             role="combobox"
-            aria-expanded="true"
-            aria-controls={listId}
+            aria-expanded={count > 0}
+            aria-controls={count > 0 ? listId : undefined}
             aria-activedescendant={activeId}
             aria-autocomplete="list"
             aria-label={`Search ${title}`}
@@ -377,7 +390,7 @@ function PickerPanel({
                 )}
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                    <span className={`min-w-0 truncate ${o.badge ? "font-semibold" : "font-medium"} text-foreground`}>
+                    <span className={`picker-name min-w-0 ${o.badge ? "font-semibold" : "font-medium"} text-foreground`}>
                       <Highlight text={o.label} query={q} />
                     </span>
                     {o.tags?.map((t) => (
