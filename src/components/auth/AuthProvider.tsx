@@ -2,7 +2,8 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { SupabaseClient, User } from "@supabase/supabase-js";
-import { getSupabaseBrowser } from "@/lib/supabase/client";
+import { loadSupabaseBrowser } from "@/lib/supabase/client";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 import AgeConfirmModal from "@/components/auth/AgeConfirmModal";
 import AccountSync from "@/components/auth/AccountSync";
 
@@ -49,30 +50,38 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [needsAge, setNeedsAge] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const client = getSupabaseBrowser();
-    if (!client) return; // stays "disabled"
-    // Browser-only setup — the client can't exist during SSR.
+    // Nothing configured → stay "disabled" and never download the Supabase
+    // library. Otherwise load it after the page is interactive.
+    if (!isSupabaseConfigured()) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSupabase(client);
     setStatus("loading");
 
     let cancelled = false;
-    client.auth.getSession().then(({ data }) => {
+    let subscription: { unsubscribe(): void } | null = null;
+    loadSupabaseBrowser().then((client) => {
       if (cancelled) return;
-      setUser(toAuthUser(data.session?.user));
-      setStatus(data.session ? "signed-in" : "signed-out");
-    });
-    const { data: sub } = client.auth.onAuthStateChange((_event, session) => {
-      // Token refreshes fire this too; keep the same object unless the
-      // person actually changed, so dependents (AccountSync) don't restart.
-      const next = toAuthUser(session?.user);
-      setUser((prev) => (prev && next && prev.id === next.id && prev.email === next.email ? prev : next));
-      setStatus(session ? "signed-in" : "signed-out");
-      if (!session) setNeedsAge(null);
+      if (!client) {
+        setStatus("disabled");
+        return;
+      }
+      setSupabase(client);
+      client.auth.getSession().then(({ data }) => {
+        if (cancelled) return;
+        setUser(toAuthUser(data.session?.user));
+        setStatus(data.session ? "signed-in" : "signed-out");
+      });
+      subscription = client.auth.onAuthStateChange((_event, session) => {
+        // Token refreshes fire this too; keep the same object unless the
+        // person actually changed, so dependents (AccountSync) don't restart.
+        const next = toAuthUser(session?.user);
+        setUser((prev) => (prev && next && prev.id === next.id && prev.email === next.email ? prev : next));
+        setStatus(session ? "signed-in" : "signed-out");
+        if (!session) setNeedsAge(null);
+      }).data.subscription;
     });
     return () => {
       cancelled = true;
-      sub.subscription.unsubscribe();
+      subscription?.unsubscribe();
     };
   }, []);
 

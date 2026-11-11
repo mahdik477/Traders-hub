@@ -2,20 +2,24 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-// Fades a section up into place the first time it scrolls into view —
-// cheap, dependency-free polish instead of everything just appearing at
-// once. Respects prefers-reduced-motion (renders fully visible immediately,
-// no observer needed) and degrades safely if IntersectionObserver is ever
-// unavailable.
+// Fades a section up into place as it scrolls into view.
 //
-// Belt and suspenders: IntersectionObserver's first callback can land
-// before layout has fully settled (fonts/images still loading, a Suspense
-// boundary still resolving above it) and, on some real devices, never
-// re-fire after that if nothing else triggers a layout change — leaving
-// the content stuck invisible until something unrelated forces a
-// re-render. A hard timeout guarantees it reveals itself regardless, so a
-// purely decorative animation can never block real content from showing.
+// Two engines, picked by the browser:
+//  1. CSS scroll-driven animation (`animation-timeline: view()`) — zero JS,
+//     runs on the compositor, the reveal is tied to scroll position. See
+//     `.scroll-reveal` in globals.css.
+//  2. Fallback for browsers without it: one IntersectionObserver per
+//     section that adds `is-visible` the first time it crosses into view.
+//
+// Either way the content is fully visible with no JS at all (the hidden
+// start state only applies under `@supports` / once the observer attaches),
+// and reduced-motion users see everything immediately. A hard timeout
+// guarantees the fallback reveals itself even if the observer never fires.
 const REVEAL_TIMEOUT_MS = 1800;
+
+function supportsScrollTimeline() {
+  return typeof CSS !== "undefined" && typeof CSS.supports === "function" && CSS.supports("animation-timeline: view()");
+}
 
 export default function ScrollReveal({
   children,
@@ -23,7 +27,7 @@ export default function ScrollReveal({
   className = "",
 }: {
   children: ReactNode;
-  /** Stagger siblings slightly, in ms. */
+  /** Stagger siblings slightly, in ms (fallback engine only). */
   delay?: number;
   className?: string;
 }) {
@@ -33,7 +37,7 @@ export default function ScrollReveal({
   useEffect(() => {
     const reducedMotion =
       typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion || typeof IntersectionObserver === "undefined" || !ref.current) {
+    if (reducedMotion || supportsScrollTimeline() || typeof IntersectionObserver === "undefined" || !ref.current) {
       setVisible(true);
       return;
     }

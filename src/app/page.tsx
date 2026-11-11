@@ -17,8 +17,9 @@ import { BROKER_CATEGORY_ITEM_LABELS } from "@/lib/broker-types";
 import { sortBrokers } from "@/lib/broker-filters";
 import FirmBadge from "@/components/FirmBadge";
 import ScrollReveal from "@/components/ScrollReveal";
-import FaqAccordion from "@/components/FaqAccordion";
-import CinematicHero from "@/components/hero/CinematicHero";
+import FaqDetails from "@/components/FaqDetails";
+import AuroraHero, { WordReveal } from "@/components/hero/AuroraHero";
+import HeroSearchButton from "@/components/hero/HeroSearchButton";
 import CountUpStat from "@/components/CountUpStat";
 import SpotlightRow from "@/components/explore/SpotlightRow";
 import MiniCurriculumPath from "@/components/explore/MiniCurriculumPath";
@@ -379,119 +380,70 @@ export default function Home() {
     strategies: <MiniCandlePreview />,
   };
 
-  const tickerItems = liveSections.map((s) => `${sectionCounts[s.slug] ?? 0} ${s.title}`.toUpperCase());
+  const heroStats = [
+    { label: "Prop firms", value: propFirms.length },
+    { label: "Courses", value: courses.length + providers.length },
+    { label: "Strategies", value: strategies.length },
+    { label: "Signal groups", value: signalGroups.length },
+  ];
 
   return (
-    <div
-      className="homepage-v3"
-      style={{ "--font-heading": "var(--font-display)" } as React.CSSProperties}
-    >
-      {/* A continuous line of live counts right under the header — purely
-          decorative (the real, accessible numbers are in the panel below
-          and on the explore cards further down), but it's the first thing
-          that moves on the page, and it says "this is a live data site"
-          before a single word of copy does. */}
-      <div className="ticker-strip -mx-4 sm:-mx-6 lg:-mx-8" aria-hidden="true">
-        <div className="ticker-track">
-          {[0, 1].map((rep) =>
-            tickerItems.map((item, i) => (
-              <span key={`${rep}-${i}`} className="inline-flex items-center gap-2.5 font-mono text-xs tracking-wider text-muted">
-                {item}
-                <span className="text-gold-bright">·</span>
-              </span>
-            )),
-          )}
-        </div>
-      </div>
-
+    <div className="homepage-v3">
       {/* ---------------------------------------------------------------- */}
-      {/* Hero — a full-bleed WebGL terrain (its ridges built from a       */}
-      {/* synthetic price walk, same convention as every other decorative  */}
-      {/* chart on the site) standing in for "Trading, decoded." as an     */}
-      {/* actual visual event rather than only a tagline. Pinned while you */}
-      {/* scroll through it: the camera moves forward and the fog closes   */}
-      {/* in, so the hero recedes into the next section instead of just    */}
-      {/* scrolling away. Real HTML text on top throughout — nothing here  */}
-      {/* is baked into the canvas. See CinematicHero.tsx for the render-  */}
-      {/* mode/accessibility handling.                                     */}
+      {/* Hero — three slow aurora gradients, a faint grid and a price line */}
+      {/* that draws itself once, all CSS/SVG (see AuroraHero.tsx). The     */}
+      {/* headline and the search box are plain HTML painted on the first  */}
+      {/* frame; the word-by-word rise and the staggered entrances are      */}
+      {/* opacity/transform only and switch off under reduced motion.      */}
       {/* ---------------------------------------------------------------- */}
-      <CinematicHero>
-        <div className="-mx-4 flex w-full flex-col items-center px-4 text-center sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-          <div className="flex items-center gap-2.5">
-            <Image
-              src="/brand/tradox-td.png"
-              alt=""
-              width={56}
-              height={56}
-              className="size-8 shrink-0 rounded-lg sm:size-10"
-              priority
-            />
-            <p className="eyebrow text-left">UAE · Trading, simplified for everyone</p>
-          </div>
-          <h1 className="mt-[clamp(0.5rem,2.5vh,1rem)] leading-[0.92]">
-            <span
-              className="brand-wordmark block text-[clamp(2.75rem,11vw,6.5rem)] font-extrabold tracking-tight"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              {SITE_NAME}
-            </span>
-            <span
-              className="mt-2 block text-[clamp(1.25rem,3.6vw,2.25rem)] font-semibold tracking-tight text-foreground"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Trading, decoded.
-            </span>
-          </h1>
-          <p className="mt-[clamp(0.5rem,2vh,1.25rem)] max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            Prop firms, courses, signal groups, brokers, tools and strategies — real pricing,
-            real rules, and live simulators you can actually practice on before you spend a
-            cent.
+      <AuroraHero>
+        <div className="mx-auto flex w-full min-w-0 max-w-4xl flex-col items-center py-[clamp(2.5rem,9vh,6rem)] text-center">
+          <p className="hero-intro eyebrow flex items-center gap-2.5 text-[0.7rem]">
+            <Image src="/brand/tradox-td.png" alt="" width={44} height={44} priority className="size-7 rounded-lg" />
+            UAE · Trading, simplified for everyone
           </p>
-          <div className="mt-[clamp(0.75rem,2.5vh,1.5rem)] flex flex-wrap items-center justify-center gap-3">
-            <Link href="/funded-accounts" className="btn btn-primary">
-              Start exploring
+          <h1
+            id="hero-heading"
+            className="mt-5 max-w-full text-balance text-[clamp(2.4rem,9vw,5.75rem)] font-bold leading-[0.98] tracking-[-0.03em] text-foreground"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            <WordReveal text="Trading, decoded." />
+          </h1>
+          <p className="hero-intro mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg" style={{ animationDelay: "160ms" }}>
+            Prop firms, courses, signal groups, brokers, tools and strategies — real pricing, real
+            rules, and live simulators you can practise on before you spend a cent.
+          </p>
+          <div className="hero-intro mt-7 flex w-full justify-center" style={{ animationDelay: "260ms" }}>
+            <HeroSearchButton />
+          </div>
+          <div className="hero-intro mt-4 flex flex-wrap items-center justify-center gap-3" style={{ animationDelay: "340ms" }}>
+            <Link href="/start-here" className="btn btn-primary">
+              <CompassIcon className="size-4" />
+              New to trading? Start here
             </Link>
-            <a href="#explore" className="btn btn-outline">
-              See everything we offer
-            </a>
+            <Link href="/funded-accounts" className="btn btn-outline">
+              Browse prop firms
+            </Link>
           </div>
 
-          <div className="mt-[clamp(0.75rem,3vh,2rem)] w-full max-w-md rounded-2xl border border-border-strong/60 bg-background/75 px-4 py-3 shadow-glow backdrop-blur-md sm:max-w-none sm:px-7 sm:py-3.5">
-            <span className="flex items-center justify-center gap-2 pb-2 sm:hidden">
-              <span className="relative flex size-1.5">
-                <span className="absolute inline-flex size-full rounded-full bg-success opacity-75 motion-safe:animate-ping" />
-                <span className="relative inline-flex size-1.5 rounded-full bg-success" />
-              </span>
-              <span className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-muted">Live</span>
-            </span>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-[auto_repeat(4,1fr)] sm:items-center sm:gap-x-8 sm:gap-y-0">
-              <span className="relative hidden items-center gap-2 pr-3 sm:flex">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex size-full rounded-full bg-success opacity-75 motion-safe:animate-ping" />
-                  <span className="relative inline-flex size-2 rounded-full bg-success" />
-                </span>
-                <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted">Live</span>
-              </span>
-              {[
-                { label: "Prop firms", value: propFirms.length },
-                { label: "Courses", value: courses.length + providers.length },
-                { label: "Strategies", value: strategies.length },
-                { label: "Signal groups", value: signalGroups.length },
-              ].map((s) => (
-                <div key={s.label} className="text-left">
-                  <dd className="figure-lg font-mono text-lg text-foreground sm:text-2xl">
-                    <CountUpStat value={s.value} />
-                  </dd>
-                  <dt className="eyebrow mt-0.5 text-[0.55rem] sm:text-[0.6rem]">{s.label}</dt>
-                </div>
-              ))}
-            </div>
-            <p className="mt-3 hidden border-t border-border pt-3 font-mono text-[0.7rem] text-subtle sm:block">
-              {TOTAL_LISTINGS}+ listings total — zero performance scores, zero rankings.
-            </p>
-          </div>
+          <dl
+            className="hero-intro mt-10 grid w-full max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4"
+            style={{ animationDelay: "440ms" }}
+          >
+            {heroStats.map((s) => (
+              <div key={s.label} className="bg-surface px-4 py-3 text-left sm:px-5">
+                <dd className="figure-lg font-mono text-2xl text-foreground sm:text-3xl">
+                  <CountUpStat value={s.value} />
+                </dd>
+                <dt className="eyebrow mt-1">{s.label}</dt>
+              </div>
+            ))}
+          </dl>
+          <p className="hero-intro meta mt-3 font-mono text-[0.7rem]" style={{ animationDelay: "520ms" }}>
+            {TOTAL_LISTINGS}+ listings · zero performance scores · zero rankings
+          </p>
         </div>
-      </CinematicHero>
+      </AuroraHero>
 
       {/* ---------------------------------------------------------------- */}
       {/* How it works — three steps, added so the hero isn't carrying the */}
@@ -528,7 +480,7 @@ export default function Home() {
       {/* → Funded Accounts). Progress comes from the browser-side store,   */}
       {/* so a returning visitor sees where they got to.                    */}
       {/* ---------------------------------------------------------------- */}
-      <ScrollReveal>
+      <ScrollReveal className="cv-auto">
         <section aria-labelledby="start-here-heading" className="border-t border-border py-14">
           <div className="start-here-band relative overflow-hidden rounded-2xl border border-accent/30 bg-surface p-6 shadow-glow sm:p-8">
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-gold-fill/12 via-transparent to-transparent" />
@@ -589,7 +541,7 @@ export default function Home() {
             const Icon = meta?.icon ?? WaveStructureIcon;
             const chartFirst = i % 2 === 1;
             return (
-              <ScrollReveal key={s.slug} delay={Math.min(i, 3) * 60}>
+              <ScrollReveal key={s.slug} delay={Math.min(i, 3) * 60} className="cv-auto">
                 <SpotlightRow>
                   <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch">
                     <div className={`flex flex-col justify-center p-6 sm:p-8 ${chartFirst ? "lg:order-last" : ""}`}>
@@ -632,7 +584,7 @@ export default function Home() {
       {/* Why Tradox — the trust facts, presented as a real section        */}
       {/* instead of a thin strip of text.                                  */}
       {/* ---------------------------------------------------------------- */}
-      <ScrollReveal>
+      <ScrollReveal className="cv-auto">
         <section aria-labelledby="why-heading" className="border-t border-border py-14">
           <h2 id="why-heading" className="section-title text-3xl sm:text-4xl">
             Why Tradox
@@ -661,13 +613,13 @@ export default function Home() {
       {/* ---------------------------------------------------------------- */}
       {/* FAQ — now an accordion instead of a flat wall of Q&As.            */}
       {/* ---------------------------------------------------------------- */}
-      <ScrollReveal>
+      <ScrollReveal className="cv-auto">
         <section aria-labelledby="faq-heading" className="border-t border-border py-14">
           <h2 id="faq-heading" className="section-title text-3xl sm:text-4xl">
             Questions people actually ask
           </h2>
           <div className="mt-6 max-w-2xl">
-            <FaqAccordion items={FAQ} />
+            <FaqDetails items={FAQ} />
           </div>
           <p className="meta mt-6">
             More detail in the{" "}
@@ -686,7 +638,7 @@ export default function Home() {
       {/* ---------------------------------------------------------------- */}
       {/* Closing CTA band                                                  */}
       {/* ---------------------------------------------------------------- */}
-      <ScrollReveal>
+      <ScrollReveal className="cv-auto">
         <section className="relative overflow-hidden rounded-2xl border border-accent/30 bg-surface p-8 text-center shadow-glow sm:p-12">
           <span
             aria-hidden="true"
