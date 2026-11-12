@@ -77,7 +77,7 @@ the recommended option was taken for each:
 |---|---|---|---|
 | 0 | This plan file | done | (this commit) |
 | 1 | Sign-in page redesign (incl. Password tab + Forgot password) | done | see git log |
-| 2 | Branded email templates | todo | |
+| 2 | Branded email templates | done | see git log |
 | 3 | "What I'm using" store + buttons on listings | todo | |
 | 4 | Database: `my_stack` table + sync | todo | |
 | 5 | My Hub redesign as a profile dashboard | todo | |
