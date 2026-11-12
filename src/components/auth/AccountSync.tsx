@@ -9,13 +9,17 @@ import {
   comparisonsStore,
   recentsStore,
   savedStore,
+  stackStore,
   SAVED_KINDS,
+  STACK_KINDS,
   type AlertPref,
   type RecentItem,
   type RecentKind,
   type SavedKind,
   type SavedComparison,
   type SavedItem,
+  type StackItem,
+  type StackKind,
 } from "@/lib/local-store";
 import { progressStore, type ProgressEntry } from "@/lib/progress-store";
 
@@ -108,6 +112,21 @@ const SPECS: Spec<unknown>[] = [
         : null;
     },
     conflict: "user_id,kind,query",
+  }),
+  // "What I'm using". If the founders haven't run the my_stack migration
+  // yet, the first select fails, syncSpec returns false and this store simply
+  // stays browser-only — nothing else is affected.
+  define<StackItem>({
+    table: "my_stack",
+    store: stackStore,
+    toRow: (e, user_id) => ({ user_id, kind: e.kind, item_id: e.id, since: e.since }),
+    fromRow: (r) => {
+      const kind = str(r.kind), item_id = str(r.item_id);
+      return kind && item_id && STACK_KINDS.includes(kind as StackKind)
+        ? { kind: kind as StackKind, id: item_id, since: str(r.since) ?? new Date().toISOString() }
+        : null;
+    },
+    conflict: "user_id,kind,item_id",
   }),
 ];
 

@@ -17,5 +17,14 @@ export function isSupabaseConfigured(): boolean {
 export function safeNextPath(next: string | null | undefined, fallback = "/my-hub"): string {
   if (!next) return fallback;
   if (!next.startsWith("/") || next.startsWith("//") || next.includes("\\") || /^\/auth\b/.test(next)) return fallback;
+  // Browsers silently drop tabs/newlines from addresses, so "/<tab>/evil.com"
+  // would become "//evil.com". Reject control characters outright, then make
+  // sure the address still resolves to this site.
+  if (/[\u0000-\u001F\u007F]/.test(next)) return fallback;
+  try {
+    if (new URL(next, "https://x.invalid").origin !== "https://x.invalid") return fallback;
+  } catch {
+    return fallback;
+  }
   return next;
 }

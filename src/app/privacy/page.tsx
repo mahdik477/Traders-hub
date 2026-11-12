@@ -7,10 +7,11 @@ export const metadata: Metadata = { title: "Privacy Policy" };
 
 // Draft wording — have this reviewed by a lawyer before launch, same as
 // /disclaimer. Written to match what the site actually does today:
-//   * optional accounts (Supabase Auth: Google or email link) storing only a
+//   * optional accounts (Supabase Auth: Google, email link or an optional
+//     password, hashed by Supabase) storing only a
 //     user id, an email address and an 18+ confirmation time;
-//   * saved listings, comparisons, recently viewed, learning progress and
-//     per-firm alert preferences, kept in the browser and — when signed in —
+//   * saved listings, comparisons, recently viewed, learning progress,
+//     "what I'm using" ticks and per-firm alert preferences, kept in the browser and — when signed in —
 //     on the person's own account rows;
 //   * no emails are sent yet; the alert tick is a recorded preference only.
 // Update this page the day any of that changes (an email tool, analytics…).
@@ -18,7 +19,7 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-3xl">
       <PageIntro eyebrow="Legal" title={<>Privacy Policy</>} />
-      <p className="meta mt-3">Last updated: 10 November 2026.</p>
+      <p className="meta mt-3">Last updated: 12 November 2026.</p>
       <p className="mt-3 rounded-lg border border-dashed border-danger/60 px-3 py-2 text-xs text-danger">
         Team reminder (remove before launch): have a lawyer review this page — UAE PDPL and UK/EU GDPR
         — before the site goes fully live, and replace the placeholder contact address at the bottom.
@@ -31,7 +32,7 @@ export default function PrivacyPage() {
             You can use everything on {SITE_NAME} without an account and without giving us any personal
             data. If you choose to sign in, we store the minimum needed to run your account: a user id,
             your email address, and the time you confirmed you are 18 or over — plus the things you
-            choose to save on the site. We don&apos;t ask for or use names, photos, phone numbers or
+            choose to save or tick on the site, and a password if you choose to set one. We don&apos;t ask for or use names, photos, phone numbers or
             payment details (see the note about Google below), we don&apos;t sell your data, and we
             don&apos;t send marketing email.
           </p>
@@ -44,12 +45,13 @@ export default function PrivacyPage() {
             Nothing is sent to us. The site remembers a few preferences in your own browser&apos;s local
             storage so they&apos;re there next visit: your light/dark theme, the country you picked on
             Funded Accounts, listings you&apos;ve saved, pages you&apos;ve viewed recently, Learn parts and
-            quizzes you&apos;ve marked done, and any price-alert boxes you&apos;ve ticked. That data never
+            quizzes you&apos;ve marked done, any price-alert boxes you&apos;ve ticked, and the firms, brokers,
+            courses and tools you&apos;ve marked as ones you use (&ldquo;I use this&rdquo;). That data never
             leaves your device unless you sign in; clearing your browser&apos;s site data removes it.
           </p>
           <h3 className="mt-4 font-semibold text-foreground">With an account</h3>
           <p className="mt-2">
-            If you sign in (with Google or with a link we email you), our account provider creates a
+            If you sign in (with Google, with a link we email you, or with a password you&apos;ve set), our account provider creates a
             user id for you and we store:
           </p>
           <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -57,8 +59,15 @@ export default function PrivacyPage() {
             <li>the date and time you ticked &ldquo;I&apos;m 18 or over&rdquo;;</li>
             <li>
               the same preferences listed above — saved listings, saved comparisons, recently viewed
-              pages, learning progress, and which firms you&apos;ve asked for price or promo alerts about
-              — so they follow you to other devices.
+              pages, learning progress, which firms you&apos;ve asked for price or promo alerts about,
+              and the firms, brokers, courses and tools you&apos;ve marked as ones you use — so they follow
+              you to other devices. &ldquo;I use this&rdquo; is something you tick yourself; we don&apos;t
+              check it, count it across people or show it to anyone else.
+            </li>
+            <li>
+              if you choose to set one, your password. Our account provider stores it in hashed form (it
+              can&apos;t be read back, including by us); we never see, store or log it ourselves. Setting a
+              password is optional — you can always sign in with Google or an email link instead.
             </li>
           </ul>
           <p className="mt-2">
@@ -73,7 +82,8 @@ export default function PrivacyPage() {
           </p>
           <p className="mt-2">
             We don&apos;t use analytics cookies, advertising cookies or tracking pixels. The only cookies
-            set are the ones that keep you signed in.
+            set are the ones that keep you signed in, plus one that remembers you chose &ldquo;Skip for
+            now&rdquo; on the choose-a-password screen, so we don&apos;t ask again on every sign-in.
           </p>
         </section>
 
@@ -82,7 +92,8 @@ export default function PrivacyPage() {
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>
               <strong className="font-semibold text-foreground">Running your account</strong> — the user
-              id and email are what let you sign in and keep your saved items in sync. Legal basis:
+              id, email and (if you set one) your password are what let you sign in and keep your saved
+              items, progress and &ldquo;I use this&rdquo; ticks in sync. Legal basis:
               performance of a contract with you (GDPR Article 6(1)(b)).
             </li>
             <li>
@@ -111,7 +122,8 @@ export default function PrivacyPage() {
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>
               <strong className="font-semibold text-foreground">Supabase</strong> hosts our account
-              database and handles sign-in, including sending the email sign-in link.
+              database and handles sign-in, including sending the sign-in, sign-up confirmation and password-reset
+              emails, and storing your password in hashed form if you set one.
             </li>
             <li>
               <strong className="font-semibold text-foreground">Google</strong>, if you choose
@@ -145,7 +157,8 @@ export default function PrivacyPage() {
             </Link>{" "}
             while signed in and choose &ldquo;Delete my account&rdquo;. It asks you to confirm, then
             removes your user id, email, confirmation time and every saved item, comparison, progress
-            tick and alert preference. There&apos;s no waiting period and nothing is kept in an archive.
+            tick and alert preference, the firms, brokers, courses and tools you&apos;ve marked as ones you
+            use, and your password if you set one. There&apos;s no waiting period and nothing is kept in an archive.
             Anything stored only in your browser stays until you clear that browser&apos;s site data.
           </p>
         </section>
@@ -185,8 +198,10 @@ export default function PrivacyPage() {
           <p className="mt-2">
             Your data sits in a database where every table is protected by row-level security: a
             signed-in person can read and change only their own rows, and nobody can read anyone
-            else&apos;s — including through the public key the website itself uses. There are no passwords
-            on {SITE_NAME} to leak; sign-in is via Google or a one-time link.
+            else&apos;s — including through the public key the website itself uses. Passwords are optional. If
+            you set one, our account provider (Supabase) stores it only in hashed form: it can&apos;t be read
+            back, including by us, and we never see or log it. You can always sign in with Google or a
+            one-time email link instead.
           </p>
         </section>
 

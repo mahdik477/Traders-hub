@@ -6,6 +6,7 @@ import PropFirmNotes from "@/components/PropFirmNotes";
 import PropFirmReviewAlert from "@/components/PropFirmReviewAlert";
 import PropFirmReviews from "@/components/PropFirmReviews";
 import SaveButton from "@/components/SaveButton";
+import UsingButton from "@/components/UsingButton";
 import TrackView from "@/components/TrackView";
 import AlertOptIn from "@/components/AlertOptIn";
 import Link from "next/link";
@@ -56,7 +57,10 @@ export default async function FirmPage({ params }: PageProps<"/funded-accounts/[
             <p className="eyebrow">Prop firm · {firm.markets.map((m) => (m.market === "forex" ? "Forex" : "Futures")).join(" & ")}</p>
             <h1 className="page-title mt-1">{firm.name}</h1>
           </div>
-          <SaveButton kind="firm" id={firm.id} name={firm.name} variant="label" />
+          <div className="flex w-full flex-wrap gap-2 sm:w-auto">
+            <SaveButton kind="firm" id={firm.id} name={firm.name} variant="label" />
+            <UsingButton kind="firm" id={firm.id} name={firm.name} />
+          </div>
         </div>
         {firm.nameNote && <p className="meta mt-3 max-w-3xl">{firm.nameNote}</p>}
         <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-4">

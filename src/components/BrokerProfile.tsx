@@ -5,6 +5,7 @@ import BrokerLogo from "@/components/BrokerLogo";
 import BrokerShowMore from "@/components/BrokerShowMore";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
 import SaveButton from "@/components/SaveButton";
+import UsingButton from "@/components/UsingButton";
 import ScrollReveal from "@/components/ScrollReveal";
 import TrackView from "@/components/TrackView";
 import StickyVisitBar from "@/components/StickyVisitBar";
@@ -53,6 +54,7 @@ export default function BrokerProfile({ broker }: { broker: BrokerView }) {
           </div>
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
             <SaveButton kind="broker" id={broker.id} name={broker.name} variant="label" className="w-full sm:w-auto" />
+            <UsingButton kind="broker" id={broker.id} name={broker.name} className="w-full sm:w-auto" />
             {visitHref && (
               <VisitSiteLink href={visitHref} firmName={broker.name} label="Visit broker" className="w-full sm:w-auto" />
             )}

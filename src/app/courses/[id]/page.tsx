@@ -10,6 +10,7 @@ import TrustpilotStars from "@/components/TrustpilotStars";
 import PartnerFirmPill from "@/components/PartnerFirmPill";
 import OurChoiceBadge from "@/components/OurChoiceBadge";
 import SaveButton from "@/components/SaveButton";
+import UsingButton from "@/components/UsingButton";
 import TrackView from "@/components/TrackView";
 import { ChevronLeftIcon, LinkIcon } from "@/components/icons";
 
@@ -114,7 +115,10 @@ export default async function CourseOrProviderPage({ params }: PageProps<"/cours
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <h1 className="page-title">{provider.name}</h1>
               {provider.affiliateLink && <OurChoiceBadge />}
-              <SaveButton kind="course" id={provider.id} name={provider.name} variant="label" className="ml-auto" />
+              <span className="ml-auto flex flex-wrap gap-2">
+                <SaveButton kind="course" id={provider.id} name={provider.name} variant="label" />
+                <UsingButton kind="course" id={provider.id} name={provider.name} />
+              </span>
             </div>
             {provider.affiliateLink && (
               <p className="meta mt-2">Featured listing on Tradox. It is not a score of trading results.</p>

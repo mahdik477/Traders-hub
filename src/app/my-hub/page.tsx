@@ -7,7 +7,7 @@ import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "My Hub",
-  description: `Your saved listings, comparisons, recently viewed pages and learning progress on ${SITE_NAME}.`,
+  description: `Your learning progress, what you use, saved listings and comparisons on ${SITE_NAME}.`,
   robots: { index: false },
 };
 
@@ -20,8 +20,12 @@ export default function MyHubPage() {
   const firmNames = Object.fromEntries(propFirms.map((f) => [f.id, f.name]));
   return (
     <>
-      <PageIntro eyebrow="Your things" title={<>My Hub</>} lede={<>Everything you&apos;ve saved, compared, ticked off or looked at recently — in one place. It works
-        without an account; sign in to keep it across devices.</>} />
+      <PageIntro
+        eyebrow="Your account"
+        title={<>My Hub</>}
+        lede={<>Your progress, what you&apos;re using and everything you&apos;ve saved — in one place. It works without an
+        account; sign in to keep it on any device.</>}
+      />
       <MyHub quizCount={strategies.length} firmNames={firmNames} />
     </>
   );

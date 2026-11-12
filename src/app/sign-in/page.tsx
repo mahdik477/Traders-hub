@@ -5,15 +5,18 @@ import PageIntro from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Sign in",
-  description: `Sign in to ${SITE_NAME} with Google or an email link to keep your saved listings, comparisons and learning progress across devices.`,
+  description: `Sign in to ${SITE_NAME} with Google, an email link or a password to keep your saved listings, comparisons and learning progress across devices.`,
   robots: { index: false },
 };
 
 export default function SignInPage() {
   return (
-    <div className="mx-auto max-w-2xl">
-      <PageIntro eyebrow="Account" title={<>Sign in</>} lede={<>Keep your saved firms, courses and comparisons, your learning progress and your alert preferences in one
-        place — on any device. Free, and everything on the site still works without it.</>} />
+    <div className="mx-auto max-w-5xl">
+      <PageIntro
+        eyebrow="Account"
+        title={<>Sign in to {SITE_NAME}</>}
+        lede={<>Your saved listings, your learning progress and what you&apos;re using — in one place, on any device.</>}
+      />
       <SignInPanel />
     </div>
   );
