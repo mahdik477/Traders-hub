@@ -26,6 +26,8 @@ export type PickerOption = {
   badge?: { logo: string | null; logoBg?: "white" | "dark" };
   /** A flag or other emoji shown in place of a logo. */
   emoji?: string;
+  /** A small icon (e.g. a lucide icon) shown in the list row, in gold. */
+  icon?: (p: { className?: string }) => ReactNode;
   /** Small pills after the name, e.g. ["Forex", "Futures"]. */
   tags?: string[];
   /** Right-aligned figure, e.g. "from $39.50". */
@@ -116,7 +118,8 @@ export default function Picker({
         className={`picker-trigger ${variant === "search" ? "picker-trigger-search" : ""} ${open ? "is-open" : ""}`}
       >
         {variant === "search" && <Search className="size-4 shrink-0 text-accent" aria-hidden="true" />}
-        {selected?.emoji && (
+        {/* Icons show in the list only; the closed button stays text-only. */}
+        {!selected?.icon && selected?.emoji && (
           <span aria-hidden="true" className="shrink-0 text-base leading-none">
             {selected.emoji}
           </span>
@@ -383,10 +386,16 @@ function PickerPanel({
                 className={`picker-row ${isActive ? "is-active" : ""} ${o.disabledNote ? "is-disabled" : ""}`}
               >
                 {o.badge && <FirmBadge name={o.label} logo={o.badge.logo} logoBg={o.badge.logoBg} size="sm" />}
-                {o.emoji && (
-                  <span aria-hidden="true" className="w-6 shrink-0 text-center text-lg leading-none">
-                    {o.emoji}
+                {o.icon ? (
+                  <span aria-hidden="true" className="flex w-6 shrink-0 justify-center text-accent">
+                    <o.icon className="size-4" />
                   </span>
+                ) : (
+                  o.emoji && (
+                    <span aria-hidden="true" className="w-6 shrink-0 text-center text-lg leading-none">
+                      {o.emoji}
+                    </span>
+                  )
                 )}
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
