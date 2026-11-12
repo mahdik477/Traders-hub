@@ -15,7 +15,16 @@ import AccountSync from "@/components/auth/AccountSync";
 // Google's display name and photo are available in the auth response but
 // are never copied into our tables or shown anywhere.
 
-export type AuthUser = { id: string; email: string | null };
+export type AuthUser = {
+  id: string;
+  email: string | null;
+  /** When the account was created (ISO), for "Member since". */
+  createdAt: string | null;
+  /** How they first signed up: "google" or "email" (link or password). */
+  provider: "google" | "email";
+  /** True once they've chosen a password (set by /welcome/password or My Hub). */
+  hasPassword: boolean;
+};
 
 export type AuthStatus = "disabled" | "loading" | "signed-out" | "signed-in";
 
@@ -39,7 +48,15 @@ export function useAuth() {
 }
 
 function toAuthUser(u: User | null | undefined): AuthUser | null {
-  return u ? { id: u.id, email: u.email ?? null } : null;
+  if (!u) return null;
+  const provider = u.app_metadata?.provider === "google" ? "google" : "email";
+  return {
+    id: u.id,
+    email: u.email ?? null,
+    createdAt: u.created_at ?? null,
+    provider,
+    hasPassword: u.user_metadata?.has_password === true,
+  };
 }
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
@@ -74,7 +91,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         // Token refreshes fire this too; keep the same object unless the
         // person actually changed, so dependents (AccountSync) don't restart.
         const next = toAuthUser(session?.user);
-        setUser((prev) => (prev && next && prev.id === next.id && prev.email === next.email ? prev : next));
+        setUser((prev) =>
+          prev && next && prev.id === next.id && prev.email === next.email && prev.hasPassword === next.hasPassword ? prev : next,
+        );
         setStatus(session ? "signed-in" : "signed-out");
         if (!session) setNeedsAge(null);
       }).data.subscription;
