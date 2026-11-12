@@ -46,8 +46,9 @@ Pages built around that data (not sections, so they are not in `sections.ts`):
 | Cost calculator | `/funded-accounts/cost-calculator` | Adds up fees only; activation/reset fees are typed in (they are only free text in `_notes`) |
 | Drawdown explained | `/funded-accounts/drawdown-explained` | Static vs EOD vs intraday trailing on one synthetic chart, labelled an illustration |
 | Start here | `/start-here` | Guided path Learn → free strategies → funded accounts, with progress ticks |
-| My Hub | `/my-hub` | Saved listings, saved comparisons, recently viewed, learning progress, alert preferences, account controls |
-| Sign in | `/sign-in` | Google or email link via Supabase Auth; hidden when the env variables are missing |
+| My Hub | `/my-hub` | Profile dashboard: account card, 9-part Learn tracker, strategies being learned, "What I'm using" (self-ticked firms/brokers/courses/tools), saved listings and comparisons, alerts, recently viewed, password + account controls |
+| Sign in | `/sign-in` | Google, email link or (optional) password via Supabase Auth; hidden when the env variables are missing |
+| Choose a password | `/welcome/password` | Shown straight after the first email-link sign-in (optional, "Skip for now" sets the `tradox_pw_skip` cookie) and after a reset link |
 
 The prop-firm loader also exposes raw numbers (`tier.rules`, `account.promoPrice`,
 `firm.countries`, `firm.lastVerified`) for these pages — see `src/lib/propfirm-types.ts`.
@@ -115,10 +116,15 @@ in `src/lib/` → a directory page with filters → a detail page per listing.
   the team: `SETUP-ACCOUNTS.md`. Env template: `env.example` (copy to
   `.env.local`, never commit keys). Our own tables store only user id, email
   and an 18+ confirmation time (Supabase Auth's own tables also keep e.g. the
-  Google profile record — say so in the privacy policy); "I'm under 18"
-  deletes the account via the `delete_my_account` function; saved items/progress/alert preferences live in the browser
-  first (`src/lib/local-store.ts`) and sync to the person's own rows
-  (`src/components/auth/AccountSync.tsx`).
+  Google profile record and, if set, the hashed password — say so in the
+  privacy policy); "I'm under 18" deletes the account via the
+  `delete_my_account` function; saved items/progress/alert preferences and
+  "What I'm using" ticks (`my_stack`) live in the browser first
+  (`src/lib/local-store.ts`) and sync to the person's own rows
+  (`src/components/auth/AccountSync.tsx`). Schema changes go in
+  `supabase/migrations/` as files a founder runs — never applied by Claude.
+  Branded auth emails: `supabase/templates/` (pasted into the Supabase
+  dashboard by a founder).
 - Not set up yet (don't add without asking): Stripe (payments, only for the
   strategies paywall later), analytics, email tool. The per-firm alert opt-in
   only records a preference — nothing sends email.

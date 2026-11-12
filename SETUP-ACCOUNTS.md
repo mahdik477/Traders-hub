@@ -168,6 +168,29 @@ Do this in Google Cloud, then paste the result into Supabase.
    (Supabase's **Authentication → Users** screen also holds the sign-in record,
    including the Google profile details, which go when the account is deleted).
 
+## Part 9 — Passwords, "What I'm using" and branded emails (10 min)
+
+Added 12 November 2026. Do these once, in this order:
+
+1. **Add the new table.** Supabase → **SQL Editor** → **New query** → paste the
+   whole of `supabase/migrations/2026-11-12-my-stack.sql` → **Run**. It only
+   adds one table (`my_stack`) with the same "own rows only" lock as the
+   others. Until you run it, the "I use this" ticks still work but stay in
+   the browser.
+2. **Turn on password sign-in.** **Authentication → Providers → Email** →
+   make sure email/password sign-in is enabled, set **minimum password
+   length to 10**, and turn on **leaked-password protection** if your plan
+   offers it. Keep "Confirm email" on.
+3. **Paste the branded emails.** Follow `supabase/templates/README.md`
+   (Authentication → Emails → Magic Link / Confirm signup / Reset Password).
+4. **Check the redirect list.** Authentication → **URL Configuration** →
+   **Redirect URLs** must include `/auth/callback` for localhost, your live
+   domain and the Vercel previews.
+5. **Test:** sign in with an email link in a private window → you should land
+   on "Choose a password" → set one → sign out → sign in with the Password
+   tab → try "Forgot password?" → the reset email arrives and the link lets
+   you choose a new one.
+
 ## If something doesn't work
 
 - **Sign in button never appears** → the two `NEXT_PUBLIC_…` variables are
