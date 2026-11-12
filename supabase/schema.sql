@@ -3,7 +3,9 @@
 --
 -- Principles:
 --   * We store the minimum: a user id, an email address, and the things a
---     person saves on the site. No names, no photos, no payment details.
+--     person saves or ticks on the site. No names, no photos, no payment
+--     details. Passwords (optional) are held hashed by Supabase Auth itself,
+--     never in these tables.
 --   * Every table has row-level security switched on, with one policy:
 --     a signed-in person can read and write ONLY rows where user_id is
 --     their own id. Nobody can read anyone else's rows, including through
@@ -84,6 +86,20 @@ create table if not exists public.alert_preferences (
 );
 
 -- ---------------------------------------------------------------------------
+-- my_stack: "What I'm using" — firms, brokers, courses and tools a person
+--   ticks themselves on a listing page. Self-reported, shown only to them
+--   in My Hub. kind is one of: firm, broker, course, tool. No free text.
+--   (Added 2026-11-12; supabase/migrations/2026-11-12-my-stack.sql.)
+-- ---------------------------------------------------------------------------
+create table if not exists public.my_stack (
+  user_id  uuid not null references auth.users (id) on delete cascade,
+  kind     text not null check (kind in ('firm','broker','course','tool')),
+  item_id  text not null check (char_length(item_id) between 1 and 120),
+  since    timestamptz not null default now(),
+  primary key (user_id, kind, item_id)
+);
+
+-- ---------------------------------------------------------------------------
 -- Row-level security: own rows only, on every table
 -- ---------------------------------------------------------------------------
 alter table public.profiles          enable row level security;
@@ -92,6 +108,7 @@ alter table public.saved_comparisons enable row level security;
 alter table public.recently_viewed   enable row level security;
 alter table public.learning_progress enable row level security;
 alter table public.alert_preferences enable row level security;
+alter table public.my_stack          enable row level security;
 
 drop policy if exists "own rows" on public.profiles;
 create policy "own rows" on public.profiles
@@ -120,6 +137,11 @@ create policy "own rows" on public.learning_progress
 
 drop policy if exists "own rows" on public.alert_preferences;
 create policy "own rows" on public.alert_preferences
+  for all to authenticated
+  using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+drop policy if exists "own rows" on public.my_stack;
+create policy "own rows" on public.my_stack
   for all to authenticated
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
 

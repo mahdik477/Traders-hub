@@ -208,3 +208,34 @@ export function toggleComparison(kind: ComparisonKind, query: string, title: str
   comparisonsStore.upsert({ kind, query, title, createdAt: new Date().toISOString() });
   return true;
 }
+
+// ---- What I'm using -----------------------------------------------------------
+// Firms, brokers, courses and tools a person says they use ("I have an
+// account here", "I'm taking this course"). Self-reported; shown only to
+// them, in My Hub. No free text, no counts across people.
+
+export type StackKind = "firm" | "broker" | "course" | "tool";
+export type StackItem = { kind: StackKind; id: string; since: string };
+
+export const STACK_KINDS: StackKind[] = ["firm", "broker", "course", "tool"];
+
+export const stackStore = createListStore<StackItem>("tradox:stack", (e) => `${e.kind}:${e.id}`, {
+  isValid: (e): e is StackItem =>
+    isRecord(e) && STACK_KINDS.includes(e.kind as StackKind) && typeof e.id === "string" && e.id.length > 0,
+});
+
+export function useIsInStack(kind: StackKind, id: string): boolean {
+  const all = stackStore.use();
+  return all.some((e) => e.kind === kind && e.id === id);
+}
+
+/** Adds or removes; returns true when it's now in the list. */
+export function toggleStack(kind: StackKind, id: string): boolean {
+  const key = `${kind}:${id}`;
+  if (stackStore.find(key)) {
+    stackStore.remove(key);
+    return false;
+  }
+  stackStore.upsert({ kind, id, since: new Date().toISOString() });
+  return true;
+}

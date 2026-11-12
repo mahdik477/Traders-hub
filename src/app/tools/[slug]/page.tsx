@@ -6,6 +6,7 @@ import StickyVisitBar from "@/components/StickyVisitBar";
 import ToolBackLink from "@/components/ToolBackLink";
 import ToolLogo from "@/components/ToolLogo";
 import SaveButton from "@/components/SaveButton";
+import UsingButton from "@/components/UsingButton";
 import TrackView from "@/components/TrackView";
 import VisitSiteLink from "@/components/VisitSiteLink";
 import { InfoIcon, LayersIcon, MonitorIcon, TagIcon } from "@/components/icons";
@@ -78,6 +79,7 @@ export default async function ToolPage({ params }: PageProps<"/tools/[slug]">) {
           <div className="flex shrink-0 flex-col gap-2 sm:self-start">
             {visitHref && <VisitSiteLink href={visitHref} firmName={tool.name} label="Visit tool" />}
             <SaveButton kind="tool" id={tool.slug} name={tool.name} variant="label" />
+            <UsingButton kind="tool" id={tool.slug} name={tool.name} />
           </div>
         </div>
 
