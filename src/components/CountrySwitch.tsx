@@ -96,7 +96,7 @@ export default function CountrySwitch({
         onChange={onChange}
         searchPlaceholder="Search countries"
         options={[
-          { value: "", label: "Any country — show every firm", emoji: "🌍" },
+          { value: "", label: "Any country — show every firm", icon: MapPin },
           ...options.map((o) => ({ value: o.code, label: o.name, emoji: flagEmoji(o.code), keywords: o.code })),
         ]}
       />
