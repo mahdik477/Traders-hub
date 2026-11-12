@@ -2571,3 +2571,22 @@ input.signal-filter-search {
   white-space: normal;
   line-height: 1.25;
 }
+
+/* Account avatar: the first letter of the email in a gold circle
+   (sign-in, My Hub, profile menu). Never a photo. */
+.avatar-gold {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--color-gold-bright), var(--color-gold-deep));
+  color: var(--color-gold-ink);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold-fill) 22%, transparent);
+}
+
+:root[data-theme="light"] .avatar-gold {
+  color: #ffffff;
+}

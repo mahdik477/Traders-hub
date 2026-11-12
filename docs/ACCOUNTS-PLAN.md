@@ -68,10 +68,15 @@ the recommended option was taken for each:
 
 ## Status board
 
+> The overnight cloud routine (11–12 Nov) did not save anything: early runs
+> hit the usage limit, later runs stalled on permission prompts (nobody to
+> approve `python3` or `git push`). It is switched off. Work continues in a
+> live session instead.
+
 | # | Step | Status | Commit |
 |---|---|---|---|
 | 0 | This plan file | done | (this commit) |
-| 1 | Sign-in page redesign | todo | |
+| 1 | Sign-in page redesign (incl. Password tab + Forgot password) | done | see git log |
 | 2 | Branded email templates | todo | |
 | 3 | "What I'm using" store + buttons on listings | todo | |
 | 4 | Database: `my_stack` table + sync | todo | |
