@@ -92,7 +92,8 @@ export default function PrivacyPage() {
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>
               <strong className="font-semibold text-foreground">Running your account</strong> — the user
-              id and email are what let you sign in and keep your saved items in sync. Legal basis:
+              id, email and (if you set one) your password are what let you sign in and keep your saved
+              items, progress and &ldquo;I use this&rdquo; ticks in sync. Legal basis:
               performance of a contract with you (GDPR Article 6(1)(b)).
             </li>
             <li>
@@ -121,7 +122,8 @@ export default function PrivacyPage() {
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>
               <strong className="font-semibold text-foreground">Supabase</strong> hosts our account
-              database and handles sign-in, including sending the email sign-in link.
+              database and handles sign-in, including sending the sign-in, sign-up confirmation and password-reset
+              emails, and storing your password in hashed form if you set one.
             </li>
             <li>
               <strong className="font-semibold text-foreground">Google</strong>, if you choose
@@ -155,7 +157,8 @@ export default function PrivacyPage() {
             </Link>{" "}
             while signed in and choose &ldquo;Delete my account&rdquo;. It asks you to confirm, then
             removes your user id, email, confirmation time and every saved item, comparison, progress
-            tick and alert preference. There&apos;s no waiting period and nothing is kept in an archive.
+            tick and alert preference, the firms, brokers, courses and tools you&apos;ve marked as ones you
+            use, and your password if you set one. There&apos;s no waiting period and nothing is kept in an archive.
             Anything stored only in your browser stays until you clear that browser&apos;s site data.
           </p>
         </section>
@@ -195,8 +198,10 @@ export default function PrivacyPage() {
           <p className="mt-2">
             Your data sits in a database where every table is protected by row-level security: a
             signed-in person can read and change only their own rows, and nobody can read anyone
-            else&apos;s — including through the public key the website itself uses. There are no passwords
-            on {SITE_NAME} to leak; sign-in is via Google or a one-time link.
+            else&apos;s — including through the public key the website itself uses. Passwords are optional. If
+            you set one, our account provider (Supabase) stores it only in hashed form: it can&apos;t be read
+            back, including by us, and we never see or log it. You can always sign in with Google or a
+            one-time email link instead.
           </p>
         </section>
 

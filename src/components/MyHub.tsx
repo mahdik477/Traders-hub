@@ -34,10 +34,10 @@ import { CheckIcon, ChevronRightIcon } from "@/components/icons";
 // catalogue so the page itself carries no listing data.
 
 const STACK_GROUPS: { kind: StackKind; title: string; empty: string; browse: string }[] = [
-  { kind: "firm", title: "Funded accounts", empty: "No prop firms yet", browse: "/funded-accounts" },
-  { kind: "broker", title: "Brokers", empty: "No brokers yet", browse: "/brokers" },
-  { kind: "course", title: "Courses", empty: "No courses yet", browse: "/courses" },
-  { kind: "tool", title: "Tools", empty: "No tools yet", browse: "/tools" },
+  { kind: "firm", title: "Funded accounts", empty: "Nothing ticked here", browse: "/funded-accounts" },
+  { kind: "broker", title: "Brokers", empty: "Nothing ticked here", browse: "/brokers" },
+  { kind: "course", title: "Courses", empty: "Nothing ticked here", browse: "/courses" },
+  { kind: "tool", title: "Tools", empty: "Nothing ticked here", browse: "/tools" },
 ];
 
 export default function MyHub({ quizCount, firmNames }: { quizCount: number; firmNames: Record<string, string> }) {

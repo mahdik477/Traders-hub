@@ -82,7 +82,7 @@ the recommended option was taken for each:
 | 4 | Database: `my_stack` table + sync (SQL file only, not applied) | done | see git log |
 | 5 | My Hub redesign as a profile dashboard | done | see git log |
 | 6 | Password screen after the link + sign in with password + forgot | done | see git log |
-| 7 | Privacy policy + schema/README notes | todo | |
+| 7 | Privacy policy + schema/README notes | done | see git log |
 | 8 | Checks, reviews, draft PR | todo | |
 
 ## Step details

@@ -180,7 +180,9 @@ Added 12 November 2026. Do these once, in this order:
 2. **Turn on password sign-in.** **Authentication → Providers → Email** →
    make sure email/password sign-in is enabled, set **minimum password
    length to 10**, and turn on **leaked-password protection** if your plan
-   offers it. Keep "Confirm email" on.
+   offers it. Keep "Confirm email" on. Check **Email OTP Expiration** is
+   3600 seconds (1 hour) — our emails and sign-in page say "expires in 1
+   hour".
 3. **Paste the branded emails.** Follow `supabase/templates/README.md`
    (Authentication → Emails → Magic Link / Confirm signup / Reset Password).
 4. **Check the redirect list.** Authentication → **URL Configuration** →

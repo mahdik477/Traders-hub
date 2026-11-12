@@ -423,8 +423,9 @@ function Benefits() {
         ))}
       </ul>
       <p className="meta mt-6 border-t border-border pt-4">
-        Free, and everything on the site still works without an account. An account stores only your user id and
-        email address, plus what you save on {SITE_NAME}. We don&apos;t use or show your Google name or photo.
+        Free, and everything on the site still works without an account. An account stores only your user id, email
+        address and the time you confirmed you&apos;re 18+, plus what you save or tick on {SITE_NAME} and a password if
+        you choose to set one (stored hashed — we never see it). We don&apos;t use or show your Google name or photo.
         You&apos;ll be asked to confirm you&apos;re 18 or over the first time. See the{" "}
         <Link href="/privacy" className="text-accent underline">
           privacy policy
