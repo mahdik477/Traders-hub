@@ -60,7 +60,7 @@ function Inner() {
           <p className="meta mt-2">
             {isReset ? "Reset links work once and expire after an hour. Ask for a new one from the sign-in page." : "Sign in first, then you can choose a password."}
           </p>
-          <Link href="/sign-in" className="btn btn-primary mt-5">
+          <Link href={isReset ? "/sign-in" : "/sign-in?next=/my-hub"} className="btn btn-primary mt-5">
             Go to sign in
           </Link>
         </div>

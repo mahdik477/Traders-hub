@@ -403,7 +403,10 @@ export default function MyHub({ quizCount, firmNames }: { quizCount: number; fir
                       ? "Choose a new password."
                       : "Optional. Add one to sign in without waiting for an email."}
                   </p>
-                  <PasswordForm submitLabel={user.hasPassword ? "Save new password" : "Add password"} />
+                  <PasswordForm
+                    submitLabel={user.hasPassword ? "Save new password" : "Add password"}
+                    onDone={changingPassword ? () => setChangingPassword(false) : undefined}
+                  />
                   {changingPassword && (
                     <button type="button" onClick={() => setChangingPassword(false)} className="mt-2 inline-flex min-h-11 items-center text-xs text-muted underline">
                       Cancel

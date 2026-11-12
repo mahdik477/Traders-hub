@@ -83,7 +83,7 @@ the recommended option was taken for each:
 | 5 | My Hub redesign as a profile dashboard | done | see git log |
 | 6 | Password screen after the link + sign in with password + forgot | done | see git log |
 | 7 | Privacy policy + schema/README notes | done | see git log |
-| 8 | Checks, reviews, draft PR | todo | |
+| 8 | Checks, reviews, draft PR | done | see git log |
 
 ## Step details
 

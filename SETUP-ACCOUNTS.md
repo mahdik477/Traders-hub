@@ -186,8 +186,14 @@ Added 12 November 2026. Do these once, in this order:
 3. **Paste the branded emails.** Follow `supabase/templates/README.md`
    (Authentication → Emails → Magic Link / Confirm signup / Reset Password).
 4. **Check the redirect list.** Authentication → **URL Configuration** →
-   **Redirect URLs** must include `/auth/callback` for localhost, your live
-   domain and the Vercel previews.
+   **Redirect URLs**: add each with `**` on the end so the `?next=` part is
+   allowed — `http://localhost:3000/auth/callback**`,
+   `https://<your-domain>/auth/callback**` and your Vercel preview pattern
+   (e.g. `https://*-mahdik477.vercel.app/auth/callback**`).
+   Note: Supabase's built-in email sender allows only a few emails an hour,
+   and some plans only let you edit templates once a custom sender (SMTP) is
+   connected. If the template editor is locked or "Too many requests" shows
+   up while testing, that's why — setting up a sender is a founder decision.
 5. **Test:** sign in with an email link in a private window → you should land
    on "Choose a password" → set one → sign out → sign in with the Password
    tab → try "Forgot password?" → the reset email arrives and the link lets

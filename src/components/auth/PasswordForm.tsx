@@ -50,7 +50,8 @@ export default function PasswordForm({
       setError("The two passwords don't match.");
       return;
     }
-    if (user.email && pw.toLowerCase().includes(user.email.split("@")[0].toLowerCase())) {
+    const emailName = (user.email ?? "").split("@")[0].toLowerCase();
+    if (emailName.length >= 4 && pw.toLowerCase().includes(emailName)) {
       setError("Don't use your email name in your password.");
       return;
     }

@@ -232,8 +232,8 @@ function SignInCard({ next, errorKey, loading }: { next: string; errorKey: strin
               {sent === "link" ? "We sent a sign-in link to" : "If there's an account for"}{" "}
               <span className="break-all font-semibold text-foreground">{address}</span>
               {sent === "link"
-                ? ". Open it on this device — it works once and expires in an hour."
-                : ", we've sent a link to choose a new password. It works once and expires in an hour."}
+                ? ". Open it on this device, in this browser — it works once and expires in an hour."
+                : ", we've sent a link to choose a new password. Open it on this device, in this browser — it works once and expires in an hour."}
             </p>
             <button
               type="button"
@@ -244,7 +244,7 @@ function SignInCard({ next, errorKey, loading }: { next: string; errorKey: strin
               {busy ? "Sending…" : wait > 0 ? `Resend in ${wait}s` : "Resend the email"}
             </button>
             <p className="meta mt-4">
-              Can&apos;t find it? Check spam or promotions.{" "}
+              Can&apos;t find it? Check spam or promotions. Asked more than once? Use the newest email.{" "}
               <button
                 type="button"
                 onClick={() => {
@@ -312,9 +312,11 @@ function SignInCard({ next, errorKey, loading }: { next: string; errorKey: strin
               </label>
 
               {mode === "password" && (
-                <label className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1">
                   <span className="flex items-center justify-between">
-                    <span className="eyebrow">Password</span>
+                    <label htmlFor="signin-password" className="eyebrow">
+                      Password
+                    </label>
                     <button
                       type="button"
                       onClick={sendReset}
@@ -325,13 +327,14 @@ function SignInCard({ next, errorKey, loading }: { next: string; errorKey: strin
                     </button>
                   </span>
                   <PasswordInput
+                    id="signin-password"
                     value={password}
                     onChange={setPassword}
                     show={showPassword}
                     onToggle={() => setShowPassword((s) => !s)}
                     autoComplete="current-password"
                   />
-                </label>
+                </div>
               )}
 
               <button type="submit" disabled={disabled} style={{ minHeight: "3.25rem" }} className="btn btn-primary w-full text-base disabled:opacity-60">
