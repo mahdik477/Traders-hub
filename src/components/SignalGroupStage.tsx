@@ -2,10 +2,9 @@
 
 import { Suspense, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode, type RefObject } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, Users, X } from "lucide-react";
 import { WordReveal } from "@/components/hero/AuroraHero";
 import SaveButton from "@/components/SaveButton";
-import SignalGroupLogo from "@/components/SignalGroupLogo";
 import { signalGroupSummary } from "@/lib/signal-group-summary";
 import { signalFiltersFromSearch, signalGroupMatchesFilters } from "@/lib/signal-group-filters";
 import { savedStore } from "@/lib/local-store";
@@ -37,6 +36,17 @@ const SHORT: Record<SignalMarket, string> = {
   crypto: "Crypto",
   oil: "Oil",
   "stocks-options": "Stocks & options",
+};
+
+/** Decorative identity only. Not a score, and not used on buttons. */
+const INK: Record<SignalMarket, string> = {
+  gold: "#e0b44a",
+  "forex-majors": "#7eb6ff",
+  "forex-minors": "#c4a1ff",
+  indices: "#7dcea0",
+  crypto: "#f0a35e",
+  oil: "#6ec6e6",
+  "stocks-options": "#e07a7a",
 };
 
 type SortKey = "listed" | "name" | "members";
@@ -178,6 +188,9 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
 
   return (
     <div className="sg-stage">
+      <ScrollGlow />
+      <CursorGlow />
+      <div key={landing ? "land" : "room"} className="sg-swap">
       {landing ? (
         <Landing
           lede={lede}
@@ -230,16 +243,22 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
                   key={id}
                   type="button"
                   className={`sg-tile sg-in ${index === 0 ? "sg-tile-lead" : ""} ${index === 1 ? "sg-tile-wide" : ""}`}
-                  style={{ animationDelay: `${index * 70}ms` }}
+                  style={{ ["--sg-ink-raw" as string]: INK[id], animationDelay: `${index * 70}ms` }}
                   onClick={() => commit({ ...room, market: id, page: 1, panel: null }, true)}
                 >
+                  <MarketMotif id={id} />
                   <span className="sg-tile-line" aria-hidden="true" />
-                  <span className="font-mono text-[11px] tracking-[0.16em] text-subtle">
-                    {String(index + 1).padStart(2, "0")}
+                  <span className="sg-display relative mt-3 text-2xl sm:text-3xl">{SHORT[id]}</span>
+                  <span className="sg-pulse relative" aria-hidden="true">
+                    {Array.from({ length: 7 }, (_, dot) => (
+                      <span key={dot} style={{ animationDelay: `${dot * 0.12}s` }} />
+                    ))}
                   </span>
-                  <span className="sg-display mt-3 text-2xl sm:text-3xl">{SHORT[id]}</span>
-                  <span className="mt-auto pt-6 font-mono text-sm text-muted">
-                    <span className="text-foreground">{counts.get(id) ?? 0}</span> groups
+                  <span className="relative mt-auto pt-4 font-mono text-sm text-muted">
+                    <span className="text-foreground">
+                      <CountUp to={counts.get(id) ?? 0} />
+                    </span>{" "}
+                    groups
                   </span>
                 </button>
               ))}
@@ -293,7 +312,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
               {room.savedOnly ? "Nothing is saved in this browser yet." : "No groups match."}
             </p>
           ) : (
-            <ul key={`${room.market}-${page}-${room.query}-${room.sort}`} className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul key={`${room.market}-${page}-${room.query}-${room.sort}`} className="sg-page mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {slice.map((group, index) => (
                 <li key={group.slug} className="sg-in" style={{ animationDelay: `${index * 45}ms` }}>
                   <MiniCard group={group} onOpen={() => openPanel(group.slug)} />
@@ -316,6 +335,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
         </section>
       )}
 
+      </div>
       {open && <GroupDrawer group={open} onClose={closePanel} />}
     </div>
   );
@@ -357,18 +377,21 @@ function Landing({
         <span className="aurora-blob aurora-blob-b" />
         <span className="aurora-blob aurora-blob-c" />
         <span className="hero-grid absolute inset-0" />
+        <MeshField />
         <span className="hero-fade absolute inset-x-0 bottom-0 h-32" />
       </div>
-      <div className="relative max-w-3xl">
+      <div className="relative max-w-3xl pb-4 pt-6 sm:pt-10">
         <p className="eyebrow">Telegram directory</p>
-        <h1 id="signal-hero-heading" className="sg-display mt-4 text-[clamp(3rem,8vw,5.5rem)] leading-[0.95]">
+        <h1 id="signal-hero-heading" className="sg-display mt-4 text-[clamp(3.2rem,8vw,6rem)] leading-[0.92]">
           <WordReveal text="Signal Groups" />
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-8 text-muted">{lede}</p>
-        <p className="mt-4 font-mono text-sm text-subtle">{total} groups · shown nine at a time</p>
-        <label className="mt-8 block max-w-xl">
+        <p className="mt-5 font-mono text-sm text-subtle">
+          <CountUp to={total} /> groups · shown nine at a time
+        </p>
+        <label className="sg-search mt-8 block max-w-xl">
           <span className="sr-only">Search signal groups</span>
-          <span className="flex items-center gap-3 border-b border-border-strong py-3">
+          <span className="flex items-center gap-3 px-4 py-3">
             <Search className="size-4 text-subtle" aria-hidden="true" />
             <input
               ref={searchRef}
@@ -409,7 +432,7 @@ function RoomBar({
       </button>
       <label className="block max-w-xl">
         <span className="sr-only">Search signal groups</span>
-        <span className="flex items-center gap-3 border-b border-border py-2">
+          <span className="sg-search flex items-center gap-3 px-4 py-2.5">
           <Search className="size-4 text-subtle" aria-hidden="true" />
           <input
             ref={searchRef}
@@ -496,33 +519,15 @@ function Filters({
           Saved
         </button>
       </div>
-      <div className="flex flex-wrap gap-2">
-        {SIGNAL_PRICE_ORDER.map((price) => {
-          const on = room.prices.includes(price);
-          return (
-            <button
-              key={price}
-              type="button"
-              aria-pressed={on}
-              onClick={() =>
-                onChange({
-                  prices: on ? room.prices.filter((item) => item !== price) : [...room.prices, price],
-                })
-              }
-              className={`inline-flex min-h-10 items-center rounded-full border px-3 text-sm ${
-                on ? "border-foreground bg-foreground text-background" : "border-border text-muted"
-              }`}
-            >
-              {SIGNAL_PRICE_LABELS[price]}
-            </button>
-          );
-        })}
-      </div>
-      <details className="group">
+      <PriceRail
+        prices={room.prices}
+        onChange={(prices) => onChange({ prices })}
+      />
+      <details className="sg-sheet group">
         <summary className="inline-flex min-h-11 cursor-pointer list-none items-center text-sm text-muted hover:text-foreground [&::-webkit-details-marker]:hidden">
           Style, language and extras
         </summary>
-        <div className="mt-3 flex flex-col gap-3">
+        <div className="sg-sheet-body mt-3 flex flex-col gap-3">
           <div className="flex flex-wrap gap-2">
             {SIGNAL_STYLE_ORDER.map((style) => {
               const on = room.styles.includes(style);
@@ -595,13 +600,37 @@ function Spotlight({
   groups: SignalGroupView[];
   onOpen: (slug: string) => void;
 }) {
-  const scroller = useRef<HTMLUListElement>(null);
+  const scroller = useRef<HTMLDivElement>(null);
+  const pause = useRef(false);
 
-  function nudge(direction: number) {
+  function stepBy(direction: number) {
     const el = scroller.current;
     if (!el) return;
-    el.scrollBy({ left: direction * Math.min(el.clientWidth * 0.8, 320), behavior: "smooth" });
+    const card = el.querySelector("li");
+    const step = (card?.getBoundingClientRect().width ?? 280) + 16;
+    const max = el.scrollWidth - el.clientWidth;
+    if (max <= 8) return;
+    const next = el.scrollLeft + direction * step;
+    const left = next > max + 4 ? 0 : next < -4 ? max : next;
+    el.scrollTo({ left, behavior: "smooth" });
   }
+
+  useEffect(() => {
+    const el = scroller.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => {
+      if (pause.current) return;
+      if (window.matchMedia("(max-width: 639px)").matches) return;
+      const card = el.querySelector("li");
+      const step = (card?.getBoundingClientRect().width ?? 280) + 16;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max <= 8) return;
+      const next = el.scrollLeft + step;
+      el.scrollTo({ left: next > max - 4 ? 0 : next, behavior: "smooth" });
+    }, 2800);
+    return () => window.clearInterval(id);
+  }, [groups]);
 
   return (
     <section aria-labelledby="sg-look-heading" className="mt-16 sm:mt-24">
@@ -612,46 +641,72 @@ function Spotlight({
             Six from the list
           </h2>
           <p className="mt-3 text-sm leading-6 text-muted">
-            These are the first six in listed order. That order is not a score of results.
+            These are the first six in listed order. That order is not a score of results. The member number on each
+            card is a snapshot, not a ranking.
           </p>
         </div>
         <div className="hidden gap-2 sm:flex">
-          <IconButton label="Previous groups" onClick={() => nudge(-1)}>
+          <IconButton label="Previous groups" onClick={() => stepBy(-1)}>
             <ChevronLeft className="size-4" />
           </IconButton>
-          <IconButton label="Next groups" onClick={() => nudge(1)}>
+          <IconButton label="Next groups" onClick={() => stepBy(1)}>
             <ChevronRight className="size-4" />
           </IconButton>
         </div>
       </div>
-      <ul
+      <div
         ref={scroller}
-        className="sg-rail nav-scroll mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2"
+        className="sg-look mt-6"
+        onMouseEnter={() => {
+          pause.current = true;
+        }}
+        onMouseLeave={() => {
+          pause.current = false;
+        }}
+        onFocus={() => {
+          pause.current = true;
+        }}
+        onBlur={() => {
+          pause.current = false;
+        }}
       >
-        {groups.map((group) => (
-          <li key={group.slug} className="w-[min(100%,18rem)] shrink-0 snap-start">
-            <MiniCard group={group} onOpen={() => onOpen(group.slug)} />
-          </li>
-        ))}
-      </ul>
+        <ul className="sg-look-row">
+          {groups.map((group) => (
+            <li key={group.slug} className="w-[min(78vw,18rem)] shrink-0 snap-start">
+              <MiniCard group={group} onOpen={() => onOpen(group.slug)} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
 
 function MiniCard({ group, onOpen }: { group: SignalGroupView; onOpen: () => void }) {
   const market = SIGNAL_MARKET_ORDER.find((id) => group.markets.includes(id));
+  const ink = market ? INK[market] : "var(--color-gold)";
   return (
-    <article className="sg-card relative flex h-full min-h-40 flex-col rounded-2xl border border-border bg-surface p-5">
-      <p className="text-[11px] font-medium tracking-[0.14em] text-subtle uppercase">
-        {market ? SHORT[market] : "Telegram"}
-      </p>
-      <h3 className="mt-3 text-lg font-semibold leading-snug tracking-tight">
+    <article
+      className="sg-card relative flex h-full min-h-44 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-5"
+      style={{ ["--sg-ink-raw" as string]: ink }}
+    >
+      <span className="sg-card-stripe" aria-hidden="true" />
+      <div className="flex items-start justify-between gap-3">
+        <Monogram name={group.name} ink={ink} />
+        <p className="text-[11px] font-medium tracking-[0.14em] text-subtle uppercase">
+          {market ? SHORT[market] : "Telegram"}
+        </p>
+      </div>
+      <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight">
         <button type="button" onClick={onOpen} className="card-stretch rounded-2xl text-left">
           <span className="line-clamp-2">{group.name}</span>
           <span className="sr-only">. Open details</span>
         </button>
       </h3>
-      <p className="mt-3 font-mono text-sm text-muted">{group.memberCount ?? "Members not listed"}</p>
+      <p className="mt-3 flex items-center gap-1.5 font-mono text-sm text-muted">
+        <Users className="size-3.5" aria-hidden="true" />
+        {group.memberCount ?? "Members not listed"}
+      </p>
       <div className="relative z-10 mt-auto pt-5">
         <JoinLink group={group} />
       </div>
@@ -765,18 +820,16 @@ function GroupDrawer({ group, onClose }: { group: SignalGroupView; onClose: () =
             <span className="sr-only">Close</span>
           </button>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-8">
-          <div className="flex items-start gap-3">
-            <SignalGroupLogo name={group.name} logo={group.logo} size="lg" />
-            <div className="min-w-0">
-              <h2 id={titleId} className="sg-display break-words text-3xl leading-tight">
-                {group.name}
-              </h2>
-              <p className="mt-2 text-sm text-muted">This is the group&apos;s own name. It is not a result we checked.</p>
-            </div>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-2">
-            <JoinLink group={group} />
+        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6 pb-36 sm:px-8">
+          <Monogram name={group.name} ink={markets[0] ? INK[markets[0]] : "var(--color-gold)"} large />
+          <h2 id={titleId} className="sg-display mt-5 break-words text-3xl leading-tight sm:text-4xl">
+            {group.name}
+          </h2>
+          <p className="mt-2 text-sm text-muted">
+            This is the group&apos;s own name. It is not a result we checked. The letters are a placeholder, not the
+            group&apos;s logo.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
             <SaveButton kind="signal" id={group.slug} name={group.name} variant="label" />
             <button
               type="button"
@@ -792,26 +845,22 @@ function GroupDrawer({ group, onClose }: { group: SignalGroupView; onClose: () =
               No description was recorded. This summary uses only the fields on the listing.
             </p>
           )}
-          <dl className="mt-8 divide-y divide-border border-y border-border">
-            <Row label="Category">
-              {markets.length ? markets.map((id) => SIGNAL_MARKET_LABELS[id]).join(", ") : "Not stated"}
-            </Row>
-            <Row label="Platform">Telegram</Row>
-            <Row label="Members">
-              {group.memberCount
-                ? `${group.memberCount}${membersAsOf ? ` · as of ${membersAsOf}` : ""}. Not a ranking.`
-                : "Not stated"}
-            </Row>
-            <Row label="Price">{group.priceLabel || "Not stated"}</Row>
-            <Row label="Style">
-              {group.styles.length ? group.styles.map((id) => SIGNAL_STYLE_LABELS[id]).join(", ") : "Not stated"}
-            </Row>
-            <Row label="Language">{group.language || "Not stated"}</Row>
-            <Row label="Posting">{group.signalsPerDay || "Not stated"}</Row>
-            <Row label="Also listed">
-              {group.extras.length ? group.extras.map((id) => SIGNAL_EXTRA_LABELS[id]).join(", ") : "Not stated"}
-            </Row>
+          <dl className="mt-8 grid grid-cols-2 gap-2">
+            <Stat label="Members" value={group.memberCount ?? "Not stated"} note={membersAsOf ? `As of ${membersAsOf}. Not a ranking.` : "Not a ranking."} />
+            <Stat label="Price" value={group.priceLabel || "Not stated"} />
+            <Stat label="Language" value={group.language || "Not stated"} />
+            <Stat label="Style" value={group.styles.length ? group.styles.map((id) => SIGNAL_STYLE_LABELS[id]).join(", ") : "Not stated"} />
+            <Stat label="Platform" value="Telegram" />
+            <Stat label="Posting" value={group.signalsPerDay || "Not stated"} />
           </dl>
+          <p className="mt-4 text-sm leading-6 text-muted">
+            <span className="font-medium text-foreground">Category. </span>
+            {markets.length ? markets.map((id) => SIGNAL_MARKET_LABELS[id]).join(", ") : "Not stated"}
+          </p>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            <span className="font-medium text-foreground">Also listed. </span>
+            {group.extras.length ? group.extras.map((id) => SIGNAL_EXTRA_LABELS[id]).join(", ") : "Not stated"}
+          </p>
           {checked && group.checkedOn && (
             <p className="mt-4 text-sm text-subtle">
               Listing checked <time dateTime={group.checkedOn}>{checked}</time>.
@@ -824,18 +873,144 @@ function GroupDrawer({ group, onClose }: { group: SignalGroupView; onClose: () =
             Open the full page
           </a>
         </div>
+        <div className="sg-joinbar absolute inset-x-0 bottom-0 border-t border-border bg-background/90 px-5 py-3 backdrop-blur-md sm:px-8">
+          <p className="mb-2 text-center text-[11px] leading-4 text-subtle">
+            Opens their Telegram. Some Join links pay us a commission.
+          </p>
+          <JoinLink group={group} />
+        </div>
       </div>
     </div>
   );
 }
 
-function Row({ label, children }: { label: string; children: ReactNode }) {
+function Stat({ label, value, note }: { label: string; value: string; note?: string }) {
   return (
-    <div className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr] sm:gap-4">
+    <div className="rounded-xl border border-border bg-surface px-3 py-3">
       <dt className="text-[11px] font-medium tracking-[0.12em] text-subtle uppercase">{label}</dt>
-      <dd className="text-sm leading-6 text-foreground">{children}</dd>
+      <dd className="mt-1 text-sm font-medium leading-5 text-foreground">{value}</dd>
+      {note && <p className="mt-1 text-[11px] leading-4 text-subtle">{note}</p>}
     </div>
   );
+}
+
+function Monogram({ name, ink, large = false }: { name: string; ink: string; large?: boolean }) {
+  const words = name.replace(/[^A-Za-z0-9 ]/g, " ").trim().split(/\s+/).filter(Boolean);
+  const letters = (words.length >= 2 ? words[0][0] + words[1][0] : (words[0] ?? "SG").slice(0, 2)).toUpperCase();
+  return (
+    <span
+      className={`sg-monogram ${large ? "sg-monogram-lg" : ""}`}
+      style={{ ["--sg-ink-raw" as string]: ink }}
+      aria-hidden="true"
+    >
+      {letters}
+    </span>
+  );
+}
+
+function CountUp({ to }: { to: number }) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const frame = requestAnimationFrame(() => setValue(to));
+      return () => cancelAnimationFrame(frame);
+    }
+    const start = performance.now();
+    let frame = 0;
+    const tick = (now: number) => {
+      const progress = Math.min(1, (now - start) / 900);
+      const eased = 1 - (1 - progress) ** 3;
+      setValue(Math.round(to * eased));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [to]);
+  return <span className="tabular-nums">{value.toLocaleString("en-US")}</span>;
+}
+
+function MeshField() {
+  return (
+    <div className="sg-mesh" aria-hidden="true">
+      <span className="sg-mesh-orb sg-mesh-orb-a" />
+      <span className="sg-mesh-orb sg-mesh-orb-b" />
+      <span className="sg-mesh-orb sg-mesh-orb-c" />
+      <span className="sg-mesh-shimmer" />
+    </div>
+  );
+}
+
+function MarketMotif({ id }: { id: SignalMarket }) {
+  return (
+    <svg className="sg-motif" viewBox="0 0 120 120" aria-hidden="true">
+      {id === "gold" && <rect x="28" y="36" width="64" height="18" rx="3" />}
+      {id === "gold" && <rect x="34" y="58" width="52" height="16" rx="3" />}
+      {id === "forex-majors" && <text x="14" y="78" fontSize="42" fontFamily="ui-monospace, monospace">€$</text>}
+      {id === "forex-minors" && <text x="18" y="78" fontSize="42" fontFamily="ui-monospace, monospace">£¥</text>}
+      {id === "indices" && <rect x="22" y="46" width="16" height="48" rx="3" />}
+      {id === "indices" && <rect x="52" y="46" width="16" height="48" rx="3" />}
+      {id === "indices" && <rect x="82" y="46" width="16" height="48" rx="3" />}
+      {id === "crypto" && <text x="22" y="82" fontSize="64" fontFamily="ui-sans-serif, system-ui">₿</text>}
+      {id === "oil" && <path d="M60 16c18 24 28 36 28 52a28 28 0 1 1-56 0c0-16 10-28 28-52z" />}
+      {id === "stocks-options" && <circle cx="48" cy="62" r="26" fill="none" stroke="currentColor" strokeWidth="6" />}
+      {id === "stocks-options" && <circle cx="74" cy="62" r="26" fill="none" stroke="currentColor" strokeWidth="6" />}
+    </svg>
+  );
+}
+
+function PriceRail({ prices, onChange }: { prices: SignalPrice[]; onChange: (prices: SignalPrice[]) => void }) {
+  const options: Array<SignalPrice | "all"> = ["all", ...SIGNAL_PRICE_ORDER];
+  return (
+    <div className="sg-pills" role="group" aria-label="Price">
+      {options.map((option) => {
+        const on = option === "all" ? prices.length === 0 : prices.includes(option);
+        return (
+          <button
+            key={option}
+            type="button"
+            aria-pressed={on}
+            onClick={() => onChange(option === "all" ? [] : [option])}
+            className={on ? "is-on" : ""}
+          >
+            {option === "all" ? "Any price" : SIGNAL_PRICE_LABELS[option]}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function ScrollGlow() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const bar = ref.current;
+    if (!bar) return;
+    const onScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = height > 0 ? window.scrollY / height : 0;
+      bar.style.transform = `scaleX(${progress})`;
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return <div ref={ref} className="sg-progress" aria-hidden="true" />;
+}
+
+function CursorGlow() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(hover: hover)").matches) return;
+    const move = (event: PointerEvent) => {
+      el.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+    };
+    window.addEventListener("pointermove", move);
+    return () => window.removeEventListener("pointermove", move);
+  }, []);
+  return <div ref={ref} className="sg-cursor" aria-hidden="true" />;
 }
 
 function JoinLink({ group }: { group: SignalGroupView }) {
