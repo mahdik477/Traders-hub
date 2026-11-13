@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { ChevronDown } from "lucide-react";
-import SignalGroupDirectory from "@/components/SignalGroupDirectory";
 import SignalGroupRiskDisclaimer from "@/components/SignalGroupRiskDisclaimer";
-import SignalGroupsIntro from "@/components/SignalGroupsIntro";
-import { signalGroups, signalGroupsLastVerified } from "@/lib/signal-groups";
+import SignalGroupStage from "@/components/SignalGroupStage";
+import { signalGroups } from "@/lib/signal-groups";
 import { getSection } from "@/lib/sections";
-import { SIGNAL_MARKET_ORDER } from "@/lib/signal-group-types";
 
 const section = getSection("signal-groups");
 
@@ -17,7 +15,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Do you rank signal groups by results?",
-    a: "No. This is a directory. We do not score accuracy, returns or how often a group's calls make money. Listed order is a manual rank, then the name. You can also sort by name, member count or category.",
+    a: "No. This is a directory. We do not score accuracy, returns or how often a group's calls make money. Listed order is a manual rank, then the name. Inside a market you can sort by name or member count. A member count is not a ranking.",
   },
   {
     q: "What does Join open?",
@@ -40,15 +38,7 @@ const faqs = [
 export default function SignalGroupsPage() {
   return (
     <>
-      <SignalGroupsIntro
-        count={signalGroups.length}
-        marketCount={SIGNAL_MARKET_ORDER.length}
-        updated={signalGroupsLastVerified}
-      />
-
-      <div className="mt-8">
-        <SignalGroupDirectory groups={signalGroups} />
-      </div>
+      <SignalGroupStage groups={signalGroups} lede={section.summary} />
 
       <section aria-labelledby="signal-faq-heading" className="mt-16 grid grid-cols-1 gap-6 border-t border-border pt-10 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">

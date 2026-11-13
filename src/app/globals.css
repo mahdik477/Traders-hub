@@ -2646,3 +2646,138 @@ input.signal-filter-search {
   border-color: var(--color-gold-fill);
   color: var(--color-accent);
 }
+
+/* Signal Groups stage — a market gallery, not a long list. */
+.sg-display {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.sg-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (width >= 40rem) {
+  .sg-gallery {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 9.5rem;
+  }
+  .sg-tile-lead {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .sg-tile-wide {
+    grid-column: span 2;
+  }
+}
+
+.sg-tile {
+  position: relative;
+  display: flex;
+  min-height: 9.5rem;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  padding: 1.25rem;
+  text-align: left;
+  color: var(--color-foreground);
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.sg-tile-line {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.15rem;
+  left: 1.25rem;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.sg-card {
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.sg-rail {
+  scroll-padding-inline: 0.25rem;
+}
+.sg-rail > li {
+  scroll-snap-align: start;
+}
+
+.sg-backdrop {
+  background: rgb(7 7 8 / 0.62);
+  backdrop-filter: blur(6px);
+}
+
+.sg-panel {
+  width: min(36rem, 100%);
+}
+
+@media (width >= 40rem) {
+  .sg-panel {
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sg-in {
+    animation: sg-rise 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .sg-tile:hover,
+  .sg-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-gold) 55%, var(--color-border));
+  }
+  .sg-tile:hover .sg-tile-line,
+  .sg-tile:focus-visible .sg-tile-line {
+    transform: scaleX(1);
+    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sg-panel {
+    transform: translate3d(0, 18%, 0);
+  }
+  .sg-panel.is-in {
+    transform: none;
+    transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (width >= 40rem) {
+    .sg-panel {
+      height: 100%;
+      transform: translate3d(110%, 0, 0);
+    }
+    .sg-panel.is-in {
+      transform: none;
+    }
+  }
+}
+
+@keyframes sg-rise {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sg-tile-line {
+    transform: none;
+  }
+  .sg-panel {
+    transform: none;
+  }
+}
