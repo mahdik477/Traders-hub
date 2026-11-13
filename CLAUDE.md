@@ -26,8 +26,8 @@ Section list lives in `src/lib/sections.ts` (header, homepage cards and
 
 | Section | Route | Status |
 |---|---|---|
-| Funded accounts (prop firms) | `/funded-accounts` | **live** — 29 firms. Forex: Audacity Capital, BrightFunded, City Traders Imperium, FTMO, Funded Trading Plus, FunderPro, FundingPips, FXIFY, Goat Funded Trader, The5ers. Futures: Apex Trader Funding, Bulenox, Earn2Trade, Elite Trader Funding, Funded Futures Network, LeeLoo Trading, Lucid Trading, MyFundedFutures, Phidias, Take Profit Trader, Top One Futures, Topstep, TradeDay, Tradeify, UProfit. Both: Alpha Funded, Blue Guardian, E8 Markets, FundedNext. Firms whose recent reviews show many payout complaints carry a dated `review_alert` (warning box + card badge) instead of being left out |
-| Courses | `/courses` | **live** — 29 courses: 247 Research, Ace of Trades, Bear Bull Traders, Bulls on Wall Street, Chroma Trading, Crystal Academy, EliteClouds Trading Education, Humbled Trader, Inner Circle Trader (ICT), Investors Underground, Kaizen, Miles High Club, No Nonsense Forex, Option Alpha, Owls Options Traders, PJ Trades Premium, RakeTrades, Six Figure Capital, Skylit, SMB Training, Stocks with Josh, tastylive, Team Bull Trading, The Peachy Investor, Trade Momentum, Trading Profit Path, Urban Forex, Warrior Trading, Wealth Group |
+| Funded accounts (prop firms) | `/funded-accounts` | **live** — forex, futures and "both" firms (one `propfirms-data-<NAME>.json` each). Firms whose recent reviews show many payout complaints carry a dated `review_alert` (warning box + card badge) instead of being left out |
+| Courses | `/courses` | **live** — one `courses-data-<name>.json` per course |
 | Signal groups | `/signal-groups` | **live** — Telegram signal groups (one `signal-groups-data-<slug>.json` per group) with a detail page each |
 | Brokers | `/brokers` | **live** — CFD brokers (VT Markets, PU Prime); stock brokers and crypto exchanges are empty tabs |
 | Tools | `/tools` | **live** — 15 tools (charting, indicators, backtesting, journals, automation, VPS, scanners, copiers) |
@@ -58,25 +58,12 @@ should reuse the existing pattern: JSON data files in the repo root → a loader
 in `src/lib/` → a directory page with filters → a detail page per listing.
 
 ## How listing data works (listings are files; the database holds only account data)
-- Every listing is one JSON file in the **repo root**, read at build time:
-  - prop firms: `propfirms-data-<NAME>.json` → loaded by `src/lib/propfirms.ts`
-  - courses: `courses-data-<name>.json` → loaded by `src/lib/courses.ts`
-  - Adding a listing = adding a file. No code changes needed.
-- Prop firm shape: firm → market (`forex` | `futures`) → program (`1-step`,
-  `2-step`, `instant`, `evaluation`) → tier → accounts. Copy an existing file
-  as the template.
-  - Forex rules are **percentages** of account size (`"unit": "percent"`).
-  - Futures rules are **fixed USD amounts** per account size (`"unit": "usd"`).
-  - Prices are plain numbers: `standard` = full price, `promo` = discounted price
-    (null if no promo). Each firm stays in its own currency — no conversion.
-  - `null` means "not shown on the provider's page" (rendered as a dash).
-    Never guess a value; leave it null.
-  - Always set `_notes.last_verified` (YYYY-MM-DD) to the day the data was
-    checked against the provider's live pricing page.
-- `affiliate_link` empty → the "Visit site" button is hidden. That's intended.
-- Logos go in `public/<section>/` and are referenced as `/<section>/file.webp`.
-- **Always run `npm run check:data` after touching a data file.** (A hook also
-  runs it automatically after every edit to a data file.)
+- Every listing is one JSON file in the **repo root**, read at build time.
+  Adding a listing = adding a file. No code changes needed.
+- `null` means "not shown on the provider's page". **Never guess a value; leave it null.**
+- **Always set `_notes.last_verified` (YYYY-MM-DD) and run `npm run check:data` after touching a data file.**
+- Full data-file rules (shapes, units, prices, `last_verified`, logos):
+  `.claude/rules/listing-data.md` — loads automatically when a data file or the data-loading code is opened.
 
 ## Non-negotiable constraints (legal + trust)
 - Never display or imply a performance, accuracy or win-rate score for any
