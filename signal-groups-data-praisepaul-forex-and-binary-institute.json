@@ -2,12 +2,11 @@
   "group": {
     "slug": "praisepaul-forex-and-binary-institute",
     "name": "PRAISEPAUL FOREX AND BINARY INSTITUTE",
-    "description": "A Telegram channel for forex majors, forex minors & exotics, crypto, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for forex majors, forex minors & exotics, and crypto. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
       "forex-majors",
       "forex-minors",
-      "crypto",
-      "oil"
+      "crypto"
     ],
     "styles": [],
     "price": "free",

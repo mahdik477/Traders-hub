@@ -2,10 +2,9 @@
   "group": {
     "slug": "usoil-gold-signals",
     "name": "USOIL⛽️ & Gold🏆 Signals",
-    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, crypto, and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for gold, forex minors & exotics, crypto, and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
       "gold",
-      "forex-majors",
       "forex-minors",
       "crypto",
       "oil"

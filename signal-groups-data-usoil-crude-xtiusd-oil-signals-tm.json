@@ -2,11 +2,11 @@
   "group": {
     "slug": "usoil-crude-xtiusd-oil-signals-tm",
     "name": "𝙐𝙎𝙊𝙄𝙇 𝘾𝙍𝙐𝘿𝙀 _XTIUSD_𝙊𝙄𝙇 𝙎𝙄𝙂𝙉𝘼𝙇𝙎 ™️",
-    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, crypto, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for gold, forex majors, indices, crypto, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
       "gold",
       "forex-majors",
-      "forex-minors",
+      "indices",
       "crypto",
       "oil"
     ],

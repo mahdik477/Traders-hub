@@ -2,9 +2,11 @@
   "group": {
     "slug": "freemium-trade-ideas-en",
     "name": "Freemium Trade Ideas (EN)",
-    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel.",
+    "description": "A Telegram channel for forex majors, forex minors & exotics, and indices. It was listed as a free channel.",
     "markets": [
-      "forex-minors"
+      "forex-majors",
+      "forex-minors",
+      "indices"
     ],
     "styles": [],
     "price": "free",

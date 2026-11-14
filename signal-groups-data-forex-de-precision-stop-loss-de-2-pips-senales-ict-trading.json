@@ -2,11 +2,9 @@
   "group": {
     "slug": "forex-de-precision-stop-loss-de-2-pips-senales-ict-trading",
     "name": "Forex de precisión - Stop loss de 2 pips señales ICT- trading",
-    "description": "A Telegram channel for forex majors, forex minors & exotics, and indices. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing gives the trading style as scalping. The listing language is Spanish.",
+    "description": "A Telegram channel for forex majors. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing gives the trading style as scalping. The listing language is Spanish.",
     "markets": [
-      "forex-majors",
-      "forex-minors",
-      "indices"
+      "forex-majors"
     ],
     "styles": [
       "scalping"

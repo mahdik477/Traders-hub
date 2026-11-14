@@ -2,9 +2,11 @@
   "group": {
     "slug": "sas-community",
     "name": "SAS Community 📊",
-    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for forex majors, forex minors & exotics, and indices. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
-      "forex-minors"
+      "forex-majors",
+      "forex-minors",
+      "indices"
     ],
     "styles": [],
     "price": "free",

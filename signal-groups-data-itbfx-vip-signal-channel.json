@@ -2,8 +2,9 @@
   "group": {
     "slug": "itbfx-vip-signal-channel",
     "name": "ITBFX VIP Signal Channel",
-    "description": "A Telegram channel for oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing language is Persian.",
+    "description": "A Telegram channel for gold and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing language is Persian.",
     "markets": [
+      "gold",
       "oil"
     ],
     "styles": [],

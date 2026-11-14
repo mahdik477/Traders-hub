@@ -2,10 +2,9 @@
   "group": {
     "slug": "ikyy-fx-trade",
     "name": "IKYY FX TRADE🇮🇩",
-    "description": "A Telegram channel for gold and forex majors. It was listed as a free channel, and a paid tier was not stated. The listing language is Indonesian.",
+    "description": "A Telegram channel for gold. It was listed as a free channel, and a paid tier was not stated. The listing language is Indonesian.",
     "markets": [
-      "gold",
-      "forex-majors"
+      "gold"
     ],
     "styles": [],
     "price": "free",

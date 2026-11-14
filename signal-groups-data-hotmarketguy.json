@@ -2,12 +2,10 @@
   "group": {
     "slug": "hotmarketguy",
     "name": "HotMarketGuy",
-    "description": "A Telegram channel for forex majors, forex minors & exotics, indices, and stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing language is Spanish.",
+    "description": "A Telegram channel for forex majors and forex minors & exotics. It was listed as a free channel, and a paid tier was not stated. The listing language is Spanish.",
     "markets": [
       "forex-majors",
-      "forex-minors",
-      "indices",
-      "stocks-options"
+      "forex-minors"
     ],
     "styles": [],
     "price": "free",

@@ -2,10 +2,11 @@
   "group": {
     "slug": "eaconomy-signals-free-signals",
     "name": "Eaconomy Signals Free signals ®📈📈📉📉",
-    "description": "A Telegram channel for gold and forex minors & exotics. It was listed as a free channel.",
+    "description": "A Telegram channel for gold, forex minors & exotics, and crypto. It was listed as a free channel.",
     "markets": [
       "gold",
-      "forex-minors"
+      "forex-minors",
+      "crypto"
     ],
     "styles": [],
     "price": "free",

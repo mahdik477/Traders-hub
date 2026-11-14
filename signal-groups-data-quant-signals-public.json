@@ -2,8 +2,9 @@
   "group": {
     "slug": "quant-signals-public",
     "name": "Quant Signals Public",
-    "description": "A Telegram channel for oil and other commodities. It was listed as a free channel.",
+    "description": "A Telegram channel for forex majors and oil and other commodities. It was listed as a free channel.",
     "markets": [
+      "forex-majors",
       "oil"
     ],
     "styles": [],

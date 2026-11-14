@@ -2,9 +2,8 @@
   "group": {
     "slug": "amarkets-asia",
     "name": "AMarkets Asia",
-    "description": "A Telegram channel for forex majors, forex minors & exotics, and crypto. It was listed as a free channel, and a paid tier was not stated. The listing language is Malay.",
+    "description": "A Telegram channel for forex minors & exotics and crypto. It was listed as a free channel, and a paid tier was not stated. The listing language is Malay.",
     "markets": [
-      "forex-majors",
       "forex-minors",
       "crypto"
     ],

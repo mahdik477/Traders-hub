@@ -2,9 +2,10 @@
   "group": {
     "slug": "us-oil-crude-oil-trading-signals",
     "name": "US OIL CRUDE OIL TRADING SIGNALS",
-    "description": "A Telegram channel for forex minors & exotics and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for gold, indices, and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
-      "forex-minors",
+      "gold",
+      "indices",
       "oil"
     ],
     "styles": [],

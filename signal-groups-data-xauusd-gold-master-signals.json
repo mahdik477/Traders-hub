@@ -2,9 +2,10 @@
   "group": {
     "slug": "xauusd-gold-master-signals",
     "name": "XAUUSD GOLD MASTER SIGNALS",
-    "description": "A Telegram channel for gold. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for gold and crypto. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
-      "gold"
+      "gold",
+      "crypto"
     ],
     "styles": [],
     "price": "free",

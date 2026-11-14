@@ -2,10 +2,10 @@
   "group": {
     "slug": "xauusd-gold-free-singnal",
     "name": "XAUUSD/GOLD FREE SINGNAL",
-    "description": "A Telegram channel for gold, forex majors, and crypto. It was listed as a free channel.",
+    "description": "A Telegram channel for gold, forex minors & exotics, and crypto. It was listed as a free channel.",
     "markets": [
       "gold",
-      "forex-majors",
+      "forex-minors",
       "crypto"
     ],
     "styles": [],

@@ -2,9 +2,10 @@
   "group": {
     "slug": "xagusd-xauusd-forex-signals",
     "name": "XAGUSD XAUUSD Forex Signals",
-    "description": "Gold and silver signals, so it sits under gold and commodities. Paid tiers were not stated.",
+    "description": "Gold, silver and forex signals, so it sits under gold, forex majors and commodities. Paid tiers were not stated.",
     "markets": [
       "gold",
+      "forex-majors",
       "oil"
     ],
     "styles": [],

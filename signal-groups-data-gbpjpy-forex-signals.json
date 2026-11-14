@@ -2,12 +2,11 @@
   "group": {
     "slug": "gbpjpy-forex-signals",
     "name": "📊GBPJPY & FOREX SIGNALS",
-    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, indices, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading styles as scalping and day trading. This listing is @gbp_jpy_forexsignals.",
+    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading styles as scalping and day trading. This listing is @gbp_jpy_forexsignals.",
     "markets": [
       "gold",
       "forex-majors",
       "forex-minors",
-      "indices",
       "oil"
     ],
     "styles": [

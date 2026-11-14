@@ -2,11 +2,10 @@
   "group": {
     "slug": "blue-world-fx-signal",
     "name": "Blue World Fx Signal",
-    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, and indices. It was listed as a free channel. The listing gives the trading style as swing. Education is included on the listing.",
+    "description": "A Telegram channel for gold, forex majors, and indices. It was listed as a free channel. The listing gives the trading style as swing. Education is included on the listing.",
     "markets": [
       "gold",
       "forex-majors",
-      "forex-minors",
       "indices"
     ],
     "styles": [

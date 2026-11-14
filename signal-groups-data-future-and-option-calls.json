@@ -2,8 +2,9 @@
   "group": {
     "slug": "future-and-option-calls",
     "name": "FUTURE AND OPTION CALLS",
-    "description": "A Telegram channel for stocks & options. A free feed and a paid premium are both listed. The premium price was not stated. Education is included on the listing.",
+    "description": "A Telegram channel for indices and stocks & options. A free feed and a paid premium are both listed. The premium price was not stated. Education is included on the listing.",
     "markets": [
+      "indices",
       "stocks-options"
     ],
     "styles": [],

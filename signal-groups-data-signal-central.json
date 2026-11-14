@@ -2,10 +2,9 @@
   "group": {
     "slug": "signal-central",
     "name": "Signal Central",
-    "description": "A Telegram channel for gold, forex majors, and indices. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for gold and indices. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
       "gold",
-      "forex-majors",
       "indices"
     ],
     "styles": [],

@@ -2,8 +2,9 @@
   "group": {
     "slug": "prosignalsfx-gold-and-forex",
     "name": "ProSignalsFx(Gold And Forex)",
-    "description": "A Telegram channel for forex minors & exotics and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated. This listing is @prosignalsfxx.",
+    "description": "A Telegram channel for forex majors, forex minors & exotics, and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated. This listing is @prosignalsfxx.",
     "markets": [
+      "forex-majors",
       "forex-minors",
       "oil"
     ],

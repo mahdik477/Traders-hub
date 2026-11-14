@@ -2,9 +2,8 @@
   "group": {
     "slug": "us30-pro-signal",
     "name": "US30 PRO SIGNAL",
-    "description": "A Telegram channel for forex majors and indices. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for indices. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
-      "forex-majors",
       "indices"
     ],
     "styles": [],

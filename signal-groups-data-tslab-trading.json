@@ -2,11 +2,9 @@
   "group": {
     "slug": "tslab-trading",
     "name": "TSLab 💎 Trading",
-    "description": "A Telegram channel for indices, oil and other commodities, and stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing language is Russian.",
+    "description": "A Telegram channel for oil and other commodities. It was listed as a free channel, and a paid tier was not stated. The listing language is Russian.",
     "markets": [
-      "indices",
-      "oil",
-      "stocks-options"
+      "oil"
     ],
     "styles": [],
     "price": "free",

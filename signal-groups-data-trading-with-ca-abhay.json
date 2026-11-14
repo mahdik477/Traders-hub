@@ -4,6 +4,7 @@
     "name": "Trading with CA Abhay",
     "description": "An India-focused channel. The description says the equity, Nifty, Sensex and Bank Nifty option trades are free, and states SEBI registration INH300008465; we did not confirm that number on the SEBI portal.",
     "markets": [
+      "indices",
       "stocks-options"
     ],
     "styles": [],

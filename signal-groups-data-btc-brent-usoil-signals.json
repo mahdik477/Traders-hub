@@ -2,8 +2,9 @@
   "group": {
     "slug": "btc-brent-usoil-signals",
     "name": "BTC Brent USOil Signals",
-    "description": "A Telegram channel for crypto and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for gold, crypto, and oil and other commodities. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
+      "gold",
       "crypto",
       "oil"
     ],

@@ -2,10 +2,9 @@
   "group": {
     "slug": "gold-btc-trading-signals-free-daily",
     "name": "Gold & BTC Trading Signals Free Daily",
-    "description": "A Telegram channel for gold, forex majors, and crypto. It was listed as a free channel. Education is included on the listing.",
+    "description": "A Telegram channel for gold and crypto. It was listed as a free channel. Education is included on the listing.",
     "markets": [
       "gold",
-      "forex-majors",
       "crypto"
     ],
     "styles": [],

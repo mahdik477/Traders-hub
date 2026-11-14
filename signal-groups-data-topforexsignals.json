@@ -2,8 +2,9 @@
   "group": {
     "slug": "topforexsignals",
     "name": "TopTradingSignals(Best Forex & Gold Signals)",
-    "description": "A Telegram channel for forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated. This listing is @topforexsignals.",
+    "description": "A Telegram channel for forex majors and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated. This listing is @topforexsignals.",
     "markets": [
+      "forex-majors",
       "forex-minors"
     ],
     "styles": [],

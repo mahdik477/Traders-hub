@@ -2,11 +2,9 @@
   "group": {
     "slug": "senales-de-forex-canal-gratuito-de-operativa-fortradingex",
     "name": "Señales de Forex | Canal Gratuito de Operativa Fortradingex",
-    "description": "A Telegram channel for gold, forex majors, and forex minors & exotics. It was listed as a free channel, and a paid tier was not stated. The listing language is Spanish.",
+    "description": "A Telegram channel for gold. It was listed as a free channel, and a paid tier was not stated. The listing language is Spanish.",
     "markets": [
-      "gold",
-      "forex-majors",
-      "forex-minors"
+      "gold"
     ],
     "styles": [],
     "price": "free",

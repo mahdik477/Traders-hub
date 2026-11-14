@@ -2,9 +2,10 @@
   "group": {
     "slug": "forexsignalsfree77",
     "name": "Сигналы по валютным парам | Сигналы по индексам",
-    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel. The listing language is Russian.",
+    "description": "A Telegram channel for forex minors & exotics and indices. It was listed as a free channel. The listing language is Russian.",
     "markets": [
-      "forex-minors"
+      "forex-minors",
+      "indices"
     ],
     "styles": [],
     "price": "free",

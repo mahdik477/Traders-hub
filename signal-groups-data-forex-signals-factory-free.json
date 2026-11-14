@@ -2,8 +2,9 @@
   "group": {
     "slug": "forex-signals-factory-free",
     "name": "☀️Forex Signals Factory (FREE)️️🌐",
-    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel.",
+    "description": "A Telegram channel for forex majors and forex minors & exotics. It was listed as a free channel.",
     "markets": [
+      "forex-majors",
       "forex-minors"
     ],
     "styles": [],

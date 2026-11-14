@@ -2,10 +2,9 @@
   "group": {
     "slug": "altsignals",
     "name": "AltSignals",
-    "description": "AltSignals' crypto and major-forex channel, which says it has run since 2017, with a paid VIP. Coinspeaker (Jun 2026) listed the VIP at $80 a month. This listing is only t.me/altsignals; other handles use similar names.",
+    "description": "AltSignals' crypto channel, which says it has run since 2017, with a paid VIP. Coinspeaker (Jun 2026) listed the VIP at $80 a month. This listing is only t.me/altsignals; other handles use similar names.",
     "markets": [
-      "crypto",
-      "forex-majors"
+      "crypto"
     ],
     "styles": [],
     "price": "free-and-vip",

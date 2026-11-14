@@ -2,8 +2,9 @@
   "group": {
     "slug": "mcx-one-call",
     "name": "MCX @ONE CALL",
-    "description": "A Telegram channel for oil and other commodities. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for gold and oil and other commodities. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
+      "gold",
       "oil"
     ],
     "styles": [],
