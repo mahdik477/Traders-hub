@@ -2656,22 +2656,27 @@ input.signal-filter-search {
 
 .sg-gallery {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
+  align-items: stretch;
 }
 
-@media (width >= 40rem) {
+@media (width >= 48rem) {
   .sg-gallery {
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 9.5rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "gold gold majors majors"
+      "gold gold minors indices"
+      "crypto oil stocks stocks";
   }
-  .sg-tile-lead {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-  .sg-tile-wide {
-    grid-column: span 2;
-  }
+  .sg-area-gold { grid-area: gold; }
+  .sg-area-forex-majors { grid-area: majors; }
+  .sg-area-forex-minors { grid-area: minors; }
+  .sg-area-indices { grid-area: indices; }
+  .sg-area-crypto { grid-area: crypto; }
+  .sg-area-oil { grid-area: oil; }
+  .sg-area-stocks-options { grid-area: stocks; }
 }
 
 .sg-tile,
@@ -2705,7 +2710,7 @@ input.signal-filter-search {
     box-shadow 220ms ease;
 }
 
-.sg-tile-lead {
+.sg-area-gold {
   min-height: 16rem;
 }
 
@@ -2721,7 +2726,7 @@ input.signal-filter-search {
   pointer-events: none;
 }
 
-.sg-tile-lead .sg-motif {
+.sg-area-gold .sg-motif {
   width: 14rem;
   height: 14rem;
   opacity: 0.28;
@@ -2768,6 +2773,13 @@ input.signal-filter-search {
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--color-gold) 70%, transparent),
     0 0 28px -8px color-mix(in srgb, var(--color-gold-bright) 80%, transparent);
+}
+
+.sg-search-input,
+.sg-search-input:focus,
+.sg-search-input:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 .sg-mesh {
@@ -2982,11 +2994,13 @@ input.signal-filter-search {
   }
   .sg-tile:hover,
   .sg-card:hover {
-    transform: translateY(-6px) rotate(-0.4deg);
     border-color: color-mix(in srgb, var(--sg-ink, var(--color-gold)) 70%, var(--color-border));
     box-shadow:
       0 18px 40px -24px color-mix(in srgb, var(--sg-ink, var(--color-gold)) 80%, transparent),
       0 0 0 1px color-mix(in srgb, var(--color-gold) 35%, transparent);
+  }
+  .sg-card:hover {
+    transform: translateY(-4px);
   }
   .sg-tile:hover .sg-tile-line,
   .sg-tile:focus-visible .sg-tile-line {

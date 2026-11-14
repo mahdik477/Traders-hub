@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode, type RefObject } from "react";
+import { Suspense, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search, Users, X } from "lucide-react";
 import { WordReveal } from "@/components/hero/AuroraHero";
@@ -94,12 +94,17 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
   const resultsRef = useRef<HTMLElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const skipScroll = useRef(true);
+  const searchUrl = useRef(0);
 
   useEffect(() => {
     if (key === written.current) return;
     written.current = key;
     setRoom(readRoom(key));
   }, [key]);
+
+  useEffect(() => {
+    return () => window.clearTimeout(searchUrl.current);
+  }, []);
 
   useEffect(() => {
     function onKey(event: globalThis.KeyboardEvent) {
@@ -114,6 +119,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
   }, []);
 
   function commit(next: Room, scroll?: boolean) {
+    window.clearTimeout(searchUrl.current);
     const qs = writeRoom(next);
     written.current = qs;
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
@@ -121,6 +127,17 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
     if (scroll) {
       skipScroll.current = false;
     }
+  }
+
+  function onSearch(value: string) {
+    const next = { ...room, query: value, page: 1, panel: null };
+    setRoom(next);
+    window.clearTimeout(searchUrl.current);
+    searchUrl.current = window.setTimeout(() => {
+      const qs = writeRoom(next);
+      written.current = qs;
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    }, 180);
   }
 
   useEffect(() => {
@@ -190,40 +207,71 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
     <div className="sg-stage">
       <ScrollGlow />
       <CursorGlow />
+      <section
+        className={
+          landing
+            ? "aurora-hero relative -mx-4 overflow-hidden px-4 pb-16 pt-10 sm:-mx-6 sm:px-6 sm:pb-20 sm:pt-16 lg:-mx-8 lg:px-8"
+            : ""
+        }
+      >
+        <div key="sg-lead">
+          {landing && (
+            <div aria-hidden="true" className="aurora-layer pointer-events-none absolute inset-0">
+              <span className="aurora-blob aurora-blob-a" />
+              <span className="aurora-blob aurora-blob-b" />
+              <span className="aurora-blob aurora-blob-c" />
+              <span className="hero-grid absolute inset-0" />
+              <MeshField />
+              <span className="hero-fade absolute inset-x-0 bottom-0 h-32" />
+            </div>
+          )}
+          {landing ? (
+            <LandingCopy lede={lede} total={groups.length} />
+          ) : (
+            <button
+              type="button"
+              onClick={() =>
+                commit(
+                  {
+                    ...room,
+                    market: "all",
+                    query: "",
+                    page: 1,
+                    savedOnly: false,
+                    styles: [],
+                    prices: [],
+                    extras: [],
+                    languages: [],
+                    panel: null,
+                  },
+                  true,
+                )
+              }
+              className="relative z-10 mb-4 inline-flex min-h-11 w-fit items-center gap-1 text-sm text-muted hover:text-foreground"
+            >
+              <ChevronLeft className="size-4" aria-hidden="true" />
+              All markets
+            </button>
+          )}
+        </div>
+        <label key="sg-search" className={`sg-search relative z-10 block max-w-xl ${landing ? "mt-8" : ""}`}>
+          <span className="sr-only">Search signal groups</span>
+          <span className="flex items-center gap-3 px-4 py-3">
+            <Search className="size-4 shrink-0 text-subtle" aria-hidden="true" />
+            <input
+              ref={searchRef}
+              value={room.query}
+              onChange={(event) => onSearch(event.target.value)}
+              placeholder={room.market === "all" || landing ? "Search by name" : `Search ${SHORT[room.market]}`}
+              className="sg-search-input w-full bg-transparent text-base text-foreground placeholder:text-subtle"
+            />
+          </span>
+        </label>
+        <p className="sr-only" aria-live="polite">
+          {landing ? `${groups.length} groups` : `${filtered.length} groups`}
+        </p>
+      </section>
       <div key={landing ? "land" : "room"} className="sg-swap">
-      {landing ? (
-        <Landing
-          lede={lede}
-          total={groups.length}
-          query={room.query}
-          searchRef={searchRef}
-          onQuery={(query) => commit({ ...room, query, page: 1, panel: null })}
-        />
-      ) : (
-        <RoomBar
-          room={room}
-          total={filtered.length}
-          searchRef={searchRef}
-          onQuery={(query) => commit({ ...room, query, page: 1 })}
-          onBack={() =>
-            commit(
-              {
-                ...room,
-                market: "all",
-                query: "",
-                page: 1,
-                savedOnly: false,
-                styles: [],
-                prices: [],
-                extras: [],
-                languages: [],
-                panel: null,
-              },
-              true,
-            )
-          }
-        />
-      )}
 
       {landing ? (
         <>
@@ -242,7 +290,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
                 <button
                   key={id}
                   type="button"
-                  className={`sg-tile sg-in ${index === 0 ? "sg-tile-lead" : ""} ${index === 1 ? "sg-tile-wide" : ""}`}
+                  className={`sg-tile sg-in sg-area-${id}`}
                   style={{ ["--sg-ink-raw" as string]: INK[id], animationDelay: `${index * 70}ms` }}
                   onClick={() => commit({ ...room, market: id, page: 1, panel: null }, true)}
                 >
@@ -341,110 +389,16 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
   );
 }
 
-function Landing({
-  lede,
-  total,
-  query,
-  searchRef,
-  onQuery,
-}: {
-  lede: string;
-  total: number;
-  query: string;
-  searchRef: RefObject<HTMLInputElement | null>;
-  onQuery: (query: string) => void;
-}) {
-  const heroRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const el = heroRef.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(
-      ([entry]) => el.classList.toggle("is-offscreen", !entry.isIntersecting),
-      { rootMargin: "80px 0px" },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
+function LandingCopy({ lede, total }: { lede: string; total: number }) {
   return (
-    <section
-      ref={heroRef}
-      aria-labelledby="signal-hero-heading"
-      className="aurora-hero relative -mx-4 overflow-hidden px-4 pb-16 pt-10 sm:-mx-6 sm:px-6 sm:pb-20 sm:pt-16 lg:-mx-8 lg:px-8"
-    >
-      <div aria-hidden="true" className="aurora-layer pointer-events-none absolute inset-0">
-        <span className="aurora-blob aurora-blob-a" />
-        <span className="aurora-blob aurora-blob-b" />
-        <span className="aurora-blob aurora-blob-c" />
-        <span className="hero-grid absolute inset-0" />
-        <MeshField />
-        <span className="hero-fade absolute inset-x-0 bottom-0 h-32" />
-      </div>
-      <div className="relative max-w-3xl pb-4 pt-6 sm:pt-10">
-        <p className="eyebrow">Telegram directory</p>
-        <h1 id="signal-hero-heading" className="sg-display mt-4 text-[clamp(3.2rem,8vw,6rem)] leading-[0.92]">
-          <WordReveal text="Signal Groups" />
-        </h1>
-        <p className="mt-6 max-w-xl text-lg leading-8 text-muted">{lede}</p>
-        <p className="mt-5 font-mono text-sm text-subtle">
-          <CountUp to={total} /> groups · shown nine at a time
-        </p>
-        <label className="sg-search mt-8 block max-w-xl">
-          <span className="sr-only">Search signal groups</span>
-          <span className="flex items-center gap-3 px-4 py-3">
-            <Search className="size-4 text-subtle" aria-hidden="true" />
-            <input
-              ref={searchRef}
-              value={query}
-              onChange={(event) => onQuery(event.target.value)}
-              placeholder="Search by name"
-              className="w-full bg-transparent text-base text-foreground outline-none placeholder:text-subtle"
-            />
-          </span>
-        </label>
-      </div>
-    </section>
-  );
-}
-
-function RoomBar({
-  room,
-  total,
-  searchRef,
-  onQuery,
-  onBack,
-}: {
-  room: Room;
-  total: number;
-  searchRef: RefObject<HTMLInputElement | null>;
-  onQuery: (query: string) => void;
-  onBack: () => void;
-}) {
-  return (
-    <div className="flex flex-col gap-4 border-b border-border pb-5">
-      <button
-        type="button"
-        onClick={onBack}
-        className="inline-flex min-h-11 w-fit items-center gap-1 text-sm text-muted hover:text-foreground"
-      >
-        <ChevronLeft className="size-4" aria-hidden="true" />
-        All markets
-      </button>
-      <label className="block max-w-xl">
-        <span className="sr-only">Search signal groups</span>
-          <span className="sg-search flex items-center gap-3 px-4 py-2.5">
-          <Search className="size-4 text-subtle" aria-hidden="true" />
-          <input
-            ref={searchRef}
-            value={room.query}
-            onChange={(event) => onQuery(event.target.value)}
-            placeholder={room.market === "all" ? "Search by name" : `Search ${SHORT[room.market]}`}
-            className="w-full bg-transparent text-base outline-none placeholder:text-subtle"
-          />
-        </span>
-      </label>
-      <p className="sr-only" aria-live="polite">
-        {total} groups
+    <div className="relative max-w-3xl pb-4 pt-6 sm:pt-10">
+      <p className="eyebrow">Telegram directory</p>
+      <h1 id="signal-hero-heading" className="sg-display mt-4 text-[clamp(3.2rem,8vw,6rem)] leading-[0.92]">
+        <WordReveal text="Signal Groups" />
+      </h1>
+      <p className="mt-6 max-w-xl text-lg leading-8 text-muted">{lede}</p>
+      <p className="mt-5 font-mono text-sm text-subtle">
+        <CountUp to={total} /> groups · shown nine at a time
       </p>
     </div>
   );
