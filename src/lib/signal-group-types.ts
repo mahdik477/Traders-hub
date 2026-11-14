@@ -51,7 +51,8 @@ export const SIGNAL_PRICE_LABELS: Record<SignalPrice, string> = {
   "free-and-vip": "Free + paid VIP",
 };
 
-export const SIGNAL_PRICE_ORDER: SignalPrice[] = ["free", "paid", "free-and-vip"];
+/** Chips on the directory. "paid" stays a valid listing value, but no group is paid-only, so it is not a filter. */
+export const SIGNAL_PRICE_ORDER: SignalPrice[] = ["free", "free-and-vip"];
 
 export const SIGNAL_EXTRA_LABELS: Record<SignalExtra, string> = {
   education: "Education included",

@@ -715,6 +715,10 @@ function checkSignalFilterRules() {
   const legacy = signalFiltersFromSearch("style=scalping&price=any");
   assert(legacy.styles.join(",") === "scalping", "an older single style value still counts as one tick");
   assert(legacy.prices.length === 0, "price=any means no price filter");
+  const oldPaid = signalFiltersFromSearch("market=gold&price=paid");
+  assert(oldPaid.market === "gold" && oldPaid.prices.length === 0, "price=paid means Any price");
+  const mixedPaid = signalFiltersFromSearch("price=free,paid");
+  assert(mixedPaid.prices.join(",") === "free", "paid is dropped from an older price list");
 }
 
 function checkAll() {

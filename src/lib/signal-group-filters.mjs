@@ -15,7 +15,9 @@ const MARKETS = new Set([
   "stocks-options",
 ]);
 const STYLES = ["scalping", "day-trading", "swing"];
-const PRICES = ["free", "paid", "free-and-vip"];
+// "paid" is still a listing value, but no group is paid-only, so it is not a
+// filter. An old ?price=paid link is ignored and means Any price.
+const PRICES = ["free", "free-and-vip"];
 const EXTRAS = ["education", "copy-trading", "prop-firm"];
 const STYLE_SET = new Set(STYLES);
 const PRICE_SET = new Set(PRICES);
