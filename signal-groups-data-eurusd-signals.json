@@ -2,10 +2,9 @@
   "group": {
     "slug": "eurusd-signals",
     "name": "EURUSD SIGNALS",
-    "description": "A Telegram channel for forex majors and indices. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for forex majors. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
-      "forex-majors",
-      "indices"
+      "forex-majors"
     ],
     "styles": [],
     "price": "free",

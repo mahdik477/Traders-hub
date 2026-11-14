@@ -4,6 +4,7 @@
     "name": "Option Expert (Finlight Research)",
     "description": "An India-focused Bank Nifty and Nifty 50 channel. The description calls the calls intraday and states SEBI registration INH000013518; we did not confirm that number on the SEBI portal. Paid tiers were not stated.",
     "markets": [
+      "indices",
       "stocks-options"
     ],
     "styles": [

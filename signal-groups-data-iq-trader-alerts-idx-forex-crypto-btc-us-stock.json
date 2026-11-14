@@ -2,9 +2,8 @@
   "group": {
     "slug": "iq-trader-alerts-idx-forex-crypto-btc-us-stock",
     "name": "iQ Trader Alerts : IDX + FOREX + Crypto BTC + US Stock",
-    "description": "A Telegram channel for forex majors, crypto, and stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing language is Indonesian.",
+    "description": "A Telegram channel for crypto and stocks & options. It was listed as a free channel, and a paid tier was not stated. The listing language is Indonesian.",
     "markets": [
-      "forex-majors",
       "crypto",
       "stocks-options"
     ],

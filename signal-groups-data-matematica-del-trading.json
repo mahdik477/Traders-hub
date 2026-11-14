@@ -2,10 +2,9 @@
   "group": {
     "slug": "matematica-del-trading",
     "name": "Matemática Del Trading 💱",
-    "description": "A Telegram channel for forex minors & exotics and indices. It was listed as a free channel, and a paid tier was not stated. The listing language is Spanish.",
+    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel, and a paid tier was not stated. The listing language is Spanish.",
     "markets": [
-      "forex-minors",
-      "indices"
+      "forex-minors"
     ],
     "styles": [],
     "price": "free",

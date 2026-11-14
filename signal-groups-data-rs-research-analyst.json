@@ -2,9 +2,8 @@
   "group": {
     "slug": "rs-research-analyst",
     "name": "RS Research Analyst",
-    "description": "A Telegram channel for indices and stocks & options. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for stocks & options. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
-      "indices",
       "stocks-options"
     ],
     "styles": [],

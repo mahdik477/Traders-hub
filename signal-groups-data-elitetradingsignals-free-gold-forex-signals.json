@@ -2,8 +2,10 @@
   "group": {
     "slug": "elitetradingsignals-free-gold-forex-signals",
     "name": "❗️EliteTradingSignals❗️(Free Gold Forex Signals)",
-    "description": "A Telegram channel for forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for gold, forex majors, and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
+      "gold",
+      "forex-majors",
       "forex-minors"
     ],
     "styles": [],

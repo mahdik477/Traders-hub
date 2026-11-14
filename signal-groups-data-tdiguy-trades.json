@@ -2,10 +2,11 @@
   "group": {
     "slug": "tdiguy-trades",
     "name": "TDIGUY_TRADES 🥼",
-    "description": "A Telegram channel for forex minors & exotics and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
+    "description": "A Telegram channel for forex minors & exotics, indices, and crypto. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
     "markets": [
       "forex-minors",
-      "oil"
+      "indices",
+      "crypto"
     ],
     "styles": [],
     "price": "free",

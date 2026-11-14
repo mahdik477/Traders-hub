@@ -2,8 +2,9 @@
   "group": {
     "slug": "officialjioke-hub",
     "name": "Officialjioke HUB",
-    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for forex majors and forex minors & exotics. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
+      "forex-majors",
       "forex-minors"
     ],
     "styles": [],

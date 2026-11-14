@@ -2,10 +2,11 @@
   "group": {
     "slug": "market-next-move",
     "name": "Market Next Move",
-    "description": "A Telegram channel for indices and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
+    "description": "A Telegram channel for indices, oil and other commodities, and stocks & options. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
     "markets": [
       "indices",
-      "oil"
+      "oil",
+      "stocks-options"
     ],
     "styles": [],
     "price": "free",

@@ -2,12 +2,13 @@
   "group": {
     "slug": "nas100us30snipershq",
     "name": "NAS100 - US30 Snipers",
-    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, and indices. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading style as scalping.",
+    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, indices, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading style as scalping.",
     "markets": [
       "gold",
       "forex-majors",
       "forex-minors",
-      "indices"
+      "indices",
+      "oil"
     ],
     "styles": [
       "scalping"

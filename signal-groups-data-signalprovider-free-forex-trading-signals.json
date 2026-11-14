@@ -2,10 +2,9 @@
   "group": {
     "slug": "signalprovider-free-forex-trading-signals",
     "name": "SignalProvider (Free Forex Trading Signals)",
-    "description": "A Telegram channel for gold, forex majors, and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing gives the trading styles as day trading and swing.",
+    "description": "A Telegram channel for gold and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing gives the trading styles as day trading and swing.",
     "markets": [
       "gold",
-      "forex-majors",
       "forex-minors"
     ],
     "styles": [

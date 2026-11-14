@@ -2,11 +2,10 @@
   "group": {
     "slug": "nasdaq-gold-signals",
     "name": "Nasdaq / Gold Signals",
-    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, indices, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for gold, forex majors, indices, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
       "gold",
       "forex-majors",
-      "forex-minors",
       "indices",
       "oil"
     ],

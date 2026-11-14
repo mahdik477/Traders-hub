@@ -2,10 +2,9 @@
   "group": {
     "slug": "foreximo-alerts",
     "name": "Foreximo - Alerts 🚨",
-    "description": "A Telegram channel for gold and forex majors. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading styles as scalping and day trading.",
+    "description": "A Telegram channel for gold. It was listed as a free channel, and a paid tier was not stated. The listing gives the trading styles as scalping and day trading.",
     "markets": [
-      "gold",
-      "forex-majors"
+      "gold"
     ],
     "styles": [
       "scalping",

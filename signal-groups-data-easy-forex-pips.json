@@ -2,10 +2,10 @@
   "group": {
     "slug": "easy-forex-pips",
     "name": "Easy Forex Pips",
-    "description": "A gold and major-forex channel. It links a separate signals-history channel. Paid tiers were not stated.",
+    "description": "A gold and forex minors channel. It links a separate signals-history channel. Paid tiers were not stated.",
     "markets": [
       "gold",
-      "forex-majors"
+      "forex-minors"
     ],
     "styles": [],
     "price": "free",

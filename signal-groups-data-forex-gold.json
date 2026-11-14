@@ -2,10 +2,9 @@
   "group": {
     "slug": "forex-gold",
     "name": "FOREX\\Gold تحلیل و سیگنال",
-    "description": "A Telegram channel for gold, forex majors, and indices. It was listed as a free channel, and a paid tier was not stated. The listing language is Persian.",
+    "description": "A Telegram channel for gold and indices. It was listed as a free channel, and a paid tier was not stated. The listing language is Persian.",
     "markets": [
       "gold",
-      "forex-majors",
       "indices"
     ],
     "styles": [],

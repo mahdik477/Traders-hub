@@ -2,10 +2,9 @@
   "group": {
     "slug": "price-action-trading-free",
     "name": "Price Action Trading (Free) 🇮🇩",
-    "description": "A Telegram channel for gold, forex majors, and crypto. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for gold and crypto. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
       "gold",
-      "forex-majors",
       "crypto"
     ],
     "styles": [],

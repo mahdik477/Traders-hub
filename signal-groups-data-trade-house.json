@@ -2,10 +2,9 @@
   "group": {
     "slug": "trade-house",
     "name": "TRADE HOUSE 🫆",
-    "description": "A Telegram channel for gold, forex majors, and crypto. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
+    "description": "A Telegram channel for gold and crypto. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing.",
     "markets": [
       "gold",
-      "forex-majors",
       "crypto"
     ],
     "styles": [],

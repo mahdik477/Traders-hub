@@ -2,10 +2,9 @@
   "group": {
     "slug": "sensex-masters",
     "name": "SENSEX MASTERS 🚀🚀",
-    "description": "A Telegram channel for indices and stocks & options. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for indices. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
-      "indices",
-      "stocks-options"
+      "indices"
     ],
     "styles": [],
     "price": "free",

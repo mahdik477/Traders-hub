@@ -2,9 +2,9 @@
   "group": {
     "slug": "forexcino-forex-vip",
     "name": "🏅Forexcino(forex)VIP🏅",
-    "description": "A Telegram channel for forex majors and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing language is Persian.",
+    "description": "A Telegram channel for gold and forex minors & exotics. A free feed and a paid VIP are both listed. The VIP price was not stated. The listing language is Persian.",
     "markets": [
-      "forex-majors",
+      "gold",
       "forex-minors"
     ],
     "styles": [],

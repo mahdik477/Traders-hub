@@ -2,10 +2,9 @@
   "group": {
     "slug": "best-shares-ka-bazaar",
     "name": "Best shares ka bazaar",
-    "description": "A Telegram channel for indices and stocks & options. A free feed and a paid premium are both listed. The premium price was not stated.",
+    "description": "A Telegram channel for indices. A free feed and a paid premium are both listed. The premium price was not stated.",
     "markets": [
-      "indices",
-      "stocks-options"
+      "indices"
     ],
     "styles": [],
     "price": "free-and-vip",

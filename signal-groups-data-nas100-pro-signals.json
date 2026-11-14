@@ -2,11 +2,9 @@
   "group": {
     "slug": "nas100-pro-signals",
     "name": "NAS100 Pro Signals",
-    "description": "An index channel whose description names US30 and Nasdaq. Recent public posts also mention gold and US oil. Paid tiers were not stated.",
+    "description": "An index channel whose description names US30 and Nasdaq. Paid tiers were not stated.",
     "markets": [
-      "indices",
-      "gold",
-      "oil"
+      "indices"
     ],
     "styles": [],
     "price": "free",

@@ -2,9 +2,8 @@
   "group": {
     "slug": "alphacoinhub-stock-signals-analysis",
     "name": "Alphacoinhub | Stock Signals & Analysis",
-    "description": "A Telegram channel for indices and stocks & options. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for stocks & options. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
-      "indices",
       "stocks-options"
     ],
     "styles": [],

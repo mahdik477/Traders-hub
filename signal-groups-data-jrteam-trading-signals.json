@@ -2,9 +2,8 @@
   "group": {
     "slug": "jrteam-trading-signals",
     "name": "JRTeam Trading ( Signals )",
-    "description": "A Telegram channel for forex majors and forex minors & exotics. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing. The listing language is Russian.",
+    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel, and a paid tier was not stated. Education is included on the listing. The listing language is Russian.",
     "markets": [
-      "forex-majors",
       "forex-minors"
     ],
     "styles": [],

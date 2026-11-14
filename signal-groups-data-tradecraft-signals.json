@@ -2,10 +2,9 @@
   "group": {
     "slug": "tradecraft-signals",
     "name": "TradeCraft signals",
-    "description": "A Telegram channel for gold, forex majors, crypto, and stocks & options. It was listed as a free channel, and a paid tier was not stated.",
+    "description": "A Telegram channel for gold, crypto, and stocks & options. It was listed as a free channel, and a paid tier was not stated.",
     "markets": [
       "gold",
-      "forex-majors",
       "crypto",
       "stocks-options"
     ],

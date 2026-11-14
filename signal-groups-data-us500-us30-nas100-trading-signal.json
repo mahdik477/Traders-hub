@@ -2,10 +2,12 @@
   "group": {
     "slug": "us500-us30-nas100-trading-signal",
     "name": "US500 | US30 | NAS100 Trading Signal",
-    "description": "Signals for the S&P 500, Nasdaq and US30. Recent public posts also mention gold. Paid tiers were not stated.",
+    "description": "Signals for the S&P 500, Nasdaq and US30, plus forex majors and minors. Recent public posts also mention gold. Paid tiers were not stated.",
     "markets": [
-      "indices",
-      "gold"
+      "gold",
+      "forex-majors",
+      "forex-minors",
+      "indices"
     ],
     "styles": [],
     "price": "free",

@@ -2,12 +2,11 @@
   "group": {
     "slug": "emperor-fx",
     "name": "🔱Emperor fx🔱",
-    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, indices, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. The listing language is Persian.",
+    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, and oil and other commodities. It was listed as a free channel, and a paid tier was not stated. The listing language is Persian.",
     "markets": [
       "gold",
       "forex-majors",
       "forex-minors",
-      "indices",
       "oil"
     ],
     "styles": [],

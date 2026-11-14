@@ -2,10 +2,9 @@
   "group": {
     "slug": "gold-forex-signals-free",
     "name": "Gold Forex Signals (Free)",
-    "description": "A Telegram channel for gold and forex majors. A free feed and a paid VIP are both listed. The VIP price was not stated.",
+    "description": "A Telegram channel for gold. A free feed and a paid VIP are both listed. The VIP price was not stated.",
     "markets": [
-      "gold",
-      "forex-majors"
+      "gold"
     ],
     "styles": [],
     "price": "free-and-vip",

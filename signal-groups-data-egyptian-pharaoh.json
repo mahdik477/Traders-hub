@@ -2,10 +2,9 @@
   "group": {
     "slug": "egyptian-pharaoh",
     "name": "Egyptian pharaoh📊",
-    "description": "A Telegram channel for gold and forex majors. It was listed as a free channel.",
+    "description": "A Telegram channel for gold. It was listed as a free channel.",
     "markets": [
-      "gold",
-      "forex-majors"
+      "gold"
     ],
     "styles": [],
     "price": "free",

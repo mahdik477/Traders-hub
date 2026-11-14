@@ -2,8 +2,9 @@
   "group": {
     "slug": "fx-broker-signals",
     "name": "Fx Broker Signals",
-    "description": "A Telegram channel for forex majors, forex minors & exotics, and oil and other commodities. It was listed as a free channel. Education is included on the listing.",
+    "description": "A Telegram channel for gold, forex majors, forex minors & exotics, and oil and other commodities. It was listed as a free channel. Education is included on the listing.",
     "markets": [
+      "gold",
       "forex-majors",
       "forex-minors",
       "oil"

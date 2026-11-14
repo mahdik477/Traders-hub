@@ -2,8 +2,10 @@
   "group": {
     "slug": "babypips-forex-signals-free",
     "name": "BabyPips Forex Signals (FREE)",
-    "description": "A Telegram channel for forex minors & exotics. It was listed as a free channel.",
+    "description": "A Telegram channel for gold, forex majors, and forex minors & exotics. It was listed as a free channel.",
     "markets": [
+      "gold",
+      "forex-majors",
       "forex-minors"
     ],
     "styles": [],
