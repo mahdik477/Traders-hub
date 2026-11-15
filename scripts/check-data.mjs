@@ -538,6 +538,7 @@ function checkStrategyEntry(file, s, i) {
   if (!s.evidence?.summary) warn(file, `${where}.evidence.summary is empty - say what the independent research actually found`);
   if (!s.public_teaser) err(file, `${where}.public_teaser is missing`);
   if (!s.core_concept) warn(file, `${where}.core_concept is empty`);
+  if (!s.plain_definition) warn(file, `${where}.plain_definition is empty - the page falls back to core_concept`);
   if (!s.win_rate_note) warn(file, `${where}.win_rate_note is empty`);
   if (!Array.isArray(s.markets) || s.markets.length === 0) warn(file, `${where}.markets is empty - won't show up under any market filter`);
   (s.markets ?? []).forEach((m) => {

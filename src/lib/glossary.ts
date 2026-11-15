@@ -58,7 +58,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: "ATR",
     definition:
       "Average True Range — the average size of a market's price swings over a recent period, in price units. It's a volatility measure, not a direction signal — often used to size stop-losses or position sizes.",
-    match: ["ATR", "Average True Range"],
+    match: ["ATR", "ATRs", "Average True Range"],
   },
   {
     term: "Bollinger Bands",
@@ -476,7 +476,7 @@ export const GLOSSARY: GlossaryEntry[] = [
   {
     term: "Gap",
     definition: "A jump between one candle's close and the next candle's open, leaving a visible empty space on the chart where no trading happened.",
-    match: ["price gap", "gap up", "gap down"],
+    match: ["price gap", "price gaps", "gap up", "gap down", "gap", "gaps"],
   },
   {
     term: "Doji",
@@ -618,6 +618,109 @@ export const GLOSSARY: GlossaryEntry[] = [
     definition:
       "A famous 1980s trend-following system built around Donchian Channel breakouts and strict, pre-defined position sizing — one of the first systematic approaches made widely public.",
     match: ["Turtle Trading", "Turtle Traders"],
+  },
+  // --- Beginner basics -------------------------------------------------------
+  // Added for the plain-English "What it is" definitions on every strategy
+  // page: those are written for someone who has never traded, and the rule
+  // there is that any technical word that can't be avoided must be hoverable.
+  // So a few everyday trading terms the list above deliberately skipped now
+  // have short, friendly entries.
+  {
+    term: "Candlestick",
+    definition:
+      "The most common way to draw price. Each candle covers one period (a minute, an hour, a day) and shows four things: where price opened, where it closed, and the highest and lowest it reached. The thick part is the body; the thin lines are the wicks. Green/white usually means it closed higher than it opened; red/black means lower.",
+    match: ["candlestick", "candlesticks", "candle", "candles"],
+  },
+  {
+    term: "Support and resistance",
+    definition:
+      "Support is a price area where falling prices have previously stopped and bounced — a floor. Resistance is the opposite — a ceiling where rising prices have stalled. They matter because many traders remember them and place orders around them. Treat them as zones, not exact lines.",
+    match: ["support and resistance", "support or resistance", "support level", "support levels", "resistance level", "resistance levels", "support zone", "resistance zone", "demand zone", "supply zone"],
+  },
+  {
+    term: "Pullback",
+    definition:
+      "A temporary move against the main trend — price dipping for a while in an uptrend, or bouncing for a while in a downtrend — before the trend resumes. Many methods look to enter during a pullback rather than chasing the move at its peak.",
+    match: ["pullback", "pullbacks", "retracement", "retracements"],
+  },
+  {
+    term: "Uptrend / downtrend",
+    definition:
+      "An uptrend is a market making higher highs and higher lows over time; a downtrend is one making lower highs and lower lows. \"The trend\" just means the overall direction the market has been moving in over the period you're looking at.",
+    match: ["uptrend", "uptrends", "downtrend", "downtrends", "higher highs", "higher lows", "lower highs", "lower lows", "higher high", "higher low", "lower high", "lower low"],
+  },
+  {
+    term: "Indicator",
+    definition:
+      "A line or number calculated from price (and sometimes volume) and drawn on or under the chart to summarise something — how fast price is moving, how far it is from its average, how strong a trend is. Indicators describe what has already happened; none of them see the future.",
+    match: ["indicator", "indicators"],
+  },
+  {
+    term: "Oscillator",
+    definition:
+      "A type of indicator that swings back and forth between two fixed limits (often 0 and 100), used to judge whether a recent move is stretched. RSI, Stochastic and Williams %R are all oscillators. They work best in sideways markets and can stay \"extreme\" for a long time in a strong trend.",
+    match: ["oscillator", "oscillators"],
+  },
+  {
+    term: "Volume",
+    definition:
+      "How much was traded in a given period — the number of shares, contracts or coins that changed hands. High volume means lots of participation; low volume means few people were involved. Many methods use it to judge how much conviction is behind a price move.",
+    match: ["volume"],
+  },
+  {
+    term: "Trading range",
+    definition:
+      "A stretch of time where price bounces between a fairly clear high and low without going anywhere — a sideways market. Also called a range or consolidation. Range-based methods trade the bounces; breakout methods wait for price to leave it.",
+    match: ["trading range", "sideways market", "sideways range"],
+  },
+  {
+    term: "Chart pattern",
+    definition:
+      "A recognisable shape that price traces out over time — a double top, a triangle, a head and shoulders. Traders use them as a shorthand for what buyers and sellers have been doing. A pattern is usually only treated as \"confirmed\" once price breaks out of it.",
+    match: ["chart pattern", "chart patterns"],
+  },
+  {
+    term: "Neckline",
+    definition:
+      "The line drawn across the low points (or high points) of a reversal pattern such as a double top or head and shoulders. The pattern is only considered complete when price closes through this line.",
+    match: ["neckline"],
+  },
+  {
+    term: "Breakout (from a pattern)",
+    definition:
+      "The moment price pushes clearly outside a range, pattern or level it had been contained by. Traders watch breakouts because the orders that built up around the boundary can fuel a bigger move — or fail and snap back (a \"false breakout\").",
+    match: ["breaks out", "break out", "broke out", "breaking out"],
+  },
+  {
+    term: "Selling short",
+    definition:
+      "Betting that a price will fall. You borrow and sell something you don't own, aiming to buy it back cheaper later. \"Going long\" is the normal direction — buying in the hope price rises. Shorting carries extra costs and risks, and isn't available on every market or account.",
+    match: ["sell short", "sells short", "selling short", "sold short", "go short", "going short", "short-selling", "short selling", "go long", "going long"],
+  },
+  {
+    term: "Trading session",
+    definition:
+      "The hours a market is officially open, e.g. the New York stock session or the London forex session. Some methods only look at the first minutes of a session (the open) because that's when overnight news gets priced in.",
+    match: ["trading session", "the open", "market open", "session open", "at the open"],
+  },
+  {
+    term: "Profit target",
+    definition:
+      "The price at which you plan to take your gain and close the trade, decided before you enter. Paired with a stop-loss, it defines the trade's risk-reward.",
+    match: ["profit target", "take-profit", "take profit", "price target"],
+  },
+
+  {
+    term: "Swing",
+    definition:
+      "One leg of price movement — a run from a low up to a high, or from a high down to a low — before the market turns the other way. Chart tools are often drawn across \"the last swing\". Swing trading means holding trades for days to weeks to capture one of these legs.",
+    match: ["price swing", "price swings", "swing trading", "swing trader", "swing traders", "big swing"],
+  },
+  {
+    term: "Trading styles",
+    definition:
+      "Names for how long trades are held. Scalping: seconds to minutes. Day trading: opened and closed the same day. Swing trading: days to weeks. Position trading: weeks to months. Shorter styles mean more trades, more time at the screen and higher costs; longer styles mean fewer trades and bigger swings in your account.",
+    match: ["scalping", "scalp", "day trading", "day trader", "day traders", "position trading", "position trader"],
   },
 ];
 

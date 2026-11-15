@@ -9,6 +9,7 @@
       "summary_one_line": "Uses a faster and a slower moving average. When the fast line crosses the slow line, the trend is treated as changing.",
       "public_teaser": "Learn how traders use two moving averages to define trend direction and spot potential trend changes.",
       "core_concept": "Prices tend to persist in trends (momentum). Averaging smooths out noise, so a crossover marks a shift in average price direction. It reacts after a move starts, not before.",
+      "plain_definition": "A moving average is a line that smooths out price by averaging the last few days (or minutes) of prices. This method draws two of them: a fast one that follows price closely and a slow one that lags behind. When the fast line crosses above the slow line (a crossover), traders read that as a sign the market may be starting to rise, and the reverse when it crosses below. It is a simple way to spot a change in direction, but it reacts after the move has already begun, never before.",
       "tools_and_defaults": "SMA or EMA. Common pairs are 50/200 daily (\"golden cross\"/\"death cross\"), 20/50, 9/21 (intraday) and 10/30.",
       "rules": {
         "entry": "Go long when the fast MA closes above the slow MA, or short on the reverse.",
@@ -121,6 +122,7 @@
       "summary_one_line": "Treats price areas where the market previously turned as zones where it may react again.",
       "public_teaser": "Learn how traders mark price zones where buying or selling previously appeared and how those zones are used to plan trades.",
       "core_concept": "Market memory and clustering of orders. Many participants anchor to prior highs and lows and to round numbers, so orders cluster there. A broken level often switches roles (support becomes resistance, and the reverse).",
+      "plain_definition": "Support and resistance are price areas where the market has turned around before. Support is a floor where falling prices previously stopped and bounced; resistance is a ceiling where rising prices previously stalled. Traders mark these areas on the chart and watch what happens when price comes back to them: it may bounce again, or break through. The idea is that a lot of buyers and sellers remember those levels, so they often matter more than once.",
       "tools_and_defaults": "Horizontal lines or zones at swing highs and lows, prior day/week highs and lows, and round numbers. Treat them as zones, not exact lines.",
       "rules": {
         "entry": "Bounce: buy near support or sell near resistance after a rejection signal. Break-and-retest: enter after a close through the level and a retest.",
@@ -237,6 +239,7 @@
       "summary_one_line": "Draws a line along rising lows (uptrend) or falling highs (downtrend); traders buy pullbacks to the line or watch for a break.",
       "public_teaser": "Learn how trendlines are drawn and how traders use them to frame pullbacks and trend breaks.",
       "core_concept": "In trends, pullbacks often stop at similar slopes. A break of the line suggests that momentum is changing.",
+      "plain_definition": "A trendline is a straight line drawn along the bottoms of a rising market (connecting its higher lows) or along the tops of a falling one. It gives you a visual edge of the trend. Traders use it in two ways: buying when price dips back to the line in an uptrend (a pullback), or treating a clear break through the line as a warning that the trend may be ending. Drawing it needs at least two touch points, and a third touch makes it more convincing.",
       "tools_and_defaults": "A line through at least two swing points, with a third touch treated as confirmation. Channels add a parallel line.",
       "rules": {
         "entry": "A touch plus rejection in the trend direction.",
@@ -347,6 +350,7 @@
       "summary_one_line": "Uses the Relative Strength Index to flag stretched conditions: above 70 is \"overbought\" and below 30 is \"oversold\".",
       "public_teaser": "Learn how the RSI oscillator measures recent momentum and how traders interpret its overbought and oversold zones.",
       "core_concept": "Short-term price extremes sometimes partially reverse. RSI compares the size of recent gains to recent losses on a 0–100 scale (J. Welles Wilder, 1978).",
+      "plain_definition": "The RSI is an indicator that scores recent price moves from 0 to 100. A high score (usually above 70) means the market has risen a lot very quickly and is called overbought; a low score (below 30) means it has fallen a lot and is called oversold. The idea is that sharp moves sometimes partly snap back, so traders watch for the RSI to come back out of those extreme zones as a possible turning point. It measures how stretched a move is, not which way price will go next.",
       "tools_and_defaults": "RSI(14), with levels at 70/30. Variants use 80/20 or a 50 midline for trend.",
       "rules": {
         "entry": "Buy when RSI crosses back above 30, or sell when it crosses back below 70. A trend-aware variant only takes oversold buys in uptrends (e.g. price above the 200-day MA).",
@@ -457,6 +461,7 @@
       "summary_one_line": "Watches the MACD line cross its signal line as a shift in short-term momentum.",
       "public_teaser": "Learn how the MACD indicator tracks momentum and what a signal-line crossover is meant to show.",
       "core_concept": "MACD is the difference between two EMAs, and the signal line is an EMA of MACD (Gerald Appel). Crossovers mark acceleration or deceleration of the trend.",
+      "plain_definition": "MACD is an indicator built from two moving averages, shown as a single line that rises when the market is speeding up and falls when it is slowing down. A second, smoother line called the signal line follows it. When the MACD line crosses above the signal line (a crossover), traders read it as momentum turning upwards; crossing below means the opposite. It is a way to see changes in the pace of a move, which often happen a little before the direction itself changes.",
       "tools_and_defaults": "MACD(12, 26, 9), with a histogram showing MACD minus signal.",
       "rules": {
         "entry": "Long when MACD crosses above the signal line (often only above zero, in trend), with the reverse for shorts.",
@@ -566,6 +571,7 @@
       "summary_one_line": "Plots bands two standard deviations around a 20-period average; traders use band touches for reversion and band expansions for breakouts.",
       "public_teaser": "Learn how Bollinger Bands adapt to volatility and the two main ways traders read them.",
       "core_concept": "Volatility clusters, and prices far from their average relative to recent volatility are \"stretched\". John Bollinger stresses that a band touch alone is not a signal.",
+      "plain_definition": "Bollinger Bands are three lines: a moving average in the middle and two bands above and below it that widen when the market is jumpy and narrow when it is calm. Price spends most of its time between the bands, so touching the outer band suggests it has moved unusually far from normal. Traders use this two ways: expecting price to drift back towards the middle in a sideways market, or watching for the bands to squeeze tight and then burst open, which can mark the start of a bigger move. A band touch on its own is not a signal.",
       "tools_and_defaults": "BB(20, 2), plus optional %B and Bandwidth.",
       "rules": {
         "entry": "Reversion: in a range, buy a close back inside the lower band. Breakout (\"band walk\"): after a narrowing (\"squeeze\"), trade a close outside the band in the direction of the break.",
@@ -677,6 +683,7 @@
       "summary_one_line": "Marks a recent high/low range and trades in the direction price escapes it.",
       "public_teaser": "Learn how traders define a price range and plan around a move out of it.",
       "core_concept": "Consolidations store orders. A break may trigger stops and new positioning, which can start a trend. Brock, Lakonishok and LeBaron tested a \"trading range break\" rule.",
+      "plain_definition": "A trading range is a stretch of time where price bounces between a clear high and a clear low without going anywhere. A breakout is the moment price finally pushes out of that box. The idea is that while the market was stuck, many traders placed orders just outside the range, so a break can trigger a rush of buying or selling and start a trend. This method marks the recent high and low, then trades in whichever direction price escapes.",
       "tools_and_defaults": "The recent N-bar high/low (e.g. 20 bars), or a visually defined box. ATR is used for stops.",
       "rules": {
         "entry": "On a close (or a trade) beyond the range.",
@@ -788,6 +795,7 @@
       "summary_one_line": "Uses specific one- to three-candle shapes as possible signs of a turn, especially at key levels.",
       "public_teaser": "Learn how to read engulfing candles and pin bars and why context matters more than the pattern itself.",
       "core_concept": "Candles summarise the battle between buyers and sellers within a bar. A long rejection wick or an engulfing body suggests the other side has taken control. This comes from Japanese rice trading and was popularised in the West by Steve Nison.",
+      "plain_definition": "A candlestick shows four things about one period of time: where price opened, where it closed, and how high and low it went in between. The thin lines sticking out are called wicks. Certain candle shapes suggest the market may be about to turn: a long wick with a small body (a hammer or pin bar) shows one side pushed hard and got rejected, and an engulfing candle swallows the previous one, suggesting control has switched sides. These shapes matter most at support and resistance, not on their own.",
       "tools_and_defaults": "Candlestick chart only. Optional filters are trend, support/resistance, and volume.",
       "rules": {
         "entry": "At support, a bullish engulfing or hammer prompts a long above the pattern high (mirror at resistance for shorts).",
@@ -902,6 +910,7 @@
       "summary_one_line": "Draws ratio-based levels (38.2%, 50%, 61.8%) across a prior swing to estimate where a pullback might pause.",
       "public_teaser": "Learn how Fibonacci retracement levels are drawn and how traders use them to plan pullback entries.",
       "core_concept": "Pullbacks in trends often retrace a portion of the prior move. Fibonacci ratios provide standard reference points. Their popularity may create some self-fulfilling attention, but there's no established mechanism behind the ratios themselves.",
+      "plain_definition": "After a strong move, markets usually pull back part of the way before continuing. A Fibonacci retracement is a set of horizontal lines drawn across the last big swing at fixed fractions of it: 38.2%, 50% and 61.8% are the most watched. Traders use these lines as guesses for where a pullback might pause, then look for an entry in the original direction. The percentages come from a famous number sequence; there is no proven reason markets obey them, but enough traders watch the same levels that they can matter.",
       "tools_and_defaults": "Levels at 23.6%, 38.2%, 50% (not a true Fibonacci ratio, but conventional), 61.8% and 78.6%. Extensions at 127.2% and 161.8%.",
       "rules": {
         "entry": "In an uptrend, draw from swing low to swing high and look for long entries near 38.2–61.8% with a confirmation candle.",
@@ -1016,6 +1025,7 @@
       "summary_one_line": "Recognises classic shapes: a double top or bottom suggests a reversal, and a triangle suggests consolidation before a breakout.",
       "public_teaser": "Learn the classic double top, double bottom and triangle patterns and how their breakout levels are defined.",
       "core_concept": "Patterns are visual summaries of failed tests (double tops/bottoms) or narrowing volatility (triangles). Confirmation comes from a break of the \"neckline\" or the triangle boundary.",
+      "plain_definition": "Chart patterns are recognisable shapes that price traces out over days or weeks. A double top is two peaks at roughly the same height, suggesting buyers failed twice and the market may fall; a double bottom is the mirror image. A triangle is price squeezing into a narrower and narrower space, which often ends in a breakout one way or the other. In each case, the pattern is only treated as confirmed when price breaks through a key line, called the neckline for double tops and bottoms.",
       "tools_and_defaults": "Price chart. Optional volume. Measured-move projection equals the pattern height.",
       "rules": {
         "entry": "Double top: sell on a close below the neckline. Triangles: trade the close through a boundary.",
@@ -1131,6 +1141,7 @@
       "summary_one_line": "Reads large operators' footprints through repeating accumulation and distribution phases.",
       "public_teaser": "Explore Richard Wyckoff's framework for reading supply, demand and phases of accumulation and distribution.",
       "core_concept": "Developed by Richard Wyckoff in the early 1900s. It rests on three laws: supply and demand, cause and effect (the range \"builds a cause\" for the later move), and effort versus result (volume versus price progress). The \"Composite Man\" heuristic imagines a single large operator. Phases A–E describe the schematic: accumulation includes the preliminary support, selling climax (SC), automatic rally (AR), secondary test (ST), Spring, sign of strength (SOS) and last point of support (LPS); distribution mirrors this with the buying climax (BC), upthrust after distribution (UTAD) and sign of weakness (SOW).",
+      "plain_definition": "The Wyckoff Method is a hundred-year-old way of reading charts that assumes big players quietly build up positions over time. It splits the market into phases: accumulation, when large buyers are slowly collecting shares while price moves sideways, and distribution, when they are quietly selling to the crowd near the top. Traders look for tell-tale events inside those sideways ranges, like a Spring (a brief dip below the range that quickly reverses) or an upthrust (the opposite at the top), and compare volume with how far price actually moves.",
       "tools_and_defaults": "Price and real volume, optional point-and-figure for \"cause\" counts, and relative strength versus the index.",
       "rules": {
         "entry": "Long on a Spring (a brief break below range support that quickly reclaims it) or on a test, or on the LPS after the SOS. Mirror the logic in distribution with an upthrust/UTAD for shorts.",
@@ -1243,6 +1254,7 @@
       "summary_one_line": "Interprets each bar's spread (range), close location and volume to infer professional buying or selling.",
       "public_teaser": "Explore how Volume Spread Analysis interprets the relationship between bar range, closing position and volume.",
       "core_concept": "Developed by Tom Williams from Wyckoff ideas. Signals include \"no demand\" (an up bar on narrow spread with low volume), \"stopping volume\", \"test\" and \"upthrust\". The core idea is effort versus result.",
+      "plain_definition": "Volume Spread Analysis looks at three things on every bar: how tall the bar is (its range, or spread), where it closed within that range, and how much volume traded. The idea is effort versus result. If huge volume produces only a tiny price move, something is absorbing the buying or selling. If price rises on very low volume, there may be no real demand behind it. Traders read these mismatches as clues about what large participants are doing.",
       "tools_and_defaults": "Bar chart with volume and a volume moving average for relative comparison.",
       "rules": {
         "entry": "In context (background strength or weakness), a low-volume test after stopping volume prompts a long (mirror for shorts).",
@@ -1352,6 +1364,7 @@
       "summary_one_line": "Organises price by time spent at each level (TPO), to see where the market finds \"fair value\" and where it rejects price.",
       "public_teaser": "Explore how Market Profile organizes trading activity by time at price to describe value and balance.",
       "core_concept": "Developed by J. Peter Steidlmayer at the Chicago Board of Trade in the 1980s. Markets auction to facilitate trade: they move away from balance to find new participants, then rotate. Key elements are the value area (about 70% of TPOs), the point of control, the initial balance (first hour), single prints, and day types (normal, trend, double distribution).",
+      "plain_definition": "Market Profile is a different way of drawing a chart: instead of showing price over time, it stacks up how much time the market spent at each price during the day. The prices where it spent the most time form the value area, which is where buyers and sellers broadly agreed. Prices it only touched briefly were rejected. Traders use this to tell a balanced, back-and-forth day from a trending day, and to see where the market considers fair value.",
       "tools_and_defaults": "30-minute TPO periods; value area 70%; initial balance = first 60 minutes of the regular session.",
       "rules": {
         "entry": "The \"80% rule\": if price opens outside the prior value area and re-enters it for two TPO periods, traders look for a traverse to the other side. Also: initial-balance breakouts on trend days.",
@@ -1461,6 +1474,7 @@
       "summary_one_line": "Plots traded volume at each price to find high-volume \"acceptance\" and low-volume \"rejection\" areas.",
       "public_teaser": "Explore how Volume Profile maps where trading activity concentrated and how traders reference those levels.",
       "core_concept": "High-volume nodes (HVN) act as magnets or balance areas; low-volume nodes (LVN) are where price moved through quickly and may move quickly again. The point of control (POC) is the single price with the most volume, and the value area is about 70% of volume.",
+      "plain_definition": "Volume Profile shows how much trading happened at each price level, drawn as a sideways bar chart along the edge of your screen. Prices with a lot of volume (a High Volume Node) are places the market accepted and may return to; prices with very little (a Low Volume Node) are places it rushed through and may rush through again. The single price with the most volume is the Point of Control. Traders use these levels the same way others use support and resistance.",
       "tools_and_defaults": "Session, visible-range or fixed-range profile; 70% value area.",
       "rules": {
         "entry": "Fade moves into HVNs or the POC in balance; expect fast travel through LVNs. Take breakouts from value with acceptance outside it.",
@@ -1572,6 +1586,7 @@
       "summary_one_line": "Looks inside each bar at aggressive buying versus selling (bid/ask volume, delta, imbalances, absorption).",
       "public_teaser": "Explore how footprint charts and delta break down buying and selling activity inside each price bar.",
       "core_concept": "Price moves when aggressive orders overwhelm resting liquidity. Signals include stacked imbalances, absorption (heavy aggression without price progress), delta divergence and exhaustion. Order flow is well established academically as a driver of price — Evans and Lyons' widely cited FX research tied inter-dealer order flow to exchange-rate moves — but that's different from showing retail footprint-pattern rules are profitable.",
+      "plain_definition": "Order flow means looking inside each candle to see the actual buying and selling that happened, not just where price ended up. A footprint chart shows, at every price, how much was bought aggressively versus sold aggressively; the difference is called delta. Traders look for moments where heavy buying fails to lift price (absorption) or where one side clearly dominates (an imbalance). It is the most detailed view of a market available, and also the most demanding to read.",
       "tools_and_defaults": "Footprint/cluster charts, cumulative delta, DOM (Level 2), time and sales.",
       "rules": {
         "entry": "At a key level, absorption plus a delta flip leads to an entry in the absorbing side's direction.",
@@ -1682,6 +1697,7 @@
       "summary_one_line": "Starts a volume-weighted average price from a chosen event (earnings, a swing low, a gap) to estimate participants' average cost since that event.",
       "public_teaser": "Explore how anchored VWAP measures the average traded price since a chosen event and how traders reference it.",
       "core_concept": "Popularised by Brian Shannon. Since an event, the anchored VWAP shows whether buyers (or sellers) are, on average, in profit. Reclaims and losses of the line mark shifts in control. VWAP is genuinely used by institutions as an execution benchmark, but that doesn't make it a predictive level.",
+      "plain_definition": "VWAP stands for volume-weighted average price: the average price everyone has paid, giving more weight to prices where more shares traded. An anchored VWAP starts that calculation from a moment you choose, such as a big news day or a major low. The line then shows whether the people who bought since that event are, on average, sitting on a gain or a loss. Traders watch whether price holds above or below the line as a sign of who is in control.",
       "tools_and_defaults": "VWAP anchored at a significant bar, with optional standard-deviation bands.",
       "rules": {
         "entry": "In an uptrend, buy a pullback that holds the anchored VWAP from the last major low.",
@@ -1793,6 +1809,7 @@
       "summary_one_line": "A retail framework that interprets charts as the footprints of \"smart money\" engineering liquidity.",
       "public_teaser": "Explore the vocabulary of Smart Money Concepts, including order blocks, liquidity sweeps and fair value gaps, and the debate around them.",
       "core_concept": "Popularised online by Michael J. Huddleston (\"Inner Circle Trader\") and many derivative educators. Its claim is that large players run stops above and below obvious highs and lows (\"liquidity\"), then reverse. Key terms: order block (the last opposing candle before an impulsive move), fair value gap/FVG (a three-candle imbalance), break of structure / change of character, and session \"kill zones\" (time windows like the London and New York opens). \"Premium/discount\" is defined by a 50% retracement of the range.",
+      "plain_definition": "Smart money concepts is a popular online framework that reads charts as the footprints of large institutions. Its central claim is that big players deliberately push price past obvious highs and lows to trigger other traders' stop-loss orders, collecting their liquidity, and then reverse. It has its own vocabulary: an order block is the last candle before a sharp move, a fair value gap is a gap left by a very fast move, and a liquidity sweep is that stop-triggering push. It is widely taught and widely debated.",
       "tools_and_defaults": "Price only, with session times.",
       "rules": {
         "entry": "Wait for a liquidity sweep of a prior high or low, then a market structure shift on a lower timeframe, then enter on a retrace into the FVG or order block.",
@@ -1907,6 +1924,7 @@
       "summary_one_line": "Sees prices moving in fractal patterns of five waves with the trend and three against it.",
       "public_teaser": "Explore R.N. Elliott's wave principle, its counting rules, and why wave counts are debated.",
       "core_concept": "From Ralph Nelson Elliott (1930s), popularised by Frost and Prechter. Crowd psychology is said to produce repeating 5-3 structures at all degrees. Three hard rules apply in impulses: wave 2 never retraces more than 100% of wave 1, wave 3 is never the shortest, and wave 4 does not overlap wave 1. Fibonacci ratios are used for projections.",
+      "plain_definition": "Elliott Wave theory says markets move in a repeating rhythm driven by crowd mood: five waves in the direction of the trend, then three waves against it, with the same pattern appearing at every scale from minutes to decades. Traders try to work out which wave the market is currently in, because that suggests what should come next. Counting waves is partly a judgement call, which is why two analysts can look at the same chart and label it differently.",
       "tools_and_defaults": "Price, Fibonacci tools, and optional oscillators (e.g. MACD for wave 3 or 5 divergence).",
       "rules": {
         "entry": "At the end of wave 2 (targeting wave 3) or the end of wave 4.",
@@ -2023,6 +2041,7 @@
       "summary_one_line": "Identifies five-point XABCD structures whose legs match specific Fibonacci ratios, pointing to a \"potential reversal zone\" (PRZ).",
       "public_teaser": "Explore the XABCD harmonic patterns and how their Fibonacci ratio rules are defined.",
       "core_concept": "Developed from H.M. Gartley (1935) and later Scott Carney and Larry Pesavento. Typical definitions: Gartley (B at 61.8% of XA, D at 78.6%), Bat (B at 38.2–50%, D at 88.6%), Butterfly (B at 78.6%, D at 127–161.8%), Crab (D at 161.8% of XA).",
+      "plain_definition": "Harmonic patterns are zig-zag shapes made of four price swings, labelled with the letters X, A, B, C and D. What makes them special is that the length of each swing is meant to match specific Fibonacci ratios of the others. When the final swing reaches the predicted spot, called the Potential Reversal Zone, traders look for the market to turn. The named patterns (Gartley, Bat, Butterfly, Crab) differ only in which ratios they require.",
       "tools_and_defaults": "XABCD drawing tool, Fibonacci ratios, tolerance bands.",
       "rules": {
         "entry": "In the PRZ at point D with a confirmation candle.",
@@ -2134,6 +2153,7 @@
       "summary_one_line": "Uses geometric angles, numerical squares and time cycles attributed to W.D. Gann to forecast support, resistance and turning dates.",
       "public_teaser": "Explore W.D. Gann's angles, squares and time cycles and the long-running debate about them.",
       "core_concept": "Price and time are said to be linked. The 1×1 angle represents one unit of price per unit of time. The Square of Nine maps numbers onto a spiral. Anniversary and cycle dates are used for timing. Many claims derive from Gann's own marketing in the early 20th century.",
+      "plain_definition": "Gann methods come from W.D. Gann, a trader from the early 1900s who believed price and time were linked by geometry. His tools include Gann angles (diagonal lines drawn at fixed slopes from a major high or low), the Square of Nine (a spiral of numbers used to find price levels), and the idea that markets turn on predictable dates. The approach has a loyal following, but how you scale the chart changes the results, which is a common criticism.",
       "tools_and_defaults": "Gann fan, box and square tools. The choice of price-to-time scaling is critical and arbitrary.",
       "rules": {
         "entry": "Price above the 1×1 angle from a major low is read as bullish; breaks of angles signal a shift to the next angle.",
@@ -2246,6 +2266,7 @@
       "summary_one_line": "Looks for price zones where several Fibonacci retracements and extensions from different swings overlap, and treats them as higher-interest areas.",
       "public_teaser": "Explore how traders combine multiple Fibonacci measurements to find overlapping zones of interest.",
       "core_concept": "Clustering of independent measurements is said to strengthen a level. Statistically, more lines raise the chance of a coincidental \"hit\".",
+      "plain_definition": "Confluence just means several clues pointing at the same place. Here, traders draw Fibonacci retracement and extension levels from more than one price swing, then look for a narrow zone where two or three of those lines land on top of each other. The thinking is that a level flagged by several measurements is more significant than one flagged by a single line. The honest caveat is that drawing lots of lines also makes accidental overlaps more likely.",
       "tools_and_defaults": "Multiple retracements and extensions (e.g. 61.8% of the large swing plus 127.2% of the smaller swing), and time Fibonacci.",
       "rules": {
         "entry": "At the cluster, with confirmation.",
@@ -2358,6 +2379,7 @@
       "summary_one_line": "Assumes prices contain repeating, roughly regular cycles and tries to time troughs and peaks.",
       "public_teaser": "Explore how cycle analysts look for recurring rhythms in price and the limits of that approach.",
       "core_concept": "J.M. Hurst's \"Profit Magic of Stock Transaction Timing\" (1970) proposed nested, harmonically related cycles. Modern tools (e.g. John Ehlers' DSP indicators) estimate a \"dominant cycle\".",
+      "plain_definition": "Cycle analysis assumes markets rise and fall in roughly regular rhythms, a bit like tides, and tries to measure how long those rhythms are. If a market has tended to bottom out every six weeks or so, a cycle analyst will look for the next low around the same spacing. Tools range from simple indicators that strip out the long-term trend to more mathematical methods that search for a dominant cycle. The rhythms are never perfectly regular, which is the main difficulty.",
       "tools_and_defaults": "Detrended Price Oscillator, Hurst cycle envelopes, Ehlers indicators, spectral analysis.",
       "rules": {
         "entry": "Buy near projected cycle troughs that are confirmed by price.",
@@ -2468,6 +2490,7 @@
       "summary_one_line": "A multi-line Japanese system that shows trend, momentum, and support/resistance through a \"cloud\".",
       "public_teaser": "Explore how the Ichimoku system's lines and cloud are combined to frame trend and equilibrium.",
       "core_concept": "Developed by Goichi Hosoda (published 1969). Midpoint-based lines reflect equilibrium. Advanced use adds Hosoda's time theory and wave/price-target principles beyond the basic signals.",
+      "plain_definition": "Ichimoku is a Japanese charting system that puts five lines on the chart at once, including a shaded area called the cloud. Together they are meant to show the trend, its strength, and likely support and resistance in a single glance: price above the cloud is read as an uptrend, below it as a downtrend, and inside it as undecided. The advanced version adds the system's original ideas about timing and price targets, which go well beyond the basic cloud signals.",
       "tools_and_defaults": "Tenkan 9, Kijun 26, Senkou B 52, with a 26-period displacement.",
       "rules": {
         "entry": "Long when price is above the cloud, Tenkan is above Kijun, Chikou is above price from 26 periods ago, and the future cloud is bullish.",
@@ -2580,6 +2603,7 @@
       "summary_one_line": "Chart types that ignore time and plot only meaningful price moves, which filters out noise.",
       "public_teaser": "Explore time-independent chart types that only plot price changes beyond a set size.",
       "core_concept": "By plotting only moves of a set size (a Renko brick, or a P&F box with a 3-box reversal), trends and breakouts appear cleaner. P&F has a long history in US equities (e.g. Dorsey Wright's work) and supports \"vertical count\" price objectives.",
+      "plain_definition": "Most charts move one step to the right every minute or day whether or not price changed. Renko, Kagi and Point-and-Figure charts ignore time completely and only draw something when price moves by a chosen amount. A Renko chart adds a brick for each step up or down; Point-and-Figure stacks Xs for rises and Os for falls. Because small wiggles never get drawn, trends and breakouts look much cleaner, at the cost of not seeing exactly when things happened.",
       "tools_and_defaults": "Renko: brick size from ATR(14), or fixed. P&F: box size by price scale or percentage, 3-box reversal. Kagi: reversal amount.",
       "rules": {
         "entry": "P&F: buy on a double-top breakout (an X column exceeds the prior X column). Renko: trade a brick colour change (e.g. two bricks).",
@@ -2694,6 +2718,7 @@
       "summary_one_line": "A complete rule set teaching novice traders (the \"Turtles\", 1983) to buy new highs and sell new lows, with volatility-based sizing.",
       "public_teaser": "Explore the rule set behind the famous Turtle experiment, including breakouts, volatility sizing and exits.",
       "core_concept": "Richard Dennis and William Eckhardt's experiment in whether trading could be taught, building on Richard Donchian's channel. The edge, if any, comes from capturing rare large trends across many markets while limiting losses.",
+      "plain_definition": "Turtle Trading is a complete rule set from a famous 1983 experiment in which two traders taught a group of beginners to trade. The core rule is simple: buy when price makes a new high for the last 20 or 55 days, sell when it makes a new low, and get out when it reverses by a set amount. The rest of the system is about how much to risk, using the market's recent volatility to size every position. It is a pure trend-following approach, built to catch a few very large moves.",
       "tools_and_defaults": "System 1: enter on a 20-day breakout, exit on a 10-day opposite breakout, skip the next signal after a win, with a 55-day failsafe. System 2: enter on a 55-day breakout, exit on a 20-day opposite breakout. N = the 20-day ATR; unit sizing sets 1N of movement to about 1% of equity. Stop at 2N; pyramid every ½N, up to 4 units.",
       "rules": {
         "entry": "A 20-day (System 1) or 55-day (System 2) breakout.",
@@ -2807,6 +2832,7 @@
       "summary_one_line": "Holds each market long if its past return (e.g. 12 months) is positive and short if negative, sized so each position contributes similar risk.",
       "public_teaser": "Explore the systematic trend-following approach studied by academics and used by many managed-futures funds.",
       "core_concept": "Trends persist for months, perhaps because of under-reaction and then over-reaction, along with behavioural biases and non-profit-seeking participants such as central banks and hedgers. Diversifying across dozens of markets is central.",
+      "plain_definition": "Time-series momentum is the simple observation that markets which have gone up over the past year have, on average, tended to keep going up for a while, and the same for markets going down. A trader using it checks each market's return over the last few months, holds it if positive and sells it short if negative, then repeats the check every month. Positions are sized so that jumpier markets get smaller bets. It is usually run across dozens of markets at once rather than one.",
       "tools_and_defaults": "Lookbacks of 1, 3 and 12 months. Volatility targeting (e.g. scaling by inverse ex-ante volatility).",
       "rules": {
         "entry": "Monthly rebalance; the sign of the past return sets the direction.",
@@ -2916,6 +2942,7 @@
       "summary_one_line": "Buys short, sharp pullbacks in long-term uptrends using an ultra-short 2-period RSI, and exits on a quick bounce.",
       "public_teaser": "Explore Larry Connors' short-term pullback framework based on a 2-period RSI and a long-term trend filter.",
       "core_concept": "In equity indices, very short-term declines within uptrends have historically tended to partially reverse. This links to the academic \"short-term reversal\" effect in stocks, documented by Jegadeesh (1990) and Lehmann.",
+      "plain_definition": "This is a short-term dip-buying method for stock markets that are in a long-term uptrend. It uses an unusually fast version of the RSI, measured over only two days, which drops to extreme lows after a couple of sharp down days. The rule is to buy when that happens, as long as the market is still above its long-term moving average, and to sell a few days later once price bounces back above a short moving average. It is designed to be in a trade only briefly.",
       "tools_and_defaults": "200-day SMA, RSI(2), 5-day SMA. A related \"ConnorsRSI\" composite combines RSI(3), streak RSI(2) and percent rank (100).",
       "rules": {
         "entry": "Price closes above the 200-day SMA, and RSI(2) closes below 5 (or 10) — buy at the close.",
@@ -3028,6 +3055,7 @@
       "summary_one_line": "Uses three \"screens\": a longer timeframe for trend, an intermediate oscillator for pullbacks, and a short-term trigger for entry.",
       "public_teaser": "Explore Dr. Alexander Elder's three-screen process for aligning trend, pullback and entry timing.",
       "core_concept": "From Alexander Elder's \"Trading for a Living\" (1993). Trend indicators and oscillators contradict each other, so use each on its proper timeframe.",
+      "plain_definition": "Elder Triple Screen is a step-by-step process rather than a single indicator. First screen: look at a longer timeframe (for example the weekly chart) and only trade in the direction of that trend. Second screen: drop to a shorter timeframe (the daily) and wait for a pullback against that trend, using an oscillator to spot it. Third screen: enter only when price starts moving back in the trend direction. The point is to stop trend tools and oscillators from giving you conflicting advice.",
       "tools_and_defaults": "Screen 1 (weekly): MACD histogram slope or 13-week EMA. Screen 2 (daily): Force Index (2-day EMA) or Stochastic/Williams %R. Screen 3: a trailing buy-stop above the prior day's high.",
       "rules": {
         "entry": "In a weekly uptrend, wait for a daily oscillator dip, then enter on a break of the prior day's high.",
@@ -3141,6 +3169,7 @@
       "summary_one_line": "Flags periods when Bollinger Bands contract inside Keltner Channels (a volatility \"squeeze\"), then trades the release in the direction of momentum.",
       "public_teaser": "Explore how traders identify volatility compression using Bollinger Bands and Keltner Channels.",
       "core_concept": "Volatility mean-reverts: quiet periods tend to be followed by expansion. John Carter popularised the TTM Squeeze, with a momentum histogram for direction.",
+      "plain_definition": "A squeeze is a period when the market goes unusually quiet and its price range narrows. The TTM Squeeze spots this by overlaying two sets of bands, Bollinger Bands and Keltner Channels, and flagging the moment the Bollinger Bands shrink inside the Keltner Channels. The idea is that calm periods tend to be followed by sharp moves. When the bands pop back out, the squeeze has fired, and a momentum bar underneath suggests which direction to lean.",
       "tools_and_defaults": "BB(20, 2), Keltner(20, 1.5×ATR), and a linear-regression momentum histogram.",
       "rules": {
         "entry": "The squeeze is \"on\" when the BB are inside the KC; enter when it \"fires\" (BB exit KC) in the histogram's direction.",
@@ -3253,6 +3282,7 @@
       "summary_one_line": "Goes long one asset and short a closely related one when their price relationship diverges, and closes when it converges.",
       "public_teaser": "Explore how pairs trading looks at the relationship between two related assets rather than the direction of one.",
       "core_concept": "Two economically linked instruments' prices (normalised, or with a cointegrated spread) tend to revert after divergence. The strategy aims to be market-neutral.",
+      "plain_definition": "Pairs trading means picking two assets that normally move together, such as two similar companies, and betting on the difference between them rather than on the overall market. When one drifts unusually far from the other, you buy the laggard and sell short the leader, expecting the difference to close. Because you hold one of each, a general market rise or fall affects you much less. Measuring whether that difference is unusual is usually done with a z-score or a test called cointegration.",
       "tools_and_defaults": "Distance method (Gatev and co-authors): a 12-month formation period, picking pairs with the minimum squared distance between normalised prices, opening at a 2-standard-deviation divergence. Alternatives: cointegration (Engle-Granger) and z-score of the spread.",
       "rules": {
         "entry": "A 2-standard-deviation divergence between the pair.",
@@ -3365,6 +3395,7 @@
       "summary_one_line": "Uses relationships between bonds, stocks, commodities and the dollar to judge the context and likely leadership for a market.",
       "public_teaser": "Explore how traders compare related markets to understand the broader backdrop for a chart.",
       "core_concept": "Popularised by John Murphy. Markets are linked through rates, inflation and growth (e.g. falling yields support equities, and a rising dollar pressures commodities). The relationships drift over time, and stock–bond correlation has changed sign across eras.",
+      "plain_definition": "Intermarket analysis is the habit of looking at several big markets side by side, mainly stocks, bonds, commodities and the US dollar, because they influence each other. For example, a strongly rising dollar tends to weigh on commodity prices, and falling interest rates often help stocks. Rather than giving you a trade on its own, it is used as background: a way to check whether the wider picture supports or contradicts what you are seeing on one chart.",
       "tools_and_defaults": "Ratio charts, correlation coefficients, relative strength between assets.",
       "rules": {
         "entry": "Used as a filter, e.g. favour equity longs when bonds and the advance-decline line confirm.",
@@ -3475,6 +3506,7 @@
       "summary_one_line": "Compares RSI swings with price swings to spot weakening momentum.",
       "public_teaser": "Explore how traders compare RSI swings with price swings to spot weakening momentum.",
       "core_concept": "Price makes a higher high while RSI makes a lower high (bearish divergence), or the reverse (bullish).",
+      "plain_definition": "Divergence is when price and an indicator disagree. With the RSI, a bearish divergence happens when price pushes to a new high but the RSI makes a lower high than before, suggesting the move is running out of steam even though price is still rising. A bullish divergence is the mirror image at a low. Traders treat it as an early warning, not a trigger, and usually wait for price itself to confirm by breaking a recent swing.",
       "tools_and_defaults": "RSI(14).",
       "rules": {
         "entry": "On a confirmation break of the swing (a trendline or the prior bar).",
@@ -3585,6 +3617,7 @@
       "summary_one_line": "Watches differences between MACD and price swings as a sign of a momentum shift.",
       "public_teaser": "Explore how differences between MACD and price swings are read as momentum shifts.",
       "core_concept": "MACD(12, 26, 9) histogram or line peaks diverging from price.",
+      "plain_definition": "This is the same divergence idea applied to the MACD indicator. If price makes a higher high but the MACD peaks lower than last time, the momentum behind the rise is fading, which sometimes comes before a turn. The opposite pattern at market lows is read as momentum quietly building. Because divergences can go on for a long time before anything happens, traders normally wait for a crossover or a break in price structure before acting.",
       "tools_and_defaults": "MACD(12, 26, 9).",
       "rules": {
         "entry": "On confirmation via a signal-line cross or a structure break.",
@@ -3694,6 +3727,7 @@
       "summary_one_line": "Compares closing prices with recent ranges to flag stretched conditions.",
       "public_teaser": "Explore how the Stochastic oscillator compares closing prices with recent ranges.",
       "core_concept": "The close's position within the N-period range (George Lane).",
+      "plain_definition": "The Stochastic oscillator asks a simple question: where did the market close compared with its highest and lowest prices over the last couple of weeks? A reading near 100 means it closed right at the top of its recent range; near 0 means right at the bottom. Readings above 80 are called overbought and below 20 oversold. Traders look for the indicator to turn back from those zones, ideally in the direction of the bigger trend, as a sign the latest push is tiring.",
       "tools_and_defaults": "Slow Stochastic (14, 3, 3); 80/20 levels.",
       "rules": {
         "entry": "Buy a %K/%D cross up from below 20 in an uptrend (mirror for shorts).",
@@ -3800,6 +3834,7 @@
       "summary_one_line": "Measures deviation from a typical price average for either momentum or reversion reads.",
       "public_teaser": "Explore how the CCI measures deviation from a typical price average.",
       "core_concept": "Donald Lambert (1980). Typical price deviation, scaled by mean deviation.",
+      "plain_definition": "The CCI is an indicator that measures how far today's price sits from its recent average, scaled so most readings fall between -100 and +100. Pushing above +100 means price is unusually strong; dropping below -100 means unusually weak. Traders use it two opposite ways: some treat a move beyond those lines as the start of a strong trend to join, while others treat a return back inside them as a sign an overstretched move is reversing.",
       "tools_and_defaults": "CCI(20); ±100 levels.",
       "rules": {
         "entry": "Trend entries: a cross above +100. Reversion: a cross back from ±100 extremes.",
@@ -3907,6 +3942,7 @@
       "summary_one_line": "Locates the close within the recent high-low range to flag reversion points.",
       "public_teaser": "Explore how Williams %R locates the close within the recent high-low range.",
       "core_concept": "Larry Williams' inverted stochastic-type oscillator.",
+      "plain_definition": "Williams %R is a close cousin of the Stochastic oscillator. It measures where the latest close sits within the recent high-to-low range, but it runs on a scale from 0 down to -100. Readings above -20 mean price closed near the top of its range (overbought); below -80 means near the bottom (oversold). Traders typically look for a turn back up from below -80 while the bigger trend is still rising, as a possible place to buy a dip.",
       "tools_and_defaults": "%R(14); −20/−80 levels.",
       "rules": {
         "entry": "Buy on a reversal up from below −80 within an uptrend.",
@@ -4014,6 +4050,7 @@
       "summary_one_line": "Measures the speed of price movement over a set period.",
       "public_teaser": "Explore how rate-of-change measures the speed of price movement over a set period.",
       "core_concept": "The percentage change over N periods. A positive reading means upward momentum.",
+      "plain_definition": "Rate of change is about as simple as an indicator gets: it shows the percentage that price has moved over a set number of periods, such as the last 12 days. Above zero means price is higher than it was then; below zero means lower. Traders use the line crossing zero as a basic trend signal, and the steepness of the line as a measure of momentum, meaning how fast the market is moving rather than just which way.",
       "tools_and_defaults": "ROC(12) or ROC(125/250) for longer-term use.",
       "rules": {
         "entry": "Long when ROC crosses above zero (optionally with a filter).",
@@ -4119,6 +4156,7 @@
       "summary_one_line": "Ranks assets by recent performance to focus on relative leaders.",
       "public_teaser": "Explore how traders rank assets by recent performance to focus on relative leaders.",
       "core_concept": "Assets that outperformed over the past 3–12 months have historically tended to keep outperforming in the short to medium term, per the academic momentum literature starting with Jegadeesh and Titman (1993). This is not the same as RSI.",
+      "plain_definition": "Relative strength here means comparing assets against each other, not the RSI indicator. The idea is that assets which have outperformed over the past several months have tended to keep outperforming for a while. A rotation strategy ranks a list of assets by their recent returns, holds the strongest few, and re-checks the ranking every month, swapping out anything that has dropped down the list. It is a way of always leaning towards what is currently working.",
       "tools_and_defaults": "Ratio charts, 6- or 12-month returns, ranking.",
       "rules": {
         "entry": "Hold the top-ranked assets and rebalance monthly.",
@@ -4224,6 +4262,7 @@
       "summary_one_line": "Tracks cumulative volume flow alongside price to confirm or question a move.",
       "public_teaser": "Explore how On-Balance Volume tracks cumulative volume flow alongside price.",
       "core_concept": "Joseph Granville. Volume is added on up days and subtracted on down days, so OBV trends may confirm or diverge from price.",
+      "plain_definition": "On-Balance Volume is a running total: on days the market closes higher, that day's volume is added; on days it closes lower, it is subtracted. The result is a line that should rise with a healthy uptrend and fall with a healthy downtrend. Traders use it as a lie detector for price. If price is making new highs but OBV is not, the rally may lack real participation; if OBV breaks out before price does, buyers may be stepping in early.",
       "tools_and_defaults": "OBV, optionally with its own MA.",
       "rules": {
         "entry": "Confirm breakouts with an OBV breakout.",
@@ -4327,6 +4366,7 @@
       "summary_one_line": "Measures trend strength and direction using ADX and the directional indicators.",
       "public_teaser": "Explore how ADX and the directional indicators measure trend strength and direction.",
       "core_concept": "Wilder (1978). +DI/−DI give direction, and ADX gives strength regardless of direction.",
+      "plain_definition": "The ADX answers one question: how strongly is this market trending right now, regardless of direction? It runs from 0 to 100, and readings above about 25 are usually taken to mean a real trend is underway, while low readings suggest choppy, directionless trading. Two companion lines, +DI and -DI, show whether buyers or sellers currently have the upper hand. Traders often use ADX as a filter, only following trend signals when it says a trend actually exists.",
       "tools_and_defaults": "ADX(14); threshold of about 20–25.",
       "rules": {
         "entry": "Trade +DI/−DI crosses only when ADX is above 25.",
@@ -4435,6 +4475,7 @@
       "summary_one_line": "Uses an ATR-based band that flips above or below price to define a trailing trend line.",
       "public_teaser": "Explore how the Supertrend indicator uses volatility to define a trailing trend line.",
       "core_concept": "An ATR-based band that flips above or below price (attributed to Olivier Seban).",
+      "plain_definition": "Supertrend is a single line that sits below price in an uptrend and above price in a downtrend, flipping sides when the market reverses by more than its typical daily swing. That swing size comes from ATR, a measure of volatility, so the line gives price more room when the market is wild and less when it is calm. Traders stay long while price is above the line and treat a flip as the signal to exit or reverse. It doubles as a trailing stop-loss.",
       "tools_and_defaults": "ATR period 10, multiplier 3 (TradingView default).",
       "rules": {
         "entry": "Long when price closes above the line (the line turns green).",
@@ -4544,6 +4585,7 @@
       "summary_one_line": "Trails price with an accelerating stop-and-reverse level.",
       "public_teaser": "Explore how Parabolic SAR trails price with an accelerating stop-and-reverse level.",
       "core_concept": "Wilder. The stop accelerates as the trend extends.",
+      "plain_definition": "Parabolic SAR draws a trail of dots below price during an uptrend and above it during a downtrend. The dots start far from price and creep closer the longer the trend lasts, which is where the name comes from: SAR stands for stop and reverse. When price touches the dots, the trend is considered over and the dots jump to the other side. It is designed to keep you in a strong trend while slowly tightening your exit as the move matures.",
       "tools_and_defaults": "Step 0.02, maximum 0.2.",
       "rules": {
         "entry": "Always in the market, often filtered with ADX.",
@@ -4652,6 +4694,7 @@
       "summary_one_line": "Averages price data into modified candles to display trends more smoothly.",
       "public_teaser": "Explore how Heikin-Ashi candles average price data to display trends more smoothly.",
       "core_concept": "Modified candles: close = (O+H+L+C)/4, open = average of the prior HA open and close. Consecutive same-colour candles with no opposing wick suggest a strong trend.",
+      "plain_definition": "Heikin-Ashi candles look like normal candlesticks but are drawn from averaged prices, which smooths out the chart. In a strong uptrend they tend to come out as a run of green candles with no wick underneath; in a strong downtrend, red candles with no wick on top. Small-bodied candles with wicks on both sides suggest the trend is losing steam. Traders use them to stay in a trend longer without being shaken out by every small wobble.",
       "tools_and_defaults": "A built-in chart type on most platforms.",
       "rules": {
         "entry": "On a colour change with confirmation.",
@@ -4760,6 +4803,7 @@
       "summary_one_line": "Uses Average True Range to size stops and define volatility-based breakouts.",
       "public_teaser": "Explore how Average True Range is used to size stops and define volatility-based breakouts.",
       "core_concept": "ATR (Wilder) measures typical range. Breakouts of more than k×ATR from a reference (the prior close or open) signal expansion. ATR stops adapt to volatility; Chandelier exits trail by 3×ATR from the highest high.",
+      "plain_definition": "ATR, or Average True Range, measures how far a market typically moves in a day. This method uses that number two ways. For entries, it treats a move larger than the usual range, say one and a half times the ATR from the open, as a breakout worth following. For exits, it places the stop-loss a set number of ATRs away from price, so the stop is wider in jumpy markets and tighter in calm ones, instead of using a fixed distance that ignores conditions.",
       "tools_and_defaults": "ATR(14), multiples of 1.5–3.",
       "rules": {
         "entry": "Price exceeds the open plus k×ATR.",
@@ -4868,6 +4912,7 @@
       "summary_one_line": "Frames price around an average using ATR-based bands for trend and pullback reads.",
       "public_teaser": "Explore how Keltner Channels frame price around an average using ATR-based bands.",
       "core_concept": "An EMA plus or minus an ATR multiple. Closes outside the band show trend strength, and pullbacks to the EMA are entries.",
+      "plain_definition": "Keltner Channels are a moving average with two bands above and below it, spaced by a multiple of the ATR, so they breathe with the market's volatility. When price keeps closing above the upper band, the trend is considered strong. The strategy waits for price to dip back towards the middle line, the pullback, and looks to buy there, aiming for a return to the upper band. It is a structured way of buying dips in a trend you can see is already underway.",
       "tools_and_defaults": "EMA 20, ATR 10, ×2 (StockCharts default).",
       "rules": {
         "entry": "In an uptrend (closes above the upper band), buy a pullback to the middle EMA.",
@@ -4976,6 +5021,7 @@
       "summary_one_line": "Waits for pullbacks to a moving average within an established trend.",
       "public_teaser": "Explore how traders wait for pullbacks to a moving average within an established trend.",
       "core_concept": "In trends, retracements to a dynamic average (e.g. the 20 or 50 EMA) offer defined-risk continuation entries.",
+      "plain_definition": "In a steady uptrend, price rarely goes straight up; it rises, dips back a little, then rises again. This method waits for those dips to reach a moving average, such as the 20-day or 50-day line, and looks to buy there, betting that the trend will continue. A longer moving average, like the 200-day, is used as a filter to confirm the trend is genuinely up. The stop-loss goes below the low of the pullback, which keeps the risk on each trade defined.",
       "tools_and_defaults": "20/50 EMA plus a trend filter (200 SMA).",
       "rules": {
         "entry": "With price above a rising 50 EMA, buy a bullish reversal bar at the 20 EMA.",
@@ -5084,6 +5130,7 @@
       "summary_one_line": "Calculates reference support/resistance levels from the prior session using floor-trader formulas.",
       "public_teaser": "Explore how floor-trader pivot points calculate reference levels from the prior session.",
       "core_concept": "Standard formulas: P = (H+L+C)/3, R1 = 2P−L, S1 = 2P−H, R2 = P+(H−L), S2 = P−(H−L). Fibonacci, Camarilla and Woodie variants exist.",
+      "plain_definition": "Pivot points are support and resistance levels calculated from yesterday's high, low and close using a fixed formula, originally used by traders on exchange floors who needed quick reference points. The central pivot acts as a bias line for the day, with resistance levels (R1, R2) above it and support levels (S1, S2) below. Traders may look for price to turn at these levels on a quiet day, or to break through them on a trending day.",
       "tools_and_defaults": "Daily pivots for intraday; weekly pivots for swing.",
       "rules": {
         "entry": "Fade S1/R1 in ranges; trade breaks of R1/S1 in trends.",
@@ -5191,6 +5238,7 @@
       "summary_one_line": "Uses the session VWAP as a reference for intraday fair value, fading extremes or following pullbacks.",
       "public_teaser": "Explore how intraday traders use the session VWAP as a reference for fair value and trend.",
       "core_concept": "The session VWAP is the volume-weighted average price. Institutions use it as an execution benchmark. Price above a rising VWAP suggests buyers are in control. Extremes at 2–3 standard-deviation bands may revert.",
+      "plain_definition": "VWAP is the average price of the day so far, weighted by volume, so it reflects where most of the day's trading actually happened. Large institutions use it to judge whether they got a fair price. Day traders use it two ways: as a trend guide, buying a pullback to VWAP when price has been holding above it, and as a stretch gauge, betting that a price far above or below VWAP will drift back towards it. It resets at the start of every trading session.",
       "tools_and_defaults": "Session VWAP with standard-deviation bands.",
       "rules": {
         "entry": "Trend: buy the first pullback to VWAP in a strong open. Reversion: fade a band-extreme back to VWAP.",
@@ -5297,6 +5345,7 @@
       "summary_one_line": "Defines the first minutes of a session and plans around moves beyond that range.",
       "public_teaser": "Explore how traders define the first minutes of a session and plan around moves beyond that range.",
       "core_concept": "Associated with Toby Crabel's work (1990). The first 5–60 minutes set the day's initial balance, and a break may indicate the day's direction.",
+      "plain_definition": "The opening range is the high and low from the first few minutes of the trading session, often the first 15 or 30. Those early minutes are when overnight news and orders get digested, so the range they set is treated as a meaningful boundary. The strategy waits for price to break out above that high or below that low, then trades in that direction, with the opposite side of the range as the stop-loss. It is an intraday method and is finished by the close.",
       "tools_and_defaults": "First 5, 15 or 30 minutes' high/low; ATR; relative volume.",
       "rules": {
         "entry": "A break of the opening-range high.",
@@ -5404,6 +5453,7 @@
       "summary_one_line": "Two opposite approaches to price gaps at the open: fading small gaps back, or following large catalyst-driven gaps.",
       "public_teaser": "Explore the two opposite ways traders approach price gaps at the open.",
       "core_concept": "\"Gap fill\" assumes small, news-light gaps tend to retrace toward the prior close. \"Gap-and-go\" assumes large, catalyst-driven gaps on high volume continue.",
+      "plain_definition": "A gap is when a market opens noticeably higher or lower than where it closed the day before, leaving an empty space on the chart. There are two opposite ways to trade it. Gap fill assumes a small gap with no real news behind it will drift back to the previous close, so you trade against the gap. Gap-and-go assumes a large gap driven by genuine news and heavy volume will keep going, so you trade with it. Telling the two kinds apart is the whole skill.",
       "tools_and_defaults": "Pre-market and opening-range levels.",
       "rules": {
         "entry": "Fill: fade the gap. Go: buy a break of the pre-market or opening high.",
@@ -5506,6 +5556,7 @@
       "summary_one_line": "Marks narrow-range and inside bars as volatility contraction before expansion.",
       "public_teaser": "Explore how narrow-range and inside bars are used to mark volatility contraction.",
       "core_concept": "Crabel's NR4/NR7 (the narrowest range in 4 or 7 bars) and inside bars mark compression before expansion.",
+      "plain_definition": "An inside bar is a candle whose entire high-to-low range fits within the previous candle's range. An NR7 is the narrowest-range bar of the last seven. Both mean the market has gone quiet and compressed, and the thinking is that compression tends to be followed by expansion. Traders place one order to buy just above the quiet bar and one to sell just below it, then let whichever direction the market picks trigger the trade and cancel the other.",
       "tools_and_defaults": "NR4/NR7 range scans, or a simple inside-bar check.",
       "rules": {
         "entry": "A buy-stop above and a sell-stop below the bar, cancelling the other once one triggers.",
@@ -5612,6 +5663,7 @@
       "summary_one_line": "Century-old principles that define trends by sequences of highs and lows.",
       "public_teaser": "Explore the century-old principles that define trends by sequences of highs and lows.",
       "core_concept": "From Charles Dow and later Hamilton and Rhea: markets have three trends (primary, secondary, minor); primary trends have three phases; averages must confirm each other; volume confirms the trend; a trend persists until a definitive reversal.",
+      "plain_definition": "Dow Theory is the hundred-year-old foundation that most trend-following ideas sit on. Its key rule is a plain definition of a trend: an uptrend is a series of higher highs and higher lows, a downtrend a series of lower highs and lower lows, and the trend is assumed to continue until that sequence clearly breaks. It also says that volume should grow in the direction of the trend, and that different market averages should confirm each other.",
       "tools_and_defaults": "Price only.",
       "rules": {
         "entry": "An uptrend means higher highs and higher lows; enter in the direction of the confirmed trend.",
@@ -5721,6 +5773,7 @@
       "summary_one_line": "Marks areas where price left sharply as possible zones of unfilled orders.",
       "public_teaser": "Explore how traders mark areas where price left sharply as possible zones of unfilled orders.",
       "core_concept": "Zones are \"base\" candles before strong departures (rally-base-rally, drop-base-drop and similar). They assume unfilled institutional orders remain there, an idea close to the ICT order block.",
+      "plain_definition": "Supply and demand zones are small areas on a chart where price paused briefly and then took off sharply. A zone before a strong rise is called a demand zone; one before a sharp fall is a supply zone. The idea is that whoever was buying or selling there may not have finished, leaving orders waiting, so price could react when it returns. Traders mark these zones and watch the first time price comes back to them. It is a close relative of support and resistance.",
       "tools_and_defaults": "Manual zone marking on a price chart.",
       "rules": {
         "entry": "At the first return to a \"fresh\" zone.",
@@ -5829,6 +5882,7 @@
       "summary_one_line": "Three peaks with the middle one highest; a break of the neckline suggests a trend reversal.",
       "public_teaser": "Explore the head-and-shoulders reversal pattern and how its neckline and measured move are defined.",
       "core_concept": "Three peaks with the middle one highest. A break of the neckline suggests a trend reversal. Lo, Mamaysky and Wang defined it formally from five consecutive extrema.",
+      "plain_definition": "Head and shoulders is a classic chart pattern that can appear at the end of an uptrend. It is three peaks in a row: a left shoulder, a taller head in the middle, and a right shoulder roughly level with the first. A line drawn under the two dips between them is the neckline. The pattern is only considered complete when price falls through that neckline, which traders read as the uptrend turning into a downtrend. The upside-down version appears at market bottoms.",
       "tools_and_defaults": "Price chart, optional volume confirmation.",
       "rules": {
         "entry": "Short on a close below the neckline (or on a retest).",
@@ -5936,6 +5990,7 @@
       "summary_one_line": "Short consolidation patterns watched after strong moves, for continuation or reversal.",
       "public_teaser": "Explore short consolidation patterns that traders watch after strong moves.",
       "core_concept": "Flags and pennants are brief counter-trend consolidations after a sharp \"pole\", read as continuation. Rising and falling wedges have converging slopes, often read as reversal.",
+      "plain_definition": "These are small chart patterns that mark a pause after a sharp move. A flag is a short, tidy drift against the trend; a pennant is a small triangle; both usually end with price continuing in the direction of the original move, called the pole. A wedge is different: its sides slope the same way and squeeze together, and it is more often read as a sign the trend is about to reverse. In all three, traders wait for price to break out of the shape before acting.",
       "tools_and_defaults": "Price chart.",
       "rules": {
         "entry": "On a break in the pole direction (flags/pennants).",
@@ -6045,6 +6100,7 @@
       "summary_one_line": "A rounded U-shaped base with a small handle pullback, then a breakout to new highs.",
       "public_teaser": "Explore the rounded-base cup-and-handle pattern popularized in growth-stock investing.",
       "core_concept": "William O'Neil's base pattern: a rounded U-shaped base with a small handle pullback, then a breakout to new highs. Often combined with CAN SLIM fundamentals.",
+      "plain_definition": "Cup and handle is a chart pattern that looks like a teacup seen from the side. Price falls, rounds out gently, and climbs back to roughly its old high, forming the cup. It then slips back slightly to form a small handle before breaking out to new highs. It was popularised in growth-stock investing, where traders also want to see volume pick up on the breakout. The depth of the cup is used to estimate how far the move might run.",
       "tools_and_defaults": "Price and volume chart.",
       "rules": {
         "entry": "On a break of the handle high on rising volume.",
@@ -6149,6 +6205,7 @@
       "summary_one_line": "A framework for aligning a higher-timeframe trend with lower-timeframe entries, not a standalone signal.",
       "public_teaser": "Explore how traders align a higher-timeframe trend with lower-timeframe entries.",
       "core_concept": "Use a higher timeframe (about 4–6× longer) for direction and a lower one for timing.",
+      "plain_definition": "Multi-timeframe analysis means looking at the same market on more than one chart scale at once, for example the daily chart to see the overall direction and the one-hour chart to time an entry. The rule of thumb is to only take trades on the smaller timeframe that agree with the trend on the larger one. It is not a strategy by itself; it is a way of organising whatever strategy you already use so that you are not fighting the bigger picture.",
       "tools_and_defaults": "Any indicator or price-action method, applied on two or three timeframes at once.",
       "rules": {
         "entry": "Trade only in the higher-timeframe direction, timed on the lower timeframe.",
@@ -6259,6 +6316,7 @@
       "summary_one_line": "Compares how holding period changes costs, time commitment and risk — a style comparison, not a strategy.",
       "public_teaser": "Compare how holding period changes costs, time commitment and risk.",
       "core_concept": "Scalping (seconds to minutes): costs dominate, needs top-tier execution. Day trading (no overnight risk): base rates are poor — 97% of Brazilian day traders who persisted for more than 300 days lost money, with no evidence of learning. Swing (days to weeks): overnight and gap risk. Position (weeks to months): fewer trades and larger drawdowns, closest to the documented trend-following evidence.",
+      "plain_definition": "This page compares the four main holding periods rather than describing a single strategy. Scalping means being in and out within seconds or minutes, so trading costs matter enormously. Day trading closes everything before the market shuts, avoiding overnight surprises. Swing trading holds for days or weeks and accepts that prices can gap while you sleep. Position trading holds for months and sits closest to long-term investing. Each one demands a very different amount of time, discipline and cost tolerance.",
       "tools_and_defaults": "Not applicable — this is a comparison of holding periods, not a tool-based method.",
       "rules": "This page compares holding periods rather than giving entry/exit/stop rules of its own — see the individual strategy pages for those.",
       "typical_timeframes": [

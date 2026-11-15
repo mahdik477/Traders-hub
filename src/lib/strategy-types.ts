@@ -172,6 +172,11 @@ export type StrategyView = {
    *  results, only describe what the method is. */
   publicTeaser: string;
   coreConcept: string;
+  /** The beginner-friendly "what it is" shown right under the title — plain
+   *  English, a few sentences, technical terms kept to the ones the glossary
+   *  can explain on hover. coreConcept is the shorter, more technical
+   *  one-liner it replaced on the page. */
+  plainDefinition: string;
   toolsAndDefaults: string;
   rules: StrategyRules;
   typicalTimeframes: StrategyTimeframe[];

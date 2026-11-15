@@ -25,6 +25,7 @@ type RawStrategy = {
   summary_one_line: string;
   public_teaser: string;
   core_concept: string;
+  plain_definition?: string;
   tools_and_defaults: string;
   rules:
     | { entry: string; exit: string; stop: string }
@@ -80,6 +81,7 @@ function buildStrategy(r: RawStrategy): StrategyView {
     summaryOneLine: r.summary_one_line,
     publicTeaser: r.public_teaser,
     coreConcept: r.core_concept,
+    plainDefinition: r.plain_definition ?? r.core_concept,
     toolsAndDefaults: r.tools_and_defaults,
     rules: buildRules(r.rules),
     typicalTimeframes: r.typical_timeframes ?? [],

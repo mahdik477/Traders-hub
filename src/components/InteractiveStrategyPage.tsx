@@ -176,19 +176,18 @@ export default function InteractiveStrategyPage({
       />
 
       {/* What it actually is — the plain-English definition, right after
-          the title, before anything else. You should know what you're
-          looking at before you read the rules, try the simulator, or do
-          anything else on this page. */}
+          the title, before anything else. Written for someone who has never
+          traded: everyday words, and any technical term that is unavoidable
+          is one the glossary explains on hover (GlossaryText). You should
+          know what you're looking at before you read the rules, try the
+          simulator, or do anything else on this page. */}
       <section aria-labelledby="concept-heading" className="mt-10 max-w-3xl">
         <h2 id="concept-heading" className="text-sm font-bold uppercase tracking-wider text-accent scroll-mt-24">
           What it is
         </h2>
-        <blockquote
-          className="mt-3 border-l-4 border-accent pl-5 text-2xl font-medium italic leading-snug text-foreground sm:text-3xl"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          <GlossaryText text={s.coreConcept} />
-        </blockquote>
+        <div className="mt-3 border-l-4 border-accent pl-5 text-base leading-relaxed text-foreground sm:text-lg">
+          <GlossaryText text={s.plainDefinition} />
+        </div>
         {s.toolsAndDefaults && (
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">
             <strong className="font-semibold text-foreground">Tools &amp; defaults: </strong>
