@@ -1703,17 +1703,28 @@ input.signal-filter-search {
 
 /* The calm gold wash behind every PageIntro. */
 .page-glow {
+  /* Two radial washes that used to meet exactly at the point where both
+     hit 0% opacity - mathematically tangent, not overlapping, which read
+     as a visible seam (gold, then a hard edge, then black) rather than a
+     gradient. Widened so they overlap generously through the middle and
+     genuinely blend into one wash, with a softer multi-stop falloff so
+     neither one has a perceptible edge of its own. */
   background:
-    radial-gradient(60% 100% at 20% 0%, color-mix(in srgb, var(--color-gold) 16%, transparent), transparent 70%),
-    radial-gradient(40% 80% at 90% 10%, color-mix(in srgb, #2fb7a6 8%, transparent), transparent 70%);
+    radial-gradient(
+      90% 100% at 15% 0%,
+      color-mix(in srgb, var(--color-gold) 16%, transparent),
+      color-mix(in srgb, var(--color-gold) 5%, transparent) 55%,
+      transparent 100%
+    ),
+    radial-gradient(75% 90% at 95% 15%, color-mix(in srgb, #2fb7a6 8%, transparent), transparent 100%);
   mask-image: linear-gradient(to bottom, black, transparent);
   -webkit-mask-image: linear-gradient(to bottom, black, transparent);
 }
 
 :root[data-theme="light"] .page-glow {
   background:
-    radial-gradient(60% 100% at 20% 0%, rgb(168 122 31 / 0.14), transparent 70%),
-    radial-gradient(40% 80% at 90% 10%, rgb(47 183 166 / 0.08), transparent 70%);
+    radial-gradient(90% 100% at 15% 0%, rgb(168 122 31 / 0.14), rgb(168 122 31 / 0.045) 55%, transparent 100%),
+    radial-gradient(75% 90% at 95% 15%, rgb(47 183 166 / 0.08), transparent 100%);
 }
 
 /* Detail heroes pick up the terminal grid texture so firm/course/strategy
