@@ -174,7 +174,9 @@ function Panel({ intent, next, errorKey }: { intent: AuthIntent; next: string; e
 function AuthCard({ intent, next, errorKey, loading }: { intent: AuthIntent; next: string; errorKey: string | null; loading: boolean }) {
   const router = useRouter();
   const isSignUp = intent === "sign-up";
-  const [mode, setMode] = useState<"link" | "password">("link");
+  // Returning people most likely know their password, so /sign-in starts
+  // there; new people on /sign-up don't have one yet, so it starts on the link.
+  const [mode, setMode] = useState<"link" | "password">(isSignUp ? "link" : "password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -471,22 +473,17 @@ function AuthCard({ intent, next, errorKey, loading }: { intent: AuthIntent; nex
             </div>
 
             <div className="seg mb-4 w-full" role="group" aria-label={isSignUp ? "How to sign up with email" : "How to sign in with email"}>
-              <button
-                type="button"
-                aria-pressed={mode === "link"}
-                onClick={() => (setMode("link"), setError(null))}
-                className="seg-btn flex-1 justify-center"
-              >
-                Email link
-              </button>
-              <button
-                type="button"
-                aria-pressed={mode === "password"}
-                onClick={() => (setMode("password"), setError(null))}
-                className="seg-btn flex-1 justify-center"
-              >
-                Password
-              </button>
+              {(isSignUp ? (["link", "password"] as const) : (["password", "link"] as const)).map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  aria-pressed={mode === m}
+                  onClick={() => (setMode(m), setError(null))}
+                  className="seg-btn flex-1 justify-center"
+                >
+                  {m === "link" ? "Email link" : "Password"}
+                </button>
+              ))}
             </div>
 
             <form onSubmit={submit} className="space-y-3" noValidate>
