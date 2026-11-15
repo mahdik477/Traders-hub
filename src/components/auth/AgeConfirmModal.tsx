@@ -73,7 +73,8 @@ export default function AgeConfirmModal({
         </h2>
         <p id="age-desc" className="mt-2 text-muted">
           {SITE_NAME} is for adults. To use an account you need to confirm you&apos;re 18 or over. We store only
-          your user id, your email address and the time you confirmed. If you&apos;re under 18, the account
+          your user id, your email address and the time you confirmed — plus a password if you set one (stored hashed; we
+          never see it). If you&apos;re under 18, the account
           that was just created is deleted straight away — see the{" "}
           <Link href="/privacy" className="text-accent underline" target="_blank">
             privacy policy

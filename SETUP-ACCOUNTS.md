@@ -157,10 +157,12 @@ Do this in Google Cloud, then paste the result into Supabase.
 
 1. Open the site. A **Sign in** button should now appear in the header (top
    right) and a **My Hub** tab in the phone bottom bar.
-2. Click **Sign in → Email me a sign-in link**, use your own address, open the
-   email, click the link. You should land back on the site, see the
-   **"One quick check — I'm 18 or over"** box, confirm it, and then see your
-   initial in the header.
+2. Click **Sign in → Create an account** (this opens `/sign-up`) **→ Email me
+   a sign-up link**, use your own address, open the email, click the link. You
+   should land back on the site, see the **"One quick check — I'm 18 or
+   over"** box, confirm it, and then see your initial in the header.
+   (The **Sign in** page itself never creates an account from a typed email
+   address — that is on purpose, so a typo can't make one.)
 3. Save a firm (bookmark icon), open **My Hub** — it should be listed.
 4. Sign out, then try **Continue with Google**.
 5. In Supabase → **Table Editor → profiles** you should see one row: your user
@@ -180,9 +182,11 @@ Added 12 November 2026. Do these once, in this order:
 2. **Turn on password sign-in.** **Authentication → Providers → Email** →
    make sure email/password sign-in is enabled, set **minimum password
    length to 10**, and turn on **leaked-password protection** if your plan
-   offers it. Keep "Confirm email" on. Check **Email OTP Expiration** is
-   3600 seconds (1 hour) — our emails and sign-in page say "expires in 1
-   hour".
+   offers it. **Keep "Confirm email" on — never switch it off.** It is what
+   makes a password sign-up wait for the emailed link, and what stops the
+   Create account page from revealing which email addresses already have an
+   account. Check **Email OTP Expiration** is 3600 seconds (1 hour) — our
+   emails and the sign-in and sign-up pages say "expires in 1 hour".
 3. **Paste the branded emails.** Follow `supabase/templates/README.md`
    (Authentication → Emails → Magic Link / Confirm signup / Reset Password).
 4. **Check the redirect list.** Authentication → **URL Configuration** →
@@ -194,15 +198,60 @@ Added 12 November 2026. Do these once, in this order:
    and some plans only let you edit templates once a custom sender (SMTP) is
    connected. If the template editor is locked or "Too many requests" shows
    up while testing, that's why — setting up a sender is a founder decision.
-5. **Test:** sign in with an email link in a private window → you should land
-   on "Choose a password" → set one → sign out → sign in with the Password
-   tab → try "Forgot password?" → the reset email arrives and the link lets
-   you choose a new one.
+5. **Test:** create an account with an email link (`/sign-up`) in a private
+   window → you should land on "Choose a password" → set one → sign out →
+   sign in (`/sign-in`) with the Password tab → try "Forgot password?" → the
+   reset email arrives and the link lets you choose a new one.
+
+## Part 10 — Separate Sign in and Create account pages
+
+Added 15 November 2026. Nothing to change in Supabase — this is how the two
+pages behave, and what to test after the update goes live:
+
+- **`/sign-up` (Create your account)** is for new people. Google, an email
+  link, or **Create a password** (10+ characters; the "Confirm signup" email
+  is sent and the account works once its link is opened).
+- **`/sign-in`** is for people coming back. Its email link is sent **only if
+  the address already has an account** — a mistyped address no longer creates
+  an empty account.
+- **Neither page says whether an address has an account.** Both always show
+  "Check your inbox". Please don't ask for that to be "fixed": a page that
+  answered "that email isn't registered" would let anyone test a list of
+  addresses against our users.
+
+Test with two addresses, one that has an account (A) and one that doesn't (B):
+
+1. `/sign-in` → email link → **B**: "Check your inbox" appears, **no email
+   arrives**, and no new user shows up in Supabase → Authentication → Users.
+2. `/sign-in` → email link → **A**: same screen, the email arrives and signs
+   you in.
+3. `/sign-up` → Password → **B** + a 10+ character password: "Check your
+   inbox", the "Confirm your email" message arrives, its link signs you in,
+   and the 18+ box appears. Sign out, then sign in with that password.
+4. `/sign-up` → Password → **A** + any password: the same "Check your inbox"
+   screen. A normal sign-in link arrives; A's real password is unchanged.
+5. **Security check.** `/sign-up` → Password → a brand-new address + password
+   "one"; do **not** open the email. Wait a minute, then (ideally in a
+   different browser) `/sign-up` → Password → the same address + password
+   "two". Open the newest email: you should be asked to **choose a password**.
+   Sign out and try signing in with "one" — **it must fail**. If "one" works,
+   tell the developer straight away.
+6. Open a firm page while signed out → price-alert box → "create a free
+   account" → finish signing up → you should land back on that firm page.
 
 ## If something doesn't work
 
 - **Sign in button never appears** → the two `NEXT_PUBLIC_…` variables are
   missing or misspelt in Vercel/`.env.local`, or you didn't redeploy / restart.
+- **Sign-in page says "Check your inbox" but nothing arrives** → either the
+  address has no account (the page hides that on purpose — use **Create an
+  account**), or Supabase's hourly email limit was hit. Check Supabase →
+  **Authentication → Logs**.
+- **After confirming, a password sign-up is asked to "Choose a password"
+  again** → that is the safety step: the password is only kept if it was typed
+  in the same browser that opens the email, on the first sign-up for that
+  address. Anything else is cancelled so a stranger can't pre-set a password
+  on someone's address.
 - **Email link says "expired" or "didn't work"** → the Redirect URL in Part 4
   step 3 doesn't match your site's address exactly, or the link was opened on a
   different device/browser from the one that requested it (links are tied to

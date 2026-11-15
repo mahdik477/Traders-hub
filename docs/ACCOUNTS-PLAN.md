@@ -87,7 +87,7 @@ the recommended option was taken for each:
 
 ## Step details
 
-### 1. Sign-in page redesign (`src/app/sign-in/page.tsx`, `src/components/auth/SignInPanel.tsx`)
+### 1. Sign-in page redesign (`src/app/sign-in/page.tsx`, `src/components/auth/AuthPanel.tsx` — since split into `/sign-in` and `/sign-up`)
 Two-column on desktop (single column on phones):
 - Left: a `kit-panel` card. Google button (outline, full width, 52px),
   "or" divider, email field + primary "Email me a sign-in link". A small

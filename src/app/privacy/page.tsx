@@ -13,13 +13,14 @@ export const metadata: Metadata = { title: "Privacy Policy" };
 //   * saved listings, comparisons, recently viewed, learning progress,
 //     "what I'm using" ticks and per-firm alert preferences, kept in the browser and — when signed in —
 //     on the person's own account rows;
-//   * no emails are sent yet; the alert tick is a recorded preference only.
+//   * no marketing or alert emails are sent yet (only account emails: sign-in link, confirm
+//     address, password reset); the alert tick is a recorded preference only.
 // Update this page the day any of that changes (an email tool, analytics…).
 export default function PrivacyPage() {
   return (
     <div className="max-w-3xl">
       <PageIntro eyebrow="Legal" title={<>Privacy Policy</>} />
-      <p className="meta mt-3">Last updated: 12 November 2026.</p>
+      <p className="meta mt-3">Last updated: 15 November 2026.</p>
       <p className="mt-3 rounded-lg border border-dashed border-danger/60 px-3 py-2 text-xs text-danger">
         Team reminder (remove before launch): have a lawyer review this page — UAE PDPL and UK/EU GDPR
         — before the site goes fully live, and replace the placeholder contact address at the bottom.
@@ -30,7 +31,7 @@ export default function PrivacyPage() {
           <h2 className="section-title text-foreground">The short version</h2>
           <p className="mt-2">
             You can use everything on {SITE_NAME} without an account and without giving us any personal
-            data. If you choose to sign in, we store the minimum needed to run your account: a user id,
+            data. If you choose to create an account, we store the minimum needed to run it: a user id,
             your email address, and the time you confirmed you are 18 or over — plus the things you
             choose to save or tick on the site, and a password if you choose to set one. We don&apos;t ask for or use names, photos, phone numbers or
             payment details (see the note about Google below), we don&apos;t sell your data, and we
@@ -51,8 +52,8 @@ export default function PrivacyPage() {
           </p>
           <h3 className="mt-4 font-semibold text-foreground">With an account</h3>
           <p className="mt-2">
-            If you sign in (with Google, with a link we email you, or with a password you&apos;ve set), our account provider creates a
-            user id for you and we store:
+            If you create an account (with Google, with a link we email you, or with an email address and
+            a password), our account provider creates a user id for you and we store:
           </p>
           <ul className="mt-2 list-disc space-y-1 pl-5">
             <li>your email address (from Google, or the one you typed);</li>
@@ -71,6 +72,17 @@ export default function PrivacyPage() {
             </li>
           </ul>
           <p className="mt-2">
+            An account is only created on the &ldquo;Create your account&rdquo; page, or the first time
+            you continue with Google. Asking for a sign-in link on the &ldquo;Sign in&rdquo; page never
+            creates one. If you sign up with a password, we email you a link to confirm the address is
+            yours before the account can be used. The address you type (and the password, in hashed
+            form) is stored from the moment you submit the form, even if the link is never opened.
+            Unconfirmed accounts can&apos;t be signed in to; if one was created with your address by
+            mistake, email us and we&apos;ll delete it. To protect the people who use {SITE_NAME}, both pages
+            show the same &ldquo;check your inbox&rdquo; message whether or not an address already has an
+            account, so nobody can use them to find out who has one.
+          </p>
+          <p className="mt-2">
             When you sign in with Google, Google also sends your display name and profile picture. Our
             sign-in provider (Supabase) keeps them, along with sign-in timestamps, in its own sign-in
             record for your account.{" "}
@@ -83,7 +95,9 @@ export default function PrivacyPage() {
           <p className="mt-2">
             We don&apos;t use analytics cookies, advertising cookies or tracking pixels. The only cookies
             set are the ones that keep you signed in, plus one that remembers you chose &ldquo;Skip for
-            now&rdquo; on the choose-a-password screen, so we don&apos;t ask again on every sign-in.
+            now&rdquo; on the choose-a-password screen, so we don&apos;t ask again on every sign-in, and
+            one (kept for an hour) that notes a password was created in this browser, so nobody else
+            can set a password on your address before you confirm it.
           </p>
         </section>
 

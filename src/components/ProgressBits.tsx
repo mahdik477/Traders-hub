@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CheckIcon } from "@/components/icons";
 import { useProgress, type ProgressKind } from "@/lib/progress-store";
 import { useAuth } from "@/components/auth/AuthProvider";
@@ -37,6 +38,7 @@ export function ProgressSummary({
 }) {
   const progress = useProgress();
   const { status } = useAuth();
+  const pathname = usePathname();
   const done = ids.filter((id) => progress.some((e) => e.kind === kind && e.id === id)).length;
   const total = ids.length;
   const pct = total ? Math.round((done / total) * 100) : 0;
@@ -55,8 +57,8 @@ export function ProgressSummary({
           ) : (
             <>
               Saved in this browser ·{" "}
-              <Link href="/sign-in" className="text-accent underline">
-                sign in to keep it everywhere
+              <Link href={`/sign-up?next=${encodeURIComponent(pathname || "/my-hub")}`} className="text-accent underline">
+                create a free account to keep it everywhere
               </Link>
             </>
           )}

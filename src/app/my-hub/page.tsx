@@ -24,7 +24,7 @@ export default function MyHubPage() {
         eyebrow="Your account"
         title={<>My Hub</>}
         lede={<>Your progress, what you&apos;re using and everything you&apos;ve saved — in one place. It works without an
-        account; sign in to keep it on any device.</>}
+        account; create a free account, or sign in, to keep it on any device.</>}
       />
       <MyHub quizCount={strategies.length} firmNames={firmNames} />
     </>
