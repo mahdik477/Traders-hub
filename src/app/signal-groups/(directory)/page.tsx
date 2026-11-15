@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "What does Join open?",
-    a: "The group's Telegram chat. That address is the only outbound link on the listing. If a link is an affiliate link, we may earn a commission, which the footer also says.",
+    a: "The group's Telegram chat. That address is the only outbound link on the listing.",
   },
   {
     q: "Why might a group be missing?",
