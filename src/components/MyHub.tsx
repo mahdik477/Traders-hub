@@ -130,7 +130,7 @@ export default function MyHub({ quizCount, firmNames }: { quizCount: number; fir
                 <p className="meta mt-0.5">
                   {status === "disabled"
                     ? "Everything here is stored in this browser only."
-                    : "Everything here lives in this browser. Sign in to keep it on any device."}
+                    : "Everything here lives in this browser. Create a free account, or sign in, to keep it on any device."}
                 </p>
               </>
             )}
@@ -142,9 +142,14 @@ export default function MyHub({ quizCount, firmNames }: { quizCount: number; fir
             </button>
           ) : (
             status === "signed-out" && (
-              <Link href="/sign-in?next=/my-hub" className="btn btn-primary w-full sm:w-auto">
-                Sign in
-              </Link>
+              <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+                <Link href="/sign-up" className="btn btn-primary w-full sm:w-auto">
+                  Create account
+                </Link>
+                <Link href="/sign-in" className="btn btn-outline w-full sm:w-auto">
+                  Sign in
+                </Link>
+              </div>
             )
           )}
         </div>

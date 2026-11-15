@@ -43,7 +43,7 @@ export default function StartHerePath() {
           <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-surface-2" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={completed} aria-label="Start here progress">
             <div className="path-progress h-full rounded-full bg-gold-fill" style={{ width: `${pct}%` }} />
           </div>
-          <p className="meta mt-2">Saved in this browser. Sign in to keep it across devices.</p>
+          <p className="meta mt-2">Saved in this browser. Create a free account, or sign in, to keep it across devices.</p>
         </div>
         {next && (
           <Link href={next.href} className="btn btn-primary mt-4 shrink-0 sm:mt-0">

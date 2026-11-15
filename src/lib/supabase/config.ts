@@ -13,6 +13,13 @@ export function isSupabaseConfigured(): boolean {
   return /^https:\/\/[a-z0-9-]+\.supabase\.(co|in)\b/i.test(SUPABASE_URL) && SUPABASE_KEY.length > 20;
 }
 
+/**
+ * Cookie holding the user id of an account whose password was typed in THIS
+ * browser (set by "Create a password" on /sign-up, read by /auth/callback).
+ * See the note in src/app/auth/callback/route.ts for why it exists.
+ */
+export const PW_OWNER_COOKIE = "tradox_pw_owner";
+
 /** Only ever send people back to a path on this site after sign-in. */
 export function safeNextPath(next: string | null | undefined, fallback = "/my-hub"): string {
   if (!next) return fallback;

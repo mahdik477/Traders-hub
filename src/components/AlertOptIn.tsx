@@ -48,10 +48,14 @@ export default function AlertOptIn({ firmId, firmName }: { firmId: string; firmN
             {status === "signed-out" && (
               <>
                 To actually reach you we&apos;ll need your email, so{" "}
+                <Link href={`/sign-up?next=/funded-accounts/${firmId}`} className="text-accent underline">
+                  create a free account
+                </Link>{" "}
+                (or{" "}
                 <Link href={`/sign-in?next=/funded-accounts/${firmId}`} className="text-accent underline">
                   sign in
-                </Link>{" "}
-                to attach this preference to an account.{" "}
+                </Link>
+                ) to attach this preference to it.{" "}
               </>
             )}
             {status === "disabled" && "Accounts aren't switched on yet, so this stays in your browser for now. "}

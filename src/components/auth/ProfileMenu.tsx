@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { useAuth } from "@/components/auth/AuthProvider";
 
@@ -12,6 +12,7 @@ import { useAuth } from "@/components/auth/AuthProvider";
 export default function ProfileMenu() {
   const { status, user, signOut } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -45,9 +46,28 @@ export default function ProfileMenu() {
   }
 
   if (status === "signed-out" || !user) {
-    const next = pathname && pathname !== "/sign-in" ? `?next=${encodeURIComponent(pathname)}` : "";
+    // One button only: /sign-in and /sign-up link to each other. From either
+    // of those pages, keep the ?next= they were opened with instead of
+    // sending people back to the form they're already on.
+    const onAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
+    const next = pathname && !onAuthPage ? `?next=${encodeURIComponent(pathname)}` : "";
     return (
-      <Link href={`/sign-in${next}`} className="btn btn-outline h-11 min-h-0 px-3.5 text-sm">
+      <Link
+        href={`/sign-in${next}`}
+        onClick={
+          onAuthPage
+            ? (e) => {
+                // Leave Ctrl/⌘/Shift-click and middle-click alone (open in a new tab).
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                const wanted = new URLSearchParams(window.location.search).get("next");
+                if (!wanted) return;
+                e.preventDefault();
+                router.push(`/sign-in?next=${encodeURIComponent(wanted)}`);
+              }
+            : undefined
+        }
+        className="btn btn-outline h-11 min-h-0 px-3.5 text-sm"
+      >
         Sign in
       </Link>
     );

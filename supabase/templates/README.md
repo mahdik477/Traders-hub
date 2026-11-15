@@ -1,6 +1,6 @@
 # Tradox email templates (Supabase Auth)
 
-Branded versions of the emails Supabase sends when someone signs in. They are
+Branded versions of the emails Supabase sends when someone signs up or signs in. They are
 **not used until a founder pastes them into Supabase** — nothing in the site
 code sends email.
 
@@ -24,7 +24,9 @@ how they look. It is for us only and is never sent.
    `http://localhost:3000/auth/callback` and
    `https://<your-domain>/auth/callback` (plus your Vercel preview pattern,
    e.g. `https://*-mahdik477.vercel.app/auth/callback`).
-4. Send yourself a link from `/sign-in` and check it on your phone and laptop.
+4. Send yourself a link from `/sign-up` (new address) and from `/sign-in`
+   (an address that already has an account) and check both on your phone and
+   laptop. `/sign-in` sends nothing to an address without an account.
 
 ## Rules for editing these
 

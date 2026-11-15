@@ -47,7 +47,8 @@ Pages built around that data (not sections, so they are not in `sections.ts`):
 | Drawdown explained | `/funded-accounts/drawdown-explained` | Static vs EOD vs intraday trailing on one synthetic chart, labelled an illustration |
 | Start here | `/start-here` | Guided path Learn → free strategies → funded accounts, with progress ticks |
 | My Hub | `/my-hub` | Profile dashboard: account card, 9-part Learn tracker, strategies being learned, "What I'm using" (self-ticked firms/brokers/courses/tools), saved listings and comparisons, alerts, recently viewed, password + account controls |
-| Sign in | `/sign-in` | Google, email link or (optional) password via Supabase Auth; hidden when the env variables are missing |
+| Sign in | `/sign-in` | For returning people: Google, email link or password via Supabase Auth. Never creates an account from a typed email. Hidden when the env variables are missing |
+| Create account | `/sign-up` | For new people: same three methods plus the benefits block. Both pages share `src/components/auth/AuthPanel.tsx` and must never reveal whether an email has an account (see the note at the top of that file) |
 | Choose a password | `/welcome/password` | Shown straight after the first email-link sign-in (optional, "Skip for now" sets the `tradox_pw_skip` cookie) and after a reset link |
 
 The prop-firm loader also exposes raw numbers (`tier.rules`, `account.promoPrice`,
