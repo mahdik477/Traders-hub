@@ -375,7 +375,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
             <ul key={`${room.market}-${page}-${room.query}-${room.sort}`} className="sg-page mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {slice.map((group, index) => (
                 <li key={group.slug} className="sg-in" style={{ animationDelay: `${index * 45}ms` }}>
-                  <MiniCard group={group} onOpen={() => openPanel(group.slug)} />
+                  <MiniCard group={group} market={room.market} onOpen={() => openPanel(group.slug)} />
                 </li>
               ))}
             </ul>
@@ -396,7 +396,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
       )}
 
       </div>
-      {open && <GroupDrawer group={open} onClose={closePanel} />}
+      {open && <GroupDrawer group={open} market={room.market} onClose={closePanel} />}
     </div>
   );
 }
@@ -648,8 +648,16 @@ function Spotlight({
   );
 }
 
-function MiniCard({ group, onOpen }: { group: SignalGroupView; onOpen: () => void }) {
-  const market = SIGNAL_MARKET_ORDER.find((id) => group.markets.includes(id));
+function MiniCard({
+  group,
+  market: active,
+  onOpen,
+}: {
+  group: SignalGroupView;
+  market?: SignalMarket | "all";
+  onOpen: () => void;
+}) {
+  const market = shownMarket(group, active);
   const ink = market ? INK[market] : "var(--color-gold)";
   return (
     <article
@@ -714,13 +722,22 @@ function Pager({ page, pageCount, onPage }: { page: number; pageCount: number; o
   );
 }
 
-function GroupDrawer({ group, onClose }: { group: SignalGroupView; onClose: () => void }) {
+function GroupDrawer({
+  group,
+  market: active,
+  onClose,
+}: {
+  group: SignalGroupView;
+  market?: SignalMarket | "all";
+  onClose: () => void;
+}) {
   const titleId = useId();
   const ref = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [copied, setCopied] = useState(false);
   const summary = signalGroupSummary(group);
   const markets = SIGNAL_MARKET_ORDER.filter((id) => group.markets.includes(id));
+  const accent = shownMarket(group, active);
   const membersAsOf = formatSignalDate(group.memberCountAsOf);
   const checked = formatSignalDate(group.checkedOn);
 
@@ -793,7 +810,7 @@ function GroupDrawer({ group, onClose }: { group: SignalGroupView; onClose: () =
           </button>
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6 pb-36 sm:px-8">
-          <Monogram name={group.name} ink={markets[0] ? INK[markets[0]] : "var(--color-gold)"} large />
+          <Monogram name={group.name} ink={accent ? INK[accent] : "var(--color-gold)"} large />
           <h2 id={titleId} className="sg-display mt-5 break-words text-3xl leading-tight sm:text-4xl">
             {group.name}
           </h2>
@@ -864,6 +881,11 @@ function Stat({ label, value, note }: { label: string; value: string; note?: str
       {note && <p className="mt-1 text-[11px] leading-4 text-subtle">{note}</p>}
     </div>
   );
+}
+
+function shownMarket(group: SignalGroupView, active?: SignalMarket | "all"): SignalMarket | undefined {
+  if (active && active !== "all" && group.markets.includes(active)) return active;
+  return SIGNAL_MARKET_ORDER.find((id) => group.markets.includes(id));
 }
 
 function Monogram({ name, ink, large = false }: { name: string; ink: string; large?: boolean }) {
