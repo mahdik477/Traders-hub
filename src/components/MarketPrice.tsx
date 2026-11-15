@@ -7,6 +7,16 @@ import type { MarketQuote, PricePayload } from "@/lib/market-quote-types";
 
 const PLACEHOLDER = [42, 44, 43, 46, 45, 47, 46, 49, 48, 50, 49, 51, 50, 52];
 
+const TICKER: Record<SignalMarket, string> = {
+  gold: "XAU/USD",
+  "forex-majors": "EUR/USD",
+  "forex-minors": "EUR/GBP",
+  indices: "NAS100",
+  crypto: "BTC/USD",
+  oil: "WTI",
+  "stocks-options": "SPX500",
+};
+
 export function useMarketQuotes(enabled: boolean): PricePayload | null {
   const [payload, setPayload] = useState<PricePayload | null>(null);
   useEffect(() => {
@@ -60,10 +70,13 @@ export function QuoteLine({ id, quote, variant }: { id: SignalMarket; quote: Mar
     <span className={`sg-quote${variant === "hero" ? " is-hero" : ""}`}>
       {quote ? (
         <>
-          <span className={`sg-quote-price${flash ? ` is-${flash}` : ""}`}>{formatPrice(id, quote.price)}</span>
+          <span className="sg-quote-main">
+            <span className="sg-ticker">{TICKER[id]}</span>
+            <span className={`sg-quote-price${flash ? ` is-${flash}` : ""}`}>{formatPrice(id, quote.price)}</span>
             <span className={`sg-change ${changeClass(quote.changePct)}`}>{formatChange(quote.changePct)}</span>
+          </span>
           <span className="sr-only">
-            {` ${quote.changePct < 0 ? "down" : "up"} ${Math.abs(quote.changePct).toFixed(2)} percent in 24 hours.`}
+            {`${TICKER[id]}. ${quote.changePct < 0 ? "Down" : "Up"} ${Math.abs(quote.changePct).toFixed(2)} percent in 24 hours.`}
             {closed ? " Market closed." : ""}
             {quote.delayed ? " Price delayed." : ""}
           </span>
@@ -107,7 +120,7 @@ function formatPrice(id: SignalMarket, price: number): string {
 function changeClass(changePct: number): string {
   if (changePct <= -0.005) return "is-down";
   if (changePct >= 0.005) return "is-up";
-  return "";
+  return "is-flat";
 }
 
 function formatChange(changePct: number): string {

@@ -2781,11 +2781,26 @@ input.signal-filter-search {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.35rem 0.55rem;
+  gap: 0.2rem 0.55rem;
   margin-top: 0.7rem;
+  max-width: 100%;
   font-family: var(--font-mono, ui-monospace, monospace);
   font-size: 0.82rem;
   line-height: 1.3;
+}
+
+.sg-quote-main {
+  display: inline-flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.4rem;
+}
+
+.sg-ticker {
+  color: var(--color-subtle);
+  font-size: 0.78em;
+  letter-spacing: 0.03em;
 }
 
 .sg-quote.is-hero {
@@ -2807,6 +2822,14 @@ input.signal-filter-search {
 
 .sg-change.is-down {
   color: #c44747;
+}
+
+.sg-change.is-flat {
+  color: #8a8378;
+}
+
+:root[data-theme="light"] .sg-change.is-flat {
+  color: #67645c;
 }
 
 :root[data-theme="dark"] .sg-change.is-up {
