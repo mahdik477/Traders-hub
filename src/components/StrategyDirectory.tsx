@@ -10,7 +10,6 @@ import {
   STRATEGY_MARKET_LABELS,
   STRATEGY_TIER_LABELS,
   type StrategyCategory,
-  type StrategyPricingTier,
   type StrategyView,
 } from "@/lib/strategy-types";
 import {
@@ -111,7 +110,7 @@ function Directory({
         })}
       </ul>
 
-      <label className="mt-3 flex min-h-12 items-center gap-2.5 rounded-xl border border-border bg-surface px-3.5">
+      <label className="kit-panel mt-3 flex min-h-12 items-center gap-2.5 px-3.5">
         <SearchIcon className="size-4.5 shrink-0 text-subtle" />
         <span className="sr-only">Search strategies by name</span>
         <input
@@ -125,7 +124,7 @@ function Directory({
 
       <form
         aria-label="Filter strategies"
-        className="mt-3 grid grid-cols-1 gap-3 rounded-xl border border-border bg-surface p-3 sm:grid-cols-2 lg:grid-cols-4"
+        className="kit-panel mt-3 grid grid-cols-1 gap-3 p-3 sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
         onSubmit={(e) => e.preventDefault()}
       >
         <Select
@@ -192,7 +191,7 @@ function Directory({
           </button>
         </div>
       ) : (
-        <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {matching.map((s) => (
             <StrategyCard key={s.slug} strategy={s} listingQuery={filtersToQuery(filters)} />
           ))}
@@ -202,66 +201,84 @@ function Directory({
   );
 }
 
-// Colours the two ends of the tier spectrum (free = nothing to lose,
-// advanced = harder, slow down) and leaves intermediate neutral — three
-// distinct hues would have clashed with the site's gold accent.
-const TIER_BADGE_CLASS: Record<StrategyPricingTier, string> = {
-  free: "badge-success",
-  intermediate: "",
-  advanced: "badge-warning",
-};
-
+// Same card as CourseDirectory/PropFirmDirectory (kit-panel + listing-card,
+// logo/name/badge row, market pills, blurb, a divider with one headline
+// stat, then a soft primary button and a quiet secondary) so the three
+// listing pages read as one design. The headline stat here is the tier —
+// strategies have no price, and a rating would read as a performance
+// score, which this site never shows.
 function StrategyCard({ strategy: s, listingQuery }: { strategy: StrategyView; listingQuery: string }) {
   const href = listingQuery ? `/strategies/${s.slug}${listingQuery}` : `/strategies/${s.slug}`;
   const CategoryIcon = STRATEGY_CATEGORY_ICONS[s.category];
-  const tierClass = TIER_BADGE_CLASS[s.tier];
 
   return (
-    <li className="lift-card group relative flex cursor-pointer flex-col overflow-hidden rounded-xl border border-border bg-surface">
-      <div className="h-1 w-full bg-gradient-to-r from-gold-deep to-gold-bright" />
+    <li className="lift-card kit-panel listing-card group flex cursor-pointer flex-col">
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start gap-3">
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+          <div className="flex size-14 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-accent">
             <CategoryIcon className="size-6" />
-          </span>
-          <div className="min-w-0 flex-1 pt-0.5">
-            <h2 className="text-lg font-semibold leading-snug">
-              <Link href={href} className="card-stretch rounded-xl">
-                {s.name}
-              </Link>
-            </h2>
-            <p className="mt-0.5 text-xs font-medium text-subtle">{STRATEGY_CATEGORY_LABELS[s.category]}</p>
           </div>
-          <SaveButton kind="strategy" id={s.slug} name={s.name} />
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <h2 className="text-lg font-semibold leading-tight">
+                <Link href={href} className="card-stretch rounded-2xl">
+                  {s.name}
+                </Link>
+              </h2>
+              <DoneTick kind="quiz" id={s.slug} />
+            </div>
+            <p className="mt-1 text-xs font-medium text-subtle">{STRATEGY_CATEGORY_LABELS[s.category]}</p>
+          </div>
+          <div className="relative z-10 -mr-1.5 -mt-1.5 shrink-0">
+            <SaveButton kind="strategy" id={s.slug} name={s.name} />
+          </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-1.5">
-          <span className={tierClass ? `badge ${tierClass}` : "pill"}>{STRATEGY_TIER_LABELS[s.tier]}</span>
-          <span className="pill">{STRATEGY_DIFFICULTY_LABELS[s.difficulty]}</span>
-          <DoneTick kind="quiz" id={s.slug} />
-          {s.controversyFlag && (
-            <span className="badge badge-warning inline-flex items-center gap-1">
-              <ShieldIcon className="size-3" />
-              Debated
-            </span>
-          )}
+        {s.markets.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {s.markets.slice(0, 3).map((m) => (
+              <span key={m} className="pill">
+                {STRATEGY_MARKET_LABELS[m]}
+              </span>
+            ))}
+            {s.markets.length > 3 && <span className="pill">+{s.markets.length - 3} more</span>}
+          </div>
+        )}
+
+        <p className="mt-4 line-clamp-2 text-sm leading-relaxed text-muted">{s.publicTeaser}</p>
+
+        <div className="mt-auto pt-5">
+          <div className="flex flex-wrap items-end justify-between gap-3 border-t border-border pt-4">
+            <div>
+              <div className="eyebrow">Tier</div>
+              <div className="figure-lg mt-1 text-accent">{STRATEGY_TIER_LABELS[s.tier]}</div>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              <span className="pill">{STRATEGY_DIFFICULTY_LABELS[s.difficulty]}</span>
+              {s.controversyFlag && (
+                <span className="badge badge-warning inline-flex items-center gap-1">
+                  <ShieldIcon className="size-3" />
+                  Debated
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="relative z-10 mt-4 flex gap-2">
+            <Link href={href} className="btn btn-soft min-w-0 flex-1">
+              View strategy
+              <span className="sr-only"> — {s.name}</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link
+              href={`${href}#simulator-heading`}
+              className="btn shrink-0 border-border-strong px-3 text-muted hover:border-subtle hover:text-foreground"
+            >
+              Try it live
+              <span className="sr-only"> — {s.name} simulator</span>
+            </Link>
+          </div>
         </div>
-
-        <p className="mt-3 line-clamp-2 flex-1 text-sm text-muted">{s.publicTeaser}</p>
-
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {s.markets.slice(0, 3).map((m) => (
-            <span key={m} className="pill text-xs">
-              {STRATEGY_MARKET_LABELS[m]}
-            </span>
-          ))}
-          {s.markets.length > 3 && <span className="pill text-xs">+{s.markets.length - 3} more</span>}
-        </div>
-
-        <Link href={href} className="btn btn-outline relative z-10 mt-5 w-full">
-          View strategy
-          <span className="sr-only"> — {s.name}</span>
-        </Link>
       </div>
     </li>
   );

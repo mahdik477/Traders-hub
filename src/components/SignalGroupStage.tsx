@@ -206,7 +206,6 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
   return (
     <div className="sg-stage">
       <ScrollGlow />
-      <CursorGlow />
       <section
         className={
           landing
@@ -669,8 +668,12 @@ function MiniCard({ group, onOpen }: { group: SignalGroupView; onOpen: () => voi
 }
 
 function Pager({ page, pageCount, onPage }: { page: number; pageCount: number; onPage: (page: number) => void }) {
+  // The Next button is the one control most people need here, so it gets the
+  // solid gold treatment - the plain text version was easy to miss, and the
+  // page count sits right under it so you always know how far through the
+  // room you are.
   return (
-    <div className="mt-8 flex items-center justify-between gap-4">
+    <div className="mt-8 flex items-start justify-between gap-4">
       <button
         type="button"
         onClick={() => onPage(page - 1)}
@@ -680,18 +683,20 @@ function Pager({ page, pageCount, onPage }: { page: number; pageCount: number; o
         <ChevronLeft className="size-4" aria-hidden="true" />
         Previous
       </button>
-      <p className="font-mono text-sm text-muted">
-        {page} / {pageCount}
-      </p>
-      <button
-        type="button"
-        onClick={() => onPage(page + 1)}
-        disabled={page >= pageCount}
-        className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-foreground disabled:text-subtle"
-      >
-        Next 9
-        <ChevronRight className="size-4" aria-hidden="true" />
-      </button>
+      <div className="flex flex-col items-end gap-1.5">
+        <button
+          type="button"
+          onClick={() => onPage(page + 1)}
+          disabled={page >= pageCount}
+          className="btn btn-primary min-h-11 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Next 9
+          <ChevronRight className="size-4" aria-hidden="true" />
+        </button>
+        <p className="font-mono text-xs text-muted" aria-live="polite">
+          Page {page} of {pageCount}
+        </p>
+      </div>
     </div>
   );
 }
@@ -951,21 +956,6 @@ function ScrollGlow() {
   return <div ref={ref} className="sg-progress" aria-hidden="true" />;
 }
 
-function CursorGlow() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!window.matchMedia("(hover: hover)").matches) return;
-    const move = (event: PointerEvent) => {
-      el.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-    };
-    window.addEventListener("pointermove", move);
-    return () => window.removeEventListener("pointermove", move);
-  }, []);
-  return <div ref={ref} className="sg-cursor" aria-hidden="true" />;
-}
 
 function JoinLink({ group }: { group: SignalGroupView }) {
   if (!group.telegramUrl) return <span className="text-sm text-muted">No Telegram link</span>;
