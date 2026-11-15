@@ -2920,19 +2920,6 @@ input.signal-filter-search {
   pointer-events: none;
 }
 
-.sg-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 30;
-  width: 18rem;
-  height: 18rem;
-  margin: -9rem 0 0 -9rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--color-gold) 18%, transparent), transparent 68%);
-  pointer-events: none;
-  mix-blend-mode: screen;
-}
 
 .sg-joinbar .btn {
   width: 100%;
@@ -3073,14 +3060,8 @@ input.signal-filter-search {
 }
 
 @media (width < 40rem) {
-  .sg-cursor {
-    display: none;
-  }
 }
 
-:root[data-theme="light"] .sg-cursor {
-  display: none;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .sg-tile-line {
@@ -3094,8 +3075,5 @@ input.signal-filter-search {
   .sg-pulse span {
     transform: none;
     animation: none;
-  }
-  .sg-cursor {
-    display: none;
   }
 }
