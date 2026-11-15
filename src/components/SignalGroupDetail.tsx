@@ -154,7 +154,7 @@ function JoinButton({ group }: { group: SignalGroupView }) {
     <a
       href={group.telegramUrl}
       target="_blank"
-      rel="noopener sponsored"
+      rel="noopener noreferrer"
       aria-label={`Join ${group.name} on Telegram (opens in a new tab)`}
       className="inline-flex h-11 w-full shrink-0 items-center justify-center gap-1.5 rounded-lg bg-gold-fill px-4 text-sm font-semibold text-gold-ink transition-colors duration-150 hover:bg-[var(--color-gold-fill-hover)] active:brightness-95 sm:w-auto"
     >
