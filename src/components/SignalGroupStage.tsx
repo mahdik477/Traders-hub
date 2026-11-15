@@ -5,6 +5,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search, Users, X } from "lucide-react";
 import { WordReveal } from "@/components/hero/AuroraHero";
 import { QuoteLine, TileChart, useMarketQuotes } from "@/components/MarketPrice";
+import EdgeFade from "@/components/EdgeFade";
+import Picker from "@/components/Picker";
 import SaveButton from "@/components/SaveButton";
 import { signalGroupSummary } from "@/lib/signal-group-summary";
 import { signalFiltersFromSearch, signalGroupMatchesFilters } from "@/lib/signal-group-filters";
@@ -154,7 +156,21 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
   useEffect(() => {
     if (skipScroll.current) return;
     skipScroll.current = true;
-    resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Scroll so the room's eyebrow sits just under the sticky header. The
+    // header's height changes with the breakpoint (its nav wraps onto a
+    // second row on phones) and with the visitor's font size, so measure it
+    // instead of guessing with a scroll-margin class. Wait a frame so the
+    // landing → room swap has laid out first.
+    const frame = window.requestAnimationFrame(() => {
+      const el = resultsRef.current;
+      if (!el) return;
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+      const top = el.getBoundingClientRect().top + window.scrollY - headerBottom - 16;
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [room.page, room.market, room.savedOnly]);
 
   const counts = useMemo(() => {
@@ -340,15 +356,14 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
           )}
         </>
       ) : (
-        <section ref={resultsRef} aria-labelledby="sg-results-heading" className="mt-8 scroll-mt-28">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow">{room.savedOnly ? "Saved" : "Room"}</p>
-              <h2 id="sg-results-heading" className="sg-display mt-2 text-3xl sm:text-4xl">
-                {room.savedOnly ? "Saved groups" : room.market === "all" ? "Search" : SHORT[room.market]}
-              </h2>
-            </div>
-            <p className="font-mono text-sm text-muted">
+        <section ref={resultsRef} aria-labelledby="sg-results-heading" className="mt-8">
+          <p className="eyebrow">{room.savedOnly ? "Saved" : "Room"}</p>
+          {/* The count sits right after the heading, not pushed to the far edge. */}
+          <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <h2 id="sg-results-heading" className="sg-display text-3xl sm:text-4xl">
+              {room.savedOnly ? "Saved groups" : room.market === "all" ? "Search" : SHORT[room.market]}
+            </h2>
+            <p className="readout">
               {filtered.length === 0
                 ? "0 groups"
                 : `${(page - 1) * PAGE + 1}–${Math.min(page * PAGE, filtered.length)} of ${filtered.length}`}
@@ -372,7 +387,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
               {room.savedOnly ? "Nothing is saved in this browser yet." : "No groups match."}
             </p>
           ) : (
-            <ul key={`${room.market}-${page}-${room.query}-${room.sort}`} className="sg-page mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul key={`${room.market}-${page}-${room.query}-${room.sort}`} className="sg-page mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {slice.map((group, index) => (
                 <li key={group.slug} className="sg-in" style={{ animationDelay: `${index * 45}ms` }}>
                   <MiniCard group={group} market={room.market} onOpen={() => openPanel(group.slug)} />
@@ -416,6 +431,10 @@ function LandingCopy({ lede, total }: { lede: string; total: number }) {
   );
 }
 
+// Room controls share one control language from DESIGN.md: exclusive
+// choices (market, price) are `seg` switches, on/off choices (Saved, style,
+// extras) are `seg-toggle` pills, and lists (sort, language) use the
+// site-wide Picker — never a native <select>.
 function MarketSwitch({
   active,
   counts,
@@ -426,28 +445,33 @@ function MarketSwitch({
   onPick: (market: SignalMarket) => void;
 }) {
   return (
-    <div className="nav-scroll -mx-1 mt-6 flex gap-2 overflow-x-auto px-1 pb-1" role="tablist" aria-label="Markets">
-      {SIGNAL_MARKET_ORDER.map((id) => {
-        const selected = id === active;
-        return (
+    // On phones the seven markets don't fit: EdgeFade scrolls the row
+    // sideways with a fade on the side that has more, and keeps the
+    // chosen market in view.
+    <EdgeFade className="mt-6" activeSelector='[aria-pressed="true"]' watch={active}>
+      <div className="seg w-max max-w-none! overflow-visible!" role="group" aria-label="Market">
+        {SIGNAL_MARKET_ORDER.map((id) => (
           <button
             key={id}
             type="button"
-            role="tab"
-            aria-selected={selected}
+            aria-pressed={id === active}
             onClick={() => onPick(id)}
-            className={`inline-flex min-h-11 shrink-0 items-center gap-2 border-b-2 px-2 text-sm ${
-              selected ? "border-foreground font-medium text-foreground" : "border-transparent text-muted hover:text-foreground"
-            }`}
+            className="seg-btn"
           >
             {SHORT[id]}
-            <span className="font-mono text-xs text-subtle">{counts.get(id) ?? 0}</span>
+            <span className="seg-count">{counts.get(id) ?? 0}</span>
           </button>
-        );
-      })}
-    </div>
+        ))}
+      </div>
+    </EdgeFade>
   );
 }
+
+const SORT_OPTIONS: { value: SortKey; label: string }[] = [
+  { value: "listed", label: "Listed order" },
+  { value: "name", label: "Name" },
+  { value: "members", label: "Member count" },
+];
 
 function Filters({
   room,
@@ -459,42 +483,40 @@ function Filters({
   onChange: (patch: Partial<Room>) => void;
 }) {
   return (
-    <div className="mt-4 flex flex-col gap-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <label className="sr-only" htmlFor="sg-sort">
-          Sort
-        </label>
-        <select
-          id="sg-sort"
-          value={room.sort}
-          onChange={(event) => onChange({ sort: event.target.value as SortKey })}
-          className="field h-11 w-auto min-w-36"
-        >
-          <option value="listed">Listed order</option>
-          <option value="name">Name</option>
-          <option value="members">Member count</option>
-        </select>
+    <div className="mt-3 flex flex-col gap-3">
+      <div className="flex flex-wrap items-center gap-3">
+        <PriceRail prices={room.prices} onChange={(prices) => onChange({ prices })} />
+        {/* Visible "Sort" word for sighted visitors; screen readers get it
+            once, from ariaLabel (same pattern as FirmMatcher). */}
+        <div className="flex w-full items-center gap-2 sm:w-auto">
+          <span className="eyebrow" aria-hidden="true">
+            Sort
+          </span>
+          <Picker
+            className="min-w-0 flex-1 sm:w-48 sm:flex-none"
+            ariaLabel="Sort"
+            sheetTitle="Sort"
+            value={room.sort}
+            onChange={(value) => onChange({ sort: value as SortKey })}
+            options={SORT_OPTIONS}
+          />
+        </div>
         <button
           type="button"
           aria-pressed={room.savedOnly}
           onClick={() => onChange({ savedOnly: !room.savedOnly })}
-          className={`inline-flex min-h-11 items-center rounded-lg border px-3 text-sm ${
-            room.savedOnly ? "border-foreground text-foreground" : "border-border text-muted"
-          }`}
+          className={`seg-toggle ${room.savedOnly ? "is-on" : ""}`}
         >
           Saved
         </button>
       </div>
-      <PriceRail
-        prices={room.prices}
-        onChange={(prices) => onChange({ prices })}
-      />
       <details className="sg-sheet group">
-        <summary className="inline-flex min-h-11 cursor-pointer list-none items-center text-sm text-muted hover:text-foreground [&::-webkit-details-marker]:hidden">
+        <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-1.5 text-sm text-muted hover:text-foreground [&::-webkit-details-marker]:hidden">
+          <ChevronRight className="size-4 transition-transform group-open:rotate-90 motion-reduce:transition-none" aria-hidden="true" />
           Style, language and extras
         </summary>
-        <div className="sg-sheet-body mt-3 flex flex-col gap-3">
-          <div className="flex flex-wrap gap-2">
+        <div className="sg-sheet-body mt-3 flex flex-col gap-4">
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Style">
             {SIGNAL_STYLE_ORDER.map((style) => {
               const on = room.styles.includes(style);
               return (
@@ -507,31 +529,22 @@ function Filters({
                       styles: on ? room.styles.filter((item) => item !== style) : [...room.styles, style],
                     })
                   }
-                  className={`inline-flex min-h-10 items-center rounded-full border px-3 text-sm ${
-                    on ? "border-foreground text-foreground" : "border-border text-muted"
-                  }`}
+                  className={`seg-toggle ${on ? "is-on" : ""}`}
                 >
                   {SIGNAL_STYLE_LABELS[style]}
                 </button>
               );
             })}
           </div>
-          <label className="block max-w-xs text-sm text-muted">
-            Language
-            <select
-              value={room.languages[0] ?? ""}
-              onChange={(event) => onChange({ languages: event.target.value ? [event.target.value] : [] })}
-              className="field mt-1 h-11 w-full"
-            >
-              <option value="">Any</option>
-              {languages.map((language) => (
-                <option key={language} value={language}>
-                  {language}
-                </option>
-              ))}
-            </select>
-          </label>
-          <div className="flex flex-wrap gap-2">
+          <Picker
+            className="w-full sm:max-w-xs"
+            label="Language"
+            value={room.languages[0] ?? ""}
+            onChange={(value) => onChange({ languages: value ? [value] : [] })}
+            searchPlaceholder="Search languages"
+            options={[{ value: "", label: "Any" }, ...languages.map((language) => ({ value: language, label: language }))]}
+          />
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Extras">
             {SIGNAL_EXTRA_ORDER.map((extra) => {
               const on = room.extras.includes(extra);
               return (
@@ -544,9 +557,7 @@ function Filters({
                       extras: on ? room.extras.filter((item) => item !== extra) : [...room.extras, extra],
                     })
                   }
-                  className={`inline-flex min-h-10 items-center rounded-full border px-3 text-sm ${
-                    on ? "border-foreground text-foreground" : "border-border text-muted"
-                  }`}
+                  className={`seg-toggle ${on ? "is-on" : ""}`}
                 >
                   {SIGNAL_EXTRA_LABELS[extra]}
                 </button>
@@ -962,21 +973,18 @@ function MarketMotif({ id }: { id: SignalMarket }) {
 function PriceRail({ prices, onChange }: { prices: SignalPrice[]; onChange: (prices: SignalPrice[]) => void }) {
   const options: Array<SignalPrice | "all"> = ["all", ...SIGNAL_PRICE_ORDER];
   return (
-    <div className="sg-pills" role="group" aria-label="Price">
-      {options.map((option) => {
-        const on = option === "all" ? prices.length === 0 : prices.includes(option);
-        return (
-          <button
-            key={option}
-            type="button"
-            aria-pressed={on}
-            onClick={() => onChange(option === "all" ? [] : [option])}
-            className={on ? "is-on" : ""}
-          >
-            {option === "all" ? "Any price" : SIGNAL_PRICE_LABELS[option]}
-          </button>
-        );
-      })}
+    <div className="seg" role="group" aria-label="Price">
+      {options.map((option) => (
+        <button
+          key={option}
+          type="button"
+          aria-pressed={option === "all" ? prices.length === 0 : prices.includes(option)}
+          onClick={() => onChange(option === "all" ? [] : [option])}
+          className="seg-btn max-sm:px-3!"
+        >
+          {option === "all" ? "Any price" : SIGNAL_PRICE_LABELS[option]}
+        </button>
+      ))}
     </div>
   );
 }
