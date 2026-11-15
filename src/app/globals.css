@@ -3021,32 +3021,6 @@ input.signal-filter-search {
   background: var(--sg-ink, var(--color-gold));
 }
 
-.sg-pills {
-  display: flex;
-  width: fit-content;
-  max-width: 100%;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
-  padding: 0.25rem;
-}
-
-.sg-pills button {
-  min-height: 2.5rem;
-  border-radius: 999px;
-  padding: 0 0.85rem;
-  font-size: 0.875rem;
-  color: var(--color-muted);
-  transition: background-color 180ms ease, color 180ms ease;
-}
-
-.sg-pills button.is-on {
-  background: var(--color-gold-fill);
-  color: var(--color-gold-ink);
-}
-
 .sg-sheet-body {
   border-radius: 1rem;
   border: 1px solid var(--color-border);
