@@ -661,9 +661,19 @@ function MiniCard({
   const ink = market ? INK[market] : "var(--color-gold)";
   return (
     <article
-      className="sg-card relative flex h-full min-h-44 flex-col overflow-hidden rounded-2xl border border-border bg-surface p-5"
+      className="sg-card relative flex h-full min-h-44 cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-surface p-5"
       style={{ ["--sg-ink-raw" as string]: ink }}
+      onClick={onOpen}
     >
+      <button
+        type="button"
+        className="sg-card-hit"
+        aria-label={`Open details for ${group.name}`}
+        onClick={(event) => {
+          event.stopPropagation();
+          onOpen();
+        }}
+      />
       <span className="sg-card-stripe" aria-hidden="true" />
       <div className="flex items-start justify-between gap-3">
         <Monogram name={group.name} ink={ink} />
@@ -672,12 +682,9 @@ function MiniCard({
         </p>
       </div>
       <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight">
-        <button type="button" onClick={onOpen} className="card-stretch rounded-2xl text-left">
-          <span className="line-clamp-2">{group.name}</span>
-          <span className="sr-only">. Open details</span>
-        </button>
+        <span className="line-clamp-2">{group.name}</span>
       </h3>
-      <p className="mt-3 flex items-center gap-1.5 font-mono text-sm text-muted">
+      <p className="sg-card-members mt-3 flex items-center gap-1.5 font-mono text-sm text-muted">
         <Users className="size-3.5" aria-hidden="true" />
         {group.memberCount ?? "Members not listed"}
       </p>
@@ -1000,6 +1007,7 @@ function JoinLink({ group }: { group: SignalGroupView }) {
       target="_blank"
       rel="noopener sponsored"
       className="btn btn-primary relative z-10"
+      onClick={(event) => event.stopPropagation()}
     >
       Join
       <span className="sr-only"> {group.name} on Telegram (opens in a new tab)</span>
