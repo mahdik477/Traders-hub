@@ -38,6 +38,16 @@ const SHORT: Record<SignalMarket, string> = {
   "stocks-options": "Stocks & options",
 };
 
+const HINT: Record<SignalMarket, string> = {
+  gold: "Trading the price of gold (XAU/USD).",
+  "forex-majors": "The most traded currency pairs, all with USD.",
+  "forex-minors": "Currency pairs without USD, like EUR/GBP.",
+  indices: "A basket of top company shares, like NASDAQ.",
+  crypto: "Digital currencies like Bitcoin and Ethereum.",
+  oil: "Trading the price of crude oil.",
+  "stocks-options": "Shares in single companies, and contracts on them.",
+};
+
 /** Decorative identity only. Not a score, and not used on buttons. */
 const INK: Record<SignalMarket, string> = {
   gold: "#e0b44a",
@@ -295,7 +305,10 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
                 >
                   <MarketMotif id={id} />
                   <span className="sg-tile-line" aria-hidden="true" />
-                  <span className="sg-display relative mt-3 text-2xl sm:text-3xl">{SHORT[id]}</span>
+                  <span className="sg-tile-copy relative mt-3">
+                    <span className="sg-display block text-2xl sm:text-3xl">{SHORT[id]}</span>
+                    <span className="sg-tile-hint">{HINT[id]}</span>
+                  </span>
                   <span className="sg-pulse relative" aria-hidden="true">
                     {Array.from({ length: 7 }, (_, dot) => (
                       <span key={dot} style={{ animationDelay: `${dot * 0.12}s` }} />

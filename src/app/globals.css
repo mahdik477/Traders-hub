@@ -2661,7 +2661,7 @@ input.signal-filter-search {
   align-items: stretch;
 }
 
-@media (width >= 48rem) {
+@media (width >= 64rem) {
   .sg-gallery {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: auto auto auto;
@@ -2692,6 +2692,7 @@ input.signal-filter-search {
 
 .sg-tile {
   position: relative;
+  container-type: inline-size;
   display: flex;
   min-height: 11.5rem;
   flex-direction: column;
@@ -2714,22 +2715,53 @@ input.signal-filter-search {
   min-height: 16rem;
 }
 
+.sg-tile-copy {
+  position: relative;
+  z-index: 1;
+  padding-right: 4.15rem;
+}
+
+.sg-tile-hint {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--color-muted);
+}
+
 .sg-motif {
   position: absolute;
-  top: -0.5rem;
-  right: -0.4rem;
-  width: 9rem;
-  height: 9rem;
+  top: 1.15rem;
+  right: 1.15rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  overflow: hidden;
   color: var(--sg-ink, var(--color-gold));
   fill: currentColor;
-  opacity: 0.22;
+  opacity: 0.28;
   pointer-events: none;
 }
 
-.sg-area-gold .sg-motif {
-  width: 14rem;
-  height: 14rem;
-  opacity: 0.28;
+@container (max-width: 18rem) {
+  .sg-motif {
+    top: 1.05rem;
+    right: 0.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .sg-tile-copy {
+    padding-right: 3.15rem;
+  }
+}
+
+@container (min-width: 26rem) {
+  .sg-area-gold .sg-motif {
+    width: 5.25rem;
+    height: 5.25rem;
+  }
+  .sg-area-gold .sg-tile-copy {
+    padding-right: 5.5rem;
+  }
 }
 
 .sg-pulse {
