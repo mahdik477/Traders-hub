@@ -34,7 +34,15 @@ export default function PageIntro({
 }) {
   return (
     <header className={`page-intro relative ${className}`}>
-      <span aria-hidden="true" className="page-glow pointer-events-none absolute inset-x-0 -top-10 h-64 sm:-top-14" />
+      {/* Full-bleed: breaks out of the centred container to the true
+          viewport edges (left-1/2 + w-screen + -translate-x-1/2 is the
+          standard trick for this), so the gold wash reaches all the way
+          to both sides of the page on wide screens instead of stopping
+          at the content column's own edges. */}
+      <span
+        aria-hidden="true"
+        className="page-glow pointer-events-none absolute -top-10 left-1/2 h-64 w-screen -translate-x-1/2 sm:-top-14"
+      />
       <div className={`relative ${aside ? "grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-center" : ""}`}>
         <div className="min-w-0">
           {back && (
