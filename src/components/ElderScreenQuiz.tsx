@@ -69,7 +69,7 @@ export default function ElderScreenQuiz() {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-success/30 bg-surface shadow-glow">
+    <div className="kit-panel overflow-hidden">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface-2 px-4 py-3 sm:px-5">
         <div>
           <p className="text-lg font-bold text-foreground">Spot the entry trigger</p>
