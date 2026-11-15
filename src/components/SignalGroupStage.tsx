@@ -4,6 +4,7 @@ import { Suspense, useEffect, useId, useMemo, useRef, useState, type KeyboardEve
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search, Users, X } from "lucide-react";
 import { WordReveal } from "@/components/hero/AuroraHero";
+import { QuoteLine, TileChart, useMarketQuotes } from "@/components/MarketPrice";
 import SaveButton from "@/components/SaveButton";
 import { signalGroupSummary } from "@/lib/signal-group-summary";
 import { signalFiltersFromSearch, signalGroupMatchesFilters } from "@/lib/signal-group-filters";
@@ -204,6 +205,7 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
     room.languages.length === 0;
 
   const open = room.panel ? groups.find((group) => group.slug === room.panel) ?? null : null;
+  const quotes = useMarketQuotes(landing);
 
   function openPanel(slug: string) {
     commit({ ...room, panel: slug });
@@ -308,18 +310,16 @@ function Stage({ groups, lede }: { groups: SignalGroupView[]; lede: string }) {
                   <span className="sg-tile-copy relative mt-3">
                     <span className="sg-display block text-2xl sm:text-3xl">{SHORT[id]}</span>
                     <span className="sg-tile-hint">{HINT[id]}</span>
+                    <QuoteLine id={id} quote={quotes?.quotes[id]} variant={id === "gold" ? "hero" : "small"} />
                   </span>
-                  <span className="sg-pulse relative" aria-hidden="true">
-                    {Array.from({ length: 7 }, (_, dot) => (
-                      <span key={dot} style={{ animationDelay: `${dot * 0.12}s` }} />
-                    ))}
-                  </span>
-                  <span className="relative mt-auto pt-4 font-mono text-sm text-muted">
-                    <span className="text-foreground">
-                      <CountUp to={counts.get(id) ?? 0} />
-                    </span>{" "}
-                    groups
-                  </span>
+                  <TileChart quote={quotes?.quotes[id]} color={INK[id]} variant={id === "gold" ? "hero" : "small"}>
+                    <span className="sg-tile-count font-mono text-sm text-muted">
+                      <span className="text-foreground">
+                        <CountUp to={counts.get(id) ?? 0} />
+                      </span>{" "}
+                      groups
+                    </span>
+                  </TileChart>
                 </button>
               ))}
             </div>
