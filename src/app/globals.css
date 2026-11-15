@@ -1701,30 +1701,33 @@ input.signal-filter-search {
    chrome). Static — nothing here animates except on interaction.
    ========================================================================== */
 
-/* The calm gold wash behind every PageIntro. */
+/* The calm gold wash behind every PageIntro. Full-bleed: the element
+   itself breaks out of the centred container to span the true viewport
+   width (see the left-1/2 + w-screen + -translate-x-1/2 trick on the
+   span in PageIntro.tsx), and the two radial washes are anchored at the
+   true left and right edges (0%/100%) rather than inset into the
+   content column - otherwise, on any screen wider than the ~1280px
+   content container, the margins either side of the page were left
+   completely flat black with no glow reaching them at all. Wide enough
+   that they still overlap generously through the middle (so there's no
+   repeat of the seam a plain two-corner version of this used to have). */
 .page-glow {
-  /* Two radial washes that used to meet exactly at the point where both
-     hit 0% opacity - mathematically tangent, not overlapping, which read
-     as a visible seam (gold, then a hard edge, then black) rather than a
-     gradient. Widened so they overlap generously through the middle and
-     genuinely blend into one wash, with a softer multi-stop falloff so
-     neither one has a perceptible edge of its own. */
   background:
     radial-gradient(
-      90% 100% at 15% 0%,
+      70% 100% at 0% 0%,
       color-mix(in srgb, var(--color-gold) 16%, transparent),
       color-mix(in srgb, var(--color-gold) 5%, transparent) 55%,
       transparent 100%
     ),
-    radial-gradient(75% 90% at 95% 15%, color-mix(in srgb, #2fb7a6 8%, transparent), transparent 100%);
+    radial-gradient(60% 90% at 100% 15%, color-mix(in srgb, #2fb7a6 8%, transparent), transparent 100%);
   mask-image: linear-gradient(to bottom, black, transparent);
   -webkit-mask-image: linear-gradient(to bottom, black, transparent);
 }
 
 :root[data-theme="light"] .page-glow {
   background:
-    radial-gradient(90% 100% at 15% 0%, rgb(168 122 31 / 0.14), rgb(168 122 31 / 0.045) 55%, transparent 100%),
-    radial-gradient(75% 90% at 95% 15%, rgb(47 183 166 / 0.08), transparent 100%);
+    radial-gradient(70% 100% at 0% 0%, rgb(168 122 31 / 0.14), rgb(168 122 31 / 0.045) 55%, transparent 100%),
+    radial-gradient(60% 90% at 100% 15%, rgb(47 183 166 / 0.08), transparent 100%);
 }
 
 /* Detail heroes pick up the terminal grid texture so firm/course/strategy
