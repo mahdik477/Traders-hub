@@ -89,8 +89,13 @@ export default function CountrySwitch({
       <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/12 text-accent">
         <MapPin className="size-4" aria-hidden="true" />
       </span>
+      {/* From sm up the picker has a fixed width and never shrinks — it used
+          to collapse to ~11px beside the long sentence on wide screens. The
+          sentence takes whatever room is left, and drops onto its own line
+          when that would be narrower than ~15rem. Clear sits inside the
+          sentence's box so it always stays on the right of it. */}
       <Picker
-        className="min-w-0 flex-1 sm:max-w-xs"
+        className="min-w-0 flex-1 sm:w-80 sm:flex-none [&>.eyebrow]:whitespace-nowrap"
         label="Available where I live"
         value={country}
         onChange={onChange}
@@ -100,24 +105,26 @@ export default function CountrySwitch({
           ...options.map((o) => ({ value: o.code, label: o.name, emoji: flagEmoji(o.code), keywords: o.code })),
         ]}
       />
-      <p className="meta min-w-0 flex-1 basis-full sm:basis-auto" aria-live="polite">
-        {country ? (
-          <>
-            Showing firms whose published country rules don&apos;t exclude{" "}
-            <span className="font-semibold text-foreground">{countryName(country)}</span>.{" "}
-            {hiddenCount > 0 && `${hiddenCount} set aside below. `}
-            {unknownCount > 0 && `${unknownCount} haven't published a list — check with the firm. `}
-            Lists change; always confirm before buying.
-          </>
-        ) : (
-          "Pick your country to set aside firms whose own rules exclude it. Based only on what each firm publishes."
+      <div className="flex min-w-0 flex-1 basis-full items-center gap-3 sm:basis-60">
+        <p className="meta min-w-0 flex-1" aria-live="polite">
+          {country ? (
+            <>
+              Showing firms whose published country rules don&apos;t exclude{" "}
+              <span className="font-semibold text-foreground">{countryName(country)}</span>.{" "}
+              {hiddenCount > 0 && `${hiddenCount} set aside below. `}
+              {unknownCount > 0 && `${unknownCount} haven't published a list — check with the firm. `}
+              Lists change; always confirm before buying.
+            </>
+          ) : (
+            "Pick your country to set aside firms whose own rules exclude it. Based only on what each firm publishes."
+          )}
+        </p>
+        {country && (
+          <button type="button" onClick={() => onChange("")} className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center text-xs text-muted underline hover:text-foreground">
+            Clear
+          </button>
         )}
-      </p>
-      {country && (
-        <button type="button" onClick={() => onChange("")} className="text-xs text-muted underline hover:text-foreground">
-          Clear
-        </button>
-      )}
+      </div>
     </div>
   );
 }
