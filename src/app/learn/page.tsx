@@ -69,7 +69,7 @@ export default function LearnPage() {
               <li key={topic.slug}>
                 <Link
                   href={`/learn/${topic.slug}`}
-                  className="lift-card kit-panel listing-card group flex h-full gap-4 overflow-hidden p-5"
+                  className="lift-card kit-panel listing-card group flex h-full gap-4 p-5"
                 >
                   <span
                     aria-hidden="true"

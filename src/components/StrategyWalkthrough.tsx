@@ -130,7 +130,7 @@ export default function StrategyWalkthrough({ slug, steps }: { slug: string; ste
                   type="button"
                   onClick={() => toggle(i)}
                   aria-expanded={isOpen}
-                  className="flex flex-1 cursor-pointer items-center justify-between gap-3 rounded-xl py-4 text-left transition-colors hover:bg-surface-2"
+                  className="flex flex-1 cursor-pointer items-center justify-between gap-3 rounded-xl py-4 pl-1 pr-3 text-left transition-colors hover:bg-surface-2"
                 >
                   <span className="flex items-center gap-3">
                     <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-fill text-xs font-bold text-gold-ink">
@@ -151,7 +151,7 @@ export default function StrategyWalkthrough({ slug, steps }: { slug: string; ste
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className="border-t border-border px-5 py-4 pl-[3.25rem] text-sm leading-relaxed text-muted">
+                  <p className="border-t border-border px-5 py-4 pl-[3.5rem] text-sm leading-relaxed text-muted">
                     <GlossaryText text={step.detail} />
                   </p>
                 </div>
