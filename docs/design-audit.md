@@ -10,6 +10,30 @@ browser)" should be looked at before they are fixed.
 
 Ordered by how much a visitor would notice. Tick items off as they are fixed.
 
+## Progress (updated 2026-11-16)
+
+Fixed and pushed, each checked at 375px and desktop width in dark and light:
+- Strategy detail shell (all 58 pages): headings, pills, cards, walkthrough,
+  long titles wrapping on phones.
+- All simulators and quizzes: outer panel (the green/gold glow border).
+- Sticky Visit bar and signal-group join bar: blur removed.
+- Learn hub and the 9 topic pages.
+
+Notes for whoever continues:
+- All 58 strategies use `InteractiveStrategyPage.tsx`. The plain template
+  `src/app/strategies/[slug]/page.tsx` currently renders **no pages**; it
+  still has the old coloured headings and 36px pills — fix it or delete it.
+- The hero stat strip on strategy pages was left as is: DESIGN.md's "Detail
+  pages" section describes exactly that `grid-cols-3 gap-px` strip.
+- `border-2` inside simulators turned out to be chart legend swatches —
+  not drift, leave them.
+- `.sg-search` blur is on a search box that is not sticky — allowed.
+- The step-open animation in `StrategyWalkthrough` / `CourseCurriculum`
+  still animates `grid-template-rows` (a height animation, motion rule 1);
+  it now switches off for reduced motion but should become native
+  `<details>`.
+- Everything not ticked below is still outstanding.
+
 Note: `docs/ROLLOUT.md` says "Strategies: do not touch" (2026-11-11). The
 founder's brief for this branch (2026-11-15) replaces that: strategy pages
 go first.
@@ -24,35 +48,35 @@ interactive pages), `src/app/strategies/[slug]/page.tsx` (plain template),
 `src/components/MarkDoneButton.tsx`, and the ~55 `*Simulator.tsx` /
 `*Quiz.tsx` widgets.
 
-- [ ] **Green heading.** "Step by step: how to actually trade this" is
+- [x] **Green heading.** "Step by step: how to actually trade this" is
   rendered with `tone="success"`, which colours the heading text *and* its
   icon green. "Market conditions" is amber the same way. DESIGN.md: status
   colours are "status only, never decoration". Fix: section headings are
   always white text with a gold `icon-chip`. (Both files, `SectionHeading`
   + `TONE_TEXT_CLASS`.)
-- [ ] **Green decoration elsewhere:** the "see the full step-by-step
+- [x] **Green decoration elsewhere:** the "see the full step-by-step
   walkthrough" link is green; the "See it happen, live" heading icon is
   green; the "In-depth guide" badge is `badge-success`; `WrittenQuiz` has a
   green outer border before anything is answered. None of these mean
   "gain/correct". (Green on a *correct answer*, a *ticked step*, "Works
   best" and buy/entry markers is meaning and stays.)
-- [ ] **Type scale.** Section headings are hand-sized `text-3xl sm:text-4xl`
+- [x] **Type scale.** Section headings are hand-sized `text-3xl sm:text-4xl`
   (30–36px, bigger than on any other detail page) with inline
   `fontFamily` instead of the `section-title` utility. The plain template
   uses a third size (`text-2xl sm:text-3xl`) and sets the definition in
   24–30px italics.
-- [ ] **Icon chips** are 48px squares; the kit `icon-chip` is 32px.
-- [ ] **Cards** use the old shell (`rounded-xl border border-border
+- [x] **Icon chips** are 48px squares; the kit `icon-chip` is 32px.
+- [x] **Cards** use the old shell (`rounded-xl border border-border
   bg-surface`) with `hover:shadow-glow` on plain, non-clickable text boxes
   — they light up like buttons but do nothing. Should be `kit-panel`, no
   hover on static content.
-- [ ] **Quick-nav pills** use `border-2`, `font-bold`, `transition-all` and
+- [x] **Quick-nav pills** use `border-2`, `font-bold`, `transition-all` and
   a hover glow (animates box-shadow — breaks motion rule 1). On the plain
   template the pills are only 36px tall (`min-h-9`) — under the 44px tap
   target.
 - [ ] **Hero stat strip** hand-built (`grid grid-cols-3 gap-px bg-border`)
   with sans figures; kit is `stat-strip` / `stat-cell` / `stat-value`.
-- [ ] **Walkthrough progress bar** animates `width` with `transition-all
+- [x] **Walkthrough progress bar** animates `width` with `transition-all
   duration-300` (motion rule 1 + hard-coded duration).
 - [ ] **Simulators and quizzes** (~110 files): `border-2` panels in ~12 of
   them, old card shell, mixed heading sizes. Chart colours for buy/sell,
@@ -69,10 +93,10 @@ Files: `src/app/strategies/page.tsx`, `src/components/StrategyDirectory.tsx`
 
 ## 3. Blur on sticky / fixed elements (motion rule 2)
 
-- [ ] `src/components/StickyVisitBar.tsx` — `backdrop-blur-md` on the bar
+- [x] `src/components/StickyVisitBar.tsx` — `backdrop-blur-md` on the bar
   that sticks to the bottom of every firm / course / tool / broker page.
   Fix: 97%-opaque surface.
-- [ ] `src/components/SignalGroupStage.tsx:883` — `.sg-joinbar` has
+- [x] `src/components/SignalGroupStage.tsx:883` — `.sg-joinbar` has
   `backdrop-blur-md` and is pinned to the bottom of the group panel.
 - [ ] `src/app/globals.css` `.sg-search` — `backdrop-filter: blur(16px)`
   (check whether the search bar is sticky; if so remove).
@@ -84,11 +108,11 @@ Files: `src/app/strategies/page.tsx`, `src/components/StrategyDirectory.tsx`
 Files: `src/app/learn/page.tsx`, `src/components/learn/LearnPageShell.tsx`,
 `src/components/learn/SectionHeading.tsx`, other `src/components/learn/*`
 
-- [ ] Quick-nav pills: same `border-2` / `font-bold` / `transition-all`
+- [x] Quick-nav pills: same `border-2` / `font-bold` / `transition-all`
   problem as strategies (`LearnPageShell.tsx:60`).
-- [ ] `section-title` overridden to `text-2xl sm:text-3xl` (hub and
+- [x] `section-title` overridden to `text-2xl sm:text-3xl` (hub and
   `SectionHeading.tsx`) — off the type scale.
-- [ ] Old card shell in `LearnPageShell`, `MiniQuiz`, `DefinitionGrid`,
+- [x] Old card shell in `LearnPageShell`, `MiniQuiz`, `DefinitionGrid`,
   `ComparisonTable`, `CandlestickDiagram`; `LeverageMarginExplainer` uses
   `transition-all`.
 - [ ] Topic pages don't use `PageIntro` (they have their own shell).
