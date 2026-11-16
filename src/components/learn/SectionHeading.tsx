@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 // longer, more essay-like Learn pages.
 export default function SectionHeading({ id, children }: { id: string; children: ReactNode }) {
   return (
-    <h2 id={id} className="section-title scroll-mt-24 text-2xl sm:text-3xl">
+    <h2 id={id} className="section-title scroll-mt-24">
       {children}
     </h2>
   );

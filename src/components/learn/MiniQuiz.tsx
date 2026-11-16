@@ -25,7 +25,7 @@ export default function MiniQuiz({
   const isCorrect = picked === correctIndex;
 
   return (
-    <div id={id} className="scroll-mt-24 rounded-2xl border border-border bg-surface p-5 sm:p-6">
+    <div id={id} className="kit-panel scroll-mt-24 p-5 sm:p-6">
       <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-accent">
         <CheckIcon className="size-4" />
         Quick check

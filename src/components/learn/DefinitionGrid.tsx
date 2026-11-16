@@ -9,7 +9,7 @@ export default function DefinitionGrid({ items, columns = 2 }: { items: Definiti
       {items.map((item) => (
         <div
           key={item.term}
-          className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/40 hover:shadow-glow"
+          className="kit-panel p-4"
         >
           <div className="flex items-center justify-between gap-2">
             <h3 className="font-bold text-foreground">{item.term}</h3>

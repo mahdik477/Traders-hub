@@ -34,7 +34,7 @@ export function CandleAnatomyDiagram() {
   const high = 15;
   const low = 85;
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-surface p-4 sm:p-6">
+    <div className="kit-panel overflow-hidden p-4 sm:p-6">
       <svg viewBox="0 0 300 100" className="mx-auto w-full max-w-sm" role="img" aria-label="Anatomy of a candlestick">
         <Candle x={x} open={open} close={close} high={high} low={low} width={22} />
 
@@ -134,7 +134,7 @@ export function CandlePatternGallery() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {COMMON_PATTERNS.map((p) => (
-        <div key={p.name} className="overflow-hidden rounded-xl border border-border bg-surface">
+        <div key={p.name} className="kit-panel overflow-hidden">
           <svg viewBox="0 0 120 100" className="w-full bg-background" role="img" aria-label={`${p.name} candlestick pattern`}>
             {p.candles.map((c, i) => (
               <Candle key={i} {...c} />

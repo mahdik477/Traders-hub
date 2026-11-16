@@ -58,7 +58,7 @@ export default function LearnPage() {
       </PageIntro>
 
       <div className="mt-6 border-t border-border pt-10">
-        <h2 className="section-title text-2xl sm:text-3xl">The 9 parts</h2>
+        <h2 className="section-title">The 9 parts</h2>
         <ProgressSummary kind="learn" ids={LEARN_TOPICS.map((t) => t.slug)} noun="parts" className="mt-4 max-w-xl" />
         <p className="mt-2 max-w-xl text-muted">Built to go in order, but every part stands on its own if you already know the earlier ones.</p>
 
@@ -69,7 +69,7 @@ export default function LearnPage() {
               <li key={topic.slug}>
                 <Link
                   href={`/learn/${topic.slug}`}
-                  className="lift-card group relative flex h-full gap-4 overflow-hidden rounded-xl border border-border bg-surface p-5"
+                  className="lift-card kit-panel listing-card group flex h-full gap-4 overflow-hidden p-5"
                 >
                   <span
                     aria-hidden="true"
