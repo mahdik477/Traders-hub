@@ -42,7 +42,7 @@ export default function ComparisonTable({
       {/* Phone: one card per column */}
       <div className="grid grid-cols-1 gap-3 sm:hidden">
         {columns.map((col, colIndex) => (
-          <div key={col} className="rounded-xl border border-border bg-surface p-4">
+          <div key={col} className="kit-panel p-4">
             <h3 className="font-bold text-foreground">{col}</h3>
             <dl className="mt-2 space-y-1.5">
               {rows.map((row) => (

@@ -47,39 +47,22 @@ import { getStrategy } from "@/lib/strategies";
 // you got it (quiz). You should know what you're about to watch before you
 // watch it, not the other way around.
 
-const TONE_CLASS = {
-  accent: "bg-accent/12 text-accent",
-  success: "bg-success/12 text-success",
-  warning: "bg-warning/12 text-warning",
-  danger: "bg-danger/12 text-danger",
-} as const;
-
-const TONE_TEXT_CLASS = {
-  accent: "text-foreground",
-  success: "text-success",
-  warning: "text-warning",
-  danger: "text-danger",
-} as const;
-
+// Every section heading looks the same: white display type with a gold icon
+// chip (DESIGN.md "Detail pages"). Green, amber and red are never used here
+// — on this site they only ever carry meaning (entry/stop, works/fails).
 function SectionHeading({
   id,
   icon: Icon,
-  tone = "accent",
   children,
 }: {
   id: string;
   icon: (p: { className?: string }) => JSX.Element;
-  tone?: keyof typeof TONE_CLASS;
   children: ReactNode;
 }) {
   return (
-    <h2
-      id={id}
-      className={`flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight sm:text-4xl ${TONE_TEXT_CLASS[tone]}`}
-      style={{ fontFamily: "var(--font-heading)" }}
-    >
-      <span className={`flex size-12 shrink-0 items-center justify-center rounded-xl ${TONE_CLASS[tone]}`}>
-        <Icon className="size-6" />
+    <h2 id={id} className="section-title flex scroll-mt-24 items-center gap-3 text-foreground">
+      <span className="icon-chip">
+        <Icon className="size-4" />
       </span>
       {children}
     </h2>
@@ -88,12 +71,12 @@ function SectionHeading({
 
 function QuickNav({ items }: { items: { href: string; label: string }[] }) {
   return (
-    <nav aria-label="Jump to section" className="mt-6 -mx-1 flex flex-wrap gap-2.5 px-1 pb-1">
+    <nav aria-label="Jump to section" className="mt-6 flex flex-wrap gap-2">
       {items.map((item) => (
         <a
           key={item.href}
           href={item.href}
-          className="inline-flex min-h-12 shrink-0 items-center rounded-full border-2 border-border-strong bg-surface px-5 text-sm font-bold text-foreground transition-all hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-glow"
+          className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-border-strong bg-surface px-4 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
         >
           {item.label}
         </a>
@@ -137,18 +120,18 @@ export default function InteractiveStrategyPage({
           <div className="flex flex-wrap items-center gap-2">
             <span className="pill">{STRATEGY_TIER_LABELS[s.tier]}</span>
             {s.stepByStep.length > 0 && (
-              <span className="badge badge-success inline-flex items-center gap-1">
+              <span className="pill gap-1">
                 <PlayIcon className="size-3" />
                 In-depth guide
               </span>
             )}
-            <span className="badge badge-promo inline-flex items-center gap-1">
+            <span className="pill gap-1">
               <LinkIcon className="size-3" />
               Interactive
             </span>
           </div>
           <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
-            <h1 className="page-title">{s.name}</h1>
+            <h1 className="page-title min-w-0 [overflow-wrap:anywhere]">{s.name}</h1>
             <SaveButton kind="strategy" id={s.slug} name={s.name} variant="label" />
           </div>
           <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
@@ -197,7 +180,7 @@ export default function InteractiveStrategyPage({
       </section>
 
       {s.image && (
-        <figure className="mt-8 overflow-hidden rounded-xl border border-accent/30 bg-surface shadow-glow transition-colors hover:border-accent">
+        <figure className="mt-8 overflow-hidden rounded-xl border border-border bg-surface">
           <Image src={s.image.src} alt={s.image.caption} width={1200} height={675} className="w-full" priority />
           <figcaption className="meta border-t border-border bg-surface-2 px-4 py-3">
             <span className="font-medium text-foreground">{s.image.caption}</span>
@@ -219,7 +202,7 @@ export default function InteractiveStrategyPage({
         </SectionHeading>
         {s.rules.kind === "structured" ? (
           <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-accent/30 bg-accent/5 p-4 transition-colors hover:border-accent hover:shadow-glow">
+            <div className="rounded-xl border border-accent/30 bg-accent/5 p-4">
               <div className="flex items-center gap-2.5">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-base font-bold text-gold-ink">
                   E
@@ -230,7 +213,7 @@ export default function InteractiveStrategyPage({
                 <GlossaryText text={s.rules.entry} />
               </dd>
             </div>
-            <div className="rounded-xl border border-border-strong bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
+            <div className="kit-panel p-4">
               <div className="flex items-center gap-2.5">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-2 text-base font-bold text-foreground">
                   X
@@ -241,7 +224,7 @@ export default function InteractiveStrategyPage({
                 <GlossaryText text={s.rules.exit} />
               </dd>
             </div>
-            <div className="rounded-xl border border-danger/30 bg-danger/5 p-4 transition-colors hover:border-accent hover:shadow-glow">
+            <div className="rounded-xl border border-danger/30 bg-danger/5 p-4">
               <div className="flex items-center gap-2.5">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-danger text-base font-bold text-white">
                   S
@@ -266,7 +249,7 @@ export default function InteractiveStrategyPage({
         {s.stepByStep.length > 0 && (
           <a
             href="#walkthrough-heading"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-success hover:underline"
+            className="mt-4 inline-flex items-center gap-1.5 min-h-11 text-sm font-medium text-accent hover:underline"
           >
             <PlayIcon className="size-3.5" />
             That&apos;s the quick version — see the full step-by-step walkthrough below
@@ -276,7 +259,7 @@ export default function InteractiveStrategyPage({
 
       {s.stepByStep.length > 0 && (
         <section aria-labelledby="walkthrough-heading" className="mt-10">
-          <SectionHeading id="walkthrough-heading" icon={PlayIcon} tone="success">
+          <SectionHeading id="walkthrough-heading" icon={PlayIcon}>
             Step by step: how to actually trade this
           </SectionHeading>
           <p className="meta mt-2 max-w-2xl">
@@ -298,7 +281,7 @@ export default function InteractiveStrategyPage({
             {Object.entries(s.assetClassNotes).map(([market, note]) => (
               <li
                 key={market}
-                className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow"
+                className="kit-panel p-4"
               >
                 <h3 className="text-lg font-bold text-foreground">
                   {STRATEGY_MARKET_LABELS[market as keyof typeof STRATEGY_MARKET_LABELS] ?? market}
@@ -313,11 +296,11 @@ export default function InteractiveStrategyPage({
       )}
 
       <section aria-labelledby="conditions-heading" className="mt-10">
-        <SectionHeading id="conditions-heading" icon={InfoIcon} tone="warning">
+        <SectionHeading id="conditions-heading" icon={InfoIcon}>
           Market conditions
         </SectionHeading>
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border border-success/30 bg-success/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
+          <div className="rounded-xl border border-success/30 bg-success/8 p-4">
             <dt className="flex items-center gap-2 text-lg font-bold text-success">
               <CheckIcon className="size-5" />
               Works best
@@ -326,7 +309,7 @@ export default function InteractiveStrategyPage({
               <GlossaryText text={s.marketConditions.worksBest} />
             </dd>
           </div>
-          <div className="rounded-xl border border-warning/30 bg-warning/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
+          <div className="rounded-xl border border-warning/30 bg-warning/8 p-4">
             <dt className="flex items-center gap-2 text-lg font-bold text-warning">
               <InfoIcon className="size-5" />
               Struggles
@@ -335,7 +318,7 @@ export default function InteractiveStrategyPage({
               <GlossaryText text={s.marketConditions.struggles} />
             </dd>
           </div>
-          <div className="rounded-xl border border-danger/30 bg-danger/8 p-4 transition-colors hover:border-accent hover:shadow-glow">
+          <div className="rounded-xl border border-danger/30 bg-danger/8 p-4">
             <dt className="flex items-center gap-2 text-lg font-bold text-danger">
               <ShieldIcon className="size-5" />
               Common failure mode
@@ -346,7 +329,7 @@ export default function InteractiveStrategyPage({
           </div>
         </dl>
         {s.commonPitfalls.length > 0 && (
-          <div className="mt-5 rounded-xl border border-warning/30 bg-warning/5 p-4 transition-colors hover:border-accent hover:shadow-glow">
+          <div className="mt-5 rounded-xl border border-warning/30 bg-warning/5 p-4">
             <h3 className="flex items-center gap-2 text-lg font-bold text-foreground">
               <InfoIcon className="size-5 text-warning" />
               Common pitfalls
@@ -370,13 +353,13 @@ export default function InteractiveStrategyPage({
           Testing this yourself
         </SectionHeading>
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
+          <div className="kit-panel p-4">
             <dt className="text-lg font-bold text-foreground">Platform / testability</dt>
             <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">
               <GlossaryText text={s.platformTestability} />
             </dd>
           </div>
-          <div className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow">
+          <div className="kit-panel p-4">
             <dt className="text-lg font-bold text-foreground">Data needed</dt>
             <dd className="mt-1.5 text-base leading-relaxed text-foreground/90">
               <GlossaryText text={s.dataRequirement} />
@@ -387,16 +370,9 @@ export default function InteractiveStrategyPage({
 
       {/* Now that the whole explanation is behind you — the live demo. */}
       <section aria-labelledby="simulator-heading" className="mt-10">
-        <h2
-          id="simulator-heading"
-          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-success/12 text-success">
-            <PlayIcon className="size-6" />
-          </span>
+        <SectionHeading id="simulator-heading" icon={PlayIcon}>
           {simulatorTitle}
-        </h2>
+        </SectionHeading>
         <div className="mt-5">{simulator}</div>
       </section>
 
@@ -405,16 +381,9 @@ export default function InteractiveStrategyPage({
           from spotting one on an unlabelled chart, which is the actual
           real-world task. */}
       <section aria-labelledby="quiz-heading" className="mt-10">
-        <h2
-          id="quiz-heading"
-          className="flex items-center gap-3 scroll-mt-24 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
-            <CheckIcon className="size-6" />
-          </span>
+        <SectionHeading id="quiz-heading" icon={CheckIcon}>
           {quizTitle}
-        </h2>
+        </SectionHeading>
         <div className="mt-5">{quiz}</div>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <MarkDoneButton kind="quiz" id={s.slug} label="Mark this quiz as done" doneLabel="Quiz done" />
@@ -424,7 +393,7 @@ export default function InteractiveStrategyPage({
 
       {s.videos.length > 0 && (
         <section aria-labelledby="videos-heading" className="mt-10 max-w-3xl">
-          <SectionHeading id="videos-heading" icon={PlayIcon} tone="danger">
+          <SectionHeading id="videos-heading" icon={PlayIcon}>
             Watch and learn
           </SectionHeading>
           <p className="meta mt-2">
@@ -436,7 +405,7 @@ export default function InteractiveStrategyPage({
               return (
                 <li
                   key={v.url}
-                  className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent hover:shadow-glow"
+                  className="kit-panel p-4"
                 >
                   <p className="text-lg font-bold text-foreground">{v.title}</p>
                   <a
@@ -451,7 +420,7 @@ export default function InteractiveStrategyPage({
                         alt={`Thumbnail for ${v.title}`}
                         fill
                         sizes="(min-width: 640px) 24rem, 100vw"
-                        className="object-cover transition-transform duration-200 group-hover:scale-105"
+                        className="object-cover"
                         unoptimized
                       />
                     ) : (
@@ -460,7 +429,7 @@ export default function InteractiveStrategyPage({
                       </span>
                     )}
                     <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/35">
-                      <span className="flex size-12 items-center justify-center rounded-full bg-danger/90 text-white shadow-glow">
+                      <span className="flex size-12 items-center justify-center rounded-full bg-gold-fill text-gold-ink">
                         <PlayIcon className="size-5" />
                       </span>
                     </span>
@@ -484,7 +453,7 @@ export default function InteractiveStrategyPage({
           </SectionHeading>
           <ul className="mt-4 flex flex-wrap gap-2">
             {s.markets.map((m) => (
-              <li key={m} className="pill transition-colors hover:border-accent hover:text-accent">
+              <li key={m} className="pill">
                 {STRATEGY_MARKET_LABELS[m]}
               </li>
             ))}

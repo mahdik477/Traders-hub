@@ -34,7 +34,7 @@ export default function RiskRewardCalculator() {
   }, [entry, stop, target, accountSize, riskPercent]);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-accent/30 bg-surface shadow-glow">
+    <div className="kit-panel overflow-hidden">
       <div className="flex items-center gap-2.5 border-b border-border bg-surface-2 px-5 py-3.5">
         <CalculatorIcon className="size-5 text-accent" />
         <p className="text-lg font-bold text-foreground">Risk : reward calculator</p>

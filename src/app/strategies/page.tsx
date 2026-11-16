@@ -60,7 +60,7 @@ export default function StrategiesPage() {
       </PageIntro>
 
       <div id="browse" className="mt-6 scroll-mt-20 border-t border-border pt-10">
-        <h2 className="section-title flex items-center gap-2 text-2xl">
+        <h2 className="section-title flex items-center gap-2">
           <CheckIcon className="size-5 text-accent" />
           Browse the library
         </h2>
