@@ -880,7 +880,7 @@ function GroupDrawer({
             Open the full page
           </a>
         </div>
-        <div className="sg-joinbar absolute inset-x-0 bottom-0 border-t border-border bg-background/90 px-5 py-3 backdrop-blur-md sm:px-8">
+        <div className="sg-joinbar absolute inset-x-0 bottom-0 border-t border-border bg-background/[0.97] px-5 py-3 sm:px-8">
           <p className="mb-2 text-center text-[11px] leading-4 text-subtle">
             Opens their Telegram.
           </p>
