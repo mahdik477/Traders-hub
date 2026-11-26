@@ -83,7 +83,7 @@ export default function StrategyWalkthrough({ slug, steps }: { slug: string; ste
             `${steps.length} steps`
           )}
         </p>
-        <button type="button" onClick={toggleAll} className="text-xs font-medium text-accent hover:underline">
+        <button type="button" onClick={toggleAll} className="inline-flex min-h-11 items-center px-1 text-sm font-medium text-accent hover:underline">
           {allOpen ? "Collapse all" : "Expand all"}
         </button>
       </div>
@@ -91,8 +91,8 @@ export default function StrategyWalkthrough({ slug, steps }: { slug: string; ste
       {hydrated && done.size > 0 && (
         <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-gold-deep to-gold-bright transition-all duration-300"
-            style={{ width: `${(done.size / steps.length) * 100}%` }}
+            className="h-full origin-left bg-gradient-to-r from-gold-deep to-gold-bright motion-safe:transition-transform motion-safe:duration-[var(--dur-base)]"
+            style={{ transform: `scaleX(${done.size / steps.length})` }}
           />
         </div>
       )}
@@ -104,29 +104,33 @@ export default function StrategyWalkthrough({ slug, steps }: { slug: string; ste
           return (
             <li
               key={step.title}
-              className={`rounded-xl border bg-surface transition-colors ${
+              className={`rounded-2xl border bg-surface transition-colors ${
                 isDone ? "border-success/40" : "border-border"
               }`}
             >
-              <div className="flex items-center gap-2 px-2">
+              <div className="flex items-center gap-1 px-1">
                 <button
                   type="button"
                   onClick={() => toggleDone(i)}
                   aria-pressed={isDone}
-                  className={`flex size-7 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                    isDone
-                      ? "border-success bg-success/15 text-success"
-                      : "border-border-strong text-transparent hover:border-subtle"
-                  }`}
+                  className="group/tick flex size-11 shrink-0 items-center justify-center rounded-full"
                 >
-                  <CheckIcon className="size-3.5" />
+                  <span
+                    className={`flex size-7 items-center justify-center rounded-full border transition-colors ${
+                      isDone
+                        ? "border-success bg-success/15 text-success"
+                        : "border-border-strong text-transparent group-hover/tick:border-subtle"
+                    }`}
+                  >
+                    <CheckIcon className="size-3.5" />
+                  </span>
                   <span className="sr-only">Mark step {i + 1} as done</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => toggle(i)}
                   aria-expanded={isOpen}
-                  className="flex flex-1 cursor-pointer items-center justify-between gap-3 rounded-xl py-4 text-left transition-colors hover:bg-surface-2"
+                  className="flex flex-1 cursor-pointer items-center justify-between gap-3 rounded-xl py-4 pl-1 pr-3 text-left transition-colors hover:bg-surface-2"
                 >
                   <span className="flex items-center gap-3">
                     <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-fill text-xs font-bold text-gold-ink">
@@ -142,12 +146,12 @@ export default function StrategyWalkthrough({ slug, steps }: { slug: string; ste
                 </button>
               </div>
               <div
-                className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                className={`grid motion-safe:transition-[grid-template-rows] motion-safe:duration-[var(--dur-base)] ease-out ${
                   isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className="border-t border-border px-5 py-4 pl-[3.75rem] text-sm leading-relaxed text-muted">
+                  <p className="border-t border-border px-5 py-4 pl-[3.5rem] text-sm leading-relaxed text-muted">
                     <GlossaryText text={step.detail} />
                   </p>
                 </div>

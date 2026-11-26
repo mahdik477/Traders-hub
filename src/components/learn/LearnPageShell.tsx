@@ -39,25 +39,25 @@ export default function LearnPageShell({
             </span>
             <span className="pill">{topic.readMinutes} min read</span>
           </div>
-          <div className="mt-4 flex items-start gap-4">
-            <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-accent/12 text-accent">
+          <div className="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent sm:size-14 sm:rounded-2xl">
               <Icon className="size-7" />
             </span>
             <div className="min-w-0">
               <h1 className="page-title">{topic.title}</h1>
-              <p className="mt-2 max-w-2xl text-lg leading-relaxed text-muted">{topic.summary}</p>
+              <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">{topic.summary}</p>
             </div>
           </div>
         </div>
       </header>
 
       {toc.length > 0 && (
-        <nav aria-label="Jump to section" className="mt-6 -mx-1 flex flex-wrap gap-2.5 px-1 pb-1">
+        <nav aria-label="Jump to section" className="mt-6 flex flex-wrap gap-2">
           {toc.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
-              className="inline-flex min-h-11 shrink-0 items-center rounded-full border-2 border-border-strong bg-surface px-4 text-sm font-bold text-foreground transition-all hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-glow"
+              className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-border-strong bg-surface px-4 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
             >
               {item.label}
             </a>
@@ -67,7 +67,7 @@ export default function LearnPageShell({
 
       <div className="mt-10 max-w-3xl space-y-12">{children}</div>
 
-      <div className="mt-10 flex max-w-3xl flex-wrap items-center gap-3 rounded-2xl border border-border bg-surface p-4">
+      <div className="mt-10 kit-panel flex max-w-3xl flex-wrap items-center gap-3 p-4">
         <MarkDoneButton kind="learn" id={topic.slug} label="Mark this part as done" doneLabel="Part done" />
         <p className="meta">
           Part {index + 1} of {LEARN_TOPICS.length}. Ticks show on the Learn page, the Start here path and My Hub.
@@ -88,7 +88,7 @@ export default function LearnPageShell({
         {prev ? (
           <Link
             href={`/learn/${prev.slug}`}
-            className="lift-card flex items-center gap-3 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/40"
+            className="lift-card kit-panel flex min-h-11 items-center gap-3 p-4"
           >
             <ChevronLeftIcon className="size-5 shrink-0 text-muted" />
             <span className="min-w-0">
@@ -102,7 +102,7 @@ export default function LearnPageShell({
         {next ? (
           <Link
             href={`/learn/${next.slug}`}
-            className="lift-card flex items-center justify-end gap-3 rounded-xl border border-border bg-surface p-4 text-right transition-colors hover:border-accent/40"
+            className="lift-card kit-panel flex min-h-11 items-center justify-end gap-3 p-4 text-right"
           >
             <span className="min-w-0">
               <span className="meta block">Next</span>

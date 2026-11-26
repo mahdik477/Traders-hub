@@ -18,7 +18,7 @@ export default function LeverageMarginExplainer() {
   const onePercentMoveEffect = leverage * 1;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-accent/30 bg-surface shadow-glow">
+    <div className="kit-panel overflow-hidden">
       <div className="flex items-center gap-2.5 border-b border-border bg-surface-2 px-5 py-3.5">
         <ScaleIcon className="size-5 text-accent" />
         <p className="text-lg font-bold text-foreground">Leverage &amp; margin, visualised</p>
@@ -74,8 +74,8 @@ export default function LeverageMarginExplainer() {
 
         <div className="mt-5 h-3 w-full overflow-hidden rounded-full bg-surface-2">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-gold-deep to-gold-bright transition-all"
-            style={{ width: `${Math.min(100, marginPercent)}%` }}
+            className="h-full origin-left bg-gradient-to-r from-gold-deep to-gold-bright motion-safe:transition-transform motion-safe:duration-[var(--dur-base)]"
+            style={{ transform: `scaleX(${Math.min(100, marginPercent) / 100})` }}
           />
         </div>
         <p className="meta mt-2">

@@ -43,14 +43,14 @@ export default function StickyVisitBar({
   return (
     <div
       aria-hidden={!visible}
-      className={`tray-bottom fixed inset-x-0 z-40 transition-transform duration-300 motion-reduce:transition-none ${
+      className={`tray-bottom fixed inset-x-0 z-40 transition-transform duration-[var(--dur-base)] ease-[var(--ease-out)] motion-reduce:transition-none ${
         visible ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
     >
-      <div className={quiet ? "border-t border-border bg-background/95 backdrop-blur-md" : "container-page pb-4"}>
+      <div className={quiet ? "border-t border-border bg-background/[0.97]" : "container-page pb-4"}>
         <div
           className={`flex items-center gap-3 ${
-            quiet ? "container-page py-3" : "rounded-xl border border-border bg-surface/95 p-3 shadow-glow backdrop-blur-md sm:p-4"
+            quiet ? "container-page py-3" : "rounded-xl border border-border bg-surface/[0.97] p-3 shadow-glow sm:p-4"
           }`}
         >
           {logo && (

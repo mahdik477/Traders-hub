@@ -20,7 +20,7 @@ export default function TradingStylesSimulator() {
   const current = STOPS[idx];
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-accent/30 bg-surface shadow-glow">
+    <div className="kit-panel overflow-hidden">
       <div className="border-b border-border bg-surface-2 px-4 py-3 sm:px-5">
         <p className="text-lg font-bold text-foreground">Try it yourself</p>
         <p className="meta mt-0.5">Drag along the holding-period spectrum and see what style that actually is.</p>
